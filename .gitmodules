@@ -1,0 +1,6 @@
+[submodule "Physiolibrary"]
+	path = Physiolibrary
+	url = https://github.com/MarekMatejak/Physiolibrary
+[submodule "Physiolibrary.extension"]
+	path = Physiolibrary.extension
+	url = https://github.com/TomasKulhanek/Physiolibrary.extension
