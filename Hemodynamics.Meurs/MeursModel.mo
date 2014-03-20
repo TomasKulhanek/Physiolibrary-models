@@ -192,7 +192,7 @@ package MeursModel
             extent={{-4,-4},{4,4}},
             rotation=180,
             origin={28,52})));
-      PhysiolibraryExtension.HydraulicResistanceInput
+      PhysiolibraryExtension.Types.RealIO.HydraulicResistanceInput
                                hydraulicresistance annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
@@ -201,7 +201,7 @@ package MeursModel
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={0,40})));
-      PhysiolibraryExtension.HydraulicResistanceToConductance hydraulicresistancetoconductance
+      PhysiolibraryExtension.Types.RealIO.HydraulicResistanceToConductance hydraulicresistancetoconductance
         annotation (Placement(transformation(
             extent={{-4,-4},{4,4}},
             rotation=180,
@@ -416,6 +416,8 @@ package MeursModel
     end SystemicVeins;
 
     model PulmonaryCirculation
+      extends Physiolibrary.Icons.PulmonaryCirculation;
+
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b bloodflowOutflow
         annotation (Placement(transformation(extent={{90,-10},{110,10}}),
             iconTransformation(extent={{90,-10},{110,10}})));
@@ -427,7 +429,7 @@ package MeursModel
             iconTransformation(
             extent={{-13,-13},{13,13}},
             rotation=270,
-            origin={-3,31})));
+            origin={1,61})));
       Physiolibrary.Hydraulic.Components.ElasticVessel PulmonaryArteries(
         useV0Input=true,
         useComplianceInput=true,
@@ -527,11 +529,6 @@ package MeursModel
           smooth=Smooth.Bezier));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),      graphics={
-            Rectangle(
-              extent={{-94,24},{94,-24}},
-              lineColor={0,0,255},
-              fillPattern=FillPattern.Solid,
-              fillColor={0,0,255}),
             Text(
               extent={{92,-44},{-92,-74}},
               lineColor={0,0,255},
@@ -539,7 +536,7 @@ package MeursModel
               fillColor={255,170,213},
               textString="%name
 "),         Text(
-              extent={{88,-6},{-84,36}},
+              extent={{88,24},{-84,66}},
               lineColor={255,0,0},
               fillColor={0,0,255},
               fillPattern=FillPattern.Solid,
@@ -547,8 +544,6 @@ package MeursModel
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics));
     end PulmonaryCirculation;
-
-
 
     model HeartIntervals
 
@@ -666,8 +661,8 @@ package MeursModel
       Physiolibrary.Types.RealIO.TimeInput T0 annotation (Placement(transformation(
               extent={{-140,-80},{-100,-40}}), iconTransformation(extent={{-140,-80},
                 {-100,-40}})));
-      PhysiolibraryExtension.HydraulicElastanceOutput Et "elasticity (torr/ml)"
-                                                                                annotation (Placement(
+      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceOutput Et
+        "elasticity (torr/ml)"                                                               annotation (Placement(
             transformation(extent={{100,-10},{120,10}}), iconTransformation(extent={
                 {100,-20},{138,18}})));
     parameter Physiolibrary.Types.HydraulicElastance EMIN
@@ -737,7 +732,7 @@ package MeursModel
       Physiolibrary.Types.RealIO.TimeInput T0 annotation (Placement(transformation(
               extent={{-138,-100},{-98,-60}}), iconTransformation(extent={{-138,-100},
                 {-98,-60}})));
-      PhysiolibraryExtension.HydraulicElastanceOutput Et
+      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceOutput Et
         "ventricular elasticity (torr/ml)"               annotation (Placement(
             transformation(extent={{100,-10},{120,10}}), iconTransformation(extent={{100,4},
                 {138,42}})));
@@ -890,9 +885,9 @@ package MeursModel
         useExternalPressureInput=true,
         volume_start=0.00013)
         annotation (Placement(transformation(extent={{32,-54},{58,-28}})));
-      PhysiolibraryExtension.CardiacValve tripupsidValve
+      PhysiolibraryExtension.Hydraulic.Components.CardiacValve tripupsidValve
         annotation (Placement(transformation(extent={{-8,-32},{14,-52}})));
-      PhysiolibraryExtension.CardiacValve pulmonicValve
+      PhysiolibraryExtension.Hydraulic.Components.CardiacValve pulmonicValve
         annotation (Placement(transformation(extent={{64,-30},{88,-54}})));
       AtrialElastance atrialElastance(EMIN=6666119.37075, EMAX=19998358.11225)
         annotation (Placement(transformation(extent={{-64,46},{-26,78}})));
@@ -919,9 +914,9 @@ package MeursModel
                                RRVOutflow(k(displayUnit="(mmHg.s)/ml")=
           399967.162245) "resistance of pulmonic valve"
         annotation (Placement(transformation(extent={{74,-86},{82,-78}})));
-      PhysiolibraryExtension.HydraulicElastanceToCompliance hydrauliccompliance
+      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance
         annotation (Placement(transformation(extent={{102,52},{110,60}})));
-      PhysiolibraryExtension.HydraulicElastanceToCompliance hydrauliccompliance1
+      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance1
         annotation (Placement(transformation(extent={{-10,58},{-2,66}})));
     equation
       connect(CRVBackflow.y, pulmonicValve.inflowConductance) annotation (Line(
@@ -1117,9 +1112,9 @@ package MeursModel
         useExternalPressureInput=true,
         volume_start=0.00013)
         annotation (Placement(transformation(extent={{32,-54},{58,-28}})));
-      PhysiolibraryExtension.CardiacValve tripupsidValve
+      PhysiolibraryExtension.Hydraulic.Components.CardiacValve tripupsidValve
         annotation (Placement(transformation(extent={{-8,-32},{14,-52}})));
-      PhysiolibraryExtension.CardiacValve pulmonicValve
+      PhysiolibraryExtension.Hydraulic.Components.CardiacValve pulmonicValve
         annotation (Placement(transformation(extent={{64,-30},{88,-54}})));
       AtrialElastance atrialElastance(EMIN=15998686.4898, EMAX=37330268.4762)
         annotation (Placement(transformation(extent={{-64,46},{-26,78}})));
@@ -1146,9 +1141,9 @@ package MeursModel
                                RLVOutflow(k(displayUnit="(mmHg.s)/ml")=
           1066579.09932) "resistance of pulmonic valve"
         annotation (Placement(transformation(extent={{74,-86},{82,-78}})));
-      PhysiolibraryExtension.HydraulicElastanceToCompliance hydrauliccompliance
+      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance
         annotation (Placement(transformation(extent={{102,52},{110,60}})));
-      PhysiolibraryExtension.HydraulicElastanceToCompliance hydrauliccompliance1
+      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance1
         annotation (Placement(transformation(extent={{-10,58},{-2,66}})));
     equation
       connect(CLVBackflow.y, pulmonicValve.inflowConductance) annotation (Line(
@@ -1356,7 +1351,7 @@ package MeursModel
           smooth=Smooth.Bezier));
       connect(pressure.y, pulmonaryCirculation.intrathoracicPressure)
         annotation (Line(
-          points={{-79,34},{-38,34},{-38,64},{4.61,64},{4.61,54.89}},
+          points={{-79,34},{-38,34},{-38,64},{5.13,64},{5.13,60.59}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(pressure.y, leftHeart.PTH) annotation (Line(
@@ -1430,7 +1425,6 @@ package MeursModel
                 -100},{100,100}}),      graphics));
     end Hemodynamics;
 
-
   end Parts;
 
   package Test
@@ -1450,131 +1444,6 @@ package MeursModel
                 -100,-100},{100,100}}), graphics));
     end testRightHeart;
 
-    model HemodynamicsTest
-      extends Physiolibrary.Icons.CardioVascular;
-      Parts.HeartIntervals heartIntervals
-        annotation (Placement(transformation(extent={{-76,28},{-56,48}})));
-      Physiolibrary.Types.Constants.FrequencyConst frequency(k=1.2)
-        annotation (Placement(transformation(extent={{-96,34},{-88,42}})));
-      Parts.RightHeart rightHeart
-        annotation (Placement(transformation(extent={{-32,14},{12,68}})));
-      Physiolibrary.Types.Constants.PressureConst pressure(k=-533.28954966)
-        annotation (Placement(transformation(extent={{-90,58},{-82,66}})));
-      Parts.PulmonaryCirculation pulmonaryCirculation
-        annotation (Placement(transformation(extent={{-10,58},{16,96}})));
-      Physiolibrary.Hydraulic.Sources.UnlimitedVolume unlimitedVolume
-        annotation (Placement(transformation(extent={{60,48},{80,68}})));
-      Physiolibrary.Hydraulic.Sources.UnlimitedPump unlimitedPump(SolutionFlow=
-            8.3333333333333e-05)
-        annotation (Placement(transformation(extent={{-78,0},{-58,20}})));
-      ModelOfHaemodynamics.Parts.RightHeart
-                       rightHeart1(
-        RightAtrium(V0=40),
-        RightVentricle(V0=130),
-        rightAtrialElastance(EMAX=0.15))                                                                                           annotation(Placement(transformation(extent={{20,-94},
-                {58,-56}})));
-      ModelOfHaemodynamics.Parts.heartIntervals
-                           heartIntervals1                    annotation(Placement(transformation(extent={{-82.0,58.0},{-62.0,78.0}}, origin={2,-118},  rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.Constant
-                     HeartRate(k=72)                     annotation(Placement(transformation(extent={{-98.0,84.0},{-90.0,92.0}}, origin={2,-118},  rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.Constant
-                     Pth(k=-4)                     annotation(Placement(transformation(extent={{-90.0,16.0},{-82.0,24.0}}, origin={8,-34},    rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.PulmonaryCirculation pulmonaryCirculation1
-        annotation (Placement(transformation(extent={{36,-30},{56,-10}})));
-      pumptest pumptest1(outflow=5000)
-        annotation (Placement(transformation(extent={{-86,-98},{-66,-78}})));
-      pressuretest pressuretest1(pressure=0)
-        annotation (Placement(transformation(extent={{70,-58},{90,-38}})));
-    equation
-      connect(frequency.y, heartIntervals.HR) annotation (Line(
-          points={{-87,38},{-78,38},{-78,37.8},{-76.8,37.8}},
-          color={0,0,127},
-          smooth=Smooth.Bezier));
-      connect(pressure.y, rightHeart.PTH) annotation (Line(
-          points={{-81,62},{-38,62},{-38,60.44},{-27.6,60.44}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(heartIntervals.Tas, rightHeart.Tas) annotation (Line(
-          points={{-55,46.8},{-46,46.8},{-46,51.26},{-30.68,51.26}},
-          color={0,0,127},
-          smooth=Smooth.Bezier));
-      connect(heartIntervals.Tav, rightHeart.Tav) annotation (Line(
-          points={{-55.4,40.6},{-42,40.6},{-42,40.73},{-30.9,40.73}},
-          color={0,0,127},
-          smooth=Smooth.Bezier));
-      connect(heartIntervals.Tvs, rightHeart.Tvs) annotation (Line(
-          points={{-55.2,36.6},{-38,36.6},{-38,30.2},{-31.56,30.2}},
-          color={0,0,127},
-          smooth=Smooth.Bezier));
-      connect(heartIntervals.T0, rightHeart.T0) annotation (Line(
-          points={{-55,29.2},{-43.5,29.2},{-43.5,21.02},{-31.12,21.02}},
-          color={0,0,127},
-          smooth=Smooth.Bezier));
-      connect(rightHeart.outflow, pulmonaryCirculation.bloodFlowInflow)
-        annotation (Line(
-          points={{-0.32,58.82},{-10,58.82},{-10,77}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.Bezier));
-      connect(pressure.y, pulmonaryCirculation.intrathoracicPressure)
-        annotation (Line(
-          points={{-81,62},{-40,62},{-40,92},{2.61,92},{2.61,82.89}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(pulmonaryCirculation.bloodflowOutflow, unlimitedVolume.y)
-        annotation (Line(
-          points={{16,77},{96,77},{96,58},{80,58}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(unlimitedPump.q_out, rightHeart.inflow) annotation (Line(
-          points={{-58,10},{-12,10},{-12,41},{-11.32,41}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(HeartRate.y, heartIntervals1.HR)
-                                             annotation(Line(visible=true, points={{-87.6,
-              -29.92},{-80,-29.92},{-80,-47.2},{-81.4,-47.2}},                                                                             color={0,0,127}));
-      connect(heartIntervals1.Tas, rightHeart1.Tas)
-                                                 annotation(Line(visible=true, points={{-59,
-              -45.4},{-44,-45.4},{-44,-62.84},{22.66,-62.84}},                                                                                  color={0,0,127}));
-      connect(heartIntervals1.Tav, rightHeart1.Tav)
-                                                 annotation(Line(visible=true, points={{-59,
-              -48.4},{-44,-48.4},{-44,-66.64},{22.66,-66.64}},                                                                                  color={0,0,127}));
-      connect(heartIntervals1.Tvs, rightHeart1.Tvs)
-                                                 annotation(Line(visible=true, points={{-59,
-              -52.2},{-44,-52.2},{-44,-70.44},{22.66,-70.44}},                                                                                  color={0,0,127}));
-      connect(heartIntervals1.T0, rightHeart1.T0)
-                                               annotation(Line(visible=true, points={{-59,
-              -55.6},{-44,-55.6},{-44,-74.24},{22.66,-74.24}},                                                                                color={0,0,127}));
-      connect(rightHeart1.PTH, Pth.y)
-                                    annotation(Line(visible=true, points={{28.74,
-              -58.66},{-26,-58.66},{-26,-13.92},{-73.6,-13.92}},                                                                     color={0,0,127}));
-      connect(rightHeart1.toPulmonaryArtery, pulmonaryCirculation1.bloodFlowInflow)
-        annotation (Line(
-          points={{56.29,-83.17},{56.29,-51.585},{34.7,-51.585},{34.7,-19.9}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(pumptest1.bloodFlowOutflow, rightHeart1.fromCentralVeins)
-        annotation (Line(
-          points={{-66.6,-88},{-22,-88},{-22,-84.31},{23.23,-84.31}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(pulmonaryCirculation1.bloodFlowOutflow, pressuretest1.bloodFlowInflow)
-        annotation (Line(
-          points={{57.7,-20.3},{97.85,-20.3},{97.85,-46.7},{89.9,-46.7}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(Pth.y, pulmonaryCirculation1.IntrathoracicPresssure) annotation (
-          Line(
-          points={{-73.6,-13.92},{-12.8,-13.92},{-12.8,-15.2},{47.2,-15.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),      graphics));
-    end HemodynamicsTest;
-
     model HemodynamicsTest2
       extends Physiolibrary.Icons.CardioVascular;
       Parts.HeartIntervals heartIntervals
@@ -1592,25 +1461,6 @@ package MeursModel
         annotation (Placement(transformation(extent={{-96,18},{-76,38}})));
       Physiolibrary.Hydraulic.Sources.UnlimitedVolume unlimitedVolume
         annotation (Placement(transformation(extent={{-80,-4},{-60,16}})));
-      ModelOfHaemodynamics.Parts.heartIntervals
-                           heartIntervals1                    annotation(Placement(transformation(extent={{-82.0,58.0},{-62.0,78.0}}, origin={2,-96},   rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.Constant
-                     HeartRate(k=72)                     annotation(Placement(transformation(extent={{-98.0,84.0},{-90.0,92.0}}, origin={0,-114},  rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.Constant
-                     Pth(k=-4)                     annotation(Placement(transformation(extent={{-90.0,16.0},{-82.0,24.0}}, origin={44,-70},   rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.SystemicArteries
-                             systemicArteries1(
-        IntrathoracicArteries(V0=300),
-        ExtrathoracicArteries(V0=500),
-        LETHA(k=0.0007))                                                                                                     annotation(Placement(transformation(extent={{42,-88},
-                {90,-50}})));
-      ModelOfHaemodynamics.Parts.LeftHeart
-                      leftHeart1                    annotation(Placement(transformation(extent={{18,-54},
-                {56,-16}})));
-      pumptest pumptest1(outflow=5000)
-        annotation (Placement(transformation(extent={{-84,-92},{-64,-72}})));
-      pressuretest pressuretest1(pressure=0)
-        annotation (Placement(transformation(extent={{-80,-108},{-60,-88}})));
       Parts.systemicPeripheralVessels
                                 systemicPeripheralVessels1
         annotation (Placement(transformation(extent={{-12,-10},{26,22}})));
@@ -1618,18 +1468,9 @@ package MeursModel
                                hydraulicresistance(k(displayUnit="(mmHg.s)/ml")=
              106657909.932)
         annotation (Placement(transformation(extent={{-2,34},{6,42}})));
-      ModelOfHaemodynamics.Parts.Constant
-                     RSP(k=0.8) "resistance torr sec/ml"
-                                                        annotation(Placement(transformation(extent={{-14,-74},
-                {-6,-66}})));
-      ModelOfHaemodynamics.Parts.SystemicPeripheralVessels
-                                      systemicPeripheralVessels                     annotation(Placement(transformation(extent={{-12,
-                -114},{30,-74}})));
       Parts.SystemicVeins
                     systemicVeins
         annotation (Placement(transformation(extent={{-50,-2},{-18,26}})));
-      ModelOfHaemodynamics.Parts.SystemicVeins systemicVeins1
-        annotation (Placement(transformation(extent={{-44,-104},{-24,-84}})));
     equation
       connect(frequency.y, heartIntervals.HR) annotation (Line(
           points={{-85,70},{-76,70},{-76,69.8},{-74.8,69.8}},
@@ -1677,35 +1518,6 @@ package MeursModel
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(heartIntervals1.Tas, leftHeart1.Tas)
-                                                annotation(Line(visible=true, points={{-59,
-              -23.4},{-24,-23.4},{-24,-22.84},{20.66,-22.84}},                                                                              color={0,0,127}));
-      connect(heartIntervals1.Tav, leftHeart1.Tav)
-                                                annotation(Line(visible=true, points={{-59,
-              -26.4},{-24,-26.4},{-24,-26.64},{20.66,-26.64}},                                                                              color={0,0,127}));
-      connect(heartIntervals1.T0, leftHeart1.T0)
-                                              annotation(Line(visible=true, points={{-59,
-              -33.6},{-24,-33.6},{-24,-34.24},{20.66,-34.24}},                                                                            color={0,0,127}));
-      connect(heartIntervals1.Tvs, leftHeart1.Tvs)
-                                                annotation(Line(visible=true, points={{-59,
-              -30.2},{-24,-30.2},{-24,-30.44},{20.66,-30.44}},                                                                              color={0,0,127}));
-      connect(HeartRate.y, heartIntervals1.HR)
-                                             annotation(Line(visible=true, points={{-89.6,
-              -25.92},{-86,-25.92},{-86,-25.2},{-81.4,-25.2}},                                                                             color={0,0,127}));
-      connect(Pth.y, leftHeart1.PTH)
-                                   annotation(Line(visible=true, points={{-37.6,
-              -49.92},{0,-49.92},{0,-32},{0,-18.66},{26.74,-18.66}},                                                                                       color={0,0,127}));
-      connect(Pth.y, systemicArteries1.IntrathoracicPresssure)
-                                                             annotation(Line(visible=true, points={{-37.6,
-              -49.92},{-37.6,-51.92},{-28,-51.92},{-28,-59.88},{68.88,-59.88}},                                                                                            color={0,0,127}));
-      connect(leftHeart1.toAorta, systemicArteries1.bloodFlowInflow)
-                                                                  annotation(Line(points={{54.29,
-              -43.17},{98,-43.17},{98,-70.33},{92.16,-70.33}},                                                                                  color={255,0,0}, thickness=1, smooth=Smooth.None));
-      connect(pumptest1.bloodFlowOutflow, leftHeart1.fromPulmonaryVeins)
-        annotation (Line(
-          points={{-64.6,-82},{-22,-82},{-22,-44.31},{21.23,-44.31}},
-          color={0,0,0},
-          smooth=Smooth.None));
       connect(systemicArteries.Outflow,systemicPeripheralVessels1. bloodFlowInflow)
         annotation (Line(
           points={{38.52,9.26},{36,9.26},{36,5.68},{26,5.68}},
@@ -1716,13 +1528,6 @@ package MeursModel
         annotation (Line(
           points={{7,38},{7,12.4}},
           color={0,0,127},
-          smooth=Smooth.None));
-      connect(systemicPeripheralVessels.PeripheralArteriolarResistance,RSP.y) annotation(Line(points={{6.9,
-              -74.4},{6.9,-69.92},{-5.6,-69.92}},                                                                                                 color={0,0,127}, smooth=Smooth.None));
-      connect(systemicPeripheralVessels.bloodFlowInflow, systemicArteries1.bloodFlowOutflow)
-        annotation (Line(
-          points={{28.95,-90.2},{28.95,-77.1},{39.84,-77.1},{39.84,-70.33}},
-          color={0,0,0},
           smooth=Smooth.None));
       connect(unlimitedVolume.y, systemicVeins.bloodflowOutflow) annotation (
           Line(
@@ -1742,21 +1547,6 @@ package MeursModel
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(pressuretest1.bloodFlowInflow, systemicVeins1.bloodFlowOutflow)
-        annotation (Line(
-          points={{-60.1,-96.7},{-52.05,-96.7},{-52.05,-94.7},{-44.9,-94.7}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(systemicVeins1.bloodFlowInflow, systemicPeripheralVessels.bloodFlowOutflow)
-        annotation (Line(
-          points={{-23.1,-94.7},{-16.55,-94.7},{-16.55,-90},{-10.95,-90}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(systemicVeins1.IntrathoracicPresssure, systemicArteries1.IntrathoracicPresssure)
-        annotation (Line(
-          points={{-32.8,-89.2},{-28,-60},{68.88,-59.88}},
-          color={0,0,127},
-          smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),      graphics));
     end HemodynamicsTest2;
@@ -1769,16 +1559,8 @@ package MeursModel
       Physiolibrary.Hydraulic.Sources.UnlimitedPump unlimitedPump(SolutionFlow=
             8.3333333333333e-05)
         annotation (Placement(transformation(extent={{-82,22},{-62,42}})));
-      ModelOfHaemodynamics.Parts.PulmonaryCirculation pulmonaryCirculation1
-        annotation (Placement(transformation(extent={{-26,-38},{32,-10}})));
-      pumptest pumptest1(outflow=5000)
-        annotation (Placement(transformation(extent={{-92,-36},{-60,-16}})));
-      ModelOfHaemodynamics.Parts.Constant Constant(k=-4)
-        annotation (Placement(transformation(extent={{-38,-8},{-30,0}})));
       Physiolibrary.Hydraulic.Sources.UnlimitedVolume unlimitedVolume(P=0)
         annotation (Placement(transformation(extent={{68,52},{88,72}})));
-      pressuretest pressuretest1(pressure=0)
-        annotation (Placement(transformation(extent={{62,-14},{82,6}})));
     equation
       connect(pressure.y, pulmonaryCirculation.intrathoracicPressure)
         annotation (Line(
@@ -1791,80 +1573,15 @@ package MeursModel
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(pumptest1.bloodFlowOutflow, pulmonaryCirculation1.bloodFlowInflow)
-        annotation (Line(
-          points={{-60.96,-26},{-46,-26},{-46,-23.86},{-29.77,-23.86}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(Constant.y, pulmonaryCirculation1.IntrathoracicPresssure)
-        annotation (Line(
-          points={{-29.6,-3.92},{-11.8,-3.92},{-11.8,-17.28},{6.48,-17.28}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(pulmonaryCirculation.bloodflowOutflow, unlimitedVolume.y)
         annotation (Line(
           points={{36,32},{98,32},{98,62},{88,62}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(pulmonaryCirculation1.bloodFlowOutflow, pressuretest1.bloodFlowInflow)
-        annotation (Line(
-          points={{36.93,-24.42},{95.465,-24.42},{95.465,-2.7},{81.9,-2.7}},
-          color={0,0,0},
-          smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}}), graphics));
     end TestPulmonaryCirculation;
-
-    model pumptest "z puvodniho modelu"
-
-    parameter Real outflow " in ml/min";
-
-      ModelOfHaemodynamics.Parts.BloodFlowOutflow bloodFlowOutflow annotation (
-          Placement(transformation(extent={{86,-12},{114,10}}), iconTransformation(
-              extent={{84,-10},{104,10}})));
-    equation
-      bloodFlowOutflow.Q = - (outflow/60);
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}), graphics), Icon(coordinateSystem(
-              preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
-              Polygon(
-              points={{-98,36},{-98,-26},{46,-24},{86,2},{84,8},{48,32},{6,34},{-98,
-                  36}},
-              lineColor={0,0,255},
-              smooth=Smooth.None,
-              fillColor={85,170,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-56,6},{30,-12}},
-              lineColor={0,0,0},
-              fillColor={85,170,255},
-              fillPattern=FillPattern.Solid,
-              textString="testpump")}));
-    end pumptest;
-
-    model pressuretest
-
-    parameter Real pressure " in mmHg";
-      ModelOfHaemodynamics.Parts.BloodFlowInflow bloodFlowInflow annotation (
-          Placement(transformation(extent={{84,2},{114,24}}), iconTransformation(
-              extent={{84,2},{114,24}})));
-    equation
-      pressure = bloodFlowInflow.Pressure;
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics={
-              Polygon(
-              points={{-88,46},{-88,-16},{140,-28},{96,12},{94,18},{130,44},{16,
-                  44},{-88,46}},
-              lineColor={0,0,255},
-              smooth=Smooth.None,
-              fillColor={85,170,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-46,16},{40,-2}},
-              lineColor={0,0,0},
-              fillColor={85,170,255},
-              fillPattern=FillPattern.Solid,
-              textString="test pressure")}));
-    end pressuretest;
 
     model TestVessel
       Physiolibrary.Hydraulic.Components.ElasticVessel PulmonaryArteries(
@@ -1886,24 +1603,9 @@ package MeursModel
       Physiolibrary.Hydraulic.Sources.UnlimitedVolume unlimitedVolume(P=
             666.611937075)
         annotation (Placement(transformation(extent={{-8,6},{12,26}})));
-      ModelOfHaemodynamics.Parts.BloodElasticCompartment
-        bloodElasticCompartment(V0=100)
-        annotation (Placement(transformation(extent={{-54,-66},{-34,-46}})));
-      pumptest pumptest1(outflow=5000)
-        annotation (Placement(transformation(extent={{-94,-76},{-74,-56}})));
-      pressuretest pressuretest1(pressure=0)
-        annotation (Placement(transformation(extent={{-8,-66},{12,-46}})));
-      ModelOfHaemodynamics.Parts.Constant VPAU1(k=50)
-        annotation (Placement(transformation(extent={{-76,-32},{-68,-24}})));
-      ModelOfHaemodynamics.Parts.Constant PEXT(k=-4)
-        annotation (Placement(transformation(extent={{-52,-28},{-44,-20}})));
-      ModelOfHaemodynamics.Parts.Constant EPA1(k=0.233)
-        annotation (Placement(transformation(extent={{-36,-30},{-28,-22}})));
       Physiolibrary.Hydraulic.Components.Conductor conductor(Conductance(
             displayUnit="ml/(mmHg.min)") = 1.2501026264094e-10)
         annotation (Placement(transformation(extent={{-16,-22},{4,-2}})));
-      ModelOfHaemodynamics.Parts.BloodResistor bloodResistor(BloodResistance=60)
-        annotation (Placement(transformation(extent={{-14,-84},{6,-64}})));
     equation
       connect(VPAU.y,PulmonaryArteries. zeroPressureVolume) annotation (Line(
           points={{-70.5,46},{-66,46},{-66,19.4},{-61.4,19.4}},
@@ -1922,28 +1624,6 @@ package MeursModel
           points={{-29,74},{-34,74},{-34,19.4},{-40.6,19.4}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(pumptest1.bloodFlowOutflow, bloodElasticCompartment.bloodFlow)
-        annotation (Line(
-          points={{-74.6,-66},{-44,-66}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(VPAU1.y, bloodElasticCompartment.UnstressedVolume) annotation (
-          Line(
-          points={{-67.6,-27.92},{-56.8,-27.92},{-56.8,-47.3554},{-50.4947,
-              -47.3554}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(PEXT.y, bloodElasticCompartment.ExternalPressure) annotation (
-          Line(
-          points={{-43.6,-23.92},{-43.6,-34.96},{-43.4947,-34.96},{-43.4947,
-              -45.3554}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(EPA1.y, bloodElasticCompartment.Elastance) annotation (Line(
-          points={{-27.6,-25.92},{-27.6,-36.96},{-37.4947,-36.96},{-37.4947,
-              -47.3554}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(PulmonaryArteries.q_in, conductor.q_in) annotation (Line(
           points={{-51,9},{-35.5,9},{-35.5,-12},{-16,-12}},
           color={0,0,0},
@@ -1953,16 +1633,6 @@ package MeursModel
           points={{4,-12},{8,-12},{8,16},{12,16}},
           color={0,0,0},
           thickness=1,
-          smooth=Smooth.None));
-      connect(bloodElasticCompartment.bloodFlow, bloodResistor.Inflow)
-        annotation (Line(
-          points={{-44,-66},{-30,-66},{-30,-74},{-14,-74}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(bloodResistor.Outflow, pressuretest1.bloodFlowInflow) annotation (
-         Line(
-          points={{6,-74},{10,-74},{10,-54.7},{11.9,-54.7}},
-          color={0,0,0},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}}), graphics));
@@ -1974,31 +1644,17 @@ package MeursModel
       Physiolibrary.Hydraulic.Sources.UnlimitedPump unlimitedPump(SolutionFlow=
             8.3333333333333e-05)
         annotation (Placement(transformation(extent={{-82,32},{-62,52}})));
-      pumptest pumptest1(outflow=5000)
-        annotation (Placement(transformation(extent={{-92,-36},{-60,-16}})));
-      ModelOfHaemodynamics.Parts.Constant Constant(k=-4)
-        annotation (Placement(transformation(extent={{-38,-8},{-30,0}})));
       Physiolibrary.Hydraulic.Sources.UnlimitedVolume unlimitedVolume(P=0)
         annotation (Placement(transformation(extent={{68,52},{88,72}})));
-      pressuretest pressuretest1(pressure=0)
-        annotation (Placement(transformation(extent={{62,-14},{82,6}})));
       Parts.SystemicArteries systemicArteries(inertia(I(displayUnit=
                 "mmHg.s2/ml") = 93325.6711905))
         annotation (Placement(transformation(extent={{-6,32},{14,52}})));
-      ModelOfHaemodynamics.Parts.SystemicArteries systemicArteries1
-        annotation (Placement(transformation(extent={{10,-34},{30,-14}})));
       Parts.systemicPeripheralVessels systemicPeripheralVessels
         annotation (Placement(transformation(extent={{40,32},{60,52}})));
       Physiolibrary.Types.Constants.HydraulicResistanceConst
                                hydraulicresistance(k(displayUnit="(mmHg.s)/ml")=
              106657909.932)
         annotation (Placement(transformation(extent={{18,88},{26,96}})));
-      ModelOfHaemodynamics.Parts.SystemicPeripheralVessels
-        systemicPeripheralVessels1
-        annotation (Placement(transformation(extent={{60,-34},{80,-14}})));
-      ModelOfHaemodynamics.Parts.Constant
-               RSP(k=0.8) "resistance torr sec/ml" annotation(Placement(transformation(extent={{36,-6},
-                {44,2}})));
     equation
       connect(unlimitedPump.q_out, systemicArteries.Outflow) annotation (Line(
           points={{-62,42},{-34,42},{-34,42.2},{-5.8,42.2}},
@@ -2008,16 +1664,6 @@ package MeursModel
       connect(systemicArteries.intrathoracicPressure, pressure.y) annotation (
           Line(
           points={{4,46.8},{4,72},{-15,72}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(pumptest1.bloodFlowOutflow, systemicArteries1.bloodFlowOutflow)
-        annotation (Line(
-          points={{-60.96,-26},{-26,-26},{-26,-24.7},{9.1,-24.7}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(systemicArteries1.IntrathoracicPresssure, Constant.y) annotation (
-         Line(
-          points={{21.2,-19.2},{-29.6,-19.2},{-29.6,-3.92}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(systemicArteries.Inflow, systemicPeripheralVessels.bloodFlowOutflow)
@@ -2035,21 +1681,6 @@ package MeursModel
       connect(hydraulicresistance.y, systemicPeripheralVessels.hydraulicresistance)
         annotation (Line(
           points={{27,92},{50,92},{50,46}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(systemicArteries1.bloodFlowInflow, systemicPeripheralVessels1.bloodFlowOutflow)
-        annotation (Line(
-          points={{30.9,-24.7},{45.45,-24.7},{45.45,-22},{60.5,-22}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(systemicPeripheralVessels1.bloodFlowInflow, pressuretest1.bloodFlowInflow)
-        annotation (Line(
-          points={{79.5,-22.1},{79.5,-14.05},{81.9,-14.05},{81.9,-2.7}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(RSP.y, systemicPeripheralVessels1.PeripheralArteriolarResistance)
-        annotation (Line(
-          points={{44.4,-1.92},{56.2,-1.92},{56.2,-14.2},{69,-14.2}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -2071,30 +1702,11 @@ package MeursModel
         annotation (Placement(transformation(extent={{-96,18},{-76,38}})));
       Physiolibrary.Hydraulic.Sources.UnlimitedVolume unlimitedVolume
         annotation (Placement(transformation(extent={{76,20},{96,40}})));
-      ModelOfHaemodynamics.Parts.heartIntervals
-                           heartIntervals1                    annotation(Placement(transformation(extent={{-82.0,58.0},{-62.0,78.0}}, origin={2,-96},   rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.Constant
-                     HeartRate(k=72)                     annotation(Placement(transformation(extent={{-98.0,84.0},{-90.0,92.0}}, origin={0,-114},  rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.Constant
-                     Pth(k=-4)                     annotation(Placement(transformation(extent={{-90.0,16.0},{-82.0,24.0}}, origin={58,-62},   rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.LeftHeart
-                      leftHeart1                    annotation(Placement(transformation(extent={{42,-54},
-                {80,-16}})));
-      pumptest pumptest1(outflow=5000)
-        annotation (Placement(transformation(extent={{-84,-92},{-64,-72}})));
-      pressuretest pressuretest1(pressure=0)
-        annotation (Placement(transformation(extent={{62,-84},{82,-64}})));
       Parts.PulmonaryCirculation
                            pulmonaryCirculation
         annotation (Placement(transformation(extent={{10,90},{36,128}})));
-      ModelOfHaemodynamics.Parts.PulmonaryCirculation
-                                 pulmonaryCirculation1(
-          PulmonaryArteries(V0=100), PulmonaryVeins(V0=600))                                                                 annotation(Placement(transformation(extent={{-16,-10},
-                {16,20}})));
       Parts.RightHeart rightHeart
         annotation (Placement(transformation(extent={{-28,40},{14,106}})));
-      ModelOfHaemodynamics.Parts.RightHeart rightHeart1
-        annotation (Placement(transformation(extent={{-18,-76},{14,-44}})));
     equation
       connect(frequency.y, heartIntervals.HR) annotation (Line(
           points={{-85,70},{-76,70},{-76,69.8},{-74.8,69.8}},
@@ -2126,21 +1738,6 @@ package MeursModel
           smooth=Smooth.Bezier,
           pattern=LinePattern.Dash));
 
-      connect(heartIntervals1.Tas, leftHeart1.Tas)
-                                                annotation(Line(visible=true, points={{-59,
-              -23.4},{-24,-23.4},{-24,-22.84},{44.66,-22.84}},                                                                              color={0,0,127}));
-      connect(heartIntervals1.Tav, leftHeart1.Tav)
-                                                annotation(Line(visible=true, points={{-59,
-              -26.4},{-24,-26.4},{-24,-26.64},{44.66,-26.64}},                                                                              color={0,0,127}));
-      connect(heartIntervals1.T0, leftHeart1.T0)
-                                              annotation(Line(visible=true, points={{-59,
-              -33.6},{-24,-33.6},{-24,-34.24},{44.66,-34.24}},                                                                            color={0,0,127}));
-      connect(heartIntervals1.Tvs, leftHeart1.Tvs)
-                                                annotation(Line(visible=true, points={{-59,
-              -30.2},{-24,-30.2},{-24,-30.44},{44.66,-30.44}},                                                                              color={0,0,127}));
-      connect(HeartRate.y, heartIntervals1.HR)
-                                             annotation(Line(visible=true, points={{-89.6,
-              -25.92},{-86,-25.92},{-86,-25.2},{-81.4,-25.2}},                                                                             color={0,0,127}));
       connect(leftHeart.outflow, unlimitedVolume.y) annotation (Line(
           points={{15.46,71.5},{15.46,96},{102,96},{102,30},{96,30}},
           color={0,0,0},
@@ -2157,22 +1754,7 @@ package MeursModel
           points={{-79,94},{-48,94},{-48,114.89},{22.61,114.89}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(pulmonaryCirculation1.bloodFlowOutflow, leftHeart1.fromPulmonaryVeins)
-        annotation (Line(
-          points={{18.72,4.55},{18.72,-43.725},{45.23,-43.725},{45.23,-44.31}},
-          color={0,0,0},
-          smooth=Smooth.None));
 
-      connect(leftHeart1.toAorta, pressuretest1.bloodFlowInflow) annotation (
-          Line(
-          points={{78.29,-43.17},{78.29,-57.585},{81.9,-57.585},{81.9,-72.7}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(Pth.y, pulmonaryCirculation1.IntrathoracicPresssure) annotation (
-          Line(
-          points={{-23.6,-41.92},{-23.6,20.04},{1.92,20.04},{1.92,12.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(rightHeart.outflow, pulmonaryCirculation.bloodFlowInflow)
         annotation (Line(
           points={{2.24,94.78},{2.24,101.39},{10,101.39},{10,109}},
@@ -2200,42 +1782,7 @@ package MeursModel
           points={{-53.2,68.6},{-38.6,68.6},{-38.6,59.8},{-27.58,59.8}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(pumptest1.bloodFlowOutflow, rightHeart1.fromCentralVeins)
-        annotation (Line(
-          points={{-64.6,-82},{-28,-82},{-28,-67.84},{-15.28,-67.84}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(rightHeart1.toPulmonaryArtery, pulmonaryCirculation1.bloodFlowInflow)
-        annotation (Line(
-          points={{12.56,-66.88},{12.56,-30.15},{-18.08,-30.15},{-18.08,5.15}},
-          color={0,0,0},
-          smooth=Smooth.None));
 
-      connect(rightHeart1.T0, heartIntervals1.T0) annotation (Line(
-          points={{-15.76,-59.36},{-37.88,-59.36},{-37.88,-33.6},{-59,-33.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.Tvs, heartIntervals1.Tvs) annotation (Line(
-          points={{-15.76,-56.16},{-37.88,-56.16},{-37.88,-30.2},{-59,-30.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.Tav, heartIntervals1.Tav) annotation (Line(
-          points={{-15.76,-52.96},{-37.88,-52.96},{-37.88,-26.4},{-59,-26.4}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.Tas, heartIntervals1.Tas) annotation (Line(
-          points={{-15.76,-49.76},{-37.88,-49.76},{-37.88,-23.4},{-59,-23.4}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.PTH, Pth.y) annotation (Line(
-          points={{-10.64,-46.24},{-17.32,-46.24},{-17.32,-41.92},{-23.6,-41.92}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(Pth.y, leftHeart1.PTH) annotation (Line(
-          points={{-23.6,-41.92},{13.2,-41.92},{13.2,-18.66},{50.74,-18.66}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(pressure.y, rightHeart.PTH) annotation (Line(
           points={{-79,94},{-52,94},{-52,96.76},{-23.8,96.76}},
           color={0,0,127},
@@ -2256,21 +1803,6 @@ package MeursModel
         annotation (Placement(transformation(extent={{-88,90},{-80,98}})));
       Parts.SystemicArteries systemicArteries
         annotation (Placement(transformation(extent={{38,-4},{90,22}})));
-      ModelOfHaemodynamics.Parts.heartIntervals
-                           heartIntervals1                    annotation(Placement(transformation(extent={{-82.0,58.0},{-62.0,78.0}}, origin={-10,-86}, rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.Constant
-                     HeartRate(k=72)                     annotation(Placement(transformation(extent={{-98.0,84.0},{-90.0,92.0}}, origin={10,-130}, rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.Constant
-                     Pth(k=-4)                     annotation(Placement(transformation(extent={{-90.0,16.0},{-82.0,24.0}}, origin={46,-24},   rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.SystemicArteries
-                             systemicArteries1(
-        IntrathoracicArteries(V0=300),
-        ExtrathoracicArteries(V0=500),
-        LETHA(k=0.0007))                                                                                                     annotation(Placement(transformation(extent={{42,-88},
-                {90,-50}})));
-      ModelOfHaemodynamics.Parts.LeftHeart
-                      leftHeart1                    annotation(Placement(transformation(extent={{18,-54},
-                {56,-16}})));
       Parts.systemicPeripheralVessels
                                 systemicPeripheralVessels1
         annotation (Placement(transformation(extent={{-12,-10},{26,22}})));
@@ -2278,27 +1810,14 @@ package MeursModel
                                hydraulicresistance(k(displayUnit="(mmHg.s)/ml")=
              106657909.932)
         annotation (Placement(transformation(extent={{-2,34},{6,42}})));
-      ModelOfHaemodynamics.Parts.Constant
-                     RSP(k=0.8) "resistance torr sec/ml"
-                                                        annotation(Placement(transformation(extent={{-14,-74},
-                {-6,-66}})));
-      ModelOfHaemodynamics.Parts.SystemicPeripheralVessels
-                                      systemicPeripheralVessels                     annotation(Placement(transformation(extent={{-12,
-                -114},{30,-74}})));
       Parts.SystemicVeins
                     systemicVeins
         annotation (Placement(transformation(extent={{-50,-2},{-18,26}})));
-      ModelOfHaemodynamics.Parts.SystemicVeins systemicVeins1
-        annotation (Placement(transformation(extent={{-44,-104},{-24,-84}})));
       Parts.RightHeart
                  rightHeart
         annotation (Placement(transformation(extent={{-30,46},{14,100}})));
       Parts.PulmonaryCirculation pulmonaryCirculation
         annotation (Placement(transformation(extent={{-2,92},{18,112}})));
-      ModelOfHaemodynamics.Parts.RightHeart rightHeart1
-        annotation (Placement(transformation(extent={{-54,-62},{-34,-42}})));
-      ModelOfHaemodynamics.Parts.PulmonaryCirculation pulmonaryCirculation1
-        annotation (Placement(transformation(extent={{-16,-20},{4,0}})));
     equation
       connect(frequency.y, heartIntervals.HR) annotation (Line(
           points={{-85,70},{-76,70},{-76,69.8},{-74.8,69.8}},
@@ -2341,21 +1860,6 @@ package MeursModel
           thickness=1,
           smooth=Smooth.Bezier));
 
-      connect(heartIntervals1.Tas, leftHeart1.Tas)
-                                                annotation(Line(visible=true, points={{-71,
-              -13.4},{-24,-13.4},{-24,-22.84},{20.66,-22.84}},                                                                              color={0,0,127}));
-      connect(heartIntervals1.Tav, leftHeart1.Tav)
-                                                annotation(Line(visible=true, points={{-71,
-              -16.4},{-24,-16.4},{-24,-26.64},{20.66,-26.64}},                                                                              color={0,0,127}));
-      connect(heartIntervals1.T0, leftHeart1.T0)
-                                              annotation(Line(visible=true, points={{-71,
-              -23.6},{-24,-23.6},{-24,-34.24},{20.66,-34.24}},                                                                            color={0,0,127}));
-      connect(heartIntervals1.Tvs, leftHeart1.Tvs)
-                                                annotation(Line(visible=true, points={{-71,
-              -20.2},{-24,-20.2},{-24,-30.44},{20.66,-30.44}},                                                                              color={0,0,127}));
-      connect(leftHeart1.toAorta, systemicArteries1.bloodFlowInflow)
-                                                                  annotation(Line(points={{54.29,
-              -43.17},{98,-43.17},{98,-70.33},{92.16,-70.33}},                                                                                  color={255,0,0}, thickness=1, smooth=Smooth.None));
       connect(systemicArteries.Outflow,systemicPeripheralVessels1. bloodFlowInflow)
         annotation (Line(
           points={{38.52,9.26},{36,9.26},{36,5.68},{26,5.68}},
@@ -2366,13 +1870,6 @@ package MeursModel
         annotation (Line(
           points={{7,38},{7,12.4}},
           color={0,0,127},
-          smooth=Smooth.None));
-      connect(systemicPeripheralVessels.PeripheralArteriolarResistance,RSP.y) annotation(Line(points={{6.9,
-              -74.4},{6.9,-69.92},{-5.6,-69.92}},                                                                                                 color={0,0,127}, smooth=Smooth.None));
-      connect(systemicPeripheralVessels.bloodFlowInflow, systemicArteries1.bloodFlowOutflow)
-        annotation (Line(
-          points={{28.95,-90.2},{28.95,-77.1},{39.84,-77.1},{39.84,-70.33}},
-          color={0,0,0},
           smooth=Smooth.None));
       connect(systemicVeins.bloodFlowInflow, systemicPeripheralVessels1.bloodFlowOutflow)
         annotation (Line(
@@ -2386,11 +1883,6 @@ package MeursModel
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(systemicVeins1.bloodFlowInflow, systemicPeripheralVessels.bloodFlowOutflow)
-        annotation (Line(
-          points={{-23.1,-94.7},{-16.55,-94.7},{-16.55,-90},{-10.95,-90}},
-          color={0,0,0},
-          smooth=Smooth.None));
       connect(systemicVeins.bloodflowOutflow, rightHeart.inflow) annotation (
           Line(
           points={{-50.32,7.24},{-50.32,39.62},{-9.32,39.62},{-9.32,73}},
@@ -2429,202 +1921,15 @@ package MeursModel
           points={{-53,61.2},{-42.5,61.2},{-42.5,53.02},{-29.12,53.02}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(HeartRate.y, heartIntervals1.HR) annotation (Line(
-          points={{-79.6,-41.92},{-70,-41.92},{-70,-54},{-93.4,-54},{-93.4,
-              -15.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(heartIntervals1.T0, rightHeart1.T0) annotation (Line(
-          points={{-71,-23.6},{-62.5,-23.6},{-62.5,-51.6},{-52.6,-51.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.Tav, heartIntervals1.Tav) annotation (Line(
-          points={{-52.6,-47.6},{-57.3,-47.6},{-57.3,-16.4},{-71,-16.4}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.Tas, leftHeart1.Tas) annotation (Line(
-          points={{-52.6,-45.6},{-52.6,-14},{-24,-14},{-24,-22.84},{20.66,
-              -22.84}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.Tvs, heartIntervals1.Tvs) annotation (Line(
-          points={{-52.6,-49.6},{-56,-49.6},{-56,-50},{-60,-50},{-60,-20.2},{
-              -71,-20.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.toPulmonaryArtery, pulmonaryCirculation1.bloodFlowInflow)
-        annotation (Line(
-          points={{-34.9,-56.3},{-34.9,-25.15},{-17.3,-25.15},{-17.3,-9.9}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(pulmonaryCirculation1.bloodFlowOutflow, leftHeart1.fromPulmonaryVeins)
-        annotation (Line(
-          points={{5.7,-10.3},{20,-44},{21.23,-44.31}},
-          color={0,0,0},
-          smooth=Smooth.None));
-      connect(systemicVeins1.bloodFlowOutflow, rightHeart1.fromCentralVeins)
-        annotation (Line(
-          points={{-44.9,-94.7},{-44.9,-68.35},{-52.3,-68.35},{-52.3,-56.9}},
-          color={0,0,0},
-          smooth=Smooth.None));
       connect(pressure.y, pulmonaryCirculation.intrathoracicPressure)
         annotation (Line(
           points={{-79,94},{-36,94},{-36,105.1},{7.7,105.1}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Pth.y, pulmonaryCirculation1.IntrathoracicPresssure) annotation (
-          Line(
-          points={{-35.6,-3.92},{-19.8,-3.92},{-19.8,-5.2},{-4.8,-5.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Pth.y, leftHeart1.PTH) annotation (Line(
-          points={{-35.6,-3.92},{-4.8,-3.92},{-4.8,-18.66},{26.74,-18.66}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Pth.y, rightHeart1.PTH) annotation (Line(
-          points={{-35.6,-3.92},{-35.6,-23.96},{-49.4,-23.96},{-49.4,-43.4}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Pth.y, systemicArteries1.IntrathoracicPresssure) annotation (Line(
-          points={{-35.6,-3.92},{16.2,-3.92},{16.2,-59.88},{68.88,-59.88}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Pth.y, systemicVeins1.IntrathoracicPresssure) annotation (Line(
-          points={{-35.6,-3.92},{-35.6,-45.96},{-32.8,-45.96},{-32.8,-89.2}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),      graphics));
     end HemodynamicsTest4;
 
-    model HemodynamicsTest5
-      extends Physiolibrary.Icons.CardioVascular;
-      ModelOfHaemodynamics.Parts.heartIntervals
-                           heartIntervals1                    annotation(Placement(transformation(extent={{-82.0,58.0},{-62.0,78.0}}, origin={-8,-26},  rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.Constant
-                     HeartRate(k=72)                     annotation(Placement(transformation(extent={{-98.0,84.0},{-90.0,92.0}}, origin={12,-70},  rotation=0), visible=true));
-      ModelOfHaemodynamics.Parts.SystemicArteries
-                             systemicArteries1(
-        IntrathoracicArteries(V0=300),
-        ExtrathoracicArteries(V0=500),
-        LETHA(k=0.0007))                                                                                                     annotation(Placement(transformation(extent={{44,-28},
-                {92,10}})));
-      ModelOfHaemodynamics.Parts.LeftHeart
-                      leftHeart1                    annotation(Placement(transformation(extent={{20,6},{
-                58,44}})));
-      ModelOfHaemodynamics.Parts.Constant
-                     RSP(k=0.8) "resistance torr sec/ml"
-                                                        annotation(Placement(transformation(extent={{-12,-14},
-                {-4,-6}})));
-      ModelOfHaemodynamics.Parts.SystemicPeripheralVessels
-                                      systemicPeripheralVessels                     annotation(Placement(transformation(extent={{-10,-54},
-                {32,-14}})));
-      ModelOfHaemodynamics.Parts.SystemicVeins systemicVeins1
-        annotation (Placement(transformation(extent={{-42,-44},{-22,-24}})));
-      ModelOfHaemodynamics.Parts.RightHeart rightHeart1(
-        rightAtrialElastance(EMAX=0.15),
-        RightAtrium(V0=40),
-        RightVentricle(V0=130))
-        annotation (Placement(transformation(extent={{-52,-2},{-32,18}})));
-      ModelOfHaemodynamics.Parts.PulmonaryCirculation pulmonaryCirculation1
-        annotation (Placement(transformation(extent={{-14,40},{6,60}})));
-      ModelOfHaemodynamics.Parts.Constant
-                     Pth(k=-4)                     annotation(Placement(transformation(extent={{-90.0,16.0},{-82.0,24.0}}, origin={26,46},    rotation=0), visible=true));
-    equation
-
-      connect(heartIntervals1.Tas, leftHeart1.Tas)
-                                                annotation(Line(visible=true, points={{-69,
-              46.6},{-22,46.6},{-22,37.16},{22.66,37.16}},                                                                                  color={0,0,127}));
-      connect(heartIntervals1.Tav, leftHeart1.Tav)
-                                                annotation(Line(visible=true, points={{-69,
-              43.6},{-22,43.6},{-22,33.36},{22.66,33.36}},                                                                                  color={0,0,127}));
-      connect(heartIntervals1.T0, leftHeart1.T0)
-                                              annotation(Line(visible=true, points={{-69,
-              36.4},{-22,36.4},{-22,25.76},{22.66,25.76}},                                                                                color={0,0,127}));
-      connect(heartIntervals1.Tvs, leftHeart1.Tvs)
-                                                annotation(Line(visible=true, points={{-69,
-              39.8},{-22,39.8},{-22,29.56},{22.66,29.56}},                                                                                  color={0,0,127}));
-      connect(leftHeart1.toAorta, systemicArteries1.bloodFlowInflow)
-                                                                  annotation(Line(points={{56.29,
-              16.83},{100,16.83},{100,-10.33},{94.16,-10.33}},                                                                                  color={255,0,0}, thickness=1, smooth=Smooth.None));
-      connect(systemicPeripheralVessels.PeripheralArteriolarResistance,RSP.y) annotation(Line(points={{8.9,
-              -14.4},{8.9,-9.92},{-3.6,-9.92}},                                                                                                   color={0,0,127}, smooth=Smooth.None));
-      connect(HeartRate.y, heartIntervals1.HR) annotation (Line(
-          points={{-77.6,18.08},{-68,18.08},{-68,6},{-91.4,6},{-91.4,44.8}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(heartIntervals1.T0, rightHeart1.T0) annotation (Line(
-          points={{-69,36.4},{-60.5,36.4},{-60.5,8.4},{-50.6,8.4}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.Tav, heartIntervals1.Tav) annotation (Line(
-          points={{-50.6,12.4},{-55.3,12.4},{-55.3,43.6},{-69,43.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.Tas, leftHeart1.Tas) annotation (Line(
-          points={{-50.6,14.4},{-50.6,46},{-22,46},{-22,37.16},{22.66,37.16}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.Tvs, heartIntervals1.Tvs) annotation (Line(
-          points={{-50.6,10.4},{-54,10.4},{-54,10},{-58,10},{-58,39.8},{-69,
-              39.8}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(rightHeart1.toPulmonaryArtery, pulmonaryCirculation1.bloodFlowInflow)
-        annotation (Line(
-          points={{-32.9,3.7},{-32.9,22.85},{-15.3,22.85},{-15.3,50.1}},
-          color={0,0,0},
-          smooth=Smooth.None,
-          thickness=1));
-      connect(pulmonaryCirculation1.bloodFlowOutflow, leftHeart1.fromPulmonaryVeins)
-        annotation (Line(
-          points={{7.7,49.7},{22,16},{23.23,15.69}},
-          color={0,0,0},
-          smooth=Smooth.None,
-          thickness=1));
-      connect(systemicVeins1.bloodFlowOutflow, rightHeart1.fromCentralVeins)
-        annotation (Line(
-          points={{-42.9,-34.7},{-42.9,-8.35},{-50.3,-8.35},{-50.3,3.1}},
-          color={0,0,0},
-          smooth=Smooth.None,
-          thickness=1));
-      connect(systemicArteries1.bloodFlowOutflow, systemicPeripheralVessels.bloodFlowInflow)
-        annotation (Line(
-          points={{41.84,-10.33},{41.84,-20.165},{30.95,-20.165},{30.95,-30.2}},
-          color={0,0,0},
-          smooth=Smooth.None,
-          thickness=1));
-
-      connect(systemicVeins1.bloodFlowInflow, systemicPeripheralVessels.bloodFlowOutflow)
-        annotation (Line(
-          points={{-21.1,-34.7},{-15.55,-34.7},{-15.55,-30},{-8.95,-30}},
-          color={0,0,0},
-          smooth=Smooth.None,
-          thickness=1));
-      connect(Pth.y, pulmonaryCirculation1.IntrathoracicPresssure) annotation (
-          Line(
-          points={{-55.6,66.08},{-28.8,66.08},{-28.8,54.8},{-2.8,54.8}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Pth.y, leftHeart1.PTH) annotation (Line(
-          points={{-55.6,66.08},{21.2,66.08},{21.2,41.34},{28.74,41.34}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Pth.y, rightHeart1.PTH) annotation (Line(
-          points={{-55.6,66.08},{-55.6,55.04},{-47.4,55.04},{-47.4,16.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Pth.y, systemicVeins1.IntrathoracicPresssure) annotation (Line(
-          points={{-55.6,66.08},{-55.6,55.04},{-30.8,55.04},{-30.8,-29.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(Pth.y, systemicArteries1.IntrathoracicPresssure) annotation (Line(
-          points={{-55.6,66.08},{71.2,66.08},{71.2,0.12},{70.88,0.12}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),      graphics));
-    end HemodynamicsTest5;
   end Test;
   annotation (uses(Physiolibrary(version="2.1"), Modelica(version="3.2.1")),
     version="1",

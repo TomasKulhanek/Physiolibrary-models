@@ -12,6 +12,7 @@ buildlog.txt
 *.mat
 *.c
 *.h
+*.dll
 
 # Build results
 
