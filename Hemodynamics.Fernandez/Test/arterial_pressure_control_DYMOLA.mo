@@ -358,9 +358,10 @@ package control "modelo y control a corto plazo"
       annotation (extent=[-56, -14; -36, 6]);
   equation 
     connect(incpres,Switch1.u1) 
-      annotation (points=[-48, 29; -33, 29; -33, 9; -8, 9], style(color=3));
-    connect(cero.y,Switch1.u3)             annotation (points=[-37.1, -35; -19.55,
-           -35; -19.55, -5; -8, -5], style(color=3));
+      annotation (points=[-48,29; -33,29; -33,10; -8,10],   style(color=3));
+    connect(cero.y,Switch1.u3)             annotation (points=[-37.1,-35; 
+          -19.55,-35; -19.55,-6; -8,-6],
+                                     style(color=3));
     connect(Switch1.y,       OutPort1) 
       annotation (points=[15, 2; 12.5, 2; 12.5, 3; 52, 3], style(color=3));
     connect(GreaterEqual1.y,Switch1.u2) 
@@ -623,7 +624,7 @@ package control "modelo y control a corto plazo"
                                        FVT "Flujo valvula tricuspide" 
       annotation (extent=[10, -8; 24, 6]);
     Modelica.Blocks.Tables.CombiTable1D   CombiTable1D1(table=[0,0.0066; 0.0625,
-          0.16; 0.125,0.32; 0.1875,0.45; 0.25,0.625; 0.3125,0.78; 0.375,0.27; 
+          0.16; 0.125,0.32; 0.1875,0.45; 0.25,0.625; 0.3125,0.78; 0.375,0.27;
           0.4375,0.0066; 1,0.0066]) 
                              annotation (extent=[-60, 10; -40, 30]);
   equation 
@@ -707,7 +708,7 @@ package control "modelo y control a corto plazo"
         Text(extent=[-62, 34; 2, 22], string="izquierdo")));
     pulsos pulsos1 annotation (extent=[-88, -6; -24, 60]);
     Modelica.Blocks.Tables.CombiTable1D   CombiTable1D1(table=[0,0.0033; 0.0625,
-          0.41; 0.125,0.63; 0.1875,0.73; 0.25,0.8; 0.3125,0.76; 0.375,0.25; 
+          0.41; 0.125,0.63; 0.1875,0.73; 0.25,0.8; 0.3125,0.76; 0.375,0.25;
           0.4375,0.0033; 1,0.0033]) 
                             annotation (extent=[-52, 20; -36, 36]);
   equation 
@@ -921,8 +922,8 @@ package control "modelo y control a corto plazo"
       "Elastancia ventricular derecha maxima" 
       annotation (extent=[58, 22; 74, 38]);
     Modelica.Blocks.Sources.Step Step1(
-      height=200, 
-      offset=250, 
+      height=200,
+      offset=250,
       startTime=20) annotation (extent=[-44, -48; -24, -28]);
   equation 
     connect(PAO, media1.PAO) annotation (points=[-58, 36; -77.46, 36; -77.46,
@@ -930,8 +931,8 @@ package control "modelo y control a corto plazo"
         color=3,
         fillColor=76,
         fillPattern=1));
-    connect(media1.media,Switch1.u1)       annotation (points=[-47.32, 72.6;
-          -41.66, 72.6; -41.66, 15.6; -73.4, 15.6], style(
+    connect(media1.media,Switch1.u1)       annotation (points=[-47.32,72.6; 
+          -41.66,72.6; -41.66,16.4; -73.4,16.4],    style(
         color=3,
         fillColor=76,
         fillPattern=1));
@@ -940,8 +941,8 @@ package control "modelo y control a corto plazo"
         color=5,
         fillColor=76,
         fillPattern=1));
-    connect(PAOmedia.y,Switch1.u3)             annotation (points=[-77.2, -14;
-          -68, -14; -68, 4.4; -73.4, 4.4], style(
+    connect(PAOmedia.y,Switch1.u3)             annotation (points=[-77.2,-14; 
+          -68,-14; -68,3.6; -73.4,3.6],    style(
         color=3,
         fillColor=76,
         fillPattern=1));
@@ -1070,14 +1071,15 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Interfaces.RealOutput 
                                        acumulador 
       annotation (extent=[92, 16; 108, 32]);
-    Modelica.Blocks.Math.Sum Sum1(nin=2) annotation (extent=[32, -12; 52, 8]);
+    Modelica.Blocks.Math.Sum Sum1(nin=2, k={0.9999999,0.9999999}) 
+                                         annotation (extent=[32, -12; 52, 8]);
     Modelica.Blocks.Routing.Multiplex2              Multiplex2_1 
       annotation (extent=[-8, -12; 12, 8]);
   equation 
     connect(PAO,Switch1.u1) 
-      annotation (points=[-91, 42; -66, 42; -66, 7; -48, 7], style(color=3));
-    connect(cero.y,Switch1.u3)             annotation (points=[-83.3, -41;
-          -52.65, -41; -52.65, -7; -48, -7], style(color=3));
+      annotation (points=[-91,42; -66,42; -66,8; -48,8],     style(color=3));
+    connect(cero.y,Switch1.u3)             annotation (points=[-83.3,-41; 
+          -52.65,-41; -52.65,-8; -48,-8],    style(color=3));
     connect(subida,Switch1.u2) 
       annotation (points=[-87, -1; -88, -1; -88, 0; -48, 0], style(color=5));
     connect(Sum1.y,       acumulador) 
@@ -1091,7 +1093,7 @@ package control "modelo y control a corto plazo"
   end acumulador;
   
   partial model contador 
-    Modelica.Blocks.Sources.Constant Constant1 
+    Modelica.Blocks.Sources.Constant Constant1(k=1) 
       annotation (extent=[-84, 28; -70, 44]);
     annotation (Diagram, Icon(Rectangle(extent=[-10, 24; 20, -4], style(
               fillColor=83, fillPattern=8)), Text(extent=[-8, 28; 18, -8],
@@ -1142,62 +1144,63 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Interfaces.RealOutput 
                                        media annotation (extent=[80, 2; 98, 18]);
     acumulador acumulador1 annotation (extent=[-66, 66; 10, 108]);
-    contador contador1 annotation (extent=[-28, -32; -2, 24]);
+    contador contador1(acumulador1(cero(k=1e-15))) 
+                       annotation (extent=[-28, -32; -2, 24]);
   equation 
     connect(PAO,UnitDelay1.u)       annotation (points=[-91, 9; -83.5, 9; -83.5,
            -2; -77.6, -2], style(
         color=3,
         fillColor=83,
         fillPattern=8));
-    connect(UnitDelay1.y,Compare1.u2)             annotation (points=[-59.2, -2;
-           -66, -2; -66, 18; -64, 18], style(
+    connect(UnitDelay1.y,Compare1.u2)             annotation (points=[-59.2,-2; 
+          -66,-2; -66,16; -64,16],     style(
         color=3,
         fillColor=83,
         fillPattern=8));
-    connect(PAO,Compare1.u1)       annotation (points=[-91, 9; -91, 38; -64, 38;
-           -64, 30], style(
+    connect(PAO,Compare1.u1)       annotation (points=[-91,9; -91,38; -64,38; 
+          -64,24],   style(
         color=3,
         fillColor=83,
         fillPattern=8));
     connect(Division1.y,Switch1.u1) 
-      annotation (points=[-9.3, 60; 8, 60; 8, 15; 12, 15], style(color=3));
+      annotation (points=[-9.3,60; 8,60; 8,16; 12,16],     style(color=3));
     connect(Compare1.y,Switch1.u2) 
       annotation (points=[-41, 24; -30, 24; -30, 8; 12, 8], style(color=5));
     connect(Switch1.y,UnitDelay2.u) 
       annotation (points=[35, 8; 40.4, 8], style(color=3));
-    connect(UnitDelay2.y,Switch1.u3)             annotation (points=[58.8, 8;
-          68, 8; 68, -12; 0, -12; 0, 1; 12, 1], style(color=3));
-    connect(UnitDelay1.y,Compare2.u1)             annotation (points=[-59.2, -2;
-           -68, -2; -68, -32; -66, -32], style(color=3));
+    connect(UnitDelay2.y,Switch1.u3)             annotation (points=[58.8,8; 68,
+          8; 68,-12; 0,-12; 0,0; 12,0],         style(color=3));
+    connect(UnitDelay1.y,Compare2.u1)             annotation (points=[-59.2,-2; 
+          -68,-2; -68,-38; -66,-38],     style(color=3));
     connect(PAO,Compare2.u2) 
-      annotation (points=[-91, 9; -91, -44; -66, -44], style(color=3));
+      annotation (points=[-91,9; -91,-46; -66,-46],    style(color=3));
     connect(Compare2.y,Switch2.u2)             annotation (points=[-43, -38;
           -36, -38; -36, -40; -26, -40], style(color=5));
     connect(Switch2.y,UnitDelay3.u) 
       annotation (points=[-3, -40; 2, -40; 2, -38; 8.4, -38], style(color=3));
     connect(UnitDelay3.y,Switch3.u1) 
-      annotation (points=[26.8, -38; 48, -38; 48, -55], style(color=3));
-    connect(UnitDelay3.y,Switch2.u3)             annotation (points=[26.8, -38;
-           28, -38; 28, -54; -38, -54; -38, -47; -26, -47], style(color=3));
+      annotation (points=[26.8,-38; 48,-38; 48,-54],    style(color=3));
+    connect(UnitDelay3.y,Switch2.u3)             annotation (points=[26.8,-38; 
+          28,-38; 28,-54; -38,-54; -38,-48; -26,-48],       style(color=3));
     connect(Compare2.y,Switch3.u2)             annotation (points=[-43, -38;
           -40, -38; -40, -62; 48, -62], style(color=5));
-    connect(PAOmedia.y,Switch3.u3)             annotation (points=[-7.1, -81;
-          15.45, -81; 15.45, -69; 48, -69], style(color=3));
+    connect(PAOmedia.y,Switch3.u3)             annotation (points=[-7.1,-81; 
+          15.45,-81; 15.45,-70; 48,-70],    style(color=3));
     connect(Switch3.y,       media) 
       annotation (points=[71, -62; 76, -62; 76, 10; 89, 10], style(color=3));
     connect(Compare1.y,       acumulador1.subida) annotation (points=[-41, 24;
           -42, 24; -42, 62; -78, 62; -78, 76; -61.06, 76; -61.06, 86.79], style(
           color=5));
     connect(PAO, acumulador1.PAO) 
-      annotation (points=[-91, 9; -91, 97.5; -51.94, 97.5], style(color=3));
+      annotation (points=[-91,9; -91,95.82; -62.58,95.82],  style(color=3));
     connect(acumulador1.acumulador,Division1.u1)       annotation (points=[10,
           92.04; 10, 66.71; -25.4, 66.71; -25.4, 64.8], style(color=3));
     connect(Division1.u2,      contador1.contador) annotation (points=[-25.4,
           55.2; -8.63, 55.2; -8.63, -1.48], style(color=3));
-    connect(Compare1.y,       contador1.subida) annotation (points=[-41, 24;
-          -34, 24; -34, -11.84; -26.31, -11.84], style(color=5));
-    connect(UnitDelay2.y,Switch2.u1)             annotation (points=[58.8, 8;
-          58, 8; 58, -18; -30, -18; -30, -33; -26, -33], style(color=3));
+    connect(Compare1.y,       contador1.subida) annotation (points=[-41,24; -34,
+          24; -34,-4.56; -25.01,-4.56],          style(color=5));
+    connect(UnitDelay2.y,Switch2.u1)             annotation (points=[58.8,8; 58,
+          8; 58,-18; -30,-18; -30,-32; -26,-32],         style(color=3));
   end media;
   
   model arteriaaorta 
@@ -1234,8 +1237,8 @@ package control "modelo y control a corto plazo"
   equation 
     connect(elastancia.y,       compartimentoconvalvula1.ELASTAN) annotation (
         points=[-27.2, 9; -40.7, 9; -40.7, 8.9; -16.8, 8.9], style(color=3));
-    connect(FAS, compartimentoconvalvula1.flujent) annotation (points=[-50, 37;
-           -50, 37; -50, 24.24; -18.36, 24.24], style(color=3));
+    connect(FAS, compartimentoconvalvula1.flujent) annotation (points=[-50,37; 
+          -50,24.24; -18.36,24.24],             style(color=3));
     connect(PVI, compartimentoconvalvula1.present) annotation (points=[-48, -4;
            -52, -4; -52, -9.39; -17.58, -9.39], style(color=3));
     connect(compartimentoconvalvula1.volsal, VAO) annotation (points=[32.34,
