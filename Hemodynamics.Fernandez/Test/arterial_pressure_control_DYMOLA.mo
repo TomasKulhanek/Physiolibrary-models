@@ -4,8 +4,8 @@ package control "modelo y control a corto plazo"
   partial model compartimentogeneral
     Modelica.Blocks.Interfaces.RealInput
                                       flujent
-      annotation (Placement(transformation(extent={{-84,30},{-68,50}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-84,30},{-68,50}}, rotation=
+             0)));
     Modelica.Blocks.Math.Add Add1(k1=-1) annotation (Placement(transformation(
             extent={{-60,24},{-40,44}}, rotation=0)));
     Modelica.Blocks.Continuous.Integrator Integrator1(y_start=scalar(c))
@@ -18,8 +18,8 @@ package control "modelo y control a corto plazo"
             extent={{-60,-12},{-40,8}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       elastancia
-      annotation (Placement(transformation(extent={{-82,-4},{-66,14}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-82,-4},{-66,14}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        presisal
       annotation (Placement(transformation(extent={{-8,-4},{10,12}}, rotation=0)));
@@ -107,22 +107,22 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{-122,34},{-18,118}},
             rotation=0)));
     sistemapulmonarvenoso sistemapulmonarvenoso1
-      annotation (Placement(transformation(extent={{-60,20},{36,112}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-60,20},{36,112}}, rotation=
+             0)));
     venacava venacava1 annotation (Placement(transformation(extent={{-114,-70},
               {-18,12}}, rotation=0)));
     Modelica.Blocks.Sources.Clock Clock1
       annotation (Placement(transformation(extent={{-22,-82},{-12,-72}},
             rotation=0)));
     Modelica.Blocks.Logical.LogicalSwitch          LogicalSwitch1
-      annotation (Placement(transformation(extent={{14,-92},{22,-68}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{14,-92},{22,-68}}, rotation=
+             0)));
     Modelica.Blocks.Sources.BooleanConstant BooleanConstant1
-      annotation (Placement(transformation(extent={{-2,-64},{10,-54}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-2,-64},{10,-54}}, rotation=
+             0)));
     Modelica.Blocks.Sources.BooleanConstant BooleanConstant2(k=false)
-      annotation (Placement(transformation(extent={{-6,-100},{8,-90}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-6,-100},{8,-90}}, rotation=
+             0)));
     Modelica.Blocks.Logical.GreaterEqualThreshold GreaterEqual1(threshold=0)
       annotation (Placement(transformation(extent={{-8,-82},{8,-72}}, rotation=
               0)));
@@ -135,8 +135,8 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Math.Division Division3 annotation (Placement(
           transformation(extent={{84,-12},{96,0}}, rotation=0)));
     Modelica.Blocks.Sources.Constant Constant2
-      annotation (Placement(transformation(extent={{72,-30},{82,-20}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{72,-30},{82,-20}}, rotation=
+             0)));
     Modelica.Blocks.Sources.Constant Constant3(k=60)
       annotation (Placement(transformation(extent={{52,2},{64,12}}, rotation=0)));
     Modelica.Blocks.Sources.Constant hemorragia(k=0)
@@ -154,8 +154,8 @@ package control "modelo y control a corto plazo"
             extent={{26,80},{36,92}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        VVD
-      annotation (Placement(transformation(extent={{-38,52},{-28,64}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-38,52},{-28,64}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        VVI annotation (Placement(transformation(
             extent={{34,42},{44,54}}, rotation=0)));
@@ -165,8 +165,8 @@ package control "modelo y control a corto plazo"
             rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        VAO
-      annotation (Placement(transformation(extent={{16,-22},{26,-10}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{16,-22},{26,-10}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        VCS
       annotation (Placement(transformation(extent={{-22,-66},{-12,-54}},
@@ -289,8 +289,8 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Interfaces.RealInput
                                       incpres
       "presion entrada - presion de salida"
-      annotation (Placement(transformation(extent={{-56,20},{-40,38}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-56,20},{-40,38}}, rotation=
+             0)));
     Modelica.Blocks.Sources.Constant cero(k=0)
       annotation (Placement(transformation(extent={{-56,-44},{-38,-26}},
             rotation=0)));
@@ -300,8 +300,8 @@ package control "modelo y control a corto plazo"
                                        OutPort1
       annotation (Placement(transformation(extent={{44,-6},{60,12}}, rotation=0)));
     Modelica.Blocks.Logical.GreaterEqualThreshold GreaterEqual1(threshold=0)
-      annotation (Placement(transformation(extent={{-56,-14},{-36,6}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-56,-14},{-36,6}}, rotation=
+             0)));
   equation
     connect(incpres,Switch1.u1)
       annotation (Line(points={{-48,29},{-33,29},{-33,10},{-8,10}}, color={0,0,
@@ -327,8 +327,8 @@ package control "modelo y control a corto plazo"
   partial model compartimentoconvalvula
     Modelica.Blocks.Interfaces.RealInput
                                       flujent "flujo de entrada"
-      annotation (Placement(transformation(extent={{-70,28},{-54,44}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-70,28},{-54,44}}, rotation=
+             0)));
     Modelica.Blocks.Math.Add Add1(k1=-1) annotation (Placement(transformation(
             extent={{-58,22},{-38,42}}, rotation=0)));
     Modelica.Blocks.Continuous.Integrator Integrator1
@@ -412,19 +412,19 @@ package control "modelo y control a corto plazo"
   partial model pulsos
     Modelica.Blocks.Interfaces.RealInput
                                       InPort1
-      annotation (Placement(transformation(extent={{-70,-6},{-58,10}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-70,-6},{-58,10}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        OutPort1
       annotation (Placement(transformation(extent={{-14,-8},{0,10}}, rotation=0)));
     Modelica.Blocks.Sources.Clock Clock1 annotation (Placement(transformation(
             extent={{-78,46},{-60,64}}, rotation=0)));
     Modelica.Blocks.Math.Division Division1
-      annotation (Placement(transformation(extent={{-80,-12},{-60,8}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-80,-12},{-60,8}}, rotation=
+             0)));
     Modelica.Blocks.Sources.Constant Constant1
-      annotation (Placement(transformation(extent={{-98,10},{-80,26}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-98,10},{-80,26}}, rotation=
+             0)));
     Modelica.Blocks.Math.Product Product1 annotation (Placement(transformation(
             extent={{-18,46},{2,66}}, rotation=0)));
     Modelica.Blocks.Math.Product Product2 annotation (Placement(transformation(
@@ -503,11 +503,11 @@ package control "modelo y control a corto plazo"
             extent={{-18,-34},{0,-18}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       FEV "Flujo entrada al ventriculo"
-      annotation (Placement(transformation(extent={{-80,32},{-66,46}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-80,32},{-66,46}}, rotation=
+             0)));
     compartimentoconvalvula compartimentoconvalvula1
-      annotation (Placement(transformation(extent={{-6,-68},{108,28}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-6,-68},{108,28}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       PEV "Presion de entrada al ventriculo"
       annotation (Placement(transformation(extent={{-78,-48},{-64,-30}},
@@ -565,23 +565,23 @@ package control "modelo y control a corto plazo"
     ventriculo ventriculo1(compartimentoconvalvula1(admitancia(k=78),
           Integrator1(y_start=150)),
                                   Einicial(k=0.87))
-      annotation (Placement(transformation(extent={{-48,-32},{64,62}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-48,-32},{64,62}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       FVP "Flujo valvula pulmonar"
-      annotation (Placement(transformation(extent={{-72,36},{-58,52}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-72,36},{-58,52}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       HR "Duracion de un ciclo cardiaco"
-      annotation (Placement(transformation(extent={{-72,16},{-58,32}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-72,16},{-58,32}}, rotation=
+             0)));
     pulsos pulsos1 annotation (Placement(transformation(extent={{-98,-18},{-32,
               60}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       EVderecho
       "Maximo de la elastancia en el ventriculo derecho"
-      annotation (Placement(transformation(extent={{-74,-6},{-58,10}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-74,-6},{-58,10}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       PVC "Presion vena cava"
       annotation (Placement(transformation(extent={{-74,-28},{-58,-12}},
@@ -637,16 +637,16 @@ package control "modelo y control a corto plazo"
     ventriculo ventriculo1(compartimentoconvalvula1(admitancia(k=17),
           Integrator1(y_start=150)),
                                   Einicial(k=0.8))
-      annotation (Placement(transformation(extent={{-46,-22},{68,68}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-46,-22},{68,68}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       FVA "Flujo valvula aortica"
-      annotation (Placement(transformation(extent={{-76,40},{-60,56}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-76,40},{-60,56}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       HR1 "Duracion del ciclo cardiaco"
-      annotation (Placement(transformation(extent={{-76,20},{-62,34}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-76,20},{-62,34}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       EVizquierdo
       "Maximo de la elastancia del ventriculo izquierdo"
@@ -709,8 +709,8 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Interfaces.RealInput
                                       FSV
       "Flujo circulación sistémica-vena cava"
-      annotation (Placement(transformation(extent={{-80,56},{-64,76}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-80,56},{-64,76}}, rotation=
+             0)));
     Modelica.Blocks.Continuous.Integrator Integrator1(y_start=3340)
       annotation (Placement(transformation(extent={{-18,34},{2,54}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
@@ -726,8 +726,8 @@ package control "modelo y control a corto plazo"
             rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       PAO "Presión aórtica"
-      annotation (Placement(transformation(extent={{-82,-18},{-64,0}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-82,-18},{-64,0}}, rotation=
+             0)));
     Modelica.Blocks.Math.Product Product2 annotation (Placement(transformation(
             extent={{-8,-38},{12,-18}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
@@ -736,12 +736,12 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{2,-30},{18,-12}}, rotation=
               0)));
     Modelica.Blocks.Math.Add3 Add3_1(k1=-1, k3=-1)
-      annotation (Placement(transformation(extent={{-64,58},{-44,78}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-64,58},{-44,78}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       ingesta "Volumen líquido ingesta"
-      annotation (Placement(transformation(extent={{-80,34},{-64,50}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-80,34},{-64,50}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       hemorragia "Volumen líquido hemorragia"
       annotation (Placement(transformation(extent={{-78,8},{-64,24}}, rotation=
@@ -805,8 +805,8 @@ package control "modelo y control a corto plazo"
   partial model modulocontrol "modulo de control"
     Modelica.Blocks.Interfaces.RealInput
                                       PAO "Presion aortica"
-      annotation (Placement(transformation(extent={{-66,28},{-50,44}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-66,28},{-50,44}}, rotation=
+             0)));
 
     media media1 annotation (Placement(transformation(extent={{-70,44},{-46,96}},
             rotation=0)));
@@ -829,8 +829,8 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Continuous.TransferFunction H2(a={15,1}, b={0.048})
       annotation (Placement(transformation(extent={{10,16},{26,30}}, rotation=0)));
     Modelica.Blocks.Continuous.TransferFunction H3(a={30,1}, b={0.194})
-      annotation (Placement(transformation(extent={{12,-30},{28,-16}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{12,-30},{28,-16}}, rotation=
+             0)));
     Modelica.Blocks.Continuous.TransferFunction H4(a={2,1}, b={0.1})
       annotation (Placement(transformation(extent={{8,-74},{24,-60}}, rotation=
               0)));
@@ -853,8 +853,8 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{10,38},{26,52}}, rotation=0)));
     Modelica.Blocks.Sources.Constant RS0(k=0.6135)
       "Resistencia circulatoria sistemica de referencia"
-      annotation (Placement(transformation(extent={{10,-98},{26,-82}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{10,-98},{26,-82}}, rotation=
+             0)));
     Modelica.Blocks.Math.Add Add6 annotation (Placement(transformation(extent={
               {46,-2},{60,12}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
@@ -866,12 +866,12 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{58,-6},{72,10}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        CV "Compilancia vena cava"
-      annotation (Placement(transformation(extent={{58,-36},{74,-18}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{58,-36},{74,-18}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        RS "Resistencia circulatoria sistemica"
-      annotation (Placement(transformation(extent={{58,-72},{76,-56}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{58,-72},{76,-56}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        EVderecho
       "Elastancia ventricular derecha maxima"
@@ -952,8 +952,8 @@ package control "modelo y control a corto plazo"
   partial model acumulador
     Modelica.Blocks.Interfaces.RealInput
                                       PAO "Presion aortica"
-      annotation (Placement(transformation(extent={{-98,34},{-84,50}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-98,34},{-84,50}}, rotation=
+             0)));
     Modelica.Blocks.Sources.Constant cero(k=0)
       annotation (Placement(transformation(extent={{-98,-48},{-84,-34}},
             rotation=0)));
@@ -961,8 +961,8 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{-46,-10},{-26,10}},
             rotation=0)));
     Modelica.Blocks.Interfaces.BooleanInput  subida "salida de < ="
-      annotation (Placement(transformation(extent={{-94,-10},{-80,8}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-94,-10},{-80,8}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        acumulador
       annotation (Placement(transformation(extent={{92,16},{108,32}}, rotation=
@@ -1002,11 +1002,11 @@ package control "modelo y control a corto plazo"
 
   partial model contador
     Modelica.Blocks.Sources.Constant Constant1(k=1)
-      annotation (Placement(transformation(extent={{-84,28},{-70,44}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-84,28},{-70,44}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.BooleanInput  subida "salida de < ="
-      annotation (Placement(transformation(extent={{-84,-10},{-70,6}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-84,-10},{-70,6}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        contador
       annotation (Placement(transformation(extent={{42,0},{56,18}}, rotation=0)));
@@ -1034,17 +1034,17 @@ package control "modelo y control a corto plazo"
   partial model media "calcula la presion media aortica"
     Modelica.Blocks.Interfaces.RealInput
                                       PAO "Presion aortica"
-      annotation (Placement(transformation(extent={{-100,0},{-82,18}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-100,0},{-82,18}}, rotation=
+             0)));
     Modelica.Blocks.Discrete.UnitDelay          UnitDelay1(samplePeriod=0.03)
-      annotation (Placement(transformation(extent={{-76,-10},{-60,6}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-76,-10},{-60,6}}, rotation=
+             0)));
     Modelica.Blocks.Logical.Greater          Compare1
-      annotation (Placement(transformation(extent={{-62,14},{-42,34}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-62,14},{-42,34}}, rotation=
+             0)));
     Modelica.Blocks.Math.Division Division1
-      annotation (Placement(transformation(extent={{-24,52},{-10,68}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-24,52},{-10,68}}, rotation=
+             0)));
     Modelica.Blocks.Logical.Switch          Switch1
       annotation (Placement(transformation(extent={{14,-2},{34,18}}, rotation=0)));
     Modelica.Blocks.Discrete.UnitDelay          UnitDelay2(samplePeriod=0.03)
@@ -1056,11 +1056,11 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{-64,-48},{-44,-28}},
             rotation=0)));
     Modelica.Blocks.Discrete.UnitDelay          UnitDelay3(samplePeriod=0.03)
-      annotation (Placement(transformation(extent={{10,-46},{26,-30}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{10,-46},{26,-30}}, rotation=
+             0)));
     Modelica.Blocks.Logical.Switch          Switch3
-      annotation (Placement(transformation(extent={{50,-72},{70,-52}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{50,-72},{70,-52}}, rotation=
+             0)));
     Modelica.Blocks.Sources.Constant PAOmedia(k=103.9884)
       "Presion aortica media de referencia"
       annotation (Placement(transformation(extent={{-26,-88},{-8,-74}},
@@ -1142,12 +1142,12 @@ package control "modelo y control a corto plazo"
             extent={{-44,2},{-28,16}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       FAS "Flujo aorta-circulacion sistemica"
-      annotation (Placement(transformation(extent={{-58,30},{-42,44}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-58,30},{-42,44}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       PVI "Presion ventriculo izquierdo"
-      annotation (Placement(transformation(extent={{-56,-12},{-40,4}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-56,-12},{-40,4}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        VAO "Voumen aorta"
       annotation (Placement(transformation(extent={{26,24},{38,40}}, rotation=0)));
@@ -1156,8 +1156,8 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{26,0},{38,14}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        FVA "Flujo valvula aórtica"
-      annotation (Placement(transformation(extent={{24,-26},{34,-12}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{24,-26},{34,-12}}, rotation=
+             0)));
   equation
     connect(elastancia.y,       compartimentoconvalvula1.ELASTAN) annotation (Line(
           points={{-27.2,9},{-40.7,9},{-40.7,8.9},{-16.8,8.9}}, color={0,0,255}));
@@ -1201,12 +1201,12 @@ package control "modelo y control a corto plazo"
               -68,-66},{88,86}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       FSP "Flujo sistema pulmonar"
-      annotation (Placement(transformation(extent={{-50,28},{-36,40}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-50,28},{-36,40}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       PVD "Presion ventriculo derecho"
-      annotation (Placement(transformation(extent={{-50,-2},{-38,12}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-50,-2},{-38,12}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        VPA
       "Volumen del sistema pulmonar arterial"
@@ -1219,8 +1219,8 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{22,-14},{34,0}}, rotation=0)));
     Modelica.Blocks.Sources.Constant elastancia(k=0.1333)
       "elastancia del sistema pulmonar arterial"
-      annotation (Placement(transformation(extent={{-72,12},{-56,24}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-72,12},{-56,24}}, rotation=
+             0)));
   equation
     connect(elastancia.y,       compartimentoconvalvula1.ELASTAN) annotation (Line(
           points={{-55.2,18},{-54,18},{-54,17.6},{-36.8,17.6}}, color={0,0,255}));
@@ -1273,12 +1273,12 @@ package control "modelo y control a corto plazo"
               0)));
     Modelica.Blocks.Interfaces.RealInput
                                       FMV "Flujo válvula mitral"
-      annotation (Placement(transformation(extent={{-48,34},{-36,46}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-48,34},{-36,46}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       PPA "Presión sistema pulmonar arterial"
-      annotation (Placement(transformation(extent={{-46,-2},{-32,14}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-46,-2},{-32,14}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        VPV "Volumen sistema pulmonar venoso"
       annotation (Placement(transformation(extent={{26,40},{38,54}}, rotation=0)));
@@ -1339,8 +1339,8 @@ package control "modelo y control a corto plazo"
               -50,-46},{60,66}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       FVT "Flujo válvula tricúspide"
-      annotation (Placement(transformation(extent={{-56,26},{-44,40}}, rotation
-            =0)));
+      annotation (Placement(transformation(extent={{-56,26},{-44,40}}, rotation=
+             0)));
     Modelica.Blocks.Interfaces.RealInput
                                       Elastancia "Copilancia de la vena cava"
       annotation (Placement(transformation(extent={{-56,4},{-44,18}}, rotation=
@@ -1395,5 +1395,7 @@ package control "modelo y control a corto plazo"
             textString=
                  "cava")}));
   end venacava;
-  annotation(uses(Modelica(version="3.2.1")));
+  annotation(uses(Modelica(version="3.2.1")),
+    version="1",
+    conversion(noneFromVersion=""));
 end control;
