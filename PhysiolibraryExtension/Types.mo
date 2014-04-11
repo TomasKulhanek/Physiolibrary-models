@@ -192,4 +192,43 @@ package Types
               pattern=LinePattern.None)}));
   end HydraulicResistanceToConductance;
   end RealIO;
+
+  package Constants
+    extends Modelica.Icons.Package;
+  block HydraulicElastanceConst
+      "Obsolete, please use HydraulicCompliance instead!"
+   parameter Physiolibrary.Types.HydraulicElastance k "Hydraulic elastance";
+        PhysiolibraryExtension.Types.RealIO.HydraulicElastanceOutput
+                                         y( displayUnit="mmHg/ml", nominal=(133.322387415)/(1e-6))
+        "HydraulicElastance constant"
+      annotation (Placement(transformation(extent={{40,-10},{60,10}}),
+                  iconTransformation(extent={{40,-10},{60,10}})));
+  equation
+        y=k;
+    annotation (defaultComponentName="hydraulicElastance",
+               Diagram(coordinateSystem(extent={{-40,-40},{40,40}},
+            preserveAspectRatio=false), graphics),                    Icon(
+          coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=false),
+              graphics={
+          Rectangle(extent={{-40,40},{40,-40}},
+            lineColor={0,0,0},
+                radius=10,
+            fillColor={236,236,236},
+                            fillPattern=FillPattern.Solid),
+          Text( extent={{-100,-44},{100,-64}},
+            lineColor={0,0,0},
+                    fillColor={236,236,236},
+            fillPattern=FillPattern.Solid,
+                textString="%name"),
+          Text(         extent={{-40,10},{40,-10}},
+            lineColor={0,0,0},
+                fillColor={236,236,236},
+            fillPattern=FillPattern.Solid,
+                    textString="Const")}),
+        Documentation(info="<html>
+<p>Please use the reciprocal value of hydraulic elastance, wich is called hydraulic compliance for the compatibility with other blocks and models!</p>
+<p>Even it is not recommended, you can use this block, but do not forget to make reciprocal value (in example using Physiolibrary.Blocks.Math.Reciprocal) before connecting to library components!</p>
+</html>"));
+  end HydraulicElastanceConst;
+  end Constants;
 end Types;

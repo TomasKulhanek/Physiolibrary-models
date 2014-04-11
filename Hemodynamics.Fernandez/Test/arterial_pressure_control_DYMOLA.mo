@@ -950,6 +950,7 @@ package control "modelo y control a corto plazo"
   end modulocontrol;
 
   partial model acumulador
+
     Modelica.Blocks.Interfaces.RealInput
                                       PAO "Presion aortica"
       annotation (Placement(transformation(extent={{-98,34},{-84,50}}, rotation=
@@ -967,7 +968,7 @@ package control "modelo y control a corto plazo"
                                        acumulador
       annotation (Placement(transformation(extent={{92,16},{108,32}}, rotation=
               0)));
-    Modelica.Blocks.Math.Sum Sum1(nin=2, k={0.9999999,0.9999999})
+    Modelica.Blocks.Math.Sum Sum1(nin=2, k={1-Modelica.Constants.eps,1-Modelica.Constants.eps})
                                          annotation (Placement(transformation(
             extent={{32,-12},{52,8}}, rotation=0)));
     Modelica.Blocks.Routing.Multiplex2              Multiplex2_1
