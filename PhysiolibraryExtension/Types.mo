@@ -196,7 +196,6 @@ package Types
   package Constants
     extends Modelica.Icons.Package;
   block HydraulicElastanceConst
-      "Obsolete, please use HydraulicCompliance instead!"
    parameter Physiolibrary.Types.HydraulicElastance k "Hydraulic elastance";
         PhysiolibraryExtension.Types.RealIO.HydraulicElastanceOutput
                                          y( displayUnit="mmHg/ml", nominal=(133.322387415)/(1e-6))

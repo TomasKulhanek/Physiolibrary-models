@@ -6390,6 +6390,7 @@ constructed by the signals connected to this bus.
                 -100},{100,100}}),      graphics));
     end ElastanceTest;
   end Models;
-  annotation(uses(Modelica(version="3.2"), HeamodynamicsDymolaLetiste(version=
-            "1")),                          version="1", conversion(noneFromVersion=""), Diagram(graphics), Icon(graphics));
+  annotation(uses(                         HeamodynamicsDymolaLetiste(version=
+            "1"), Modelica(version="3.2.1")),
+                                            version="1", conversion(noneFromVersion=""), Diagram(graphics), Icon(graphics));
 end HeamodynamicsDymola;
