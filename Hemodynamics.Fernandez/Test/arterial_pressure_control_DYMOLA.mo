@@ -412,11 +412,11 @@ package control "modelo y control a corto plazo"
   partial model pulsos
     Modelica.Blocks.Interfaces.RealInput
                                       InPort1
-      annotation (Placement(transformation(extent={{-70,-6},{-58,10}}, rotation=
+      annotation (Placement(transformation(extent={{-106,-14},{-94,2}},rotation=
              0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        OutPort1
-      annotation (Placement(transformation(extent={{-14,-8},{0,10}}, rotation=0)));
+      annotation (Placement(transformation(extent={{56,12},{70,30}}, rotation=0)));
     Modelica.Blocks.Sources.Clock Clock1 annotation (Placement(transformation(
             extent={{-78,46},{-60,64}}, rotation=0)));
     Modelica.Blocks.Math.Division Division1
@@ -443,7 +443,8 @@ package control "modelo y control a corto plazo"
     connect(Constant1.y,Division1.u1)
       annotation (Line(points={{-79.1,18},{-82,18},{-82,4}}, color={0,0,255}));
     connect(InPort1,Division1.u2)
-      annotation (Line(points={{-64,2},{-84,2},{-84,-8},{-82,-8}}, color={0,0,
+      annotation (Line(points={{-100,-6},{-84,-6},{-84,-8},{-82,-8}},
+                                                                   color={0,0,
             255}));
     connect(Clock1.y,Product1.u1)             annotation (Line(points={{-59.1,
             55},{-54,54},{-42,54},{-42,62},{-20,62}}, color={0,0,255}));
@@ -453,12 +454,13 @@ package control "modelo y control a corto plazo"
       annotation (Line(points={{-59,-2},{-44,-2},{-44,0},{-50,0}}, color={0,0,
             255}));
     connect(Division1.y,Product1.u2)
-      annotation (Line(points={{-59,-2},{-34,-2},{-34,50},{-20,50}}, color={0,0,
+      annotation (Line(points={{-59,-2},{-56,-2},{-56,50},{-20,50}}, color={0,0,
             255}));
     connect(Product1.y,Add1.u1)
       annotation (Line(points={{3,56},{14,56},{14,2},{42,2}}, color={0,0,255}));
     connect(Add1.y,       OutPort1)
-      annotation (Line(points={{65,-4},{72,-4},{72,1},{-7,1}}, color={0,0,255}));
+      annotation (Line(points={{65,-4},{72,-4},{72,21},{63,21}},
+                                                               color={0,0,255}));
     connect(Product2.y,Add2.u1)
       annotation (Line(points={{-27,-6},{0,-6},{0,0},{-24,0}}, color={0,0,255}));
     connect(Constant2.y,Add2.u2)             annotation (Line(points={{-11.1,
@@ -468,7 +470,9 @@ package control "modelo y control a corto plazo"
     connect(RealToInteger1.y,Add1.u2)
       annotation (Line(points={{29,-6},{36,-6},{36,-10},{42,-10}}, color={255,
             127,0}));
-    annotation (Diagram(graphics),
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}),
+                        graphics),
                          Icon(graphics={Ellipse(
             extent={{-58,12},{-14,-10}},
             lineColor={0,0,255},
@@ -483,7 +487,7 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{-80,4},{-64,20}}, rotation=
               0)));
     Modelica.Blocks.Math.Product Product1
-      annotation (Placement(transformation(extent={{-76,-24},{-58,-8}},
+      annotation (Placement(transformation(extent={{-62,-24},{-44,-8}},
             rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       Maxelas "Maximo de la eslastancia "
@@ -521,20 +525,20 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{0,24},{14,38}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        PSV "Presion de salida del ventriculo"
-      annotation (Placement(transformation(extent={{0,-8},{14,8}}, rotation=0)));
+      annotation (Placement(transformation(extent={{76,4},{90,20}},rotation=0)));
   equation
     connect(Maxelas,Product1.u2)       annotation (Line(points={{-72,-15},{-90,
-            -15},{-90,-20.8},{-77.8,-20.8}}, color={0,0,255}));
+            -15},{-90,-20.8},{-63.8,-20.8}}, color={0,0,255}));
     connect(Constant1.y,Division1.u1)             annotation (Line(points={{
             -59.2,-46},{-56,-46},{-56,-44},{-50,-44}}, color={0,0,255}));
     connect(Einicial.y,Division1.u2)             annotation (Line(points={{
             -61.2,-70},{-54,-70},{-54,-56},{-50,-56}}, color={0,0,255}));
-    connect(Product1.y,Product2.u1)             annotation (Line(points={{-57.1,
+    connect(Product1.y,Product2.u1)             annotation (Line(points={{-43.1,
             -16},{-38,-16},{-38,-21.2},{-19.8,-21.2}}, color={0,0,255}));
     connect(Division1.y,Product2.u2)             annotation (Line(points={{-27,
             -50},{-24,-50},{-24,-30.8},{-19.8,-30.8}}, color={0,0,255}));
     connect(EV,Product1.u1)       annotation (Line(points={{-72,12},{-88,12},{
-            -88,-11.2},{-77.8,-11.2}}, color={0,0,255}));
+            -88,-11.2},{-63.8,-11.2}}, color={0,0,255}));
     connect(FEV, compartimentoconvalvula1.flujent) annotation (Line(points={{
             -73,39},{-41.5,39},{-41.5,-2.72},{15.66,-2.72}}, color={0,0,255}));
     connect(Product2.y,       compartimentoconvalvula1.ELASTAN) annotation (Line(
@@ -543,11 +547,13 @@ package control "modelo y control a corto plazo"
             -71,-39},{4,-39},{4,-30.08},{16.23,-30.08}}, color={0,0,255}));
     connect(compartimentoconvalvula1.volsal, VSV) annotation (Line(points={{
             52.71,-4.16},{52.71,23.92},{7,23.92},{7,31}}, color={0,0,255}));
-    connect(compartimentoconvalvula1.pressal, PSV) annotation (Line(points={{
-            53.28,-14.72},{62.64,-14.72},{62.64,0},{7,0}}, color={0,0,255}));
+    connect(compartimentoconvalvula1.pressal, PSV) annotation (Line(points={{53.28,
+            -14.72},{62.64,-14.72},{62.64,12},{83,12}},    color={0,0,255}));
     connect(compartimentoconvalvula1.flujsal, FSV) annotation (Line(points={{
             53.28,-25.76},{53.28,-45.88},{7,-45.88},{7,-35}}, color={0,0,255}));
-    annotation (Diagram(graphics),
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}),
+                        graphics),
                          Icon(graphics={Rectangle(
             extent={{-64,52},{0,-70}},
             lineColor={0,0,255},
@@ -573,10 +579,10 @@ package control "modelo y control a corto plazo"
              0)));
     Modelica.Blocks.Interfaces.RealInput
                                       HR "Duracion de un ciclo cardiaco"
-      annotation (Placement(transformation(extent={{-72,16},{-58,32}}, rotation=
+      annotation (Placement(transformation(extent={{-98,14},{-84,30}}, rotation=
              0)));
-    pulsos pulsos1 annotation (Placement(transformation(extent={{-98,-18},{-32,
-              60}}, rotation=0)));
+    pulsos pulsos1 annotation (Placement(transformation(extent={{-74,34},{-8,
+              112}},rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       EVderecho
       "Maximo de la elastancia en el ventriculo derecho"
@@ -603,24 +609,27 @@ package control "modelo y control a corto plazo"
   equation
     connect(FVP, ventriculo1.FEV) annotation (Line(points={{-65,44},{-56,44},{
             -56,33.33},{-32.88,33.33}}, color={0,0,255}));
-    connect(HR, pulsos1.InPort1) annotation (Line(points={{-65,24},{-75.56,24},
-            {-75.56,21.78},{-86.12,21.78}}, color={0,0,255}));
+    connect(HR, pulsos1.InPort1) annotation (Line(points={{-91,22},{-75.56,22},
+            {-75.56,70.66},{-74,70.66}},    color={0,0,255}));
     connect(EVderecho, ventriculo1.Maxelas) annotation (Line(points={{-66,2},{
             -54,2},{-54,7.95},{-32.32,7.95}}, color={0,0,255}));
     connect(PVC, ventriculo1.PEV) annotation (Line(points={{-66,-20},{-54,-20},
             {-54,-3.33},{-31.76,-3.33}}, color={0,0,255}));
     connect(ventriculo1.VSV, VVD) annotation (Line(points={{11.92,29.57},{11.92,
             38.785},{17,38.785},{17,44}}, color={0,0,255}));
-    connect(ventriculo1.PSV, PVD) annotation (Line(points={{11.92,15},{20.96,15},
-            {20.96,20},{16,20}}, color={0,0,255}));
+    connect(ventriculo1.PSV, PVD) annotation (Line(points={{54.48,20.64},{20.96,
+            20.64},{20.96,20},{16,20}},
+                                 color={0,0,255}));
     connect(ventriculo1.FSV, FVT) annotation (Line(points={{11.92,-1.45},{18.96,
             -1.45},{18.96,-1},{17,-1}}, color={0,0,255}));
-    connect(pulsos1.OutPort1,CombiTable1D1.u[1])    annotation (Line(points={{
-            -67.31,21.39},{-64.655,21.39},{-64.655,20},{-62,20}}, color={0,0,
+    connect(pulsos1.OutPort1,CombiTable1D1.u[1])    annotation (Line(points={{-20.21,
+            81.19},{-64.655,81.19},{-64.655,20},{-62,20}},        color={0,0,
             255}));
     connect(CombiTable1D1.y[1],    ventriculo1.EV) annotation (Line(points={{
             -39,20},{-38,20},{-38,20.64},{-32.32,20.64}}, color={0,0,255}));
-    annotation (Diagram(graphics),
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}),
+                        graphics),
                          Icon(graphics={
           Rectangle(
             extent={{-58,68},{10,-40}},
