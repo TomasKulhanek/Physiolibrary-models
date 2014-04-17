@@ -13,3 +13,7 @@ Download the model and open in th following order:
   * MeursModel/*.mo
   * BurkhoffModel/*.mo
 
+Publication
+===========
+Being prepared for scientific journal ... 
+
