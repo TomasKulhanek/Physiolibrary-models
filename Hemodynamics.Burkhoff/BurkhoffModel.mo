@@ -1685,7 +1685,8 @@ package BurkhoffModel
       extends MeursModel.Models.Hemodynamics(
       redeclare BurkhoffModel.Parts.Heart  heart,
       redeclare BurkhoffModel.Parts.PulmonaryCirculation pulmonaryCirculation,
-      redeclare BurkhoffModel.Parts.SystemicCirculation systemicCirculation);
+      redeclare BurkhoffModel.Parts.SystemicCirculation systemicCirculation,
+        HeartRate(k(displayUnit="1/min") = 1.3333333333333));
     end HemodynamicsBurkhoff;
 
 

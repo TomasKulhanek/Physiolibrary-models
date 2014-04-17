@@ -23,9 +23,6 @@ package FernandezModel
             transformation(extent={{86,-12},{106,8}}), iconTransformation(extent={{74,
                 -24},{106,8}})));
 
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics={Ellipse(extent={{-46,52},{68,-78}},
-                lineColor={0,0,255})}));
 
     equation
     /*  p2 = 1/timeInput * time;
@@ -36,16 +33,14 @@ package FernandezModel
   timeOutput = a1;*/
 
       timeOutput = (time - integer(time/timeInput)*timeInput)/timeInput;
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}), graphics={Ellipse(extent={{-46,52},{68,-78}},
+                lineColor={0,0,255})}));
     end pulsos;
 
     model venderecho "right ventricle"
       pulsos pulsos1
         annotation (Placement(transformation(extent={{-68,0},{-48,20}})));
-      Physiolibrary.Blocks.Factors.Spline splineCombiTableD1(data=[0,0,0.0066;
-            0.0625,0.625,0.16; 0.125,0.125,0.32; 0.1875,0.1875,0.45; 0.25,0.25,
-            0.625; 0.3125,0.3125,0.78; 0.375,0.375,0.27; 0.4375,0.4375,0.0066;
-            1,1,0.0066])
-        annotation (Placement(transformation(extent={{-42,66},{-22,86}})));
       Physiolibrary.Hydraulic.Components.ElasticVessel ventricle(
         useV0Input=true,
         useComplianceInput=true,
@@ -63,17 +58,18 @@ package FernandezModel
       Modelica.Blocks.Math.Product product annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
-            origin={-14,50})));
+            origin={0,52})));
       Modelica.Blocks.Math.Product product1 annotation (Placement(
             transformation(
             extent={{-5,-5},{5,5}},
             rotation=270,
             origin={-1,29})));
+      Physiolibrary.Blocks.Interpolation.Curve curve(
+        x={0,0.0625,0.125,0.1875,0.25,0.3125,0.375,0.4375,1},
+        y={0.0066,0.16,0.32,0.45,0.625,0.78,0.27,0.0066,0.0066},
+        slope={0,2.5072,2.32,2.44,2.64,-2.84,-6.1872,-0.42144,0})
+        annotation (Placement(transformation(extent={{-40,54},{-20,74}})));
     equation
-      connect(pulsos1.timeOutput, splineCombiTableD1.u) annotation (Line(
-          points={{-49,9.2},{-43.5,9.2},{-43.5,76},{-40,76}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(port_a, ventricle.q_in) annotation (Line(
           points={{-60,-20},{-30,-20},{-30,-4},{0,-4}},
           color={0,0,0},
@@ -88,12 +84,8 @@ package FernandezModel
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(product.u2, splineCombiTableD1.y) annotation (Line(
-          points={{-20,62},{-26,62},{-26,72},{-32,72}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(product.y, product1.u2) annotation (Line(
-          points={{-14,39},{-10,39},{-10,35},{-4,35}},
+          points={{-1.9984e-015,41},{-10,41},{-10,35},{-4,35}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(product1.y, hydrauliccompliance.hydraulicelastance) annotation (
@@ -101,8 +93,16 @@ package FernandezModel
           points={{-1,23.5},{-1,21.75},{-0.1,21.75},{-0.1,20.1}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics));
+      connect(product.u2, curve.val) annotation (Line(
+          points={{-6,64},{-20,64}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(pulsos1.timeOutput, curve.u) annotation (Line(
+          points={{-49,9.2},{-49,40},{-50,40},{-50,64},{-40,64}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),      graphics));
     end venderecho;
   end Parts;
 
@@ -110,7 +110,7 @@ package FernandezModel
     model testpulsos
       Parts.pulsos pulsos
         annotation (Placement(transformation(extent={{-24,-2},{-4,18}})));
-      Physiolibrary.Types.Constants.TimeConst timeConst(k(displayUnit="s") =
+      Physiolibrary.Types.Constants.TimeConst timeConst(k(displayUnit="s")=
           0.7) annotation (Placement(transformation(extent={{-48,6},{-40,14}})));
     equation
       connect(timeConst.y, pulsos.timeInput) annotation (Line(

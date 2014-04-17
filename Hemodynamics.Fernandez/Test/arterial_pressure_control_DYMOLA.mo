@@ -204,7 +204,7 @@ package control "modelo y control a corto plazo"
           points={{2.88,69.68},{18,69.68},{18,102},{-104,102},{-104,90.28},{
             -92.36,90.28}}, color={0,0,255}));
     connect(venderecho1.PVD, sistemapulmonarterial1.PVD) annotation (Line(
-          points={{-53.16,29.2},{-44,29.2},{-44,50},{-100,50},{-100,78.1},{
+          points={{-21.8,29.2},{-44,29.2},{-44,50},{-100,50},{-100,78.1},{
             -92.88,78.1}}, color={0,0,255}));
     connect(venizquierdo1.FVM, sistemapulmonarvenoso1.FMV) annotation (Line(
           points={{6.84,14.42},{26,14.42},{26,50},{-42,50},{-42,84.4},{-32.16,
@@ -215,9 +215,9 @@ package control "modelo y control a corto plazo"
     connect(sistemapulmonarterial1.FVP, venderecho1.FVP) annotation (Line(
           points={{-55.44,73.06},{-55.44,52},{-102,52},{-102,39.04},{-92.85,
             39.04}}, color={0,0,255}));
-    connect(Division3.y,       venderecho1.HR) annotation (Line(points={{96.6,
-            -6},{94,-6},{94,16},{34,16},{34,0},{-106,0},{-106,30},{-92.85,30},{
-            -92.85,30.84}}, color={0,0,255}));
+    connect(Division3.y,       venderecho1.HR) annotation (Line(points={{96.6,-6},
+            {94,-6},{94,16},{34,16},{34,0},{-106,0},{-106,30},{-105.59,30},{
+            -105.59,30.02}},color={0,0,255}));
     connect(modulocontrol1.EVderecho, venderecho1.EVderecho) annotation (Line(
           points={{72.78,-35.7},{100,-35.7},{100,24},{30,24},{30,-2},{-104,-2},
             {-104,21.82},{-93.34,21.82}}, color={0,0,255}));
@@ -236,8 +236,8 @@ package control "modelo y control a corto plazo"
     connect(sistemapulmonarvenoso1.PPV, venizquierdo1.PPV) annotation (Line(
           points={{4.32,78.42},{4.32,48},{-42,48},{-42,10.55},{-27.48,10.55}},
           color={0,0,255}));
-    connect(venderecho1.FVT, venacava1.FVT) annotation (Line(points={{-52.67,
-            20.59},{-52.67,2},{-98,2},{-98,-15.47},{-90,-15.47}}, color={0,0,
+    connect(venderecho1.FVT, venacava1.FVT) annotation (Line(points={{-19.35,
+            19.77},{-19.35,2},{-98,2},{-98,-15.47},{-90,-15.47}}, color={0,0,
             255}));
     connect(Division2.y,       venacava1.Elastancia) annotation (Line(points={{
             100.6,-66},{110,-66},{110,-106},{-102,-106},{-102,-24.49},{-90,
@@ -272,8 +272,8 @@ package control "modelo y control a corto plazo"
             90.28},{-46.72,90.28},{-46.72,94},{-37,94}}, color={0,0,255}));
     connect(sistemapulmonarvenoso1.VPV, VPV) annotation (Line(points={{3.36,
             87.62},{15.68,87.62},{15.68,86},{31,86}}, color={0,0,255}));
-    connect(venderecho1.VVD, VVD) annotation (Line(points={{-52.67,39.04},{
-            -52.67,58},{-33,58}}, color={0,0,255}));
+    connect(venderecho1.VVD, VVD) annotation (Line(points={{-22.29,39.86},{
+            -22.29,58},{-33,58}}, color={0,0,255}));
     connect(venizquierdo1.VVI, VVI) annotation (Line(points={{6.84,38.5},{21.42,
             38.5},{21.42,48},{39,48}}, color={0,0,255}));
     connect(venacava1.VVC, VVC) annotation (Line(points={{-56.88,-15.88},{
@@ -518,7 +518,8 @@ package control "modelo y control a corto plazo"
             rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        FSV "Flujo de salida del ventriculo"
-      annotation (Placement(transformation(extent={{0,-42},{14,-28}}, rotation=
+      annotation (Placement(transformation(extent={{88,-54},{102,-40}},
+                                                                      rotation=
               0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        VSV "Volumen de salida del ventriculo"
@@ -549,10 +550,10 @@ package control "modelo y control a corto plazo"
             52.71,-4.16},{52.71,23.92},{7,23.92},{7,31}}, color={0,0,255}));
     connect(compartimentoconvalvula1.pressal, PSV) annotation (Line(points={{53.28,
             -14.72},{62.64,-14.72},{62.64,12},{83,12}},    color={0,0,255}));
-    connect(compartimentoconvalvula1.flujsal, FSV) annotation (Line(points={{
-            53.28,-25.76},{53.28,-45.88},{7,-45.88},{7,-35}}, color={0,0,255}));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-              -100,-100},{100,100}}),
+    connect(compartimentoconvalvula1.flujsal, FSV) annotation (Line(points={{53.28,
+            -25.76},{53.28,-45.88},{95,-45.88},{95,-47}},     color={0,0,255}));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}),
                         graphics),
                          Icon(graphics={Rectangle(
             extent={{-64,52},{0,-70}},
@@ -571,7 +572,7 @@ package control "modelo y control a corto plazo"
     ventriculo ventriculo1(compartimentoconvalvula1(admitancia(k=78),
           Integrator1(y_start=150)),
                                   Einicial(k=0.87))
-      annotation (Placement(transformation(extent={{-48,-32},{64,62}}, rotation=
+      annotation (Placement(transformation(extent={{-40,-38},{72,56}}, rotation=
              0)));
     Modelica.Blocks.Interfaces.RealInput
                                       FVP "Flujo valvula pulmonar"
@@ -581,8 +582,8 @@ package control "modelo y control a corto plazo"
                                       HR "Duracion de un ciclo cardiaco"
       annotation (Placement(transformation(extent={{-98,14},{-84,30}}, rotation=
              0)));
-    pulsos pulsos1 annotation (Placement(transformation(extent={{-74,34},{-8,
-              112}},rotation=0)));
+    pulsos pulsos1 annotation (Placement(transformation(extent={{-92,40},{-26,
+              118}},rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       EVderecho
       "Maximo de la elastancia en el ventriculo derecho"
@@ -594,41 +595,41 @@ package control "modelo y control a corto plazo"
             rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        VVD "Volumen ventriculo derecho"
-      annotation (Placement(transformation(extent={{10,36},{24,52}}, rotation=0)));
+      annotation (Placement(transformation(extent={{72,38},{86,54}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        PVD "Presion ventriculo derecho"
-      annotation (Placement(transformation(extent={{10,12},{22,28}}, rotation=0)));
+      annotation (Placement(transformation(extent={{74,12},{86,28}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        FVT "Flujo valvula tricuspide"
-      annotation (Placement(transformation(extent={{10,-8},{24,6}}, rotation=0)));
+      annotation (Placement(transformation(extent={{78,-10},{92,4}},rotation=0)));
     Modelica.Blocks.Tables.CombiTable1D   CombiTable1D1(table=[0,0.0066; 0.0625,
           0.16; 0.125,0.32; 0.1875,0.45; 0.25,0.625; 0.3125,0.78; 0.375,0.27;
           0.4375,0.0066; 1,0.0066])
                              annotation (Placement(transformation(extent={{-60,
               10},{-40,30}}, rotation=0)));
   equation
-    connect(FVP, ventriculo1.FEV) annotation (Line(points={{-65,44},{-56,44},{
-            -56,33.33},{-32.88,33.33}}, color={0,0,255}));
+    connect(FVP, ventriculo1.FEV) annotation (Line(points={{-65,44},{-38,44},{
+            -38,27.33},{-24.88,27.33}}, color={0,0,255}));
     connect(HR, pulsos1.InPort1) annotation (Line(points={{-91,22},{-75.56,22},
-            {-75.56,70.66},{-74,70.66}},    color={0,0,255}));
+            {-75.56,76.66},{-92,76.66}},    color={0,0,255}));
     connect(EVderecho, ventriculo1.Maxelas) annotation (Line(points={{-66,2},{
-            -54,2},{-54,7.95},{-32.32,7.95}}, color={0,0,255}));
-    connect(PVC, ventriculo1.PEV) annotation (Line(points={{-66,-20},{-54,-20},
-            {-54,-3.33},{-31.76,-3.33}}, color={0,0,255}));
-    connect(ventriculo1.VSV, VVD) annotation (Line(points={{11.92,29.57},{11.92,
-            38.785},{17,38.785},{17,44}}, color={0,0,255}));
-    connect(ventriculo1.PSV, PVD) annotation (Line(points={{54.48,20.64},{20.96,
-            20.64},{20.96,20},{16,20}},
+            -40,2},{-40,1.95},{-24.32,1.95}}, color={0,0,255}));
+    connect(PVC, ventriculo1.PEV) annotation (Line(points={{-66,-20},{-38,-20},
+            {-38,-9.33},{-23.76,-9.33}}, color={0,0,255}));
+    connect(ventriculo1.VSV, VVD) annotation (Line(points={{19.92,23.57},{24,
+            23.57},{24,46},{79,46}},      color={0,0,255}));
+    connect(ventriculo1.PSV, PVD) annotation (Line(points={{62.48,14.64},{46,
+            14.64},{46,20},{80,20}},
                                  color={0,0,255}));
-    connect(ventriculo1.FSV, FVT) annotation (Line(points={{11.92,-1.45},{18.96,
-            -1.45},{18.96,-1},{17,-1}}, color={0,0,255}));
-    connect(pulsos1.OutPort1,CombiTable1D1.u[1])    annotation (Line(points={{-20.21,
-            81.19},{-64.655,81.19},{-64.655,20},{-62,20}},        color={0,0,
+    connect(ventriculo1.FSV, FVT) annotation (Line(points={{69.2,-13.09},{24,
+            -13.09},{24,-3},{85,-3}},   color={0,0,255}));
+    connect(pulsos1.OutPort1,CombiTable1D1.u[1])    annotation (Line(points={{-38.21,
+            87.19},{-64.655,87.19},{-64.655,20},{-62,20}},        color={0,0,
             255}));
-    connect(CombiTable1D1.y[1],    ventriculo1.EV) annotation (Line(points={{
-            -39,20},{-38,20},{-38,20.64},{-32.32,20.64}}, color={0,0,255}));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-              -100,-100},{100,100}}),
+    connect(CombiTable1D1.y[1],    ventriculo1.EV) annotation (Line(points={{-39,20},
+            {-26,20},{-26,14.64},{-24.32,14.64}},         color={0,0,255}));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}),
                         graphics),
                          Icon(graphics={
           Rectangle(
@@ -685,9 +686,9 @@ package control "modelo y control a corto plazo"
     connect(FVA, ventriculo1.FEV) annotation (Line(points={{-68,48},{-50,48},{
             -50,40.55},{-30.61,40.55}}, color={0,0,255}));
     connect(HR1, pulsos1.InPort1) annotation (Line(points={{-69,27},{-81.5,27},
-            {-81.5,27.66},{-76.48,27.66}}, color={0,0,255}));
-    connect(pulsos1.OutPort1,CombiTable1D1.u[1])    annotation (Line(points={{
-            -58.24,27.33},{-58.24,26.665},{-53.6,26.665},{-53.6,28}}, color={0,
+            {-81.5,25.02},{-88,25.02}},    color={0,0,255}));
+    connect(pulsos1.OutPort1,CombiTable1D1.u[1])    annotation (Line(points={{-35.84,
+            33.93},{-35.84,26.665},{-53.6,26.665},{-53.6,28}},        color={0,
             0,255}));
     connect(CombiTable1D1.y[1],    ventriculo1.EV) annotation (Line(points={{
             -35.2,28},{-28,28},{-28,28.4},{-30.04,28.4}}, color={0,0,255}));
@@ -697,8 +698,9 @@ package control "modelo y control a corto plazo"
             {-59.5,5.45},{-29.47,5.45}}, color={0,0,255}));
     connect(ventriculo1.VSV, VVI) annotation (Line(points={{14.99,36.95},{
             34.495,36.95},{34.495,50},{11,50}}, color={0,0,255}));
-    connect(ventriculo1.PSV, PVI) annotation (Line(points={{14.99,23},{36.495,
-            23},{36.495,20},{11,20}}, color={0,0,255}));
+    connect(ventriculo1.PSV, PVI) annotation (Line(points={{58.31,28.4},{36.495,
+            28.4},{36.495,20},{11,20}},
+                                      color={0,0,255}));
     connect(ventriculo1.FSV, FVM) annotation (Line(points={{14.99,7.25},{41.495,
             7.25},{41.495,-6},{11,-6}}, color={0,0,255}));
     annotation (Diagram(graphics),
