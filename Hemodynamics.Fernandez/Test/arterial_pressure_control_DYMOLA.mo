@@ -99,7 +99,8 @@ package control "modelo y control a corto plazo"
     circulacionsistemica circulacionsistemica1
       annotation (Placement(transformation(extent={{-78,-112},{8,-46}},
             rotation=0)));
-    modulocontrol modulocontrol1 annotation (Placement(transformation(extent={{
+    modulocontrol modulocontrol1(Step1(height=0))
+                                 annotation (Placement(transformation(extent={{
               18,-102},{84,0}}, rotation=0)));
     arteriaaorta arteriaaorta1 annotation (Placement(transformation(extent={{
               -52,-68},{34,6}}, rotation=0)));
@@ -123,7 +124,7 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Sources.BooleanConstant BooleanConstant2(k=false)
       annotation (Placement(transformation(extent={{-6,-100},{8,-90}}, rotation=
              0)));
-    Modelica.Blocks.Logical.GreaterEqualThreshold GreaterEqual1(threshold=0)
+    Modelica.Blocks.Logical.GreaterEqualThreshold GreaterEqual1(threshold=10)
       annotation (Placement(transformation(extent={{-8,-82},{8,-72}}, rotation=
               0)));
     Modelica.Blocks.Math.Division Division1
@@ -282,7 +283,9 @@ package control "modelo y control a corto plazo"
             13.38,-19.16},{13.38,-16},{21,-16}}, color={0,0,255}));
     connect(circulacionsistemica1.VCS, VCS) annotation (Line(points={{-30.7,
             -64.15},{-22.35,-64.15},{-22.35,-60},{-17,-60}}, color={0,0,255}));
-    annotation (Diagram(graphics));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}),
+                        graphics));
   end circulacion;
 
   partial model limite "accion de la valvula"
@@ -890,8 +893,8 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Sources.Step Step1(
       height=200,
       offset=250,
-      startTime=20) annotation (Placement(transformation(extent={{-44,-48},{-24,
-              -28}}, rotation=0)));
+      startTime=20) annotation (Placement(transformation(extent={{-42,-56},{-22,
+              -36}}, rotation=0)));
   equation
     connect(PAO, media1.PAO) annotation (Line(points={{-58,36},{-77.46,36},{
             -77.46,72.34},{-68.92,72.34}}, color={0,0,255}));
@@ -943,8 +946,8 @@ package control "modelo y control a corto plazo"
             68.35,-27},{66,-27}}, color={0,0,255}));
     connect(Add5.y,       RS) annotation (Line(points={{54.7,-83},{64.35,-83},{
             64.35,-64},{67,-64}}, color={0,0,255}));
-    connect(Step1.y,Add2.u2)             annotation (Line(points={{-23,-38},{12,
-            -38},{12,-29.2},{44.6,-29.2}}, color={0,0,255}));
+    connect(Step1.y,Add2.u2)             annotation (Line(points={{-21,-46},{12,
+            -46},{12,-29.2},{44.6,-29.2}}, color={0,0,255}));
     annotation (Diagram(graphics),
                          Icon(graphics={
           Rectangle(
@@ -1410,4 +1413,170 @@ package control "modelo y control a corto plazo"
   annotation(uses(Modelica(version="3.2.1")),
     version="1",
     conversion(noneFromVersion=""));
+  model testcontrol
+
+    replaceable modulocontroltest modulocontrol1
+      annotation (Placement(transformation(extent={{-18,2},{2,22}})));
+    Modelica.Blocks.Sources.Ramp ramp(
+      duration=120,
+      startTime=60,
+      height=80,
+      offset=80) annotation (Placement(transformation(extent={{-74,6},{-54,26}})));
+  equation
+
+    modulocontrol1.activado = true;
+    connect(ramp.y, modulocontrol1.PAO) annotation (Line(
+        points={{-53,16},{-34,16},{-34,15.6},{-13.8,15.6}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}), graphics));
+  end testcontrol;
+
+  partial model modulocontroltest "modulo de control"
+    Modelica.Blocks.Interfaces.RealInput
+                                      PAO "Presion aortica"
+      annotation (Placement(transformation(extent={{-66,28},{-50,44}}, rotation=
+             0)));
+
+    Modelica.Blocks.Logical.Switch          Switch1
+      annotation (Placement(transformation(extent={{-72,2},{-58,18}}, rotation=
+              0)));
+    Modelica.Blocks.Interfaces.BooleanInput  activado
+      annotation (Placement(transformation(extent={{-68,-60},{-52,-42}},
+            rotation=0)));
+    Modelica.Blocks.Sources.Constant PAOmedia(k=103.9884)
+      "Presion aortica media de referencia"
+      annotation (Placement(transformation(extent={{-94,-22},{-78,-6}},
+            rotation=0)));
+    Modelica.Blocks.Math.Add Add1(k1=-1) annotation (Placement(transformation(
+            extent={{-32,-4},{-20,12}}, rotation=0)));
+    Modelica.Blocks.Nonlinear.DeadZone DeadZone1(uMax=0.1, uMin=-0.1)
+      annotation (Placement(transformation(extent={{-14,-6},{2,8}}, rotation=0)));
+    Modelica.Blocks.Continuous.TransferFunction H1(a={15,1}, b={1})
+      annotation (Placement(transformation(extent={{8,60},{24,74}}, rotation=0)));
+    Modelica.Blocks.Continuous.TransferFunction H2(a={15,1}, b={0.048})
+      annotation (Placement(transformation(extent={{10,16},{26,30}}, rotation=0)));
+    Modelica.Blocks.Continuous.TransferFunction H3(a={30,1}, b={0.194})
+      annotation (Placement(transformation(extent={{12,-30},{28,-16}}, rotation=
+             0)));
+    Modelica.Blocks.Continuous.TransferFunction H4(a={2,1}, b={0.1})
+      annotation (Placement(transformation(extent={{8,-74},{24,-60}}, rotation=
+              0)));
+    Modelica.Blocks.Math.Add Add2 annotation (Placement(transformation(extent={
+              {46,-32},{60,-18}}, rotation=0)));
+    Modelica.Blocks.Math.Add Add3 annotation (Placement(transformation(extent={
+              {46,20},{60,34}}, rotation=0)));
+    Modelica.Blocks.Math.Add Add4 annotation (Placement(transformation(extent={
+              {34,78},{48,92}}, rotation=0)));
+    Modelica.Blocks.Math.Add Add5 annotation (Placement(transformation(extent={
+              {40,-90},{54,-76}}, rotation=0)));
+    Modelica.Blocks.Sources.Constant HR0(k=80)
+      "Frecuencia cardiaca de referencia" annotation (Placement(transformation(
+            extent={{6,82},{22,96}}, rotation=0)));
+    Modelica.Blocks.Sources.Constant EV0izquierdo(k=0.8)
+      "Elastancia ventricular izquierda maxima de referencia"
+      annotation (Placement(transformation(extent={{10,-6},{26,8}}, rotation=0)));
+    Modelica.Blocks.Sources.Constant EV0derecho(k=0.78)
+      "Elastancia ventricular derecha maxima de refencia"
+      annotation (Placement(transformation(extent={{10,38},{26,52}}, rotation=0)));
+    Modelica.Blocks.Sources.Constant RS0(k=0.6135)
+      "Resistencia circulatoria sistemica de referencia"
+      annotation (Placement(transformation(extent={{10,-98},{26,-82}}, rotation=
+             0)));
+    Modelica.Blocks.Math.Add Add6 annotation (Placement(transformation(extent={
+              {46,-2},{60,12}}, rotation=0)));
+    Modelica.Blocks.Interfaces.RealOutput
+                                       HR "Frecuencia cardiaca"
+      annotation (Placement(transformation(extent={{58,70},{74,86}}, rotation=0)));
+    Modelica.Blocks.Interfaces.RealOutput
+                                       EVizquierda
+      "Elastancia ventricular izquierda maxima"
+      annotation (Placement(transformation(extent={{58,-6},{72,10}}, rotation=0)));
+    Modelica.Blocks.Interfaces.RealOutput
+                                       CV "Compilancia vena cava"
+      annotation (Placement(transformation(extent={{58,-36},{74,-18}}, rotation=
+             0)));
+    Modelica.Blocks.Interfaces.RealOutput
+                                       RS "Resistencia circulatoria sistemica"
+      annotation (Placement(transformation(extent={{58,-72},{76,-56}}, rotation=
+             0)));
+    Modelica.Blocks.Interfaces.RealOutput
+                                       EVderecho
+      "Elastancia ventricular derecha maxima"
+      annotation (Placement(transformation(extent={{58,22},{74,38}}, rotation=0)));
+    Modelica.Blocks.Sources.Step Step1(
+      height=200,
+      offset=250,
+      startTime=20) annotation (Placement(transformation(extent={{-42,-56},{-22,
+              -36}}, rotation=0)));
+  equation
+    connect(activado,Switch1.u2)       annotation (Line(points={{-60,-51},{-56,
+            -51},{-58,10},{-73.4,10}}, color={255,0,255}));
+    connect(PAOmedia.y,Switch1.u3)             annotation (Line(points={{-77.2,
+            -14},{-68,-14},{-68,3.6},{-73.4,3.6}}, color={0,0,255}));
+    connect(PAOmedia.y,Add1.u2)             annotation (Line(points={{-77.2,-14},
+            {-36,-14},{-36,-0.8},{-33.2,-0.8}}, color={0,0,255}));
+    connect(Switch1.y,Add1.u1)             annotation (Line(points={{-57.3,10},
+            {-43.25,10},{-43.25,8.8},{-33.2,8.8}}, color={0,0,255}));
+    connect(Add1.y,DeadZone1.u)             annotation (Line(points={{-19.4,4},
+            {-16,4},{-16,1},{-15.6,1}}, color={0,0,255}));
+    connect(DeadZone1.y,H1.u)             annotation (Line(points={{2.8,1},{4,1},
+            {4,67},{6.4,67}}, color={0,0,255}));
+    connect(DeadZone1.y,H2.u)             annotation (Line(points={{2.8,1},{4.6,
+            1},{4.6,23},{8.4,23}}, color={0,0,255}));
+    connect(DeadZone1.y,H3.u)             annotation (Line(points={{2.8,1},{2.8,
+            -26},{4,-26},{4,-23},{10.4,-23}}, color={0,0,255}));
+    connect(DeadZone1.y,H4.u)             annotation (Line(points={{2.8,1},{4,
+            -70},{6.4,-67}}, color={0,0,255}));
+    connect(H1.y,Add4.u2)             annotation (Line(points={{24.8,67},{30.4,
+            67},{30.4,80.8},{32.6,80.8}}, color={0,0,255}));
+    connect(H2.y,Add3.u2)             annotation (Line(points={{26.8,23},{33.4,
+            23},{33.4,22.8},{44.6,22.8}}, color={0,0,255}));
+    connect(H3.y,Add2.u1)             annotation (Line(points={{28.8,-23},{35.4,
+            -23},{35.4,-20.8},{44.6,-20.8}}, color={0,0,255}));
+    connect(HR0.y,Add4.u1)             annotation (Line(points={{22.8,89},{22.8,
+            89.5},{32.6,89.5},{32.6,89.2}}, color={0,0,255}));
+    connect(EV0derecho.y,Add3.u1)             annotation (Line(points={{26.8,45},
+            {26.8,45.5},{44.6,45.5},{44.6,31.2}}, color={0,0,255}));
+    connect(H2.y,Add6.u1)             annotation (Line(points={{26.8,23},{36,23},
+            {36,9.2},{44.6,9.2}}, color={0,0,255}));
+    connect(EV0izquierdo.y,Add6.u2)             annotation (Line(points={{26.8,
+            1},{37.4,1},{37.4,0.8},{44.6,0.8}}, color={0,0,255}));
+    connect(RS0.y,Add5.u2)             annotation (Line(points={{26.8,-90},{34,
+            -90},{34,-87.2},{38.6,-87.2}}, color={0,0,255}));
+    connect(H4.y,Add5.u1)             annotation (Line(points={{24.8,-67},{31.4,
+            -67},{31.4,-78.8},{38.6,-78.8}}, color={0,0,255}));
+    connect(Add4.y,       HR) annotation (Line(points={{48.7,85},{60.35,85},{
+            60.35,78},{66,78}}, color={0,0,255}));
+    connect(Add3.y,       EVderecho) annotation (Line(points={{60.7,27},{68.35,
+            27},{68.35,30},{66,30}}, color={0,0,255}));
+    connect(Add6.y,       EVizquierda) annotation (Line(points={{60.7,5},{68.35,
+            5},{68.35,2},{65,2}}, color={0,0,255}));
+    connect(Add2.y,       CV) annotation (Line(points={{60.7,-25},{68.35,-25},{
+            68.35,-27},{66,-27}}, color={0,0,255}));
+    connect(Add5.y,       RS) annotation (Line(points={{54.7,-83},{64.35,-83},{
+            64.35,-64},{67,-64}}, color={0,0,255}));
+    connect(Step1.y,Add2.u2)             annotation (Line(points={{-21,-46},{12,
+            -46},{12,-29.2},{44.6,-29.2}}, color={0,0,255}));
+    connect(PAO, Switch1.u1) annotation (Line(
+        points={{-58,36},{-68,36},{-68,28},{-76,28},{-76,16.4},{-73.4,16.4}},
+        color={0,0,127},
+        smooth=Smooth.None));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}),
+                        graphics),
+                         Icon(graphics={
+          Rectangle(
+            extent={{-48,96},{56,-96}},
+            lineColor={0,0,255},
+            fillColor={255,255,0},
+            fillPattern=FillPattern.Solid),
+          Text(extent={{-72,52},{76,30}}, textString=
+                                              "Modulo"),
+          Text(extent={{-14,24},{16,2}}, textString=
+                                             "de"),
+          Text(extent={{-34,-12},{46,-38}}, textString=
+                                                "Control")}));
+  end modulocontroltest;
 end control;
