@@ -318,7 +318,9 @@ package control "modelo y control a corto plazo"
             255}));
     connect(incpres,GreaterEqual1.u)       annotation (Line(points={{-48,29},{
             -68,29},{-68,-4},{-58,-4}}, color={0,0,255}));
-    annotation (Diagram(graphics),
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}),
+                        graphics),
                          Icon(graphics={Rectangle(
             extent={{-34,16},{0,-6}},
             lineColor={0,0,255},
@@ -330,10 +332,10 @@ package control "modelo y control a corto plazo"
   partial model compartimentoconvalvula
     Modelica.Blocks.Interfaces.RealInput
                                       flujent "flujo de entrada"
-      annotation (Placement(transformation(extent={{-70,28},{-54,44}}, rotation=
+      annotation (Placement(transformation(extent={{-98,32},{-82,48}}, rotation=
              0)));
     Modelica.Blocks.Math.Add Add1(k1=-1) annotation (Placement(transformation(
-            extent={{-58,22},{-38,42}}, rotation=0)));
+            extent={{-68,22},{-48,42}}, rotation=0)));
     Modelica.Blocks.Continuous.Integrator Integrator1
       annotation (Placement(transformation(extent={{-28,22},{-8,42}}, rotation=
               0)));
@@ -341,7 +343,7 @@ package control "modelo y control a corto plazo"
                                        volsal "volumen de salida"
       annotation (Placement(transformation(extent={{-4,24},{10,42}}, rotation=0)));
     Modelica.Blocks.Math.Product Product1 annotation (Placement(transformation(
-            extent={{-24,-12},{-4,8}}, rotation=0)));
+            extent={{-30,-12},{-10,8}},rotation=0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        pressal "presion de salida"
       annotation (Placement(transformation(extent={{-4,2},{12,20}}, rotation=0)));
@@ -352,10 +354,10 @@ package control "modelo y control a corto plazo"
           rotation=270)));
     Modelica.Blocks.Interfaces.RealInput
                                       present "presion de entrada"
-      annotation (Placement(transformation(extent={{-70,-30},{-52,-12}},
+      annotation (Placement(transformation(extent={{-102,-30},{-84,-12}},
             rotation=0)));
-    limite limite1 annotation (Placement(transformation(extent={{-84,-118},{6,
-              -16}}, rotation=0)));
+    limite limite1 annotation (Placement(transformation(extent={{-84,-142},{6,
+              -40}}, rotation=0)));
     Modelica.Blocks.Math.Product Product2 annotation (Placement(transformation(
             extent={{-18,-64},{2,-44}}, rotation=0)));
     Modelica.Blocks.Sources.Constant admitancia(k=1)
@@ -367,37 +369,39 @@ package control "modelo y control a corto plazo"
               0)));
     Modelica.Blocks.Interfaces.RealInput
                                       ELASTAN "elastancia"
-      annotation (Placement(transformation(extent={{-68,2},{-52,18}}, rotation=
+      annotation (Placement(transformation(extent={{-98,2},{-82,18}}, rotation=
               0)));
   equation
-    connect(flujent,Add1.u1)       annotation (Line(points={{-62,36},{-60,36},{
-            -60,38}}, color={0,0,255}));
-    connect(Add1.y,Integrator1.u)             annotation (Line(points={{-37,32},
+    connect(flujent,Add1.u1)       annotation (Line(points={{-90,40},{-70,40},{
+            -70,38}}, color={0,0,255}));
+    connect(Add1.y,Integrator1.u)             annotation (Line(points={{-47,32},
             {-30,32}}, color={0,0,255}));
     connect(Integrator1.y,       volsal) annotation (Line(points={{-7,32},{4,32},
             {4,33},{3,33}}, color={0,0,255}));
-    connect(Integrator1.y,Product1.u1)             annotation (Line(points={{-7,
-            32},{-8,32},{-8,16},{-26,16},{-26,4}}, color={0,0,255}));
-    connect(Product1.y,       pressal) annotation (Line(points={{-3,-2},{-2.5,
+    connect(Integrator1.y,Product1.u1)             annotation (Line(points={{-7,32},
+            {-8,32},{-8,16},{-32,16},{-32,4}},     color={0,0,255}));
+    connect(Product1.y,       pressal) annotation (Line(points={{-9,-2},{-2.5,
             -2},{-2.5,11},{4,11}}, color={0,0,255}));
-    connect(Product1.y,Add2.u1)             annotation (Line(points={{-3,-2},{
+    connect(Product1.y,Add2.u1)             annotation (Line(points={{-9,-2},{
             -2,-2},{-2,-16},{-16,-16},{-16,-24},{-52,-24}}, color={0,0,255}));
-    connect(present,Add2.u2)       annotation (Line(points={{-61,-21},{-64.5,
+    connect(present,Add2.u2)       annotation (Line(points={{-93,-21},{-64.5,
             -21},{-64.5,-24},{-64,-24}}, color={0,0,255}));
     connect(Add2.y,       limite1.incpres) annotation (Line(points={{-58,-47},{
-            -67.26,-47},{-67.26,-52.21},{-60.6,-52.21}}, color={0,0,255}));
+            -67.26,-47},{-67.26,-76.21},{-60.6,-76.21}}, color={0,0,255}));
     connect(admitancia.y,Product2.u1)             annotation (Line(points={{
             -27.2,-38},{-14,-38},{-14,-48},{-20,-48}}, color={0,0,255}));
     connect(limite1.OutPort1,Product2.u2)       annotation (Line(points={{-15.6,
-            -65.47},{-21.25,-65.47},{-21.25,-60},{-20,-60}}, color={0,0,255}));
+            -89.47},{-21.25,-89.47},{-21.25,-60},{-20,-60}}, color={0,0,255}));
     connect(Product2.y,       flujsal)
       annotation (Line(points={{3,-54},{8,-54},{8,-12},{4,-12}}, color={0,0,255}));
     connect(Product2.y,Add1.u2)             annotation (Line(points={{3,-54},{0,
-            -54},{0,-20},{-66,-20},{-66,26},{-60,26}}, color={0,0,255}));
+            -54},{0,-20},{-66,-20},{-66,26},{-70,26}}, color={0,0,255}));
     connect(ELASTAN,Product1.u2)
-      annotation (Line(points={{-60,10},{-52,10},{-52,-8},{-26,-8}}, color={0,0,
+      annotation (Line(points={{-90,10},{-52,10},{-52,-8},{-32,-8}}, color={0,0,
             255}));
-    annotation (Diagram(graphics),
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}),
+                        graphics),
                          Icon(graphics={
           Rectangle(
             extent={{-52,50},{-4,-40}},
@@ -543,12 +547,12 @@ package control "modelo y control a corto plazo"
             -50},{-24,-50},{-24,-30.8},{-19.8,-30.8}}, color={0,0,255}));
     connect(EV,Product1.u1)       annotation (Line(points={{-72,12},{-88,12},{
             -88,-11.2},{-63.8,-11.2}}, color={0,0,255}));
-    connect(FEV, compartimentoconvalvula1.flujent) annotation (Line(points={{
-            -73,39},{-41.5,39},{-41.5,-2.72},{15.66,-2.72}}, color={0,0,255}));
+    connect(FEV, compartimentoconvalvula1.flujent) annotation (Line(points={{-73,39},
+            {-41.5,39},{-41.5,-0.8},{-0.3,-0.8}},            color={0,0,255}));
     connect(Product2.y,       compartimentoconvalvula1.ELASTAN) annotation (Line(
-          points={{0.9,-26},{6,-26},{6,-15.2},{16.8,-15.2}}, color={0,0,255}));
-    connect(PEV, compartimentoconvalvula1.present) annotation (Line(points={{
-            -71,-39},{4,-39},{4,-30.08},{16.23,-30.08}}, color={0,0,255}));
+          points={{0.9,-26},{6,-26},{6,-15.2},{-0.3,-15.2}}, color={0,0,255}));
+    connect(PEV, compartimentoconvalvula1.present) annotation (Line(points={{-71,-39},
+            {4,-39},{4,-30.08},{-2.01,-30.08}},          color={0,0,255}));
     connect(compartimentoconvalvula1.volsal, VSV) annotation (Line(points={{
             52.71,-4.16},{52.71,23.92},{7,23.92},{7,31}}, color={0,0,255}));
     connect(compartimentoconvalvula1.pressal, PSV) annotation (Line(points={{53.28,
@@ -704,9 +708,11 @@ package control "modelo y control a corto plazo"
     connect(ventriculo1.PSV, PVI) annotation (Line(points={{58.31,28.4},{36.495,
             28.4},{36.495,20},{11,20}},
                                       color={0,0,255}));
-    connect(ventriculo1.FSV, FVM) annotation (Line(points={{14.99,7.25},{41.495,
-            7.25},{41.495,-6},{11,-6}}, color={0,0,255}));
-    annotation (Diagram(graphics),
+    connect(ventriculo1.FSV, FVM) annotation (Line(points={{65.15,1.85},{41.495,
+            1.85},{41.495,-6},{11,-6}}, color={0,0,255}));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}),
+                        graphics),
                          Icon(graphics={
           Rectangle(
             extent={{-60,66},{4,-38}},
@@ -1175,11 +1181,11 @@ package control "modelo y control a corto plazo"
              0)));
   equation
     connect(elastancia.y,       compartimentoconvalvula1.ELASTAN) annotation (Line(
-          points={{-27.2,9},{-40.7,9},{-40.7,8.9},{-16.8,8.9}}, color={0,0,255}));
-    connect(FAS, compartimentoconvalvula1.flujent) annotation (Line(points={{
-            -50,37},{-50,24.24},{-18.36,24.24}}, color={0,0,255}));
-    connect(PVI, compartimentoconvalvula1.present) annotation (Line(points={{
-            -48,-4},{-52,-4},{-52,-9.39},{-17.58,-9.39}}, color={0,0,255}));
+          points={{-27.2,9},{-40.7,9},{-40.7,8.9},{-40.2,8.9}}, color={0,0,255}));
+    connect(FAS, compartimentoconvalvula1.flujent) annotation (Line(points={{-50,37},
+            {-50,26.6},{-40.2,26.6}},            color={0,0,255}));
+    connect(PVI, compartimentoconvalvula1.present) annotation (Line(points={{-48,-4},
+            {-52,-4},{-52,-9.39},{-42.54,-9.39}},         color={0,0,255}));
     connect(compartimentoconvalvula1.volsal, VAO) annotation (Line(points={{
             32.34,22.47},{27.385,22.47},{27.385,32},{32,32}}, color={0,0,255}));
     connect(compartimentoconvalvula1.pressal, PAO) annotation (Line(points={{
@@ -1238,11 +1244,11 @@ package control "modelo y control a corto plazo"
              0)));
   equation
     connect(elastancia.y,       compartimentoconvalvula1.ELASTAN) annotation (Line(
-          points={{-55.2,18},{-54,18},{-54,17.6},{-36.8,17.6}}, color={0,0,255}));
-    connect(FSP, compartimentoconvalvula1.flujent) annotation (Line(points={{
-            -43,34},{-52,34},{-52,37.36},{-38.36,37.36}}, color={0,0,255}));
-    connect(PVD, compartimentoconvalvula1.present) annotation (Line(points={{
-            -44,5},{-61,5},{-61,-5.96},{-37.58,-5.96}}, color={0,0,255}));
+          points={{-55.2,18},{-54,18},{-54,17.6},{-60.2,17.6}}, color={0,0,255}));
+    connect(FSP, compartimentoconvalvula1.flujent) annotation (Line(points={{-43,34},
+            {-52,34},{-52,40.4},{-60.2,40.4}},            color={0,0,255}));
+    connect(PVD, compartimentoconvalvula1.present) annotation (Line(points={{-44,5},
+            {-61,5},{-61,-5.96},{-62.54,-5.96}},        color={0,0,255}));
     connect(compartimentoconvalvula1.volsal, VPA) annotation (Line(points={{
             12.34,35.08},{26.17,35.08},{26.17,34},{28,34}}, color={0,0,255}));
     connect(compartimentoconvalvula1.pressal, PAP) annotation (Line(points={{
