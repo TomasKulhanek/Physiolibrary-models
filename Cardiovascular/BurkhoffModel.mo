@@ -1,7 +1,5 @@
 within ;
 package BurkhoffModel
-  // CP: 65001
-  // SimulationX Version: 3.6.1.26028 x64
   package Parts
 
     model PulmonaryCirculation
@@ -546,10 +544,9 @@ package BurkhoffModel
         "coefficient of end diastolic pressure-volume curve"                                          annotation(Placement(visible = true, transformation(origin = {-167.3974,74.6281}, extent = {{-20.0,-20.0},{20.0,20.0}}, rotation = 0), iconTransformation(origin = {-107,69.0001}, extent = {{-8.99991,-9.0001},{9.00027,8.999919999999999}}, rotation = 0)));
       Modelica.Blocks.Interfaces.RealInput Beta
         "coefficient of end diastolic pressure-volume curve"                                         annotation(Placement(visible = true, transformation(origin = {-167.3974,74.6281}, extent = {{-20.0,-20.0},{20.0,20.0}}, rotation = 0), iconTransformation(origin = {-108,38}, extent = {{-9.99994,-10},{10.0002,10}}, rotation = 0)));
-      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceInput Ees
+      Cardiovascular.Types.RealIO.HydraulicElastanceInput Ees
         "coefficient of end-systolic elastance"                                                               annotation(Placement(visible = true, transformation(origin = {-167.3974,74.6281}, extent = {{-20.0,-20.0},{20.0,20.0}}, rotation = 0), iconTransformation(origin = {-107,91}, extent = {{-8.99994,-9},{9.00018,9}}, rotation = 0)));
-      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceOutput Et
-        "elasticity"                                                               annotation(Placement(transformation(extent = {{94.0,16.0},{114.0,36.0}}, origin = {0.0,0.0}, rotation = 0), iconTransformation(extent = {{100.0,20.0},{120.0,40.0}}, origin = {2,40}, rotation = 0), visible = true));
+      Cardiovascular.Types.RealIO.HydraulicElastanceOutput Et "elasticity" annotation(Placement(transformation(extent = {{94.0,16.0},{114.0,36.0}}, origin = {0.0,0.0}, rotation = 0), iconTransformation(extent = {{100.0,20.0},{120.0,40.0}}, origin = {2,40}, rotation = 0), visible = true));
     equation
       //  Etpom = ((1 - Et0)*(Beta*(exp(Alpha*Vs*1e+6) - 1)))/(Vs*1e+6);
       //1e+6 and 133.322368 are recalculation in SI units - as the original equation comes in torr and ml.
@@ -632,7 +629,7 @@ package BurkhoffModel
       HeartElastanceBurkhoff VentricularElastance annotation(Placement(transformation(extent = {{42,68},{76,94}})));
       GainConst xAAlpha(k = 0.04) annotation(Placement(transformation(extent = {{-92,84},{-84,90}})));
       GainConst xABeta(k = 0.3) annotation(Placement(transformation(extent = {{-80,80},{-72,86}})));
-      PhysiolibraryExtension.Types.Constants.HydraulicElastanceConst xVEes(k=50662507.2177)   annotation(Placement(transformation(extent = {{14,90},{22,96}})));
+      Cardiovascular.Types.Constants.HydraulicElastanceConst xVEes(k=50662507.2177)   annotation(Placement(transformation(extent = {{14,90},{22,96}})));
       GainConst xVAlpha(k = 0.024) annotation(Placement(transformation(extent = {{2,84},{10,90}})));
       GainConst xVBeta(k = 0.34) annotation(Placement(transformation(extent = {{14,78},{22,84}})));
       ElasticVesselWithSVandP atrium(
@@ -649,11 +646,11 @@ package BurkhoffModel
         useExternalPressureInput=true,
         volume_start=6e-05)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance annotation(Placement(transformation(extent = {{-4,-4},{4,4}}, rotation = 270, origin = {-64,24})));
-      PhysiolibraryExtension.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance1 annotation(Placement(transformation(extent = {{-4,-4},{4,4}}, rotation = 270, origin = {40,26})));
-      PhysiolibraryExtension.Hydraulic.Components.CardiacValve atrioVentricularValve
+      Cardiovascular.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance annotation(Placement(transformation(extent = {{-4,-4},{4,4}}, rotation = 270, origin = {-64,24})));
+      Cardiovascular.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance1 annotation(Placement(transformation(extent = {{-4,-4},{4,4}}, rotation = 270, origin = {40,26})));
+      Cardiovascular.Hydraulic.Components.CardiacValve atrioVentricularValve
         annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-      PhysiolibraryExtension.Hydraulic.Components.CardiacValve ventriculoArteryValve
+      Cardiovascular.Hydraulic.Components.CardiacValve ventriculoArteryValve
         annotation (Placement(transformation(extent={{66,-10},{86,10}})));
       Physiolibrary.Types.Constants.HydraulicConductanceConst CxABackflow(k = 0) annotation(Placement(transformation(extent = {{-24,16},{-18,22}})));
       Physiolibrary.Types.Constants.HydraulicResistanceConst xtv(k(displayUnit = "(mmHg.s)/ml") = 333305.9685375) annotation(Placement(transformation(extent = {{-14,26},{-6,34}})));
@@ -665,7 +662,7 @@ package BurkhoffModel
                 {-54,-52}})));
       Modelica.Blocks.Math.Add add1 annotation(Placement(transformation(extent={{12,-70},
                 {32,-50}})));
-      PhysiolibraryExtension.Types.Constants.HydraulicElastanceConst xAEes(k=26664477.483)   annotation(Placement(transformation(extent = {{-78,92},{-70,100}})));
+      Cardiovascular.Types.Constants.HydraulicElastanceConst xAEes(k=26664477.483)   annotation(Placement(transformation(extent = {{-78,92},{-70,100}})));
     equation
       connect(Volume,Volume) annotation(Line(points={{54,-60},{54,-60}},   color = {0,0,127}, smooth = Smooth.None));
       connect(AEt0,AtrialElastance.Et0) annotation(Line(points={{-93,71},{-72.5,
@@ -731,11 +728,6 @@ package BurkhoffModel
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(CxABackflow.y, atrioVentricularValve.inflowConductance) annotation (
-          Line(
-          points={{-17.25,19},{-17.4,19},{-17.4,7.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(xtv.y, atrioVentricularValve.outflowResistance) annotation (Line(
           points={{-5,30},{-4,30},{-4,8.800000000000001},{-4.8,8.800000000000001}},
           color={0,0,127},
@@ -746,11 +738,6 @@ package BurkhoffModel
           color={0,0,127},
           smooth=Smooth.None));
 
-      connect(CxVBackflow.y, ventriculoArteryValve.inflowConductance) annotation (
-          Line(
-          points={{61,22},{64,22},{64,7.6},{68.59999999999999,7.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(PTH,ventricle. externalPressure) annotation (Line(
           points={{-56,50},{-56,56},{48,56},{48,8}},
           color={0,0,127},
@@ -795,6 +782,16 @@ package BurkhoffModel
           points={{10,-54},{2,-54},{2,-46},{40,-46},{40,-10}},
           color={0,0,127},
           smooth=Smooth.None));
+      connect(CxABackflow.y, atrioVentricularValve.backflowConductance)
+        annotation (Line(
+          points={{-17.25,19},{-17.25,13.5},{-17.4,13.5},{-17.4,7.6}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(CxVBackflow.y, ventriculoArteryValve.backflowConductance)
+        annotation (Line(
+          points={{61,22},{64,22},{64,7.6},{68.6,7.6}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
       annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                     graphics={  Text(extent={{
                   -96,106},{-46,92}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
@@ -889,7 +886,7 @@ package BurkhoffModel
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-48,66})));
-      Physiolibrary.Types.Constants.TimeConst AVDelay(k(displayUnit="ms") =
+      Physiolibrary.Types.Constants.TimeConst AVDelay(k(displayUnit="ms")=
           0.16)                                                                     annotation(Placement(transformation(extent={{-4,-4},
                 {4,4}},
             rotation=180,
@@ -911,8 +908,8 @@ package BurkhoffModel
       MeursModel.Parts.FlowPressureMeasurement flowPressureMeasurement
         annotation (Placement(transformation(extent={{18,8},{38,28}})));
       Physiolibrary.Types.RealIO.PressureOutput pressure annotation (Placement(
-            transformation(extent={{30,68},{50,88}}), iconTransformation(extent
-              ={{36,74},{50,88}})));
+            transformation(extent={{38,-4},{58,16}}), iconTransformation(extent={{44,2},{
+                58,16}})));
     equation
       connect(PTH, rightHeart.PTH) annotation (Line(
           points={{-24,60},{-24,35.52},{-26.62,35.52}},
@@ -982,9 +979,9 @@ package BurkhoffModel
           smooth=Smooth.None));
       connect(heartElasticities.AEt0, rightHeart.AEt0) annotation (Line(
           points={{-38.2,68.2},{-36,68.2},{-36,48},{-44.44,48},{-44.44,35.52}},
-
           color={0,0,127},
           smooth=Smooth.None));
+
       connect(heartElasticities.AVDelay, AVDelay.y) annotation (Line(
           points={{-56.6,64},{-60,64},{-60,44},{-59,44}},
           color={0,0,127},
@@ -1004,7 +1001,7 @@ package BurkhoffModel
           thickness=1,
           smooth=Smooth.Bezier));
       connect(heartRate, flowPressureMeasurement.HR) annotation (Line(
-          points={{-74,72},{-64,72},{-64,78},{28,78},{28,23.6}},
+          points={{-74,72},{-64,72},{-64,78},{28,78},{28,24.6}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(rightHeart.StressedVolume, add1.u2) annotation (Line(
@@ -1015,6 +1012,10 @@ package BurkhoffModel
           points={{24.5,-47},{38,-47},{38,-38}},
           color={0,0,127},
           smooth=Smooth.None));
+      connect(flowPressureMeasurement.Pmean, pressure) annotation (Line(
+          points={{24.2,15},{32.1,15},{32.1,6},{48,6}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-60,-60},
                 {40,80}}),              graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-60,-60},{40,80}}),
@@ -1041,7 +1042,6 @@ package BurkhoffModel
               fillPattern=FillPattern.Solid,
               textString="Pmean")}));
     end Heart;
-
 
   end Parts;
 
@@ -1093,13 +1093,13 @@ package BurkhoffModel
               10},{-12,48},{30,48},{30,56.3},{34.64,56.3}},                                                                    color = {0,0,127}, smooth = Smooth.None));
       connect(AEt0.y,AtrialElastance.Et0) annotation(Line(points={{21.5,37},{
               21.5,43.5},{34.64,43.5},{34.64,50.06}},                                                                  color = {0,0,127}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent = {{-112,60},{-54,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AEt0"),Text(extent = {{-62,60},{-4,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "VEt0"),Text(extent = {{-16,60},{42,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "PTH"),Text(extent = {{-76,-34},{26,-60}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AVGain"),Text(extent = {{-84,-84},{-42,-94}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Volume"),Text(extent = {{-20,-84},{40,-92}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent=  {{-112,60},{-54,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AEt0"),Text(extent=  {{-62,60},{-4,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "VEt0"),Text(extent=  {{-16,60},{42,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "PTH"),Text(extent=  {{-76,-34},{26,-60}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVGain"),Text(extent=  {{-84,-84},{-42,-94}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Volume"),Text(extent=  {{-20,-84},{40,-92}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
     end TestElastance;
 
     model TestPulmonary "model of hemodynamics by Burkhoff in Physiolibrary"
@@ -1648,7 +1648,6 @@ package BurkhoffModel
 
   package Models
 
-
     model HemodynamicsBurkhoff
       extends MeursModel.Models.Hemodynamics(
       redeclare BurkhoffModel.Parts.Heart  heart,
@@ -1657,17 +1656,8 @@ package BurkhoffModel
         HeartRate(k(displayUnit="1/min") = 1.3333333333333));
     end HemodynamicsBurkhoff;
 
-
-
-
-
   end Models;
-  annotation(uses(                             Physiolibrary(version = "2.1"), MeursModel(version = "1"), HeamodynamicsDymola(version = "1"),
-      Modelica(version="3.2.1")), Documentation(revisions="<html>
-<p>Licensed by Tomas Kulhanek under the Modelica License 2</p>
-<p>Copyright &copy; 2008-2014, Tomas Kulhanek, Charles University in Prague.</p>
-<p><br><i>This Modelica package is&nbsp;<u>free</u>&nbsp;software and the use is completely at&nbsp;<u>your own risk</u>; it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the disclaimer of warranty) see&nbsp;<a href=\"modelica://Physiolibrary.UsersGuide.ModelicaLicense2\">Physiolibrary.UsersGuide.ModelicaLicense2</a>&nbsp;or visit&nbsp;<a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"));
+
   package Experiment
     model BurkhoffHemodynamics_volume_control
       extends MeursModel.Experiment.Hemodynamics_volume_control(redeclare
@@ -1715,4 +1705,10 @@ systemic.volume")}),     Icon(coordinateSystem(preserveAspectRatio=false, extent
               smooth=Smooth.Bezier)}));
     end HemodynamicsBurkhoff_with_catheter;
   end Experiment;
+  annotation(uses(                             Physiolibrary(version = "2.1"), MeursModel(version = "1"), HeamodynamicsDymola(version = "1"),
+      Modelica(version="3.2.1")), Documentation(revisions="<html>
+<p>Licensed by Tomas Kulhanek under the Modelica License 2</p>
+<p>Copyright &copy; 2008-2014, Tomas Kulhanek, Charles University in Prague.</p>
+<p><br><i>This Modelica package is&nbsp;<u>free</u>&nbsp;software and the use is completely at&nbsp;<u>your own risk</u>; it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the disclaimer of warranty) see&nbsp;<a href=\"modelica://Physiolibrary.UsersGuide.ModelicaLicense2\">Physiolibrary.UsersGuide.ModelicaLicense2</a>&nbsp;or visit&nbsp;<a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"));
 end BurkhoffModel;
