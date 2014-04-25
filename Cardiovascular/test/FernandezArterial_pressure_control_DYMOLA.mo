@@ -124,7 +124,7 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Sources.BooleanConstant BooleanConstant2(k=false)
       annotation (Placement(transformation(extent={{-6,-100},{8,-90}}, rotation=
              0)));
-    Modelica.Blocks.Logical.GreaterEqualThreshold GreaterEqual1(threshold=10)
+    Modelica.Blocks.Logical.GreaterEqualThreshold GreaterEqual1(threshold=0)
       annotation (Placement(transformation(extent={{-8,-82},{8,-72}}, rotation=
               0)));
     Modelica.Blocks.Math.Division Division1
@@ -1416,9 +1416,7 @@ package control "modelo y control a corto plazo"
             textString=
                  "cava")}));
   end venacava;
-  annotation(uses(Modelica(version="3.2.1")),
-    version="1",
-    conversion(noneFromVersion=""));
+
   model testcontrol
 
     replaceable modulocontroltest modulocontrol1
@@ -1585,4 +1583,7 @@ package control "modelo y control a corto plazo"
           Text(extent={{-34,-12},{46,-38}}, textString=
                                                 "Control")}));
   end modulocontroltest;
+  annotation(uses(Modelica(version="3.2.1")),
+    version="1",
+    conversion(noneFromVersion=""));
 end control;

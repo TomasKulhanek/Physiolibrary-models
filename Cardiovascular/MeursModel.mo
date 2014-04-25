@@ -339,8 +339,6 @@ package MeursModel
       connect(hydrauliccompliance.y, ventricle.compliance) annotation(Line(points = {{100, 43}, {100, 18.5654}, {42.7567, 18.5654}, {42.7567, -31}, {43, -31}}, smooth = Smooth.Bezier));
       connect(ventricularElastance.Et, hydrauliccompliance.hydraulicelastance) annotation(Line(points = {{86.56, 56.91}, {94, 56.91}, {99.90000000000001, 55.9}, {99.90000000000001, 52.1}}, color = {0, 0, 127}));
       connect(Tvs, ventricularElastance.Tvs) annotation(Line(points = {{3, 39}, {16, 39}, {16, 48.58}, {29.68, 48.58}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
-      connect(atrioVentricleValve.bloodFlowOutflow, ventricle.q_in) annotation(Line(points = {{20, -42}, {30, -42}, {30, -43}, {43, -43}}, thickness = 1, smooth = Smooth.Bezier));
-      connect(atrium.q_in, atrioVentricleValve.bloodFlowInflow) annotation(Line(points = {{-34, -44}, {-22, -44}, {-5.74, -41.8}, {-5.74, -41.76}}, thickness = 1, smooth = Smooth.Bezier));
       connect(RxAOutflow.y, atrioVentricleValve.outflowResistance) annotation(Line(points = {{5, -88}, {12, -88}, {13.76, -50.8}, {13.76, -52.56}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(Tas, atrialElastance.Tas) annotation(Line(points = {{-98, 56}, {-74, 56}, {-74, 68.72}, {-67.8, 68.72}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(ventricleArteryValve.outflowResistance, RxVOutflow.y) annotation(Line(points = {{82.23999999999999, -52.56}, {82, -52.56}, {82, -82}, {83, -82}}, color = {0, 0, 127}, smooth = Smooth.None));
@@ -355,8 +353,6 @@ package MeursModel
       connect(hydrauliccompliance1.y, atrium.compliance) annotation(Line(points = {{-1, 62}, {0, 62}, {0, 36}, {-34, 36}, {-34, -31.2}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(Tas, ventricularElastance.Tas) annotation(Line(points = {{-98, 56}, {-80, 56}, {-80, 88}, {12, 88}, {12, 65.58}, {29.68, 65.58}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(inflow, atrium.q_in) annotation(Line(points = {{-96, 0}, {-86, 0}, {-86, -48}, {-34, -48}, {-34, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
-      connect(ventricle.q_in, ventricleArteryValve.bloodFlowInflow) annotation(Line(points = {{43, -43}, {54.5, -43}, {54.5, -41.76}, {64.23999999999999, -41.76}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
-      connect(ventricleArteryValve.bloodFlowOutflow, outflow) annotation(Line(points = {{88, -42}, {92, -42}, {92, 0}, {94, 0}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
       connect(CxABackflow.y, atrioVentricleValve.backflowConductance)
         annotation (Line(
           points={{-9,-80},{-6,-80},{-6,-51.12},{-2.62,-51.12}},
@@ -366,6 +362,26 @@ package MeursModel
         annotation (Line(
           points={{63,-78},{66,-78},{66,-51.12},{67.12,-51.12}},
           color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(atrium.q_in, atrioVentricleValve.inflow) annotation (Line(
+          points={{-34,-44},{-20,-44},{-20,-41.76},{-5.74,-41.76}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.Bezier));
+      connect(atrioVentricleValve.outflow, ventricle.q_in) annotation (Line(
+          points={{20,-42},{32,-42},{32,-43},{43,-43}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.Bezier));
+      connect(ventricle.q_in, ventricleArteryValve.inflow) annotation (Line(
+          points={{43,-43},{53.5,-43},{53.5,-41.76},{64.24,-41.76}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.Bezier));
+      connect(ventricleArteryValve.outflow, outflow) annotation (Line(
+          points={{88,-42},{92,-42},{92,0},{94,0}},
+          color={0,0,0},
+          thickness=1,
           smooth=Smooth.Bezier));
       annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-70, 90}, {-56, 78}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
                 fillPattern =                                                                                                    FillPattern.Solid, textString = "T0"), Text(extent = {{-42, 94}, {-26, 74}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
@@ -621,86 +637,6 @@ package MeursModel
               textString="Pext")}));
     end systemicCirculation;
 
-    model FlowPressureMeasurement
-      extends Physiolibrary.Hydraulic.Sensors.FlowMeasure;
-        Physiolibrary.Types.RealIO.FrequencyInput HR annotation (Placement(
-            transformation(extent={{-170,-64},{-130,-24}}), iconTransformation(
-            extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={0,66})));
-    //  Physiolibrary.Types.RealIO.FrequencyInput HR "Heart rate " annotation(Placement(transformation(extent = {{-36,28},{4,68}}), iconTransformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,68})));
-      Physiolibrary.Types.RealIO.PressureOutput Ps
-        "Systolic pressure during heart cycle"                                            annotation(Placement(transformation(extent = {{-72,-42},{-52,-22}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-80,-30})));
-      Physiolibrary.Types.RealIO.PressureOutput Pd
-        "Diastolic pressure during heart cycle"                                            annotation(Placement(transformation(extent = {{-50,-40},{-30,-20}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-60,-30})));
-      Physiolibrary.Types.RealIO.PressureOutput Pmean
-        "Mean pressure during heart cycle"                                               annotation(Placement(transformation(extent = {{-10,-36},{10,-16}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-38,-30})));
-      Physiolibrary.Types.RealIO.VolumeOutput SV "systolic volume" annotation(Placement(transformation(extent = {{22,-42},{42,-22}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
-      Physiolibrary.Types.RealIO.VolumeFlowRateOutput CO "Cardiac output" annotation(Placement(transformation(extent = {{50,-40},{70,-20}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {50,-30})));
-      Real SumPressure(start = 0) "sum of pressure of cardiac cycle";
-      Physiolibrary.Types.Pressure Pmin(start = 200);
-      Physiolibrary.Types.Pressure Pmax(start = 0);
-      Physiolibrary.Types.Volume Volume(start = 0)
-        "sum of volume through cyrdiac cycle";
-      Boolean b "event condition";
-      Physiolibrary.Types.Time T0 "start of cardiac cycle ";
-      discrete Physiolibrary.Types.Time HP "length of cardiac cycle";
-    initial equation
-      T0 = 0;
-      HP = 1 / HR;
-      CO = 0;
-      SV = 0;
-      Ps = 0;
-      Pd = 0;
-      Pmean = 0;
-    equation
-    //    q_out.pressure = q_in.pressure;
-    //  actualFlow = q_in.q;
-    //  Inflow.q + Outflow.q = 0;
-    //  Inflow.pressure = 0;//Outflow.pressure;
-      Pmax = max(Pmax, q_in.pressure);
-      Pmin = min(Pmin, q_in.pressure);
-      b = time - pre(T0) >= pre(HP) "b=true when new cardiac cycle begins";
-      when {b} then
-        T0 = time "initial time of current cardiac cycle";
-        HP = 1 / HR "calculation od time lenght of current cardiac cycle";
-        SV = Volume
-          "systolic volume is equal of total volume passed through this block";
-        CO = SV * HR
-          "cardiac output calculation from systolic volume and heart rate (l/min)";
-        Pmean = SumPressure / pre(HP)
-          "mean pressure (torr) = summ pressure through cardiac cycle divided by length of previous cardiac cycle";
-        Ps = Pmax "systolic pressure = maximum pressure during cardiac cycle";
-        Pd = Pmin "diastolic pressure=minimal pressure during cardiac cycle";
-        reinit(Volume, 0) "reinitialisation of volume";
-        reinit(SumPressure, 0) "reinitialisation of sum pressure";
-        reinit(Pmax, Pmean)
-          "reinitialisation of maximal pressure to mean pressure";
-        reinit(Pmin, Pmean)
-          "reinitialisation minimal pressure to mean pressure";
-      end when;
-      der(Volume) = q_in.q;
-      der(SumPressure) = q_in.pressure;
-      annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-                -100},{100,100}}),                                                                     graphics={                                   Text(extent = {{-32,46},{26,32}}, lineColor=
-                  {0,128,0},                                                                                                    fillColor=
-                  {85,170,255},
-                fillPattern=FillPattern.Solid,
-              textString="HR"),                                                                                                    Text(extent={{
-                  -52,11},{52,-11}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin={
-                  -77,30},                                                                                                    rotation = 90, textString = "Ps"),Text(extent={{
-                  -53,10},{53,-10}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin={
-                  -56,31},                                                                                                    rotation = 90, textString = "Pd"),Text(extent={{
-                  -55,12},{55,-12}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin={
-                  -32,35},                                                                                                    rotation = 90, textString = "Pmean"),Text(extent = {{-29,12},{29,-12}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin = {34,7}, rotation = 90, textString = "SV"),Text(extent = {{-30,11},{30,-11}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin = {55,8}, rotation = 90, textString = "CO")}),
-          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-                100}}), graphics));
-    end FlowPressureMeasurement;
 
     model SystemicPeripheralVessels
       extends Physiolibrary.Icons.SystemicCirculation;
@@ -999,7 +935,8 @@ package MeursModel
         annotation (Placement(transformation(extent={{28,52},{48,72}}),
             iconTransformation(extent={{8,10},{28,30}})));
 
-      FlowPressureMeasurement flowPressureMeasurement
+      Cardiovascular.Hydraulic.Components.FlowPressureMeasurement
+        flowPressureMeasurement
         annotation (Placement(transformation(extent={{18,30},{38,50}})));
       Physiolibrary.Types.RealIO.PressureOutput pmean annotation (Placement(
             transformation(extent={{36,16},{56,36}}), iconTransformation(
@@ -1120,6 +1057,263 @@ package MeursModel
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-60,-60},
                 {40,80}}), graphics));
     end Heart_baro;
+
+    partial model SideOfHeart_testPhysiolibraryValve
+
+      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a inflow annotation(Placement(transformation(extent = {{-106, -10}, {-86, 10}}), iconTransformation(extent = {{-12, -4}, {8, 16}})));
+      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b outflow annotation(Placement(transformation(extent = {{84, -10}, {104, 10}}), iconTransformation(extent = {{-10, 60}, {10, 80}})));
+      Physiolibrary.Types.RealIO.PressureInput PTH "intrathoracic pressure" annotation(Placement(transformation(extent = {{-20, -20}, {20, 20}}, rotation = 270, origin = {-16, 6}), iconTransformation(extent = {{-20, -20}, {20, 20}}, rotation = 90, origin = {-6, -84})));
+      Physiolibrary.Types.RealIO.TimeInput Tas "duration of atrial systole" annotation(Placement(transformation(extent = {{-118, 36}, {-78, 76}}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 270, origin = {22, 106})));
+      Physiolibrary.Types.RealIO.TimeInput Tav "atrioventricular delay" annotation(Placement(transformation(extent = {{-6, 44}, {18, 68}}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 270, origin = {-6, 106})));
+      Physiolibrary.Types.RealIO.TimeInput T0 annotation(Placement(transformation(extent = {{-120, 10}, {-80, 50}}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 270, origin = {-62, 106})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel atrium(useV0Input = true, useComplianceInput = true, useExternalPressureInput = true, volume_start = 4e-005) annotation(Placement(transformation(extent = {{-50, -60}, {-18, -28}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel ventricle(useV0Input = true, useComplianceInput = true, useExternalPressureInput = true, volume_start = 0.00013) annotation(Placement(transformation(extent = {{28, -58}, {58, -28}})));
+      Physiolibrary.Hydraulic.Components.IdealValve ventricleArteryValve(
+          useLimitationInputs=true)                                      annotation(Placement(transformation(extent = {{64, -30}, {88, -54}})));
+      Parts.AtrialElastance atrialElastance(EMIN = 15998686.4898, EMAX = 37330268.4762) annotation(Placement(transformation(extent = {{-64, 46}, {-26, 78}})));
+      Parts.VentricularElastance ventricularElastance(EMIN = 11999014.86735, EMAX = 533289549.66) annotation(Placement(transformation(extent = {{34, 36}, {82, 70}})));
+      Physiolibrary.Types.Constants.VolumeConst VxAU(k = 3e-005) annotation(Placement(transformation(extent = {{-64, -18}, {-56, -10}})));
+      Physiolibrary.Types.Constants.VolumeConst VxVU(k = 6e-005) annotation(Placement(transformation(extent = {{16, -14}, {24, -6}})));
+      Physiolibrary.Types.Constants.HydraulicConductanceConst CxABackflow(k = 0)
+        "conductance of tricupsid valve backflow"                                                                          annotation(Placement(transformation(extent = {{-18, -84}, {-10, -76}})));
+      Physiolibrary.Types.Constants.HydraulicConductanceConst CxVBackflow(k = 0) annotation(Placement(transformation(extent = {{-4, -4}, {4, 4}}, rotation = 0, origin = {58, -78})));
+      Physiolibrary.Types.Constants.HydraulicResistanceConst RxAOutflow(k(
+            displayUnit="(mmHg.s)/ml") = 399967.162245)
+        "resistance of tricupsid valve"                                                                                                     annotation(Placement(transformation(extent = {{-4, -92}, {4, -84}})));
+      Physiolibrary.Types.Constants.HydraulicResistanceConst RxVOutflow(k(displayUnit = "(mmHg.s)/ml") = 1066579.09932)
+        "resistance of pulmonic valve"                                                                                                     annotation(Placement(transformation(extent = {{74, -86}, {82, -78}})));
+      Cardiovascular.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance1 annotation(Placement(transformation(extent = {{-10, 58}, {-2, 66}})));
+      Physiolibrary.Hydraulic.Components.IdealValve atrioVentricleValve(
+          useLimitationInputs=true)                                     annotation(Placement(visible = true, transformation(origin = {7, -42}, extent = {{-13, 12}, {13, -12}}, rotation = 0)));
+      Physiolibrary.Types.RealIO.TimeInput Tvs
+        "duration of ventricular systole"                                        annotation(Placement(visible = true, transformation(origin = {3, 39}, extent = {{-13, -13}, {13, 13}}, rotation = 0), iconTransformation(origin = {-34, 106}, extent = {{-14, -14}, {14, 14}}, rotation = 270)));
+      Cardiovascular.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance annotation(Placement(visible = true, transformation(origin = {100, 48}, extent = {{-4, -4}, {4, 4}}, rotation = -90)));
+      Cardiovascular.Types.RealIO.HydraulicResistanceToConductance
+        hydraulicresistancetoconductance
+        annotation (Placement(transformation(extent={{12,-92},{20,-84}})));
+      Cardiovascular.Types.RealIO.HydraulicResistanceToConductance
+        hydraulicresistancetoconductance1
+        annotation (Placement(transformation(extent={{90,-82},{98,-74}})));
+    equation
+      connect(hydrauliccompliance.y, ventricle.compliance) annotation(Line(points = {{100, 43}, {100, 18.5654}, {42.7567, 18.5654}, {42.7567, -31}, {43, -31}}, smooth = Smooth.Bezier));
+      connect(ventricularElastance.Et, hydrauliccompliance.hydraulicelastance) annotation(Line(points = {{86.56, 56.91}, {94, 56.91}, {99.90000000000001, 55.9}, {99.90000000000001, 52.1}}, color = {0, 0, 127}));
+      connect(Tvs, ventricularElastance.Tvs) annotation(Line(points = {{3, 39}, {16, 39}, {16, 48.58}, {29.68, 48.58}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(Tas, atrialElastance.Tas) annotation(Line(points = {{-98, 56}, {-74, 56}, {-74, 68.72}, {-67.8, 68.72}}, color = {0, 0, 127}, smooth = Smooth.None));
+      connect(VxAU.y, atrium.zeroPressureVolume) annotation(Line(points = {{-55, -14}, {-50, -14}, {-50, -31.2}, {-46.8, -31.2}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(VxVU.y, ventricle.zeroPressureVolume) annotation(Line(points = {{25, -10}, {30, -10}, {30, -31}, {31, -31}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(T0, atrialElastance.T0) annotation(Line(points = {{-100, 30}, {-74, 30}, {-74, 52.4}, {-67.8, 52.4}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(Tav, ventricularElastance.Tav) annotation(Line(points = {{6, 56}, {6, 56}, {6, 56.4}, {29.68, 56.4}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(PTH, atrium.externalPressure) annotation(Line(points = {{-16, 6}, {-18, 6}, {-18, -31.2}, {-21.2, -31.2}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(PTH, ventricle.externalPressure) annotation(Line(points = {{-16, 6}, {55, 6}, {55, -31}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(T0, ventricularElastance.T0) annotation(Line(points = {{-100, 30}, {-80, 30}, {-80, 8}, {-14, 8}, {-14, 24}, {29.68, 24}, {29.68, 39.4}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(atrialElastance.Et, hydrauliccompliance1.hydraulicelastance) annotation(Line(points = {{-22.39, 61.84}, {-16.195, 61.84}, {-16.195, 61.9}, {-10.1, 61.9}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(hydrauliccompliance1.y, atrium.compliance) annotation(Line(points = {{-1, 62}, {0, 62}, {0, 36}, {-34, 36}, {-34, -31.2}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(Tas, ventricularElastance.Tas) annotation(Line(points = {{-98, 56}, {-80, 56}, {-80, 88}, {12, 88}, {12, 65.58}, {29.68, 65.58}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(inflow, atrium.q_in) annotation(Line(points = {{-96, 0}, {-86, 0}, {-86, -48}, {-34, -48}, {-34, -44}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
+      connect(atrium.q_in, atrioVentricleValve.q_in) annotation (Line(
+          points={{-34,-44},{-22,-44},{-22,-42},{-6,-42}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.Bezier));
+      connect(atrioVentricleValve.q_out, ventricle.q_in) annotation (Line(
+          points={{20,-42},{32,-42},{32,-43},{43,-43}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.Bezier));
+      connect(ventricle.q_in, ventricleArteryValve.q_in) annotation (Line(
+          points={{43,-43},{53.5,-43},{53.5,-42},{64,-42}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.Bezier));
+      connect(ventricleArteryValve.q_out, outflow) annotation (Line(
+          points={{88,-42},{92,-42},{92,0},{94,0}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.Bezier));
+      connect(RxAOutflow.y, hydraulicresistancetoconductance.hydraulicresistance)
+        annotation (Line(
+          points={{5,-88},{11.2,-88},{11.2,-87.6}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(hydraulicresistancetoconductance.y, atrioVentricleValve.Gon)
+        annotation (Line(
+          points={{21,-88},{10,-88},{10,-54},{-0.8,-54}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(RxVOutflow.y, hydraulicresistancetoconductance1.hydraulicresistance)
+        annotation (Line(
+          points={{83,-82},{86,-82},{86,-77.6},{89.2,-77.6}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(hydraulicresistancetoconductance1.y, ventricleArteryValve.Gon)
+        annotation (Line(
+          points={{99,-78},{84,-78},{84,-54},{68.8,-54}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(CxABackflow.y, atrioVentricleValve.Goff) annotation (Line(
+          points={{-9,-80},{4,-80},{4,-54},{14.8,-54}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(CxVBackflow.y, ventricleArteryValve.Goff) annotation (Line(
+          points={{63,-78},{74,-78},{74,-54},{83.2,-54}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-70, 90}, {-56, 78}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "T0"), Text(extent = {{-42, 94}, {-26, 74}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tvs"), Text(extent = {{-14, 94}, {2, 74}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tav"), Text(extent = {{14, 92}, {34, 76}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tas"), Text(extent = {{12, -82}, {38, -104}}, lineColor = {0, 0, 255}, textString = "PTH")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+                -100},{100,100}}),                                                                                                    graphics));
+    end SideOfHeart_testPhysiolibraryValve;
+
+    model LeftHeart_testPhysiolibraryValve
+      extends Physiolibrary.Icons.LeftHeart;
+      extends SideOfHeart_testPhysiolibraryValve(VxAU(k=3e-05),    VxVU(k = 6e-005), RxAOutflow(k=
+              399967.162245),                                                                RxVOutflow(k=
+              1066579.09932),                                                                                               ventricularElastance(EMIN=
+              11999014.86735, EMAX=533289549.66),                                                                                                    atrialElastance(EMIN=
+              15998686.4898, EMAX=37330268.4762),                                                                                                    atrium(volume_start = 4e-005), ventricle(volume_start = 0.00013));
+      annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,-100},
+                {100,100}}),                                                                              graphics), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+    end LeftHeart_testPhysiolibraryValve;
+
+    model RightHeart_testPhysiolibraryValve
+      extends Physiolibrary.Icons.RightHeart;
+      extends SideOfHeart_testPhysiolibraryValve(atrialElastance(EMIN=6666119.37075, EMAX=
+              19998358.11225),                                                          ventricularElastance(EMIN=
+              7599376.082655, EMAX=65327969.83335),                                                                                                    VxAU(k = 3e-005), RxAOutflow(k = 399967.162245), VxVU(k = 4e-005), RxVOutflow(k=
+              399967.162245),                                                                                                    atrium(volume_start = 4e-005), ventricle(
+            volume_start=0.00013));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{32, 60}, {18, 64}, {6, 64}, {6, 76}, {18, 76}, {30, 72}, {44, 64}, {36, 58}, {32, 60}}, smooth = Smooth.None,
+                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {58, 117, 175}, pattern = LinePattern.None, lineColor = {0, 0, 0})}));
+    end RightHeart_testPhysiolibraryValve;
+
+    model Heart_testPhysiolibraryValve
+      "both sides of heart with heart interval control"
+
+      LeftHeart_testPhysiolibraryValve leftHeart annotation(Placement(transformation(extent={{-8,-14},
+                {28,22}})));
+      RightHeart_testPhysiolibraryValve       rightHeart annotation(Placement(transformation(extent={{-38,-14},
+                {0,24}})));
+      HeartIntervals       heartIntervals annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 270, origin={-24,52})));
+      Physiolibrary.Types.RealIO.PressureInput PTH annotation (Placement(
+            transformation(extent={{-64,-42},{-24,-2}}), iconTransformation(
+            extent={{-13,-13},{13,13}},
+            rotation=270,
+            origin={15,61})));
+      Physiolibrary.Types.RealIO.FrequencyInput heartRate annotation (Placement(
+            transformation(extent={{-78,48},{-38,88}}), iconTransformation(
+            extent={{-14,-14},{14,14}},
+            rotation=270,
+            origin={-26,60})));
+      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rightHeartInflow
+        annotation (Placement(transformation(extent={{-54,-2},{-34,18}}),
+            iconTransformation(extent={{-44,-20},{-24,0}})));
+      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b rightHeartOutflow
+        annotation (Placement(transformation(extent={{-54,12},{-34,32}}),
+            iconTransformation(extent={{-22,8},{-2,28}})));
+      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a leftHeartInflow
+        annotation (Placement(transformation(extent={{32,-2},{52,18}}),
+            iconTransformation(extent={{18,-12},{38,8}})));
+      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b leftHeartOutflow
+        annotation (Placement(transformation(extent={{28,52},{48,72}}),
+            iconTransformation(extent={{8,10},{28,30}})));
+
+    equation
+      connect(PTH, rightHeart.PTH) annotation (Line(
+          points={{-44,-22},{-20.14,-22},{-20.14,-10.96}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(PTH, leftHeart.PTH) annotation (Line(
+          points={{-44,-22},{8.92,-22},{8.92,-11.12}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(rightHeartInflow, rightHeart.inflow) annotation (Line(
+          points={{-44,8},{-30,8},{-30,6.14},{-19.38,6.14}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(rightHeartInflow, rightHeartInflow) annotation (Line(
+          points={{-44,8},{-44,8}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(rightHeart.outflow, rightHeartOutflow) annotation (Line(
+          points={{-19,18.3},{-42,18.3},{-42,22},{-44,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(leftHeart.inflow, leftHeartInflow) annotation (Line(
+          points={{9.64,5.08},{35.8,5.08},{35.8,8},{42,8}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(heartRate, heartIntervals.HR) annotation (Line(
+          points={{-58,68},{-36,68},{-36,62.8},{-24.2,62.8}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(heartIntervals.T0, rightHeart.T0) annotation (Line(
+          points={{-32.8,41},{-32.8,28},{-32,28},{-30.78,28},{-30.78,26},{
+              -30.78,25.14}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(heartIntervals.Tvs, rightHeart.Tvs) annotation (Line(
+          points={{-25.4,41.2},{-25.4,33.6},{-25.46,33.6},{-25.46,25.14}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(heartIntervals.Tav, rightHeart.Tav) annotation (Line(
+          points={{-21.4,41.4},{-21.4,28},{-20,28},{-20,26},{-20.14,26},{-20.14,
+              25.14}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(heartIntervals.Tas, rightHeart.Tas) annotation (Line(
+          points={{-15.2,41},{-15.2,28},{-14,28},{-14,26},{-14.82,26},{-14.82,
+              25.14}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(heartIntervals.Tas, leftHeart.Tas) annotation (Line(
+          points={{-15.2,41},{13.96,41},{13.96,23.08}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(heartIntervals.Tav, leftHeart.Tav) annotation (Line(
+          points={{-21.4,41.4},{-21.4,38},{8.92,38},{8.92,23.08}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(heartIntervals.Tvs, leftHeart.Tvs) annotation (Line(
+          points={{-25.4,41.2},{-25.4,34},{3.88,34},{3.88,23.08}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(heartIntervals.T0, leftHeart.T0) annotation (Line(
+          points={{-32.8,41},{-32.8,30},{-1.16,30},{-1.16,23.08}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
+      connect(leftHeartInflow, leftHeartInflow) annotation (Line(
+          points={{42,8},{36,8},{36,8},{42,8}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(leftHeartOutflow, leftHeart.outflow) annotation (Line(
+          points={{38,62},{30,62},{30,60},{20,60},{20,16.6},{10,16.6}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-60,-60},
+                {40,80}}),      graphics={
+            Text(
+              extent={{-14,50},{44,32}},
+              lineColor={0,0,255},
+              textString="PTH"),
+            Text(
+              extent={{-64,48},{4,32}},
+              lineColor={0,0,255},
+              textString="HeartRate"),
+            Bitmap(extent={{-6,22},{34,-48}}, fileName=
+                  "modelica://Physiolibrary/Resources/Icons/srdceLeva.png"),
+            Bitmap(extent={{-34,18},{6,-48}}, fileName=
+                  "modelica://Physiolibrary/Resources/Icons/srdceprava.png")}),
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-60,-60},
+                {40,80}}), graphics));
+    end Heart_testPhysiolibraryValve;
   end Parts;
 
   package Test
@@ -1551,24 +1745,24 @@ package MeursModel
       replaceable Parts.systemicCirculation systemicCirculation                            annotation (Placement(transformation(extent={{-2,6},{18,26}})));
     equation
       connect(systemicCirculation.inflow, heart.leftHeartOutflow) annotation (Line(
-          points={{17.6,16.2},{26,16.2},{26,48.5714},{12.48,48.5714}},
+          points={{17.4,16.2},{26,16.2},{26,45.02},{10.72,45.02}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
       connect(heart.leftHeartInflow, pulmonaryCirculation.outflow)
         annotation (Line(
-          points={{14.08,45.1143},{26,45.1143},{26,80},{18,80}},
+          points={{10.4,51.4},{26,51.4},{26,80},{18,80}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
       connect(systemicCirculation.outflow, heart.rightHeartInflow) annotation (Line(
-          points={{-1.2,16.2},{-10,16.2},{-10,43.8571},{4.16,43.8571}},
+          points={{-1.2,16},{-10,16},{-10,45.24},{4.16,45.24}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
       connect(heart.rightHeartOutflow, pulmonaryCirculation.inflow) annotation (
           Line(
-          points={{7.68,48.2571},{-8,48.2571},{-8,80},{-2,80}},
+          points={{4.8,51.62},{-8,51.62},{-8,79.8},{-1.8,79.8}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
@@ -1686,6 +1880,42 @@ package MeursModel
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -40,-20},{60,100}}), graphics));
     end Hemodynamics;
+
+    model Hemodynamics_testPhysiolibraryValve
+      extends Hemodynamics_pure(redeclare Parts.Heart_testPhysiolibraryValve
+          heart);
+        Physiolibrary.Types.Constants.PressureConst Pext(k=0)              annotation(Placement(transformation(extent = {{-4, -4}, {4, 4}}, rotation=0,     origin={-24,12})));
+      Physiolibrary.Types.Constants.PressureConst Pth(k=-533.28954966)   annotation(Placement(transformation(extent = {{-4, -4}, {4, 4}}, rotation=180,   origin={38,68})));
+      Physiolibrary.Types.Constants.FrequencyConst HeartRate(k(displayUnit="1/min")=
+             1.2)                                                               annotation(Placement(transformation(extent={{-4,-4},
+                {4,4}},
+            rotation=0,
+            origin={-26,66})));
+
+    equation
+      connect(Pext.y, systemicCirculation.Pext) annotation (Line(
+          points={{-19,12},{-8,12},{-8,13},{3,13}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(HeartRate.y, heart.heartRate) annotation (Line(
+          points={{-21,66},{5.44,66},{5.44,54.8571}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(Pth.y, pulmonaryCirculation.PTH) annotation (Line(
+          points={{33,68},{32,68},{32,88},{8.1,88},{8.1,86.1}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(Pth.y, heart.PTH) annotation (Line(
+          points={{33,68},{32,68},{32,56},{12,56},{12,55.0143}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(Pth.y, systemicCirculation.PTH) annotation (Line(
+          points={{33,68},{32,68},{32,24},{8.2,24}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -40,-20},{60,100}}), graphics));
+    end Hemodynamics_testPhysiolibraryValve;
   end Models;
 
   package Experiment
@@ -1922,66 +2152,7 @@ systemic.volume")}), Icon(coordinateSystem(preserveAspectRatio=false, extent={{
               fillPattern=FillPattern.Solid)}));
     end VolumeControl;
 
-    model Hemodynamics_with_volume_control
-      extends Hemodynamics_with_catheter;
-      BloodTransfusionHemorrhage bloodTransfusionHemorrhage
-        annotation (Placement(transformation(extent={{-40,6},{-20,26}})));
-      VolumeControl volumeControl
-        annotation (Placement(transformation(extent={{-46,20},{-26,40}})));
-      Physiolibrary.Types.Constants.VolumeConst desiredVolume(k=0.00515)
-        annotation (Placement(transformation(extent={{-56,42},{-48,50}})));
-    equation
-      connect(bloodTransfusionHemorrhage.port_b, heart.rightHeartInflow)
-        annotation (Line(
-          points={{-23.4,7},{-16,7},{-16,43.8571},{4.16,43.8571}},
-          color={190,0,0},
-          thickness=1,
-          smooth=Smooth.Bezier));
-      connect(volumeControl.volume, volume) annotation (Line(
-          points={{-34.6,37.2},{-34.6,49},{-27,49}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(desiredVolume.y, volumeControl.desiredVolume) annotation (Line(
-          points={{-47,46},{-42.8,46},{-42.8,37.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(volumeControl.volumeflowrate, bloodTransfusionHemorrhage.volumeflowrate)
-        annotation (Line(
-          points={{-26.1,32.5},{-22,32.5},{-22,28},{-42,28},{-42,23.6},{-37,
-              23.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -60,-20},{40,100}}), graphics));
-    end Hemodynamics_with_volume_control;
 
-    model Hemodynamics_volume_up
-      extends Hemodynamics_with_catheter;
-      BloodTransfusionHemorrhage bloodTransfusionHemorrhage
-        annotation (Placement(transformation(extent={{-40,6},{-20,26}})));
-      VolumeControl volumeControl
-        annotation (Placement(transformation(extent={{-46,20},{-26,40}})));
-
-    equation
-      connect(bloodTransfusionHemorrhage.port_b, heart.rightHeartInflow)
-        annotation (Line(
-          points={{-23.4,7},{-16,7},{-16,43.8571},{4.16,43.8571}},
-          color={190,0,0},
-          thickness=1,
-          smooth=Smooth.Bezier));
-      connect(volumeControl.volume, volume) annotation (Line(
-          points={{-34.6,37.2},{-34.6,49},{-27,49}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(volumeControl.volumeflowrate, bloodTransfusionHemorrhage.volumeflowrate)
-        annotation (Line(
-          points={{-26.1,32.5},{-22,32.5},{-22,28},{-42,28},{-42,23.6},{-37,23.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-60,-20},
-                {40,100}}), graphics));
-    end Hemodynamics_volume_up;
 
     model Hemodynamics_volume_control
 
@@ -1996,13 +2167,13 @@ systemic.volume")}), Icon(coordinateSystem(preserveAspectRatio=false, extent={{
     equation
       connect(bloodTransfusionHemorrhage.port_b, hemodynamics_with_catheter.catheter)
         annotation (Line(
-          points={{-3.4,-19},{7.3,-19},{7.3,-1.4},{22.125,-1.4}},
+          points={{-3.4,-19},{7.3,-19},{7.3,-2.6},{23.375,-2.6}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
       connect(hemodynamics_with_catheter.volume, volumeControl.volume) annotation (
           Line(
-          points={{26.5,10},{-34.6,10},{-34.6,3.2}},
+          points={{25.25,11.2},{-34.6,11.2},{-34.6,3.2}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(volumeControl.volumeflowrate, bloodTransfusionHemorrhage.volumeflowrate)

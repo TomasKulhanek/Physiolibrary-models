@@ -905,7 +905,8 @@ package BurkhoffModel
         annotation (Placement(transformation(extent={{6,-4},{-6,4}},
             rotation=90,
             origin={20,54})));
-      MeursModel.Parts.FlowPressureMeasurement flowPressureMeasurement
+      Cardiovascular.Hydraulic.Components.FlowPressureMeasurement
+        flowPressureMeasurement
         annotation (Placement(transformation(extent={{18,8},{38,28}})));
       Physiolibrary.Types.RealIO.PressureOutput pressure annotation (Placement(
             transformation(extent={{38,-4},{58,16}}), iconTransformation(extent={{44,2},{
