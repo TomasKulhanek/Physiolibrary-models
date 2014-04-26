@@ -100,8 +100,8 @@ package control "modelo y control a corto plazo"
       annotation (Placement(transformation(extent={{-78,-112},{8,-46}},
             rotation=0)));
     modulocontrol modulocontrol1(Step1(height=0))
-                                 annotation (Placement(transformation(extent={{
-              18,-102},{84,0}}, rotation=0)));
+                                 annotation (Placement(transformation(extent={{16,-102},
+              {82,0}},          rotation=0)));
     arteriaaorta arteriaaorta1 annotation (Placement(transformation(extent={{
               -52,-68},{34,6}}, rotation=0)));
     sistemapulmonarterial sistemapulmonarterial1
@@ -112,7 +112,7 @@ package control "modelo y control a corto plazo"
              0)));
     venacava venacava1 annotation (Placement(transformation(extent={{-114,-70},
               {-18,12}}, rotation=0)));
-    Modelica.Blocks.Sources.Clock Clock1
+    Modelica.Blocks.Sources.Clock Clock1(startTime=10)
       annotation (Placement(transformation(extent={{-22,-82},{-12,-72}},
             rotation=0)));
     Modelica.Blocks.Logical.LogicalSwitch          LogicalSwitch1
@@ -174,7 +174,7 @@ package control "modelo y control a corto plazo"
             rotation=0)));
   equation
     connect(LogicalSwitch1.y,       modulocontrol1.activado) annotation (Line(
-          points={{22.4,-80},{38,-80},{38,-77.01},{31.2,-77.01}}, color={255,0,
+          points={{22.4,-80},{38,-80},{38,-77.01},{29.2,-77.01}}, color={255,0,
             255}));
     connect(Clock1.y,GreaterEqual1.u)             annotation (Line(points={{
             -11.5,-77},{-9.6,-77}}, color={0,0,255}));
@@ -186,8 +186,8 @@ package control "modelo y control a corto plazo"
     connect(BooleanConstant1.y,LogicalSwitch1.u1)             annotation (Line(
           points={{10.6,-59},{10.6,-62.5},{13.2,-62.5},{13.2,-70.4}}, color={
             255,0,255}));
-    connect(modulocontrol1.HR,Division3.u2)       annotation (Line(points={{
-            72.78,-11.22},{74.39,-11.22},{74.39,-9.6},{82.8,-9.6}}, color={0,0,
+    connect(modulocontrol1.HR,Division3.u2)       annotation (Line(points={{70.78,
+            -11.22},{74.39,-11.22},{74.39,-9.6},{82.8,-9.6}},       color={0,0,
             255}));
     connect(Constant3.y,Division3.u1)             annotation (Line(points={{
             64.6,7},{72.3,7},{72.3,-2.4},{82.8,-2.4}}, color={0,0,255}));
@@ -195,11 +195,11 @@ package control "modelo y control a corto plazo"
             82.5,-25},{82.5,-62.4},{86.8,-62.4}}, color={0,0,255}));
     connect(Constant2.y,Division1.u1)             annotation (Line(points={{
             82.5,-25},{84,-78},{86.8,-78.4}}, color={0,0,255}));
-    connect(modulocontrol1.CV,Division2.u2)       annotation (Line(points={{
-            72.78,-64.77},{79.39,-64.77},{79.39,-69.6},{86.8,-69.6}}, color={0,
+    connect(modulocontrol1.CV,Division2.u2)       annotation (Line(points={{70.78,
+            -64.77},{79.39,-64.77},{79.39,-69.6},{86.8,-69.6}},       color={0,
             0,255}));
-    connect(modulocontrol1.RS,Division1.u2)       annotation (Line(points={{
-            73.11,-83.64},{80.555,-83.64},{80.555,-85.6},{86.8,-85.6}}, color={
+    connect(modulocontrol1.RS,Division1.u2)       annotation (Line(points={{71.11,
+            -83.64},{80.555,-83.64},{80.555,-85.6},{86.8,-85.6}},       color={
             0,0,255}));
     connect(sistemapulmonarvenoso1.FSP, sistemapulmonarterial1.FSP) annotation (Line(
           points={{2.88,69.68},{18,69.68},{18,102},{-104,102},{-104,90.28},{
@@ -220,7 +220,7 @@ package control "modelo y control a corto plazo"
             {94,-6},{94,16},{34,16},{34,0},{-106,0},{-106,30},{-105.59,30},{
             -105.59,30.02}},color={0,0,255}));
     connect(modulocontrol1.EVderecho, venderecho1.EVderecho) annotation (Line(
-          points={{72.78,-35.7},{100,-35.7},{100,24},{30,24},{30,-2},{-104,-2},
+          points={{70.78,-35.7},{100,-35.7},{100,24},{30,24},{30,-2},{-104,-2},
             {-104,21.82},{-93.34,21.82}}, color={0,0,255}));
     connect(venacava1.PVC, venderecho1.PVC) annotation (Line(points={{-56.88,
             -24.08},{-44,-24.08},{-44,-4},{-100,-4},{-100,12.8},{-93.34,12.8}},
@@ -232,7 +232,7 @@ package control "modelo y control a corto plazo"
             96.6,-6},{94,-6},{94,16},{34,16},{34,0},{-40,0},{-40,28.61},{-28.36,
             28.61}}, color={0,0,255}));
     connect(modulocontrol1.EVizquierda, venizquierdo1.EVizquierdo) annotation (Line(
-          points={{72.45,-49.98},{106,-49.98},{106,34},{28,34},{28,2},{-34,2},{
+          points={{70.45,-49.98},{106,-49.98},{106,34},{28,34},{28,2},{-34,2},{
             -34,20.44},{-27.92,20.44}}, color={0,0,255}));
     connect(sistemapulmonarvenoso1.PPV, venizquierdo1.PPV) annotation (Line(
           points={{4.32,78.42},{4.32,48},{-42,48},{-42,10.55},{-27.48,10.55}},
@@ -266,8 +266,8 @@ package control "modelo y control a corto plazo"
     connect(Division1.y,       circulacionsistemica1.admitancia) annotation (Line(
           points={{100.6,-82},{104,-82},{104,-102},{-74,-102},{-74,-89.56},{
             -65.53,-89.56}}, color={0,0,255}));
-    connect(arteriaaorta1.PAO, modulocontrol1.PAO) annotation (Line(points={{
-            4.76,-28.41},{24,-28.41},{24,-32.64},{31.86,-32.64}}, color={0,0,
+    connect(arteriaaorta1.PAO, modulocontrol1.PAO) annotation (Line(points={{4.76,
+            -28.41},{24,-28.41},{24,-32.64},{29.86,-32.64}},      color={0,0,
             255}));
     connect(sistemapulmonarterial1.VPA, VPA) annotation (Line(points={{-55.44,
             90.28},{-46.72,90.28},{-46.72,94},{-37,94}}, color={0,0,255}));
@@ -283,8 +283,8 @@ package control "modelo y control a corto plazo"
             13.38,-19.16},{13.38,-16},{21,-16}}, color={0,0,255}));
     connect(circulacionsistemica1.VCS, VCS) annotation (Line(points={{-30.7,
             -64.15},{-22.35,-64.15},{-22.35,-60},{-17,-60}}, color={0,0,255}));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-              -100,-100},{100,100}}),
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}),
                         graphics));
   end circulacion;
 
@@ -897,9 +897,9 @@ package control "modelo y control a corto plazo"
       "Elastancia ventricular derecha maxima"
       annotation (Placement(transformation(extent={{58,22},{74,38}}, rotation=0)));
     Modelica.Blocks.Sources.Step Step1(
-      height=200,
       offset=250,
-      startTime=20) annotation (Placement(transformation(extent={{-42,-56},{-22,
+      startTime=20,
+      height=0)     annotation (Placement(transformation(extent={{-42,-56},{-22,
               -36}}, rotation=0)));
   equation
     connect(PAO, media1.PAO) annotation (Line(points={{-58,36},{-77.46,36},{

@@ -2,8 +2,6 @@ within ;
 package FernandezModel
   package Parts
 
-
-
     model pulsos "generates relative position in heart period from 0 to 1"
       discrete Physiolibrary.Types.Time HP(start = 0)
         "heart period - duration of cardiac cycle";
@@ -92,7 +90,7 @@ package FernandezModel
     EV0left=103991462.1837,
     EV0venacava=1.8751539396141e-06,
     RS0(displayUnit="ml/(mmHg.s)") = 4.6016277678131e-09)*/
-      parameter Physiolibrary.Types.HydraulicCompliance EV0venacava=1/533289.54966;
+      parameter Physiolibrary.Types.HydraulicCompliance EV0venacava=3.0002463033826e-11;
       parameter Physiolibrary.Types.HydraulicResistance RS0(displayUnit="(mmHg.s)/ml") = 106657909.932;
 
     //  parameter Physiolibrary.Types.HydraulicConductance Conductance=0
@@ -106,16 +104,12 @@ package FernandezModel
       H1.u =deadZone.y;
       HR = (HR0*60+H1.y)/60; //recount to SI Hz
       H2.u = deadZone.y;
-      evright = 1/(EV0right + H2.y*(1e+6)*(133.322387415)); //recount to SI
-      evleft = 1/(EV0left + H2.y*(1e+6)*(133.322387415)); //recount to SI
+      evright = 1/(EV0right+ H2.y*(1e+6)*(133.322387415)); //recount to SI
+      evleft = 1/(EV0left+ H2.y*(1e+6)*(133.322387415)); //recount to SI
       H3.u = deadZone.y;
-      evenacava = 1/(1/EV0venacava + H3.y*(1e+6)*(133.322387415));
+      evenacava = (EV0venacava+ H3.y*(1e-6)/(133.322387415));
       H4.u = deadZone.y;
       RS = 1/(RS0+ H4.y*(1e+6)*(133.322387415)); //recount to conductance
-      connect(evenacava, evenacava) annotation (Line(
-          points={{88,-44},{90,-44},{90,-44},{88,-44}},
-          color={0,0,127},
-          smooth=Smooth.None));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics={
             Ellipse(
@@ -1079,8 +1073,8 @@ package FernandezModel
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b outflow annotation (
           Placement(transformation(extent={{-92,-10},{-72,10}}), iconTransformation(
               extent={{-102,-10},{-82,10}})));
-      venacava_controllable venacava_controllable1
-        annotation (Placement(transformation(extent={{-22,-14},{-40,6}})));
+      venacava_controllable venacava1
+        annotation (Placement(transformation(extent={{-20,-14},{-38,6}})));
       circulatorosystemica_controllable circulatorosystemica_controllable1
         annotation (Placement(transformation(extent={{24,-14},{4,6}})));
       Physiolibrary.Types.RealIO.HydraulicConductanceInput RSO annotation (
@@ -1089,8 +1083,8 @@ package FernandezModel
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={72,60})));
-      Physiolibrary.Types.RealIO.HydraulicComplianceInput EVenaCava annotation
-        (Placement(transformation(extent={{-92,16},{-52,56}}),
+      Physiolibrary.Types.RealIO.HydraulicComplianceInput EVenaCava annotation (
+         Placement(transformation(extent={{-92,16},{-52,56}}),
             iconTransformation(
             extent={{-20,-20},{20,20}},
             rotation=270,
@@ -1108,14 +1102,14 @@ package FernandezModel
             rotation=90,
             origin={40,60})));
     equation
-      connect(venacava_controllable1.outflow, outflow) annotation (Line(
-          points={{-39.46,-4.4},{-59.73,-4.4},{-59.73,0},{-82,0}},
+      connect(venacava1.outflow, outflow) annotation (Line(
+          points={{-37.46,-4.4},{-59.73,-4.4},{-59.73,0},{-82,0}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(venacava_controllable1.inflow, circulatorosystemica_controllable1.outflow)
+      connect(venacava1.inflow, circulatorosystemica_controllable1.outflow)
         annotation (Line(
-          points={{-22.36,-4},{-8,-4},{-8,-4.4},{4.6,-4.4}},
+          points={{-20.36,-4},{-8,-4},{-8,-4.4},{4.6,-4.4}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
@@ -1123,9 +1117,8 @@ package FernandezModel
           points={{-2,32},{24,32},{24,0.8},{14.6,0.8}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(EVenaCava, venacava_controllable1.hydrauliccompliance)
-        annotation (Line(
-          points={{-72,36},{-52,36},{-52,34},{-31,34},{-31,1}},
+      connect(EVenaCava, venacava1.hydrauliccompliance) annotation (Line(
+          points={{-72,36},{-52,36},{-52,34},{-29,34},{-29,1}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(circulatorosystemica_controllable1.inflow,
@@ -1408,11 +1401,13 @@ package FernandezModel
     end Hemodynamics;
 
     model Hemodynamics_pure
+
       replaceable Parts.Heart
                   heart
         annotation (Placement(transformation(extent={{-24,-22},{18,14}})));
       replaceable Parts.SystemicCirculation
-                                systemicCirculation
+                                systemicCirculation(venacava1(venacava(volume_start=
+               0.001)))
         annotation (Placement(transformation(extent={{-20,-66},{12,-34}})));
       Parts.PulmonaryCirculation pulmonaryCirculation
         annotation (Placement(transformation(extent={{-20,48},{14,80}})));
@@ -1447,8 +1442,13 @@ package FernandezModel
 
     model Hemodynamics_with_baro
       extends Hemodynamics_pure(redeclare Parts.Heart_controllable2 heart,redeclare
-          Parts.SystemicCirculation_controllable                                                                           systemicCirculation);
-      Parts.Baroreceptor baroreceptor(EV0venacava=533289.54966)
+          Parts.SystemicCirculation_controllable systemicCirculation);
+
+      Parts.Baroreceptor baroreceptor(
+        EV0right=115990477.05105,
+        EV0left=106657909.932,
+        EV0venacava=1.8751539396141e-06,
+        RS0=81793284.679103)
         annotation (Placement(transformation(extent={{-20,22},{20,54}})));
     equation
       connect(baroreceptor.evleft, heart.ELMax) annotation (Line(
