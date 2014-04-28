@@ -57,14 +57,14 @@ package MeursModel
           smooth=Smooth.None));
       annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                           graphics), Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-                -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent = {{-98, 38}, {94, -42}}, lineColor = {255, 229, 185}, fillColor = {255, 85, 85},
-                fillPattern =                                                                                                    FillPattern.HorizontalCylinder), Text(extent={{
+                -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent=  {{-98, 38}, {94, -42}}, lineColor=  {255, 229, 185}, fillColor=  {255, 85, 85},
+                fillPattern=                                                                                                    FillPattern.HorizontalCylinder), Text(extent={{
                   -60,36},{160,24}},                                                                                                    lineColor=
                   {0,0,255},                                                                                                    fillColor=
                   {255,235,161},
                 fillPattern=FillPattern.Solid,
-              textString="intraThoracicPressure"),                                                                                                    Text(extent = {{-98, -64}, {94, -48}}, lineColor = {0, 0, 255}, fillColor = {255, 235, 161},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"),
+              textString="intraThoracicPressure"),                                                                                                    Text(extent=  {{-98, -64}, {94, -48}}, lineColor=  {0, 0, 255}, fillColor=  {255, 235, 161},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"),
             Text(
               extent={{-142,36},{-8,24}},
               lineColor={0,0,255},
@@ -125,12 +125,12 @@ package MeursModel
           smooth=Smooth.None));
       annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                           graphics), Icon(coordinateSystem(extent={{-100,
-                -100},{100,100}},                                                                                                    preserveAspectRatio=false,   initialScale = 0.1, grid = {2, 2}), graphics={  Rectangle(lineColor = {0, 0, 127}, fillColor = {255, 170, 213},
-                fillPattern =                                                                                                    FillPattern.HorizontalCylinder, extent = {{-100, 22}, {100, -28}}), Text(fillColor = {255, 170, 213},
-                fillPattern =                                                                                                    FillPattern.HorizontalCylinder, extent={{
-                  -134,20},{60,6}},                                                                                                    textString = "IntraThoracic pressure"), Text(lineColor = {0, 0, 255}, fillColor = {255, 170, 213},
-                fillPattern =                                                                                                    FillPattern.HorizontalCylinder, extent = {{-163.443, -33.4448}, {170.927, -54.6458}}, textString = "%name"), Text(lineColor = {0, 0, 255}, fillColor = {255, 85, 85},
-                fillPattern =                                                                                                    FillPattern.Solid, extent = {{-154, -14}, {-39.5145, -24.748}}, textString = "bloodflow outflow
+                -100},{100,100}},                                                                                                    preserveAspectRatio=false,   initialScale = 0.1, grid = {2, 2}), graphics={  Rectangle(lineColor=  {0, 0, 127}, fillColor=  {255, 170, 213},
+                fillPattern=                                                                                                    FillPattern.HorizontalCylinder, extent=  {{-100, 22}, {100, -28}}), Text(fillColor=  {255, 170, 213},
+                fillPattern=                                                                                                    FillPattern.HorizontalCylinder, extent={{
+                  -134,20},{60,6}},                                                                                                    textString=  "IntraThoracic pressure"), Text(lineColor=  {0, 0, 255}, fillColor=  {255, 170, 213},
+                fillPattern=                                                                                                    FillPattern.HorizontalCylinder, extent=  {{-163.443, -33.4448}, {170.927, -54.6458}}, textString=  "%name"), Text(lineColor=  {0, 0, 255}, fillColor=  {255, 85, 85},
+                fillPattern=                                                                                                    FillPattern.Solid, extent=  {{-154, -14}, {-39.5145, -24.748}}, textString=  "bloodflow outflow
        ")}));
     end SystemicVeins;
 
@@ -219,20 +219,20 @@ package MeursModel
         Tvs = 0.16 + 0.2 * HP;
         //duration of ventricular systole
       end when;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-96, 94}, {98, -94}}, lineColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {255, 255, 170}), Rectangle(extent = {{-78, 32}, {-70, -80}}, lineColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 85, 85}), Rectangle(extent = {{-60, 32}, {-52, -80}}, lineColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 85, 85}), Rectangle(extent = {{0, 32}, {8, -80}}, lineColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 85, 85}), Rectangle(extent = {{44, 32}, {52, -80}}, lineColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 85, 85}), Rectangle(extent = {{-88, 32}, {-80, -80}}, lineColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 85, 85}), Rectangle(extent = {{-40, 32}, {-32, -80}}, lineColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 85, 85}), Text(extent = {{52, 70}, {-94, 94}}, lineColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 85, 85}, textString = "Heart Intervals"), Text(extent = {{58, 106}, {98, 68}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tas"), Text(extent = {{54, 46}, {94, 8}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tav"), Text(extent = {{54, 2}, {94, -36}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tvs"), Text(extent = {{56, -64}, {96, -102}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "T0"), Text(extent = {{-130, 46}, {-100, 12}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "HR")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-96, 94}, {98, -94}}, lineColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {255, 255, 170}), Rectangle(extent=  {{-78, 32}, {-70, -80}}, lineColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 85, 85}), Rectangle(extent=  {{-60, 32}, {-52, -80}}, lineColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 85, 85}), Rectangle(extent=  {{0, 32}, {8, -80}}, lineColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 85, 85}), Rectangle(extent=  {{44, 32}, {52, -80}}, lineColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 85, 85}), Rectangle(extent=  {{-88, 32}, {-80, -80}}, lineColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 85, 85}), Rectangle(extent=  {{-40, 32}, {-32, -80}}, lineColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 85, 85}), Text(extent=  {{52, 70}, {-94, 94}}, lineColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 85, 85}, textString=  "Heart Intervals"), Text(extent=  {{58, 106}, {98, 68}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tas"), Text(extent=  {{54, 46}, {94, 8}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tav"), Text(extent=  {{54, 2}, {94, -36}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tvs"), Text(extent=  {{56, -64}, {96, -102}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "T0"), Text(extent=  {{-130, 46}, {-100, 12}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "HR")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end HeartIntervals;
 
     model AtrialElastance
@@ -251,16 +251,16 @@ package MeursModel
       else
         Et = EMIN;
       end if;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-100, 100}, {100, -100}}, pattern = LinePattern.None,
-                lineThickness =                                                                                                    1, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, lineColor = {0, 0, 255}), Text(extent = {{-98, 98}, {98, 40}}, lineColor = {0, 0, 255},
-                lineThickness =                                                                                                    1, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Atrial elastance"), Line(points = {{-78, -34}, {-76, -26}, {-70, -14}, {-58, 6}, {-36, 36}, {-14, 14}, {-6, -10}, {0, -32}, {6, -34}, {88, -34}, {94, -34}}, color = {0, 0, 255}, smooth = Smooth.Bezier), Text(extent = {{-220, -102}, {200, -120}}, lineColor = {0, 0, 255},
-                lineThickness =                                                                                                    1, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"), Text(extent = {{-104, 46}, {-64, 38}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tas"), Text(extent = {{-110, -56}, {-58, -64}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "T0"), Text(extent = {{72, 4}, {102, -8}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Et")}));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-100, 100}, {100, -100}}, pattern=  LinePattern.None,
+                lineThickness=                                                                                                    1, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {0, 0, 255}), Text(extent=  {{-98, 98}, {98, 40}}, lineColor=  {0, 0, 255},
+                lineThickness=                                                                                                    1, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Atrial elastance"), Line(points=  {{-78, -34}, {-76, -26}, {-70, -14}, {-58, 6}, {-36, 36}, {-14, 14}, {-6, -10}, {0, -32}, {6, -34}, {88, -34}, {94, -34}}, color=  {0, 0, 255}, smooth=  Smooth.Bezier), Text(extent=  {{-220, -102}, {200, -120}}, lineColor=  {0, 0, 255},
+                lineThickness=                                                                                                    1, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"), Text(extent=  {{-104, 46}, {-64, 38}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tas"), Text(extent=  {{-110, -56}, {-58, -64}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "T0"), Text(extent=  {{72, 4}, {102, -8}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Et")}));
     end AtrialElastance;
 
     model VentricularElastance
@@ -292,20 +292,20 @@ package MeursModel
       else
         Et0 = 0;
       end if;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-100, 100}, {100, -100}}, pattern = LinePattern.None,
-                lineThickness =                                                                                                    1, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, lineColor = {0, 0, 255}), Text(extent = {{-82, 82}, {80, 24}}, lineColor = {0, 0, 255},
-                lineThickness =                                                                                                    1, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Ventricular elastance"), Line(points = {{-72, -34}, {-68, -26}, {-62, -14}, {-52, 4}, {-18, 38}, {-12, 14}, {-6, -10}, {0, -32}, {6, -34}, {88, -34}, {94, -34}}, color = {0, 0, 255}, smooth = Smooth.Bezier), Text(extent = {{-220, -102}, {200, -120}}, lineColor = {0, 0, 255},
-                lineThickness =                                                                                                    1, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"), Text(extent = {{-96, 82}, {-76, 66}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tas"), Text(extent = {{-92, 26}, {-76, 6}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tav"), Text(extent = {{-94, -18}, {-78, -38}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tvs"), Text(extent = {{-96, -74}, {-82, -86}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "T0"), Text(extent = {{72, 36}, {88, 14}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Et"), Text(extent = {{96, -32}, {68, -8}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Et0"), Text(extent = {{42, -72}, {88, -84}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Heart interval")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-100, 100}, {100, -100}}, pattern=  LinePattern.None,
+                lineThickness=                                                                                                    1, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {0, 0, 255}), Text(extent=  {{-82, 82}, {80, 24}}, lineColor=  {0, 0, 255},
+                lineThickness=                                                                                                    1, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Ventricular elastance"), Line(points=  {{-72, -34}, {-68, -26}, {-62, -14}, {-52, 4}, {-18, 38}, {-12, 14}, {-6, -10}, {0, -32}, {6, -34}, {88, -34}, {94, -34}}, color=  {0, 0, 255}, smooth=  Smooth.Bezier), Text(extent=  {{-220, -102}, {200, -120}}, lineColor=  {0, 0, 255},
+                lineThickness=                                                                                                    1, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"), Text(extent=  {{-96, 82}, {-76, 66}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tas"), Text(extent=  {{-92, 26}, {-76, 6}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tav"), Text(extent=  {{-94, -18}, {-78, -38}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tvs"), Text(extent=  {{-96, -74}, {-82, -86}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "T0"), Text(extent=  {{72, 36}, {88, 14}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Et"), Text(extent=  {{96, -32}, {68, -8}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Et0"), Text(extent=  {{42, -72}, {88, -84}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Heart interval")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end VentricularElastance;
 
     partial model SideOfHeart
@@ -383,11 +383,11 @@ package MeursModel
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-70, 90}, {-56, 78}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "T0"), Text(extent = {{-42, 94}, {-26, 74}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tvs"), Text(extent = {{-14, 94}, {2, 74}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tav"), Text(extent = {{14, 92}, {34, 76}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tas"), Text(extent = {{12, -82}, {38, -104}}, lineColor = {0, 0, 255}, textString = "PTH")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-70, 90}, {-56, 78}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "T0"), Text(extent=  {{-42, 94}, {-26, 74}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tvs"), Text(extent=  {{-14, 94}, {2, 74}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tav"), Text(extent=  {{14, 92}, {34, 76}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tas"), Text(extent=  {{12, -82}, {38, -104}}, lineColor=  {0, 0, 255}, textString=  "PTH")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                                                    graphics));
     end SideOfHeart;
 
@@ -409,8 +409,8 @@ package MeursModel
               7599376.082655, EMAX=65327969.83335),                                                                                                    VxAU(k = 3e-005), RxAOutflow(k = 399967.162245), VxVU(k = 4e-005), RxVOutflow(k=
               399967.162245),                                                                                                    atrium(volume_start = 4e-005), ventricle(
             volume_start=0.00013));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{32, 60}, {18, 64}, {6, 64}, {6, 76}, {18, 76}, {30, 72}, {44, 64}, {36, 58}, {32, 60}}, smooth = Smooth.None,
-                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {58, 117, 175}, pattern = LinePattern.None, lineColor = {0, 0, 0})}));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{32, 60}, {18, 64}, {6, 64}, {6, 76}, {18, 76}, {30, 72}, {44, 64}, {36, 58}, {32, 60}}, smooth=  Smooth.None,
+                fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {58, 117, 175}, pattern=  LinePattern.None, lineColor=  {0, 0, 0})}));
     end RightHeart;
 
     model Heart "both sides of heart with heart interval control"
@@ -637,7 +637,6 @@ package MeursModel
               textString="Pext")}));
     end systemicCirculation;
 
-
     model SystemicPeripheralVessels
       extends Physiolibrary.Icons.SystemicCirculation;
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a bloodFlowInflow annotation(Placement(transformation(extent = {{90, -12}, {110, 8}}), iconTransformation(extent = {{90, -12}, {110, 8}})));
@@ -703,9 +702,9 @@ package MeursModel
       annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                           graphics), Icon(coordinateSystem(extent={{-100,
                 -100},{100,100}},                                                                                                    preserveAspectRatio=false,   initialScale = 0.1, grid = {2, 2}), graphics={
-                                                                                                    Text(lineColor = {0, 0, 255}, fillColor = {255, 85, 85},
-                fillPattern =                                                                                                    FillPattern.Solid, extent={{
-                  -134,-50},{138,-70}},                                                                                                    textString = "%name")}));
+                                                                                                    Text(lineColor=  {0, 0, 255}, fillColor=  {255, 85, 85},
+                fillPattern=                                                                                                    FillPattern.Solid, extent={{
+                  -134,-50},{138,-70}},                                                                                                    textString=  "%name")}));
     end SystemicPeripheralVessels;
 
     model SystemicPeripheralVessels_baro2
@@ -776,9 +775,9 @@ package MeursModel
       annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                           graphics), Icon(coordinateSystem(extent={{-100,
                 -100},{100,100}},                                                                                                    preserveAspectRatio=false,   initialScale = 0.1, grid = {2, 2}), graphics={
-                                                                                                    Text(lineColor = {0, 0, 255}, fillColor = {255, 85, 85},
-                fillPattern =                                                                                                    FillPattern.Solid, extent={{
-                  -134,-50},{138,-70}},                                                                                                    textString = "%name"), Text(
+                                                                                                    Text(lineColor=  {0, 0, 255}, fillColor=  {255, 85, 85},
+                fillPattern=                                                                                                    FillPattern.Solid, extent={{
+                  -134,-50},{138,-70}},                                                                                                    textString=  "%name"), Text(
               extent={{52,62},{138,42}},
               lineColor={0,0,127},
               pattern=LinePattern.Dot,
@@ -1158,11 +1157,11 @@ package MeursModel
           points={{63,-78},{74,-78},{74,-54},{83.2,-54}},
           color={0,0,127},
           smooth=Smooth.Bezier));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-70, 90}, {-56, 78}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "T0"), Text(extent = {{-42, 94}, {-26, 74}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tvs"), Text(extent = {{-14, 94}, {2, 74}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tav"), Text(extent = {{14, 92}, {34, 76}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tas"), Text(extent = {{12, -82}, {38, -104}}, lineColor = {0, 0, 255}, textString = "PTH")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-70, 90}, {-56, 78}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "T0"), Text(extent=  {{-42, 94}, {-26, 74}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tvs"), Text(extent=  {{-14, 94}, {2, 74}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tav"), Text(extent=  {{14, 92}, {34, 76}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tas"), Text(extent=  {{12, -82}, {38, -104}}, lineColor=  {0, 0, 255}, textString=  "PTH")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                                                    graphics));
     end SideOfHeart_testPhysiolibraryValve;
 
@@ -1184,8 +1183,8 @@ package MeursModel
               7599376.082655, EMAX=65327969.83335),                                                                                                    VxAU(k = 3e-005), RxAOutflow(k = 399967.162245), VxVU(k = 4e-005), RxVOutflow(k=
               399967.162245),                                                                                                    atrium(volume_start = 4e-005), ventricle(
             volume_start=0.00013));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{32, 60}, {18, 64}, {6, 64}, {6, 76}, {18, 76}, {30, 72}, {44, 64}, {36, 58}, {32, 60}}, smooth = Smooth.None,
-                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {58, 117, 175}, pattern = LinePattern.None, lineColor = {0, 0, 0})}));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{32, 60}, {18, 64}, {6, 64}, {6, 76}, {18, 76}, {30, 72}, {44, 64}, {36, 58}, {32, 60}}, smooth=  Smooth.None,
+                fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {58, 117, 175}, pattern=  LinePattern.None, lineColor=  {0, 0, 0})}));
     end RightHeart_testPhysiolibraryValve;
 
     model Heart_testPhysiolibraryValve
@@ -2151,8 +2150,6 @@ systemic.volume")}), Icon(coordinateSystem(preserveAspectRatio=false, extent={{
               fillColor={0,0,0},
               fillPattern=FillPattern.Solid)}));
     end VolumeControl;
-
-
 
     model Hemodynamics_volume_control
 

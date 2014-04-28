@@ -899,7 +899,7 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Sources.Step Step1(
       offset=250,
       startTime=20,
-      height=0)     annotation (Placement(transformation(extent={{-42,-56},{-22,
+      height=250)   annotation (Placement(transformation(extent={{-42,-56},{-22,
               -36}}, rotation=0)));
   equation
     connect(PAO, media1.PAO) annotation (Line(points={{-58,36},{-77.46,36},{

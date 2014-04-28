@@ -139,7 +139,7 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
               fillColor={236,236,236},
                               fillPattern=FillPattern.Solid),
             Rectangle(
-              extent={{-28,3},{24,-3}},
+              extent={{-28,3},{20,-4}},
               lineThickness=1,
               fillColor={0,0,255},
               fillPattern=FillPattern.Solid,
@@ -150,7 +150,19 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
               smooth=Smooth.None,
               fillColor={0,0,255},
               fillPattern=FillPattern.Solid,
-                pattern=LinePattern.None)}));
+                pattern=LinePattern.None),
+              Text(
+                extent={{-16,30},{12,2}},
+                lineColor={0,0,255},
+                fillColor={255,240,234},
+                fillPattern=FillPattern.Solid,
+                textString="1"),
+              Text(
+                extent={{-22,-10},{16,-32}},
+                lineColor={0,0,255},
+                fillColor={255,240,234},
+                fillPattern=FillPattern.Solid,
+                textString="E")}));
     end HydraulicElastanceToCompliance;
 
     block HydraulicResistanceToConductance
@@ -250,6 +262,94 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
 <p>Even it is not recommended, you can use this block, but do not forget to make reciprocal value (in example using Physiolibrary.Blocks.Math.Reciprocal) before connecting to library components!</p>
 </html>"));
     end HydraulicElastanceConst;
+
+    block HydraulicComplianceControl
+        "Constant signal of type HydraulicCompliance"
+
+          Physiolibrary.Types.RealIO.HydraulicComplianceOutput y
+          "HydraulicCompliance constant"
+                                       annotation (Placement(transformation(extent={
+                {40,-10},{60,10}}), iconTransformation(extent={{40,-10},{60,10}})));
+      Physiolibrary.Types.RealIO.HydraulicComplianceInput c
+        annotation (Placement(transformation(extent={{-40,-20},{0,20}}),
+            iconTransformation(extent={{-40,-20},{0,20}})));
+      parameter Physiolibrary.Types.HydraulicCompliance k; //ignored for this component
+    equation
+          y=c;
+      annotation (defaultComponentName="hydraulicCompliance",
+                 Diagram(coordinateSystem(extent={{-40,-40},{40,40}})), Icon(
+            coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=false),
+                graphics={
+            Rectangle(extent={{-40,40},{40,-40}},
+              lineColor={0,0,0},
+                  radius=10,
+              fillColor={236,236,236},
+                              fillPattern=FillPattern.Solid),
+            Text( extent={{-100,-44},{100,-64}},
+              lineColor={0,0,0},
+                      fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                  textString="%name")}));
+    end HydraulicComplianceControl;
+
+    block HydraulicConductanceControl
+        "External signal of type HydraulicConductance"
+
+          Physiolibrary.Types.RealIO.HydraulicConductanceOutput y
+          "HydraulicCompliance constant"
+                                       annotation (Placement(transformation(extent={
+                {40,-10},{60,10}}), iconTransformation(extent={{40,-10},{60,10}})));
+      Physiolibrary.Types.RealIO.HydraulicConductanceInput c
+        annotation (Placement(transformation(extent={{-40,-20},{0,20}}),
+            iconTransformation(extent={{-40,-20},{0,20}})));
+      parameter Physiolibrary.Types.HydraulicConductance k; //ignored for this component
+      //TODO add switch between constant default signal and input control signal
+    equation
+          y=c;
+      annotation (defaultComponentName="hydraulicCompliance",
+                 Diagram(coordinateSystem(extent={{-40,-40},{40,40}})), Icon(
+            coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=false),
+                graphics={
+            Rectangle(extent={{-40,40},{40,-40}},
+              lineColor={0,0,0},
+                  radius=10,
+              fillColor={236,236,236},
+                              fillPattern=FillPattern.Solid),
+            Text( extent={{-100,-44},{100,-64}},
+              lineColor={0,0,0},
+                      fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                  textString="%name")}));
+    end HydraulicConductanceControl;
+
+    block FrequencyControl "External signal of type Frequency"
+
+          Physiolibrary.Types.RealIO.FrequencyOutput y
+          "HydraulicCompliance constant"
+                                       annotation (Placement(transformation(extent={
+                {40,-10},{60,10}}), iconTransformation(extent={{40,-10},{60,10}})));
+      Physiolibrary.Types.RealIO.FrequencyInput c
+        annotation (Placement(transformation(extent={{-40,-20},{0,20}}),
+            iconTransformation(extent={{-40,-20},{0,20}})));
+      parameter Physiolibrary.Types.Frequency k; //ignored for this component
+      //TODO add switch between constant default signal and input control signal
+    equation
+          y=c;
+      annotation (defaultComponentName="hydraulicCompliance",
+                 Diagram(coordinateSystem(extent={{-40,-40},{40,40}})), Icon(
+            coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=false),
+                graphics={
+            Rectangle(extent={{-40,40},{40,-40}},
+              lineColor={0,0,0},
+                  radius=10,
+              fillColor={236,236,236},
+                              fillPattern=FillPattern.Solid),
+            Text( extent={{-100,-44},{100,-64}},
+              lineColor={0,0,0},
+                      fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                  textString="%name")}));
+    end FrequencyControl;
     end Constants;
   end Types;
 
@@ -390,7 +490,7 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
               graphics));
       end CardiacValve;
 
-      model FlowPressureMeasurement
+      model BloodFlowMeasurement
         extends Physiolibrary.Hydraulic.Sensors.FlowMeasure;
           Physiolibrary.Types.RealIO.FrequencyInput HR annotation (Placement(
               transformation(extent={{-170,-64},{-130,-24}}), iconTransformation(
@@ -469,7 +569,7 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
                   fillPattern =                                                                                                    FillPattern.Solid, origin = {55,8}, rotation = 90, textString = "CO")}),
             Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
                   100}}), graphics));
-      end FlowPressureMeasurement;
+      end BloodFlowMeasurement;
     end Components;
   end Hydraulic;
   annotation (Documentation(info="<html>
