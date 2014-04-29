@@ -570,6 +570,82 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
             Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
                   100}}), graphics));
       end BloodFlowMeasurement;
+
+      model AortaFlowMeasurement
+        "measures flow, diastolic, systolic and mean pressure"
+        extends Physiolibrary.Hydraulic.Sensors.FlowMeasure;
+        Physiolibrary.Types.RealIO.PressureOutput Ps
+          "Systolic pressure during heart cycle"                                            annotation(Placement(transformation(extent = {{-72,-42},{-52,-22}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-80,-30})));
+        Physiolibrary.Types.RealIO.PressureOutput Pd
+          "Diastolic pressure during heart cycle"                                            annotation(Placement(transformation(extent = {{-50,-40},{-30,-20}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-60,-30})));
+        Physiolibrary.Types.RealIO.PressureOutput Pmean
+          "Mean pressure during heart cycle"                                               annotation(Placement(transformation(extent = {{-10,-36},{10,-16}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-38,-30})));
+        Physiolibrary.Types.RealIO.VolumeOutput SV "systolic volume" annotation(Placement(transformation(extent = {{22,-42},{42,-22}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
+        Physiolibrary.Types.RealIO.VolumeFlowRateOutput CO "Cardiac output" annotation(Placement(transformation(extent = {{50,-40},{70,-20}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {50,-30})));
+        Real SumPressure(start = 0) "sum of pressure of cardiac cycle";
+        Physiolibrary.Types.Pressure Pmin(start = 13300);
+        Physiolibrary.Types.Pressure Pmax(start = 0);
+        Physiolibrary.Types.Volume Volume(start = 0)
+          "sum of volume through cyrdiac cycle";
+        discrete Boolean b "event condition";
+        Physiolibrary.Types.Time T0 "start of cardiac cycle ";
+        discrete Physiolibrary.Types.Time HP "length of cardiac cycle";
+      initial equation
+        T0 = 0;
+        HP = 1;//1/HR
+        CO = 0;
+        SV = 0;
+        Ps = 0;
+        Pd = 0;
+        Pmean = 13300;
+      //  Pmax=Pmean;//q_in.pressure;
+      //  Pmin=Pmean;//q_in.pressure;
+      equation
+
+        Pmax = max(Pmax, q_in.pressure);
+        Pmin = min(Pmin, q_in.pressure);
+        b = der(q_in.pressure)>0;//time - pre(T0) >= pre(HP) "b=true when new cardiac cycle begins";
+        when { b and not
+                        (pre(b))} then
+          T0 = time "initial time of current cardiac cycle";
+           if (pre(T0)>0) then
+             HP = time-pre(T0);
+           else
+             HP = 1;
+           end if;//1 / HR "calculation of time lenght of current cardiac cycle";
+          SV = Volume
+            "systolic volume is equal of total volume passed through this block";
+          CO = SV / HP
+            "cardiac output calculation from systolic volume and heart rate (l/min)";
+          Pmean = SumPressure / pre(HP)
+            "mean pressure (torr) = summ pressure through cardiac cycle divided by length of previous cardiac cycle";
+          Ps = Pmax "systolic pressure = maximum pressure during cardiac cycle";
+          Pd = Pmin "diastolic pressure=minimal pressure during cardiac cycle";
+          reinit(Volume, 0) "reinitialisation of volume";
+          reinit(SumPressure, 0) "reinitialisation of sum pressure";
+          reinit(Pmax, q_in.pressure)
+            "reinitialisation of maximal pressure to mean pressure";
+          reinit(Pmin, q_in.pressure)
+            "reinitialisation minimal pressure to mean pressure";
+        end when;
+        der(Volume) = q_in.q;
+        der(SumPressure) = q_in.pressure;
+        annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,-100},
+                  {100,100}}),                                                                           graphics={                  Text(extent={{
+                    -52,11},{52,-11}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin={
+                    -77,30},                                                                                                    rotation = 90, textString = "Ps"),Text(extent={{
+                    -53,10},{53,-10}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin={
+                    -56,31},                                                                                                    rotation = 90, textString = "Pd"),Text(extent={{
+                    -55,12},{55,-12}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin={
+                    -32,35},                                                                                                    rotation = 90, textString = "Pmean"),Text(extent = {{-29,12},{29,-12}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin = {34,7}, rotation = 90, textString = "SV"),Text(extent = {{-30,11},{30,-11}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin = {55,8}, rotation = 90, textString = "CO")}),
+            Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+                  100}}), graphics));
+      end AortaFlowMeasurement;
     end Components;
   end Hydraulic;
   annotation (Documentation(info="<html>
