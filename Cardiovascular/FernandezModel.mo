@@ -177,7 +177,7 @@ package FernandezModel
                                                                         ELMAX(k=106657909.932)
         annotation (Placement(transformation(extent={{96,44},{80,60}})));
       replaceable Physiolibrary.Types.Constants.FrequencyConst
-                                                   heartRate(k=1.2)
+                                                   heartRate(k=1.3333333333333)
         annotation (Placement(transformation(extent={{-86,48},{-68,62}})));
       Cardiovascular.Hydraulic.Components.CardiacValve tricuspidValve
         annotation (Placement(transformation(extent={{-74,-42},{-54,-22}})));
@@ -802,14 +802,13 @@ package FernandezModel
     equation
       connect(heart.leftHeartOutflow, systemicCirculation.inflow) annotation (
           Line(
-          points={{2.95,-11.2},{24,-11.2},{24,-48.0571},{15.45,-48.0571}},
+          points={{2.95,-11.2},{24,-11.2},{24,-45.4},{15.45,-45.4}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.None));
       connect(systemicCirculation.outflow, heart.rightHeartInflow) annotation (
           Line(
-          points={{-18.85,-48.5714},{-32,-48.5714},{-32,-10.6857},{-11.4,
-              -10.6857}},
+          points={{-18.85,-46},{-32,-46},{-32,-10.6857},{-11.4,-10.6857}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.None));
@@ -2261,7 +2260,7 @@ package FernandezModel
       Modelica.Blocks.Continuous.TransferFunction H3(a={15,1},b={0.154});// from orign.mo(a={30,1}, b={0.194});
       Modelica.Blocks.Continuous.TransferFunction H4(a={2,1}, b={0.1});
       Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=0.1, uMin=-0.1);
-      parameter Physiolibrary.Types.Pressure PAOmedia=13863.981751466;
+      parameter Physiolibrary.Types.Pressure PAOmedia=13265;
 
       parameter Physiolibrary.Types.Frequency HR0Param=1.3333333333333
         annotation (Dialog(enable=not useConductanceInput));
@@ -2318,8 +2317,8 @@ package FernandezModel
     RS0(displayUnit="ml/(mmHg.s)") = 4.6016277678131e-09)*/
       parameter Physiolibrary.Types.HydraulicCompliance EV0venacava=1.8751e-11;
       parameter Physiolibrary.Types.HydraulicResistance RS0(displayUnit="(mmHg.s)/ml") = 106657909.932;
-      parameter Physiolibrary.Types.Time activationDelay=5;
-      parameter Physiolibrary.Types.Time stenosisDelay=20;
+      parameter Physiolibrary.Types.Time activationDelay=5*60;
+      parameter Physiolibrary.Types.Time stenosisDelay=20*60;
 
     //  parameter Physiolibrary.Types.HydraulicConductance Conductance=0
     protected
@@ -2401,7 +2400,9 @@ package FernandezModel
     end Baroreceptor_VCStenosis;
 
     model Hemodynamics_baro_VCStenosis
-      extends Hemodynamics_baro(redeclare Baroreceptor_VCStenosis baroreceptor);
+      extends Hemodynamics_baro(redeclare Baroreceptor_VCStenosis baroreceptor(
+            stenosisDelay(displayUnit="s") = 20, activationDelay(displayUnit=
+                "s") = 15));
     end Hemodynamics_baro_VCStenosis;
   end Experiment;
 end FernandezModel;

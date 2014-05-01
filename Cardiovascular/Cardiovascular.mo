@@ -632,17 +632,33 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         der(SumPressure) = q_in.pressure;
         annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,-100},
                   {100,100}}),                                                                           graphics={                  Text(extent={{
-                    -52,11},{52,-11}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin={
-                    -77,30},                                                                                                    rotation = 90, textString = "Ps"),Text(extent={{
-                    -53,10},{53,-10}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin={
-                    -56,31},                                                                                                    rotation = 90, textString = "Pd"),Text(extent={{
-                    -55,12},{55,-12}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin={
-                    -32,35},                                                                                                    rotation = 90, textString = "Pmean"),Text(extent = {{-29,12},{29,-12}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin = {34,7}, rotation = 90, textString = "SV"),Text(extent = {{-30,11},{30,-11}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin = {55,8}, rotation = 90, textString = "CO")}),
+                    -52,11},{52,-11}},                                                                                                    lineColor=
+                    {0,0,0},                                                                                                    fillColor=
+                    {85,170,255},
+                  fillPattern=FillPattern.Solid,                                                                                                    origin={
+                    -77,30},                                                                                                    rotation = 90,
+                textString="Ps",
+                textStyle={TextStyle.Bold}),                                                                                                    Text(extent={{
+                    -53,10},{53,-10}},                                                                                                    lineColor=
+                    {0,0,0},                                                                                                    fillColor=
+                    {85,170,255},
+                  fillPattern=FillPattern.Solid,                                                                                                    origin={
+                    -56,29},                                                                                                    rotation = 90,
+                textString="Pd"),                                                                                                    Text(extent={{
+                    -55,12},{55,-12}},                                                                                                    lineColor=
+                    {0,0,0},                                                                                                    fillColor=
+                    {85,170,255},
+                  fillPattern=FillPattern.Solid,                                                                                                    origin={
+                    -32,35},                                                                                                    rotation = 90,
+                textString="Pmean"),                                                                                                    Text(extent = {{-29,12},{29,-12}}, lineColor=
+                    {255,0,0},                                                                                                    fillColor=
+                    {85,170,255},
+                  fillPattern=FillPattern.Solid,                                                                                                    origin = {34,7}, rotation = 90,
+                textString="SV"),                                                                                                    Text(extent = {{-30,11},{30,-11}}, lineColor=
+                    {255,0,0},                                                                                                    fillColor=
+                    {85,170,255},
+                  fillPattern=FillPattern.Solid,                                                                                                    origin = {55,8}, rotation = 90,
+                textString="CO")}),
             Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
                   100}}), graphics));
       end AortaFlowMeasurement;
