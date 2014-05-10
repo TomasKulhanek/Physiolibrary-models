@@ -725,6 +725,7 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
     end Components;
 
     package Models
+      extends Modelica.Icons.Package;
       model PulmonaryCirculation
         extends Cardiovascular.Hydraulic.Components.PulmonaryCirculation;
 
@@ -987,24 +988,24 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
           annotation (Placement(transformation(extent={{-12,12},{8,32}})));
       equation
         connect(systemicCirculation.inflow, heart.leftHeartOutflow) annotation (Line(
-            points={{7.6,-23.8},{16,-23.8},{16,-0.571429},{3.6,-0.571429}},
+            points={{8,-24},{16,-24},{16,-3.6},{1.6,-3.6}},
             color={190,0,0},
             thickness=1,
             smooth=Smooth.Bezier));
         connect(heart.leftHeartInflow, pulmonaryCirculation.outflow)
           annotation (Line(
-            points={{5.6,-3.71429},{16,-3.71429},{16,22},{8,22}},
+            points={{1.6,2.8},{16,2.8},{16,21.4},{7.8,21.4}},
             color={190,0,0},
             thickness=1,
             smooth=Smooth.Bezier));
         connect(systemicCirculation.outflow, heart.rightHeartInflow) annotation (Line(
-            points={{-11.2,-23.8},{-20,-23.8},{-20,-4.85714},{-6.8,-4.85714}},
+            points={{-12,-24},{-20,-24},{-20,-3.6},{-8.2,-3.6}},
             color={190,0,0},
             thickness=1,
             smooth=Smooth.Bezier));
         connect(heart.rightHeartOutflow, pulmonaryCirculation.inflow) annotation (
             Line(
-            points={{-2.4,-0.857143},{-18,-0.857143},{-18,22},{-12,22}},
+            points={{-7.6,3},{-18,3},{-18,21.8},{-11.8,21.8}},
             color={190,0,0},
             thickness=1,
             smooth=Smooth.Bezier));
@@ -1025,11 +1026,10 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         extends CardiovascularSystem(
           pulmonaryCirculation(pulmonaryArteries(Simulation=Physiolibrary.Types.SimulationType.InitSteadyState),
               pulmonaryVeinsAndLeftAtrium(Simulation=Physiolibrary.Types.SimulationType.InitSteadyState)),
-
           heart(rightAtrium(isDependent=true, Simulation=Physiolibrary.Types.SimulationType.InitSteadyState)),
-
           systemicCirculation(veins(Simulation=Physiolibrary.Types.SimulationType.InitSteadyState),
               arteries(Simulation=Physiolibrary.Types.SimulationType.InitSteadyState)));
+
         Physiolibrary.SteadyStates.Components.MassConservationLaw
           massConservationLaw(
           n=3,
@@ -1051,8 +1051,8 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
             points={{-2,16.8},{-2,10},{26,10},{26,-0.133333}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-40,-60},{40,60}}), graphics), Documentation(info="<html>
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,
+                  -60},{40,60}}), graphics), Documentation(info="<html>
 <p>Steady state model extension of Cardiovascular subsystem in famous Guyton-Coleman-Granger model from 1972. </p>
 </html>"));
       end CVS_Steady;
@@ -1065,4 +1065,61 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
 <p>Copyright &copy; 2014, Tomas Kulhanek, Charles University in Prague.</p>
 <p><br/><i>This Modelica package is&nbsp;<u>free</u>&nbsp;software and the use is completely at&nbsp;<u>your own risk</u>; it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the disclaimer of warranty) see&nbsp;<a href=\"modelica://Physiolibrary.UsersGuide.ModelicaLicense2\">Physiolibrary.UsersGuide.ModelicaLicense2</a>&nbsp;or visit&nbsp;<a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"), uses(Modelica(version="3.2.1"), Physiolibrary(version="2.1.1")));
+  package Blocks
+  extends Modelica.Icons.Package;
+    package Interpolation
+      extends Modelica.Icons.Package;
+          model Curve
+        "2D natural cubic interpolation spline defined with (x,y,slope) points"
+            //workaround for openmodelica error: Cyclically dependent constants or parameters found in scope Physiolibrary.Blocks.Interpolation.Curve: {data,x}, {data,y}, {data,slope}.
+               //Error: Error occurred while flattening model Physiolibrary.Blocks.Interpolation.Curve
+
+               parameter Real x[:] "x coordinations of interpolating points";
+               parameter Real y[:] "y coordinations of interpolating points";
+               parameter Real slope[:] "slopes at interpolating points";
+
+               Modelica.Blocks.Interfaces.RealInput u
+                            annotation (Placement(transformation(extent={{-120,
+                  -20},{-80,20}})));
+               Modelica.Blocks.Interfaces.RealOutput val
+                               annotation (Placement(transformation(extent={{80,-20},
+                  {120,20}})));
+
+      protected
+              parameter Real a[:,:] = Physiolibrary.Blocks.Interpolation.SplineCoefficients(
+                                                          x,y,slope)
+          "cubic polynom coefficients of curve segments between interpolating points";
+
+          equation
+            val = Physiolibrary.Blocks.Interpolation.Spline(
+              x,
+              a,
+              u);
+
+             annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),      graphics), Icon(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+              graphics={
+              Rectangle(
+                extent={{-100,100},{100,-100}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Line(
+                points={{-70,-76},{-20,-48},{0,12},{34,62},{76,72}},
+                color={0,0,127},
+                smooth=Smooth.Bezier),
+              Line(
+                points={{-48,-82},{-48,90},{-48,90}},
+                color={0,0,127},
+                smooth=Smooth.Bezier,
+                arrow={Arrow.None,Arrow.Filled}),
+              Line(
+                points={{-72,-74},{68,-74},{68,-74}},
+                color={0,0,127},
+                smooth=Smooth.Bezier,
+                arrow={Arrow.None,Arrow.Filled})}));
+          end Curve;
+    end Interpolation;
+  end Blocks;
 end Cardiovascular;
