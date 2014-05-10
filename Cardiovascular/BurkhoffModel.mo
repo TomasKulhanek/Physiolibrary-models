@@ -1650,7 +1650,7 @@ package BurkhoffModel
   package Models
 
     model HemodynamicsBurkhoff
-      extends MeursModel.Models.Hemodynamics(
+      extends MeursModel.Test.Hemodynamics_test(
       redeclare BurkhoffModel.Parts.Heart  heart,
       redeclare BurkhoffModel.Parts.PulmonaryCirculation pulmonaryCirculation,
       redeclare BurkhoffModel.Parts.SystemicCirculation systemicCirculation,

@@ -955,7 +955,9 @@ package control "modelo y control a corto plazo"
     connect(Step1.y,Add2.u2)             annotation (Line(points={{-21,-46},{12,
             -46},{12,-29.2},{44.6,-29.2}}, color={0,0,255}));
     annotation (Diagram(graphics),
-                         Icon(graphics={
+                         Icon(coordinateSystem(preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}}),
+                              graphics={
           Rectangle(
             extent={{-48,96},{56,-96}},
             lineColor={0,0,255},

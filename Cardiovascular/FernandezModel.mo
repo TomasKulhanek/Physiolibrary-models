@@ -802,13 +802,14 @@ package FernandezModel
     equation
       connect(heart.leftHeartOutflow, systemicCirculation.inflow) annotation (
           Line(
-          points={{2.95,-11.2},{24,-11.2},{24,-45.4},{15.45,-45.4}},
+          points={{2.95,-11.2},{24,-11.2},{24,-48.0571},{15.45,-48.0571}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.None));
       connect(systemicCirculation.outflow, heart.rightHeartInflow) annotation (
           Line(
-          points={{-18.85,-46},{-32,-46},{-32,-10.6857},{-11.4,-10.6857}},
+          points={{-18.85,-48.5714},{-32,-48.5714},{-32,-10.6857},{-11.4,
+              -10.6857}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.None));
@@ -825,8 +826,10 @@ package FernandezModel
           thickness=1,
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-80},
-                {40,80}}),              graphics), Icon(coordinateSystem(extent={{-40,
-                -80},{40,80}})));
+                {40,80}}),              graphics), Icon(coordinateSystem(extent={{-40,-80},
+                {40,80}}, preserveAspectRatio=false), graphics={Bitmap(extent={
+                  {-38,78},{38,-72}}, fileName=
+                  "modelica://FernandezModel/Resources/Icons/cvsconcept.png")}));
     end Hemodynamics_pure;
 
   end Models;
@@ -1917,37 +1920,97 @@ package FernandezModel
         annotation (Placement(transformation(extent={{-18,36},{22,68}})));
     equation
       connect(baroreceptor.evleft, heart.ELMax) annotation (Line(
-          points={{-1.2,57.76},{-1.2,17.52},{0.57,17.52},{0.57,5.9}},
+          points={{-14,58.72},{-14,17.52},{0.57,17.52},{0.57,5.9}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(baroreceptor.HR, heart.HR) annotation (Line(
-          points={{-0.2,44.48},{-0.2,16.6},{-4.47,16.6},{-4.47,4.1}},
+          points={{-14.2,64},{-14.2,16.6},{-4.47,16.6},{-4.47,4.1}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(baroreceptor.evright, heart.ERMax) annotation (Line(
-          points={{-10.4,57.12},{-10.4,5.36},{-10.98,5.36}},
+          points={{-13.2,53.6},{-13.2,5.36},{-10.98,5.36}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(baroreceptor.evenacava, systemicCirculation.EVenaCava)
         annotation (Line(
-          points={{-15.6,44.64},{-44,44.64},{-44,-40.72},{-15.84,-40.72}},
+          points={{-13.6,42.72},{-44,42.72},{-44,-40.72},{-15.84,-40.72}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(baroreceptor.HR, systemicCirculation.HR) annotation (Line(
-          points={{-0.2,44.48},{-0.2,-5.4},{-6.88,-5.4},{-6.88,-39.76}},
+          points={{-14.2,64},{-14.2,-5.4},{-6.88,-5.4},{-6.88,-39.76}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(systemicCirculation.RSO, baroreceptor.RS) annotation (Line(
-          points={{7.52,-40.4},{40,-40.4},{40,44.64},{-8.8,44.64}},
+          points={{7.52,-40.4},{40,-40.4},{40,48.16},{-13.2,48.16}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(baroreceptor.PAo, systemicCirculation.Pmean) annotation (Line(
-          points={{10,44.64},{14,44.64},{14,-28},{2.4,-28},{2.4,-40.4}},
+          points={{-13.2,38.88},{14,38.88},{14,-28},{2.4,-28},{2.4,-40.4}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics));
     end Hemodynamics_with_baro;
+
+    model Hemodynamics_baro
+      extends Models.Hemodynamics_pure(redeclare Experiment.Heart_baro heart,
+                                                                   redeclare
+          Experiment.SystemicCirculation_baro systemicCirculation);
+      replaceable Experiment.Baroreceptor baroreceptor(
+        activationDelay(displayUnit="s"),
+        EV0right=115990477.05105,
+        EV0left=106657909.932,
+        EV0venacava=1.8751539396141e-06,
+        RS0=81793284.679103)
+        annotation (Placement(transformation(extent={{30,-22},{76,24}})));
+    equation
+      connect(baroreceptor.evenacava, systemicCirculation.ECVin) annotation (Line(
+          points={{35.06,-12.34},{35.06,-22},{-10.45,-22},{-10.45,-32.6286}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(baroreceptor.RS, systemicCirculation.RPSin) annotation (Line(
+          points={{35.52,-4.52},{35.52,-26},{-0.825,-26},{-0.825,-31.8571}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(systemicCirculation.Pmean, baroreceptor.PAo) annotation (Line(
+          points={{14.05,-39.8286},{35.52,-39.8286},{35.52,-17.86}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(baroreceptor.evright, heart.ERMaxIn) annotation (Line(
+          points={{35.52,3.3},{35.52,16},{48,16},{48,24},{-8.25,24},{-8.25,
+              9.37143}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(baroreceptor.evleft, heart.ELMaxIn) annotation (Line(
+          points={{34.6,10.66},{34.6,22},{-0.2,22},{-0.2,9.37143}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(baroreceptor.HR, heart.HRin) annotation (Line(
+          points={{34.37,18.25},{34.37,18},{5.575,18},{5.575,9.62857}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(extent={{-60,-80},{60,80}},
+              preserveAspectRatio=false), graphics), Icon(coordinateSystem(extent={{
+                -60,-80},{60,80}})));
+    end Hemodynamics_baro;
+
+    model Hemodynamics_VCStenosis
+      extends Models.Hemodynamics_pure(redeclare
+          Experiment.SystemicCirculation_VCStenosis systemicCirculation);
+      Modelica.Blocks.Sources.Step step(
+        startTime=20,
+        height=1.8751e-6,
+        offset=1.8751e-6)
+        annotation (Placement(transformation(extent={{-68,-34},{-48,-14}})));
+    equation
+      connect(step.y, systemicCirculation.EVCin) annotation (Line(
+          points={{-47,-24},{-15.7,-24},{-15.7,-35.8}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -40,-80},{40,80}}), graphics));
+    end Hemodynamics_VCStenosis;
   end Obsolete;
   annotation (uses(Physiolibrary(version="2.1"), Modelica(version="3.2.1"),
       MeursModel(version="2")));
@@ -2036,47 +2099,67 @@ package FernandezModel
             graphics));
     end Heart_baro;
 
-    model Hemodynamics_baro
+    model Hemodynamics_controllable
       extends Models.Hemodynamics_pure(redeclare Heart_baro heart, redeclare
           SystemicCirculation_baro systemicCirculation);
-      replaceable Baroreceptor baroreceptor(
-        activationDelay(displayUnit="s"),
-        EV0right=115990477.05105,
-        EV0left=106657909.932,
-        EV0venacava=1.8751539396141e-06,
-        RS0=81793284.679103)
-        annotation (Placement(transformation(extent={{30,-22},{76,24}})));
+      Physiolibrary.Types.RealIO.HydraulicComplianceInput ELMax annotation (
+          Placement(transformation(extent={{18,8},{58,48}}), iconTransformation(
+            extent={{-8,-8},{8,8}},
+            rotation=180,
+            origin={12,-2})));
+      Physiolibrary.Types.RealIO.HydraulicComplianceInput ERMax annotation (
+          Placement(transformation(extent={{-68,-4},{-28,36}}), iconTransformation(
+            extent={{-8,-8},{8,8}},
+            rotation=180,
+            origin={0,-16})));
+      Physiolibrary.Types.RealIO.FrequencyInput HR annotation (Placement(
+            transformation(extent={{22,-18},{62,22}}), iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={6,16})));
+      Physiolibrary.Types.RealIO.HydraulicConductanceInput RSP annotation (
+          Placement(transformation(extent={{-62,-42},{-22,-2}}), iconTransformation(
+            extent={{-8,-8},{8,8}},
+            rotation=180,
+            origin={16,-38})));
+      Physiolibrary.Types.RealIO.HydraulicComplianceInput ECV annotation (Placement(
+            transformation(extent={{-70,-66},{-30,-26}}), iconTransformation(
+            extent={{-8,-8},{8,8}},
+            rotation=180,
+            origin={2,-52})));
+      Physiolibrary.Types.RealIO.PressureOutput Pmean annotation (Placement(
+            transformation(extent={{32,-40},{52,-20}}), iconTransformation(extent={{
+                20,-78},{32,-66}})));
     equation
-      connect(baroreceptor.evenacava, systemicCirculation.ECVin) annotation (Line(
-          points={{32.76,-9.58},{32.76,-22},{-10.45,-22},{-10.45,-32.6286}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(baroreceptor.RS, systemicCirculation.RPSin) annotation (Line(
-          points={{40.58,-9.58},{40.58,-26},{-0.825,-26},{-0.825,-31.8571}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(systemicCirculation.Pmean, baroreceptor.PAo) annotation (Line(
-          points={{14.05,-39.8286},{62.2,-39.8286},{62.2,-9.58}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(baroreceptor.evright, heart.ERMaxIn) annotation (Line(
-          points={{47.94,9.74},{47.94,16},{48,16},{48,24},{-8.25,24},{-8.25,
-              9.37143}},
-          color={0,0,127},
-          smooth=Smooth.None));
 
-      connect(baroreceptor.evleft, heart.ELMaxIn) annotation (Line(
-          points={{40.12,10.2},{40.12,22},{-0.2,22},{-0.2,9.37143}},
+      connect(Pmean, systemicCirculation.Pmean) annotation (Line(
+          points={{42,-30},{14.05,-30},{14.05,-39.8286}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(baroreceptor.HR, heart.HRin) annotation (Line(
-          points={{32.99,9.97},{32.99,18},{5.575,18},{5.575,9.62857}},
+      connect(RSP, systemicCirculation.RPSin) annotation (Line(
+          points={{-42,-22},{-0.825,-22},{-0.825,-31.8571}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(heart.ELMaxIn, ELMax) annotation (Line(
+          points={{-0.2,9.37143},{-0.2,28},{38,28}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(heart.ERMaxIn, ERMax) annotation (Line(
+          points={{-8.25,9.37143},{-8.25,15.6857},{-48,15.6857},{-48,16}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(heart.HRin, HR) annotation (Line(
+          points={{5.575,9.62857},{5.575,14},{34,14},{34,2},{42,2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(ECV, systemicCirculation.ECVin) annotation (Line(
+          points={{-50,-46},{-34,-46},{-34,-32.6286},{-10.45,-32.6286}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(extent={{-60,-80},{60,80}},
-              preserveAspectRatio=false), graphics), Icon(coordinateSystem(extent={{
-                -60,-80},{60,80}})));
-    end Hemodynamics_baro;
+              preserveAspectRatio=false), graphics), Icon(coordinateSystem(extent={{-60,-80},
+                {60,80}}, preserveAspectRatio=false), graphics));
+    end Hemodynamics_controllable;
 
     model Baroreceptor
       Modelica.Blocks.Continuous.TransferFunction H1(a={15,1}, b={1});
@@ -2084,7 +2167,7 @@ package FernandezModel
       Modelica.Blocks.Continuous.TransferFunction H3(a={15,1},b={0.154});// from orign.mo(a={30,1}, b={0.194});
       Modelica.Blocks.Continuous.TransferFunction H4(a={2,1}, b={0.1});
       Modelica.Blocks.Nonlinear.DeadZone deadZone(uMax=0.1, uMin=-0.1);
-      parameter Physiolibrary.Types.Pressure PAOmedia=13863.981751466;
+      parameter Physiolibrary.Types.Pressure PAOmedia=13465.561128915;
 
       parameter Physiolibrary.Types.Frequency HR0Param=1.3333333333333
         annotation (Dialog(enable=not useConductanceInput));
@@ -2094,41 +2177,41 @@ package FernandezModel
       Physiolibrary.Types.RealIO.FrequencyInput cond(start=HR0Param)=HR0 if useHRInput annotation (Placement(
             transformation(extent={{-62,36},{-22,76}}), iconTransformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={34,36})));
+            rotation=180,
+            origin={26,76})));
 
       Physiolibrary.Types.RealIO.PressureInput PAo "pressure in aorta" annotation (
           Placement(transformation(extent={{2,-58},{42,-18}}),
-            iconTransformation(extent={{-20,-20},{20,20}},
-            rotation=90,
-            origin={40,-46})));
+            iconTransformation(extent={{-16,-16},{16,16}},
+            rotation=0,
+            origin={-76,-82})));
       Physiolibrary.Types.RealIO.FrequencyOutput HR
         "heart rate - compatible with Const block" annotation (Placement(
             transformation(extent={{-76,60},{-56,80}}), iconTransformation(
             extent={{-15,-15},{15,15}},
-            rotation=90,
-            origin={-87,39})));
+            rotation=180,
+            origin={-81,75})));
       Physiolibrary.Types.RealIO.HydraulicComplianceOutput evright annotation (
           Placement(transformation(extent={{80,22},{100,42}}), iconTransformation(
               extent={{-14,-14},{14,14}},
-            rotation=90,
-            origin={-22,38})));
+            rotation=180,
+            origin={-76,10})));
       Physiolibrary.Types.RealIO.HydraulicComplianceOutput evleft annotation (
           Placement(transformation(extent={{78,-18},{98,2}}), iconTransformation(
               extent={{-16,-16},{16,16}},
-            rotation=90,
-            origin={-56,40})));
+            rotation=180,
+            origin={-80,42})));
       Physiolibrary.Types.RealIO.HydraulicComplianceOutput evenacava annotation (
           Placement(transformation(extent={{78,-54},{98,-34}}), iconTransformation(
               extent={{-16,-16},{16,16}},
-            rotation=270,
-            origin={-88,-46})));
+            rotation=180,
+            origin={-78,-58})));
       Physiolibrary.Types.RealIO.HydraulicConductanceOutput RS annotation (
           Placement(transformation(extent={{80,-90},{100,-70}}), iconTransformation(
               extent={{-14,-14},{14,14}},
-            rotation=270,
-            origin={-54,-46})));
-      parameter Physiolibrary.Types.HydraulicElastance EV0right=106657909.932, EV0left=103991462.1837;
+            rotation=180,
+            origin={-76,-24})));
+      parameter Physiolibrary.Types.HydraulicElastance EV0right=115990477.05105, EV0left=106657909.932;
     /*    PAOmedia=13465.561128915,
     EV0right=106657909.932,
     EV0left=103991462.1837,
@@ -2138,14 +2221,26 @@ package FernandezModel
     EV0right=106657909.932,
     EV0left=103991462.1837,
     EV0venacava=1.8751539396141e-06,
-    RS0(displayUnit="ml/(mmHg.s)") = 4.6016277678131e-09)*/
-      parameter Physiolibrary.Types.HydraulicCompliance EV0venacava=3.0002463033826e-11;
-      parameter Physiolibrary.Types.HydraulicResistance RS0(displayUnit="(mmHg.s)/ml") = 106657909.932;
-      parameter Physiolibrary.Types.Time activationDelay=40;
+    RS0(displayUnit="ml/(mmHg.s)") = 4.6016277678131e-09)
+    
+    EV0right=115990477.05105,
+    EV0left=106657909.932,
+    EV0venacava=1.8751539396141e-06,
+    RS0=81793284.67910*/
+      parameter Physiolibrary.Types.HydraulicCompliance EV0venacava=1.8751539396141e-06;
+      parameter Physiolibrary.Types.HydraulicResistance RS0(displayUnit="(mmHg.s)/ml") = 81793284.67910;
+      parameter Physiolibrary.Types.Time activationDelay=15;
 
     //  parameter Physiolibrary.Types.HydraulicConductance Conductance=0
     protected
       Physiolibrary.Types.Frequency HR0;
+    public
+      Physiolibrary.Types.RealIO.HydraulicComplianceInput ECV0 annotation (
+          Placement(transformation(extent={{-204,-96},{-164,-56}}),
+            iconTransformation(
+            extent={{-20,-20},{20,20}},
+            rotation=180,
+            origin={26,-54})));
     equation
       if not useHRInput then
         HR0=HR0Param;
@@ -2161,7 +2256,7 @@ package FernandezModel
       evright = 1/(EV0right+ H2.y*(1e+6)*(133.322387415)); //recount to SI
       evleft = 1/(EV0left+ H2.y*(1e+6)*(133.322387415)); //recount to SI
       H3.u = deadZone.y;
-      evenacava = (EV0venacava+ H3.y*(1e-6)/(133.322387415));
+      evenacava = (ECV0+ H3.y*(1e-6)/(133.322387415));
       H4.u = deadZone.y;
       RS = 1/(RS0+ H4.y*(1e+6)*(133.322387415)); //recount to conductance
       connect(evenacava, evenacava) annotation (Line(
@@ -2172,50 +2267,52 @@ package FernandezModel
                 -100},{100,100}}),
                              graphics={
             Ellipse(
-              extent={{64,22},{-100,-32}},
+              extent={{28,102},{-68,-110}},
               lineColor={0,0,127},
               fillColor={255,170,170},
               fillPattern=FillPattern.Solid),
             Text(
-              extent={{-104,24},{-80,0}},
+              extent={{-58,88},{24,64}},
               lineColor={0,0,127},
               fillColor={0,0,255},
               fillPattern=FillPattern.Solid,
               textString="HR"),
             Text(
-              extent={{-48,20},{24,2}},
+              extent={{-68,20},{4,2}},
               lineColor={0,0,127},
               fillColor={0,0,255},
               fillPattern=FillPattern.Solid,
               textString="EVright"),
             Text(
-              extent={{-102,22},{-16,4}},
+              extent={{-78,58},{8,40}},
               lineColor={0,0,127},
               fillColor={0,0,255},
               fillPattern=FillPattern.Solid,
               textString="EVleft"),
             Text(
-              extent={{-148,-12},{-34,-28}},
+              extent={{-96,-48},{18,-64}},
               lineColor={0,0,127},
               fillColor={255,170,170},
               fillPattern=FillPattern.Solid,
               textString="ECV"),
             Text(
-              extent={{-86,-12},{-12,-32}},
+              extent={{-76,-14},{-2,-34}},
               lineColor={0,0,127},
               fillColor={255,170,170},
               fillPattern=FillPattern.Solid,
               textString="RPS"),
             Text(
-              extent={{60,62},{84,38}},
+              extent={{-48,-80},{-24,-98}},
               lineColor={0,0,127},
-              fillColor={0,0,255},
-              fillPattern=FillPattern.Solid,
-              textString="HRInit"),
+              textString="PAo"),
             Text(
-              extent={{26,-10},{50,-28}},
-              lineColor={0,0,127},
-              textString="PAo")}),Diagram(coordinateSystem(preserveAspectRatio=false,
+              extent={{-98,-104},{116,-120}},
+              lineColor={0,0,0},
+              lineThickness=1,
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid,
+              textString="%name")}),
+                                  Diagram(coordinateSystem(preserveAspectRatio=false,
               extent={{-100,-100},{100,100}}), graphics));
     end Baroreceptor;
 
@@ -2240,18 +2337,19 @@ package FernandezModel
     model Hemodynamics_VCStenosis
       extends Models.Hemodynamics_pure(redeclare SystemicCirculation_VCStenosis
           systemicCirculation);
-      Modelica.Blocks.Sources.Step step(
-        startTime=20,
-        height=1.8751e-6,
-        offset=1.8751e-6)
-        annotation (Placement(transformation(extent={{-68,-34},{-48,-14}})));
+      Physiolibrary.Types.RealIO.HydraulicComplianceInput ECV annotation (Placement(
+            transformation(extent={{-64,-54},{-24,-14}}), iconTransformation(
+            extent={{-8,-8},{8,8}},
+            rotation=180,
+            origin={6,-44})));
     equation
-      connect(step.y, systemicCirculation.EVCin) annotation (Line(
-          points={{-47,-24},{-15.7,-24},{-15.7,-35.8}},
+      connect(ECV, systemicCirculation.EVCin) annotation (Line(
+          points={{-44,-34},{-32,-34},{-32,-35.8},{-15.7,-35.8}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -40,-80},{40,80}}), graphics));
+                -40,-80},{40,80}}), graphics), Icon(coordinateSystem(
+              preserveAspectRatio=false, extent={{-40,-80},{40,80}}), graphics));
     end Hemodynamics_VCStenosis;
 
     model Baroreceptor_VCStenosis
@@ -2400,9 +2498,134 @@ package FernandezModel
     end Baroreceptor_VCStenosis;
 
     model Hemodynamics_baro_VCStenosis
-      extends Hemodynamics_baro(redeclare Baroreceptor_VCStenosis baroreceptor(
-            stenosisDelay(displayUnit="s") = 20, activationDelay(displayUnit=
-                "s") = 15));
+      extends Hemodynamics_controllable(redeclare Baroreceptor_VCStenosis
+          baroreceptor(stenosisDelay(displayUnit="s") = 20, activationDelay(
+              displayUnit="s") = 15));
     end Hemodynamics_baro_VCStenosis;
+
+    model Hemodynamics_stenosiswithbarocontrol
+      Hemodynamics_controllable hemodynamics_baro
+        annotation (Placement(transformation(extent={{-96,-52},{-2,60}})));
+      Baroreceptor baroreceptor(
+        EV0venacava(displayUnit="ml/mmHg"),
+        activationDelay(displayUnit="s"),
+        PAOmedia=13265.17758063)
+        annotation (Placement(transformation(extent={{-8,-44},{58,22}})));
+      Stenosis stenosis(
+        InitialElastance(displayUnit="mmHg/ml"),
+        FinalElastance(displayUnit="mmHg/ml"),
+        startTime(displayUnit="s"),
+        duration(displayUnit="s"))
+        annotation (Placement(transformation(extent={{-78,-82},{-30,-38}})));
+    equation
+      connect(hemodynamics_baro.Pmean, baroreceptor.PAo) annotation (Line(
+          points={{-28.6333,-46.4},{-3.31665,-46.4},{-3.31665,-38.06},{-0.08,
+              -38.06}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(baroreceptor.evenacava, hemodynamics_baro.ECV) annotation (Line(
+          points={{-0.74,-30.14},{-22.37,-30.14},{-22.37,-32.4},{-47.4333,-32.4}},
+
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(baroreceptor.RS, hemodynamics_baro.RSP) annotation (Line(
+          points={{-0.08,-18.92},{-17.04,-18.92},{-17.04,-22.6},{-36.4667,-22.6}},
+
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(baroreceptor.evright, hemodynamics_baro.ERMax) annotation (Line(
+          points={{-0.08,-7.7},{-22.04,-7.7},{-22.04,-7.2},{-49,-7.2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(baroreceptor.evleft, hemodynamics_baro.ELMax) annotation (Line(
+          points={{-1.4,2.86},{-18.7,2.86},{-18.7,2.6},{-39.6,2.6}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(baroreceptor.HR, hemodynamics_baro.HR) annotation (Line(
+          points={{-1.73,13.75},{-21.865,13.75},{-21.865,15.2},{-44.3,15.2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(stenosis.hydrauliccompliance, baroreceptor.ECV0) annotation (Line(
+          points={{-52.08,-54.72},{33.58,-54.72},{33.58,-28.82}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics));
+    end Hemodynamics_stenosiswithbarocontrol;
+
+    model Stenosis
+      parameter Physiolibrary.Types.HydraulicElastance InitialElastance(displayUnit="mmHg/ml") = 533289.54966;
+      parameter Physiolibrary.Types.HydraulicElastance  FinalElastance(displayUnit="mmHg/ml") = 266644.77483;
+      parameter Physiolibrary.Types.Time startTime(displayUnit="s") = 20;
+      parameter Physiolibrary.Types.Time duration(displayUnit="s") = 5;
+      Physiolibrary.Types.RealIO.HydraulicComplianceOutput hydrauliccompliance
+        annotation (Placement(transformation(extent={{48,-10},{68,10}}),
+            iconTransformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={8,24})));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),
+                             graphics={
+            Rectangle(
+              extent={{-64,14},{80,-32}},
+              lineThickness=1,
+              fillColor={190,0,0},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None,
+              lineColor={0,0,0}),
+            Ellipse(
+              extent={{-36,36},{52,-2}},
+              lineThickness=1,
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,0}),
+            Ellipse(
+              extent={{-36,-10},{52,-48}},
+              lineThickness=1,
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid,
+              lineColor={0,0,0}),
+            Rectangle(
+              extent={{-64,42},{80,14}},
+              lineThickness=1,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Rectangle(
+              extent={{-64,-32},{80,-60}},
+              lineThickness=1,
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+            Text(
+              extent={{-56,-46},{76,-58}},
+              lineColor={0,0,0},
+              lineThickness=1,
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid,
+              textString="%name")}),       Diagram(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
+    equation
+      hydrauliccompliance = 1 / (InitialElastance + (if time < startTime then
+        0 else if time < (startTime + duration) then
+          (time - startTime)*(FinalElastance-InitialElastance)/duration else
+          (FinalElastance-InitialElastance)));
+    end Stenosis;
+
+    model Hemodynamics_stenosiswithoutbaro
+      Hemodynamics_VCStenosis hemodynamics_VCStenosis
+        annotation (Placement(transformation(extent={{-76,-66},{-2,72}})));
+      Stenosis stenosis
+        annotation (Placement(transformation(extent={{-16,-106},{40,-18}})));
+    equation
+      connect(stenosis.hydrauliccompliance, hemodynamics_VCStenosis.ECV)
+        annotation (Line(
+          points={{14.24,-51.44},{14.24,-34.95},{-33.45,-34.95}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics));
+    end Hemodynamics_stenosiswithoutbaro;
   end Experiment;
 end FernandezModel;

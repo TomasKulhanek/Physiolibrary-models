@@ -662,7 +662,401 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
             Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
                   100}}), graphics));
       end AortaFlowMeasurement;
+
+      partial model PulmonaryCirculation
+        extends Physiolibrary.Icons.PulmonaryCirculation;
+
+        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a inflow annotation (
+            Placement(transformation(extent={{-86,68},{-66,88}}), iconTransformation(
+                extent={{-108,-12},{-88,8}})));
+        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b outflow annotation (
+            Placement(transformation(extent={{40,68},{60,88}}), iconTransformation(
+                extent={{88,-16},{108,4}})));
+        Physiolibrary.Types.RealIO.VolumeOutput volume annotation (Placement(
+              transformation(extent={{44,46},{64,66}}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={0,-52})));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics), Diagram(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
+      end PulmonaryCirculation;
+
+      partial model SystemicCirculation
+        extends Physiolibrary.Icons.SystemicCirculation;
+        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a inflow annotation (
+            Placement(transformation(extent={{52,-36},{72,-16}}), iconTransformation(
+                extent={{90,-10},{110,10}})));
+        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b outflow annotation (
+            Placement(transformation(extent={{-100,2},{-80,22}}), iconTransformation(
+                extent={{-110,-10},{-90,10}})));
+        Physiolibrary.Types.RealIO.VolumeOutput volume annotation (Placement(
+              transformation(extent={{62,-64},{82,-44}}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={0,-52})));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
+      end SystemicCirculation;
+
+      partial model Heart
+        extends Physiolibrary.Icons.Heart;
+        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rightHeartInflow
+          annotation (Placement(transformation(extent={{-92,18},{-72,38}}),
+              iconTransformation(extent={{-72,-26},{-52,-6}})));
+        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b rightHeartOutflow
+          annotation (Placement(transformation(extent={{-30,54},{-10,74}}),
+              iconTransformation(extent={{-66,40},{-46,60}})));
+        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a leftHeartInflow
+          annotation (Placement(transformation(extent={{-2,54},{18,74}}),
+              iconTransformation(extent={{26,38},{46,58}})));
+        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b leftHeartOutflow
+          annotation (Placement(transformation(extent={{50,16},{70,36}}),
+              iconTransformation(extent={{26,-26},{46,-6}})));
+        Physiolibrary.Types.RealIO.VolumeOutput volume annotation (Placement(
+              transformation(extent={{-32,-4},{-12,16}}), iconTransformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-6,-48})));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics), Diagram(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
+      end Heart;
     end Components;
+
+    package Models
+      model PulmonaryCirculation
+        extends Cardiovascular.Hydraulic.Components.PulmonaryCirculation;
+
+        Physiolibrary.Hydraulic.Components.ElasticVessel pulmonaryVeinsAndLeftAtrium(
+          volume_start(displayUnit="l") = 0.0004,
+          ZeroPressureVolume(displayUnit="l") = 0.0004,
+          Compliance(displayUnit="l/mmHg") = 7.5006157584566e-08)
+          annotation (Placement(transformation(extent={{12,68},{32,88}})));
+        Physiolibrary.Hydraulic.Components.ElasticVessel pulmonaryArteries(
+          ZeroPressureVolume(displayUnit="l") = 0.00030625,
+          Compliance(displayUnit="l/mmHg") = 3.6002955640592e-08,
+          volume_start(displayUnit="l") = 0.00038)
+          annotation (Placement(transformation(extent={{-54,68},{-34,88}})));
+        Physiolibrary.Hydraulic.Components.Conductor
+                 pulmonary(Conductance(displayUnit="l/(mmHg.min)") = 4.1665920538226e-08)
+          annotation (Placement(transformation(extent={{-22,68},{-2,88}})));
+
+          Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{24,52},{32,60}})));
+      equation
+        connect(pulmonaryArteries.q_in,pulmonary. q_in) annotation (Line(
+            points={{-44,78},{-22,78}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(pulmonary.q_out,pulmonaryVeinsAndLeftAtrium. q_in) annotation (
+            Line(
+            points={{-2,78},{22,78}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(inflow, pulmonaryArteries.q_in) annotation (Line(
+            points={{-76,78},{-44,78}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(outflow, pulmonaryVeinsAndLeftAtrium.q_in) annotation (Line(
+            points={{50,78},{22,78}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(add.y, volume) annotation (Line(
+            points={{32.4,56},{54,56}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(pulmonaryArteries.volume, add.u2) annotation (Line(
+            points={{-44,68},{-42,68},{-42,56},{23.2,56},{23.2,53.6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(pulmonaryVeinsAndLeftAtrium.volume, add.u1) annotation (Line(
+            points={{22,68},{22,64},{22,58.4},{23.2,58.4}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics), Diagram(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
+      end PulmonaryCirculation;
+
+      model SystemicCirculation
+        extends Cardiovascular.Hydraulic.Components.SystemicCirculation;
+        Physiolibrary.Hydraulic.Components.ElasticVessel arteries(
+          volume_start(displayUnit="l") = 0.00085,
+          ZeroPressureVolume(displayUnit="l") = 0.000495,
+          Compliance(displayUnit="l/mmHg") = 2.6627185942521e-08)
+          annotation (Placement(transformation(extent={{24,-36},{44,-16}})));
+        Physiolibrary.Hydraulic.Components.ElasticVessel veins(
+          Compliance(displayUnit="l/mmHg") = 6.1880080007267e-07,
+          volume_start(displayUnit="l") = 0.00325,
+          ZeroPressureVolume(displayUnit="l") = 0.00295)
+          annotation (Placement(transformation(extent={{-54,-36},{-34,-16}})));
+        Physiolibrary.Hydraulic.Components.Conductor
+                 nonMuscle(Conductance(displayUnit="l/(mmHg.min)") = 3.5627924852669e-09)
+          annotation (Placement(transformation(extent={{-14,-36},{6,-16}})));
+        Physiolibrary.Hydraulic.Components.Conductor
+                 kidney(Conductance(displayUnit="l/(mmHg.min)") = 1.4126159678427e-09)
+          annotation (Placement(transformation(extent={{-14,-54},{6,-34}})));
+        Physiolibrary.Hydraulic.Components.Conductor
+                 muscle(Conductance(displayUnit="l/(mmHg.min)") = 1.3001067314658e-09)
+          annotation (Placement(transformation(extent={{-14,-18},{6,2}})));
+        Physiolibrary.Hydraulic.Components.Conductor
+                 largeVeins(Conductance(displayUnit="l/(mmHg.min)") = 1.6888886482791e-07)
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-74,2})));
+
+        Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{42,-58},{50,-50}})));
+      equation
+        connect(veins.q_in,nonMuscle. q_in)  annotation (Line(
+            points={{-44,-26},{-14,-26}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(nonMuscle.q_out,arteries. q_in)  annotation (Line(
+            points={{6,-26},{34,-26}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(muscle.q_out,arteries. q_in) annotation (Line(
+            points={{6,-8},{20,-8},{20,-26},{34,-26}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(kidney.q_out,arteries. q_in) annotation (Line(
+            points={{6,-44},{20,-44},{20,-26},{34,-26}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(kidney.q_in,nonMuscle. q_in) annotation (Line(
+            points={{-14,-44},{-24,-44},{-24,-26},{-14,-26}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(muscle.q_in,nonMuscle. q_in) annotation (Line(
+            points={{-14,-8},{-24,-8},{-24,-26},{-14,-26}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(veins.q_in,largeVeins. q_out) annotation (Line(
+            points={{-44,-26},{-74,-26},{-74,-8}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(arteries.q_in, inflow) annotation (Line(
+            points={{34,-26},{62,-26}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(largeVeins.q_in, outflow) annotation (Line(
+            points={{-74,12},{-90,12}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(arteries.volume, add.u1) annotation (Line(
+            points={{34,-36},{34,-51.6},{41.2,-51.6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(veins.volume, add.u2) annotation (Line(
+            points={{-44,-36},{-44,-56.4},{41.2,-56.4}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(add.y, volume) annotation (Line(
+            points={{50.4,-54},{60,-54},{60,-54},{72,-54}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
+      end SystemicCirculation;
+
+      model Heart
+        extends Cardiovascular.Hydraulic.Components.Heart;
+        Physiolibrary.Hydraulic.Sensors.PressureMeasure pressureMeasure
+          annotation (Placement(transformation(extent={{-68,36},{-48,56}})));
+        Physiolibrary.Hydraulic.Components.Pump rightHeart(useSolutionFlowInput=true)
+          annotation (Placement(transformation(extent={{-46,18},{-26,38}})));
+        Physiolibrary.Types.Constants.VolumeFlowRateConst RNormalCO(k(displayUnit="l/min") = 8.3333333333333e-05)
+          annotation (Placement(transformation(extent={{-50,50},{-42,58}})));
+        Physiolibrary.Hydraulic.Sensors.PressureMeasure pressureMeasure1
+          annotation (Placement(transformation(extent={{2,36},{22,56}})));
+        Physiolibrary.Hydraulic.Components.Pump leftHeart(useSolutionFlowInput=true)
+          annotation (Placement(transformation(extent={{26,16},{46,36}})));
+        Physiolibrary.Types.Constants.VolumeFlowRateConst LNormalCO(k(displayUnit="l/min") = 8.3333333333333e-05)
+          annotation (Placement(transformation(extent={{22,52},{30,60}})));
+        Physiolibrary.Hydraulic.Components.ElasticVessel rightAtrium(
+          volume_start(displayUnit="l") = 0.0001,
+          ZeroPressureVolume(displayUnit="l") = 0.0001,
+          Compliance(displayUnit="l/mmHg") = 3.7503078792283e-08)
+          annotation (Placement(transformation(extent={{-70,18},{-50,38}})));
+        Physiolibrary.Blocks.Factors.Spline       rightStarling(data={{-6,0,0},{-3,0.15,0.104},{-1,0.52,
+              0.48},{2,1.96,0.48},{4,2.42,0.123},{8,2.7,0}})
+          "At filling pressure 0mmHg (because external thorax pressure is -4mmHg) is normal cardiac output (effect=1)."
+          annotation (Placement(transformation(extent={{-46,32},{-26,52}})));
+        Physiolibrary.Blocks.Factors.Spline       leftStarling(data={{-4,0,0},{-1,
+              0.72,0.29},{0,1.01,0.29},{3,1.88,0.218333},{10,2.7,0}})
+          "At filling pressure -0.0029mmHg (because external thorax pressure is -4mmHg) is normal cardiac output (effect=1)."
+          annotation (Placement(transformation(extent={{26,32},{46,52}})));
+      equation
+        connect(pressureMeasure.q_in,rightHeart. q_in) annotation (Line(
+            points={{-62,40},{-62,28},{-46,28}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(rightAtrium.q_in,rightHeart. q_in) annotation (Line(
+            points={{-60,28},{-46,28}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(RNormalCO.y,rightStarling. yBase) annotation (Line(
+            points={{-41,54},{-36,54},{-36,44}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(pressureMeasure.actualPressure,rightStarling. u) annotation (Line(
+            points={{-52,42},{-44,42}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(LNormalCO.y,leftStarling. yBase) annotation (Line(
+            points={{31,56},{36,56},{36,44}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(pressureMeasure1.actualPressure,leftStarling. u) annotation (Line(
+            points={{18,42},{28,42}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(pressureMeasure.q_in,rightAtrium. q_in) annotation (Line(
+            points={{-62,40},{-62,28},{-60,28}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(rightHeart.solutionFlow,rightStarling. y) annotation (Line(
+            points={{-36,32},{-36,38}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(leftStarling.y,leftHeart. solutionFlow) annotation (Line(
+            points={{36,38},{36,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(leftHeart.q_out, leftHeartOutflow) annotation (Line(
+            points={{46,26},{60,26}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(rightHeart.q_out, rightHeartOutflow) annotation (Line(
+            points={{-26,28},{-20,28},{-20,64}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(leftHeartInflow, pressureMeasure1.q_in) annotation (Line(
+            points={{8,64},{8,40}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(rightHeartInflow, rightAtrium.q_in) annotation (Line(
+            points={{-82,28},{-60,28}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(leftHeartInflow, leftHeart.q_in) annotation (Line(
+            points={{8,64},{8,26},{26,26}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
+        connect(rightAtrium.volume, volume) annotation (Line(
+            points={{-60,18},{-60,6},{-22,6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics), Diagram(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
+      end Heart;
+
+      model CardiovascularSystem
+
+        replaceable Heart
+              heart annotation (Placement(transformation(extent={{-12,-12},{8,8}})));
+        replaceable SystemicCirculation
+                            systemicCirculation
+          annotation (Placement(transformation(extent={{-12,-34},{8,-14}})));
+        replaceable PulmonaryCirculation
+                             pulmonaryCirculation
+          annotation (Placement(transformation(extent={{-12,12},{8,32}})));
+      equation
+        connect(systemicCirculation.inflow, heart.leftHeartOutflow) annotation (Line(
+            points={{7.6,-23.8},{16,-23.8},{16,-0.571429},{3.6,-0.571429}},
+            color={190,0,0},
+            thickness=1,
+            smooth=Smooth.Bezier));
+        connect(heart.leftHeartInflow, pulmonaryCirculation.outflow)
+          annotation (Line(
+            points={{5.6,-3.71429},{16,-3.71429},{16,22},{8,22}},
+            color={190,0,0},
+            thickness=1,
+            smooth=Smooth.Bezier));
+        connect(systemicCirculation.outflow, heart.rightHeartInflow) annotation (Line(
+            points={{-11.2,-23.8},{-20,-23.8},{-20,-4.85714},{-6.8,-4.85714}},
+            color={190,0,0},
+            thickness=1,
+            smooth=Smooth.Bezier));
+        connect(heart.rightHeartOutflow, pulmonaryCirculation.inflow) annotation (
+            Line(
+            points={{-2.4,-0.857143},{-18,-0.857143},{-18,22},{-12,22}},
+            color={190,0,0},
+            thickness=1,
+            smooth=Smooth.Bezier));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-20,-40},
+                  {20,40}}),                                                                                   graphics), Icon(
+              coordinateSystem(extent={{-20,-40},{20,40}},  preserveAspectRatio=false),
+              graphics={Bitmap(extent={{-30,38},{30,-36}},
+                                                         fileName=
+                    "modelica://MeursModel/Resources/Icons/cvsconcept.png")}),
+          Documentation(info="<html>
+<p>Cardiovascular subsystem in famous Guyton-Coleman-Granger model from 1972. </p>
+<p><br>Model, all parameters and all initial values are from article: </p>
+<p>A.C. Guyton, T.G. Coleman, H.J. Granger (1972). &QUOT;Circulation: overall regulation.&QUOT; Annual review of physiology 34(1): 13-44.</p>
+</html>"));
+      end CardiovascularSystem;
+
+      model CVS_Steady
+        extends CardiovascularSystem(
+          pulmonaryCirculation(pulmonaryArteries(Simulation=Physiolibrary.Types.SimulationType.InitSteadyState),
+              pulmonaryVeinsAndLeftAtrium(Simulation=Physiolibrary.Types.SimulationType.InitSteadyState)),
+
+          heart(rightAtrium(isDependent=true, Simulation=Physiolibrary.Types.SimulationType.InitSteadyState)),
+
+          systemicCirculation(veins(Simulation=Physiolibrary.Types.SimulationType.InitSteadyState),
+              arteries(Simulation=Physiolibrary.Types.SimulationType.InitSteadyState)));
+        Physiolibrary.SteadyStates.Components.MassConservationLaw
+          massConservationLaw(
+          n=3,
+          Simulation=Physiolibrary.Types.SimulationType.InitSteadyState,
+          Total=0.005)
+          annotation (Placement(transformation(extent={{26,-6},{40,10}})));
+      equation
+        connect(systemicCirculation.volume, massConservationLaw.fragment[1])
+          annotation (Line(
+            points={{-2,-29.2},{-2,-32},{26,-32},{26,-2.26667}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(heart.volume, massConservationLaw.fragment[2]) annotation (Line(
+            points={{-2.6,-6.8},{-2.6,-10},{18,-10},{18,-1.2},{26,-1.2}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(pulmonaryCirculation.volume, massConservationLaw.fragment[3])
+          annotation (Line(
+            points={{-2,16.8},{-2,10},{26,10},{26,-0.133333}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-40,-60},{40,60}}), graphics), Documentation(info="<html>
+<p>Steady state model extension of Cardiovascular subsystem in famous Guyton-Coleman-Granger model from 1972. </p>
+</html>"));
+      end CVS_Steady;
+    end Models;
   end Hydraulic;
   annotation (Documentation(info="<html>
 <p>Physiolibraryextension is package containing blocks which was not yet approved to be involved in Physiolibrary. It contains development  input output types as well as a new components to support modeling physiology.</p>
@@ -670,5 +1064,5 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
 <p>Licensed by Tomas Kulhanek under the Modelica License 2</p>
 <p>Copyright &copy; 2014, Tomas Kulhanek, Charles University in Prague.</p>
 <p><br/><i>This Modelica package is&nbsp;<u>free</u>&nbsp;software and the use is completely at&nbsp;<u>your own risk</u>; it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the disclaimer of warranty) see&nbsp;<a href=\"modelica://Physiolibrary.UsersGuide.ModelicaLicense2\">Physiolibrary.UsersGuide.ModelicaLicense2</a>&nbsp;or visit&nbsp;<a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"), uses(Modelica(version="3.2.1"), Physiolibrary(version="2.1")));
+</html>"), uses(Modelica(version="3.2.1"), Physiolibrary(version="2.1.1")));
 end Cardiovascular;
