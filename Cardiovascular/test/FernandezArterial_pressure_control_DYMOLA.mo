@@ -435,7 +435,8 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Math.Product Product1 annotation (Placement(transformation(
             extent={{-18,46},{2,66}}, rotation=0)));
     Modelica.Blocks.Math.Product Product2 annotation (Placement(transformation(
-            extent={{-48,-16},{-28,4}}, rotation=0)));
+            extent={{-52,-42},{-32,-22}},
+                                        rotation=0)));
     Modelica.Blocks.Math.Add Add1(k2=-1) annotation (Placement(transformation(
             extent={{44,-14},{64,6}}, rotation=0)));
     Modelica.Blocks.Sources.Constant Constant2(k=0.5)
@@ -456,9 +457,10 @@ package control "modelo y control a corto plazo"
     connect(Clock1.y,Product1.u1)             annotation (Line(points={{-59.1,
             55},{-54,54},{-42,54},{-42,62},{-20,62}}, color={0,0,255}));
     connect(Clock1.y,Product2.u2)             annotation (Line(points={{-59.1,
-            55},{-42,55},{-42,-12},{-50,-12}}, color={0,0,255}));
+            55},{-42,55},{-42,-38},{-54,-38}}, color={0,0,255}));
     connect(Division1.y,Product2.u1)
-      annotation (Line(points={{-59,-2},{-44,-2},{-44,0},{-50,0}}, color={0,0,
+      annotation (Line(points={{-59,-2},{-44,-2},{-44,-26},{-54,-26}},
+                                                                   color={0,0,
             255}));
     connect(Division1.y,Product1.u2)
       annotation (Line(points={{-59,-2},{-56,-2},{-56,50},{-20,50}}, color={0,0,
@@ -469,7 +471,8 @@ package control "modelo y control a corto plazo"
       annotation (Line(points={{65,-4},{72,-4},{72,21},{63,21}},
                                                                color={0,0,255}));
     connect(Product2.y,Add2.u1)
-      annotation (Line(points={{-27,-6},{0,-6},{0,0},{-24,0}}, color={0,0,255}));
+      annotation (Line(points={{-31,-32},{0,-32},{0,0},{-24,0}},
+                                                               color={0,0,255}));
     connect(Constant2.y,Add2.u2)             annotation (Line(points={{-11.1,
             -40},{-4,-40},{-4,-12},{-24,-12}}, color={0,0,255}));
     connect(Add2.y,RealToInteger1.u)
