@@ -350,6 +350,169 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
               fillPattern=FillPattern.Solid,
                   textString="%name")}));
     end FrequencyControl;
+
+    block HydraulicElastanceToComplianceFactorConst
+        "Constant signal of type HydraulicCompliance from HydraulicElastance constant"
+     parameter Physiolibrary.Types.HydraulicElastance k
+          "Reciprocal constant value of hydraulic compliance";
+     parameter Real factor = 1;
+          Physiolibrary.Types.RealIO.HydraulicComplianceOutput y
+          "HydraulicCompliance constant"
+                                       annotation (Placement(transformation(extent={
+                {40,-10},{60,10}}), iconTransformation(extent={{40,-10},{60,10}})));
+    equation
+          y=1/k*factor;
+      annotation (defaultComponentName="hydraulicElastance2Compliance",
+                 Diagram(coordinateSystem(extent={{-40,-40},{40,40}})), Icon(
+            coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=false),
+                graphics={
+            Rectangle(extent={{-40,40},{40,-40}},
+              lineColor={0,0,0},
+                  radius=10,
+              fillColor={236,236,236},
+                              fillPattern=FillPattern.Solid),
+            Text( extent={{-100,-44},{100,-64}},
+              lineColor={0,0,0},
+                      fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                  textString="%name"),
+            Text(         extent={{-40,12},{40,-8}},
+              lineColor={0,0,0},
+                  fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                      textString="Const"),
+              Text(
+                extent={{-18,-10},{22,-26}},
+                lineColor={0,0,255},
+                textString="*"),
+              Text(
+                extent={{-18,-24},{20,-32}},
+                lineColor={0,0,255},
+                textString="%factor")}));
+    end HydraulicElastanceToComplianceFactorConst;
+
+    block HydraulicResistanceToConductanceFactorConst
+        "Constant signal of type HydraulicConductance from HydraulicResistance parameter"
+     parameter Physiolibrary.Types.HydraulicResistance k
+          "Reciprocal constant value of hydraulic conductance";
+     parameter Real factor = 1;
+          Physiolibrary.Types.RealIO.HydraulicConductanceOutput y
+          "HydraulicConductance constant"
+                                        annotation (Placement(transformation(extent=
+               {{40,-10},{60,10}}), iconTransformation(extent={{40,-10},{60,10}})));
+    equation
+          y=1/k*factor;
+      annotation (defaultComponentName="hydraulicResistance2conductance",
+                 Diagram(coordinateSystem(extent={{-40,-40},{40,40}})), Icon(
+            coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=false),
+                graphics={
+            Rectangle(extent={{-40,40},{40,-40}},
+              lineColor={0,0,0},
+                  radius=10,
+              fillColor={236,236,236},
+                              fillPattern=FillPattern.Solid),
+            Text( extent={{-100,-44},{100,-64}},
+              lineColor={0,0,0},
+                      fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                  textString="%name"),
+            Text(         extent={{-40,10},{40,-10}},
+              lineColor={0,0,0},
+                  fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                      textString="Const"),
+            Text(
+              extent={{-14,-20},{24,-28}},
+              lineColor={0,0,255},
+              textString="%factor"),
+            Text(
+              extent={{-16,-8},{24,-24}},
+              lineColor={0,0,255},
+              textString="*")}));
+    end HydraulicResistanceToConductanceFactorConst;
+
+    block VolumeFactorConst "Constant signal of type Volume"
+     parameter Physiolibrary.Types.Volume k "Constant Volume output value";
+     parameter Real factor = 1;
+          Physiolibrary.Types.RealIO.VolumeOutput y "Volume constant" annotation (
+          Placement(transformation(extent={{40,-10},{60,10}}), iconTransformation(
+              extent={{40,-10},{60,10}})));
+    equation
+          y=k*factor;
+      annotation (defaultComponentName="volume",
+                 Diagram(coordinateSystem(extent={{-40,-40},{40,40}})), Icon(
+            coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=false),
+                graphics={
+            Rectangle(extent={{-40,40},{40,-40}},
+              lineColor={0,0,0},
+                  radius=10,
+              fillColor={236,236,236},
+                              fillPattern=FillPattern.Solid),
+            Text( extent={{-100,-44},{100,-64}},
+              lineColor={0,0,0},
+                      fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                  textString="%name"),
+            Text(         extent={{-40,10},{40,-10}},
+              lineColor={0,0,0},
+                  fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                      textString="Const"),
+            Text(
+              extent={{-18,-8},{22,-24}},
+              lineColor={0,0,255},
+              textString="*"),
+            Text(
+              extent={{-18,-20},{20,-28}},
+              lineColor={0,0,255},
+              textString="%factor")}));
+    end VolumeFactorConst;
+
+    block HydraulicResistanceFactorConst
+        "Obsolete, please use HydraulicConductance instead!"
+
+     parameter Physiolibrary.Types.HydraulicResistance k "Hydraulic resistance";
+     parameter Real factor=1;
+          Modelica.Blocks.Interfaces.RealOutput
+                                            y(final quantity="HydraulicConductance",final unit="(Pa.s)/m3", displayUnit="(mmHg.min)/ml", nominal=(1e+6)*(133.322387415)*60)
+          "HydraulicResistance constant"
+        annotation (Placement(transformation(extent={{40,-10},{60,10}}),
+                    iconTransformation(extent={{40,-10},{60,10}})));
+    equation
+          y=k*factor;
+      annotation (defaultComponentName="hydraulicResistance",
+                      Icon(
+            coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=false),
+                graphics={
+            Rectangle(extent={{-40,40},{40,-40}},
+              lineColor={0,0,0},
+                  radius=10,
+              fillColor={236,236,236},
+                              fillPattern=FillPattern.Solid),
+            Text( extent={{-100,-44},{100,-64}},
+              lineColor={0,0,0},
+                      fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                  textString="%name"),
+            Text(         extent={{-40,10},{40,-10}},
+              lineColor={0,0,0},
+                  fillColor={236,236,236},
+              fillPattern=FillPattern.Solid,
+                      textString="Const"),
+            Text(
+              extent={{-18,-8},{22,-24}},
+              lineColor={0,0,255},
+              textString="*"),
+            Text(
+              extent={{-16,-20},{22,-28}},
+              lineColor={0,0,255},
+              textString="%factor")}),
+          Documentation(info="<html>
+<p>Please use the reciprocal value of hydraulic resistance, wich is called hydraulic conductance for the compatibility with other blocks and models!</p>
+<p>Because zero hydraulic conductance means zero volumetric flow, it is much better to use this reciprocal value of hydraulic resistance.</p>
+<p>Even it is not recommended, you can use this block, but do not forget to make reciprocal value (in example using Physiolibrary.Blocks.Math.Reciprocal) before connecting to library components!</p>
+</html>"));
+    end HydraulicResistanceFactorConst;
     end Constants;
   end Types;
 
@@ -551,22 +714,22 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         der(Volume) = q_in.q;
         der(SumPressure) = q_in.pressure;
         annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-                  -100},{100,100}}),                                                                     graphics={                                   Text(extent = {{-32,46},{26,32}}, lineColor=
+                  -100},{100,100}}),                                                                     graphics={                                   Text(extent=  {{-32,46},{26,32}}, lineColor=
                     {0,128,0},                                                                                                    fillColor=
                     {85,170,255},
                   fillPattern=FillPattern.Solid,
                 textString="HR"),                                                                                                    Text(extent={{
-                    -52,11},{52,-11}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin={
-                    -77,30},                                                                                                    rotation = 90, textString = "Ps"),Text(extent={{
-                    -53,10},{53,-10}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin={
-                    -56,31},                                                                                                    rotation = 90, textString = "Pd"),Text(extent={{
-                    -55,12},{55,-12}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin={
-                    -32,35},                                                                                                    rotation = 90, textString = "Pmean"),Text(extent = {{-29,12},{29,-12}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin = {34,7}, rotation = 90, textString = "SV"),Text(extent = {{-30,11},{30,-11}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                  fillPattern =                                                                                                    FillPattern.Solid, origin = {55,8}, rotation = 90, textString = "CO")}),
+                    -52,11},{52,-11}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                  fillPattern=                                                                                                    FillPattern.Solid, origin={
+                    -77,30},                                                                                                    rotation=  90, textString=  "Ps"),Text(extent={{
+                    -53,10},{53,-10}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                  fillPattern=                                                                                                    FillPattern.Solid, origin={
+                    -56,31},                                                                                                    rotation=  90, textString=  "Pd"),Text(extent={{
+                    -55,12},{55,-12}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                  fillPattern=                                                                                                    FillPattern.Solid, origin={
+                    -32,35},                                                                                                    rotation=  90, textString=  "Pmean"),Text(extent=  {{-29,12},{29,-12}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                  fillPattern=                                                                                                    FillPattern.Solid, origin=  {34,7}, rotation=  90, textString=  "SV"),Text(extent=  {{-30,11},{30,-11}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                  fillPattern=                                                                                                    FillPattern.Solid, origin=  {55,8}, rotation=  90, textString=  "CO")}),
             Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
                   100}}), graphics));
       end BloodFlowMeasurement;
@@ -590,9 +753,19 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         discrete Boolean b "event condition";
         Physiolibrary.Types.Time T0 "start of cardiac cycle ";
         discrete Physiolibrary.Types.Time HP "length of cardiac cycle";
+      //  parameter Boolean useHRInput = false;
+      /*    Physiolibrary.Types.RealIO.FrequencyInput HR if useHRInput annotation (Placement(
+        transformation(extent={{-170,-64},{-130,-24}}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={-2,62})));*/
       initial equation
         T0 = 0;
-        HP = 1;//1/HR
+      //  if useHRInput then
+      //    HP = 1/HR;
+      //  else
+          HP = 1;
+      //  end;
         CO = 0;
         SV = 0;
         Ps = 0;
@@ -604,9 +777,12 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
 
         Pmax = max(Pmax, q_in.pressure);
         Pmin = min(Pmin, q_in.pressure);
-        b = der(q_in.pressure)>0;//time - pre(T0) >= pre(HP) "b=true when new cardiac cycle begins";
-        when { b and not
-                        (pre(b))} then
+      //  if useHRInput then
+      //    b = time - pre(T0) >= pre(HP) "b=true when new cardiac cycle begins";
+      //  else
+          b = der(q_in.pressure)>0;
+      //  end;
+        when { b and not (pre(b))} then
           T0 = time "initial time of current cardiac cycle";
            if (pre(T0)>0) then
              HP = time-pre(T0);
@@ -651,11 +827,11 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
                   fillPattern=FillPattern.Solid,                                                                                                    origin={
                     -32,35},                                                                                                    rotation = 90,
                 textString="Pmean"),                                                                                                    Text(extent = {{-29,12},{29,-12}}, lineColor=
-                    {255,0,0},                                                                                                    fillColor=
+                    {0,0,255},                                                                                                    fillColor=
                     {85,170,255},
                   fillPattern=FillPattern.Solid,                                                                                                    origin = {34,7}, rotation = 90,
                 textString="SV"),                                                                                                    Text(extent = {{-30,11},{30,-11}}, lineColor=
-                    {255,0,0},                                                                                                    fillColor=
+                    {0,0,255},                                                                                                    fillColor=
                     {85,170,255},
                   fillPattern=FillPattern.Solid,                                                                                                    origin = {55,8}, rotation = 90,
                 textString="CO")}),
@@ -1058,13 +1234,7 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       end CVS_Steady;
     end Models;
   end Hydraulic;
-  annotation (Documentation(info="<html>
-<p>Physiolibraryextension is package containing blocks which was not yet approved to be involved in Physiolibrary. It contains development  input output types as well as a new components to support modeling physiology.</p>
-</html>", revisions="<html>
-<p>Licensed by Tomas Kulhanek under the Modelica License 2</p>
-<p>Copyright &copy; 2014, Tomas Kulhanek, Charles University in Prague.</p>
-<p><br/><i>This Modelica package is&nbsp;<u>free</u>&nbsp;software and the use is completely at&nbsp;<u>your own risk</u>; it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the disclaimer of warranty) see&nbsp;<a href=\"modelica://Physiolibrary.UsersGuide.ModelicaLicense2\">Physiolibrary.UsersGuide.ModelicaLicense2</a>&nbsp;or visit&nbsp;<a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"), uses(Modelica(version="3.2.1"), Physiolibrary(version="2.1.1")));
+
   package Blocks
   extends Modelica.Icons.Package;
     package Interpolation
@@ -1122,4 +1292,11 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
           end Curve;
     end Interpolation;
   end Blocks;
+  annotation (Documentation(info="<html>
+<p>Physiolibraryextension is package containing blocks which was not yet approved to be involved in Physiolibrary. It contains development  input output types as well as a new components to support modeling physiology.</p>
+</html>", revisions="<html>
+<p>Licensed by Tomas Kulhanek under the Modelica License 2</p>
+<p>Copyright &copy; 2014, Tomas Kulhanek, Charles University in Prague.</p>
+<p><br/><i>This Modelica package is&nbsp;<u>free</u>&nbsp;software and the use is completely at&nbsp;<u>your own risk</u>; it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the disclaimer of warranty) see&nbsp;<a href=\"modelica://Physiolibrary.UsersGuide.ModelicaLicense2\">Physiolibrary.UsersGuide.ModelicaLicense2</a>&nbsp;or visit&nbsp;<a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
+</html>"), uses(Modelica(version="3.2.1"), Physiolibrary(version="2.1.1")));
 end Cardiovascular;

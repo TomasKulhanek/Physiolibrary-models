@@ -29,25 +29,6 @@ package FernandezModel
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
     end pulsos;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     model VariableElasticityGenerator
 
       pulsos pulsos1(HP(displayUnit="s", start=1))
@@ -645,7 +626,6 @@ package FernandezModel
     end SystemicCirculation_test;
   end Parts;
 
-
   package Models
 
     model Hemodynamics_pure
@@ -660,14 +640,13 @@ package FernandezModel
     equation
       connect(heart.leftHeartOutflow, systemicCirculation.inflow) annotation (
           Line(
-          points={{2.95,-11.2},{24,-11.2},{24,-48.0571},{15.45,-48.0571}},
+          points={{2.95,-11.2},{24,-11.2},{24,-45.4},{15.45,-45.4}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.None));
       connect(systemicCirculation.outflow, heart.rightHeartInflow) annotation (
           Line(
-          points={{-18.85,-48.5714},{-32,-48.5714},{-32,-10.6857},{-11.4,
-              -10.6857}},
+          points={{-18.85,-46},{-32,-46},{-32,-10.6857},{-11.4,-10.6857}},
           color={190,0,0},
           thickness=1,
           smooth=Smooth.None));
@@ -712,14 +691,14 @@ package FernandezModel
           smooth=Smooth.None));
       connect(baroreceptor.evenacava, hemodynamics_baro.ECV) annotation (Line(
           points={{-0.74,-30.14},{-22.37,-30.14},{-22.37,-32.4},{-47.4333,-32.4}},
-
           color={0,0,127},
           smooth=Smooth.None));
+
       connect(baroreceptor.RS, hemodynamics_baro.RSP) annotation (Line(
           points={{-0.08,-18.92},{-17.04,-18.92},{-17.04,-22.6},{-36.4667,-22.6}},
-
           color={0,0,127},
           smooth=Smooth.None));
+
       connect(baroreceptor.evright, hemodynamics_baro.ERMax) annotation (Line(
           points={{-0.08,-7.7},{-22.04,-7.7},{-22.04,-7.2},{-49,-7.2}},
           color={0,0,127},
@@ -755,8 +734,7 @@ package FernandezModel
                 -100,-100},{100,100}}), graphics));
     end Hemodynamics_stenosiswithoutbaro;
   end Models;
-  annotation (uses(Physiolibrary(version="2.1"), Modelica(version="3.2.1"),
-      MeursModel(version="2")));
+
   package Experiments
     model SystemicCirculation_baro
       extends FernandezModel.Parts.SystemicCirculation(
@@ -1112,6 +1090,11 @@ package FernandezModel
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={8,24})));
+    equation
+      hydrauliccompliance = 1 / (InitialElastance + (if time < startTime then
+        0 else if time < (startTime + duration) then
+          (time - startTime)*(FinalElastance-InitialElastance)/duration else
+          (FinalElastance-InitialElastance)));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                              graphics={
@@ -1154,11 +1137,8 @@ package FernandezModel
               fillPattern=FillPattern.Solid,
               textString="%name")}),       Diagram(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
-    equation
-      hydrauliccompliance = 1 / (InitialElastance + (if time < startTime then
-        0 else if time < (startTime + duration) then
-          (time - startTime)*(FinalElastance-InitialElastance)/duration else
-          (FinalElastance-InitialElastance)));
     end Stenosis;
   end Experiments;
+  annotation (uses(Physiolibrary(version="2.1"), Modelica(version="3.2.1"),
+      MeursModel(version="2")));
 end FernandezModel;
