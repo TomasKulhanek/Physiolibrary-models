@@ -328,9 +328,9 @@ package BurkhoffModel
           smooth=Smooth.None));
       connect(SystemicVeins.volume, Add3BV.u1) annotation (Line(
           points={{46,-10},{46,-28},{44,-28},{44,-46},{0,-46},{0,-54},{10,-54}},
-
           color={0,0,127},
           smooth=Smooth.None));
+
       connect(SystemicArteries.volume, Add3BV.u2) annotation (Line(
           points={{-2,-10},{-2,-64},{10,-64},{10,-62}},
           color={0,0,127},
@@ -346,9 +346,9 @@ package BurkhoffModel
           smooth=Smooth.None));
       connect(SystemicArteries.StressedVolume, Add3SV.u2) annotation (Line(
           points={{-10,-10.2},{-26,-10.2},{-26,-38},{-96,-38},{-96,-58},{-88,-58}},
-
           color={0,0,127},
           smooth=Smooth.None));
+
       connect(AortaProximal.StressedVolume, Add3SV.u3) annotation (Line(
           points={{-58,-10.2},{-58,-36},{-98,-36},{-98,-66},{-88,-66}},
           color={0,0,127},
@@ -785,7 +785,6 @@ package BurkhoffModel
           thickness=1,
           smooth=Smooth.None));
 
-
       connect(PTH,ventricle. externalPressure) annotation (Line(
           points={{-56,50},{-56,56},{48,56},{48,8}},
           color={0,0,127},
@@ -974,7 +973,7 @@ package BurkhoffModel
         annotation (Placement(transformation(extent={{6,-4},{-6,4}},
             rotation=90,
             origin={20,54})));
-      Cardiovascular.Hydraulic.Components.AortaFlowMeasurement
+      Cardiovascular.Hydraulic.Components.BloodFlowMeasurement
         flowPressureMeasurement
         annotation (Placement(transformation(extent={{18,8},{38,28}})));
       Physiolibrary.Types.Constants.FrequencyConst HeartRate(k=1.1666666666667)   annotation(Placement(transformation(extent={{-4,-4},
@@ -1080,6 +1079,10 @@ package BurkhoffModel
           points={{-25,58},{10.44,58},{10.44,33.28}},
           color={0,0,127},
           smooth=Smooth.None));
+      connect(HeartRate.y, flowPressureMeasurement.HR) annotation (Line(
+          points={{-65,68},{-64,68},{-64,72},{28,72},{28,24.6}},
+          color={0,0,127},
+          smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-80,-60},
                 {60,80}}),              graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-80,-60},{60,80}}),
@@ -1140,13 +1143,13 @@ package BurkhoffModel
               10},{-12,48},{30,48},{30,56.3},{34.64,56.3}},                                                                    color = {0,0,127}, smooth = Smooth.None));
       connect(AEt0.y,AtrialElastance.Et0) annotation(Line(points={{21.5,37},{
               21.5,43.5},{34.64,43.5},{34.64,50.06}},                                                                  color = {0,0,127}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent = {{-112,60},{-54,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AEt0"),Text(extent = {{-62,60},{-4,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "VEt0"),Text(extent = {{-16,60},{42,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "PTH"),Text(extent = {{-76,-34},{26,-60}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AVGain"),Text(extent = {{-84,-84},{-42,-94}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Volume"),Text(extent = {{-20,-84},{40,-92}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent=  {{-112,60},{-54,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AEt0"),Text(extent=  {{-62,60},{-4,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "VEt0"),Text(extent=  {{-16,60},{42,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "PTH"),Text(extent=  {{-76,-34},{26,-60}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVGain"),Text(extent=  {{-84,-84},{-42,-94}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Volume"),Text(extent=  {{-20,-84},{40,-92}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
     end TestElastance;
 
     model TestPulmonary "model of hemodynamics by Burkhoff in Physiolibrary"
