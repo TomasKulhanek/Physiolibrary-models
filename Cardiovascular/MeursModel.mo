@@ -13,7 +13,9 @@ package MeursModel
       replaceable
         Physiolibrary.Types.Constants.HydraulicElastanceToComplianceConst
                                                                         EETHA(k(displayUnit = "mmHg/ml") = 74127247.40274) annotation(Placement(visible = true, transformation(origin = {-82, 58}, extent = {{-8, -6}, {8, 6}}, rotation = 0)));
-      Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RETHA(k(displayUnit = "(mmHg.s)/ml") = 7999343.2449) annotation(Placement(visible = true, transformation(origin = {-41, 32}, extent = {{-7, -6}, {7, 6}}, rotation = 0)));
+      replaceable
+        Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst
+                                                                          RETHA(k(displayUnit = "(mmHg.s)/ml") = 7999343.2449) annotation(Placement(visible = true, transformation(origin = {-41, 32}, extent = {{-7, -6}, {7, 6}}, rotation = 0)));
       Physiolibrary.Types.Constants.VolumeConst VITHAU(k = 0.00014)
         "unstressed volume of intrathoracic arteries"                                                             annotation(Placement(visible = true, transformation(origin = {6, 46}, extent = {{-8, -6}, {8, 6}}, rotation = 0)));
       replaceable
@@ -50,7 +52,9 @@ package MeursModel
       Physiolibrary.Types.RealIO.PressureInput extraThoracicPressure annotation(Placement(transformation(extent = {{12, 26}, {52, 66}}), iconTransformation(extent = {{-13, -13}, {13, 13}}, rotation = 270, origin = {57, 35})));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b bloodflowOutflow annotation(Placement(visible = true, transformation(origin = {-82, -24}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a bloodFlowInflow annotation(Placement(visible = true, transformation(origin = {90, -34}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {98, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RETHV(k(displayUnit = "(Pa.s)/m3") = 11999014.86735) annotation(Placement(visible = true, transformation(origin = {11, -2}, extent = {{-7, -6}, {7, 6}}, rotation = 0)));
+      replaceable
+        Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst
+                                                                          RETHV(k(displayUnit = "(Pa.s)/m3") = 11999014.86735) annotation(Placement(visible = true, transformation(origin = {11, -2}, extent = {{-7, -6}, {7, 6}}, rotation = 0)));
       Physiolibrary.Types.Constants.VolumeConst VETHVU(k(displayUnit = "m3") = 0.001) annotation(Placement(visible = true, transformation(origin = {38, -8}, extent = {{-8, -6}, {8, 6}}, rotation = 0)));
       Physiolibrary.Types.Constants.HydraulicElastanceToComplianceConst EETHV(k(displayUnit = "Pa/m3") = 2253148.3473135) annotation(Placement(visible = true, transformation(origin = {37, 10}, extent = {{-7, -6}, {7, 6}}, rotation = 0)));
       replaceable
@@ -60,7 +64,8 @@ package MeursModel
                                                 VITHVU(k(displayUnit = "m3") = 0.00119) annotation(Placement(visible = true, transformation(origin = {-56, 17}, extent = {{-8, -7}, {8, 7}}, rotation = 0)));
       replaceable
         Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst
-                                                                          RRAIN(k(displayUnit = "(Pa.s)/m3") = 399967.162245) annotation(Placement(visible = true, transformation(origin = {-84, 5}, extent = {{-8, -7}, {8, 7}}, rotation = 0)));
+                                                                          RRAIN(k(
+            displayUnit="(mmHg.s)/ml") = 399967.162245)                                                                       annotation(Placement(visible = true, transformation(origin = {-84, 5}, extent = {{-8, -7}, {8, 7}}, rotation = 0)));
     equation
       connect(RRAIN.y, CentralVenousResistance.cond) annotation(Line(points = {{-74, 5}, {-62, 5}, {-62, -28}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(VITHVU.y, IntraThoracicVeins.zeroPressureVolume) annotation(Line(points = {{-46, 17}, {-42, 17}, {-42, -22.8}, {-31.2, -22.8}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
@@ -94,10 +99,14 @@ package MeursModel
       replaceable
         Physiolibrary.Types.Constants.HydraulicElastanceToComplianceConst
                                                                         EPA(k = 31064116.267695) annotation(Placement(visible = true, transformation(origin = {-85, 50}, extent = {{-9, -6}, {9, 6}}, rotation = 0)));
-      Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RPP(k(displayUnit = "(mmHg.s)/ml") = 14665462.61565) annotation(Placement(visible = true, transformation(origin = {-41, 39}, extent = {{-9, -7}, {9, 7}}, rotation = 0)));
+      replaceable
+        Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst
+                                                                          RPP(k(displayUnit = "(mmHg.s)/ml") = 14665462.61565) annotation(Placement(visible = true, transformation(origin = {-41, 39}, extent = {{-9, -7}, {9, 7}}, rotation = 0)));
       Physiolibrary.Types.Constants.HydraulicElastanceToComplianceConst EPV(k = 6066168.6273825) annotation(Placement(visible = true, transformation(origin = {-3, 47}, extent = {{-9, -7}, {9, 7}}, rotation = 0)));
       Physiolibrary.Types.Constants.VolumeConst VPVU(k = 0.00035) annotation(Placement(visible = true, transformation(origin = {-3, 24}, extent = {{-9, -6}, {9, 6}}, rotation = 0)));
-      Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RLAIN(k(displayUnit = "(mmHg.s)/ml") = 399967.162245) annotation(Placement(visible = true, transformation(origin = {54, 40}, extent = {{-10, -6}, {10, 6}}, rotation = 0)));
+      replaceable
+        Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst
+                                                                          RLAIN(k(displayUnit = "(mmHg.s)/ml") = 399967.162245) annotation(Placement(visible = true, transformation(origin = {54, 40}, extent = {{-10, -6}, {10, 6}}, rotation = 0)));
     equation
       connect(RLAIN.y, PulmonaryVeinResistance.cond) annotation(Line(points = {{66.5, 40}, {81.75, 40}, {61, 21.5}, {61, 7.2}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(VPVU.y, PulmonaryVeins.zeroPressureVolume) annotation(Line(points = {{8.25, 24}, {10, 24}, {10, 9.6}, {12.4, 9.6}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
@@ -326,7 +335,8 @@ package MeursModel
 
     model LeftHeart
       extends Physiolibrary.Icons.LeftHeart;
-      extends SideOfHeart(VxAU(k = 3e-005), VxVU(k = 6e-005), RxAOutflow(k = 399967.162245), RxVOutflow(k = 1066579.09932), ventricularElastance(EMIN = 11999014.86735, EMAX = 533289549.66), atrialElastance(EMIN = 15998686.4898, EMAX = 37330268.4762), atrium(volume_start = 4e-005), ventricle(volume_start = 0.00013));
+      extends SideOfHeart(VxAU(k = 3e-005), VxVU(k = 6e-005), RxAOutflow(k = 399967.162245), RxVOutflow(k = 1066579.09932), ventricularElastance(EMIN=
+              11999014.86735, EMAX=533289549.66),                                                                                                    atrialElastance(EMIN = 15998686.4898, EMAX = 37330268.4762), atrium(volume_start = 4e-005), ventricle(volume_start = 0.00013));
       annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end LeftHeart;
 
@@ -384,17 +394,31 @@ package MeursModel
       Physiolibrary.Types.Constants.HydraulicElastanceToComplianceConst EST(k = 34930465.50273) annotation(Placement(visible = true, transformation(origin = {8, 42}, extent = {{-7, -6}, {7, 6}}, rotation = 180)));
       Physiolibrary.Types.Constants.VolumeConst UVST(k = 0.000185) annotation(Placement(visible = true, transformation(origin = {-27, 24}, extent = {{-7, -6}, {7, 6}}, rotation = 0)));
       replaceable
-        Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst
-                                                                          RSVEN(k(displayUnit = "(mmHg.s)/ml") = 26664477.483) annotation(Placement(visible = true, transformation(origin = {-69, 20}, extent = {{-7, -6}, {7, 6}}, rotation = 0)));
+        Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RTA(k(
+            displayUnit="(mmHg.s)/ml") = 26664477.483) annotation (Placement(
+            visible=true, transformation(
+            origin={-69,20},
+            extent={{-7,-6},{7,6}},
+            rotation=0)));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a bloodFlowInflow annotation(Placement(visible = true, transformation(origin = {72, -2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {84, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b bloodFlowOutflow annotation(Placement(visible = true, transformation(origin = {-74, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-88, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       replaceable
-        Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst           RSART(k(displayUnit = "(mmHg.s)/ml") = 106657909.932) annotation(Placement(visible = true, transformation(origin = {70.5, 16}, extent = {{-6.5, -6}, {6.5, 6}}, rotation = 180)));
+        Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RSP(k(
+            displayUnit="(mmHg.s)/ml") = 106657909.932) annotation (Placement(
+            visible=true, transformation(
+            origin={70.5,16},
+            extent={{-6.5,-6},{6.5,6}},
+            rotation=180)));
     equation
-      connect(RSART.y, SystemicArterioralConductance.cond) annotation(Line(points = {{62.375, 16}, {60, 16}, {60, 14}, {35, 14}, {35, 4.4}}, color = {0, 0, 127}));
+      connect(RSP.y, SystemicArterioralConductance.cond) annotation (Line(
+            points={{62.375,16},{60,16},{60,14},{35,14},{35,4.4}}, color={0,0,
+              127}));
       connect(SmallVenuleConductance.q_out, bloodFlowOutflow) annotation(Line(points = {{-60, 1}, {-78, 1}, {-74, 2}, {-74, 2}}, thickness = 1));
       connect(bloodFlowInflow, SystemicArterioralConductance.q_in) annotation(Line(points = {{72, -2}, {74, -2}, {74, -1}, {46, -1}}, thickness = 1));
-      connect(RSVEN.y, SmallVenuleConductance.cond) annotation(Line(points = {{-60.25, 20}, {-46, 20}, {-46, 6.4}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
+      connect(RTA.y, SmallVenuleConductance.cond) annotation (Line(
+          points={{-60.25,20},{-46,20},{-46,6.4}},
+          color={0,0,127},
+          smooth=Smooth.Bezier));
       connect(UVST.y, PeripheralVessels.zeroPressureVolume) annotation(Line(points = {{-18.25, 24}, {-10, 24}, {-10, 14}, {-10, 6}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(EST.y, PeripheralVessels.compliance) annotation(Line(points = {{-0.75, 42}, {-2, 42}, {-2, 22}, {-2, 6}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(extraThoracicPressure, PeripheralVessels.externalPressure) annotation(Line(points = {{40, 34}, {6, 34}, {6, 6}}, color = {0, 0, 127}));
@@ -739,11 +763,11 @@ package MeursModel
       connect(hydraulicresistancetoconductance1.y, ventricleArteryValve.Gon) annotation(Line(points = {{99, -78}, {84, -78}, {84, -54}, {68.8, -54}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(CxABackflow.y, atrioVentricleValve.Goff) annotation(Line(points = {{-9, -80}, {4, -80}, {4, -54}, {14.8, -54}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(CxVBackflow.y, ventricleArteryValve.Goff) annotation(Line(points = {{63, -78}, {74, -78}, {74, -54}, {83.2, -54}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-70, 90}, {-56, 78}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "T0"), Text(extent=  {{-42, 94}, {-26, 74}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tvs"), Text(extent=  {{-14, 94}, {2, 74}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tav"), Text(extent=  {{14, 92}, {34, 76}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tas"), Text(extent=  {{12, -82}, {38, -104}}, lineColor=  {0, 0, 255}, textString=  "PTH")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-70, 90}, {-56, 78}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "T0"), Text(extent = {{-42, 94}, {-26, 74}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tvs"), Text(extent = {{-14, 94}, {2, 74}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tav"), Text(extent = {{14, 92}, {34, 76}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tas"), Text(extent = {{12, -82}, {38, -104}}, lineColor = {0, 0, 255}, textString = "PTH")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end SideOfHeart_testPhysiolibraryValve;
 
     model LeftHeart_testPhysiolibraryValve
@@ -755,8 +779,8 @@ package MeursModel
     model RightHeart_testPhysiolibraryValve
       extends Physiolibrary.Icons.RightHeart;
       extends Test.SideOfHeart_testPhysiolibraryValve(atrialElastance(EMIN = 6666119.37075, EMAX = 19998358.11225), ventricularElastance(EMIN = 7599376.082655, EMAX = 65327969.83335), VxAU(k = 3e-005), RxAOutflow(k = 399967.162245), VxVU(k = 4e-005), RxVOutflow(k = 399967.162245), atrium(volume_start = 4e-005), ventricle(volume_start = 0.00013));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{32, 60}, {18, 64}, {6, 64}, {6, 76}, {18, 76}, {30, 72}, {44, 64}, {36, 58}, {32, 60}}, smooth=  Smooth.None,
-                fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {58, 117, 175}, pattern=  LinePattern.None, lineColor=  {0, 0, 0})}));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{32, 60}, {18, 64}, {6, 64}, {6, 76}, {18, 76}, {30, 72}, {44, 64}, {36, 58}, {32, 60}}, smooth = Smooth.None,
+                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {58, 117, 175}, pattern = LinePattern.None, lineColor = {0, 0, 0})}));
     end RightHeart_testPhysiolibraryValve;
 
     model Heart_testPhysiolibraryValve
@@ -788,7 +812,7 @@ package MeursModel
       connect(heartIntervals.T0, leftHeart.T0) annotation(Line(points = {{-32.8, 41}, {-32.8, 30}, {-1.16, 30}, {-1.16, 23.08}}, color = {0, 0, 127}, smooth = Smooth.Bezier));
       connect(leftHeartInflow, leftHeartInflow) annotation(Line(points = {{42, 8}, {36, 8}, {36, 8}, {42, 8}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(leftHeartOutflow, leftHeart.outflow) annotation(Line(points = {{38, 62}, {30, 62}, {30, 60}, {20, 60}, {20, 16.6}, {10, 16.6}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-60, -60}, {40, 80}}), graphics={  Text(extent=  {{-14, 50}, {44, 32}}, lineColor=  {0, 0, 255}, textString=  "PTH"), Text(extent=  {{-64, 48}, {4, 32}}, lineColor=  {0, 0, 255}, textString=  "HeartRate"), Bitmap(extent=  {{-6, 22}, {34, -48}}, fileName=  "modelica://Physiolibrary/Resources/Icons/srdceLeva.png"), Bitmap(extent=  {{-34, 18}, {6, -48}}, fileName=  "modelica://Physiolibrary/Resources/Icons/srdceprava.png")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-60, -60}, {40, 80}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-60, -60}, {40, 80}}), graphics={  Text(extent = {{-14, 50}, {44, 32}}, lineColor = {0, 0, 255}, textString = "PTH"), Text(extent = {{-64, 48}, {4, 32}}, lineColor = {0, 0, 255}, textString = "HeartRate"), Bitmap(extent = {{-6, 22}, {34, -48}}, fileName = "modelica://Physiolibrary/Resources/Icons/srdceLeva.png"), Bitmap(extent = {{-34, 18}, {6, -48}}, fileName = "modelica://Physiolibrary/Resources/Icons/srdceprava.png")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-60, -60}, {40, 80}}), graphics));
     end Heart_testPhysiolibraryValve;
 
     model Hemodynamics_testPhysiolibraryValve
@@ -859,15 +883,23 @@ package MeursModel
             redeclare
               Cardiovascular.Types.Constants.HydraulicResistanceToConductanceFactorConst
               RRAIN(k(displayUnit="(mmHg.s)/ml")),
-            redeclare Cardiovascular.Types.Constants.VolumeFactorConst VITHVU),
+            redeclare Cardiovascular.Types.Constants.VolumeFactorConst VITHVU,
+            redeclare
+              Cardiovascular.Types.Constants.HydraulicResistanceToConductanceFactorConst
+              RETHV),
             systemicPeripheralVessels(redeclare
               Cardiovascular.Types.Constants.HydraulicResistanceToConductanceFactorConst
-              RSVEN),
+              RSP, redeclare
+              Cardiovascular.Types.Constants.HydraulicResistanceToConductanceFactorConst
+              RTA),
           systemicArteries(redeclare
               Cardiovascular.Types.Constants.HydraulicElastanceToComplianceFactorConst
               EETHA, redeclare
               Cardiovascular.Types.Constants.HydraulicElastanceToComplianceFactorConst
-              EITHA)),                               heart(rightHeart(redeclare
+              EITHA,
+            redeclare
+              Cardiovascular.Types.Constants.HydraulicResistanceToConductanceFactorConst
+              RETHA)),                               heart(rightHeart(redeclare
               Experiment.VentricularElastance_factor_manipulation
               ventricularElastance,
             redeclare
@@ -883,7 +915,13 @@ package MeursModel
               RxVOutflow)),
         pulmonaryCirculation(redeclare
             Cardiovascular.Types.Constants.HydraulicElastanceToComplianceFactorConst
-            EPA));
+            EPA,
+          redeclare
+            Cardiovascular.Types.Constants.HydraulicResistanceToConductanceFactorConst
+            RPP,
+          redeclare
+            Cardiovascular.Types.Constants.HydraulicResistanceToConductanceFactorConst
+            RLAIN));
     end Hemodynamics_factor_manipulation;
   end Models;
 
@@ -915,7 +953,7 @@ package MeursModel
       annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-40, -40}, {20, 40}}), graphics={  Text(extent=  {{-22, 40}, {-4, 30}}, lineColor=  {0, 0, 0}, fillColor=  {255, 170, 170},
                 fillPattern=                                                                                                    FillPattern.Solid, textString=  "=pulmonary.volume+
   heart.volume+
-  systemic.volume")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-40, -40}, {20, 40}}), graphics={  Line(points=  {{-28, -6}, {-22, 0}, {-6, 2}, {-8, 2}}, color=  {190, 0, 0}, smooth=  Smooth.Bezier, thickness=  1)}));
+  systemic.volume")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-40, -40}, {20, 40}}), graphics={  Line(points = {{-28, -6}, {-22, 0}, {-6, 2}, {-8, 2}}, color = {190, 0, 0}, smooth = Smooth.Bezier, thickness = 1)}));
     end Hemodynamics_with_catheter;
 
     model BloodTransfusionHemorrhage
@@ -924,18 +962,18 @@ package MeursModel
       Physiolibrary.Types.RealIO.VolumeFlowRateInput volumeflowrate annotation(Placement(transformation(extent = {{-186, -80}, {-146, -40}}), iconTransformation(extent = {{-90, 56}, {-50, 96}})));
     equation
       port_b.q = -volumeflowrate;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-54, 36}, {8, -30}}, lineColor=  {0, 0, 0},
-                lineThickness=                                                                                                    1,
-                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {190, 0, 0}, radius=  4), Rectangle(extent=  {{-50, -28}, {-46, -62}}, lineColor=  {0, 0, 0},
-                lineThickness=                                                                                                    1,
-                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {190, 0, 0}), Rectangle(extent=  {{4, -26}, {8, -62}}, lineColor=  {0, 0, 0},
-                lineThickness=                                                                                                    1,
-                fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {190, 0, 0}), Polygon(points=  {{-20, -30}, {-20, -38}, {-18, -40}, {-14, -46}, {-16, -48}, {-14, -52}, {-12, -54}, {-10, -56}, {-12, -58}, {-14, -62}, {-12, -64}, {-8, -66}, {-6, -68}, {-4, -74}, {-2, -76}, {2, -80}, {8, -82}, {14, -86}, {22, -90}, {28, -92}, {34, -94}, {38, -94}, {54, -96}, {62, -96}, {62, -96}, {60, -94}, {54, -92}, {48, -92}, {38, -90}, {36, -90}, {30, -86}, {20, -84}, {14, -80}, {10, -78}, {4, -76}, {0, -70}, {-2, -68}, {-4, -64}, {-8, -60}, {-4, -54}, {-10, -50}, {-10, -46}, {-8, -44}, {-14, -38}, {-16, -34}, {-16, -30}, {-20, -30}}, lineColor=  {127, 0, 0},
-                lineThickness=                                                                                                    1,
-                fillPattern=                                                                                                    FillPattern.Sphere, smooth=  Smooth.None, fillColor=  {190, 0, 0}), Rectangle(extent=  {{-54, 62}, {8, 56}}, lineColor=  {0, 0, 0},
-                fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {170, 255, 255}), Rectangle(extent=  {{-54, 56}, {8, 32}}, lineColor=  {0, 0, 0}, fillColor=  {170, 255, 255},
-                fillPattern=                                                                                                    FillPattern.Sphere, radius=  2,
-                lineThickness=                                                                                                    1)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-54, 36}, {8, -30}}, lineColor = {0, 0, 0},
+                lineThickness =                                                                                                    1,
+                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {190, 0, 0}, radius = 4), Rectangle(extent = {{-50, -28}, {-46, -62}}, lineColor = {0, 0, 0},
+                lineThickness =                                                                                                    1,
+                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {190, 0, 0}), Rectangle(extent = {{4, -26}, {8, -62}}, lineColor = {0, 0, 0},
+                lineThickness =                                                                                                    1,
+                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {190, 0, 0}), Polygon(points = {{-20, -30}, {-20, -38}, {-18, -40}, {-14, -46}, {-16, -48}, {-14, -52}, {-12, -54}, {-10, -56}, {-12, -58}, {-14, -62}, {-12, -64}, {-8, -66}, {-6, -68}, {-4, -74}, {-2, -76}, {2, -80}, {8, -82}, {14, -86}, {22, -90}, {28, -92}, {34, -94}, {38, -94}, {54, -96}, {62, -96}, {62, -96}, {60, -94}, {54, -92}, {48, -92}, {38, -90}, {36, -90}, {30, -86}, {20, -84}, {14, -80}, {10, -78}, {4, -76}, {0, -70}, {-2, -68}, {-4, -64}, {-8, -60}, {-4, -54}, {-10, -50}, {-10, -46}, {-8, -44}, {-14, -38}, {-16, -34}, {-16, -30}, {-20, -30}}, lineColor = {127, 0, 0},
+                lineThickness =                                                                                                    1,
+                fillPattern =                                                                                                    FillPattern.Sphere, smooth = Smooth.None, fillColor = {190, 0, 0}), Rectangle(extent = {{-54, 62}, {8, 56}}, lineColor = {0, 0, 0},
+                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {170, 255, 255}), Rectangle(extent = {{-54, 56}, {8, 32}}, lineColor = {0, 0, 0}, fillColor = {170, 255, 255},
+                fillPattern =                                                                                                    FillPattern.Sphere, radius = 2,
+                lineThickness =                                                                                                    1)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end BloodTransfusionHemorrhage;
 
     model VolumeControl "control total blood volume"
@@ -945,13 +983,13 @@ package MeursModel
       Physiolibrary.Types.RealIO.VolumeFlowRateOutput volumeflowrate annotation(Placement(transformation(extent = {{88, 18}, {108, 38}}), iconTransformation(extent = {{82, 8}, {116, 42}})));
     equation
       volumeflowrate = (desiredVolume - volume) / flowtime;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-98, 56}, {98, -8}}, lineColor=  {0, 0, 255},
-                fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {170, 213, 255}), Ellipse(extent=  {{-10, 52}, {46, 0}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-92, 46}, {-38, 8}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-32, 30}, {-14, 24}}, lineColor=  {0, 0, 255}, fillColor=  {0, 0, 0},
-                fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{56, 36}, {74, 30}}, lineColor=  {0, 0, 255}, fillColor=  {0, 0, 0},
-                fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{56, 24}, {74, 18}}, lineColor=  {0, 0, 255}, fillColor=  {0, 0, 0},
-                fillPattern=                                                                                                    FillPattern.Solid)}));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-98, 56}, {98, -8}}, lineColor = {0, 0, 255},
+                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {170, 213, 255}), Ellipse(extent = {{-10, 52}, {46, 0}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-92, 46}, {-38, 8}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-32, 30}, {-14, 24}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{56, 36}, {74, 30}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{56, 24}, {74, 18}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                    FillPattern.Solid)}));
     end VolumeControl;
 
     model Hemodynamics_volume_control
@@ -1006,9 +1044,9 @@ package MeursModel
       connect(ramp.y, product.u2) annotation(Line(points = {{-15, 64}, {2, 64}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(RSP.y, product.u1) annotation(Line(points = {{-18.75, 92}, {-8, 92}, {-8, 76}, {2, 76}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(product.y, RSPout) annotation(Line(points = {{25, 70}, {40, 70}, {40, -2}}, color = {0, 0, 127}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent=  {{-24, 18}, {16, -20}}, lineColor=  {0, 0, 0},
-                lineThickness=                                                                                                    1, fillColor=  {255, 170, 170},
-                fillPattern=                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Ellipse(extent = {{-24, 18}, {16, -20}}, lineColor = {0, 0, 0},
+                lineThickness =                                                                                                    1, fillColor = {255, 170, 170},
+                fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end PeripheralStenosis;
 
     model Hemodynamics_steady
@@ -1049,20 +1087,20 @@ package MeursModel
       else
         Et0 = 0;
       end if;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-100, 100}, {100, -100}}, pattern=  LinePattern.None,
-                lineThickness=                                                                                                    1, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, lineColor=  {0, 0, 255}), Text(extent=  {{-82, 82}, {80, 24}}, lineColor=  {0, 0, 255},
-                lineThickness=                                                                                                    1, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Ventricular elastance"), Line(points=  {{-72, -34}, {-68, -26}, {-62, -14}, {-52, 4}, {-18, 38}, {-12, 14}, {-6, -10}, {0, -32}, {6, -34}, {88, -34}, {94, -34}}, color=  {0, 0, 255}, smooth=  Smooth.Bezier), Text(extent=  {{-220, -102}, {200, -120}}, lineColor=  {0, 0, 255},
-                lineThickness=                                                                                                    1, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"), Text(extent=  {{-96, 82}, {-76, 66}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tas"), Text(extent=  {{-92, 26}, {-76, 6}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tav"), Text(extent=  {{-94, -18}, {-78, -38}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Tvs"), Text(extent=  {{-96, -74}, {-82, -86}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "T0"), Text(extent=  {{72, 36}, {88, 14}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Et"), Text(extent=  {{96, -32}, {68, -8}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Et0"), Text(extent=  {{42, -72}, {88, -84}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Heart interval")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-100, 100}, {100, -100}}, pattern = LinePattern.None,
+                lineThickness =                                                                                                    1, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, lineColor = {0, 0, 255}), Text(extent = {{-82, 82}, {80, 24}}, lineColor = {0, 0, 255},
+                lineThickness =                                                                                                    1, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Ventricular elastance"), Line(points = {{-72, -34}, {-68, -26}, {-62, -14}, {-52, 4}, {-18, 38}, {-12, 14}, {-6, -10}, {0, -32}, {6, -34}, {88, -34}, {94, -34}}, color = {0, 0, 255}, smooth = Smooth.Bezier), Text(extent = {{-220, -102}, {200, -120}}, lineColor = {0, 0, 255},
+                lineThickness =                                                                                                    1, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"), Text(extent = {{-96, 82}, {-76, 66}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tas"), Text(extent = {{-92, 26}, {-76, 6}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tav"), Text(extent = {{-94, -18}, {-78, -38}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Tvs"), Text(extent = {{-96, -74}, {-82, -86}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "T0"), Text(extent = {{72, 36}, {88, 14}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Et"), Text(extent = {{96, -32}, {68, -8}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Et0"), Text(extent = {{42, -72}, {88, -84}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Heart interval")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end VentricularElastance_factor_manipulation;
   end Experiment;
   annotation(uses(Physiolibrary(version = "2.1"), Modelica(version = "3.2.1")), version = "2", conversion(noneFromVersion = ""), Documentation(revisions = "<html>
