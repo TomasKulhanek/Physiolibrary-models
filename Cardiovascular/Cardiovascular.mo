@@ -661,27 +661,26 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
               rotation=270,
               origin={0,66})));
       //  Physiolibrary.Types.RealIO.FrequencyInput HR "Heart rate " annotation(Placement(transformation(extent = {{-36,28},{4,68}}), iconTransformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,68})));
-        Physiolibrary.Types.RealIO.PressureOutput Ps
+        discrete Physiolibrary.Types.RealIO.PressureOutput Ps
           "Systolic pressure during heart cycle"                                            annotation(Placement(transformation(extent = {{-72,-42},{-52,-22}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-80,-30})));
-        Physiolibrary.Types.RealIO.PressureOutput Pd
+        discrete Physiolibrary.Types.RealIO.PressureOutput Pd
           "Diastolic pressure during heart cycle"                                            annotation(Placement(transformation(extent = {{-50,-40},{-30,-20}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-60,-30})));
-        Physiolibrary.Types.RealIO.PressureOutput Pmean
+        discrete Physiolibrary.Types.RealIO.PressureOutput Pmean
           "Mean pressure during heart cycle"                                               annotation(Placement(transformation(extent = {{-10,-36},{10,-16}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-38,-30})));
-        Physiolibrary.Types.RealIO.VolumeOutput SV "systolic volume" annotation(Placement(transformation(extent = {{22,-42},{42,-22}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
-        Physiolibrary.Types.RealIO.VolumeFlowRateOutput CO "Cardiac output" annotation(Placement(transformation(extent = {{50,-40},{70,-20}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {50,-30})));
+      /*  Physiolibrary.Types.RealIO.VolumeOutput SV "systolic volume" annotation(Placement(transformation(extent = {{22,-42},{42,-22}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
+  Physiolibrary.Types.RealIO.VolumeFlowRateOutput CO "Cardiac output" annotation(Placement(transformation(extent = {{50,-40},{70,-20}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {50,-30})));*/
         Real SumPressure(start = 0) "sum of pressure of cardiac cycle";
-        Physiolibrary.Types.Pressure Pmin(start = 200);
-        Physiolibrary.Types.Pressure Pmax(start = 0);
-        Physiolibrary.Types.Volume Volume(start = 0)
-          "sum of volume through cyrdiac cycle";
+         Physiolibrary.Types.Pressure Pmin(start = 200);
+         Physiolibrary.Types.Pressure Pmax(start = 0);
+      //  Physiolibrary.Types.Volume Volume(start = 0) "sum of volume through cyrdiac cycle";
         Boolean b "event condition";
-        Physiolibrary.Types.Time T0 "start of cardiac cycle ";
+        discrete Physiolibrary.Types.Time T0 "start of cardiac cycle ";
         discrete Physiolibrary.Types.Time HP "length of cardiac cycle";
       initial equation
         T0 = 0;
         HP = 1 / HR;
-        CO = 0;
-        SV = 0;
+      //  CO = 0;
+      //  SV = 0;
         Ps = 0;
         Pd = 0;
         Pmean = 13300;
@@ -696,22 +695,24 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         when {b} then
           T0 = time "initial time of current cardiac cycle";
           HP = 1 / HR "calculation od time lenght of current cardiac cycle";
-          SV = Volume
-            "systolic volume is equal of total volume passed through this block";
-          CO = SV * HR
-            "cardiac output calculation from systolic volume and heart rate (l/min)";
-          Pmean = SumPressure / pre(HP)
-            "mean pressure (torr) = summ pressure through cardiac cycle divided by length of previous cardiac cycle";
+          /*SV = Volume 
+      "systolic volume is equal of total volume passed through this block";
+/    CO = SV * HR 
+      "cardiac output calculation from systolic volume and heart rate (l/min)";*/
+          Pmean = SumPressure / pre(HP); //1/3*Pmax+2/3*Pmin;
+      //      "mean pressure (torr) = summ pressure through cardiac cycle divided by length of previous cardiac cycle";
           Ps = Pmax "systolic pressure = maximum pressure during cardiac cycle";
           Pd = Pmin "diastolic pressure=minimal pressure during cardiac cycle";
-          reinit(Volume, 0) "reinitialisation of volume";
-          reinit(SumPressure, 0) "reinitialisation of sum pressure";
+        //  reinit(Volume, 0) "reinitialisation of volume";
+            reinit(SumPressure, 0) "reinitialisation of sum pressure";
+      //  Pmax = Pmean;
+      //  Pmin = Pmean;
           reinit(Pmax, Pmean)
             "reinitialisation of maximal pressure to mean pressure";
           reinit(Pmin, Pmean)
             "reinitialisation minimal pressure to mean pressure";
         end when;
-        der(Volume) = q_in.q;
+      //  der(Volume) = q_in.q;
         der(SumPressure) = q_in.pressure;
         annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                   -100},{100,100}}),                                                                     graphics={                                   Text(extent = {{-32,46},{26,32}}, lineColor=
@@ -849,11 +850,6 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b outflow annotation (
             Placement(transformation(extent={{40,68},{60,88}}), iconTransformation(
                 extent={{88,-16},{108,4}})));
-        Physiolibrary.Types.RealIO.VolumeOutput volume annotation (Placement(
-              transformation(extent={{44,46},{64,66}}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={0,-52})));
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics), Diagram(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
@@ -867,11 +863,6 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b outflow annotation (
             Placement(transformation(extent={{-100,2},{-80,22}}), iconTransformation(
                 extent={{-110,-10},{-90,10}})));
-        Physiolibrary.Types.RealIO.VolumeOutput volume annotation (Placement(
-              transformation(extent={{62,-64},{82,-44}}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={0,-52})));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics));
       end SystemicCirculation;
@@ -890,15 +881,127 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b leftHeartOutflow
           annotation (Placement(transformation(extent={{50,16},{70,36}}),
               iconTransformation(extent={{26,-26},{46,-6}})));
-        Physiolibrary.Types.RealIO.VolumeOutput volume annotation (Placement(
-              transformation(extent={{-32,-4},{-12,16}}), iconTransformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-6,-48})));
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics), Diagram(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
       end Heart;
+
+      model AtrialFlowMeasurement
+        extends Physiolibrary.Hydraulic.Sensors.FlowMeasure;
+      /*    Physiolibrary.Types.RealIO.FrequencyInput HR annotation (Placement(
+        transformation(extent={{-170,-64},{-130,-24}}), iconTransformation(
+        extent={{-20,-20},{20,20}},
+        rotation=270,
+        origin={0,66})));*/
+      //  Physiolibrary.Types.RealIO.FrequencyInput HR "Heart rate " annotation(Placement(transformation(extent = {{-36,28},{4,68}}), iconTransformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,68})));
+        Physiolibrary.Types.RealIO.PressureOutput Ps
+          "Systolic pressure during heart cycle"                                            annotation(Placement(transformation(extent = {{-72,-42},{-52,-22}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-80,-30})));
+        Physiolibrary.Types.RealIO.PressureOutput Pd
+          "Diastolic pressure during heart cycle"                                            annotation(Placement(transformation(extent = {{-50,-40},{-30,-20}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-60,-30})));
+        Physiolibrary.Types.RealIO.PressureOutput Pmean
+          "Mean pressure during heart cycle"                                               annotation(Placement(transformation(extent = {{-10,-36},{10,-16}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-38,-30})));
+        Physiolibrary.Types.RealIO.VolumeOutput SV "systolic volume" annotation(Placement(transformation(extent = {{22,-42},{42,-22}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
+        Physiolibrary.Types.RealIO.VolumeFlowRateOutput CO "Cardiac output" annotation(Placement(transformation(extent = {{50,-40},{70,-20}}), iconTransformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {50,-30})));
+        Real SumPressure(start = 0) "sum of pressure of cardiac cycle";
+        Physiolibrary.Types.Pressure Pmin(start = 200);
+        Physiolibrary.Types.Pressure Pmax(start = 0);
+        Physiolibrary.Types.Volume Volume(start = 0)
+          "sum of volume through cyrdiac cycle";
+        Boolean b "event condition";
+        Physiolibrary.Types.RealIO.TimeInput T0 annotation (Placement(
+              transformation(extent={{-170,-64},{-130,-24}}), iconTransformation(
+              extent={{-20,-20},{20,20}},
+              rotation=270,
+              origin={0,66})));// "start of cardiac cycle ";
+        discrete Physiolibrary.Types.Time HP "length of cardiac cycle";
+      initial equation
+      //  T0 = 0;
+      //  HP = 1 / HR;
+        CO = 0;
+        SV = 0;
+        Ps = 0;
+        Pd = 0;
+        Pmean = 13300;
+      equation
+      //    q_out.pressure = q_in.pressure;
+      //  actualFlow = q_in.q;
+      //  Inflow.q + Outflow.q = 0;
+      //  Inflow.pressure = 0;//Outflow.pressure;
+        Pmax = max(Pmax, q_in.pressure);
+        Pmin = min(Pmin, q_in.pressure);
+        b = time ==T0;//- pre(T0) >= pre(HP) "b=true when new cardiac cycle begins";
+        when {b} then
+        //  T0 = time "initial time of current cardiac cycle";
+        //  HP = 1 / HR "calculation od time lenght of current cardiac cycle";
+          SV = Volume
+            "systolic volume is equal of total volume passed through this block";
+          CO = SV * HR
+            "cardiac output calculation from systolic volume and heart rate (l/min)";
+          Pmean = SumPressure / pre(HP)
+            "mean pressure (torr) = summ pressure through cardiac cycle divided by length of previous cardiac cycle";
+          Ps = Pmax "systolic pressure = maximum pressure during cardiac cycle";
+          Pd = Pmin "diastolic pressure=minimal pressure during cardiac cycle";
+          reinit(Volume, 0) "reinitialisation of volume";
+          reinit(SumPressure, 0) "reinitialisation of sum pressure";
+          reinit(Pmax, Pmean)
+            "reinitialisation of maximal pressure to mean pressure";
+          reinit(Pmin, Pmean)
+            "reinitialisation minimal pressure to mean pressure";
+        end when;
+        der(Volume) = q_in.q;
+        der(SumPressure) = q_in.pressure;
+        annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+                  -100},{100,100}}),                                                                     graphics={                                   Text(extent = {{-32,46},{26,32}}, lineColor=
+                    {0,128,0},                                                                                                    fillColor=
+                    {85,170,255},
+                  fillPattern=FillPattern.Solid,
+                textString="HR"),                                                                                                    Text(extent={{
+                    -52,11},{52,-11}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin={
+                    -77,30},                                                                                                    rotation = 90, textString = "Ps"),Text(extent={{
+                    -53,10},{53,-10}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin={
+                    -56,31},                                                                                                    rotation = 90, textString = "Pd"),Text(extent={{
+                    -55,12},{55,-12}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin={
+                    -32,35},                                                                                                    rotation = 90, textString = "Pmean"),Text(extent = {{-29,12},{29,-12}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin = {34,7}, rotation = 90, textString = "SV"),Text(extent = {{-30,11},{30,-11}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, origin = {55,8}, rotation = 90, textString = "CO")}),
+            Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+                  100}}), graphics));
+      end AtrialFlowMeasurement;
+
+      model PulmonaryCirculation_V
+        extends PulmonaryCirculation;
+        Physiolibrary.Types.RealIO.VolumeOutput volume
+                                              annotation (Placement(transformation(
+                extent={{-20,-20},{20,20}},
+              rotation=270,
+              origin={0,-60})));
+      end PulmonaryCirculation_V;
+
+      model SystemicCirculation_V
+        extends SystemicCirculation;
+        Physiolibrary.Types.RealIO.VolumeOutput volume
+                                              annotation (Placement(transformation(
+                extent={{-20,-20},{20,20}},
+              rotation=270,
+              origin={0,-72})));
+      end SystemicCirculation_V;
+
+      model Heart_V
+        extends Heart;
+        Physiolibrary.Types.RealIO.VolumeOutput volume
+                                              annotation (Placement(transformation(
+                extent={{-20,-20},{20,20}},
+              rotation=270,
+              origin={10,-90}), iconTransformation(
+              extent={{-14,-14},{14,14}},
+              rotation=270,
+              origin={-4,-50})));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
+                  -100,-100},{100,100}}), graphics));
+      end Heart_V;
     end Components;
 
     package Models
@@ -920,8 +1023,6 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
                  pulmonary(Conductance(displayUnit="l/(mmHg.min)") = 4.1665920538226e-08)
           annotation (Placement(transformation(extent={{-22,68},{-2,88}})));
 
-          Modelica.Blocks.Math.Add add
-          annotation (Placement(transformation(extent={{24,52},{32,60}})));
       equation
         connect(pulmonaryArteries.q_in,pulmonary. q_in) annotation (Line(
             points={{-44,78},{-22,78}},
@@ -944,25 +1045,13 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
             color={0,0,0},
             thickness=1,
             smooth=Smooth.None));
-        connect(add.y, volume) annotation (Line(
-            points={{32.4,56},{54,56}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(pulmonaryArteries.volume, add.u2) annotation (Line(
-            points={{-44,68},{-42,68},{-42,56},{23.2,56},{23.2,53.6}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(pulmonaryVeinsAndLeftAtrium.volume, add.u1) annotation (Line(
-            points={{22,68},{22,64},{22,58.4},{23.2,58.4}},
-            color={0,0,127},
-            smooth=Smooth.None));
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                   {100,100}}), graphics), Diagram(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
       end PulmonaryCirculation;
 
       model SystemicCirculation
-        extends Cardiovascular.Hydraulic.Components.SystemicCirculation;
+        extends Cardiovascular.Hydraulic.Components.SystemicCirculation_V;
         Physiolibrary.Hydraulic.Components.ElasticVessel arteries(
           volume_start(displayUnit="l") = 0.00085,
           ZeroPressureVolume(displayUnit="l") = 0.000495,
@@ -1045,7 +1134,7 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
             color={0,0,127},
             smooth=Smooth.None));
         connect(add.y, volume) annotation (Line(
-            points={{50.4,-54},{60,-54},{60,-54},{72,-54}},
+            points={{50.4,-54},{60,-54},{60,-72},{0,-72}},
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -1053,7 +1142,7 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       end SystemicCirculation;
 
       model Heart
-        extends Cardiovascular.Hydraulic.Components.Heart;
+        extends Cardiovascular.Hydraulic.Components.Heart_V;
         Physiolibrary.Hydraulic.Sensors.PressureMeasure pressureMeasure
           annotation (Placement(transformation(extent={{-68,36},{-48,56}})));
         Physiolibrary.Hydraulic.Components.Pump rightHeart(useSolutionFlowInput=true)
@@ -1145,7 +1234,7 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
             thickness=1,
             smooth=Smooth.None));
         connect(rightAtrium.volume, volume) annotation (Line(
-            points={{-60,18},{-60,6},{-22,6}},
+            points={{-60,18},{-60,-90},{10,-90}},
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -1165,24 +1254,24 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
           annotation (Placement(transformation(extent={{-12,12},{8,32}})));
       equation
         connect(systemicCirculation.inflow, heart.leftHeartOutflow) annotation (Line(
-            points={{7.8,-26.2},{16,-26.2},{16,3.71429},{1.71429,3.71429}},
+            points={{8,-26},{16,-26},{16,-3.6},{1.6,-3.6}},
             color={190,0,0},
             thickness=1,
             smooth=Smooth.Bezier));
         connect(heart.leftHeartInflow, pulmonaryCirculation.outflow)
           annotation (Line(
-            points={{3.42857,-0.857143},{16,-0.857143},{16,22},{8,22}},
+            points={{1.6,2.8},{16,2.8},{16,21.4},{7.8,21.4}},
             color={190,0,0},
             thickness=1,
             smooth=Smooth.Bezier));
         connect(systemicCirculation.outflow, heart.rightHeartInflow) annotation (Line(
-            points={{-11.6,-26.2},{-20,-26.2},{-20,-1.71429},{-6.28571,-1.71429}},
+            points={{-12,-26},{-20,-26},{-20,-3.6},{-8.2,-3.6}},
             color={190,0,0},
             thickness=1,
             smooth=Smooth.Bezier));
         connect(heart.rightHeartOutflow, pulmonaryCirculation.inflow) annotation (
             Line(
-            points={{-3.42857,2.85714},{-18,2.85714},{-18,21.8},{-12,21.8}},
+            points={{-7.6,3},{-18,3},{-18,21.8},{-11.8,21.8}},
             color={190,0,0},
             thickness=1,
             smooth=Smooth.Bezier));
@@ -1232,16 +1321,16 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       equation
         connect(systemicCirculation.volume, massConservationLaw.fragment[1])
           annotation (Line(
-            points={{-2,-31.2},{-2,-32},{26,-32},{26,-2.26667}},
+            points={{-2,-33.2},{-2,-32},{26,-32},{26,-2.26667}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(heart.volume, massConservationLaw.fragment[2]) annotation (Line(
-            points={{-2.6,-6.8},{-2.6,-10},{18,-10},{18,-1.2},{26,-1.2}},
+            points={{-2.4,-7},{-2.4,-10},{18,-10},{18,-1.2},{26,-1.2}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(pulmonaryCirculation.volume, massConservationLaw.fragment[3])
           annotation (Line(
-            points={{-2,16.8},{-2,10},{26,10},{26,-0.133333}},
+            points={{-2,16},{-2,10},{26,10},{26,-0.133333}},
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,
