@@ -579,13 +579,14 @@ package MeursModel
     end HemodynamicsOldVersion;
 
     model HemodynamicsConcept
+
       Physiolibrary.Hydraulic.Components.Conductor conductor annotation(Placement(transformation(extent = {{-6, 60}, {14, 80}})));
       Physiolibrary.Hydraulic.Components.ElasticVessel pulmonaryVeins annotation(Placement(transformation(extent = {{22, 56}, {42, 76}})));
       Physiolibrary.Hydraulic.Components.Conductor conductor1 annotation(Placement(transformation(extent = {{48, 42}, {68, 62}})));
       Physiolibrary.Hydraulic.Components.ElasticVessel leftAtrium annotation(Placement(transformation(extent = {{60, 26}, {80, 46}})));
-      PhysiolibraryExtension.Hydraulic.Components.CardiacValve mitralValve annotation(Placement(transformation(extent = {{82, 24}, {102, 44}})));
+      Physiolibrary.Hydraulic.Components.IdealValve mitralValve annotation(Placement(transformation(extent = {{82, 24}, {102, 44}})));
       Physiolibrary.Hydraulic.Components.ElasticVessel leftVentricle annotation(Placement(transformation(extent = {{94, -2}, {114, 18}})));
-      PhysiolibraryExtension.Hydraulic.Components.CardiacValve aortalValve annotation(Placement(transformation(extent = {{116, -22}, {94, -2}})));
+      Physiolibrary.Hydraulic.Components.IdealValve aortalValve annotation(Placement(transformation(extent = {{116, -22}, {94, -2}})));
       Physiolibrary.Hydraulic.Components.ElasticVessel aorta annotation(Placement(transformation(extent = {{76, -44}, {96, -24}})));
       Physiolibrary.Hydraulic.Components.Inertia inertia annotation(Placement(transformation(extent = {{72, -38}, {52, -20}})));
       Physiolibrary.Hydraulic.Components.Conductor conductor2 annotation(Placement(transformation(extent = {{-9, -8}, {9, 8}}, rotation = 180, origin = {41, -42})));
@@ -598,9 +599,9 @@ package MeursModel
       Physiolibrary.Hydraulic.Components.ElasticVessel intrathoracicSystemicVeins annotation(Placement(transformation(extent = {{-92, -38}, {-72, -18}})));
       Physiolibrary.Hydraulic.Components.Conductor conductor6 annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 180, origin = {-90, -16})));
       Physiolibrary.Hydraulic.Components.ElasticVessel rightAtrium annotation(Placement(transformation(extent = {{-114, -2}, {-94, 18}})));
-      PhysiolibraryExtension.Hydraulic.Components.CardiacValve tricupsidValve annotation(Placement(transformation(extent = {{-112, 28}, {-92, 48}})));
+      Physiolibrary.Hydraulic.Components.IdealValve            tricupsidValve annotation(Placement(transformation(extent = {{-112, 28}, {-92, 48}})));
       Physiolibrary.Hydraulic.Components.ElasticVessel rightVentricle annotation(Placement(transformation(extent = {{-98, 54}, {-78, 74}})));
-      PhysiolibraryExtension.Hydraulic.Components.CardiacValve pulmonaryValve annotation(Placement(transformation(extent = {{-74, 54}, {-54, 74}})));
+      Physiolibrary.Hydraulic.Components.IdealValve            pulmonaryValve annotation(Placement(transformation(extent = {{-74, 54}, {-54, 74}})));
       Physiolibrary.Hydraulic.Components.ElasticVessel pulmonaryArteries annotation(Placement(transformation(extent = {{-42, 58}, {-22, 78}})));
     equation
       connect(conductor.q_out, pulmonaryVeins.q_in) annotation(Line(points = {{14, 70}, {24, 70}, {24, 66}, {32, 66}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
@@ -619,14 +620,31 @@ package MeursModel
       connect(conductor4.q_out, extraThoracicSystemicVeins.q_in) annotation(Line(points = {{-36, -49}, {-46, -49}, {-46, -62}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
       connect(extraThoracicSystemicVeins.q_in, conductor5.q_in) annotation(Line(points = {{-46, -62}, {-58, -62}, {-58, -52}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
       connect(conductor5.q_out, intrathoracicSystemicVeins.q_in) annotation(Line(points = {{-78, -52}, {-82, -52}, {-82, -28}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
-      connect(rightAtrium.q_in, tricupsidValve.bloodFlowInflow) annotation(Line(points = {{-104, 8}, {-112, 8}, {-112, 37.8}, {-111.8, 37.8}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
-      connect(tricupsidValve.bloodFlowOutflow, rightVentricle.q_in) annotation(Line(points = {{-92, 38}, {-90, 38}, {-90, 64}, {-88, 64}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
-      connect(rightVentricle.q_in, pulmonaryValve.bloodFlowInflow) annotation(Line(points = {{-88, 64}, {-78, 64}, {-78, 63.8}, {-73.8, 63.8}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
-      connect(pulmonaryValve.bloodFlowOutflow, pulmonaryArteries.q_in) annotation(Line(points = {{-54, 64}, {-46, 64}, {-46, 68}, {-32, 68}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
       connect(pulmonaryArteries.q_in, conductor.q_in) annotation(Line(points = {{-32, 68}, {-20, 68}, {-20, 70}, {-6, 70}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
       connect(intrathoracicSystemicVeins.q_in, conductor6.q_in) annotation(Line(points = {{-82, -28}, {-82, -16}, {-80, -16}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
       connect(conductor6.q_out, rightAtrium.q_in) annotation(Line(points = {{-100, -16}, {-100, -16}, {-100, 8}, {-104, 8}}, color = {190, 0, 0}, thickness = 1, smooth = Smooth.Bezier));
-      annotation(Icon(coordinateSystem(extent = {{-120, -120}, {140, 120}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-120, -120}, {140, 120}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2, 2}), graphics));
+      connect(rightAtrium.q_in, tricupsidValve.q_in) annotation (Line(
+          points={{-104,8},{-108,8},{-108,38},{-112,38}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(tricupsidValve.q_out, rightVentricle.q_in) annotation (Line(
+          points={{-92,38},{-90,38},{-90,64},{-88,64}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(rightVentricle.q_in, pulmonaryValve.q_in) annotation (Line(
+          points={{-88,64},{-74,64}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(pulmonaryValve.q_out, pulmonaryArteries.q_in) annotation (Line(
+          points={{-54,64},{-44,64},{-44,68},{-32,68}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      annotation(Icon(coordinateSystem(extent = {{-120, -120}, {140, 120}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent={{-120,
+                -120},{140,120}},                                                                                                    preserveAspectRatio=false,   initialScale = 0.1, grid = {2, 2}), graphics));
     end HemodynamicsConcept;
 
     model Hemodynamicsv2 "model of hemodynamics - decomposed to submodels"

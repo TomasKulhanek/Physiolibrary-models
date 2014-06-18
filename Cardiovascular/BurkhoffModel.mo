@@ -1032,13 +1032,13 @@ package BurkhoffModel
               10},{-12,48},{30,48},{30,56.3},{34.64,56.3}},                                                                    color = {0,0,127}, smooth = Smooth.None));
       connect(AEt0.y,AtrialElastance.Et0) annotation(Line(points={{21.5,37},{
               21.5,43.5},{34.64,43.5},{34.64,50.06}},                                                                  color = {0,0,127}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent=  {{-112,60},{-54,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AEt0"),Text(extent=  {{-62,60},{-4,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "VEt0"),Text(extent=  {{-16,60},{42,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "PTH"),Text(extent=  {{-76,-34},{26,-60}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVGain"),Text(extent=  {{-84,-84},{-42,-94}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Volume"),Text(extent=  {{-20,-84},{40,-92}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
-                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent = {{-112,60},{-54,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                fillPattern =                                                                                                   FillPattern.Solid, textString = "AEt0"),Text(extent = {{-62,60},{-4,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                fillPattern =                                                                                                   FillPattern.Solid, textString = "VEt0"),Text(extent = {{-16,60},{42,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                fillPattern =                                                                                                   FillPattern.Solid, textString = "PTH"),Text(extent = {{-76,-34},{26,-60}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                fillPattern =                                                                                                   FillPattern.Solid, textString = "AVGain"),Text(extent = {{-84,-84},{-42,-94}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                fillPattern =                                                                                                   FillPattern.Solid, textString = "Volume"),Text(extent = {{-20,-84},{40,-92}}, lineColor = {0,0,255}, fillColor = {85,170,255},
+                fillPattern =                                                                                                   FillPattern.Solid, textString = "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
     end TestElastance;
 
     model TestPulmonary "model of hemodynamics by Burkhoff in Physiolibrary"
@@ -1145,6 +1145,179 @@ package BurkhoffModel
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics));
     end Hemodynamics_pure;
+
+    model HemodynamicsBurkhoffConcept
+      Physiolibrary.Hydraulic.Components.ElasticVessel Cvs
+        annotation (Placement(transformation(extent={{-72,12},{-52,32}})));
+      Physiolibrary.Hydraulic.Components.Conductor Ras
+        annotation (Placement(transformation(extent={{-46,12},{-26,32}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel Cas
+        annotation (Placement(transformation(extent={{-24,12},{-4,32}})));
+      Physiolibrary.Hydraulic.Components.Conductor Rcs
+        annotation (Placement(transformation(extent={{-2,12},{18,32}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel Caprox
+        annotation (Placement(transformation(extent={{20,12},{40,32}})));
+      Physiolibrary.Hydraulic.Components.Conductor Rcprox
+        annotation (Placement(transformation(extent={{42,12},{62,32}})));
+      Physiolibrary.Hydraulic.Components.IdealValve AOV annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={80,22})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel LV
+        annotation (Placement(transformation(extent={{92,12},{112,32}})));
+      Physiolibrary.Hydraulic.Components.IdealValve MV annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={122,22})));
+      Physiolibrary.Hydraulic.Components.Conductor RMV
+        annotation (Placement(transformation(extent={{138,12},{158,32}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel LA
+        annotation (Placement(transformation(extent={{160,12},{180,32}})));
+      Physiolibrary.Hydraulic.Components.Conductor RVP
+        annotation (Placement(transformation(extent={{186,12},{206,32}})));
+      Physiolibrary.Hydraulic.Components.Conductor Rvs
+        annotation (Placement(transformation(extent={{-86,-34},{-66,-14}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel RA
+        annotation (Placement(transformation(extent={{-62,-34},{-42,-14}})));
+      Physiolibrary.Hydraulic.Components.Conductor RTV
+        annotation (Placement(transformation(extent={{-40,-34},{-20,-14}})));
+      Physiolibrary.Hydraulic.Components.IdealValve TV annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={0,-24})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel RV
+        annotation (Placement(transformation(extent={{14,-34},{34,-14}})));
+      Physiolibrary.Hydraulic.Components.IdealValve PV annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={48,-24})));
+      Physiolibrary.Hydraulic.Components.Conductor Rcp
+        annotation (Placement(transformation(extent={{66,-34},{86,-14}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel Cap
+        annotation (Placement(transformation(extent={{90,-34},{110,-14}})));
+      Physiolibrary.Hydraulic.Components.Conductor Rap
+        annotation (Placement(transformation(extent={{116,-34},{136,-14}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel Cvp
+        annotation (Placement(transformation(extent={{142,-34},{162,-14}})));
+    equation
+      connect(Cvs.q_in, Ras.q_in) annotation (Line(
+          points={{-62,22},{-46,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Ras.q_out, Cas.q_in) annotation (Line(
+          points={{-26,22},{-14,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Cas.q_in, Rcs.q_in) annotation (Line(
+          points={{-14,22},{-2,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rcs.q_out, Caprox.q_in) annotation (Line(
+          points={{18,22},{30,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rcprox.q_in, Caprox.q_in) annotation (Line(
+          points={{42,22},{30,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(AOV.q_out, Rcprox.q_out) annotation (Line(
+          points={{70,22},{62,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(AOV.q_in, LV.q_in) annotation (Line(
+          points={{90,22},{102,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(LV.q_in, MV.q_out) annotation (Line(
+          points={{102,22},{112,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(RMV.q_in, MV.q_in) annotation (Line(
+          points={{138,22},{132,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(RMV.q_out, LA.q_in) annotation (Line(
+          points={{158,22},{170,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(LA.q_in, RVP.q_in) annotation (Line(
+          points={{170,22},{186,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rvs.q_in, Cvs.q_in) annotation (Line(
+          points={{-86,-24},{-86,22},{-62,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rvs.q_out, RA.q_in) annotation (Line(
+          points={{-66,-24},{-52,-24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(RA.q_in, RTV.q_in) annotation (Line(
+          points={{-52,-24},{-40,-24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(RTV.q_out, TV.q_in) annotation (Line(
+          points={{-20,-24},{-10,-24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(TV.q_out, RV.q_in) annotation (Line(
+          points={{10,-24},{24,-24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(RV.q_in, PV.q_in) annotation (Line(
+          points={{24,-24},{38,-24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(PV.q_out, Rcp.q_in) annotation (Line(
+          points={{58,-24},{66,-24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rcp.q_out, Cap.q_in) annotation (Line(
+          points={{86,-24},{100,-24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Cap.q_in, Rap.q_in) annotation (Line(
+          points={{100,-24},{116,-24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rap.q_out, Cvp.q_in) annotation (Line(
+          points={{136,-24},{152,-24}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Cvp.q_in, RVP.q_out) annotation (Line(
+          points={{152,-24},{206,-24},{206,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{220,100}}), graphics), Icon(coordinateSystem(extent
+              ={{-100,-100},{220,100}})));
+    end HemodynamicsBurkhoffConcept;
   end Test;
 
   package OldParts
