@@ -3,7 +3,7 @@ package SkeletalVO2Kinetics
   package Parts
     model Tube
 
-      Physiolibrary.Chemical.Interfaces.ChemicalPort_a port_in(q(start=1))  annotation (
+      Physiolibrary.Chemical.Interfaces.ChemicalPort_a port_in(q(start=1e-5))  annotation (
           Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(extent={{-110,-10},{-90,10}})));
       Physiolibrary.Chemical.Interfaces.ChemicalPort_b port_out annotation (
@@ -55,7 +55,7 @@ package SkeletalVO2Kinetics
       Physiolibrary.Chemical.Interfaces.ChemicalPort_a port_in annotation (
           Placement(transformation(extent={{-114,-10},{-94,10}}),
             iconTransformation(extent={{-114,-10},{-94,10}})));
-      Physiolibrary.Chemical.Interfaces.ChemicalPort_b port_out annotation (
+      Physiolibrary.Chemical.Interfaces.ChemicalPort_b port_out(conc(start=1e-6)) annotation (
           Placement(transformation(extent={{90,-12},{110,8}}), iconTransformation(
               extent={{90,-12},{110,8}})));
       Physiolibrary.Types.RealIO.MolarFlowRateInput SoluteEliminationRate
@@ -89,7 +89,7 @@ package SkeletalVO2Kinetics
       Physiolibrary.Chemical.Interfaces.ChemicalPort_a port_a1 annotation (
           Placement(transformation(extent={{-108,-24},{-88,-4}}),
             iconTransformation(extent={{-108,-24},{-88,-4}})));
-      Physiolibrary.Chemical.Interfaces.ChemicalPort_b port_b(q(start = 5)) annotation (Placement(
+      Physiolibrary.Chemical.Interfaces.ChemicalPort_b port_b               annotation (Placement(
             transformation(extent={{88,-8},{108,12}}), iconTransformation(extent={{88,
                 -8},{108,12}})));
       Physiolibrary.Types.RealIO.VolumeFlowRateInput solventflowrate annotation (
@@ -107,7 +107,8 @@ package SkeletalVO2Kinetics
               extent={{-98,20},{100,-16}},
               lineColor={0,0,255},
               fillPattern=FillPattern.Solid,
-              fillColor={170,213,255})}));
+              fillColor={170,213,255})}), Diagram(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
     end Mixing;
 
     model CardioPulmonarySoluteInFlow
@@ -181,7 +182,10 @@ package SkeletalVO2Kinetics
     end PerfusionDeterminationFromCO;
 
     model SkeletalVO2Kinetics
-      Tube tube(TubeVolume(displayUnit="l") = 0.002) annotation (Placement(
+
+      Tube tube(TubeVolume(displayUnit="l") = 0.002,
+        port_in(q(start=1.6666666666667e-05)),
+        SolventFlowRate(start=8.3333333333333e-05))  annotation (Placement(
             transformation(
             extent={{-11,-12},{11,12}},
             rotation=90,
@@ -200,7 +204,7 @@ package SkeletalVO2Kinetics
             extent={{-10,-10},{10,10}},
             rotation=180,
             origin={-2,0})));
-      Mixing mixing(port_b(q(fixed=true, start=8.3333333333333e-05)))
+      Mixing mixing(port_b(q(start=8.3333333333333e-05)))
         annotation (Placement(transformation(
             extent={{-13,-31},{13,31}},
             rotation=90,
@@ -309,7 +313,10 @@ package SkeletalVO2Kinetics
               fillPattern=FillPattern.Solid)}), Diagram(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics),
-        experiment(__Dymola_Algorithm="Rkfix4"),
+        experiment(
+          Tolerance=0.1,
+          __Dymola_fixedstepsize=1,
+          __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput);
     end SkeletalVO2Kinetics;
   end Parts;
