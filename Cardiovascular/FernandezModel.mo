@@ -316,7 +316,8 @@ package FernandezModel
 
     model Hemodynamics_stenosiswithbarocontrol
       Experiments.Hemodynamics_controllable hemodynamics_baro annotation(Placement(transformation(extent = {{-96, -52}, {-2, 60}})));
-      Experiments.Baroreceptor baroreceptor(EV0venacava(displayUnit = "ml/mmHg"), activationDelay(displayUnit = "s"), PAOmedia = 13265.17758063) annotation(Placement(transformation(extent = {{-8, -44}, {58, 22}})));
+      Experiments.Baroreceptor baroreceptor(EV0venacava(displayUnit = "ml/mmHg"), activationDelay(displayUnit = "s"),
+        EV0right(displayUnit="mmHg/ml"))                                                                                                     annotation(Placement(transformation(extent = {{-8, -44}, {58, 22}})));
       Experiments.Stenosis stenosis(InitialElastance(displayUnit = "mmHg/ml"), FinalElastance(displayUnit = "mmHg/ml"), startTime(displayUnit = "s"), duration(displayUnit = "s")) annotation(Placement(transformation(extent = {{-78, -82}, {-30, -38}})));
     equation
       connect(hemodynamics_baro.Pmean, baroreceptor.PAo) annotation(Line(points={{
@@ -420,9 +421,11 @@ package FernandezModel
         "heart rate - compatible with Const block"                                             annotation(Placement(transformation(extent = {{-76, 60}, {-56, 80}}), iconTransformation(extent = {{-15, -15}, {15, 15}}, rotation = 180, origin = {-81, 75})));
       Physiolibrary.Types.RealIO.HydraulicComplianceOutput evright annotation(Placement(transformation(extent = {{80, 22}, {100, 42}}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 180, origin = {-76, 10})));
       Physiolibrary.Types.RealIO.HydraulicComplianceOutput evleft annotation(Placement(transformation(extent = {{78, -18}, {98, 2}}), iconTransformation(extent = {{-16, -16}, {16, 16}}, rotation = 180, origin = {-80, 42})));
+      Physiolibrary.Types.HydraulicElastance evrightref;
+      Physiolibrary.Types.HydraulicElastance evleftref;
       Physiolibrary.Types.RealIO.HydraulicComplianceOutput evenacava annotation(Placement(transformation(extent = {{78, -54}, {98, -34}}), iconTransformation(extent = {{-16, -16}, {16, 16}}, rotation = 180, origin = {-78, -58})));
       Physiolibrary.Types.RealIO.HydraulicConductanceOutput RS annotation(Placement(transformation(extent = {{80, -90}, {100, -70}}), iconTransformation(extent = {{-14, -14}, {14, 14}}, rotation = 180, origin = {-76, -24})));
-      parameter Physiolibrary.Types.HydraulicElastance EV0right = 115990477.05105, EV0left = 106657909.932;
+      parameter Physiolibrary.Types.HydraulicElastance EV0right = 103991462.1837, EV0left = 106657909.932;
       /*    PAOmedia=13465.561128915,
                 EV0right=106657909.932,
                 EV0left=103991462.1837,
@@ -460,8 +463,10 @@ package FernandezModel
       //recount to SI Hz
       H2.u = deadZone.y;
       evright = 1 / (EV0right + H2.y * 1000000.0 * 133.322387415);
+      evrightref= 1/evright;
       //recount to SI
       evleft = 1 / (EV0left + H2.y * 1000000.0 * 133.322387415);
+      evleftref = 1/evleft;
       //recount to SI
       H3.u = deadZone.y;
       evenacava = ECV0 + H3.y * 1e-006 / 133.322387415;
