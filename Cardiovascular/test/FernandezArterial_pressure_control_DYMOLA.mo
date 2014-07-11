@@ -13,13 +13,14 @@ package control "modelo y control a corto plazo"
               0)));
     Modelica.Blocks.Interfaces.RealOutput
                                        volusal
-      annotation (Placement(transformation(extent={{-8,26},{8,44}}, rotation=0)));
+      annotation (Placement(transformation(extent={{24,28},{40,46}},rotation=0),
+          iconTransformation(extent={{-8,26},{8,44}})));
     Modelica.Blocks.Math.Product Product1 annotation (Placement(transformation(
             extent={{-60,-12},{-40,8}}, rotation=0)));
     Modelica.Blocks.Interfaces.RealInput
                                       elastancia
-      annotation (Placement(transformation(extent={{-82,-4},{-66,14}}, rotation=
-             0)));
+      annotation (Placement(transformation(extent={{-98,-2},{-82,16}}, rotation=
+             0), iconTransformation(extent={{-82,-4},{-66,14}})));
     Modelica.Blocks.Interfaces.RealOutput
                                        presisal
       annotation (Placement(transformation(extent={{-8,-4},{10,12}}, rotation=0)));
@@ -45,12 +46,12 @@ package control "modelo y control a corto plazo"
     connect(Add1.y,Integrator1.u)
       annotation (Line(points={{-39,34},{-30,34}}, color={0,0,255}));
     connect(Integrator1.y,       volusal)
-      annotation (Line(points={{-7,34},{18.5,34},{18.5,35},{0,35}}, color={0,0,
+      annotation (Line(points={{-7,34},{18.5,34},{18.5,37},{32,37}},color={0,0,
             255}));
     connect(Integrator1.y,Product1.u1)             annotation (Line(points={{-7,
             34},{-8,34},{-8,12},{-70,12},{-70,4},{-62,4}}, color={0,0,255}));
     connect(elastancia,Product1.u2)
-      annotation (Line(points={{-74,5},{-73,5},{-73,-8},{-62,-8}}, color={0,0,
+      annotation (Line(points={{-90,7},{-73,7},{-73,-8},{-62,-8}}, color={0,0,
             255}));
     connect(Product1.y,       presisal)
       annotation (Line(points={{-39,-2},{-19.5,-2},{-19.5,4},{1,4}}, color={0,0,
@@ -68,7 +69,9 @@ package control "modelo y control a corto plazo"
             255}));
     connect(Product2.y,Add1.u2)             annotation (Line(points={{3,-38},{4,
             -38},{4,-14},{-72,-14},{-72,28},{-62,28}}, color={0,0,255}));
-    annotation (Diagram(graphics),
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}),
+                        graphics),
                          Icon(graphics={
           Rectangle(
             extent={{-66,48},{-8,-52}},
@@ -99,7 +102,7 @@ package control "modelo y control a corto plazo"
     circulacionsistemica circulacionsistemica1
       annotation (Placement(transformation(extent={{-78,-112},{8,-46}},
             rotation=0)));
-    modulocontrol modulocontrol1(Step1(height=0))
+    modulocontrol modulocontrol1(Step1(height=0), HR0(k=120))
                                  annotation (Placement(transformation(extent={{16,-102},
               {82,0}},          rotation=0)));
     arteriaaorta arteriaaorta1 annotation (Placement(transformation(extent={{
