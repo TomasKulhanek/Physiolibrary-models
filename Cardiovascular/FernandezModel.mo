@@ -317,7 +317,8 @@ package FernandezModel
     model Hemodynamics_stenosiswithbarocontrol
       Experiments.Hemodynamics_controllable hemodynamics_baro annotation(Placement(transformation(extent = {{-96, -52}, {-2, 60}})));
       Experiments.Baroreceptor baroreceptor(EV0venacava(displayUnit = "ml/mmHg"), activationDelay(displayUnit = "s"),
-        EV0right(displayUnit="mmHg/ml"))                                                                                                     annotation(Placement(transformation(extent = {{-8, -44}, {58, 22}})));
+        EV0right(displayUnit="mmHg/ml"),
+        PAOmedia=13264.244323918)                                                                                                     annotation(Placement(transformation(extent = {{-8, -44}, {58, 22}})));
       Experiments.Stenosis stenosis(InitialElastance(displayUnit = "mmHg/ml"), FinalElastance(displayUnit = "mmHg/ml"), startTime(displayUnit = "s"), duration(displayUnit = "s")) annotation(Placement(transformation(extent = {{-78, -82}, {-30, -38}})));
     equation
       connect(hemodynamics_baro.Pmean, baroreceptor.PAo) annotation(Line(points={{
