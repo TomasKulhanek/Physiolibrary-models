@@ -1,0 +1,52 @@
+package Fernandez2013Model
+  package Models
+    model Hemodynamics
+      Physiolibrary.Hydraulic.Components.Conductor RPulmonaryVeins annotation(Placement(visible = true, transformation(origin = {-220, 60}, extent = {{15, -15}, {-15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.Inertia pulmonaryVeinsInertia annotation(Placement(visible = true, transformation(origin = {-280, 60}, extent = {{15, -15}, {-15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.Conductor RPulmonaryArtery annotation(Placement(visible = true, transformation(origin = {300, 60}, extent = {{17.5, -17.5}, {-17.5, 17.5}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.Inertia pulmonaryArterialInertia annotation(Placement(visible = true, transformation(origin = {240, 60}, extent = {{15, -15}, {-15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.ElasticVessel pulmonaryVeins annotation(Placement(visible = true, transformation(origin = {-315, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.IdealValve mitralValve annotation(Placement(visible = true, transformation(origin = {-255, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.ElasticVessel leftVentricle annotation(Placement(visible = true, transformation(origin = {-215, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.Conductor RLeftMyo annotation(Placement(visible = true, transformation(origin = {-175, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.IdealValve aorticValve annotation(Placement(visible = true, transformation(origin = {-135, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.ElasticVessel aorta annotation(Placement(visible = true, transformation(origin = {-95, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.Conductor Raorta annotation(Placement(visible = true, transformation(origin = {-55, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.Inertia aorticInertia annotation(Placement(visible = true, transformation(origin = {-15, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.ElasticVessel arteries annotation(Placement(visible = true, transformation(origin = {25, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.Conductor RSystemic annotation(Placement(visible = true, transformation(origin = {65, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.Inertia systemicInertia annotation(Placement(visible = true, transformation(origin = {105, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.IdealValve tricuspidValve annotation(Placement(visible = true, transformation(origin = {145, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.ElasticVessel rightVentricle annotation(Placement(visible = true, transformation(origin = {185, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.Conductor RRightMyo annotation(Placement(visible = true, transformation(origin = {225, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.IdealValve pulmonaryValve annotation(Placement(visible = true, transformation(origin = {265, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.ElasticVessel pulmonaryArtery annotation(Placement(visible = true, transformation(origin = {305, -5}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+      Physiolibrary.Hydraulic.Components.ElasticVessel pulmonaryArterioles annotation(Placement(visible = true, transformation(origin = {200, 60}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+    equation
+      connect(pulmonaryVeins.q_in, mitralValve.q_in) annotation(Line(points = {{-315, -5}, {-268.999, -5}, {-268.999, -5.0093}, {-268.999, -5.0093}}));
+      connect(pulmonaryVeinsInertia.q_out, pulmonaryVeins.q_in) annotation(Line(points = {{-295, 60}, {-337.627, 60}, {-337.627, -6.01116}, {-315.085, -6.01116}, {-315.085, -6.01116}}));
+      connect(RPulmonaryVeins.q_out, pulmonaryVeinsInertia.q_in) annotation(Line(points = {{-235, 60}, {-264.992, 60}, {-264.992, 59.1097}, {-264.992, 59.1097}}));
+      connect(pulmonaryArterioles.q_in, RPulmonaryVeins.q_in) annotation(Line(points = {{200, 60}, {-205.381, 60}, {-205.381, 59.1097}, {-205.381, 59.1097}}));
+      connect(pulmonaryArterialInertia.q_out, pulmonaryArterioles.q_in) annotation(Line(points = {{225, 60}, {199.871, 60}, {200, 60}, {200, 60}}));
+      connect(RPulmonaryArtery.q_out, pulmonaryArterialInertia.q_in) annotation(Line(points = {{282.5, 60}, {254.973, 60}, {254.973, 59.6106}, {254.973, 59.6106}}));
+      connect(pulmonaryArtery.q_in, RPulmonaryArtery.q_in) annotation(Line(points = {{305, -5}, {331.615, -5}, {331.615, 59.6106}, {318.09, 59.6106}, {318.09, 59.6106}}));
+      connect(pulmonaryValve.q_out, pulmonaryArtery.q_in) annotation(Line(points = {{280, -5}, {305.066, -5}, {305.066, -6.01116}, {305.066, -6.01116}}));
+      connect(RRightMyo.q_out, pulmonaryValve.q_in) annotation(Line(points = {{240, -5}, {250.966, -5}, {250.966, -5.0093}, {250.966, -5.0093}}));
+      connect(RRightMyo.q_in, rightVentricle.q_in) annotation(Line(points = {{210, -5}, {185.845, -5}, {185.845, -6.01116}, {185.845, -6.01116}}));
+      connect(tricuspidValve.q_out, rightVentricle.q_in) annotation(Line(points = {{160, -5}, {185.344, -5}, {185.344, -5.0093}, {185.344, -5.0093}}));
+      connect(systemicInertia.q_out, tricuspidValve.q_in) annotation(Line(points = {{120, -5}, {130.242, -5}, {130.242, -6.01116}, {130.242, -6.01116}}));
+      connect(RSystemic.q_out, systemicInertia.q_in) annotation(Line(points = {{80, -5}, {90.1674, -5}, {90.1674, -5.51023}, {90.1674, -5.51023}}));
+      connect(RSystemic.q_in, arteries.q_in) annotation(Line(points = {{50, -5}, {25.0465, -5}, {25.0465, -5.51023}, {25.0465, -5.51023}}));
+      connect(aorticInertia.q_out, arteries.q_in) annotation(Line(points = {{2.22045e-15, -5}, {25.5474, -5}, {25.5474, -5.51023}, {25.5474, -5.51023}}));
+      connect(Raorta.q_out, aorticInertia.q_out) annotation(Line(points = {{-40, -5}, {1.00186, -5}, {1.00186, -6.01116}, {1.00186, -6.01116}}));
+      connect(aorta.q_in, Raorta.q_out) annotation(Line(points = {{-95, -5}, {-40.0744, -5}, {-40.0744, -6.51209}, {-40.0744, -6.51209}}));
+      connect(aorticValve.q_out, aorta.q_in) annotation(Line(points = {{-120, -5}, {-94.6757, -5}, {-94.6757, -5.0093}, {-94.6757, -5.0093}}));
+      connect(RLeftMyo.q_in, leftVentricle.q_in) annotation(Line(points = {{-190, -5}, {-214.899, -5}, {-214.899, -5.51023}, {-214.899, -5.51023}}));
+      connect(RLeftMyo.q_out, aorticValve.q_in) annotation(Line(points = {{-160, -5}, {-149.778, -5}, {-149.778, -5.51023}, {-149.778, -5.51023}}));
+      connect(mitralValve.q_out, leftVentricle.q_in) annotation(Line(points = {{-240, -5}, {-213.897, -5}, {-213.897, -5.51023}, {-213.897, -5.51023}}));
+      annotation(Diagram(coordinateSystem(extent = {{-350, -100}, {350, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-350, -100}, {350, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})));
+    end Hemodynamics;
+    annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})));
+  end Models;
+  annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})));
+end Fernandez2013Model;
