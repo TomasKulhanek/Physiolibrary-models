@@ -9,35 +9,35 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       extends Modelica.Icons.Package;
       connector HydraulicElastanceInput = input
           Physiolibrary.Types.HydraulicElastance
-        "input HydraulicElastance as connector"                                                                                annotation(defaultComponentName = "hydraulicelastance", Icon(graphics={  Polygon(points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor = {0, 0, 127}, fillColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Solid)}, coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.2)), Diagram(coordinateSystem(preserveAspectRatio = true, initialScale = 0.2, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points = {{0, 50}, {100, 0}, {0, -50}, {0, 50}}, lineColor = {0, 0, 127}, fillColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-10, 85}, {-10, 60}}, lineColor = {0, 0, 127}, textString = "%name")}), Documentation(info = "<html> 
+        "input HydraulicElastance as connector"                                                                                annotation(defaultComponentName = "hydraulicelastance", Icon(graphics={  Polygon(points=  {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor=  {0, 0, 127}, fillColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Solid)}, coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.2)), Diagram(coordinateSystem(preserveAspectRatio = true, initialScale = 0.2, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points=  {{0, 50}, {100, 0}, {0, -50}, {0, 50}}, lineColor=  {0, 0, 127}, fillColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-10, 85}, {-10, 60}}, lineColor=  {0, 0, 127}, textString=  "%name")}), Documentation(info = "<html> 
                       <p> 
                       Connector with one input signal of type HydraulicElastance. 
                       </p> 
                       </html>"));
       connector HydraulicElastanceOutput = output
           Physiolibrary.Types.HydraulicElastance
-        "output HydraulicElastance as connector"                                                                                  annotation(defaultComponentName = "hydraulicelastance", Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 255},
-                fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points = {{-100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 255},
-                fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{30, 110}, {30, 60}}, lineColor = {0, 0, 127}, textString = "%name")}), Documentation(info = "<html>
+        "output HydraulicElastance as connector"                                                                                  annotation(defaultComponentName = "hydraulicelastance", Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points=  {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255},
+                fillPattern=                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points=  {{-100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255},
+                fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{30, 110}, {30, 60}}, lineColor=  {0, 0, 127}, textString=  "%name")}), Documentation(info = "<html>
                     <p>
                     Connector with one output signal of type HydraulicElastance.
                     </p>
                     </html>"));
       connector HydraulicResistanceInput = input
           Physiolibrary.Types.HydraulicResistance
-        "input HydraulicResistance as connector"                                                                                  annotation(defaultComponentName = "hydraulicresistance", Icon(graphics={  Polygon(points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor = {0, 0, 127}, fillColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Solid)}, coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.2)), Diagram(coordinateSystem(preserveAspectRatio = true, initialScale = 0.2, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points = {{0, 50}, {100, 0}, {0, -50}, {0, 50}}, lineColor = {0, 0, 127}, fillColor = {0, 0, 127},
-                fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-10, 85}, {-10, 60}}, lineColor = {0, 0, 127}, textString = "%name")}), Documentation(info = "<html> 
+        "input HydraulicResistance as connector"                                                                                  annotation(defaultComponentName = "hydraulicresistance", Icon(graphics={  Polygon(points=  {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor=  {0, 0, 127}, fillColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Solid)}, coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.2)), Diagram(coordinateSystem(preserveAspectRatio = true, initialScale = 0.2, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points=  {{0, 50}, {100, 0}, {0, -50}, {0, 50}}, lineColor=  {0, 0, 127}, fillColor=  {0, 0, 127},
+                fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-10, 85}, {-10, 60}}, lineColor=  {0, 0, 127}, textString=  "%name")}), Documentation(info = "<html> 
                       <p> 
                       Connector with one input signal of type HydraulicResistance. 
                       </p> 
                       </html>"));
       connector HydraulicResistanceOutput = output
           Physiolibrary.Types.HydraulicResistance
-        "output HydraulicResistance as connector"                                                                                    annotation(defaultComponentName = "hydraulicresistance", Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 255},
-                fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics = {Polygon(points=  {{-100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid), Text(extent=  {{30, 110}, {30, 60}}, lineColor=  {0, 0, 127}, textString=  "%name")}), Documentation(info = "<html>
+        "output HydraulicResistance as connector"                                                                                    annotation(defaultComponentName = "hydraulicresistance", Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points=  {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255},
+                fillPattern=                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics = {Polygon(points=  {{-100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid), Text(extent=  {{30, 110}, {30, 60}}, lineColor=  {0, 0, 127}, textString=  "%name")}), Documentation(info = "<html>
                     <p>
                     Connector with one output signal of type HydraulicResistance.
                     </p>
@@ -51,14 +51,14 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
           "HydraulicElastance input"                                                       annotation(Placement(transformation(extent = {{-68, -28}, {-28, 12}}), iconTransformation(extent = {{-54, -14}, {-28, 12}})));
       equation
         y = 1 / hydraulicelastance;
-        annotation(defaultComponentName = "hydrauliccompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-28, 3}, {20, -4}},
-                  lineThickness =                                                                                                    1, fillColor = {0, 0, 255},
-                  fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None), Polygon(points = {{24, 10}, {24, -10}, {36, 0}, {36, 0}, {24, 10}},
-                  lineThickness =                                                                                                    1, smooth = Smooth.None, fillColor = {0, 0, 255},
-                  fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-16, 30}, {12, 2}}, lineColor = {0, 0, 255}, fillColor = {255, 240, 234},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "1"), Text(extent = {{-22, -10}, {16, -32}}, lineColor = {0, 0, 255}, fillColor = {255, 240, 234},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "E")}));
+        annotation(defaultComponentName = "hydrauliccompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-28, 3}, {20, -4}},
+                  lineThickness=                                                                                                    1, fillColor=  {0, 0, 255},
+                  fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.None), Polygon(points=  {{24, 10}, {24, -10}, {36, 0}, {36, 0}, {24, 10}},
+                  lineThickness=                                                                                                    1, smooth=  Smooth.None, fillColor=  {0, 0, 255},
+                  fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.None), Text(extent=  {{-16, 30}, {12, 2}}, lineColor=  {0, 0, 255}, fillColor=  {255, 240, 234},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "1"), Text(extent=  {{-22, -10}, {16, -32}}, lineColor=  {0, 0, 255}, fillColor=  {255, 240, 234},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "E")}));
       end HydraulicElastanceToCompliance;
 
       block HydraulicResistanceToConductance
@@ -68,26 +68,26 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       equation
         y = 1 / hydraulicresistance;
         //"signal from HydraulicResistance to HydraulicConductance parameter"
-        annotation(defaultComponentName = "hydraulicresistancetoconductance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-40, 10}, {40, -10}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = ""), Rectangle(extent = {{-24, 7}, {2, 2}},
-                  lineThickness =                                                                                                    1, fillColor = {0, 0, 255},
-                  fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None), Polygon(points = {{28, 14}, {28, -6}, {40, 4}, {40, 4}, {28, 14}},
-                  lineThickness =                                                                                                    1, smooth = Smooth.None, fillColor = {0, 0, 255},
-                  fillPattern =                                                                                                    FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-26, 34}, {4, 8}}, lineColor = {0, 0, 127}, textString = "1"), Text(extent = {{-26, -10}, {8, -40}}, lineColor = {0, 0, 127}, textString = "R"), Rectangle(extent = {{6, 14}, {20, 10}}, lineColor = {0, 0, 127},
-                  fillPattern =                                                                                                    FillPattern.Solid, fillColor = {0, 0, 255}), Rectangle(extent = {{6, -2}, {20, -6}}, lineColor = {0, 0, 127}, fillColor = {0, 0, 255},
-                  fillPattern =                                                                                                    FillPattern.Solid)}));
+        annotation(defaultComponentName = "hydraulicresistancetoconductance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-40, 10}, {40, -10}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  ""), Rectangle(extent=  {{-24, 7}, {2, 2}},
+                  lineThickness=                                                                                                    1, fillColor=  {0, 0, 255},
+                  fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.None), Polygon(points=  {{28, 14}, {28, -6}, {40, 4}, {40, 4}, {28, 14}},
+                  lineThickness=                                                                                                    1, smooth=  Smooth.None, fillColor=  {0, 0, 255},
+                  fillPattern=                                                                                                    FillPattern.Solid, pattern=  LinePattern.None), Text(extent=  {{-26, 34}, {4, 8}}, lineColor=  {0, 0, 127}, textString=  "1"), Text(extent=  {{-26, -10}, {8, -40}}, lineColor=  {0, 0, 127}, textString=  "R"), Rectangle(extent=  {{6, 14}, {20, 10}}, lineColor=  {0, 0, 127},
+                  fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {0, 0, 255}), Rectangle(extent=  {{6, -2}, {20, -6}}, lineColor=  {0, 0, 127}, fillColor=  {0, 0, 255},
+                  fillPattern=                                                                                                    FillPattern.Solid)}));
       end HydraulicResistanceToConductance;
 
-      connector BooleanOutput = output Boolean "output Boolean as connector" annotation(defaultComponentName = "acceleration", Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 255},
-                fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points=  {{-100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255},
+      connector BooleanOutput = output Boolean "output Boolean as connector" annotation(defaultComponentName = "acceleration", Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points=  {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255},
+                fillPattern=                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points=  {{-100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255},
                 fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{30, 110}, {30, 60}}, lineColor=  {0, 0, 127}, textString=  "%name")}), Documentation(info = "<html>
            <p>
            Connector with one output signal of type Real.
            </p>
            </html>"));
-      connector BooleanInput = input Boolean "input Boolean as connector" annotation(defaultComponentName = "acceleration", Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points = {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor = {0, 0, 127}, fillColor = {0, 0, 255},
-                fillPattern =                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics = {Polygon(points=  {{-100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid), Text(extent=  {{30, 110}, {30, 60}}, lineColor=  {0, 0, 127}, textString=  "%name")}), Documentation(info = "<html>
+      connector BooleanInput = input Boolean "input Boolean as connector" annotation(defaultComponentName = "acceleration", Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Polygon(points=  {{-100, 100}, {100, 0}, {-100, -100}, {-100, 100}}, lineColor=  {0, 0, 127}, fillColor=  {0, 0, 255},
+                fillPattern=                                                                                                    FillPattern.Solid)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics = {Polygon(points=  {{-100, 50}, {0, 0}, {-100, -50}, {-100, 50}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid), Text(extent=  {{30, 110}, {30, 60}}, lineColor=  {0, 0, 127}, textString=  "%name")}), Documentation(info = "<html>
            <p>
            Connector with one output signal of type Real.
            </p>
@@ -104,10 +104,10 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
           "HydraulicElastance constant"                                                                                                     annotation(Placement(transformation(extent = {{40, -10}, {60, 10}}), iconTransformation(extent = {{40, -10}, {60, 10}})));
       equation
         y = k;
-        annotation(defaultComponentName = "hydraulicElastance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, -44}, {100, -64}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"), Text(extent = {{-40, 10}, {40, -10}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "Const")}), Documentation(info = "<html>
+        annotation(defaultComponentName = "hydraulicElastance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, -44}, {100, -64}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"), Text(extent=  {{-40, 10}, {40, -10}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "Const")}), Documentation(info = "<html>
   <p>Please use the reciprocal value of hydraulic elastance, wich is called hydraulic compliance for the compatibility with other blocks and models!</p>
   <p>Even it is not recommended, you can use this block, but do not forget to make reciprocal value (in example using Physiolibrary.Blocks.Math.Reciprocal) before connecting to library components!</p>
   </html>"));
@@ -122,9 +122,9 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         //ignored for this component
       equation
         y = c;
-        annotation(defaultComponentName = "hydraulicCompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, -44}, {100, -64}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+        annotation(defaultComponentName = "hydraulicCompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, -44}, {100, -64}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
       end HydraulicComplianceControl;
 
       block HydraulicConductanceControl
@@ -137,9 +137,9 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         //TODO add switch between constant default signal and input control signal
       equation
         y = c;
-        annotation(defaultComponentName = "hydraulicCompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, -44}, {100, -64}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+        annotation(defaultComponentName = "hydraulicCompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, -44}, {100, -64}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
       end HydraulicConductanceControl;
 
       block FrequencyControl "External signal of type Frequency"
@@ -151,9 +151,9 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         //TODO add switch between constant default signal and input control signal
       equation
         y = c;
-        annotation(defaultComponentName = "hydraulicCompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, -44}, {100, -64}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+        annotation(defaultComponentName = "hydraulicCompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, -44}, {100, -64}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
       end FrequencyControl;
 
       block HydraulicElastanceToComplianceFactorConst
@@ -165,10 +165,10 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
           "HydraulicCompliance constant"                                                      annotation(Placement(transformation(extent = {{40, -10}, {60, 10}}), iconTransformation(extent = {{40, -10}, {60, 10}})));
       equation
         y = 1 / k * factor;
-        annotation(defaultComponentName = "hydraulicElastance2Compliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, -44}, {100, -64}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"), Text(extent = {{-40, 12}, {40, -8}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "Const"), Text(extent = {{-18, -10}, {22, -26}}, lineColor = {0, 0, 255}, textString = "*"), Text(extent = {{-18, -24}, {20, -32}}, lineColor = {0, 0, 255}, textString = "%factor")}));
+        annotation(defaultComponentName = "hydraulicElastance2Compliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, -44}, {100, -64}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"), Text(extent=  {{-40, 12}, {40, -8}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "Const"), Text(extent=  {{-18, -10}, {22, -26}}, lineColor=  {0, 0, 255}, textString=  "*"), Text(extent=  {{-18, -24}, {20, -32}}, lineColor=  {0, 0, 255}, textString=  "%factor")}));
       end HydraulicElastanceToComplianceFactorConst;
 
       block HydraulicResistanceToConductanceFactorConst
@@ -180,10 +180,10 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
           "HydraulicConductance constant"                                                       annotation(Placement(transformation(extent = {{40, -10}, {60, 10}}), iconTransformation(extent = {{40, -10}, {60, 10}})));
       equation
         y = 1 / k * factor;
-        annotation(defaultComponentName = "hydraulicResistance2conductance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, -44}, {100, -64}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"), Text(extent = {{-40, 10}, {40, -10}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "Const"), Text(extent = {{-14, -20}, {24, -28}}, lineColor = {0, 0, 255}, textString = "%factor"), Text(extent = {{-16, -8}, {24, -24}}, lineColor = {0, 0, 255}, textString = "*")}));
+        annotation(defaultComponentName = "hydraulicResistance2conductance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, -44}, {100, -64}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"), Text(extent=  {{-40, 10}, {40, -10}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "Const"), Text(extent=  {{-14, -20}, {24, -28}}, lineColor=  {0, 0, 255}, textString=  "%factor"), Text(extent=  {{-16, -8}, {24, -24}}, lineColor=  {0, 0, 255}, textString=  "*")}));
       end HydraulicResistanceToConductanceFactorConst;
 
       block VolumeFactorConst "Constant signal of type Volume"
@@ -192,10 +192,10 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         Physiolibrary.Types.RealIO.VolumeOutput y "Volume constant" annotation(Placement(transformation(extent = {{40, -10}, {60, 10}}), iconTransformation(extent = {{40, -10}, {60, 10}})));
       equation
         y = k * factor;
-        annotation(defaultComponentName = "volume", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, -44}, {100, -64}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"), Text(extent = {{-40, 10}, {40, -10}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "Const"), Text(extent = {{-18, -8}, {22, -24}}, lineColor = {0, 0, 255}, textString = "*"), Text(extent = {{-18, -20}, {20, -28}}, lineColor = {0, 0, 255}, textString = "%factor")}));
+        annotation(defaultComponentName = "volume", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, -44}, {100, -64}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"), Text(extent=  {{-40, 10}, {40, -10}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "Const"), Text(extent=  {{-18, -8}, {22, -24}}, lineColor=  {0, 0, 255}, textString=  "*"), Text(extent=  {{-18, -20}, {20, -28}}, lineColor=  {0, 0, 255}, textString=  "%factor")}));
       end VolumeFactorConst;
 
       block HydraulicResistanceFactorConst
@@ -207,10 +207,10 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
           "HydraulicResistance constant"                                                                                                     annotation(Placement(transformation(extent = {{40, -10}, {60, 10}}), iconTransformation(extent = {{40, -10}, {60, 10}})));
       equation
         y = k * factor;
-        annotation(defaultComponentName = "hydraulicResistance", Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, -44}, {100, -64}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"), Text(extent = {{-40, 10}, {40, -10}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "Const"), Text(extent = {{-18, -8}, {22, -24}}, lineColor = {0, 0, 255}, textString = "*"), Text(extent = {{-16, -20}, {22, -28}}, lineColor = {0, 0, 255}, textString = "%factor")}), Documentation(info = "<html>
+        annotation(defaultComponentName = "hydraulicResistance", Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, -44}, {100, -64}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"), Text(extent=  {{-40, 10}, {40, -10}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "Const"), Text(extent=  {{-18, -8}, {22, -24}}, lineColor=  {0, 0, 255}, textString=  "*"), Text(extent=  {{-16, -20}, {22, -28}}, lineColor=  {0, 0, 255}, textString=  "%factor")}), Documentation(info = "<html>
   <p>Please use the reciprocal value of hydraulic resistance, wich is called hydraulic conductance for the compatibility with other blocks and models!</p>
   <p>Because zero hydraulic conductance means zero volumetric flow, it is much better to use this reciprocal value of hydraulic resistance.</p>
   <p>Even it is not recommended, you can use this block, but do not forget to make reciprocal value (in example using Physiolibrary.Blocks.Math.Reciprocal) before connecting to library components!</p>
@@ -228,9 +228,9 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
         //TODO add switch between constant default signal and input control signal
       equation
         y = c*k;
-        annotation(defaultComponentName = "hydraulicCompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-100, -44}, {100, -64}}, lineColor = {0, 0, 0}, fillColor = {236, 236, 236},
-                  fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+        annotation(defaultComponentName = "hydraulicCompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}})), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40, 40}, {40, -40}}, lineColor=  {0, 0, 0}, radius=  10, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-100, -44}, {100, -64}}, lineColor=  {0, 0, 0}, fillColor=  {236, 236, 236},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
       end HydraulicConductanceFaktorControl;
     end Constants;
   end Types;
@@ -532,7 +532,8 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       connect(pulmonary.q_out, pulmonaryVeinsAndLeftAtrium.q_in) annotation(Line(points = {{-2, 78}, {22, 78}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(inflow, pulmonaryArteries.q_in) annotation(Line(points = {{-100, 0}, {-72, 0}, {-72, 78}, {-44, 78}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(outflow, pulmonaryVeinsAndLeftAtrium.q_in) annotation(Line(points = {{100, 0}, {62, 0}, {62, 78}, {22, 78}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-160, -42}, {152, -68}}, lineColor=  {0, 0, 255}, lineThickness=  1, textString=  "%name")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-160, -42}, {152, -68}}, lineColor = {0, 0, 255},
+                lineThickness =                                                                                                    1, textString = "%name")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end PulmonaryCirculation;
 
     model SystemicCirculation
@@ -553,7 +554,8 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       connect(veins.q_in, largeVeins.q_out) annotation(Line(points = {{-44, -26}, {-74, -26}, {-74, -8}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(arteries.q_in, inflow) annotation(Line(points = {{34, -26}, {68, -26}, {68, 0}, {100, 0}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(largeVeins.q_in, outflow) annotation(Line(points = {{-74, 12}, {-88, 12}, {-88, 0}, {-100, 0}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-160, -60}, {158, -92}}, lineColor=  {0, 0, 255}, lineThickness=  1, textString=  "%name")}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-160, -60}, {158, -92}}, lineColor = {0, 0, 255},
+                lineThickness =                                                                                                    1, textString = "%name")}));
     end SystemicCirculation;
 
     model Heart
@@ -587,7 +589,8 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       connect(rightHeart.q_out, rightHeartOutflow) annotation(Line(points = {{-26, 28}, {-18, 28}, {-18, 68}, {-100, 68}, {-100, 20}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(leftHeart.q_in, pressureMeasure1.q_in) annotation(Line(points = {{26, 26}, {18, 26}, {18, 28}, {8, 28}, {8, 40}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(leftHeartInflow, pressureMeasure1.q_in) annotation(Line(points = {{100, 20}, {100, 80}, {8, 80}, {8, 40}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-158, -42}, {160, -80}}, lineColor=  {190, 0, 0}, lineThickness=  1, textString=  "%name")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-158, -42}, {160, -80}}, lineColor = {190, 0, 0},
+                lineThickness =                                                                                                    1, textString = "%name")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end Heart;
 
     model System
@@ -671,7 +674,18 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       Physiolibrary.Types.RealIO.VolumeFlowRateInput volumeflowrate annotation(Placement(transformation(extent = {{-92, -76}, {-52, -36}}), iconTransformation(extent = {{-94, 40}, {-54, 80}})));
     equation
       port_b.q = -volumeflowrate;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-54, 36}, {8, -30}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillPattern=  FillPattern.Sphere, fillColor=  {190, 0, 0}, radius=  4), Rectangle(extent=  {{-50, -28}, {-46, -62}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillPattern=  FillPattern.Sphere, fillColor=  {190, 0, 0}), Rectangle(extent=  {{4, -26}, {8, -62}}, lineColor=  {0, 0, 0}, lineThickness=  1, fillPattern=  FillPattern.Sphere, fillColor=  {190, 0, 0}), Polygon(points=  {{-20, -30}, {-20, -38}, {-18, -40}, {-14, -46}, {-16, -48}, {-14, -52}, {-12, -54}, {-10, -56}, {-12, -58}, {-14, -62}, {-12, -64}, {-8, -66}, {-6, -68}, {-4, -74}, {-2, -76}, {2, -80}, {8, -82}, {14, -86}, {22, -90}, {28, -92}, {34, -94}, {38, -94}, {54, -96}, {62, -96}, {62, -96}, {60, -94}, {54, -92}, {48, -92}, {38, -90}, {36, -90}, {30, -86}, {20, -84}, {14, -80}, {10, -78}, {4, -76}, {0, -70}, {-2, -68}, {-4, -64}, {-8, -60}, {-4, -54}, {-10, -50}, {-10, -46}, {-8, -44}, {-14, -38}, {-16, -34}, {-16, -30}, {-20, -30}}, lineColor=  {127, 0, 0}, lineThickness=  1, fillPattern=  FillPattern.Sphere, smooth=  Smooth.None, fillColor=  {190, 0, 0}), Rectangle(extent=  {{-54, 62}, {8, 56}}, lineColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid, fillColor=  {170, 255, 255}), Rectangle(extent=  {{-54, 56}, {8, 32}}, lineColor=  {0, 0, 0}, fillColor=  {170, 255, 255}, fillPattern=  FillPattern.Sphere, radius=  2, lineThickness=  1)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-54, 36}, {8, -30}}, lineColor = {0, 0, 0},
+                lineThickness =                                                                                                    1,
+                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {190, 0, 0}, radius = 4), Rectangle(extent = {{-50, -28}, {-46, -62}}, lineColor = {0, 0, 0},
+                lineThickness =                                                                                                    1,
+                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {190, 0, 0}), Rectangle(extent = {{4, -26}, {8, -62}}, lineColor = {0, 0, 0},
+                lineThickness =                                                                                                    1,
+                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {190, 0, 0}), Polygon(points = {{-20, -30}, {-20, -38}, {-18, -40}, {-14, -46}, {-16, -48}, {-14, -52}, {-12, -54}, {-10, -56}, {-12, -58}, {-14, -62}, {-12, -64}, {-8, -66}, {-6, -68}, {-4, -74}, {-2, -76}, {2, -80}, {8, -82}, {14, -86}, {22, -90}, {28, -92}, {34, -94}, {38, -94}, {54, -96}, {62, -96}, {62, -96}, {60, -94}, {54, -92}, {48, -92}, {38, -90}, {36, -90}, {30, -86}, {20, -84}, {14, -80}, {10, -78}, {4, -76}, {0, -70}, {-2, -68}, {-4, -64}, {-8, -60}, {-4, -54}, {-10, -50}, {-10, -46}, {-8, -44}, {-14, -38}, {-16, -34}, {-16, -30}, {-20, -30}}, lineColor = {127, 0, 0},
+                lineThickness =                                                                                                    1,
+                fillPattern =                                                                                                    FillPattern.Sphere, smooth = Smooth.None, fillColor = {190, 0, 0}), Rectangle(extent = {{-54, 62}, {8, 56}}, lineColor = {0, 0, 0},
+                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {170, 255, 255}), Rectangle(extent = {{-54, 56}, {8, 32}}, lineColor = {0, 0, 0}, fillColor = {170, 255, 255},
+                fillPattern =                                                                                                    FillPattern.Sphere, radius = 2,
+                lineThickness =                                                                                                    1)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end BloodTransfusionHemorrhage;
 
     model VolumeControl "control total blood volume"
@@ -682,7 +696,13 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
       Physiolibrary.Types.RealIO.VolumeFlowRateOutput volumeflowrate annotation(Placement(transformation(extent = {{88, 18}, {108, 38}}), iconTransformation(extent = {{82, 8}, {116, 42}})));
     equation
       volumeflowrate = if enabled then (desiredVolume - volume) / flowtime else 0;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-98, 56}, {98, -8}}, lineColor=  {0, 0, 255}, fillPattern=  FillPattern.Solid, fillColor=  {170, 213, 255}), Ellipse(extent=  {{-10, 52}, {46, 0}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-92, 46}, {-38, 8}}, lineColor=  {0, 0, 255}, fillColor=  {255, 255, 170}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{-32, 30}, {-14, 24}}, lineColor=  {0, 0, 255}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{56, 36}, {74, 30}}, lineColor=  {0, 0, 255}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid), Rectangle(extent=  {{56, 24}, {74, 18}}, lineColor=  {0, 0, 255}, fillColor=  {0, 0, 0}, fillPattern=  FillPattern.Solid)}));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-98, 56}, {98, -8}}, lineColor = {0, 0, 255},
+                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {170, 213, 255}), Ellipse(extent = {{-10, 52}, {46, 0}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-92, 46}, {-38, 8}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-32, 30}, {-14, 24}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{56, 36}, {74, 30}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{56, 24}, {74, 18}}, lineColor = {0, 0, 255}, fillColor = {0, 0, 0},
+                fillPattern =                                                                                                    FillPattern.Solid)}));
     end VolumeControl;
   end Control;
   annotation(Documentation(info = "<html>
@@ -692,5 +712,5 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
   <p>Copyright &copy; 2014, Tomas Kulhanek, Charles University in Prague.</p>
   <p><br/><i>This Modelica package is&nbsp;<u>free</u>&nbsp;software and the use is completely at&nbsp;<u>your own risk</u>; it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the disclaimer of warranty) see&nbsp;<a href=\"modelica://Physiolibrary.UsersGuide.ModelicaLicense2\">Physiolibrary.UsersGuide.ModelicaLicense2</a>&nbsp;or visit&nbsp;<a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
   </html>"), uses(                             Physiolibrary(version = "2.1.1"),
-        Modelica(version="3.2")));
+        Modelica(version="3.2.1")));
 end Cardiovascular;
