@@ -116,25 +116,59 @@ package Smith2004Model
   end Hemodynamics_flat;
   annotation (uses(Modelica(version="3.2.1"), Physiolibrary(version="2.1.1")));
   model VentricularInteraction
+    Physiolibrary.Types.Pressure Plv,Plvf,Pperi,Prv,Prvf,Ppcd,Pth,Pspt;
+    Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a port_a annotation (
+        Placement(transformation(extent={{-10,80},{10,100}}),
+          iconTransformation(extent={{-10,90},{10,110}})));
+    Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a port_a1 annotation (
+        Placement(transformation(extent={{-10,-104},{10,-84}}),
+          iconTransformation(extent={{-10,-110},{10,-90}})));
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}), graphics={
-          Rectangle(extent={{-80,60},{80,-80}}, lineColor={0,0,255}),
+              -100},{100,100}}),
+                           graphics={
+          Ellipse(
+            extent={{98,0},{-102,-100}},
+            lineColor={0,0,255},
+            lineThickness=1,
+            fillColor={255,255,170},
+            fillPattern=FillPattern.Solid),
+          Ellipse(
+            extent={{100,98},{-98,0}},
+            lineColor={0,0,255},
+            lineThickness=1,
+            fillColor={255,255,170},
+            fillPattern=FillPattern.Solid),
           Polygon(
-            points={{-80,0},{-66,4},{-50,6},{-32,2},{-14,-6},{-4,0},{12,4},{30,
-                4},{56,2},{74,-2},{80,0},{80,-4},{74,-6},{64,-4},{52,-2},{28,0},
-                {12,0},{2,-4},{-8,-8},{-20,-10},{-30,-4},{-48,0},{-68,-2},{-80,
-                -6},{-80,0}},
+            points={{-80,0},{-66,4},{-50,6},{-32,2},{-16,0},{-4,0},{12,4},{30,4},
+                {50,0},{74,-2},{80,0},{80,-4},{74,-6},{64,-4},{52,-8},{30,-2},{
+                12,0},{2,-4},{-8,-4},{-20,-6},{-30,-4},{-48,0},{-68,-2},{-80,-6},
+                {-80,0}},
             lineColor={0,0,255},
             smooth=Smooth.None,
             fillColor={0,0,255},
             fillPattern=FillPattern.Solid),
           Line(
-            points={{-14,46},{-14,0},{-26,12},{-2,12},{-14,0}},
+            points={{-16,54},{-16,8},{-28,20},{-4,20},{-16,8}},
             color={0,0,255},
             smooth=Smooth.None),
           Line(
-            points={{34,-66},{34,-8},{22,-22},{48,-22},{34,-10}},
+            points={{34,-68},{34,-10},{22,-24},{48,-24},{34,-12}},
             color={0,0,255},
-            smooth=Smooth.None)}));
+            smooth=Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio
+            =false, extent={{-100,-100},{100,100}}), graphics));
+
+  equation
+    Plv = Plvf+Pperi;
+    Plvf=e*Peslvf+(1-e)*Pedlvf;
+
+    Prv=Prvf+Pperi;
+    Prvf=e*Pesrvf+(1-e)*Pedrvf;
+
+    Pperi=Ppcd+Pth;
+
+    Pspt=Plv-Prv;
+
+    Pspt=e*Pesspt+(1-e)*Pedspt;
+
   end VentricularInteraction;
 end Smith2004Model;
