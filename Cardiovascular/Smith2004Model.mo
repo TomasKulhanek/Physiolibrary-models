@@ -114,7 +114,7 @@ package Smith2004Model
     annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
               -100,-100},{100,100}}), graphics));
   end Hemodynamics_flat;
-  annotation (uses(Modelica(version="3.2.1"), Physiolibrary(version="2.1.1")));
+
   model VentricularInteraction
     Physiolibrary.Types.Pressure Plv,Plvf,Pperi,Prv,Prvf,Ppcd,Pth,Pspt;
     Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a port_a annotation (
@@ -123,6 +123,20 @@ package Smith2004Model
     Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a port_a1 annotation (
         Placement(transformation(extent={{-10,-104},{10,-84}}),
           iconTransformation(extent={{-10,-110},{10,-90}})));
+
+  equation
+    Plv = Plvf+Pperi;
+    Plvf=e*Peslvf+(1-e)*Pedlvf;
+
+    Prv=Prvf+Pperi;
+    Prvf=e*Pesrvf+(1-e)*Pedrvf;
+
+    Pperi=Ppcd+Pth;
+
+    Pspt=Plv-Prv;
+
+    Pspt=e*Pesspt+(1-e)*Pedspt;
+
     annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
               -100},{100,100}}),
                            graphics={
@@ -154,21 +168,8 @@ package Smith2004Model
           Line(
             points={{34,-68},{34,-10},{22,-24},{48,-24},{34,-12}},
             color={0,0,255},
-            smooth=Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio
-            =false, extent={{-100,-100},{100,100}}), graphics));
-
-  equation
-    Plv = Plvf+Pperi;
-    Plvf=e*Peslvf+(1-e)*Pedlvf;
-
-    Prv=Prvf+Pperi;
-    Prvf=e*Pesrvf+(1-e)*Pedrvf;
-
-    Pperi=Ppcd+Pth;
-
-    Pspt=Plv-Prv;
-
-    Pspt=e*Pesspt+(1-e)*Pedspt;
-
+            smooth=Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio=
+             false, extent={{-100,-100},{100,100}}), graphics));
   end VentricularInteraction;
+  annotation (uses(Modelica(version="3.2.1"), Physiolibrary(version="2.1.1")));
 end Smith2004Model;

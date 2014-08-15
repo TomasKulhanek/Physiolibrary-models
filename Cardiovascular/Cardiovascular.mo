@@ -568,7 +568,7 @@ package Cardiovascular "Extension library of Physiolibrary v 2.1"
             "systolic volume is equal of total volume passed through this block";
           CO = SV / HP
             "cardiac output calculation from systolic volume and heart period";
-
+          reinit(Volume, 0) "reinitialisation of volume";
           reinit(SumPressure, 0) "reinitialisation of sum pressure";
           reinit(Pmax, q_in.pressure) "reinitialisation of maximal pressure";
           reinit(Pmin, q_in.pressure) "reinitialisation minimal pressure";
