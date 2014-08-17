@@ -24,8 +24,8 @@ package SkeletalVO2Kinetics
     equation
       //port_in.conc*CO=port_in.q;
 
-      TD=TubeVolume/SolventFlowRate*1000;
-      port_out.conc=if (time<TD) then port_in.conc else delay(port_in.conc,TD,60);
+      TD=TubeVolume/SolventFlowRate;//*1000;
+      port_out.conc=delay(port_in.conc,TD);
       port_out.q=port_out.conc*SolventFlowRate;
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -138,8 +138,10 @@ package SkeletalVO2Kinetics
             origin={52,42})));
     equation
       port_in.q + port_out.q + soluteflowrate = 0;
+      //port_out.q = soluteflowrate;
       outflowSoluteConcentration = port_out.conc;
-      soluteflowrate/port_in.conc = solventflowrate;
+      soluteflowrate/port_out.conc = solventflowrate;
+      //soluteflowrate/port_in.conc = solventflowrate;
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                              graphics={Rectangle(
@@ -223,15 +225,12 @@ package SkeletalVO2Kinetics
             0.00016666666666667) annotation (Placement(transformation(
             extent={{-4,-4},{4,4}},
             rotation=180,
-            origin={22,18})));
+            origin={22,20})));
       Physiolibrary.Types.Constants.VolumeFlowRateConst volumeFlowRate(k(
             displayUnit="l/min") = 8.3333333333333e-05)
         annotation (Placement(transformation(extent={{-94,58},{-76,74}})));
       Physiolibrary.Types.Constants.ConcentrationConst concentration(k=9.8)
         annotation (Placement(transformation(extent={{-92,84},{-74,96}})));
-      Physiolibrary.Chemical.Components.Stream Stream(SolutionFlow=
-            8.3333333333333e-05)
-        annotation (Placement(transformation(extent={{-36,62},{-16,82}})));
     equation
       connect(cardioPulmonarySoluteInFlow.port_out, soluteElimination.port_in)
         annotation (Line(
@@ -267,7 +266,7 @@ package SkeletalVO2Kinetics
           smooth=Smooth.None));
       connect(molarFlowRate1.y, soluteElimination.SoluteEliminationRate)
         annotation (Line(
-          points={{17,18},{10,18},{10,22},{1.8,22}},
+          points={{17,20},{10,20},{10,22},{1.8,22}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(volumeFlowRate.y, mixing.solventflowrate) annotation (Line(
@@ -305,14 +304,9 @@ package SkeletalVO2Kinetics
           points={{-41.04,13.66},{-54,13.66},{-54,-28},{-4.2,-28},{-4.2,-4}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(mixing.port_b, Stream.q_in) annotation (Line(
-          points={{-33.62,61.74},{-34,61.74},{-34,72},{-36,72}},
-          color={107,45,134},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Stream.q_out, cardioPulmonarySoluteInFlow.port_in) annotation (
+      connect(mixing.port_b, cardioPulmonarySoluteInFlow.port_in) annotation (
           Line(
-          points={{-16,72},{-14,72},{-14,60},{-12,60}},
+          points={{-33.62,61.74},{-22.81,61.74},{-22.81,60},{-12,60}},
           color={107,45,134},
           thickness=1,
           smooth=Smooth.None));
@@ -331,7 +325,6 @@ package SkeletalVO2Kinetics
         __Dymola_experimentSetupOutput);
     end SkeletalVO2Kinetics;
 
-
   end Parts;
 
   package Model
@@ -346,14 +339,15 @@ package SkeletalVO2Kinetics
         annotation (Placement(transformation(extent={{-86,80},{-68,92}})));
       Parts.CardioPulmonarySoluteInFlow cardioPulmonarySoluteInFlow
         annotation (Placement(transformation(extent={{-6,42},{14,62}})));
-      Physiolibrary.Chemical.Sources.UnlimitedSolutePump unlimitedSolutePump(
-          SoluteFlow=8.3333333333333e-05)
-        annotation (Placement(transformation(extent={{-58,26},{-38,46}})));
-      Physiolibrary.Chemical.Components.Substance substance
-        annotation (Placement(transformation(extent={{38,12},{58,32}})));
-      Physiolibrary.Chemical.Components.Stream Stream(SolutionFlow=
-            8.3333333333333e-08)
-        annotation (Placement(transformation(extent={{10,10},{30,30}})));
+      Physiolibrary.Chemical.Components.Substance substance(Simulation=
+            Physiolibrary.Types.SimulationType.NoInit)
+        annotation (Placement(transformation(extent={{54,42},{74,62}})));
+      Physiolibrary.Chemical.Components.Substance substance1(Simulation=
+            Physiolibrary.Types.SimulationType.NoInit, solute_start=0.005)
+        annotation (Placement(transformation(extent={{-40,34},{-20,54}})));
+      Physiolibrary.Chemical.Components.SolutePump solutePump(
+          useSoluteFlowInput=true, SoluteFlow=0.00016666666666667)
+        annotation (Placement(transformation(extent={{24,42},{44,62}})));
     equation
       connect(volumeFlowRate.y, cardioPulmonarySoluteInFlow.solventflowrate)
         annotation (Line(
@@ -365,25 +359,30 @@ package SkeletalVO2Kinetics
           points={{9.2,56.2},{9.2,86},{-65.75,86}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(unlimitedSolutePump.q_out, cardioPulmonarySoluteInFlow.port_in)
+      connect(substance1.q_out, cardioPulmonarySoluteInFlow.port_in)
         annotation (Line(
-          points={{-38,36},{-22,36},{-22,52},{-6,52}},
+          points={{-30,44},{-18,44},{-18,52},{-6,52}},
           color={107,45,134},
           thickness=1,
           smooth=Smooth.None));
-      connect(Stream.q_out, substance.q_out) annotation (Line(
-          points={{30,20},{40,20},{40,22},{48,22}},
+      connect(cardioPulmonarySoluteInFlow.port_out, solutePump.q_in)
+        annotation (Line(
+          points={{13.8,52},{24,52}},
           color={107,45,134},
           thickness=1,
           smooth=Smooth.None));
-      connect(Stream.q_in, cardioPulmonarySoluteInFlow.port_out) annotation (
-          Line(
-          points={{10,20},{12,20},{12,52},{13.8,52}},
+      connect(solutePump.q_out, substance.q_out) annotation (Line(
+          points={{44,52},{64,52}},
           color={107,45,134},
           thickness=1,
           smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                {{-100,-100},{100,100}}), graphics));
+      connect(cardioPulmonarySoluteInFlow.soluteflowrate, solutePump.soluteFlow)
+        annotation (Line(
+          points={{-2.2,56.2},{-2.2,66},{38,66},{38,56}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),        graphics));
     end TestCardioInflow;
 
     model testSkeletalVO2Kinetics
@@ -397,7 +396,7 @@ package SkeletalVO2Kinetics
             conc(start=9.8)))
         annotation (Placement(transformation(extent={{-12,50},{8,70}})));
       Physiolibrary.Types.Constants.MolarFlowRateConst molarFlowRate1(k=
-            8.3333333333333e-05) annotation (Placement(transformation(
+            0.00016666666666667) annotation (Placement(transformation(
             extent={{-4,-4},{4,4}},
             rotation=180,
             origin={22,-6})));
@@ -408,15 +407,9 @@ package SkeletalVO2Kinetics
         annotation (Placement(transformation(extent={{-92,84},{-74,96}})));
       Modelica.Blocks.Math.Add add(k2=-1)
         annotation (Placement(transformation(extent={{-70,-14},{-50,6}})));
-      Modelica.Blocks.Sources.Constant const(k=2)
+      Modelica.Blocks.Sources.Constant const(k=0)
         annotation (Placement(transformation(extent={{-102,-22},{-82,-2}})));
     equation
-      connect(cardioPulmonarySoluteInFlow.port_out, soluteElimination.port_in)
-        annotation (Line(
-          points={{7.8,60},{34,60},{34,26},{8.4,26}},
-          color={107,45,134},
-          thickness=1,
-          smooth=Smooth.None));
       connect(molarFlowRate1.y, soluteElimination.SoluteEliminationRate)
         annotation (Line(
           points={{17,-6},{10,-6},{10,22},{1.8,22}},
@@ -452,6 +445,12 @@ package SkeletalVO2Kinetics
           color={107,45,134},
           thickness=1,
           smooth=Smooth.None));
+      connect(cardioPulmonarySoluteInFlow.port_out, soluteElimination.port_in)
+        annotation (Line(
+          points={{7.8,60},{26,60},{26,26},{8.4,26}},
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}}), graphics={Ellipse(
               extent={{-36,38},{38,-34}},
@@ -484,7 +483,7 @@ package SkeletalVO2Kinetics
             rotation=180,
             origin={22,-6})));
       Physiolibrary.Types.Constants.VolumeFlowRateConst volumeFlowRate(k(
-            displayUnit="l/min") = 8.3333333333333e-05)
+            displayUnit="ml/min") = 8.3333333333333e-05)
         annotation (Placement(transformation(extent={{-96,58},{-78,74}})));
       Physiolibrary.Types.Constants.ConcentrationConst concentration(k=9.8)
         annotation (Placement(transformation(extent={{-92,84},{-74,96}})));
@@ -699,6 +698,282 @@ package SkeletalVO2Kinetics
           __Dymola_Algorithm="Dassl"),
         __Dymola_experimentSetupOutput);
     end testSkeletalVO2Kinetics3;
+
+    model testSkeletalVO2Kinetics4
+
+      Parts.SoluteElimination soluteElimination annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-2,26})));
+      Parts.CardioPulmonarySoluteInFlow cardioPulmonarySoluteInFlow(port_in(
+            conc(start=9.8)))
+        annotation (Placement(transformation(extent={{-12,50},{8,70}})));
+      Physiolibrary.Types.Constants.MolarFlowRateConst molarFlowRate1(k=
+            0.00016666666666667) annotation (Placement(transformation(
+            extent={{-4,-4},{4,4}},
+            rotation=180,
+            origin={16,10})));
+      Physiolibrary.Types.Constants.VolumeFlowRateConst volumeFlowRate(k(
+            displayUnit="l/min") = 8.3333333333333e-05)
+        annotation (Placement(transformation(extent={{-96,58},{-78,74}})));
+      Physiolibrary.Types.Constants.ConcentrationConst concentration(k=9.8)
+        annotation (Placement(transformation(extent={{-92,84},{-74,96}})));
+      Modelica.Blocks.Math.Add add(k2=-1)
+        annotation (Placement(transformation(extent={{-48,-16},{-28,4}})));
+      Parts.SoluteElimination soluteElimination1
+                                                annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={0,-24})));
+      Physiolibrary.Types.Constants.MolarFlowRateConst molarFlowRate2(k=0.00035)
+                                 annotation (Placement(transformation(
+            extent={{-4,-4},{4,4}},
+            rotation=180,
+            origin={20,-40})));
+      Physiolibrary.Types.Constants.VolumeFlowRateConst flowdistribution(k(
+            displayUnit="l/min") = 3.3333333333333e-05)
+        annotation (Placement(transformation(extent={{-78,-44},{-60,-28}})));
+    equation
+      connect(molarFlowRate1.y, soluteElimination.SoluteEliminationRate)
+        annotation (Line(
+          points={{11,10},{10,10},{10,22},{1.8,22}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(volumeFlowRate.y, cardioPulmonarySoluteInFlow.solventflowrate)
+        annotation (Line(
+          points={{-75.75,66},{-62,66},{-62,80},{-2,80},{-2,64.2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(concentration.y, cardioPulmonarySoluteInFlow.outflowSoluteConcentration)
+        annotation (Line(
+          points={{-71.75,90},{3.2,90},{3.2,64.2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(add.y, soluteElimination.SolventFlowRate) annotation (Line(
+          points={{-27,-6},{-6.2,-6},{-6.2,22}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(soluteElimination.port_out, cardioPulmonarySoluteInFlow.port_in)
+        annotation (Line(
+          points={{-12,26.2},{-16,26.2},{-16,26},{-20,26},{-20,60},{-12,60}},
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(cardioPulmonarySoluteInFlow.port_out, soluteElimination.port_in)
+        annotation (Line(
+          points={{7.8,60},{26,60},{26,26},{8.4,26}},
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(soluteElimination1.port_in, soluteElimination.port_in)
+        annotation (Line(
+          points={{10.4,-24},{26,-24},{26,26},{8.4,26}},
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(soluteElimination1.port_out, cardioPulmonarySoluteInFlow.port_in)
+        annotation (Line(
+          points={{-10,-23.8},{-16,-23.8},{-16,-24},{-20,-24},{-20,60},{-12,60}},
+
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(soluteElimination1.SoluteEliminationRate, molarFlowRate2.y)
+        annotation (Line(
+          points={{3.8,-28},{4,-28},{4,-40},{15,-40}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(add.u1, volumeFlowRate.y) annotation (Line(
+          points={{-50,0},{-75.75,0},{-75.75,66}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(flowdistribution.y, add.u2) annotation (Line(
+          points={{-57.75,-36},{-54,-36},{-54,-12},{-50,-12}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(flowdistribution.y, soluteElimination1.SolventFlowRate)
+        annotation (Line(
+          points={{-57.75,-36},{-4.2,-36},{-4.2,-28}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics={Ellipse(
+              extent={{-36,38},{38,-34}},
+              lineColor={0,0,255},
+              fillColor={170,213,255},
+              fillPattern=FillPattern.Solid)}), Diagram(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+            graphics),
+        experiment(
+          StopTime=60,
+          Tolerance=0.1,
+          __Dymola_fixedstepsize=1,
+          __Dymola_Algorithm="Dassl"),
+        __Dymola_experimentSetupOutput);
+    end testSkeletalVO2Kinetics4;
+
+    model testSkeletalVO2Kinetics5
+
+      Parts.CardioPulmonarySoluteInFlow cardioPulmonarySoluteInFlow(port_in(
+            conc(start=9.8)))
+        annotation (Placement(transformation(extent={{50,42},{70,62}})));
+      Physiolibrary.Types.Constants.ConcentrationConst concentration(k=9.8)
+        annotation (Placement(transformation(extent={{-30,76},{-12,88}})));
+      Modelica.Blocks.Math.Add add(k2=-1)
+        annotation (Placement(transformation(extent={{6,18},{16,28}})));
+      Parts.SoluteElimination soluteElimination1
+                                                annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={62,-32})));
+      Physiolibrary.Types.Constants.MolarFlowRateConst molarFlowRate2(k=0.00035)
+                                 annotation (Placement(transformation(
+            extent={{-4,-4},{4,4}},
+            rotation=180,
+            origin={82,-48})));
+      Modelica.Blocks.Math.Add add1(
+                                   k2=-1)
+        annotation (Placement(transformation(extent={{18,-38},{38,-58}})));
+      Parts.Tube tube(SolventFlowRate(start=8.3333333333333e-05, displayUnit=
+              "ml/min"), TubeVolume(displayUnit="l") = 0.002) annotation (
+          Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={48,0})));
+      Parts.SoluteElimination soluteElimination2
+                                                annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={64,26})));
+      Physiolibrary.Types.Constants.MolarFlowRateConst molarFlowRate1(k=
+            0.00016666666666667) annotation (Placement(transformation(
+            extent={{-4,-4},{4,4}},
+            rotation=180,
+            origin={74,6})));
+      Physiolibrary.Types.Constants.VolumeFlowRateConst FlowRateDistribution(k(
+            displayUnit="l/min") = 3.3333333333333e-05)
+        annotation (Placement(transformation(extent={{14,-6},{-4,10}})));
+      Modelica.Blocks.Sources.Ramp ramp(
+        height=1,
+        duration=30,
+        offset=1,
+        startTime=10)
+        annotation (Placement(transformation(extent={{-94,26},{-74,46}})));
+      Modelica.Blocks.Math.Product product1
+        annotation (Placement(transformation(extent={{-56,42},{-36,62}})));
+      Physiolibrary.Types.Constants.VolumeFlowRateConst volumeFlowRate1(
+                                                                       k(
+            displayUnit="l/min") = 8.3333333333333e-05)
+        annotation (Placement(transformation(extent={{-94,56},{-76,72}})));
+    equation
+
+      connect(concentration.y, cardioPulmonarySoluteInFlow.outflowSoluteConcentration)
+        annotation (Line(
+          points={{-9.75,82},{65.2,82},{65.2,56.2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(soluteElimination1.SoluteEliminationRate, molarFlowRate2.y)
+        annotation (Line(
+          points={{65.8,-36},{66,-36},{66,-48},{77,-48}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(add1.y, soluteElimination1.SolventFlowRate) annotation (Line(
+          points={{39,-48},{57.8,-48},{57.8,-36}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(soluteElimination1.port_out, tube.port_in) annotation (Line(
+          points={{52,-31.8},{46,-31.8},{46,-10},{48,-10}},
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(tube.port_out, cardioPulmonarySoluteInFlow.port_in) annotation (
+          Line(
+          points={{48,9.8},{48,52},{50,52}},
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(cardioPulmonarySoluteInFlow.port_out, soluteElimination1.port_in)
+        annotation (Line(
+          points={{69.8,52},{82,52},{82,-32},{72.4,-32}},
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(add1.u2, add.y) annotation (Line(
+          points={{16,-42},{16,-26},{16.5,-26},{16.5,23}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(add1.y, tube.SolventFlowRate) annotation (Line(
+          points={{39,-48},{40,-48},{40,0.6},{43.8,0.6}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(cardioPulmonarySoluteInFlow.port_out, soluteElimination2.port_in)
+        annotation (Line(
+          points={{69.8,52},{82,52},{82,26},{74.4,26}},
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(soluteElimination2.port_out, cardioPulmonarySoluteInFlow.port_in)
+        annotation (Line(
+          points={{54,26.2},{50,26.2},{50,26},{48,26},{48,52},{50,52}},
+          color={107,45,134},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(molarFlowRate1.y, soluteElimination2.SoluteEliminationRate)
+        annotation (Line(
+          points={{69,6},{67.8,6},{67.8,22}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(add.y, soluteElimination2.SolventFlowRate) annotation (Line(
+          points={{16.5,23},{38.25,23},{38.25,22},{59.8,22}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(FlowRateDistribution.y, add.u2) annotation (Line(
+          points={{-6.25,2},{-6,2},{-6,20},{5,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(ramp.y, product1.u2) annotation (Line(
+          points={{-73,36},{-66,36},{-66,46},{-58,46}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(volumeFlowRate1.y, product1.u1) annotation (Line(
+          points={{-73.75,64},{-66,64},{-66,58},{-58,58}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(product1.y, cardioPulmonarySoluteInFlow.solventflowrate)
+        annotation (Line(
+          points={{-35,52},{4,52},{4,62},{60,62},{60,56.2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(product1.y, add.u1) annotation (Line(
+          points={{-35,52},{-34,52},{-34,26},{5,26}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(product1.y, add1.u1) annotation (Line(
+          points={{-35,52},{-34,52},{-34,-54},{16,-54},{16,-54}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics={Ellipse(
+              extent={{-36,38},{38,-34}},
+              lineColor={0,0,255},
+              fillColor={170,213,255},
+              fillPattern=FillPattern.Solid)}), Diagram(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+            graphics),
+        experiment(
+          StopTime=60,
+          Tolerance=0.1,
+          __Dymola_fixedstepsize=1,
+          __Dymola_Algorithm="Dassl"),
+        __Dymola_experimentSetupOutput);
+    end testSkeletalVO2Kinetics5;
   end Test;
   annotation (uses(Physiolibrary(version="2.1.1"), Modelica(version="3.2")));
 end SkeletalVO2Kinetics;
