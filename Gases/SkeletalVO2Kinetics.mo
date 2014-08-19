@@ -137,7 +137,8 @@ package SkeletalVO2Kinetics
             rotation=270,
             origin={52,42})));
     equation
-      port_in.q + port_out.q + soluteflowrate = 0;
+      //port_in.q + port_out.q + soluteflowrate = 0;
+      port_out.q+soluteflowrate = 0; //expects that difusion is 100% and independent to inflow of molar flow rate
       //port_out.q = soluteflowrate;
       outflowSoluteConcentration = port_out.conc;
       soluteflowrate/port_out.conc = solventflowrate;
@@ -778,10 +779,10 @@ package SkeletalVO2Kinetics
       connect(soluteElimination1.port_out, cardioPulmonarySoluteInFlow.port_in)
         annotation (Line(
           points={{-10,-23.8},{-16,-23.8},{-16,-24},{-20,-24},{-20,60},{-12,60}},
-
           color={107,45,134},
           thickness=1,
           smooth=Smooth.None));
+
       connect(soluteElimination1.SoluteEliminationRate, molarFlowRate2.y)
         annotation (Line(
           points={{3.8,-28},{4,-28},{4,-40},{15,-40}},
@@ -975,5 +976,5 @@ package SkeletalVO2Kinetics
         __Dymola_experimentSetupOutput);
     end testSkeletalVO2Kinetics5;
   end Test;
-  annotation (uses(Physiolibrary(version="2.1.1"), Modelica(version="3.2")));
+  annotation (uses(Physiolibrary(version="2.1.1"), Modelica(version="3.2.1")));
 end SkeletalVO2Kinetics;
