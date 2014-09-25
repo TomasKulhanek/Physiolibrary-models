@@ -1,19 +1,17 @@
 within ;
 package BurkhoffModel
   package Parts
-
     model ElasticVesselWithSVandP
       "elastic vessel computes aditionally stressed volume and pressure"
       extends Physiolibrary.Hydraulic.Components.ElasticVessel;
-      Physiolibrary.Types.RealIO.VolumeOutput StressedVolume annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-88,-100}), iconTransformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-80,-102})));
+      Physiolibrary.Types.RealIO.VolumeOutput StressedVolume annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-88,-100}), iconTransformation(extent = {{-20,-20},{20,20}}, rotation=90,    origin={-44,102})));
       Physiolibrary.Types.RealIO.PressureOutput pressure annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {92,-86}), iconTransformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {84,-100})));
     equation
       StressedVolume = volume - zpv;
       pressure = q_in.pressure;
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+                -100},{100,100}}),                                                                                                    graphics));
     end ElasticVesselWithSVandP;
-
-
 
     model BloodVolume
     //  Physiolibrary.Types.RealIO.VolumeInput DesiredBloodVolume; //(start=0.005);
@@ -27,7 +25,6 @@ package BurkhoffModel
       Physiolibrary.Types.RealIO.VolumeOutput TotalBloodVolume annotation(Placement(transformation(extent = {{88,16},{108,36}}), iconTransformation(extent = {{88,16},{108,36}})));
       Physiolibrary.Types.RealIO.VolumeOutput TotalBloodStressedVolume annotation(Placement(transformation(extent = {{88,16},{108,36}}), iconTransformation(extent = {{88,-6},{108,14}})));
       Physiolibrary.Types.RealIO.VolumeOutput TotalBloodUnstressedVolume annotation(Placement(transformation(extent = {{88,16},{108,36}}), iconTransformation(extent = {{88,-30},{108,-10}})));
-
       Physiolibrary.Types.RealIO.VolumeInput DesiredBloodVolume annotation (
           Placement(transformation(extent={{-90,70},{-50,110}}), iconTransformation(
             extent={{-12,-12},{12,12}},
@@ -97,17 +94,17 @@ package BurkhoffModel
                 fillPattern =                                                                                                    FillPattern.Solid, textString = "Total Blood Unstressed Volume")}));
     end BloodVolume;
 
-
     partial model HeartElastance
-      "Elastance of heart artia and ventricules by Burkhoff"
+      "Elastance of heart atria and ventricules by Burkhoff"
     //  extends BurkhoffModel.Parts.EtTimingBurkhoff;
         Physiolibrary.Types.RealIO.VolumeInput Vs "Stressed volume" annotation(Placement(visible = true, transformation(origin={-163.397,
-                -51.3719},                                                                                                    extent = {{-20.0,-20.0},{20.0,20.0}}, rotation = 0), iconTransformation(origin={-112,-26},  extent = {{-9.999980000000001,-10},{10,9.99995}}, rotation = 0)));
+                -51.3719},                                                                                                    extent = {{-20.0,-20.0},{20.0,20.0}}, rotation = 0), iconTransformation(origin={-90,-30},   extent = {{-9.999980000000001,-10},{10,9.99995}}, rotation = 0)));
       parameter Real Alpha "coefficient of end diastolic pressure-volume curve";
       parameter Real Beta "coefficient of end diastolic pressure-volume curve";
       parameter Physiolibrary.Types.HydraulicElastance Ees
         "coefficient of end-systolic elastance";
-      Cardiovascular.Types.RealIO.HydraulicElastanceOutput Et "elasticity" annotation(Placement(transformation(extent = {{94.0,16.0},{114.0,36.0}}, origin = {0.0,0.0}, rotation = 0), iconTransformation(extent = {{100.0,20.0},{120.0,40.0}}, origin = {2,40}, rotation = 0), visible = true));
+      Physiolibrary.Types.RealIO.HydraulicComplianceOutput Ct "compliance" annotation(Placement(transformation(extent = {{94.0,16.0},{114.0,36.0}}, origin = {0.0,0.0}, rotation = 0), iconTransformation(extent = {{100.0,20.0},{120.0,40.0}}, origin = {2,40}, rotation = 0), visible = true));
+      Physiolibrary.Types.HydraulicElastance Et "Elastance";
       Physiolibrary.Types.Time Tsyst; //need to define in extended model
       parameter Physiolibrary.Types.Time Tmax "duration of systole ";
       parameter Physiolibrary.Types.Time Tau
@@ -122,16 +119,24 @@ package BurkhoffModel
       //1e+6 and 133.322368 are recalculation in SI units - as the original equation comes in torr and ml.
       //  Et = (1 - Et0) * Beta * (exp(Alpha * Vs * 1e+6) - 1) / Vs * 1e+6) * 133.322368 * 1e+6 + Et0 * Ees;
         Et = (1 - Et0) * Beta * (exp(Alpha * Vs * 1e+6) - 1) / Vs  * 133.322368 + Et0 * Ees;
+        Ct = 1/Et;
       annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                        graphics), Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                                                    graphics={
-                                                                                                    Line(points = {{-42,90},{-42,-60},{82,-60}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-58},{26,-56},{50,-54},{66,-52},{72,-50},{78,-48},{82,-46},{86,-44}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-60},{4,88}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-60},{84,56}}, color = {255,0,0}, smooth = Smooth.None),Polygon(points = {{72,48},{68,56},{76,52},{72,48}}, lineColor = {255,0,0}, smooth = Smooth.None, fillColor = {255,0,0},
+            Rectangle(
+              extent={{-52,94},{94,-76}},
+              lineColor={0,0,127},
+              fillColor={255,255,170},
+              fillPattern=FillPattern.Solid),                                                       Line(points = {{-42,90},{-42,-60},{82,-60}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-58},{26,-56},{50,-54},{66,-52},{72,-50},{78,-48},{82,-46},{86,-44}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-60},{4,88}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-60},{84,56}}, color = {255,0,0}, smooth = Smooth.None),Polygon(points = {{72,48},{68,56},{76,52},{72,48}}, lineColor = {255,0,0}, smooth = Smooth.None, fillColor = {255,0,0},
                 fillPattern =                                                                                                    FillPattern.Solid),Polygon(points = {{0,-4},{-4,4},{4,0},{0,-4}}, lineColor = {255,0,0}, smooth = Smooth.None, fillColor = {255,0,0},
                 fillPattern =                                                                                                    FillPattern.Solid, origin = {80,45}, rotation = 180),
                                                                                                     Text(extent={{
-                  -116,-18},{-62,-34}},                                                                                                    lineColor = {0,0,255}, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Vs"), Text(extent = {{50,90},{104,52}}, lineColor = {0,0,255}, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Et"),Text(extent = {{-100,-108},{100,-124}}, lineColor = {0,0,255}, fillColor = {170,213,255},
+                  -92,-26},{-38,-42}},                                                                                                    lineColor = {0,0,255}, fillColor = {255,0,0},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "Vs"), Text(extent = {{50,90},{104,52}}, lineColor=
+                  {0,0,255},                                                                                                    fillColor=
+                  {255,0,0},
+                fillPattern=FillPattern.Solid,
+              textString="Ct"),                                                                                                    Text(extent = {{-100,-108},{100,-124}}, lineColor = {0,0,255}, fillColor = {170,213,255},
                 fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
     end HeartElastance;
 
@@ -140,15 +145,13 @@ package BurkhoffModel
         "heart period - duration of cardiac cycle";
       Boolean b(start = false);
       Physiolibrary.Types.RealIO.FrequencyInput HR annotation(Placement(transformation(extent = {{-134.0,8.0},{-94.0,48.0}}, origin = {1.3363,-48.0}, rotation = 0), iconTransformation(extent={{
-                -87.1011,5.25412},{-61.1011,31.5247}},                                                                                                    origin={-38.8989,
-                80.7459},                                                                                                    rotation = 0), visible = true));
+                -73.7009,4.4},{-51.7009,26.4}},                                                                                                    origin={-26.2991,
+                67.6},                                                                                                    rotation = 0), visible = true));
       Physiolibrary.Types.Time Tasyst
         "time elapsed from the beginning of atrial systole";
       Physiolibrary.Types.Time Tvsyst
         "time elapsed from the beginning of ventricular systole";
-      Physiolibrary.Types.RealIO.TimeInput AVDelay "AV interval" annotation(Placement(visible = true, transformation(origin = {-0.0177,33.9592}, extent = {{-134.0,8.0},{-94.0,48.0}}, rotation = 0), iconTransformation(origin={-45.6,
-                55.2},                                                                                                    extent={{-80.4,
-                4.8},{-56.4,28.8}},                                                                                                    rotation = 0)));
+      parameter Physiolibrary.Types.Time AVDelay=0.160 "AV interval";
       Physiolibrary.Types.Time T0 "start time of cardiac cycle";
       Physiolibrary.Types.Time EDTV "Ventricular end Diastolic Time";
     equation
@@ -167,124 +170,104 @@ package BurkhoffModel
       annotation(Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                       graphics={                                                                                                    Text(visible = true, origin={
-                  -36.5625,84},                                                                                                    lineColor = {0,0,255}, extent={{
-                  -73.4375,6.00004},{-23.4375,24}},                                                                                                    textString = "HR", fontName = "Arial"),
-                                                                                                    Text(visible = true, origin={
-                  13.4799,60.5407},                                                                                                    lineColor = {0,0,255},
-                fillPattern =                                                                                                    FillPattern.Solid, extent={{
-                  -125.48,5.45934},{-40.0478,21.8373}},                                                                                                    textString = "AVDelay", fontName = "Arial")}));
+                  -18.5625,68},                                                                                                    lineColor = {0,0,255}, extent={{
+                  -73.4375,6.00004},{-23.4375,24}},                                                                                                    textString = "HR", fontName = "Arial")}));
     end HeartIntervals;
 
     model SideOfHeart "abstract model for heart side"
       import BurkhoffModel;
-      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a inflow annotation(Placement(transformation(extent = {{-114,-10},{-94,10}}), iconTransformation(extent = {{-14,-8},{6,12}})));
+      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a inflow annotation(Placement(transformation(extent={{-110,
+                -10},{-90,10}}),                                                                                                    iconTransformation(extent = {{-14,-8},{6,12}})));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b outflow annotation (
           Placement(transformation(extent={{90,-10},{110,10}}), iconTransformation(
               extent={{-18,54},{2,74}})));
       Physiolibrary.Types.RealIO.PressureInput PTH "Intrathoracic Pressure" annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-56,50}), iconTransformation(extent={{-16,-16},
-                {16,16}},                                                                                                    rotation = 270, origin={-6,124})));
-      Modelica.Blocks.Interfaces.RealInput AVGain
-        "Ventricular-Atrial Interconnection Gain"                                           annotation(Placement(transformation(extent = {{-6,-6},{6,6}}, rotation = 270, origin = {-38,52}), iconTransformation(extent={{-15,-15},
-                {15,15}},
-            rotation=270,
-            origin={25,125})));
+                {16,16}},                                                                                                    rotation=90,    origin={-8,-102})));
       BurkhoffModel.Parts.AtrialElastance atrialElastance(
         Alpha=0.04,
         Beta=0.3,
         Ees=26664477.483,
         Tmax(displayUnit="ms") = 0.125,
         Tau(displayUnit="ms") = 0.02)
-        annotation (Placement(transformation(extent={{-50,66},{-16,92}})));
+        annotation (Placement(transformation(extent={{-100,28},{-66,54}})));
       BurkhoffModel.Parts.VentricularElastance ventricularElastance(
         Alpha=0.024,
         Beta=0.34,
         Ees=50662507.2177,
         Tmax(displayUnit="ms") = 0.2,
         Tau(displayUnit="ms") = 0.03)
-        annotation (Placement(transformation(extent={{42,68},{76,94}})));
+        annotation (Placement(transformation(extent={{0,28},{34,54}})));
       ElasticVesselWithSVandP atrium(
         useV0Input=true,
         useComplianceInput=true,
         useExternalPressureInput=true,
         volume_start=4e-05)
         annotation (Placement(transformation(extent={{-70,-10},{-50,10}})));
-      Modelica.Blocks.Math.Product product annotation(Placement(transformation(extent = {{-5,-5},{5,5}}, rotation = 270, origin = {-35,37})));
-      Modelica.Blocks.Math.Add add annotation(Placement(transformation(extent = {{-6,-6},{6,6}}, rotation = 270, origin = {-52,22})));
+      Modelica.Blocks.Math.Product product annotation(Placement(transformation(extent={{-6,-6},
+                {6,6}},                                                                                  rotation=180,   origin={-38,32})));
+      Modelica.Blocks.Math.Add add annotation(Placement(transformation(extent = {{-6,-6},{6,6}}, rotation = 270, origin={-52,18})));
       ElasticVesselWithSVandP ventricle(
         useV0Input=true,
         useComplianceInput=true,
         useExternalPressureInput=true,
         volume_start=6e-05)
         annotation (Placement(transformation(extent={{30,-10},{50,10}})));
-      Cardiovascular.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance annotation(Placement(transformation(extent = {{-4,-4},{4,4}}, rotation = 270, origin = {-64,24})));
-      Cardiovascular.Types.RealIO.HydraulicElastanceToCompliance hydrauliccompliance1 annotation(Placement(transformation(extent = {{-4,-4},{4,4}}, rotation = 270, origin = {40,26})));
       Physiolibrary.Hydraulic.Components.IdealValve    atrioVentricularValve(
           useLimitationInputs=true)
         annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
       Physiolibrary.Hydraulic.Components.IdealValve    ventriculoArteryValve(
           useLimitationInputs=true)
         annotation (Placement(transformation(extent={{66,-10},{86,10}})));
-      Physiolibrary.Types.Constants.HydraulicConductanceConst CxABackflow(k = 0) annotation(Placement(transformation(extent={{-10,28},
-                {-4,34}})));
-      Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst xtv(k(displayUnit = "(mmHg.s)/ml") = 333305.9685375) annotation(Placement(transformation(extent={{-26,22},
-                {-18,30}})));
-      Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst xR(k(displayUnit = "(mmHg.s)/ml") = 266644.77483) annotation(Placement(transformation(extent={{56,20},
-                {64,28}})));
-      Physiolibrary.Types.Constants.HydraulicConductanceConst CxVBackflow(k = 0) annotation(Placement(transformation(extent={{72,38},
-                {80,46}})));
-      Physiolibrary.Types.Constants.VolumeConst VxAU(k=5e-06)    annotation(Placement(transformation(extent = {{-82,16},{-74,24}})));
-      Physiolibrary.Types.Constants.VolumeConst VxVU(k=5e-06)    annotation(Placement(transformation(extent = {{16,20},{24,28}})));
+      Physiolibrary.Types.Constants.HydraulicConductanceConst CxABackflow(k = 0) annotation(Placement(transformation(extent={{-18,28},
+                {-8,36}})));
+      Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst Rxv(k(displayUnit = "(mmHg.s)/ml") = 333305.9685375) annotation(Placement(transformation(extent={{-24,16},
+                {-16,24}})));
+      Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst xR(k(displayUnit = "(mmHg.s)/ml") = 266644.77483) annotation(Placement(transformation(extent={{60,16},
+                {68,24}})));
+      Physiolibrary.Types.Constants.HydraulicConductanceConst CxVBackflow(k = 0) annotation(Placement(transformation(extent={{60,28},
+                {70,36}})));
+      Physiolibrary.Types.Constants.VolumeConst VxAU(k=5e-06)    annotation(Placement(transformation(extent={{-80,14},
+                {-72,22}})));
+      Physiolibrary.Types.Constants.VolumeConst VxVU(k=5e-06)    annotation(Placement(transformation(extent={{22,16},
+                {30,24}})));
       Physiolibrary.Types.RealIO.FrequencyInput HR annotation (Placement(
-            transformation(extent={{-104,80},{-84,100}}), iconTransformation(
+            transformation(extent={{-102,52},{-82,72}}),  iconTransformation(
             extent={{-15,-15},{15,15}},
             rotation=270,
-            origin={-39,125})));
-      Physiolibrary.Types.RealIO.TimeInput avDelay annotation (Placement(
-            transformation(extent={{-86,66},{-66,86}}),  iconTransformation(
-            extent={{-15,-15},{15,15}},
-            rotation=270,
-            origin={-75,125})));
+            origin={-9,115})));
+      Modelica.Blocks.Sources.Constant AVGain(k=0.02)
+        annotation (Placement(transformation(extent={{-5,-5},{5,5}},
+            rotation=180,
+            origin={-23,47})));
     equation
-      connect(AVGain,product.u2) annotation(Line(points = {{-38,52},{-38,43}}, color = {0,0,127}, smooth = Smooth.None));
       connect(atrium.externalPressure, add.y) annotation (Line(
-          points={{-52,8},{-52,15.4}},
+          points={{-52,8},{-52,11.4}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(PTH,add.u2) annotation(Line(points = {{-56,50},{-55.6,50},{-55.6,29.2}}, color = {0,0,127}, smooth = Smooth.None));
-      connect(product.y,add.u1) annotation(Line(points = {{-35,31.5},{-41.5,31.5},{-41.5,29.2},{-48.4,29.2}}, color = {0,0,127}, smooth = Smooth.None));
+      connect(PTH,add.u2) annotation(Line(points={{-56,50},{-55.6,50},{-55.6,
+              25.2}},                                                                  color = {0,0,127}, smooth = Smooth.None));
+      connect(product.y,add.u1) annotation(Line(points={{-44.6,32},{-41.5,32},{
+              -41.5,25.2},{-48.4,25.2}},                                                                      color = {0,0,127}, smooth = Smooth.None));
       connect(ventricle.pressure, product.u1) annotation (Line(
-          points={{48.4,-10},{48,-10},{48,-24},{-26,-24},{-26,46},{-32,46},{-32,
-              43}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(hydrauliccompliance.y,atrium. compliance) annotation (Line(
-          points={{-64,19},{-62,19},{-62,8},{-60,8}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(hydrauliccompliance1.y,ventricle. compliance) annotation (Line(
-          points={{40,21},{40,8}},
+          points={{48.4,-10},{48,-10},{48,-16},{-26,-16},{-26,28},{-30,28},{-30,
+              28.4},{-30.8,28.4}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(inflow,atrium. q_in) annotation (Line(
-          points={{-104,0},{-60,0}},
+          points={{-100,4.44089e-16},{-80,4.44089e-16},{-80,0},{-60,0}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-
       connect(PTH,ventricle. externalPressure) annotation (Line(
           points={{-56,50},{-56,56},{48,56},{48,8}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(VxAU.y,atrium. zeroPressureVolume) annotation (Line(
-          points={{-73,20},{-70,20},{-70,8},{-68,8}},
+          points={{-71,18},{-70,18},{-70,8},{-68,8}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(VxVU.y,ventricle. zeroPressureVolume) annotation (Line(
-          points={{25,24},{28,24},{28,8},{32,8}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(inflow,inflow) annotation(Line(points = {{-104,0},{-104,0}}, color = {0,0,0}, thickness = 1, smooth = Smooth.None));
+      connect(inflow,inflow) annotation(Line(points={{-100,4.44089e-16},{-100,
+              4.44089e-16}},                                               color = {0,0,0}, thickness = 1, smooth = Smooth.None));
       connect(atrium.q_in, atrioVentricularValve.q_in) annotation (Line(
           points={{-60,0},{-20,0}},
           color={0,0,0},
@@ -295,12 +278,12 @@ package BurkhoffModel
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(xtv.y, atrioVentricularValve.Gon) annotation (Line(
-          points={{-17,26},{-16,26},{-16,10}},
+      connect(Rxv.y, atrioVentricularValve.Gon) annotation (Line(
+          points={{-15,20},{-16,20},{-16,10}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(CxABackflow.y, atrioVentricularValve.Goff) annotation (Line(
-          points={{-3.25,31},{-3.25,19.5},{-4,19.5},{-4,10}},
+          points={{-6.75,32},{-6.75,19.5},{-4,19.5},{-4,10}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(ventricle.q_in, ventriculoArteryValve.q_in) annotation (Line(
@@ -314,70 +297,59 @@ package BurkhoffModel
           thickness=1,
           smooth=Smooth.None));
       connect(CxVBackflow.y, ventriculoArteryValve.Goff) annotation (Line(
-          points={{81,42},{82,42},{82,10}},
+          points={{71.25,32},{82,32},{82,10}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(xR.y, ventriculoArteryValve.Gon) annotation (Line(
-          points={{65,24},{68,24},{68,10},{70,10}},
+          points={{69,20},{68,20},{68,10},{70,10}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(atrialElastance.Et, hydrauliccompliance.hydraulicelastance)
-        annotation (Line(
-          points={{-13.96,88.1},{-10,88.1},{-10,60},{-64.1,60},{-64.1,28.1}},
+      connect(AVGain.y, product.u2) annotation (Line(
+          points={{-28.5,47},{-30.8,47},{-30.8,35.6}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(ventricularElastance.Et, hydrauliccompliance1.hydraulicelastance)
-        annotation (Line(
-          points={{78.04,90.1},{82,90.1},{82,62},{39.9,62},{39.9,30.1}},
+      connect(atrialElastance.Ct, atrium.compliance) annotation (Line(
+          points={{-63.96,50.1},{-63.96,34.05},{-60,34.05},{-60,8}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(atrium.StressedVolume, atrialElastance.Vs) annotation (Line(
+          points={{-64.4,10.2},{-64.4,28},{-98.3,28},{-98.3,37.1}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(ventricle.compliance, ventricularElastance.Ct) annotation (Line(
+          points={{40,8},{38,8},{38,50.1},{36.04,50.1}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(ventricle.zeroPressureVolume, VxVU.y) annotation (Line(
+          points={{32,8},{32,14},{32,20},{31,20}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(ventricle.StressedVolume, ventricularElastance.Vs) annotation (
           Line(
-          points={{32,-10.2},{32,-16},{14,-16},{14,77.62},{39.96,77.62}},
+          points={{35.6,10.2},{35.6,28},{1.7,28},{1.7,37.1}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(atrium.StressedVolume, atrialElastance.Vs) annotation (Line(
-          points={{-68,-10.2},{-68,-18},{-84,-18},{-84,68},{-52.04,68},{-52.04,
-              75.62}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(HR, atrialElastance.HR) annotation (Line(
-          points={{-94,90},{-74,90},{-74,91.8876},{-52.21,91.8876}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(ventricularElastance.AVDelay, avDelay) annotation (Line(
-          points={{39.62,90.36},{12,90.36},{12,96},{-76,96},{-76,76}},
+      connect(atrialElastance.HR, HR) annotation (Line(
+          points={{-98.13,51.79},{-98.13,55.895},{-92,55.895},{-92,62}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(ventricularElastance.HR, HR) annotation (Line(
-          points={{39.79,93.8876},{26,93.8876},{26,100},{-94,100},{-94,90}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(avDelay, atrialElastance.AVDelay) annotation (Line(
-          points={{-76,76},{-52.38,76},{-52.38,88.36}},
+          points={{1.87,51.79},{1.87,62},{-92,62}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-                -100},{100,100}}),                                                                     graphics={                                                       Text(extent={{
-                  -8,112},{76,94}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "AVGain"),
+                -100},{100,100}}),                                                                     graphics={
                                                                                                     Text(extent={{
-                  -28,108},{18,90}},                                                                                                   lineColor=
+                  -10,-84},{36,-102}},                                                                                                 lineColor=
                   {0,0,255},                                                                                                    fillColor=
                   {85,170,255},
                 fillPattern=FillPattern.Solid,
               textString="PTh"),                                                                                                    Text(extent={{
-                  -60,108},{-14,90}},                                                                                                  lineColor=
+                  -32,102},{14,84}},                                                                                                   lineColor=
                   {0,0,255},                                                                                                    fillColor=
                   {85,170,255},
                 fillPattern=FillPattern.Solid,
-              textString="HR"),                                                                                                    Text(extent={{
-                  -104,106},{-58,88}},                                                                                                 lineColor=
-                  {0,0,255},                                                                                                    fillColor=
-                  {85,170,255},
-                fillPattern=FillPattern.Solid,
-              textString="AvDelay"),
-            Ellipse(extent={{-28,82},{16,-14}}, lineColor={0,0,0})}),                                                                     Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+              textString="HR")}),                                                                                                    Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                                                    graphics));
     end SideOfHeart;
 
@@ -389,39 +361,22 @@ package BurkhoffModel
           Beta=0.3,
           Tmax(displayUnit="ms") = 0.125,
           Tau(displayUnit="ms") = 0.02,
+          AVDelay(displayUnit="ms"),
           Ees=33330596.85375),
         ventricularElastance(
           Alpha=0.024,
           Beta=0.34,
-          Ees=205316476.6191,
           Tmax(displayUnit="ms") = 0.2,
-          Tau(displayUnit="ms") = 0.03),
+          Tau(displayUnit="ms") = 0.03,
+          Ees=205316476.6191),
         VxAU(k=5e-06),
         VxVU(k=5e-06),
-        xtv(k=333305.9685375),
+        Rxv(k=333305.9685375),
         CxABackflow(k=0),
         xR(k=266644.77483),
         CxVBackflow(k=0),
         atrium(volume_start=8.1e-05),
         ventricle(volume_start=0.000125));
-                          /*(
-    xAEes(k(displayUnit="mmHg/ml") = 33330596.85375),
-    xAAlpha(k=0.04),
-    xABeta(k=0.3),
-    xVEes(k(displayUnit="mmHg/ml") = 205316476.6191),
-    xVAlpha(k=0.024),
-    xVBeta(k=0.34),
-    VxAU(k(displayUnit="m3") = 5e-06),
-    CxABackflow(k=0),
-    xtv(k(displayUnit="(Pa.s)/m3") = 333305.9685375),
-    VxVU(k=5e-06),
-    CxVBackflow(k=0),
-    xR(k(displayUnit="(Pa.s)/m3") = 266644.77483),
-    atrium(volume_start=8.4e-05),
-    ventricle(volume_start=0.000132),
-    ventriculoArteryValve(open(fixed=false)),
-    atrioVentricularValve(passableVariable(displayUnit="1")));
-*/
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics), Diagram(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
@@ -436,42 +391,26 @@ package BurkhoffModel
         atrialElastance(
           Alpha=0.04,
           Beta=0.3,
-          Ees=26664477.483,
           Tmax(displayUnit="ms") = 0.125,
-          Tau(displayUnit="ms") = 0.02),
+          Tau(displayUnit="ms") = 0.02,
+          AVDelay(displayUnit="ms"),
+          Ees=26664477.483),
         ventricularElastance(
           Alpha=0.024,
           Beta=0.34,
-          Ees=50662507.2177,
           Tmax(displayUnit="ms") = 0.2,
-          Tau(displayUnit="ms") = 0.03),
-        xtv(k=333305.9685375),
+          Tau(displayUnit="ms") = 0.03,
+          Ees=50662507.2177),
+        Rxv(k=333305.9685375),
         CxABackflow(k=0),
         xR(k=266644.77483),
         CxVBackflow(k=0),
         atrium(volume_start=7.3e-05),
         ventricle(volume_start=0.000112));
-                          /*(
-    xAAlpha(k=0.04),
-    xABeta(k=0.3),
-    xAEes(k(displayUnit="mmHg/ml") = 26664477.483),
-    xVEes(k(displayUnit="mmHg/ml") = 50662507.2177),
-    xVAlpha(k=0.024),
-    xVBeta(k=0.34),
-    VxAU(k=5e-06),
-    CxABackflow(k=0),
-    xtv(k=333305.9685375),
-    VxVU(k=5e-06),
-    CxVBackflow(k=0),
-    xR(k=266644.77483),
-    atrium(volume_start=7.8e-05),
-    ventricle(volume_start=0.000121));*/
-
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics), Diagram(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
     end RightHeart;
-
 
     model SystemicCirculation
       extends Cardiovascular.SystemicCirculation;                     //Physiolibrary.Icons.SystemicCirculation;
@@ -509,33 +448,33 @@ package BurkhoffModel
       Physiolibrary.Hydraulic.Components.Conductor SystemicVenousResistance(useConductanceInput = true) annotation(Placement(transformation(extent={{-86,-10},
                 {-66,10}})));
       Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RcsProx(k(
-            displayUnit="(mmHg.s)/ml") = 2666447.7483)                                                                           annotation(Placement(transformation(extent={{66,22},
-                {74,30}})));
+            displayUnit="(mmHg.s)/ml") = 2666447.7483)                                                                           annotation(Placement(transformation(extent={{66,24},
+                {74,32}})));
       Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RcsSys(k(displayUnit = "(mmHg.s)/ml") = 3199737.29796) annotation(Placement(transformation(extent={{18,12},
                 {26,20}})));
       Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RaSys(k(displayUnit = "(mmHg.s)/ml") = 99991790.56125) annotation(Placement(transformation(extent={{-36,16},
                 {-28,24}})));
       Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RvSys(k(displayUnit = "(mmHg.s)/ml") = 2666447.7483)
-        "Systemic Venous Characteristic Impedance"                                                                                                     annotation(Placement(transformation(extent={{-88,16},
-                {-80,24}})));
+        "Systemic Venous Characteristic Impedance"                                                                                                     annotation(Placement(transformation(extent={{-88,14},
+                {-80,22}})));
       Physiolibrary.Types.Constants.VolumeConst UVaproxSys(k=3e-05)
         "Unstressed volume in proximal aorta"                                                                annotation(Placement(transformation(extent={{32,22},
                 {40,30}})));
-      Physiolibrary.Types.Constants.HydraulicComplianceConst CaproxSys(k = 7.5006157584566e-010)
-        "Pulmonary Proximal Aortic Capacitance"                                                                                          annotation(Placement(transformation(extent={{40,32},
+      Physiolibrary.Types.Constants.HydraulicComplianceConst CaproxSys(k=
+            7.5006157584566e-10) "Pulmonary Proximal Aortic Capacitance"                                                                 annotation(Placement(transformation(extent={{40,32},
                 {48,40}})));
-      Physiolibrary.Types.Constants.VolumeConst UVaSys(k = 0.0007)
+      Physiolibrary.Types.Constants.VolumeConst UVaSys(k=0.0007)
         "Unstressed volume in systemic arteries"                                                            annotation(Placement(transformation(extent={{-20,16},
                 {-12,24}})));
       Physiolibrary.Types.Constants.HydraulicComplianceConst CaSys(k(
-            displayUnit="m3/Pa") = 1.2751046789376e-08)
+            displayUnit="ml/mmHg") = 1.2751046789376e-08)
         "Systemic Artery Capacitance"                                                                                      annotation(Placement(transformation(extent={{-12,32},
                 {-4,40}})));
-      Physiolibrary.Types.Constants.VolumeConst UVvSys(k = 0.00223)
-        "Unstressed volume in systemic veins"                                                             annotation(Placement(transformation(extent={{-70,22},
-                {-62,30}})));
+      Physiolibrary.Types.Constants.VolumeConst UVvSys(k=0.00223)
+        "Unstressed volume in systemic veins"                                                             annotation(Placement(transformation(extent={{-68,22},
+                {-60,30}})));
       Physiolibrary.Types.Constants.HydraulicComplianceConst CvSys(k(
-            displayUnit="m3/Pa") = 5.2504310309196e-07)
+            displayUnit="ml/mmHg") = 5.2504310309196e-07)
         "Systemnic Venous Capacitance "                                                                                      annotation(Placement(transformation(extent={{-64,34},
                 {-56,42}})));
       Physiolibrary.Types.Constants.PressureConst PTH(k = 0) annotation(Placement(transformation(extent={{50,44},
@@ -548,14 +487,14 @@ package BurkhoffModel
     equation
       connect(SystemicProximalImpedance.q_out,AortaProximal.q_in) annotation(Line(points={{66,0},{
               52,0}},                                                                                                    color = {0,0,0}, thickness = 1, smooth = Smooth.None));
-      connect(RcsProx.y,SystemicProximalImpedance.cond) annotation(Line(points={{75,26},
-              {77,26},{77,6}},                                                                                color = {0,0,127}, smooth = Smooth.None));
+      connect(RcsProx.y,SystemicProximalImpedance.cond) annotation(Line(points={{75,28},
+              {77,28},{77,6}},                                                                                color = {0,0,127}, smooth = Smooth.None));
       connect(RcsSys.y,ProximalAortaResistance.cond) annotation(Line(points={{27,16},
               {26,16},{26,4.4}},                                                                           color = {0,0,127}, smooth = Smooth.None));
       connect(RaSys.y,SystemicArterialResistance.cond) annotation(Line(points={{-27,20},
               {-25,20},{-25,6}},                                                                          color = {0,0,127}, smooth = Smooth.None));
-      connect(RvSys.y,SystemicVenousResistance.cond) annotation(Line(points={{-79,20},
-              {-78,20},{-78,6},{-76,6}},                                                                       color = {0,0,127}, smooth = Smooth.None));
+      connect(RvSys.y,SystemicVenousResistance.cond) annotation(Line(points={{-79,18},
+              {-78,18},{-78,6},{-76,6}},                                                                       color = {0,0,127}, smooth = Smooth.None));
       connect(UVaproxSys.y,AortaProximal.zeroPressureVolume) annotation(Line(points={{41,26},
               {42,26},{42,8},{44,8}},                                                                                      color = {0,0,127}, smooth = Smooth.None));
       connect(CaproxSys.y,AortaProximal.compliance) annotation(Line(points={{49,36},
@@ -564,11 +503,10 @@ package BurkhoffModel
               {-10,20},{-10,8}},                                                                                  color = {0,0,127}, smooth = Smooth.None));
       connect(CaSys.y,SystemicArteries.compliance) annotation(Line(points={{-3,36},
               {-2,36},{-2,8}},                                                                        color = {0,0,127}, smooth = Smooth.None));
-      connect(UVvSys.y,SystemicVeins.zeroPressureVolume) annotation(Line(points={{-61,26},
+      connect(UVvSys.y,SystemicVeins.zeroPressureVolume) annotation(Line(points={{-59,26},
               {-62,26},{-62,8}},                                                                            color = {0,0,127}, smooth = Smooth.None));
       connect(CvSys.y,SystemicVeins.compliance) annotation(Line(points={{-55,38},
               {-54,38},{-54,8}},                                                                   color = {0,0,127}, smooth = Smooth.None));
-
       connect(PTH.y, AortaProximal.externalPressure) annotation (Line(
           points={{59,48},{60,48},{60,8}},
           color={0,0,127},
@@ -674,10 +612,11 @@ package BurkhoffModel
                 {-32,22}})));
       Physiolibrary.Types.Constants.VolumeConst UVaP(k=0.0006)                  annotation(Placement(transformation(extent={{-22,38},
                 {-14,46}})));
-      Physiolibrary.Types.Constants.HydraulicComplianceConst CaPulm(k = 1.5001231516913e-007) annotation(Placement(transformation(extent={{-14,52},
+      Physiolibrary.Types.Constants.HydraulicComplianceConst CaPulm(k=
+            1.5001231516913e-07)                                                              annotation(Placement(transformation(extent={{-14,52},
                 {-6,60}})));
       Physiolibrary.Types.Constants.HydraulicResistanceToConductanceConst RaPulm(k(displayUnit = "(mmHg.s)/ml") = 2666447.7483) annotation(Placement(transformation(extent = {{10,36},{18,44}})));
-      Physiolibrary.Types.Constants.VolumeConst UVvP(k = 0.0001) annotation(Placement(transformation(extent={{28,40},
+      Physiolibrary.Types.Constants.VolumeConst UVvP(k=0.0001)   annotation(Placement(transformation(extent={{28,40},
                 {36,48}})));
       Physiolibrary.Types.Constants.HydraulicComplianceConst CvPulm(k(
             displayUnit="ml/mmHg") = 5.2504310309196e-08)                                     annotation(Placement(transformation(extent={{36,54},
@@ -690,7 +629,6 @@ package BurkhoffModel
       Physiolibrary.Types.Constants.PressureConst PTH(k = 0) annotation(Placement(transformation(extent={{-70,62},
                 {-62,70}})));
     equation
-
       connect(UVap.y, arteryProximal.zeroPressureVolume) annotation (Line(
           points={{-63,40},{-62,40},{-62,30},{-60,30}},
           color={0,0,127},
@@ -789,15 +727,13 @@ package BurkhoffModel
                 -100},{100,100}}),                                                                                                    graphics));
     end PulmonaryCirculation;
 
-
-
-
-
     model AtrialElastance
       extends HeartIntervals;
       extends HeartElastance;
     equation
        Tsyst = Tasyst;
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics));
     end AtrialElastance;
 
     model VentricularElastance
@@ -813,14 +749,10 @@ package BurkhoffModel
         annotation (Placement(transformation(extent={{-18,-32},{44,24}})));
       RightHeart rightHeart
         annotation (Placement(transformation(extent={{-62,-32},{2,28}})));
-      Physiolibrary.Types.Constants.TimeConst avDelay(k(displayUnit="ms") = 0.16)
-        annotation (Placement(transformation(extent={{-76,46},{-68,54}})));
       Physiolibrary.Types.Constants.FrequencyConst heartRate(k=1.3333333333333)
-        annotation (Placement(transformation(extent={{-76,62},{-68,70}})));
+        annotation (Placement(transformation(extent={{-76,40},{-68,48}})));
       Physiolibrary.Types.Constants.PressureConst Pth(k=0)
-        annotation (Placement(transformation(extent={{-76,76},{-68,84}})));
-      Modelica.Blocks.Sources.Constant AVGain(k=0.02)
-        annotation (Placement(transformation(extent={{-76,88},{-66,98}})));
+        annotation (Placement(transformation(extent={{-64,-46},{-56,-38}})));
       Cardiovascular.Hydraulic.Components.BloodFlowMeasurement
         bloodFlowMeasurement
         annotation (Placement(transformation(extent={{48,10},{68,30}})));
@@ -840,36 +772,20 @@ package BurkhoffModel
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(avDelay.y, rightHeart.avDelay) annotation (Line(
-          points={{-67,50},{-54,50},{-54,35.5}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(avDelay.y, leftHeart.avDelay) annotation (Line(
-          points={{-67,50},{-10.25,50},{-10.25,31}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(heartRate.y, rightHeart.HR) annotation (Line(
-          points={{-67,66},{-42.48,66},{-42.48,35.5}},
+          points={{-67,44},{-32.88,44},{-32.88,32.5}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(heartRate.y, leftHeart.HR) annotation (Line(
-          points={{-67,66},{0.91,66},{0.91,31}},
+          points={{-67,44},{10.21,44},{10.21,28.2}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(Pth.y, rightHeart.PTH) annotation (Line(
-          points={{-67,80},{-31.92,80},{-31.92,35.2}},
+          points={{-55,-42},{-32.56,-42},{-32.56,-32.6}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(Pth.y, leftHeart.PTH) annotation (Line(
-          points={{-67,80},{11.14,80},{11.14,30.72}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(AVGain.y, rightHeart.AVGain) annotation (Line(
-          points={{-65.5,93},{-22,93},{-22,35.5}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(AVGain.y, leftHeart.AVGain) annotation (Line(
-          points={{-65.5,93},{20.75,93},{20.75,31}},
+          points={{-55,-42},{10.52,-42},{10.52,-32.56}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(leftHeart.outflow, bloodFlowMeasurement.q_in) annotation (Line(
@@ -883,7 +799,7 @@ package BurkhoffModel
           thickness=1,
           smooth=Smooth.None));
       connect(bloodFlowMeasurement.HR, heartRate.y) annotation (Line(
-          points={{58,27.6},{58,66},{-67,66}},
+          points={{58,29.4},{58,44},{-67,44}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -946,13 +862,13 @@ package BurkhoffModel
               10},{-12,48},{30,48},{30,56.3},{34.64,56.3}},                                                                    color = {0,0,127}, smooth = Smooth.None));
       connect(AEt0.y,AtrialElastance.Et0) annotation(Line(points={{21.5,37},{
               21.5,43.5},{34.64,43.5},{34.64,50.06}},                                                                  color = {0,0,127}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent = {{-112,60},{-54,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AEt0"),Text(extent = {{-62,60},{-4,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "VEt0"),Text(extent = {{-16,60},{42,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "PTH"),Text(extent = {{-76,-34},{26,-60}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AVGain"),Text(extent = {{-84,-84},{-42,-94}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Volume"),Text(extent = {{-20,-84},{40,-92}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent=  {{-112,60},{-54,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AEt0"),Text(extent=  {{-62,60},{-4,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "VEt0"),Text(extent=  {{-16,60},{42,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "PTH"),Text(extent=  {{-76,-34},{26,-60}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVGain"),Text(extent=  {{-84,-84},{-42,-94}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Volume"),Text(extent=  {{-20,-84},{40,-92}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
     end TestElastance;
 
     model TestPulmonary "model of hemodynamics by Burkhoff in Physiolibrary"
@@ -1035,7 +951,6 @@ package BurkhoffModel
       OldParts.Heart_HI heart
         annotation (Placement(transformation(extent={{-30,16},{18,48}})));
     equation
-
       connect(pulmonaryCirculation.inflow, heart.rightHeartOutflow) annotation (
           Line(
           points={{-16,77.6},{-20,77.6},{-20,39.7714},{-9.42857,39.7714}},
@@ -1062,179 +977,6 @@ package BurkhoffModel
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics));
     end Hemodynamics_pure;
-
-    model HemodynamicsBurkhoffConcept
-      Physiolibrary.Hydraulic.Components.ElasticVessel Cvs
-        annotation (Placement(transformation(extent={{-72,12},{-52,32}})));
-      Physiolibrary.Hydraulic.Components.Conductor Ras
-        annotation (Placement(transformation(extent={{-46,12},{-26,32}})));
-      Physiolibrary.Hydraulic.Components.ElasticVessel Cas
-        annotation (Placement(transformation(extent={{-24,12},{-4,32}})));
-      Physiolibrary.Hydraulic.Components.Conductor Rcs
-        annotation (Placement(transformation(extent={{-2,12},{18,32}})));
-      Physiolibrary.Hydraulic.Components.ElasticVessel Caprox
-        annotation (Placement(transformation(extent={{20,12},{40,32}})));
-      Physiolibrary.Hydraulic.Components.Conductor Rcprox
-        annotation (Placement(transformation(extent={{42,12},{62,32}})));
-      Physiolibrary.Hydraulic.Components.IdealValve AOV annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={80,22})));
-      Physiolibrary.Hydraulic.Components.ElasticVessel LV
-        annotation (Placement(transformation(extent={{92,12},{112,32}})));
-      Physiolibrary.Hydraulic.Components.IdealValve MV annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={122,22})));
-      Physiolibrary.Hydraulic.Components.Conductor RMV
-        annotation (Placement(transformation(extent={{138,12},{158,32}})));
-      Physiolibrary.Hydraulic.Components.ElasticVessel LA
-        annotation (Placement(transformation(extent={{160,12},{180,32}})));
-      Physiolibrary.Hydraulic.Components.Conductor RVP
-        annotation (Placement(transformation(extent={{186,12},{206,32}})));
-      Physiolibrary.Hydraulic.Components.Conductor Rvs
-        annotation (Placement(transformation(extent={{-86,-34},{-66,-14}})));
-      Physiolibrary.Hydraulic.Components.ElasticVessel RA
-        annotation (Placement(transformation(extent={{-62,-34},{-42,-14}})));
-      Physiolibrary.Hydraulic.Components.Conductor RTV
-        annotation (Placement(transformation(extent={{-40,-34},{-20,-14}})));
-      Physiolibrary.Hydraulic.Components.IdealValve TV annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={0,-24})));
-      Physiolibrary.Hydraulic.Components.ElasticVessel RV
-        annotation (Placement(transformation(extent={{14,-34},{34,-14}})));
-      Physiolibrary.Hydraulic.Components.IdealValve PV annotation (Placement(
-            transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=0,
-            origin={48,-24})));
-      Physiolibrary.Hydraulic.Components.Conductor Rcp
-        annotation (Placement(transformation(extent={{66,-34},{86,-14}})));
-      Physiolibrary.Hydraulic.Components.ElasticVessel Cap
-        annotation (Placement(transformation(extent={{90,-34},{110,-14}})));
-      Physiolibrary.Hydraulic.Components.Conductor Rap
-        annotation (Placement(transformation(extent={{116,-34},{136,-14}})));
-      Physiolibrary.Hydraulic.Components.ElasticVessel Cvp
-        annotation (Placement(transformation(extent={{142,-34},{162,-14}})));
-    equation
-      connect(Cvs.q_in, Ras.q_in) annotation (Line(
-          points={{-62,22},{-46,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Ras.q_out, Cas.q_in) annotation (Line(
-          points={{-26,22},{-14,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Cas.q_in, Rcs.q_in) annotation (Line(
-          points={{-14,22},{-2,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Rcs.q_out, Caprox.q_in) annotation (Line(
-          points={{18,22},{30,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Rcprox.q_in, Caprox.q_in) annotation (Line(
-          points={{42,22},{30,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(AOV.q_out, Rcprox.q_out) annotation (Line(
-          points={{70,22},{62,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(AOV.q_in, LV.q_in) annotation (Line(
-          points={{90,22},{102,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(LV.q_in, MV.q_out) annotation (Line(
-          points={{102,22},{112,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(RMV.q_in, MV.q_in) annotation (Line(
-          points={{138,22},{132,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(RMV.q_out, LA.q_in) annotation (Line(
-          points={{158,22},{170,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(LA.q_in, RVP.q_in) annotation (Line(
-          points={{170,22},{186,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Rvs.q_in, Cvs.q_in) annotation (Line(
-          points={{-86,-24},{-86,22},{-62,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Rvs.q_out, RA.q_in) annotation (Line(
-          points={{-66,-24},{-52,-24}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(RA.q_in, RTV.q_in) annotation (Line(
-          points={{-52,-24},{-40,-24}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(RTV.q_out, TV.q_in) annotation (Line(
-          points={{-20,-24},{-10,-24}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(TV.q_out, RV.q_in) annotation (Line(
-          points={{10,-24},{24,-24}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(RV.q_in, PV.q_in) annotation (Line(
-          points={{24,-24},{38,-24}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(PV.q_out, Rcp.q_in) annotation (Line(
-          points={{58,-24},{66,-24}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Rcp.q_out, Cap.q_in) annotation (Line(
-          points={{86,-24},{100,-24}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Cap.q_in, Rap.q_in) annotation (Line(
-          points={{100,-24},{116,-24}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Rap.q_out, Cvp.q_in) annotation (Line(
-          points={{136,-24},{152,-24}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      connect(Cvp.q_in, RVP.q_out) annotation (Line(
-          points={{152,-24},{206,-24},{206,22}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{220,100}}), graphics), Icon(coordinateSystem(extent=
-               {{-100,-100},{220,100}})));
-    end HemodynamicsBurkhoffConcept;
   end Test;
 
   package OldParts
@@ -1347,13 +1089,13 @@ package BurkhoffModel
       connect(port_a,port_a) annotation(Line(points = {{-104,0},{-104,0}}, color = {0,0,0}, thickness = 1, smooth = Smooth.None));
       connect(RAEes.y,AtrialElastance.Ees) annotation(Line(points={{-69,96},{
               -60,96},{-60,92.83},{-51.19,92.83}},                                                                  color = {0,0,127}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent = {{-112,60},{-54,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AEt0"),Text(extent = {{-62,60},{-4,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "VEt0"),Text(extent = {{-16,60},{42,38}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "PTH"),Text(extent = {{-76,-34},{26,-60}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AVGain"),Text(extent = {{-84,-84},{-42,-94}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Volume"),Text(extent = {{-20,-84},{40,-92}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent=  {{-112,60},{-54,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AEt0"),Text(extent=  {{-62,60},{-4,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "VEt0"),Text(extent=  {{-16,60},{42,38}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "PTH"),Text(extent=  {{-76,-34},{26,-60}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVGain"),Text(extent=  {{-84,-84},{-42,-94}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Volume"),Text(extent=  {{-20,-84},{40,-92}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                                                    graphics));
     end RightHeart;
 
@@ -1465,13 +1207,13 @@ package BurkhoffModel
               {24,98},{24,92.65},{36.6,92.65}},                                                                                             color = {0,0,127}, smooth = Smooth.None));
       connect(Rmv.y,MitralValve.outflowResistance) annotation(Line(points = {{-27,12},{-26.8,12},{-26.8,-19.2}}, color = {0,0,127}, smooth = Smooth.None));
       connect(CmitralValveBackflow.y,MitralValve.inflowConductance) annotation(Line(points = {{-37,-2},{-32,-2},{-32,-10},{-39.4,-10},{-39.4,-20.4}}, color = {0,0,127}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent = {{-40,66},{18,44}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AEt0"),Text(extent = {{8,66},{66,44}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "VEt0"),Text(extent = {{52,68},{110,46}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "PTH"),Text(extent = {{-28,-32},{70,-52}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AVGain"),Text(extent = {{-40,-72},{28,-82}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Volume"),Text(extent = {{30,-74},{102,-84}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Text(extent=  {{-40,66},{18,44}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AEt0"),Text(extent=  {{8,66},{66,44}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "VEt0"),Text(extent=  {{52,68},{110,46}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "PTH"),Text(extent=  {{-28,-32},{70,-52}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVGain"),Text(extent=  {{-40,-72},{28,-82}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Volume"),Text(extent=  {{30,-74},{102,-84}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                                                    graphics));
     end LeftHeart;
 
@@ -1629,7 +1371,6 @@ package BurkhoffModel
     end Hemodynamics;
 
     model BloodVolume
-
       Physiolibrary.Types.RealIO.VolumeInput RightHeartBloodVolume annotation(Placement(transformation(extent = {{-90,70},{-50,110}}), iconTransformation(extent = {{-12,-12},{12,12}}, rotation = 270, origin = {-88,92})));
       Physiolibrary.Types.RealIO.VolumeInput RightHeartStressedVolume annotation(Placement(transformation(extent = {{-90,70},{-50,110}}), iconTransformation(extent = {{-12,-12},{12,12}}, rotation = 270, origin = {-64,92})));
       Physiolibrary.Types.RealIO.VolumeInput LeftHeartBloodVolume annotation(Placement(transformation(extent = {{-90,70},{-50,110}}), iconTransformation(extent = {{-12,-12},{12,12}}, rotation = 270, origin={-36,94})));
@@ -1646,11 +1387,11 @@ package BurkhoffModel
       TotalBloodStressedVolume = RightHeartStressedVolume + LeftHeartStressedVolume + PulmonaryStressedVolume + SystemicStressedVolume;
       TotalBloodUnstressedVolume = TotalBloodVolume - TotalBloodStressedVolume;
       annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-                -100},{100,100}}),                                                                     graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid),Text(extent = {{-100,40},{80,20}}, lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Total Blood Volume"),Text(extent = {{-98,22},{80,-6}}, lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Total Blood Stressed Volume"),Text(extent = {{-98,-4},{80,-32}}, lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Total Blood Unstressed Volume")}));
+                -100},{100,100}}),                                                                     graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid),Text(extent=  {{-100,40},{80,20}}, lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Total Blood Volume"),Text(extent=  {{-98,22},{80,-6}}, lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Total Blood Stressed Volume"),Text(extent=  {{-98,-4},{80,-32}}, lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Total Blood Unstressed Volume")}));
     end BloodVolume;
 
     model SideOfHeart "abstract model for heart side"
@@ -1755,7 +1496,6 @@ package BurkhoffModel
           points={{48.4,-10},{60,-10},{60,-24},{-26,-24},{-26,46},{-32,46},{-32,43}},
           color={0,0,127},
           smooth=Smooth.None));
-
       connect(hydrauliccompliance.y,atrium. compliance) annotation (Line(
           points={{-64,19},{-62,19},{-62,8},{-60,8}},
           color={0,0,127},
@@ -1771,7 +1511,6 @@ package BurkhoffModel
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-
       connect(PTH,ventricle. externalPressure) annotation (Line(
           points={{-56,50},{-56,56},{48,56},{48,8}},
           color={0,0,127},
@@ -1854,18 +1593,18 @@ package BurkhoffModel
           smooth=Smooth.None));
       annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                     graphics={  Text(extent={{
-                  -96,106},{-46,92}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AEt0"),Text(extent={{
-                  -66,108},{-14,92}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "VEt0"),Text(extent={{
-                  -28,108},{20,92}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "PTH"),Text(extent={{
-                  -8,112},{76,94}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "AVGain"),Text(extent={{
-                  -84,-84},{-44,-90}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Volume"),Text(extent={{
-                  -30,-72},{38,-78}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+                  -96,106},{-46,92}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AEt0"),Text(extent={{
+                  -66,108},{-14,92}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "VEt0"),Text(extent={{
+                  -28,108},{20,92}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "PTH"),Text(extent={{
+                  -8,112},{76,94}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVGain"),Text(extent={{
+                  -84,-84},{-44,-90}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Volume"),Text(extent={{
+                  -30,-72},{38,-78}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Stressed Volume")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                                                    graphics));
     end SideOfHeart;
 
@@ -2078,13 +1817,13 @@ package BurkhoffModel
           color={0,0,127},
           smooth=Smooth.None));
       annotation(Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-                -100},{100,100}}),                                                                     graphics={  Text(extent = {{-72,28},{76,18}}, lineColor = {0,0,255},
-                lineThickness =                                                                                                   0.5, fillColor = {0,0,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "Intrathoracic pressure"),Text(extent = {{-82,18},{-36,-56}}, lineColor = {0,0,0},
-                lineThickness =                                                                                                   0.5, fillColor = {0,0,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "blood volume"),Text(extent = {{40,-10},{88,-28}}, lineColor = {0,0,0},
-                lineThickness =                                                                                                   0.5, fillColor = {0,0,255},
-                fillPattern =                                                                                                   FillPattern.Solid, textString = "stressed volume")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+                -100},{100,100}}),                                                                     graphics={  Text(extent=  {{-72,28},{76,18}}, lineColor=  {0,0,255},
+                lineThickness=                                                                                                    0.5, fillColor=  {0,0,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Intrathoracic pressure"),Text(extent=  {{-82,18},{-36,-56}}, lineColor=  {0,0,0},
+                lineThickness=                                                                                                    0.5, fillColor=  {0,0,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "blood volume"),Text(extent=  {{40,-10},{88,-28}}, lineColor=  {0,0,0},
+                lineThickness=                                                                                                    0.5, fillColor=  {0,0,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "stressed volume")}), Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                                                    graphics));
     end PulmonaryCirculation1;
 
@@ -2201,7 +1940,6 @@ package BurkhoffModel
           points={{46,-10},{46,-28},{44,-28},{44,-46},{0,-46},{0,-54},{10,-54}},
           color={0,0,127},
           smooth=Smooth.None));
-
       connect(SystemicArteries.volume, Add3BV.u2) annotation (Line(
           points={{-2,-10},{-2,-64},{10,-64},{10,-62}},
           color={0,0,127},
@@ -2219,7 +1957,6 @@ package BurkhoffModel
           points={{-10,-10.2},{-26,-10.2},{-26,-38},{-96,-38},{-96,-58},{-88,-58}},
           color={0,0,127},
           smooth=Smooth.None));
-
       connect(AortaProximal.StressedVolume, Add3SV.u3) annotation (Line(
           points={{-58,-10.2},{-58,-36},{-98,-36},{-98,-66},{-88,-66}},
           color={0,0,127},
@@ -2242,7 +1979,6 @@ package BurkhoffModel
     end SystemicCirculation1;
 
     model Heart
-
       Parts.RightHeart rightHeart
         annotation (Placement(transformation(extent={{-52,-16},{2,30}})));
       Parts.LeftHeart leftHeart
@@ -2320,7 +2056,6 @@ package BurkhoffModel
           points={{13,-44},{16,-44},{16,-17.76},{13.56,-17.76}},
           color={0,0,127},
           smooth=Smooth.None));
-
       connect(AVGain.y, leftHeart.AVGain) annotation (Line(
           points={{20,46.5},{18.5,46.5},{18.5,33.5}},
           color={0,0,127},
@@ -2353,7 +2088,6 @@ package BurkhoffModel
           points={{-38.2,64.2},{-36,64.2},{-36,48},{-44.44,48},{-44.44,35.52}},
           color={0,0,127},
           smooth=Smooth.None));
-
       connect(heartElasticities.AVDelay, AVDelay.y) annotation (Line(
           points={{-56.6,60},{-60,60},{-60,44},{-59,44}},
           color={0,0,127},
@@ -2456,14 +2190,14 @@ package BurkhoffModel
       end when;
       der(Volume) = Inflow.q;
       der(SumPressure) = Inflow.pressure;
-      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Polygon(points = {{-92,52},{-92,14},{-92,-20},{62,-20},{102,0},{70,52},{40,52},{-92,52}}, lineColor = {0,0,255}, smooth = Smooth.None, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid),Text(extent = {{-32,46},{26,32}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "HR"),Text(extent = {{-18,12},{18,-12}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin = {-76,-4}, rotation = 90, textString = "Ps"),Text(extent = {{-19,12},{19,-12}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin = {-54,-3}, rotation = 90, textString = "Pd"),Text(extent = {{-35,12},{35,-12}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin = {-32,15}, rotation = 90, textString = "Pmean"),Text(extent = {{-29,12},{29,-12}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin = {34,7}, rotation = 90, textString = "SV"),Text(extent = {{-30,11},{30,-11}}, lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, origin = {55,8}, rotation = 90, textString = "CO")}));
+      annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Polygon(points=  {{-92,52},{-92,14},{-92,-20},{62,-20},{102,0},{70,52},{40,52},{-92,52}}, lineColor=  {0,0,255}, smooth=  Smooth.None, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid),Text(extent=  {{-32,46},{26,32}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "HR"),Text(extent=  {{-18,12},{18,-12}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, origin=  {-76,-4}, rotation=  90, textString=  "Ps"),Text(extent=  {{-19,12},{19,-12}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, origin=  {-54,-3}, rotation=  90, textString=  "Pd"),Text(extent=  {{-35,12},{35,-12}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, origin=  {-32,15}, rotation=  90, textString=  "Pmean"),Text(extent=  {{-29,12},{29,-12}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, origin=  {34,7}, rotation=  90, textString=  "SV"),Text(extent=  {{-30,11},{30,-11}}, lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, origin=  {55,8}, rotation=  90, textString=  "CO")}));
     end PressureFlowMeasurement;
 
     block GainConst "Constant signal of type Gain"
@@ -2471,11 +2205,11 @@ package BurkhoffModel
       Modelica.Blocks.Interfaces.RealOutput y "Gain constant" annotation(Placement(transformation(extent = {{40,-10},{60,10}}), iconTransformation(extent = {{40,-10},{60,10}})));
     equation
       y = k;
-      annotation(defaultComponentName = "gain", Diagram(coordinateSystem(extent = {{-40,-40},{40,40}})), Icon(coordinateSystem(extent = {{-40,-40},{40,40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40,40},{40,-40}}, lineColor = {0,0,0}, radius = 10, fillColor = {236,236,236},
-                fillPattern =                                                                                                    FillPattern.Solid),Text(extent = {{-100,-44},{100,-64}}, lineColor = {0,0,0}, fillColor = {236,236,236},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"),Text(extent = {{-40,32},{40,12}}, lineColor = {0,0,0}, fillColor = {236,236,236},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Const"),Text(extent = {{-40,6},{40,-32}}, lineColor = {0,0,255}, fillColor = {170,213,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "%k")}));
+      annotation(defaultComponentName = "gain", Diagram(coordinateSystem(extent = {{-40,-40},{40,40}})), Icon(coordinateSystem(extent = {{-40,-40},{40,40}}, preserveAspectRatio = false), graphics={  Rectangle(extent=  {{-40,40},{40,-40}}, lineColor=  {0,0,0}, radius=  10, fillColor=  {236,236,236},
+                fillPattern=                                                                                                    FillPattern.Solid),Text(extent=  {{-100,-44},{100,-64}}, lineColor=  {0,0,0}, fillColor=  {236,236,236},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"),Text(extent=  {{-40,32},{40,12}}, lineColor=  {0,0,0}, fillColor=  {236,236,236},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Const"),Text(extent=  {{-40,6},{40,-32}}, lineColor=  {0,0,255}, fillColor=  {170,213,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "%k")}));
     end GainConst;
 
     model HeartElasticities
@@ -2526,15 +2260,15 @@ package BurkhoffModel
           smooth=Smooth.Bezier));
       annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                        graphics), Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-                -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid),Text(extent = {{-64,80},{10,46}}, lineColor = {0,0,0},
-                lineThickness =                                                                                                    1, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "HeartRate"),Text(extent = {{-62,-4},{2,-42}}, lineColor = {0,0,0},
-                lineThickness =                                                                                                    1, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "AVDelay"),Text(extent = {{-88,-72},{86,-102}}, lineColor = {0,0,0},
-                lineThickness =                                                                                                    1, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "HeartElasticities"),Text(extent = {{16,70},{90,44}}, lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "VEt0
+                -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid),Text(extent=  {{-64,80},{10,46}}, lineColor=  {0,0,0},
+                lineThickness=                                                                                                    1, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "HeartRate"),Text(extent=  {{-62,-4},{2,-42}}, lineColor=  {0,0,0},
+                lineThickness=                                                                                                    1, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVDelay"),Text(extent=  {{-88,-72},{86,-102}}, lineColor=  {0,0,0},
+                lineThickness=                                                                                                    1, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "HeartElasticities"),Text(extent=  {{16,70},{90,44}}, lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "VEt0
 "),         Text(
               extent={{14,34},{90,8}},
               lineColor={0,0,0},
@@ -2587,7 +2321,6 @@ package BurkhoffModel
       Physiolibrary.Types.Constants.PressureConst PTH(k=0)   annotation(Placement(transformation(extent={{-34,52},
                 {-26,60}})));
     equation
-
       connect(AVGain.y, leftHeart.AVGain) annotation (Line(
           points={{-15,47},{20.58,47},{20.58,31.74}},
           color={0,0,127},
@@ -2601,7 +2334,6 @@ package BurkhoffModel
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-
       connect(leftHeart.outflow, flowPressureMeasurement.q_in) annotation (Line(
           points={{12,18.32},{13.96,18.32},{13.96,18},{18,18}},
           color={0,0,0},
@@ -2653,7 +2385,6 @@ package BurkhoffModel
     end Heart_HI;
 
     model HeartElasticities_HI
-
       Physiolibrary.Types.RealIO.FrequencyInput HeartRate
         "heart rates beats per time interval"                                                   annotation(Placement(transformation(extent = {{-106,2},{-66,42}}), iconTransformation(extent = {{-120,38},{-68,90}})));
       Physiolibrary.Types.RealIO.TimeInput AVDelay "Atrial-ventricular delay" annotation(Placement(transformation(extent = {{-106,-40},{-66,0}}), iconTransformation(extent = {{-106,-40},{-66,0}})));
@@ -2699,15 +2430,15 @@ package BurkhoffModel
               {22,76},{22,76.1},{32.7,76.1}},                                                                                                    color = {0,0,127}, smooth = Smooth.None));
       annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                 -100},{100,100}}),                                                                        graphics), Icon(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
-                -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid),Text(extent = {{-64,80},{10,46}}, lineColor = {0,0,0},
-                lineThickness =                                                                                                    1, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "HeartRate"),Text(extent = {{-62,-4},{2,-42}}, lineColor = {0,0,0},
-                lineThickness =                                                                                                    1, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "AVDelay"),Text(extent = {{-88,-72},{86,-102}}, lineColor = {0,0,0},
-                lineThickness =                                                                                                    1, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "HeartElasticities"),Text(extent = {{16,70},{90,44}}, lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "VEt0
+                -100},{100,100}}),                                                                                                    graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid),Text(extent=  {{-64,80},{10,46}}, lineColor=  {0,0,0},
+                lineThickness=                                                                                                    1, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "HeartRate"),Text(extent=  {{-62,-4},{2,-42}}, lineColor=  {0,0,0},
+                lineThickness=                                                                                                    1, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVDelay"),Text(extent=  {{-88,-72},{86,-102}}, lineColor=  {0,0,0},
+                lineThickness=                                                                                                    1, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "HeartElasticities"),Text(extent=  {{16,70},{90,44}}, lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "VEt0
 "),         Text(
               extent={{14,34},{90,8}},
               lineColor={0,0,0},
@@ -2736,9 +2467,9 @@ package BurkhoffModel
       else
         Et0 = 0.5 * exp(-(T0 - 3 * Tmax / 2) / Tau);
       end if;
-      annotation(Icon(graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,255},
-                fillPattern =                                                                                      FillPattern.Solid, fillColor = {170,213,255}),Text(extent = {{-112,120},{148,96}}, lineColor = {0,0,255},
-                fillPattern =                                                                                                    FillPattern.Solid, fillColor = {255,255,0}, textString = "%name"),Text(extent = {{-122,-36},{-48,-54}}, lineColor = {0,0,255}, textString = "T0"),Text(extent = {{-108,26},{-56,12}}, lineColor = {0,0,255}, textString = "Tau"),Text(extent = {{-102,80},{-50,66}}, lineColor = {0,0,255}, textString = "Tmax"),Text(extent = {{50,16},{118,4}}, lineColor = {0,0,255}, textString = "Et0"),Text(extent = {{-54,60},{114,78}}, lineColor = {0,0,255}, textString = "Elastance"),Line(points = {{-66,-62},{-54,-34},{-36,-2},{0,44},{28,46},{40,-2},{56,-62}}, color = {0,0,255}, smooth = Smooth.Bezier),Line(points = {{56,-62},{90,-62},{100,-62}}, color = {0,0,255}, smooth = Smooth.Bezier)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
+      annotation(Icon(graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,255},
+                fillPattern=                                                                                       FillPattern.Solid, fillColor=  {170,213,255}),Text(extent=  {{-112,120},{148,96}}, lineColor=  {0,0,255},
+                fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {255,255,0}, textString=  "%name"),Text(extent=  {{-122,-36},{-48,-54}}, lineColor=  {0,0,255}, textString=  "T0"),Text(extent=  {{-108,26},{-56,12}}, lineColor=  {0,0,255}, textString=  "Tau"),Text(extent=  {{-102,80},{-50,66}}, lineColor=  {0,0,255}, textString=  "Tmax"),Text(extent=  {{50,16},{118,4}}, lineColor=  {0,0,255}, textString=  "Et0"),Text(extent=  {{-54,60},{114,78}}, lineColor=  {0,0,255}, textString=  "Elastance"),Line(points=  {{-66,-62},{-54,-34},{-36,-2},{0,44},{28,46},{40,-2},{56,-62}}, color=  {0,0,255}, smooth=  Smooth.Bezier),Line(points=  {{56,-62},{90,-62},{100,-62}}, color=  {0,0,255}, smooth=  Smooth.Bezier)}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
     end EtTimingBurkhoff_HI;
 
     model HeartElastanceBurkhoff_HI
@@ -2759,17 +2490,17 @@ package BurkhoffModel
       //1e+6 and 133.322368 are recalculation in SI units - as the original equation comes in torr and ml.
       //  Et = (1 - Et0) * Beta * (exp(Alpha * Vs * 1e+6) - 1) / Vs * 1e+6) * 133.322368 * 1e+6 + Et0 * Ees;
         Et = (1 - Et0) * Beta * (exp(Alpha * Vs * 1e+6) - 1) / Vs  * 133.322368 + Et0 * Ees;
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,255}, fillColor = {170,213,255},
-                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-42,90},{-42,-60},{82,-60}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-58},{26,-56},{50,-54},{66,-52},{72,-50},{78,-48},{82,-46},{86,-44}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-60},{4,88}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-60},{84,56}}, color = {255,0,0}, smooth = Smooth.None),Polygon(points = {{72,48},{68,56},{76,52},{72,48}}, lineColor = {255,0,0}, smooth = Smooth.None, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid),Polygon(points = {{0,-4},{-4,4},{4,0},{0,-4}}, lineColor = {255,0,0}, smooth = Smooth.None, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, origin = {80,45}, rotation = 180),Text(extent = {{-98,102},{-48,76}}, lineColor = {0,0,255}, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Ees"),Text(extent = {{-98,54},{-38,24}}, lineColor = {0,0,255}, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Beta"),Text(extent = {{-104,78},{-32,54}}, lineColor = {0,0,255}, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Alpha"),Text(extent = {{-116,24},{-40,-8}}, lineColor = {0,0,255}, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Vs"),Text(extent = {{-112,-24},{-42,-52}}, lineColor = {0,0,255}, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Et0"),Text(extent = {{50,90},{104,52}}, lineColor = {0,0,255}, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Et"),Text(extent = {{-100,-108},{100,-124}}, lineColor = {0,0,255}, fillColor = {170,213,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,255}, fillColor=  {170,213,255},
+                fillPattern=                                                                                                    FillPattern.Solid),Line(points=  {{-42,90},{-42,-60},{82,-60}}, color=  {0,0,0}, smooth=  Smooth.None),Line(points=  {{-38,-58},{26,-56},{50,-54},{66,-52},{72,-50},{78,-48},{82,-46},{86,-44}}, color=  {0,0,0}, smooth=  Smooth.None),Line(points=  {{-38,-60},{4,88}}, color=  {0,0,0}, smooth=  Smooth.None),Line(points=  {{-38,-60},{84,56}}, color=  {255,0,0}, smooth=  Smooth.None),Polygon(points=  {{72,48},{68,56},{76,52},{72,48}}, lineColor=  {255,0,0}, smooth=  Smooth.None, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid),Polygon(points=  {{0,-4},{-4,4},{4,0},{0,-4}}, lineColor=  {255,0,0}, smooth=  Smooth.None, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid, origin=  {80,45}, rotation=  180),Text(extent=  {{-98,102},{-48,76}}, lineColor=  {0,0,255}, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Ees"),Text(extent=  {{-98,54},{-38,24}}, lineColor=  {0,0,255}, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Beta"),Text(extent=  {{-104,78},{-32,54}}, lineColor=  {0,0,255}, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Alpha"),Text(extent=  {{-116,24},{-40,-8}}, lineColor=  {0,0,255}, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Vs"),Text(extent=  {{-112,-24},{-42,-52}}, lineColor=  {0,0,255}, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Et0"),Text(extent=  {{50,90},{104,52}}, lineColor=  {0,0,255}, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Et"),Text(extent=  {{-100,-108},{100,-124}}, lineColor=  {0,0,255}, fillColor=  {170,213,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
     end HeartElastanceBurkhoff_HI;
 
     model HeartIntervals_HI
@@ -2798,17 +2529,16 @@ package BurkhoffModel
       else
         Tvsyst = time - (T0 + AVDelay);
       end if;
-      annotation(Icon(graphics={  Rectangle(fillColor = {170,213,255},
-                fillPattern =                                                        FillPattern.Solid, extent = {{-100,-100},{100,100}}, lineColor = {0,0,0}),Text(visible = true, origin = {-22.8148,-7.7778}, lineColor = {127,0,0}, fillColor = {0,0,255},
-                fillPattern =                                                                                                    FillPattern.Solid, extent = {{42.8148,37.7778},{110.8148,75.5556}}, textString = "Tasyst", fontName = "Arial"),Text(visible = true, origin = {6.1844,12.2128}, lineColor = {0,0,255}, extent = {{-122.1844,53.5603},{113.8156,82.0142}}, textString = "Heart Intervals", fontName = "Arial"),Text(visible = true, origin = {-8,20}, lineColor = {0,0,255}, extent = {{-94.0,12.0},{-30.0,48.0}}, textString = "HR", fontName = "Arial"),Line(visible = true, points = {{-80,-6},{-80,-80}}, color = {0,0,255}, thickness = 0.5),Line(visible = true, points = {{-70,-6},{-70,-80}}, color = {0,0,255}, thickness = 0.5),Line(visible = true, points = {{-60,-6},{-60,-80}}, color = {0,0,255}, thickness = 0.5),Line(visible = true, points = {{-32,-6},{-32,-80}}, color = {0,0,255}, thickness = 0.5),Line(visible = true, points = {{30,-6},{30,-80}}, color = {0,0,255}, thickness = 0.5),Line(visible = true, points = {{0,-6},{0,-80}}, color = {0,0,255}, thickness = 0.5),Text(visible = true, origin = {-27.1481,39.1028}, lineColor = {127,0,0}, fillColor = {0,0,255},
-                fillPattern =                                                                                                    FillPattern.Solid, extent = {{47.1481,-42.1852},{114.1481,-4.963}}, textString = "Tvsyst", fontName = "Arial"),Text(lineColor = {127,0,0}, fillColor = {0,0,255},
-                fillPattern =                                                                                                    FillPattern.Solid, extent = {{34,-48},{88,-18}}, fontName = "Arial", textString = "T0"),Text(visible = true, origin = {57.0182,-15.6217}, lineColor = {0,0,255},
-                fillPattern =                                                                                                    FillPattern.Solid, extent = {{-155.3698,12.0},{-49.5861,48.0}}, textString = "AVDelay", fontName = "Arial"),Text(lineColor = {127,0,0}, fillColor = {0,0,255},
-                fillPattern =                                                                                                    FillPattern.Solid, extent = {{34,-78},{88,-48}}, fontName = "Arial", textString = "EDTV")}));
+      annotation(Icon(graphics={  Rectangle(fillColor=  {170,213,255},
+                fillPattern=                                                         FillPattern.Solid, extent=  {{-100,-100},{100,100}}, lineColor=  {0,0,0}),Text(visible=  true, origin=  {-22.8148,-7.7778}, lineColor=  {127,0,0}, fillColor=  {0,0,255},
+                fillPattern=                                                                                                    FillPattern.Solid, extent=  {{42.8148,37.7778},{110.8148,75.5556}}, textString=  "Tasyst", fontName=  "Arial"),Text(visible=  true, origin=  {6.1844,12.2128}, lineColor=  {0,0,255}, extent=  {{-122.1844,53.5603},{113.8156,82.0142}}, textString=  "Heart Intervals", fontName=  "Arial"),Text(visible=  true, origin=  {-8,20}, lineColor=  {0,0,255}, extent=  {{-94.0,12.0},{-30.0,48.0}}, textString=  "HR", fontName=  "Arial"),Line(visible=  true, points=  {{-80,-6},{-80,-80}}, color=  {0,0,255}, thickness=  0.5),Line(visible=  true, points=  {{-70,-6},{-70,-80}}, color=  {0,0,255}, thickness=  0.5),Line(visible=  true, points=  {{-60,-6},{-60,-80}}, color=  {0,0,255}, thickness=  0.5),Line(visible=  true, points=  {{-32,-6},{-32,-80}}, color=  {0,0,255}, thickness=  0.5),Line(visible=  true, points=  {{30,-6},{30,-80}}, color=  {0,0,255}, thickness=  0.5),Line(visible=  true, points=  {{0,-6},{0,-80}}, color=  {0,0,255}, thickness=  0.5),Text(visible=  true, origin=  {-27.1481,39.1028}, lineColor=  {127,0,0}, fillColor=  {0,0,255},
+                fillPattern=                                                                                                    FillPattern.Solid, extent=  {{47.1481,-42.1852},{114.1481,-4.963}}, textString=  "Tvsyst", fontName=  "Arial"),Text(lineColor=  {127,0,0}, fillColor=  {0,0,255},
+                fillPattern=                                                                                                    FillPattern.Solid, extent=  {{34,-48},{88,-18}}, fontName=  "Arial", textString=  "T0"),Text(visible=  true, origin=  {57.0182,-15.6217}, lineColor=  {0,0,255},
+                fillPattern=                                                                                                    FillPattern.Solid, extent=  {{-155.3698,12.0},{-49.5861,48.0}}, textString=  "AVDelay", fontName=  "Arial"),Text(lineColor=  {127,0,0}, fillColor=  {0,0,255},
+                fillPattern=                                                                                                    FillPattern.Solid, extent=  {{34,-78},{88,-48}}, fontName=  "Arial", textString=  "EDTV")}));
     end HeartIntervals_HI;
 
     model SideOfHeart_measured
-
       Parts.SideOfHeart side
         annotation (Placement(transformation(extent={{-34,-28},{58,46}})));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a inflow annotation(Placement(transformation(extent={{-84,0},
@@ -2890,8 +2620,8 @@ package BurkhoffModel
           color={0,0,127},
           smooth=Smooth.None));
       annotation (Icon(graphics={                                                                                                    Text(extent={{0,
-                  104},{84,86}},                                                                                                    lineColor = {0,0,255}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "AVGain"),
+                  104},{84,86}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AVGain"),
                                                                                                     Text(extent={{
                   -20,100},{26,82}},                                                                                                   lineColor=
                   {0,0,255},                                                                                                    fillColor=
@@ -2913,19 +2643,17 @@ package BurkhoffModel
   end OldParts;
 
   package Models
-
     model HemodynamicsBurkhoff
       extends Cardiovascular.System(
         redeclare BurkhoffModel.Parts.Heart heart,
         redeclare BurkhoffModel.Parts.PulmonaryCirculation pulmonaryCirculation,
         redeclare BurkhoffModel.Parts.SystemicCirculation systemicCirculation);
-
       annotation (Diagram(coordinateSystem(extent={{-40,-40},{40,40}})), Icon(
             coordinateSystem(extent={{-40,-40},{40,40}})));
     end HemodynamicsBurkhoff;
 
     model HemodynamicsBurkhoffVolumeControl
-      extends Cardiovascular.SystemVolumeControl(
+      extends Cardiovascular.Control.SystemVolume(
         redeclare Parts.PulmonaryCirculation pulmonaryCirculation,
         redeclare Parts.Heart heart,
         redeclare Parts.SystemicCirculation systemicCirculation,
@@ -2943,6 +2671,346 @@ package BurkhoffModel
       + heart.rightHeart.side.atrium.volume
       + heart.rightHeart.side.ventricle.volume;
     end HemodynamicsBurkhoffVolumeControl;
+
+    model HemodynamicsBurkhoff_flat
+      Physiolibrary.Hydraulic.Components.ElasticVessel Cvs(
+        volume_start=0.002701,
+        ZeroPressureVolume=0.00223,
+        Compliance=5.2504310309196e-07)
+        annotation (Placement(transformation(extent={{-72,12},{-52,32}})));
+      Physiolibrary.Hydraulic.Components.Conductor Ras(Conductance(displayUnit=
+              "ml/(mmHg.s)") = 1.000057099075e-08)
+        annotation (Placement(transformation(extent={{-46,12},{-26,32}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel Cas(
+        volume_start=0.000834,
+        ZeroPressureVolume=0.0007,
+        Compliance=1.2751046789376e-08)
+        annotation (Placement(transformation(extent={{-24,12},{-4,32}})));
+      Physiolibrary.Hydraulic.Components.Conductor Rcs(Conductance(displayUnit=
+              "ml/(mmHg.s)") = 3.1252815680761e-07)
+        annotation (Placement(transformation(extent={{-2,12},{18,32}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel Caprox(
+        volume_start=3.8e-05,
+        ZeroPressureVolume=3e-05,
+        Compliance=7.5006157584566e-10)
+        annotation (Placement(transformation(extent={{20,12},{40,32}})));
+      Physiolibrary.Hydraulic.Components.Conductor Rcprox(Conductance(
+            displayUnit="ml/(mmHg.s)") = 3.7503078792283e-07)
+        annotation (Placement(transformation(extent={{42,12},{62,32}})));
+      Physiolibrary.Hydraulic.Components.IdealValve AOV(_Gon(displayUnit=
+              "ml/(mmHg.s)") = 3.7503078792283e-06)     annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={80,2})));
+      Parts.ElasticVesselWithSVandP                    LV(
+        useComplianceInput=true,
+        volume_start=0.000125,
+        ZeroPressureVolume=5e-06)
+        annotation (Placement(transformation(extent={{92,-8},{112,12}})));
+      Physiolibrary.Hydraulic.Components.IdealValve MV(_Gon(displayUnit=
+              "ml/(mmHg.s)") = 3.0002463033826e-06)    annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={122,0})));
+      Parts.ElasticVesselWithSVandP                    LA(
+        useComplianceInput=true,
+        useExternalPressureInput=true,
+        volume_start=8.1e-05,
+        ZeroPressureVolume=5e-06)
+        annotation (Placement(transformation(extent={{158,-10},{178,10}})));
+      Physiolibrary.Hydraulic.Components.Conductor RVP(Conductance(displayUnit=
+              "ml/(mmHg.s)") = 5.0004355076902e-07)
+        annotation (Placement(transformation(extent={{186,-2},{206,18}})));
+      Physiolibrary.Hydraulic.Components.Conductor Rvs(Conductance(displayUnit=
+              "ml/(mmHg.s)") = 3.7503078792283e-07)
+        annotation (Placement(transformation(extent={{-84,-36},{-64,-16}})));
+      Parts.ElasticVesselWithSVandP                    RA(
+        useComplianceInput=true,
+        useExternalPressureInput=true,
+        volume_start=7.3e-05,
+        ZeroPressureVolume=5e-06)
+        annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
+      Physiolibrary.Hydraulic.Components.IdealValve TV(_Gon(displayUnit=
+              "ml/(mmHg.s)") = 3.0002463033826e-06)    annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={4,-40})));
+      Parts.ElasticVesselWithSVandP                    RV(
+        useComplianceInput=true,
+        volume_start=0.000112,
+        ZeroPressureVolume=5e-06,
+        ExternalPressure=0)
+        annotation (Placement(transformation(extent={{16,-50},{36,-30}})));
+      Physiolibrary.Hydraulic.Components.IdealValve PV(_Gon(displayUnit=
+              "ml/(mmHg.s)") = 3.7503078792283e-06)    annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={50,-40})));
+      Physiolibrary.Hydraulic.Components.Conductor Rcsp(Conductance(displayUnit=
+             "ml/(mmHg.s)") = 3.7503078792283e-07)
+        annotation (Placement(transformation(extent={{70,-50},{90,-30}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel Cap(
+        volume_start=0.000802,
+        ZeroPressureVolume=0.0006,
+        Compliance=1.5001231516913e-07)
+        annotation (Placement(transformation(extent={{144,-48},{164,-28}})));
+      Physiolibrary.Hydraulic.Components.Conductor Rcp(Conductance(displayUnit=
+              "ml/(mmHg.s)") = 3.7503078792283e-07)
+        annotation (Placement(transformation(extent={{122,-48},{142,-28}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel Cvp(
+        volume_start=0.000154,
+        ZeroPressureVolume=0.0001,
+        Compliance=5.2504310309196e-08)
+        annotation (Placement(transformation(extent={{184,-48},{204,-28}})));
+      Physiolibrary.Hydraulic.Components.ElasticVessel Capprox(
+        volume_start=3e-05,
+        ZeroPressureVolume=2e-05,
+        Compliance=7.5006157584566e-09)
+        annotation (Placement(transformation(extent={{98,-48},{118,-28}})));
+      Physiolibrary.Hydraulic.Components.Conductor Rap(Conductance(displayUnit=
+              "ml/(mmHg.s)") = 3.7503078792283e-07)
+        annotation (Placement(transformation(extent={{164,-48},{184,-28}})));
+      Parts.AtrialElastance               atrialElastance(
+        Alpha=0.04,
+        Beta=0.3,
+        Tmax(displayUnit="ms") = 0.125,
+        Tau(displayUnit="ms") = 0.02,
+        Ees=26664477.483)
+        annotation (Placement(transformation(extent={{-54,-20},{-20,6}})));
+      Parts.VentricularElastance               ventricularElastance(
+        Alpha=0.024,
+        Beta=0.34,
+        Tmax(displayUnit="ms") = 0.2,
+        Tau(displayUnit="ms") = 0.03,
+        Ees=50662507.2177)
+        annotation (Placement(transformation(extent={{4,-24},{38,2}})));
+      Parts.AtrialElastance               atrialElastance1(
+        Alpha=0.04,
+        Beta=0.3,
+        Tmax(displayUnit="ms") = 0.125,
+        Tau(displayUnit="ms") = 0.02,
+        Ees=33330596.85375)
+        annotation (Placement(transformation(extent={{-17,-13},{17,13}},
+            rotation=0,
+            origin={153,31})));
+      Parts.VentricularElastance               ventricularElastance1(
+        Alpha=0.024,
+        Beta=0.34,
+        Tmax(displayUnit="ms") = 0.2,
+        Tau(displayUnit="ms") = 0.03,
+        Ees=205316476.6191)
+        annotation (Placement(transformation(extent={{78,20},{112,46}})));
+      Modelica.Blocks.Math.Product product annotation(Placement(transformation(extent = {{-5,-5},{5,5}}, rotation=180,   origin={-29,-59})));
+      Modelica.Blocks.Sources.Constant AVGain(k=0.02)
+        annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+            rotation=180,
+            origin={-14,-54})));
+      Modelica.Blocks.Math.Product product1
+                                           annotation(Placement(transformation(extent = {{-5,-5},{5,5}}, rotation=0,     origin={137,-21})));
+      Modelica.Blocks.Sources.Constant AVGain1(
+                                              k=0.02)
+        annotation (Placement(transformation(extent={{-4,-4},{4,4}},
+            rotation=0,
+            origin={120,-16})));
+      Physiolibrary.Types.Constants.FrequencyConst heartRate(k=1.3333333333333)
+        annotation (Placement(transformation(extent={{-94,42},{-84,52}})));
+    equation
+      connect(Cvs.q_in, Ras.q_in) annotation (Line(
+          points={{-62,22},{-46,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Ras.q_out, Cas.q_in) annotation (Line(
+          points={{-26,22},{-14,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Cas.q_in, Rcs.q_in) annotation (Line(
+          points={{-14,22},{-2,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rcs.q_out, Caprox.q_in) annotation (Line(
+          points={{18,22},{30,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rcprox.q_in, Caprox.q_in) annotation (Line(
+          points={{42,22},{30,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(AOV.q_out, Rcprox.q_out) annotation (Line(
+          points={{70,2},{66,2},{66,22},{62,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(AOV.q_in, LV.q_in) annotation (Line(
+          points={{90,2},{102,2}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(LV.q_in, MV.q_out) annotation (Line(
+          points={{102,2},{108,2},{108,1.55431e-15},{112,1.55431e-15}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(LA.q_in, RVP.q_in) annotation (Line(
+          points={{168,8.88178e-16},{178,8.88178e-16},{178,8},{186,8}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rvs.q_in, Cvs.q_in) annotation (Line(
+          points={{-84,-26},{-84,22},{-62,22}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rvs.q_out, RA.q_in) annotation (Line(
+          points={{-64,-26},{-58,-26},{-58,-40},{-50,-40}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(TV.q_out, RV.q_in) annotation (Line(
+          points={{14,-40},{26,-40}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(RV.q_in, PV.q_in) annotation (Line(
+          points={{26,-40},{40,-40}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(PV.q_out, Rcsp.q_in) annotation (Line(
+          points={{60,-40},{70,-40}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Cvp.q_in, RVP.q_out) annotation (Line(
+          points={{194,-38},{206,-38},{206,8}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rcsp.q_out, Capprox.q_in) annotation (Line(
+          points={{90,-40},{98,-40},{98,-38},{108,-38}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Capprox.q_in, Rcp.q_in) annotation (Line(
+          points={{108,-38},{122,-38}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rcp.q_out, Cap.q_in) annotation (Line(
+          points={{142,-38},{154,-38}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Cap.q_in, Rap.q_in) annotation (Line(
+          points={{154,-38},{164,-38}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(Rap.q_out, Cvp.q_in) annotation (Line(
+          points={{184,-38},{194,-38}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(RA.compliance, atrialElastance.Ct) annotation (Line(
+          points={{-50,-32},{-50,-24},{-18,-24},{-18,-10},{-17.96,-10},{-17.96,
+              2.1}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(ventricularElastance.Ct, RV.compliance) annotation (Line(
+          points={{40.04,-1.9},{46,-1.9},{46,-28},{26,-28},{26,-32}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(LA.compliance, atrialElastance1.Ct) annotation (Line(
+          points={{168,8},{172.04,8},{172.04,40.1}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(ventricularElastance1.Ct, LV.compliance) annotation (Line(
+          points={{114.04,42.1},{114.04,31.05},{102,31.05},{102,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(RV.pressure, product.u1) annotation (Line(
+          points={{34.4,-50},{36,-50},{36,-62},{-23,-62}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(product.y, RA.externalPressure) annotation (Line(
+          points={{-34.5,-59},{-38,-59},{-38,-32},{-42,-32}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(product.u2, AVGain.y) annotation (Line(
+          points={{-23,-56},{-20,-56},{-20,-54},{-18.4,-54}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(LV.pressure, product1.u2) annotation (Line(
+          points={{110.4,-8},{110,-8},{110,-24},{131,-24}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(AVGain1.y, product1.u1) annotation (Line(
+          points={{124.4,-16},{128,-16},{128,-18},{131,-18}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(product1.y, LA.externalPressure) annotation (Line(
+          points={{142.5,-21},{182,-21},{182,8},{176,8}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(heartRate.y, atrialElastance.HR) annotation (Line(
+          points={{-82.75,47},{-78,47},{-78,6},{-66,6},{-66,3.79},{-52.13,3.79}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(ventricularElastance.HR, atrialElastance.HR) annotation (Line(
+          points={{5.87,-0.21},{-2,-0.21},{-2,6},{-58,6},{-58,3.79},{-52.13,
+              3.79}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(atrialElastance1.HR, heartRate.y) annotation (Line(
+          points={{137.87,41.79},{128,41.79},{128,47},{-82.75,47}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(ventricularElastance1.HR, heartRate.y) annotation (Line(
+          points={{79.87,43.79},{62,43.79},{62,47},{-82.75,47}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(RA.StressedVolume, atrialElastance.Vs) annotation (Line(
+          points={{-54.4,-29.8},{-54.4,-19.9},{-52.3,-19.9},{-52.3,-10.9}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(LV.StressedVolume, ventricularElastance1.Vs) annotation (Line(
+          points={{97.6,12.2},{97.6,16},{79.7,16},{79.7,29.1}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(RV.StressedVolume, ventricularElastance.Vs) annotation (Line(
+          points={{21.6,-29.8},{21.6,-28},{6,-28},{6,-22},{5.7,-22},{5.7,-14.9}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(LA.StressedVolume, atrialElastance1.Vs) annotation (Line(
+          points={{163.6,10.2},{137.7,10.2},{137.7,27.1}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(RA.q_in, TV.q_in) annotation (Line(
+          points={{-50,-40},{-6,-40}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      connect(LA.q_in, MV.q_in) annotation (Line(
+          points={{168,8.88178e-16},{156,8.88178e-16},{156,-8.88178e-16},{132,
+              -8.88178e-16}},
+          color={0,0,0},
+          thickness=1,
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{220,100}}),      graphics), Icon(coordinateSystem(extent=
+               {{-100,-100},{220,100}})));
+    end HemodynamicsBurkhoff_flat;
   end Models;
 
   package Experiment
@@ -2979,11 +3047,10 @@ package BurkhoffModel
       + pulmonaryCirculation.artery.volume
       + pulmonaryCirculation.veins.volume;
       connect(catheter, heart.rightHeartInflow) annotation (Line(
-          points={{-24,-6},{-14,-6},{-14,-5.71429},{-6.72727,-5.71429}},
+          points={{-24,-6},{-14,-6},{-14,-2.08},{-8,-2.08}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
-
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},
                 {40,40}}),  graphics={Text(
               extent={{-12,38},{0,30}},
@@ -2997,10 +3064,14 @@ systemic.volume")}),     Icon(coordinateSystem(preserveAspectRatio=false, extent
                 {40,40}}),     graphics));
     end HemodynamicsBurkhoff_with_catheter;
   end Experiment;
-  annotation(uses(                             Physiolibrary(version = "2.1"), MeursModel(version = "1"), HeamodynamicsDymola(version = "1"),
+  annotation(uses(                                                             MeursModel(version = "1"), HeamodynamicsDymola(version = "1"),
+      Cardiovascular(version="1"),
+      Physiolibrary(version="2.2.0"),
       Modelica(version="3.2.1")), Documentation(revisions="<html>
 <p>Licensed by Tomas Kulhanek under the Modelica License 2</p>
 <p>Copyright &copy; 2008-2014, Tomas Kulhanek, Charles University in Prague.</p>
 <p><br><i>This Modelica package is&nbsp;<u>free</u>&nbsp;software and the use is completely at&nbsp;<u>your own risk</u>; it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the disclaimer of warranty) see&nbsp;<a href=\"modelica://Physiolibrary.UsersGuide.ModelicaLicense2\">Physiolibrary.UsersGuide.ModelicaLicense2</a>&nbsp;or visit&nbsp;<a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
-</html>"));
+</html>"),
+    version="1.2",
+    conversion(noneFromVersion=""));
 end BurkhoffModel;
