@@ -1,8 +1,15 @@
 within ;
 package HumMod
   extends PhysiolibraryOld.Icons.GolemLib;
+<<<<<<< HEAD
   package CardioVascular "Blood and Cardio-Vascular System"
     extends PhysiolibraryOld.Icons.CardioVascularLib;
+=======
+
+  package CardioVascular "Blood and Cardio-Vascular System"
+    extends PhysiolibraryOld.Icons.CardioVascularLib;
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     package VascularCompartments "Blood Cardio-Vascular Distribution"
       package heart "Heart Ventricle Components"
         model Systole
@@ -239,7 +246,11 @@ package HumMod
                    <td>Tom Coleman: QHP 2008 beta 3, University of Mississippi Medical Center</td>
                    </tr>
                    </table>
+<<<<<<< HEAD
                    </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-82, 30}, {76, 16}}, lineColor=  {0, 0, 0}, textString=  "contractilityBasic = %contractilityBasic")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-32, 62}, {-8, 60}}, lineColor=  {0, 0, 0}, textString=  "Volume_SteadyState"), Text(extent=  {{8, 62}, {32, 60}}, lineColor=  {0, 0, 0}, textString=  "Blood_Inflow")}), DymolaStoredErrors);
+=======
+                   </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-82, 30}, {76, 16}}, lineColor = {0, 0, 0}, textString = "contractilityBasic = %contractilityBasic")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-32, 62}, {-8, 60}}, lineColor=  {0, 0, 0}, textString=  "Volume_SteadyState"), Text(extent=  {{8, 62}, {32, 60}}, lineColor=  {0, 0, 0}, textString=  "Blood_Inflow")}), DymolaStoredErrors);
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
         end Ventricle3;
 
         model Diastole3
@@ -660,7 +671,11 @@ package HumMod
                    </table>
                    </html>", info = "<html>
                    <p>Calculation of blood flow fraction through ventilated alveoli.</p>
+<<<<<<< HEAD
                    </html>"), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent=  {{-100, 100}, {100, -100}}, fileName=  "modelica://HumMod/icons/plicniZkrat.png"), Text(extent=  {{-102, -92}, {112, -114}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+=======
+                   </html>"), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-100, 100}, {100, -100}}, fileName = "modelica://HumMod/icons/plicniZkrat.png"), Text(extent = {{-102, -92}, {112, -114}}, lineColor = {0, 0, 255}, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end LungBloodFlow;
 
       package Interfaces "Abstract Interfaces"
@@ -869,7 +884,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-100, -126}, {100, -92}}, textString=  "%name", lineColor=  {0, 0, 255}), Bitmap(extent=  {{-100, 100}, {100, -100}}, fileName=  "icons/komoraSrdce.png")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), DymolaStoredErrors);
+=======
+                   </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-100, -126}, {100, -92}}, textString = "%name", lineColor = {0, 0, 255}), Bitmap(extent = {{-100, 100}, {100, -100}}, fileName = "icons/komoraSrdce.png")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), DymolaStoredErrors);
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
         end IVentricle;
       end Interfaces;
 
@@ -1385,7 +1404,11 @@ package HumMod
       equation
         q_in.pressure = if q_out.pressure > PR1LL + ExternalPressure then q_out.pressure else PR1LL + ExternalPressure;
         annotation(Icon(graphics={  Rectangle(extent = {{-100, 38}, {100, -40}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
+<<<<<<< HEAD
                   fillPattern =                                                                                                   FillPattern.Solid), Text(extent = {{-64, 10}, {56, -16}}, lineColor = {0, 0, 255}, textString = "%name"), Bitmap(extent = {{-100, 100}, {100, -100}}, fileName = "icons/kolaps.png")}));
+=======
+                  fillPattern =                                                                                                    FillPattern.Solid), Text(extent = {{-64, 10}, {56, -16}}, lineColor = {0, 0, 255}, textString = "%name"), Bitmap(extent = {{-100, 100}, {100, -100}}, fileName = "icons/kolaps.png")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end CollapsingVeins;
 
       partial model Base
@@ -1429,9 +1452,15 @@ package HumMod
                    <td>2009</td>
                    </tr>
                    </table>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points = {{14, 9}, {-14, 1}, {14, -9}, {14, -1}, {14, 9}}, lineColor = {135, 135, 135}, smooth = Smooth.None, fillColor = {175, 175, 175},
                   fillPattern =                                                                                                   FillPattern.Solid, origin = {34, -61}, rotation = 180), Rectangle(extent = {{-34, -60}, {20, -62}}, lineColor = {135, 135, 135},
                   fillPattern =                                                                                                   FillPattern.Solid, fillColor = {175, 175, 175}), Bitmap(extent = {{-178, 110}, {158, -104}}, fileName = "icons/perfusion.png")}));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Polygon(points=  {{14, 9}, {-14, 1}, {14, -9}, {14, -1}, {14, 9}}, lineColor=  {135, 135, 135}, smooth=  Smooth.None, fillColor=  {175, 175, 175},
+                  fillPattern=                                                                                                    FillPattern.Solid, origin=  {34, -61}, rotation=  180), Rectangle(extent=  {{-34, -60}, {20, -62}}, lineColor=  {135, 135, 135},
+                  fillPattern=                                                                                                    FillPattern.Solid, fillColor=  {175, 175, 175}), Bitmap(extent=  {{-178, 110}, {158, -104}}, fileName=  "icons/perfusion.png")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end Base;
 
       partial model BaseBadDirection
@@ -1476,8 +1505,13 @@ package HumMod
                      </tr>
                      </table>
                      </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent = {{-70, -20}, {70, 20}}, textString = "%name", lineColor = {0, 0, 255}), Polygon(points = {{-18, -52}, {-46, -60}, {-18, -70}, {-18, -62}, {-18, -52}}, lineColor = {135, 135, 135}, smooth = Smooth.None, fillColor = {175, 175, 175},
+<<<<<<< HEAD
                   fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-18, -60}, {36, -62}}, lineColor = {135, 135, 135},
                   fillPattern =                                                                                                   FillPattern.Solid, fillColor = {175, 175, 175}), Bitmap(extent = {{-162, 100}, {174, -114}}, fileName = "icons/perfusion2.png")}));
+=======
+                  fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-18, -60}, {36, -62}}, lineColor = {135, 135, 135},
+                  fillPattern =                                                                                                    FillPattern.Solid, fillColor = {175, 175, 175}), Bitmap(extent = {{-162, 100}, {174, -114}}, fileName = "icons/perfusion2.png")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end BaseBadDirection;
 
       model SystemicVeins
@@ -1662,7 +1696,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, initialScale = 0.1, grid = {1, 1}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, initialScale = 0.1, grid = {1, 1}), graphics={  Text(extent = {{-100, -90}, {100, -70}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, initialScale = 0.1, grid = {1, 1}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, initialScale = 0.1, grid = {1, 1}), graphics={  Text(extent=  {{-100, -90}, {100, -70}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end Bone;
 
       model Brain
@@ -1727,7 +1765,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent = {{-100, -100}, {100, -80}}, lineColor = {0, 0, 255}, textString = "%name")}), Diagram(graphics));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent=  {{-100, -100}, {100, -80}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Diagram(graphics));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end Brain;
 
       model Fat
@@ -1796,7 +1838,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent = {{-100, -100}, {100, -80}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent=  {{-100, -100}, {100, -80}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end Fat;
 
       model Kidney
@@ -1940,7 +1986,11 @@ package HumMod
                    <td>Tom Coleman: QHP 2008 beta 3, University of Mississippi Medical Center</td>
                    </tr>
                    </table>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{14, -24}, {50, -62}}, lineColor=  {127, 0, 0}), Text(extent=  {{14, -62}, {50, -56}}, lineColor=  {0, 0, 255}, textString=  "Macula Densa")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-100, -100}, {100, -80}}, lineColor = {0, 0, 255}, textString = "%name")}), Diagram(graphics));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{14, -24}, {50, -62}}, lineColor=  {127, 0, 0}), Text(extent=  {{14, -62}, {50, -56}}, lineColor=  {0, 0, 255}, textString=  "Macula Densa")}), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-100, -100}, {100, -80}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Diagram(graphics));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end Kidney;
 
       model VariableResistorWithMyogenicResponse
@@ -2062,7 +2112,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent = {{-100, -100}, {100, -80}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent=  {{-100, -100}, {100, -80}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end OtherTissue;
 
       model SkeletalMuscle
@@ -2159,7 +2213,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent = {{-100, -100}, {100, -80}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent=  {{-100, -100}, {100, -80}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end SkeletalMuscle;
 
       model RespiratoryMuscle
@@ -2237,7 +2295,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent = {{-102, -100}, {98, -80}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent=  {{-102, -100}, {98, -80}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end RespiratoryMuscle;
 
       model Heart
@@ -2693,7 +2755,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent = {{-100, -100}, {100, -80}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(graphics={  Text(extent=  {{-100, -100}, {100, -80}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end Skin;
     end OrganFlow;
 
@@ -2994,6 +3060,10 @@ package HumMod
 
   package Water "Body Water"
     extends PhysiolibraryOld.Icons.WaterLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     package Hydrostatics
       "Hydrostatic pressure difference in upper, midle and lower torso"
       type Posture = enumeration(
@@ -3002,6 +3072,10 @@ package HumMod
           Standing,
           Tilting,
           SteadyState);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       model TorsoHydrostatics
         extends PhysiolibraryOld.Interfaces.BaseModel;
         parameter Real Alpha = 0.1667
@@ -3148,6 +3222,10 @@ package HumMod
                                                                                                                                                                            Connector with one input signal of type Posture.
                                                                                                                                                                            </p>
                                                                                                                                                                            </html>"));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       model Real2Posture "Convert Real to type Posture"
         extends PhysiolibraryOld.Interfaces.ConversionIcon;
         PostureOutput y "Connector of Real output signal" annotation(Placement(transformation(extent = {{60, -20}, {80, 0}}, rotation = 0), iconTransformation(extent = {{100, -20}, {140, 20}})));
@@ -3602,7 +3680,11 @@ package HumMod
           connect(colloidhydraulicPressure0_1.withoutCOP, nephron.EfferentArtery_Water_Hydraulic) annotation(Line(points = {{32, 88}, {52, 88}, {52, 14}, {2.7, 14}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
           connect(busConnector, nephron.busConnector) annotation(Line(points = {{-80, 90}, {-80, 8}, {-18, 8}, {-18, 8.635289999999999}}, color = {0, 0, 255}, thickness = 0.5, smooth = Smooth.None));
           connect(Medulla_Volume.y, busConnector.Medulla_Volume) annotation(Line(points = {{-81.7, -21}, {-80, -21}, {-80, 90}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
+<<<<<<< HEAD
           annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-100, 120}, {100, 104}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+=======
+          annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-100, 120}, {100, 104}}, lineColor = {0, 0, 255}, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
         end Kidney;
       end Kidney;
 
@@ -3731,7 +3813,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-102, 124}, {98, 108}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-102, 124}, {98, 108}}, lineColor = {0, 0, 255}, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end GILumen2;
 
       package test
@@ -3765,7 +3851,11 @@ package HumMod
           connect(busConnector.CD_H2O_Outflow, bladderVoidFlow.desiredFlow) annotation(Line(points = {{-90, 79}, {-92, 79}, {-92, 4}, {-65.5, 4}, {-65.5, -11}}, color = {0, 0, 255}, thickness = 0.5, smooth = Smooth.None), Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}));
           connect(con, volumeCompartement.con) annotation(Line(points = {{-64, 38}, {-36, 38}, {-36, 66}, {-30, 66}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
           connect(volumeCompartement.Volume, busConnector.BladderVolume_Mass) annotation(Line(points = {{-18.8, 56}, {-18, 56}, {-18, 48}, {8, 48}, {8, 79}, {-90, 79}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
+<<<<<<< HEAD
           annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-100, 96}, {100, 80}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics));
+=======
+          annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-100, 96}, {100, 80}}, lineColor = {0, 0, 255}, textString = "%name")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
         end Bladder_steady;
       end test;
 
@@ -3893,7 +3983,11 @@ package HumMod
         connect(sweatGland.busConnector, busConnector) annotation(Line(points = {{-31, 87}, {-31, 93}, {-96, 93}}, color = {0, 0, 255}, thickness = 0.5, smooth = Smooth.None));
         connect(flowMeasure1.actualFlow, busConnector.UT_Sweat_H2OOutflow) annotation(Line(points = {{-8.9, 64.90000000000001}, {22, 64.90000000000001}, {22, 93}, {-96, 93}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
         connect(flowMeasure2.actualFlow, busConnector.UT_InsensibleSkin_H2O) annotation(Line(points = {{-6.9, 38.9}, {22, 38.9}, {22, 93}, {-96, 93}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
+<<<<<<< HEAD
         annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-139, -91}, {142, -116}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+=======
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-139, -91}, {142, -116}}, lineColor = {0, 0, 255}, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end UT;
 
       model MT
@@ -3968,7 +4062,11 @@ package HumMod
         connect(lungEdema.y, busConnector.ExcessLungWater_Volume) annotation(Line(points = {{-65.59999999999999, 72}, {-54, 72}, {-54, 97}, {-96, 97}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
         connect(peritoneum_const.flux, vascularH2O) annotation(Line(points = {{-78, 40}, {-90, 40}, {-90, -26}}, color = {127, 127, 0}, thickness = 1, smooth = Smooth.None));
         connect(peritoneum_const.busConnector, busConnector) annotation(Line(points = {{-71, 43}, {-96, 97}}, color = {0, 0, 255}, thickness = 0.5, smooth = Smooth.None));
+<<<<<<< HEAD
         annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-141, -87}, {140, -112}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+=======
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-141, -87}, {140, -112}}, lineColor = {0, 0, 255}, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end MT;
 
       model LT
@@ -4027,7 +4125,11 @@ package HumMod
         connect(metabolic1.q_out, extravascularH2O.q_out) annotation(Line(points = {{34, -66}, {4, -66}, {4, -18}, {25.2, -18}, {25.2, -17.4}}, color = {127, 127, 0}, thickness = 1, smooth = Smooth.None));
         connect(MetabolicH2O1.u, busConnector.MetabolicH2O_Rate) annotation(Line(points = {{63.2, -54}, {98, -54}, {98, 95}, {-96, 95}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
         connect(lymph.LymphFlow, busConnector.LT_LymphFlow) annotation(Line(points = {{-55, -24}, {-28, -24}, {-28, -4}, {-96, -4}, {-96, 95}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
+<<<<<<< HEAD
         annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-141, -103}, {140, -128}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+=======
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-141, -103}, {140, -128}}, lineColor = {0, 0, 255}, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end LT;
 
       model Plasma
@@ -4077,7 +4179,11 @@ package HumMod
                           orginaly described by Tom Coleman in QHP 2008 beta 3, University of Mississippi Medical Center
                           </li>
                    </ul>
+<<<<<<< HEAD
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0}), Text(extent=  {{-100, -80}, {100, -100}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+=======
+                   </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 0}), Text(extent = {{-100, -80}, {100, -100}}, lineColor = {0, 0, 255}, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end Plasma;
 
       model CapilaryMembrane
@@ -4717,7 +4823,11 @@ package HumMod
       connect(busConnector.MT_InsensibleSkin_H2O, insensibleSkin.u[2]) annotation(Line(points = {{-6, 40}, {-6, 67}, {60, 67}, {60, 76}, {70.40000000000001, 76}}, color = {0, 0, 255}, thickness = 0.5, smooth = Smooth.None), Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}));
       connect(busConnector.LT_InsensibleSkin_H2O, insensibleSkin.u[3]) annotation(Line(points = {{-6, 40}, {-6, 68}, {60, 68}, {60, 77.0667}, {70.40000000000001, 77.0667}}, color = {0, 0, 255}, thickness = 0.5, smooth = Smooth.None), Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}));
       connect(sweatDuct.y, busConnector.SweatGland_H2ORate) annotation(Line(points = {{30.8, 83}, {100, 83}, {100, 40}, {-6, 40}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 1}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 1}), graphics={  Text(extent=  {{-110, -103}, {132, -137}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Documentation(revisions = "<html>
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}, grid = {2, 1}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {2, 1}), graphics={  Text(extent = {{-110, -103}, {132, -137}}, lineColor = {0, 0, 255}, textString = "%name")}), Documentation(revisions = "<html>
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
                    <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
                    <td><p>Author:</p></td>
                    <td><p>Marek Matejak</p></td>
@@ -4835,7 +4945,11 @@ package HumMod
       connect(Constant.y, product.u1) annotation(Line(points = {{-57.6, 50}, {-46, 50}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(vapor.q_in, q_out) annotation(Line(points = {{68, -26}, {-26, -26}}, color = {127, 127, 0}, thickness = 1, smooth = Smooth.None));
       connect(division.y, vapor.desiredFlow) annotation(Line(points = {{49, 0}, {74, 0}, {74, -22}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-153, -59}, {128, -84}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-153, -59}, {128, -84}}, lineColor = {0, 0, 255}, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end InsensibleLungs;
 
     model Water2
@@ -4993,7 +5107,11 @@ package HumMod
                    </ul>
                    </html>"), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, grid = {1, 1}), graphics={  Text(extent = {{-139, -99}, {142, -124}}, lineColor = {0, 0, 255}, textString = "%name")}));
     end Water2;
+<<<<<<< HEAD
     annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent=  {{-100, 100}, {100, -100}}, fileName=  "icons/golem.png")}), Documentation(revisions = "<html>
+=======
+    annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Bitmap(extent = {{-100, 100}, {100, -100}}, fileName = "icons/golem.png")}), Documentation(revisions = "<html>
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
                    <table>
                    <tr>
                    <td>Author:</td>
@@ -5021,6 +5139,10 @@ package HumMod
 
   package Proteins "Body Proteins"
     extends PhysiolibraryOld.Icons.ProteinsLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     model Proteins
       extends PhysiolibraryOld.Icons.Proteins;
       PhysiolibraryOld.Interfaces.BusConnector busConnector annotation (
@@ -5179,6 +5301,10 @@ package HumMod
 
   package Electrolytes "Body Electrolytes"
     extends PhysiolibraryOld.Icons.ElectrolytesLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     package Sodium "Body Sodium Distribution"
       model GlomerulusCationFiltration
         PhysiolibraryOld.ConcentrationFlow.NegativeConcentrationFlow q_out
@@ -6557,6 +6683,10 @@ package HumMod
 
   package Gases "Body O2 and CO2"
     extends PhysiolibraryOld.Icons.GasesLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     package O2 "Body O2 Transport"
       model O2
         //extends Library.Interfaces.BaseModel;
@@ -6648,7 +6778,11 @@ package HumMod
         connect(alveolarVentilation.AlveolarVentilation_STPD, busConnector.AlveolarVentilation_STPD) annotation(Line(points = {{0, 52}, {34, 52}, {34, 26}, {98, 26}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
         connect(alveolarVentilation.BronchiDilution, busConnector.BronchiDilution) annotation(Line(points = {{0, 46}, {34, 46}, {34, 26}, {98, 26}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
         connect(fromMLtoMMOL.T, busConnector.core_T) annotation(Line(points = {{-0.08, 16.24}, {12, 16.24}, {12, 26}, {98, 26}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
         annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-120, -62}, {122, -96}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Documentation(revisions = "<html>
+=======
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-120, -62}, {122, -96}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Documentation(revisions = "<html>
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
                    <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>
                    <td><p>Author:</p></td>
                    <td><p>Marek Matejak</p></td>
@@ -6878,8 +7012,12 @@ package HumMod
         connect(liverO2.HepaticArtyBloodFlow, busConnector.HepaticArty_BloodFlow) annotation(Line(points = {{71, 50}, {96, 50}, {96, 92}, {-88, 92}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
         connect(liverO2.PortalVeinBloodFlow, busConnector.GITract_BloodFlow) annotation(Line(points = {{60, 69}, {60, 92}, {-88, 92}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{3, 13}, {3, 13}}));
         connect(kidneyO2.TubulePO2, busConnector.KidneyO2_TubulePO2) annotation(Line(points = {{64, -41}, {64, -46}, {98, -46}, {98, 92}, {-88, 92}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, -3}, {6, -3}}));
+<<<<<<< HEAD
         annotation(Icon(graphics={  Rectangle(extent=  {{-120, 100}, {120, -100}}, lineColor=  {0, 0, 0})}), Diagram(coordinateSystem(preserveAspectRatio=false,  extent={{-100,
                   -100},{100,100}}),                                                                                                    graphics));
+=======
+        annotation(Icon(graphics = {Rectangle(extent=  {{-120, 100}, {120, -100}}, lineColor=  {0, 0, 0})}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end TissuesO2;
 
       package tissues
@@ -7029,8 +7167,12 @@ package HumMod
           connect(mmol_TO_ml.y, HgbOnPerm.u) annotation(Line(points = {{55, 40}, {62, 40}, {62, -56}, {41.8, -56}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(O2Tissue.ceHb_, mmol_TO_ml.u) annotation(Line(points = {{-12, 6}, {-12, 40}, {32, 40}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(T, fromMLtoMMOL.T) annotation(Line(points = {{-34, -8}, {-28, -8}, {-28, -36.24}, {-15.92, -36.24}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
           annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-80, -78}, {80, -100}}, lineColor=  {127, 0, 0},
                     fillPattern=                                                                                                    FillPattern.Solid, textString=  "(init %initialMass mEq)"), Text(extent=  {{28, 94}, {76, 34}}, lineColor=  {0, 0, 0}, textString=  "O"), Text(extent=  {{62, 34}, {82, 62}}, lineColor=  {0, 0, 0}, textString=  "2"), Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0})}));
+=======
+          annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-80, -78}, {80, -100}}, lineColor=  {127, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "(init %initialMass mEq)"), Text(extent=  {{28, 94}, {76, 34}}, lineColor=  {0, 0, 0}, textString=  "O"), Text(extent=  {{62, 34}, {82, 62}}, lineColor=  {0, 0, 0}, textString=  "2"), Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0})}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
         end TissueO2_kidney;
 
         model TissueO2
@@ -7148,8 +7290,12 @@ package HumMod
           connect(fromMLtoMMOL.q_ML, Metabolism_O2Use.q_in) annotation(Line(points = {{-8, -44}, {-8, -47}, {-8, -50}, {-8, -50}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
           connect(fromMLtoMMOL.q_MMOL, O2Tissue.alveolar) annotation(Line(points = {{-8, -28}, {-8, -22}, {-8, -22}, {-8, -16}}, color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
           connect(T, fromMLtoMMOL.T) annotation(Line(points = {{-34, -8}, {-28, -8}, {-28, -36.24}, {-15.92, -36.24}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
           annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-80, -80}, {80, -100}}, lineColor=  {127, 0, 0},
                     fillPattern=                                                                                                    FillPattern.Solid, textString=  "(init %initialMass mEq)"), Text(extent=  {{28, 94}, {76, 34}}, lineColor=  {0, 0, 0}, textString=  "O"), Text(extent=  {{62, 34}, {82, 62}}, lineColor=  {0, 0, 0}, textString=  "2"), Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0})}));
+=======
+          annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-80, -80}, {80, -100}}, lineColor=  {127, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "(init %initialMass mEq)"), Text(extent=  {{28, 94}, {76, 34}}, lineColor=  {0, 0, 0}, textString=  "O"), Text(extent=  {{62, 34}, {82, 62}}, lineColor=  {0, 0, 0}, textString=  "2"), Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0})}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
         end TissueO2;
 
         model SkeletalMuscleO2
@@ -7332,8 +7478,12 @@ package HumMod
           connect(portalVein, O2Tissue.q_out) annotation(Line(points = {{-92, -2}, {-90, -2}, {-90, 20}, {2, 20}, {2, 4}}, color = {200, 0, 0}, thickness = 1, smooth = Smooth.None));
           connect(HepaticArtyBloodFlow, O2Tissue.BloodFlow) annotation(Line(points = {{-80, 60}, {-28, 60}, {-28, 0}, {-17, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
           connect(T, fromMLtoMMOL.T) annotation(Line(points = {{-34, -10}, {-26, -10}, {-26, -36.24}, {-15.92, -36.24}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
           annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-80, -80}, {80, -100}}, lineColor=  {127, 0, 0},
                     fillPattern=                                                                                                    FillPattern.Solid, textString=  "(init %initialMass mEq)"), Text(extent=  {{28, 94}, {76, 34}}, lineColor=  {0, 0, 0}, textString=  "O"), Text(extent=  {{62, 34}, {82, 62}}, lineColor=  {0, 0, 0}, textString=  "2"), Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0})}));
+=======
+          annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-80, -80}, {80, -100}}, lineColor=  {127, 0, 0}, fillPattern=  FillPattern.Solid, textString=  "(init %initialMass mEq)"), Text(extent=  {{28, 94}, {76, 34}}, lineColor=  {0, 0, 0}, textString=  "O"), Text(extent=  {{62, 34}, {82, 62}}, lineColor=  {0, 0, 0}, textString=  "2"), Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 0})}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
         end TissueO2_liver2;
       end tissues;
 
@@ -7388,8 +7538,12 @@ package HumMod
         tO2 = MiniliterPerLiter * (-q_out.q / BloodFlow);
         //mmol/l
         ceHb_ = ceHb;
+<<<<<<< HEAD
         annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-74, -32}, {74, -64}}, lineColor=  {0, 0, 255}, textString=  "%name"), Polygon(points=  {{-72, 10}, {80, 0}, {-72, -10}, {-72, 10}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255},
                   fillPattern=                                                                                                    FillPattern.Solid, origin=  {-2, -84}, rotation=  360)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics));
+=======
+        annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-74, -32}, {74, -64}}, lineColor=  {0, 0, 255}, textString=  "%name"), Polygon(points=  {{-72, 10}, {80, 0}, {-72, -10}, {-72, 10}}, lineColor=  {0, 0, 127}, fillColor=  {255, 255, 255}, fillPattern=  FillPattern.Solid, origin=  {-2, -84}, rotation=  360)}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end BloodO2_Siggaard;
 
       partial model BloodO2Base
@@ -7579,8 +7733,12 @@ package HumMod
         //  x=log(pO2CO/7);
         //  x=log(max(1e-15+1e-19*pO2CO,pO2CO/7)) - a - 0.055*(T-37); //namiesto:  x=log(pO2CO/7) - a - 0.055*(T-37);
         //  y=log(max(1e-15+1e-19*sO2CO/(1-sO2CO),sO2CO/(1-sO2CO)));
+<<<<<<< HEAD
         annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215},
                   fillPattern=                                                                                                    FillPattern.Solid), Text(extent=  {{-74, -32}, {74, -64}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics));
+=======
+        annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent=  {{-100, 100}, {100, -100}}, lineColor=  {0, 0, 255}, fillColor=  {215, 215, 215}, fillPattern=  FillPattern.Solid), Text(extent=  {{-74, -32}, {74, -64}}, lineColor=  {0, 0, 255}, textString=  "%name")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end BloodO2Base;
       annotation(Documentation(revisions = "<html>
                    <table>
@@ -10203,6 +10361,10 @@ package HumMod
               extent={{-20,-20},{20,20}},
               rotation=0,
               origin={-80,-20})));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
         PhysiolibraryOld.Interfaces.RealInput_ BronchiDilution annotation (
             Placement(transformation(
               extent={{-10.0004,-10.0004},{4.00021,4.00021}},
@@ -10446,6 +10608,10 @@ package HumMod
 
   package Heat "Body Temperature Balance"
     extends PhysiolibraryOld.Icons.HeatLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     model TissuesHeat
       extends PhysiolibraryOld.Icons.Tissues;
       tissues.Bone Bone annotation(Placement(transformation(extent = {{64, 30}, {44, 50}})));
@@ -11074,6 +11240,10 @@ package HumMod
 
   package Metabolism "Body Nutrients, Metabolism and Heat Systems"
     extends PhysiolibraryOld.Icons.NutrientsMetabolismLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     model LiverMetabolism
       import QHP = HumMod;
       extends PhysiolibraryOld.Icons.Liver;
@@ -13507,6 +13677,10 @@ package HumMod
 
   package Hormones "Hormones"
     extends PhysiolibraryOld.Icons.HormonesLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     model Insulin
       extends PhysiolibraryOld.Icons.Pancreas;
       // outer parameter Real ECF_Vol(final unit="ml");
@@ -13627,7 +13801,11 @@ package HumMod
       connect(mU_per_l.y, feedback1.u1) annotation(Line(points = {{-31.6, 12}, {-26, 12}, {-26, -30}, {25, -30}, {25, -39.4}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(busConnector.KAPool_mg_per_dl, KAEffect.u) annotation(Line(points = {{-98, 40}, {4, 40}, {4, 10}, {12.2, 10}}, color = {0, 0, 255}, thickness = 0.5, smooth = Smooth.None), Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}));
       connect(integrator1.y, LM_Insulin_InsulinDelayed) annotation(Line(points = {{25, -68.5}, {25, -76}, {62, -76}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-100, 80}, {100, 100}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-100, 80}, {100, 100}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end Insulin;
 
     model Glucagon
@@ -13694,7 +13872,11 @@ package HumMod
       connect(GlucagonPool.q_out, concentrationMeasure.q_in) annotation(Line(points = {{-56, -6}, {-54, -6}, {-54, 8}, {-60, 8}}, color = {200, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(concentrationMeasure.actualConc, Glucagon) annotation(Line(points = {{-60, 12}, {-60, 18}, {-80, 18}, {-80, -50}, {-68, -50}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(busConnector.Glucagon_conc, concentrationMeasure.actualConc) annotation(Line(points = {{-88, 78}, {-88, 14}, {-60, 14}, {-60, 12}}, color = {0, 0, 255}, thickness = 0.5, smooth = Smooth.None), Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-100, 80}, {100, 100}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-100, 80}, {100, 100}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end Glucagon;
 
     model ADH
@@ -13906,7 +14088,11 @@ package HumMod
       connect(TO_ng_per_dl.actualConc, feedback1.u1) annotation(Line(points = {{-50, 20}, {-50, 36}, {-57, 36}, {-57, -33.4}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(busConnector.NephronAldo_conc_in_nG_per_dl, AldoDelayed.y) annotation(Line(points = {{-90, 90}, {-90, -66}, {-57, -66}, {-57, -62.5}}, color = {0, 0, 255}, thickness = 0.5, smooth = Smooth.None), Text(string = "%first", index = -1, extent = {{-6, 3}, {-6, 3}}));
       connect(KEffect.u, busConnector.KPool_conc_per_liter) annotation(Line(points = {{46.2, 10}, {12, 90}, {-90, 90}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-116, 104}, {118, 82}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-116, 104}, {118, 82}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end Aldosterone;
 
     model ANP
@@ -14178,7 +14364,11 @@ package HumMod
         connect(log10_2.y, busConnector.BetaPool_Effect) annotation(Line(points = {{25, -24}, {78, -24}, {78, 88}, {-78, 88}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
         connect(Constant.y, busConnector.AlphaBlocade_Effect) annotation(Line(points = {{40.4, -62}, {78, -62}, {78, 88}, {-78, 88}}, color = {0, 0, 127}, smooth = Smooth.None));
         connect(Constant1.y, busConnector.BetaBlocade_Effect) annotation(Line(points = {{34.4, -30}, {78, -30}, {78, 88}, {-78, 88}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
         annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-100, 80}, {100, 100}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-100, 80}, {100, 100}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
       end Catechols;
       annotation(Documentation(revisions = "<html>
                    <table>
@@ -14271,7 +14461,11 @@ package HumMod
       connect(concentrationMeasure.actualConc, log10_1.u) annotation(Line(points = {{-76, -28}, {-76, -18}, {-54, -18}, {-54, 56}, {-48, 56}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(log10_1.y, busConnector.EPOPool_Log10Conc) annotation(Line(points = {{-25, 56}, {-6, 56}, {-6, 88}, {-78, 88}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
       connect(VODIST.y, EPOPool.SolventVolume) annotation(Line(points = {{-59.4, -2}, {-56, -2}, {-56, -14}, {-94, -14}, {-94, -38}, {-84, -38}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-116, 104}, {118, 82}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-116, 104}, {118, 82}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end EPO;
 
     model Thyroxine
@@ -14327,7 +14521,11 @@ package HumMod
       connect(concentrationMeasure.actualConc, Thyroxine) annotation(Line(points = {{-76, -26}, {-76, -8}, {-40, -8}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(curve.val, busConnector.ThyroidEffect) annotation(Line(points = {{-33.8, 28}, {0, 28}, {0, 88}, {-78, 88}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
       connect(concentrationMeasure.actualConc, curve.u) annotation(Line(points = {{-76, -26}, {-76, 28}, {-54, 28}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-124, 114}, {118, 90}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-124, 114}, {118, 90}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end Thyroxine;
 
     model Thyrotropin
@@ -14367,7 +14565,11 @@ package HumMod
       connect(feedback.u1, busConnector.HeatCore_Temp) annotation(Line(points = {{74.8, 26}, {82, 26}, {82, 88}, {-78, 88}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
       connect(feedback.u2, temperatureConstant.y) annotation(Line(points = {{70, 21.2}, {70, 16}, {81.59999999999999, 16}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(TemperatureEffect_.y, HypothalamusTSH.u) annotation(Line(points = {{46, 24}, {46, 14}, {-4.2, 14}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-118, 122}, {116, 100}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-118, 122}, {116, 100}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end Thyrotropin;
 
     model Renin
@@ -14522,7 +14724,11 @@ package HumMod
       connect(ReninFree.q_out, fluxReninGranules.q_out) annotation(Line(points = {{36, -44}, {48, -44}, {48, -51}, {60, -51}}, color = {200, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(ReninGranules.soluteMass, gain3.u) annotation(Line(points = {{86, -51.8}, {86, -72}, {64, -72}, {64, -69}, {65, -69}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(ReninFree.soluteMass, gain1.u) annotation(Line(points = {{36, -51.8}, {36, -58}, {58, -58}, {58, -16}, {65, -16}, {65, -21}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-112, 108}, {122, 86}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-112, 108}, {122, 86}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end Renin;
 
     model Angiotensine2
@@ -14572,7 +14778,11 @@ package HumMod
       connect(EndogenousRate.y, A2_pG_per_mL.u) annotation(Line(points = {{-36, 18}, {-36, 10}, {-31.8, 10}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(A2_pG_per_mL.y, log10_1.u) annotation(Line(points = {{-22, 8}, {-22, -32}, {-4, -32}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(A2_pG_per_mL.y, PG_TO_PMOL.yBase) annotation(Line(points = {{-22, 8}, {-22, -42}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-128, 102}, {106, 80}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-128, 102}, {106, 80}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end Angiotensine2;
 
     model Hormones
@@ -14645,7 +14855,11 @@ package HumMod
       connect(AdiposeEffect.u, busConnector.LipidDeposits_Mass) annotation(Line(points = {{77.8, 10}, {90, 10}, {90, 78}, {-88, 78}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
       connect(concentrationMeasure.actualConc, Leptin) annotation(Line(points = {{-60, 12}, {-60, 20}, {-82, 20}, {-82, -50}, {-68, -50}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(concentrationMeasure.actualConc, busConnector.Leptin) annotation(Line(points = {{-60, 12}, {-60, 78}, {-88, 78}}, color = {0, 0, 127}, smooth = Smooth.None), Text(string = "%second", index = 1, extent = {{6, 3}, {6, 3}}));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-100, 80}, {100, 100}}, lineColor = {0, 0, 255}, textString = "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent=  {{-100, 80}, {100, 100}}, lineColor=  {0, 0, 255}, textString=  "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end Leptin;
     annotation(Documentation(revisions = "<html>
                    <table>
@@ -14678,6 +14892,10 @@ package HumMod
 
   package Nerves "Autonimic Nerves"
     extends PhysiolibraryOld.Icons.NervesLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     model BaroReceptorInHoursAdaptation
       extends PhysiolibraryOld.Icons.Barroreceptor;
       PhysiolibraryOld.Interfaces.RealInput_ pressure annotation (Placement(
@@ -14705,8 +14923,13 @@ package HumMod
       connect(pressureChangeOnNA.val, NA) annotation(Line(points = {{66.36, 34}, {88, 34}, {88, 0}, {100, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(pressureChange.y, pressureChangeOnNA.u) annotation(Line(points = {{-51, 0}, {-40, 0}, {-40, 34}, {30, 34}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(pressure, pressureChange.u1) annotation(Line(points = {{-100, 0}, {-68, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-122, 130}, {118, 102}}, lineColor=  {0, 0, 0}, fillColor=  {213, 255, 170},
                 fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-122, 130}, {118, 102}}, lineColor = {0, 0, 0}, fillColor = {213, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end BaroReceptorInHoursAdaptation;
 
     model BaroReceptorInDaysAdaptation
@@ -14736,8 +14959,13 @@ package HumMod
       connect(pressureChangeOnNA.val, NA) annotation(Line(points = {{66.36, 34}, {88, 34}, {88, 0}, {100, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(pressureChange.y, pressureChangeOnNA.u) annotation(Line(points = {{-51, 0}, {-40, 0}, {-40, 34}, {30, 34}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(pressure, pressureChange.u1) annotation(Line(points = {{-100, 0}, {-68, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-100, 100}, {100, 64}}, lineColor=  {0, 0, 0}, fillColor=  {213, 255, 170},
                 fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-100, 100}, {100, 64}}, lineColor = {0, 0, 0}, fillColor = {213, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end BaroReceptorInDaysAdaptation;
 
     model SympatheticCNS
@@ -14807,8 +15035,13 @@ package HumMod
       connect(gain.y, NA) annotation(Line(points = {{92.40000000000001, 0}, {96, 0}, {96, -60}, {100, -60}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(baroEffect.val, SympsCNS_BaroEffect) annotation(Line(points = {{-25.8, 80}, {80, 80}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(A2Effect.val, SympsCNS_A2Effect) annotation(Line(points = {{-25.8, -80}, {44, -80}, {44, 38}, {102, 38}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-160, 198}, {156, 164}}, lineColor=  {0, 0, 0}, fillColor=  {213, 255, 170},
                 fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-160, 198}, {156, 164}}, lineColor = {0, 0, 0}, fillColor = {213, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end SympatheticCNS;
 
     model ExerciseSympathetic
@@ -14842,8 +15075,13 @@ package HumMod
       connect(motorRadiation_TotalEffect.val, totalEffect.u[2]) annotation(Line(points = {{-33.8, 0}, {-1.9, 0}, {-1.9, 1}, {30, 1}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(ExerciseMetabolism_TotalWats, motorRadiation_TotalEffect.u) annotation(Line(points = {{-98, -40}, {-76, -40}, {-76, 0}, {-54, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(totalEffect.y, ExerciseSymps_TotalEffect) annotation(Line(points = {{53, 0}, {98, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-132, 142}, {130, 106}}, lineColor=  {0, 0, 0}, fillColor=  {213, 255, 170},
                 fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-132, 142}, {130, 106}}, lineColor = {0, 0, 0}, fillColor = {213, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end ExerciseSympathetic;
 
     model VagusNerve
@@ -14861,8 +15099,13 @@ package HumMod
     equation
       connect(SympsCNS_NA_Hz, sympsOnParasymps.u) annotation(Line(points = {{-100, 0}, {-54, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(sympsOnParasymps.val, VagusNerve_NA_Hz) annotation(Line(points = {{-33.8, 0}, {98, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-104, 136}, {100, 102}}, lineColor=  {0, 0, 0}, fillColor=  {213, 255, 170},
                 fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-104, 136}, {100, 102}}, lineColor = {0, 0, 0}, fillColor = {213, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end VagusNerve;
 
     model SA_Node
@@ -14906,8 +15149,13 @@ package HumMod
       connect(GangliaGeneral_NA, betaReceptorsActivityFactor.GangliaGeneral_NA) annotation(Line(points = {{-100, -20}, {-30, -20}, {-30, 66}, {10.2, 66}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(betaReceptorsActivityFactor.y, sympatheticEffect.u) annotation(Line(points = {{20, 65}, {20, 30}, {26, 30}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(sympatheticEffect.val, rate.u[3]) annotation(Line(points = {{46.2, 30}, {54, 30}, {54, 1.33333}, {62, 1.33333}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-102, 134}, {100, 102}}, lineColor=  {0, 0, 0}, fillColor=  {213, 255, 170},
                 fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-102, 134}, {100, 102}}, lineColor = {0, 0, 0}, fillColor = {213, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end SA_Node;
 
     model GangliaKidney
@@ -14958,8 +15206,13 @@ package HumMod
       connect(SympsCNS_A2Effect, NeuralActivity.u2) annotation(Line(points = {{-80, -80}, {42, -80}, {42, -24}, {60, -24}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(NeuralActivity.y, toHz.u) annotation(Line(points = {{83, -18}, {86, -18}, {86, 0}, {87.2, 0}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(toHz.y, NA) annotation(Line(points = {{96.40000000000001, 0}, {98, 0}, {98, 36}, {68, 36}, {68, 62}, {80, 62}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-112, 138}, {110, 106}}, lineColor=  {0, 0, 0}, fillColor=  {213, 255, 170},
                 fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name"), Ellipse(extent=  {{-106, 104}, {100, -98}}, lineColor=  {0, 0, 0})}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-112, 138}, {110, 106}}, lineColor = {0, 0, 0}, fillColor = {213, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name"), Ellipse(extent = {{-106, 104}, {100, -98}}, lineColor = {0, 0, 0})}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end GangliaKidney;
 
     model BetaReceptorsActivityFactor
@@ -15074,9 +15327,15 @@ package HumMod
       connect(SympsEffect.y, y) annotation(Line(points = {{80, -77}, {80, -90}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(GangliaGeneral_NA, TotalAgonism.u1) annotation(Line(points = {{-90, 50}, {-70, 50}, {-70, 36}, {-60, 36}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(AlphaPool_Effect, TotalAgonism.u2) annotation(Line(points = {{-90, 10}, {-70, 10}, {-70, 24}, {-60, 24}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent=  {{-100, 70}, {100, -70}}, lineColor=  {112, 143, 0},
                 fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {255, 255, 255}), Text(extent=  {{-88, -40}, {100, 48}}, lineColor=  {0, 0, 0},
                 fillPattern=                                                                                                    FillPattern.Sphere, fillColor=  {85, 255, 170}, textString=  "%name")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics));
+=======
+      annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-100, 70}, {100, -70}}, lineColor = {112, 143, 0},
+                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {255, 255, 255}), Text(extent = {{-88, -40}, {100, 48}}, lineColor = {0, 0, 0},
+                fillPattern =                                                                                                    FillPattern.Sphere, fillColor = {85, 255, 170}, textString = "%name")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end AplhaReceptorsActivityFactor;
 
     model Pituitary
@@ -15107,8 +15366,13 @@ package HumMod
       connect(product.y, add.u1) annotation(Line(points = {{33, 12}, {38, 12}, {38, 6}, {44, 6}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(sub.y, product.u2) annotation(Line(points = {{1, 0}, {6, 0}, {6, 6}, {10, 6}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(BaroSensitivity.y, product.u1) annotation(Line(points = {{-3.6, 34}, {4, 34}, {4, 18}, {10, 18}}, color = {0, 0, 127}, smooth = Smooth.None));
+<<<<<<< HEAD
       annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent=  {{-110, 128}, {110, 102}}, lineColor=  {0, 0, 0}, fillColor=  {213, 255, 170},
                 fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
+=======
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-110, 128}, {110, 102}}, lineColor = {0, 0, 0}, fillColor = {213, 255, 170},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     end Pituitary;
 
     model Hypothalamus
@@ -15276,6 +15540,10 @@ package HumMod
 
   package Setup "Environment Influences"
     extends PhysiolibraryOld.Icons.SetupLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     model Setup_variables
       extends PhysiolibraryOld.Icons.Setup;
       replaceable class Variable = PhysiolibraryOld.Utilities.ConstantFromFile;
@@ -15703,6 +15971,10 @@ package HumMod
 
   package Status "Fitness Status of Tissue Structures and Functionality"
     extends PhysiolibraryOld.Icons.StatusLib;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
     model TissuesFitness
       //extends Library.Interfaces.BaseModel;
       extends PhysiolibraryOld.Icons.Status;
@@ -15831,7 +16103,11 @@ package HumMod
       connect(skeletalMuscle.FunctionFailed, busConnector.SkeletalMuscle_Function_Failed) annotation(Line(points = {{-64, 62}, {-20, 62}, {-20, 92}, {-88, 92}}, color = {0, 0, 127}, smooth = Smooth.None));
       connect(brain.FunctionEffect, patientStatus.BrainFunctionEffect) annotation(Line(points = {{8, 28}, {8, 26}, {74, 26}}, color = {0, 0, 127}, smooth = Smooth.None));
       annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-152, -102}, {150, -138}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255},
+<<<<<<< HEAD
                 fillPattern =                                                                                                   FillPattern.Solid, textString = "%name")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+=======
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics), Documentation(info = "<html>
+>>>>>>> 4b6cb083998abd2cf74e843afccb9298a956171e
                    <p>BE_interstitial is base excess in the interstitium of the tissue. The standard value is 0, when strong acid concentration increase, then BE value decrease with the same concentration. </p>
                    <p>Meaning might be interpreted like what amount of hydrogen iont must be added to sollution if the end poit of titration will be pH=7.4 and pCO2=5.3kPa.</p>
                    <p>For any tissue can be simplified with difference of lactate concentration from its normal value.</p>
