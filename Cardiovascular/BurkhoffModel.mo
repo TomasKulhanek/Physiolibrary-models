@@ -86,12 +86,12 @@ package BurkhoffModel
               fillPattern=FillPattern.Sphere,
               radius=2,
               lineThickness=1),                                                                                                    Text(extent={{
-                  -66,40},{110,22}},                                                                                                    lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Total Blood Volume"),Text(extent={{
-                  -92,24},{86,-4}},                                                                                                    lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Total Blood Stressed Volume"),Text(extent={{
-                  -110,4},{88,-30}},                                                                                                    lineColor = {0,0,0}, fillColor = {85,170,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Total Blood Unstressed Volume")}));
+                  -66,40},{110,22}},                                                                                                    lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Total Blood Volume"),Text(extent={{
+                  -92,24},{86,-4}},                                                                                                    lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Total Blood Stressed Volume"),Text(extent={{
+                  -110,4},{88,-30}},                                                                                                    lineColor=  {0,0,0}, fillColor=  {85,170,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Total Blood Unstressed Volume")}));
     end BloodVolume;
 
     partial model HeartElastance
@@ -127,17 +127,17 @@ package BurkhoffModel
               extent={{-52,94},{94,-76}},
               lineColor={0,0,127},
               fillColor={255,255,170},
-              fillPattern=FillPattern.Solid),                                                       Line(points = {{-42,90},{-42,-60},{82,-60}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-58},{26,-56},{50,-54},{66,-52},{72,-50},{78,-48},{82,-46},{86,-44}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-60},{4,88}}, color = {0,0,0}, smooth = Smooth.None),Line(points = {{-38,-60},{84,56}}, color = {255,0,0}, smooth = Smooth.None),Polygon(points = {{72,48},{68,56},{76,52},{72,48}}, lineColor = {255,0,0}, smooth = Smooth.None, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid),Polygon(points = {{0,-4},{-4,4},{4,0},{0,-4}}, lineColor = {255,0,0}, smooth = Smooth.None, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, origin = {80,45}, rotation = 180),
+              fillPattern=FillPattern.Solid),                                                       Line(points=  {{-42,90},{-42,-60},{82,-60}}, color=  {0,0,0}, smooth=  Smooth.None),Line(points=  {{-38,-58},{26,-56},{50,-54},{66,-52},{72,-50},{78,-48},{82,-46},{86,-44}}, color=  {0,0,0}, smooth=  Smooth.None),Line(points=  {{-38,-60},{4,88}}, color=  {0,0,0}, smooth=  Smooth.None),Line(points=  {{-38,-60},{84,56}}, color=  {255,0,0}, smooth=  Smooth.None),Polygon(points=  {{72,48},{68,56},{76,52},{72,48}}, lineColor=  {255,0,0}, smooth=  Smooth.None, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid),Polygon(points=  {{0,-4},{-4,4},{4,0},{0,-4}}, lineColor=  {255,0,0}, smooth=  Smooth.None, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid, origin=  {80,45}, rotation=  180),
                                                                                                     Text(extent={{
-                  -92,-26},{-38,-42}},                                                                                                    lineColor = {0,0,255}, fillColor = {255,0,0},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "Vs"), Text(extent = {{50,90},{104,52}}, lineColor=
+                  -92,-26},{-38,-42}},                                                                                                    lineColor=  {0,0,255}, fillColor=  {255,0,0},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "Vs"), Text(extent=  {{50,90},{104,52}}, lineColor=
                   {0,0,255},                                                                                                    fillColor=
                   {255,0,0},
                 fillPattern=FillPattern.Solid,
-              textString="Ct"),                                                                                                    Text(extent = {{-100,-108},{100,-124}}, lineColor = {0,0,255}, fillColor = {170,213,255},
-                fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}));
+              textString="Ct"),                                                                                                    Text(extent=  {{-100,-108},{100,-124}}, lineColor=  {0,0,255}, fillColor=  {170,213,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "%name")}));
     end HeartElastance;
 
     model HeartIntervals
@@ -169,9 +169,9 @@ package BurkhoffModel
       end if;
       annotation(Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
-                      graphics={                                                                                                    Text(visible = true, origin={
-                  -18.5625,68},                                                                                                    lineColor = {0,0,255}, extent={{
-                  -73.4375,6.00004},{-23.4375,24}},                                                                                                    textString = "HR", fontName = "Arial")}));
+                      graphics={                                                                                                    Text(visible=  true, origin={
+                  -18.5625,68},                                                                                                    lineColor=  {0,0,255}, extent={{
+                  -73.4375,6.00004},{-23.4375,24}},                                                                                                    textString=  "HR", fontName=  "Arial")}));
     end HeartIntervals;
 
     model SideOfHeart "abstract model for heart side"
@@ -2653,7 +2653,7 @@ package BurkhoffModel
     end HemodynamicsBurkhoff;
 
     model HemodynamicsBurkhoffVolumeControl
-      extends Cardiovascular.Control.SystemVolume(
+      extends Cardiovascular.Test.SystemVolume(
         redeclare Parts.PulmonaryCirculation pulmonaryCirculation,
         redeclare Parts.Heart heart,
         redeclare Parts.SystemicCirculation systemicCirculation,
@@ -2964,13 +2964,11 @@ package BurkhoffModel
           points={{-82.75,47},{-78,47},{-78,6},{-66,6},{-66,3.79},{-52.13,3.79}},
           color={0,0,127},
           smooth=Smooth.None));
-
       connect(ventricularElastance.HR, atrialElastance.HR) annotation (Line(
           points={{5.87,-0.21},{-2,-0.21},{-2,6},{-58,6},{-58,3.79},{-52.13,
               3.79}},
           color={0,0,127},
           smooth=Smooth.None));
-
       connect(atrialElastance1.HR, heartRate.y) annotation (Line(
           points={{137.87,41.79},{128,41.79},{128,47},{-82.75,47}},
           color={0,0,127},
@@ -2991,7 +2989,6 @@ package BurkhoffModel
           points={{21.6,-29.8},{21.6,-28},{6,-28},{6,-22},{5.7,-22},{5.7,-14.9}},
           color={0,0,127},
           smooth=Smooth.None));
-
       connect(LA.StressedVolume, atrialElastance1.Vs) annotation (Line(
           points={{163.6,10.2},{137.7,10.2},{137.7,27.1}},
           color={0,0,127},
