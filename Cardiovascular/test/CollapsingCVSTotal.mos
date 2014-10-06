@@ -1,0 +1,2 @@
+﻿simulateModel("Cardiovascular_Test_CollapsingCVS", stopTime=1100, numberOfIntervals=5000, method="dassl", tolerance=0.01, resultFile="Cardiovascular_Test_CollapsingCVS");
+plot({"elasticVessel.volume","elasticVessel1.volume","elasticVessel2.volume","elasticVessel3.volume"}, colors={{0,0,255},{255,0,0},{0,128,0},{255,0,255}});
