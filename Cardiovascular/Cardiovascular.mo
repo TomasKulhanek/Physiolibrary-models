@@ -1568,7 +1568,7 @@ package Cardiovascular "Extension library of Physiolibrary"
       end HemodynamicsMeurs;
 
       model HemodynamicsMeursVolume
-        extends Cardiovascular.Interfaces.System_ERV_Control(
+        extends Cardiovascular.Interfaces.System_ER_Control(
           redeclare Parts.PulmonaryCirculation pulmonaryCirculation,
           redeclare Parts.Heart heart,
           redeclare Parts.SystemicCirculation systemicCirculation);
@@ -5643,74 +5643,71 @@ package Cardiovascular "Extension library of Physiolibrary"
     end Constants;
   end Types;
 
-
-
-
   model System
     replaceable Interfaces.Heart heart
       annotation (Placement(transformation(extent={{-8,-8},{6,8}})));
     replaceable Interfaces.SystemicCirculation systemicCirculation
-      annotation (Placement(transformation(extent={{-12,-36},{8,-16}})));
+      annotation (Placement(transformation(extent={{-10,-36},{10,-16}})));
     replaceable Interfaces.PulmonaryCirculation pulmonaryCirculation
-      annotation (Placement(transformation(extent={{-12,12},{8,32}})));
+      annotation (Placement(transformation(extent={{-10,12},{10,32}})));
     Physiolibrary.Hydraulic.Sensors.FlowMeasure flowMeasure annotation (
         Placement(transformation(
-          extent={{-4,-4},{4,4}},
+          extent={{-2,-2},{2,2}},
           rotation=90,
-          origin={-16,-12})));
+          origin={-14,-6})));
     Physiolibrary.Hydraulic.Sensors.FlowMeasure flowMeasure1 annotation (
         Placement(transformation(
-          extent={{-4,-4},{4,4}},
+          extent={{-2,-2},{2,2}},
           rotation=270,
-          origin={12,-12})));
+          origin={12,-6})));
     Physiolibrary.Hydraulic.Sensors.FlowMeasure flowMeasure2 annotation (
         Placement(transformation(
-          extent={{-4,-4},{4,4}},
+          extent={{-2,-2},{2,2}},
           rotation=270,
-          origin={12,12})));
+          origin={12,8})));
     Physiolibrary.Hydraulic.Sensors.FlowMeasure flowMeasure3 annotation (
         Placement(transformation(
-          extent={{-4,-4},{4,4}},
+          extent={{-2,-2},{2,2}},
           rotation=90,
-          origin={-18,14})));
+          origin={-14,8})));
   equation
     connect(systemicCirculation.q_out, flowMeasure.q_in) annotation (Line(
-        points={{-12,-26},{-16,-26},{-16,-16}},
+        points={{-10,-26},{-14,-26},{-14,-8}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(flowMeasure.q_out, heart.rightHeartInflow) annotation (Line(
-        points={{-16,-8},{-16,-8},{-16,-2},{-12,-2},{-12,-2.08},{-8,-2.08}},
+        points={{-14,-4},{-14,-2},{-12,-2},{-12,-4.11429},{-8,-4.11429}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(systemicCirculation.q_in, flowMeasure1.q_out) annotation (Line(
-        points={{8,-26},{12,-26},{12,-16}},
+        points={{10,-26},{12,-26},{12,-8}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(flowMeasure1.q_in, heart.leftHeartOutflow) annotation (Line(
-        points={{12,-8},{12,-1.92},{6,-1.92}},
+        points={{12,-4},{12,-3.88571},{6,-3.88571}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(pulmonaryCirculation.q_out, flowMeasure2.q_in) annotation (Line(
-        points={{7.8,21.4},{12,21.4},{12,16}},
+        points={{8.85714,21.4},{12,21.4},{12,10}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(flowMeasure2.q_out, heart.leftHeartInflow) annotation (Line(
-        points={{12,8},{12,8},{12,4},{12,4.16},{10,4.16},{6,4.16}},
+        points={{12,6},{12,4.8},{6,4.8}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(heart.rightHeartOutflow, flowMeasure3.q_in) annotation (Line(
-        points={{-8,4.16},{-12,4.16},{-12,4},{-18,4},{-18,10}},
+        points={{-8,4.8},{-12,4.8},{-12,4},{-14,4},{-14,6}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(flowMeasure3.q_out, pulmonaryCirculation.q_in) annotation (Line(
-        points={{-18,18},{-18,18},{-18,22},{-14,22},{-14,21.8},{-11.8,21.8}},
+        points={{-14,10},{-14,21.8},{-9.80952,21.8}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
@@ -5746,7 +5743,6 @@ package Cardiovascular "Extension library of Physiolibrary"
 
   package Test
     extends Modelica.Icons.Package;
-
 
     model SystemVolume
       extends System;
@@ -6413,8 +6409,6 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
   package Interfaces
     extends Modelica.Icons.InterfacesPackage;
 
-
-
     partial model Heart
       extends Physiolibrary.Icons.Heart;
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rightHeartInflow
@@ -6485,78 +6479,78 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
 </html>"));
     end SystemicCirculation_ER_Control;
 
-    model System_ERV_Control
+    model System_ER_Control
       "interface to control elasticity,resistance and volume"
-      extends System_V_Control(redeclare replaceable Heart_EHR_Control heart, redeclare replaceable
+      extends System(redeclare replaceable Heart_EHR_Control heart, redeclare replaceable
           Interfaces.SystemicCirculation_ER_Control             systemicCirculation);
       Physiolibrary.Types.RealIO.PressureOutput Pmean annotation (Placement(
             transformation(extent={{12,-6},{22,4}}), iconTransformation(extent=
                 {{20,-44},{40,-24}})));
       Physiolibrary.Types.RealIO.HydraulicComplianceInput EVC annotation (
-          Placement(transformation(extent={{-16,-18},{-6,-8}}),
+          Placement(transformation(extent={{-10,-16},{-4,-10}}),
             iconTransformation(
             extent={{-7,-7},{7,7}},
             rotation=180,
             origin={27,5})));
       Physiolibrary.Types.RealIO.HydraulicComplianceInput ERMAX annotation (
-          Placement(transformation(extent={{-18,6},{-4,20}}),
+          Placement(transformation(extent={{-10,10},{-4,16}}),
             iconTransformation(
             extent={{-7,-7},{7,7}},
             rotation=180,
             origin={27,19})));
       Physiolibrary.Types.RealIO.HydraulicComplianceInput ELMAX annotation (
           Placement(transformation(
-            extent={{-5,-5},{5,5}},
+            extent={{-3,-3},{3,3}},
             rotation=180,
-            origin={5,13}), iconTransformation(
+            origin={7,15}), iconTransformation(
             extent={{-7,-7},{7,7}},
             rotation=180,
             origin={27,33})));
       Physiolibrary.Types.RealIO.FrequencyInput HR annotation (Placement(
             transformation(
-            extent={{-5,-5},{5,5}},
+            extent={{-3,-3},{3,3}},
             rotation=180,
-            origin={17,9}), iconTransformation(
+            origin={17,11}),iconTransformation(
             extent={{-7,-7},{7,7}},
             rotation=180,
             origin={27,-9})));
       Physiolibrary.Types.RealIO.HydraulicConductanceInput RSP annotation (
-          Placement(transformation(extent={{-10,-18},{2,-6}}),
+          Placement(transformation(extent={{-4,-16},{4,-8}}),
             iconTransformation(
             extent={{-7,-7},{7,7}},
             rotation=180,
             origin={27,-23})));
-        annotation (Placement(transformation(extent={{-38,-36},{-18,-16}})));
     equation
       connect(heart.ERMaxIn, ERMAX) annotation (Line(
-          points={{-3.52,5.12},{-3.52,9.06},{-11,9.06},{-11,13}},
+          points={{-3.52,6.17143},{-3.52,9.06},{-7,9.06},{-7,13}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(ELMAX, heart.ELMaxIn) annotation (Line(
-          points={{5,13},{-0.58,13},{-0.58,5.92}},
+          points={{7,15},{-0.58,15},{-0.58,7.31429}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(systemicCirculation.ECVin, EVC) annotation (Line(
-          points={{-7.4,-20},{-7.4,-16.5},{-11,-16.5},{-11,-13}},
+          points={{-5.4,-20},{-5.4,-16.5},{-7,-16.5},{-7,-13}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(heart.HRin, HR) annotation (Line(
-          points={{2.01,5.2},{2.01,9},{17,9}},
+          points={{2.01,6.28571},{2.01,11},{17,11}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(heart.Pmean, Pmean) annotation (Line(
-          points={{6.7,1.12},{9.35,1.12},{9.35,-1},{17,-1}},
+          points={{6.7,0.457143},{9.35,0.457143},{9.35,-1},{17,-1}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(systemicCirculation.RPSin, RSP) annotation (Line(
-          points={{-1.9,-19.7},{-1.9,-15.85},{-4,-15.85},{-4,-12}},
+          points={{0.1,-19.7},{0.1,-15.85},{0,-15.85},{0,-12}},
           color={0,0,127},
           smooth=Smooth.None));
 
-      annotation (Diagram(coordinateSystem(extent={{-40,-40},{20,40}},
+        annotation (Placement(transformation(extent={{-38,-36},{-18,-16}})),
+                  Diagram(coordinateSystem(extent={{-40,-40},{20,40}},
               preserveAspectRatio=false), graphics), Icon(coordinateSystem(
               extent={{-40,-40},{20,40}}, preserveAspectRatio=false), graphics));
-    end System_ERV_Control;
+    end System_ER_Control;
 
     model Heart_EHR_Control "interface to control elastance and heart rate"
       extends Interfaces.Heart;
@@ -6614,7 +6608,7 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
           color={0,0,127},
           smooth=Smooth.None));
       connect(flowMeasure.volumeFlow, volumeRefill.maxflowrate) annotation (Line(
-          points={{-20.8,-12},{-24,-12},{-24,-17.4},{-25.4,-17.4}},
+          points={{-16.4,-6},{-24,-6},{-24,-17.4},{-25.4,-17.4}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(volumeRefill.currentVolume, volume) annotation (Line(
@@ -6622,7 +6616,7 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
           color={0,0,127},
           smooth=Smooth.None));
       connect(flowMeasure.q_out, volumeRefill.port_b) annotation (Line(
-          points={{-16,-8},{-20.8,-8},{-20.8,-23}},
+          points={{-14,-4},{-20.8,-4},{-20.8,-23}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
@@ -6630,6 +6624,11 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
               preserveAspectRatio=false), graphics), Icon(coordinateSystem(
               extent={{-40,-40},{20,40}}, preserveAspectRatio=false), graphics));
     end System_V_Control;
+
+    model System_VER_Control
+      extends System_V_Control;
+      extends System_ER_Control;
+    end System_VER_Control;
   end Interfaces;
 
   package Control
@@ -6862,7 +6861,8 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
     extends Modelica.Icons.Package;
 
     model CVS_VolumeControl
-      replaceable Interfaces.System_ERV_Control system_V
+
+      replaceable Interfaces.System_VER_Control system_V
         annotation (Placement(transformation(extent={{0,-68},{72,32}})));
       replaceable Plasma
              plasma
@@ -7322,7 +7322,6 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
             graphics));
     end RedBloodCells;
 
-
     model Erythropoetin
       Physiolibrary.Chemical.Components.Substance erythropoetin(solute_start(
             displayUnit="mol") = 19, useNormalizedVolume=false)
@@ -7496,7 +7495,6 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
             graphics));
     end Erythropoetin;
 
-
     model KidneyFluidBalance
 
       Physiolibrary.Types.RealIO.VolumeFlowRateOutput urineoutflowrate annotation (
@@ -7523,171 +7521,14 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
                 {100,100}}), graphics={Bitmap(extent={{-82,82},{80,-80}}, fileName="modelica://Cardiovascular/Resources/Icons/kidney.png")}));
     end KidneyFluidBalance;
 
-
-
-
-
-
-
-
-
     package MeursControl
-      model MeursHeart_PV
-        extends Model.Meurs.Parts.Heart(
-          redeclare Types.Constants.FrequencyControl HeartRate,
-          redeclare MeursRightHeart_PV rightHeart,
-          redeclare MeursLeftHeart_PV leftHeart);
-        extends Cardiovascular.Interfaces.Heart_EHR_Control;
-      equation
-        connect(HRin, HeartRate.c) annotation (Line(
-            points={{-112,62},{-74,62},{-74,36},{-61,36}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(aortaFlowMeasurement.Pmean, Pmean) annotation (Line(
-            points={{35.8,1.8},{35.8,-42},{56,-42}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(ERMaxIn, rightHeart.cmax) annotation (Line(
-            points={{-40,80},{-40,52},{-18.6,52},{-18.6,28.4}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(leftHeart.cmax, ELMaxIn) annotation (Line(
-            points={{22.66,24},{22.66,44},{40,44},{40,80}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                  -100,-60},{100,80}}), graphics));
-      end MeursHeart_PV;
 
-      partial model MeursSideOfHeart_PV
-        extends Model.Meurs.Parts.SideOfHeart(redeclare
-            Model.Meurs.Parts.VentricularElastance_new ventricularElastance);
-        Physiolibrary.Types.RealIO.HydraulicComplianceInput cmax annotation (
-            Placement(transformation(
-              extent={{-20,-20},{20,20}},
-              rotation=0,
-              origin={-32,82}),iconTransformation(
-              extent={{-20,-20},{20,20}},
-              rotation=270,
-              origin={58,120})));
-      equation
-        connect(cmax, ventricularElastance.cmax) annotation (Line(
-            points={{-32,82},{-3.8,82},{-3.8,39}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), Icon(coordinateSystem(
-                preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
-      end MeursSideOfHeart_PV;
 
-      model MeursLeftHeart_PV
-        extends Physiolibrary.Icons.LeftHeart;
-        extends Cardiovascular.Control.MeursControl.MeursSideOfHeart_PV(
-          VxAU(k=3e-005),
-          VxVU(k=6e-005),
-          RxAOutflow(k=399967.162245),
-          RxVOutflow(k=1066579.09932),
-          ventricularElastance(EMIN=11999014.86735, EMAX=533289549.66),
-          atrialElastance(EMIN=15998686.4898, EMAX=37330268.4762),
-          atrium(volume_start=9.31e-005),
-          ventricle(volume_start=0.000144),
-          atrioVentricleValve(Pknee=0),
-          ventricleArteryValve(Pknee=0));
-        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
-                  {-100,-100},{100,100}}), graphics), Diagram(
-              coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}), graphics));
-      end MeursLeftHeart_PV;
 
-      model MeursRightHeart_PV
-        extends Physiolibrary.Icons.RightHeart;
-        extends Cardiovascular.Control.MeursControl.MeursSideOfHeart_PV(
-          atrialElastance(EMIN=6666119.37075, EMAX=19998358.11225),
-          ventricularElastance(EMIN=7599376.082655, EMAX=65327969.83335),
-          VxAU(k=3e-005),
-          RxAOutflow(k=399967.162245),
-          VxVU(k=4e-005),
-          RxVOutflow(k=399967.162245),
-          atrium(volume_start=0.000135),
-          ventricle(volume_start=0.000131),
-          atrioVentricleValve(Pknee=0),
-          ventricleArteryValve(Pknee=0));
-        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
-                  {-100,-100},{100,100}}), graphics={Polygon(
-                        points={{32,60},{18,64},{6,64},{6,76},{18,76},{30,72},
-                  {44,64},{36,58},{32,60}},
-                        smooth=Smooth.None,
-                        fillPattern=FillPattern.Solid,
-                        fillColor={58,117,175},
-                        pattern=LinePattern.None,
-                        lineColor={0,0,0})}));
-      end MeursRightHeart_PV;
 
-      model MeursSystemic_PV
-        extends Cardiovascular.Model.Meurs.Parts.SystemicCirculation(redeclare
-            Types.Constants.HydraulicComplianceControl EITHV, redeclare
-            Types.Constants.HydraulicConductanceControl RSP);
-        extends Interfaces.SystemicCirculation_ER_Control;
-      equation
-        connect(ECVin, EITHV.c) annotation (Line(
-            points={{-112,46},{-74,46},{-74,23},{-66,23}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(RPSin, RSP.c) annotation (Line(
-            points={{-38,50},{-8,50},{-8,48},{19.5,48},{19.5,-9}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics));
-      end MeursSystemic_PV;
 
-      model MeursSystem_PV
-        extends Interfaces.System_ERV_Control(
-          redeclare MeursControl.MeursHeart_PV heart,
-          redeclare MeursControl.MeursSystemic_PV systemicCirculation,
-          redeclare Model.Meurs.Parts.PulmonaryCirculation pulmonaryCirculation);
-      equation
-          volume = pulmonaryCirculation.PulmonaryArteries.volume +
-          pulmonaryCirculation.PulmonaryVeins.volume + heart.leftHeart.atrium.volume
-           + heart.leftHeart.ventricle.volume + heart.rightHeart.atrium.volume
-           + heart.rightHeart.ventricle.volume + systemicCirculation.IntraThoracicArteries.volume
-           + systemicCirculation.ExtrathoracicArteries.volume +
-          systemicCirculation.PeripheralVessels.volume + systemicCirculation.ExtrathoracicVeins.volume
-           + systemicCirculation.IntraThoracicVeins.volume;
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},
-                  {20,40}}), graphics));
-      end MeursSystem_PV;
 
-      model Meurs_VC_HighVolumeBleeding
-        extends Meurs_VC(system_V(systemicCirculation(IntraThoracicVeins(volume_start=
-                   0.00188))),
-          baroreceptor(activationDelay=2),
-          plasma(hemorrhage(SolutionFlow=1.6666666666667e-06)));
-      end Meurs_VC_HighVolumeBleeding;
 
-      model Meurs_VC
-        extends CVS_VolumeControl(
-            baroreceptor(
-            PAOmedia=12974.934743228,
-            HR0Param=1.2,
-            EV0right=65327969.83335,
-            EV0left=533289549.66,
-            EV0venacava=4.120838297696e-07,
-            RS0=106657909.932,
-            activationDelay(displayUnit="s") = 30), redeclare
-            MeursControl.MeursSystem_PV system_V);
-            parameter Real MaxConcentration = 38;
-      equation
-         redBloodCells.kidney_o2concentration = MaxConcentration*(
-           atan((-system_V.systemicCirculation.SmallVenuleConductance.q_out.q-0.00008333)/0.00003333)+Modelica.Constants.pi/2)
-           /Modelica.Constants.pi;
-        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {180,100}}),            graphics), Diagram(coordinateSystem(
-                preserveAspectRatio=false, extent={{-100,-100},{180,100}}), graphics={Text(
-                extent={{-44,-68},{-2,-84}},
-                lineColor={0,0,255},
-                textString="~ atan(flowrate)")}));
-      end Meurs_VC;
 
       model Meurs_Bleeding
 
@@ -7700,7 +7541,7 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
           startTime=10,
           duration=240,
           offset=0.005,
-          height=-0.0023)
+          height=-0.002)
           annotation (Placement(transformation(extent={{-36,28},{-16,48}})));
       equation
           system_V_Control.volume = system_V_Control.pulmonaryCirculation.PulmonaryArteries.volume +
@@ -7717,6 +7558,223 @@ each 60 seconds add 1 l")}), Icon(coordinateSystem(preserveAspectRatio=false,
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics));
       end Meurs_Bleeding;
+
+      model Meurs_V_Control
+        extends Cardiovascular.Interfaces.System_V_Control(
+          redeclare replaceable Model.Meurs.Parts.PulmonaryCirculation pulmonaryCirculation,
+          redeclare replaceable Model.Meurs.Parts.Heart heart,
+          redeclare replaceable Model.Meurs.Parts.SystemicCirculation systemicCirculation);
+      //  extends Cardiovascular.Model.Meurs.HemodynamicsMeurs;
+      equation
+            volume = pulmonaryCirculation.PulmonaryArteries.volume +
+          pulmonaryCirculation.PulmonaryVeins.volume + heart.leftHeart.atrium.volume
+           + heart.leftHeart.ventricle.volume + heart.rightHeart.atrium.volume
+           + heart.rightHeart.ventricle.volume + systemicCirculation.IntraThoracicArteries.volume
+           + systemicCirculation.ExtrathoracicArteries.volume +
+          systemicCirculation.PeripheralVessels.volume + systemicCirculation.ExtrathoracicVeins.volume
+           + systemicCirculation.IntraThoracicVeins.volume;
+
+      end Meurs_V_Control;
+
+      model Meurs_ER_Control
+      //  extends Cardiovascular.Model.Meurs.HemodynamicsMeurs;
+        extends Cardiovascular.Interfaces.System_ER_Control(
+          redeclare Adapter.MeursHeart_PV heart,
+          redeclare Adapter.MeursSystemic_PV systemicCirculation,
+          redeclare Model.Meurs.Parts.PulmonaryCirculation pulmonaryCirculation);
+      equation
+
+      end Meurs_ER_Control;
+
+      model Meurs_VER_Control
+
+          extends Cardiovascular.Interfaces.System_VER_Control(
+          redeclare Model.Meurs.Parts.PulmonaryCirculation pulmonaryCirculation,
+          redeclare Adapter.MeursHeart_PV heart,
+          redeclare Adapter.MeursSystemic_PV systemicCirculation);
+          extends Cardiovascular.Control.MeursControl.Meurs_V_Control;
+            /*    extends Cardiovascular.Control.MeursControl.MeursSystem_V_Control(
+      redeclare MeursHeart_PV heart, redeclare MeursSystemic_PV
+      systemicCirculation);*/
+      equation
+
+      end Meurs_VER_Control;
+
+      model Meurs_VER_Model
+        extends CVS_VolumeControl(
+            baroreceptor(
+            PAOmedia=12974.934743228,
+            HR0Param=1.2,
+            EV0right=65327969.83335,
+            EV0left=533289549.66,
+            EV0venacava=4.120838297696e-07,
+            RS0=106657909.932,
+            activationDelay(displayUnit="s") = 30), redeclare
+            Cardiovascular.Control.MeursControl.Meurs_VER_Control system_V);
+            parameter Real MaxConcentration = 38;
+      equation
+         redBloodCells.kidney_o2concentration = MaxConcentration*(
+           atan((-system_V.systemicCirculation.SmallVenuleConductance.q_out.q-0.00008333)/0.00003333)+Modelica.Constants.pi/2)
+           /Modelica.Constants.pi;
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {180,100}}),            graphics), Diagram(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{180,100}}), graphics={Text(
+                extent={{-44,-68},{-2,-84}},
+                lineColor={0,0,255},
+                textString="~ atan(flowrate)")}));
+      end Meurs_VER_Model;
+
+      model Meurs_VER_Bleeding
+        extends Meurs_VER_Model(system_V(systemicCirculation(IntraThoracicVeins(volume_start=
+                   0.00188))),
+          baroreceptor(activationDelay=2),
+          plasma(hemorrhage(useSolutionFlowInput=false, SolutionFlow=
+                  1.6666666666667e-06)));
+      end Meurs_VER_Bleeding;
+
+      package Adapter
+        model MeursHeart_PV
+          extends Model.Meurs.Parts.Heart(
+            redeclare Types.Constants.FrequencyControl HeartRate,
+            redeclare MeursRightHeart_PV rightHeart,
+            redeclare MeursLeftHeart_PV leftHeart);
+          extends Cardiovascular.Interfaces.Heart_EHR_Control;
+        equation
+          connect(HRin, HeartRate.c) annotation (Line(
+              points={{-112,62},{-74,62},{-74,36},{-61,36}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(aortaFlowMeasurement.Pmean, Pmean) annotation (Line(
+              points={{35.8,1.8},{35.8,-42},{56,-42}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(ERMaxIn, rightHeart.cmax) annotation (Line(
+              points={{-40,80},{-40,52},{-18.6,52},{-18.6,28.4}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(leftHeart.cmax, ELMaxIn) annotation (Line(
+              points={{22.66,24},{22.66,44},{40,44},{40,80}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                    -100,-60},{100,80}}), graphics));
+        end MeursHeart_PV;
+
+        partial model MeursSideOfHeart_PV
+          extends Model.Meurs.Parts.SideOfHeart(redeclare
+              Model.Meurs.Parts.VentricularElastance_new ventricularElastance);
+          Physiolibrary.Types.RealIO.HydraulicComplianceInput cmax annotation (
+              Placement(transformation(
+                extent={{-20,-20},{20,20}},
+                rotation=0,
+                origin={-32,82}),iconTransformation(
+                extent={{-20,-20},{20,20}},
+                rotation=270,
+                origin={58,120})));
+        equation
+          connect(cmax, ventricularElastance.cmax) annotation (Line(
+              points={{-32,82},{-3.8,82},{-3.8,39}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics), Icon(coordinateSystem(
+                  preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
+        end MeursSideOfHeart_PV;
+
+        model MeursLeftHeart_PV
+          extends Physiolibrary.Icons.LeftHeart;
+          extends
+            Cardiovascular.Control.MeursControl.Adapter.MeursSideOfHeart_PV(
+            VxAU(k=3e-005),
+            VxVU(k=6e-005),
+            RxAOutflow(k=399967.162245),
+            RxVOutflow(k=1066579.09932),
+            ventricularElastance(EMIN=11999014.86735, EMAX=533289549.66),
+            atrialElastance(EMIN=15998686.4898, EMAX=37330268.4762),
+            atrium(volume_start=9.31e-005),
+            ventricle(volume_start=0.000144),
+            atrioVentricleValve(Pknee=0),
+            ventricleArteryValve(Pknee=0));
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
+                    {-100,-100},{100,100}}), graphics), Diagram(
+                coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                    {100,100}}), graphics));
+        end MeursLeftHeart_PV;
+
+        model MeursRightHeart_PV
+          extends Physiolibrary.Icons.RightHeart;
+          extends
+            Cardiovascular.Control.MeursControl.Adapter.MeursSideOfHeart_PV(
+            atrialElastance(EMIN=6666119.37075, EMAX=19998358.11225),
+            ventricularElastance(EMIN=7599376.082655, EMAX=65327969.83335),
+            VxAU(k=3e-005),
+            RxAOutflow(k=399967.162245),
+            VxVU(k=4e-005),
+            RxVOutflow(k=399967.162245),
+            atrium(volume_start=0.000135),
+            ventricle(volume_start=0.000131),
+            atrioVentricleValve(Pknee=0),
+            ventricleArteryValve(Pknee=0));
+          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
+                    {-100,-100},{100,100}}), graphics={Polygon(
+                          points={{32,60},{18,64},{6,64},{6,76},{18,76},{30,72},
+                    {44,64},{36,58},{32,60}},
+                          smooth=Smooth.None,
+                          fillPattern=FillPattern.Solid,
+                          fillColor={58,117,175},
+                          pattern=LinePattern.None,
+                          lineColor={0,0,0})}));
+        end MeursRightHeart_PV;
+
+        model MeursSystemic_PV
+          extends Cardiovascular.Model.Meurs.Parts.SystemicCirculation(redeclare
+              Types.Constants.HydraulicComplianceControl EITHV, redeclare
+              Types.Constants.HydraulicConductanceControl RSP);
+          extends Interfaces.SystemicCirculation_ER_Control;
+        equation
+          connect(ECVin, EITHV.c) annotation (Line(
+              points={{-112,46},{-74,46},{-74,23},{-66,23}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(RPSin, RSP.c) annotation (Line(
+              points={{-38,50},{-8,50},{-8,48},{19.5,48},{19.5,-9}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics));
+        end MeursSystemic_PV;
+      end Adapter;
+
+      package Test
+        model MeursSystem_PV
+          extends Interfaces.System_ER_Control(
+            redeclare Adapter.MeursHeart_PV heart,
+            redeclare Adapter.MeursSystemic_PV systemicCirculation,
+            redeclare Model.Meurs.Parts.PulmonaryCirculation pulmonaryCirculation);
+        equation
+
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-40,-40},
+                    {20,40}}), graphics));
+        end MeursSystem_PV;
+      end Test;
+
+      model Meurs_V_Bleeding
+        Meurs_V_Control meurs_V_Control
+          annotation (Placement(transformation(extent={{0,-46},{52,28}})));
+        Modelica.Blocks.Sources.Ramp ramp(
+          startTime=10,
+          duration=240,
+          offset=0.005,
+          height=-0.002)
+          annotation (Placement(transformation(extent={{-52,-14},{-32,6}})));
+      equation
+        connect(ramp.y, meurs_V_Control.desiredVolume) annotation (Line(
+            points={{-31,-4},{-12,-4},{-12,-1.6},{8.66667,-1.6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics));
+      end Meurs_V_Bleeding;
     end MeursControl;
   end Control;
   annotation (
