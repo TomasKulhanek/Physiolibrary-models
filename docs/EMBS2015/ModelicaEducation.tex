@@ -1,0 +1,164 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out
+                                                          % if you need a4paper
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
+                                                          % paper
+
+\IEEEoverridecommandlockouts                              % This command is only
+                                                          % needed if you want to
+                                                          % use the \thanks command
+\overrideIEEEmargins
+%\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+
+
+% The following packages can be found on http:\\www.ctan.org
+\usepackage{graphicx} % for pdf, bitmapped graphics files
+\usepackage{bibentry}
+\usepackage{url}
+%\usepackage[nottoc]{tocbibind}
+%\usepackage{url}
+%\usepackage[nottoc]{tocbibind}
+\nobibliography*
+\usepackage{hyperref}
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amsmath} % assumes amsmath package installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+\title{\LARGE \bf
+Experiences in teaching of modeling and simulation with emphasize on equation based and acausal modeling techniques.
+}
+
+%\author{ \parbox{3 in}{\centering Tomas Kulhanek*
+%         \thanks{*Use the $\backslash$thanks command to put information here}\\
+%         Faculty of Electrical Engineering, Mathematics and Computer Science\\
+%         University of Twente\\
+%         7500 AE Enschede, The Netherlands\\
+%         {\tt\small h.kwakernaak@autsubmit.com}}
+%         \hspace*{ 0.5 in}
+%         \parbox{3 in}{ \centering Pradeep Misra**
+%         \thanks{**The footnote marks may be inserted manually}\\
+%        Department of Electrical Engineering \\
+%         Wright State University\\
+%         Dayton, OH 45435, USA\\
+%         {\tt\small pmisra@cs.wright.edu}}
+%}
+
+\author{\parbox{3 in}{
+Tomáš Kulhánek$^{*,1}$, 
+%Filip Ježek$^{1,2}$, 
+%Marek Mateják$^{1}$,  
+%Jan Šilar$^{1}$, 
+%Pavol Privitzer$^{1}$, 
+%Martin Tribula$^{1}$ 
+and Jiří Kofránek$^{1}$}% <-this % stops a space
+\thanks{$^{*}$corresponding author {\tt\small tomas.kulhanek@lf1.cuni.cz}}%        
+\thanks{$^{1}$Institute of Pathological Physiology, First Faculty of Medicine, Charles University in Prague, Czech Republic}%        
+%\thanks{$^{2}$Faculty of Electrical Engineering, Czech Technical University in Prague}%
+}
+\begin{document}
+
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+This work introduces experiences of teaching modeling and simulation in the field of biomedical engineering with emphasize on acausal and equation/based modeling technique. Lot of 
+
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+An important aspect of biomedical engineering is the ability to mathematically formalize the scientific knowledge in biomedicine and utilize such formalization -- model -- in engineering use cases like simulation, prediction, decision support etc. 
+%Guyton et al. \cite{Guyton1972} published one of the most complex and integrative mathematical model of cardiovascular system and several control mechanisms which were originally implemented in generic FORTRAN programming language. This model gradually evolved to the model HumMod published by Hester et al. \cite{Hester2011systems,hester2011} which does not implement the model directly in some programming language, rather they use an in-house XML-based domain specific language and tool with it's tool to interpret and solve mathematical equations is distributed with the model. Kofranek and Rusz published MATLAB Simulink implementation with recommended correction to the  original diagram \cite{Kofranek2010restoration}.
+%There are other efforts to standardize modeling technology within physiological domain, e.g. the NSR Physiome project introduced a JSIM Java based simulation system to support modeling in  physiology and introduces a repository of several hundred of models \cite{Butterworth2014,jsim}. The similar effort is done by IUPS Physiome project and it's XML based standard CellML and FieldML, where tools and repository of models are presented \cite{Hunter2004,Yu2011}. The Systems Biology Markup Language (SBML) is used for modeling biological system at the level of biochemical reaction and regulatory network \cite{Hucka2004}.
+
+There are several approaches, how a mathematical model can be expressed and implemented in an execution code which can be simulated using computers. One approach is to directly incorporate mathematical equations of the model as statements in some programming language code. Another approach is to separate the mathematical model from it's simulator code and model can be expressed in some specialized modeling language. 
+There are several efforts to standardize modeling technology within physiological domain, e.g. the NSR Physiome project introduced a JSIM Java based simulation system to support modeling in  physiology and introduces a repository of several hundred of models \cite{Butterworth2014,jsim}. The similar effort is done by IUPS Physiome project and it's XML based standard CellML and FieldML, where tools and repository of models are presented \cite{Hunter2004,Yu2011}. The Systems Biology Markup Language (SBML) is used for modeling biological system at the level of biochemical reaction and regulatory network \cite{Hucka2004}.
+Compared to domain specific languages above, other approach is based on using some existing tool or standard modeling technology, which are already used by industry in different domains, e.g. MATLAB Simulink or Modelica language. %Using specialized technique to express mathematical model has benefit of expressing high level mathematics and do not struggle with specifics of some generic programming languages like C++, FORTRAN etc.
+
+One of the first complex model of integrative physiology was model of circulatory system with it's control regulation published by Guyton et al. \cite{Guyton1972}. This model was originally implemented in generic programming language FORTRAN and it gradually evolved to the current model HumMod published by Hester et al. \cite{Hester2011systems,hester2011} which does not implement the model directly in some programming language, rather they use an in-house XML-based domain specific language and tool to interpret and solve this model language.  
+
+Kofránek and Rusz published implementation of the Guyton's original model in MATLAB Simulink \cite{Kofranek2010restoration}. Due to the complexity of further integrative models, it becomes harder to maintain and keep the complex model updated and flexible using the mentioned modeling technology and tools. One of the reason is that the models express the process of computation.  
+Therefore, Kofránek et al. choose acausal and object-oriented modeling language Modelica and implemented the current HumMod model in the standardized Modelica language \cite{Kofranek2011hummod}.  Recently we have shown that the block oriented aproach in modeling pulsatile cardiovascular system introduced by Fernandez de Canete et al.\cite{FernandezdeCanete2014} may bring problems of further development and it is not understandable for non-engineering experts. An acausal approach was shown by Kulhánek et al.\cite{Kulhanek2014Modeling}.
+
+%The acausal modeling technique seems to be one of the key features to maintain complex models as the model diagrams still captures the essence of the modeled reality much better and the simulation models are much more legible and thus less prone to mistakes \cite{Kofranek2008,FernandezDeCanete2013}.
+
+Because of this, we started to teach the Modelica language within the subject modeling and simulation which is executed within the last year of biomedical engineering curriculum with preliminary results promising good acceptance published by Ježek et al.\cite{Jezek2012}. The students of biomedical engineering (of Czech Technical University in Prague, Czech Republic) are familiar with generic programming languages like C++, Java or interpreted Python etc. They are familiar with block-oriented modeling and simulation techniques and capabilities of MATLAB Simulink. And when faced up with the task to express mathematical model published in scientific paper they usually use a block-oriented (causal) approach which leads to the implementation of process of computation. Although, this approach is possible also in Modelica language, we concluded that using acausal approach with  object-oriented techniques can lead to more understandable and maintainable models.
+
+This work sumarizes the main aspects of acausal modeling technique in connection with modeling some physiological phenomenon and it's benefits to learning and inter-disciplinar comprehension.
+%This block-oriented modeling technique lead to describing the process of computation, which has a benefit of full control on the computation process without the need to do such stuff in some generic programming languages like C++, FORTRAN etc.
+
+
+%One approach is to standardize the academic grown tools and language to describe physiological system. E.g. the NSR Physiome project introduced a JSIM Java based simulation system to support modeling in  physiology and introduces a repository of several hundred of models\cite{Butterworth2014,jsim}. The similar effort is done by IUPS Physiome project and it's XML based standard CellML and FieldML, where tools and repository of models are presented \cite{Hunter2004,Yu2011}. The Systems Biology Markup Language (SBML) is used for modeling biological system at the level of biochemical reaction and regulatory network\cite{Hucka2004}. JSIM, CellML, SBML or HumMod are domain specific language and the tools and environment are primarily developed to model physiology or systems biology. 
+
+%Another approach is to use commercial or industry standard tools for mathematical modeling e.g. %Fernandez de Canete et al. described a closed loop cardiovascular model and mechanism of arterial pressure control in MATLAB\textsuperscript{\textregistered} based modeling module SIMSCAPE\texttrademark\cite{FernandezDeCanete2013} and recently in Modelica language and DYMOLA tool\cite{FernandezDeCanete2014}. 
+
+
+
+
+%For the complex models this seems to bring disadvantages for more complex phenomenon or integrative approach. 
+
+ 
+%Hester et al. published HumMod - a large scale physiological model, constructed from empirical data obtained from peer-reviewed physiological literature \cite{hester2011}. Kofranek et al. translated and maintain HumMod-Golem Edition model in the standardized Modelica language which may be more understandable \cite{Kofranek2011hummod}. Modelica \cite{Modelica} tools offer simulation environment or the model can be exported into a package conforming standard FMI and integrated into custom application. 
+
+\section{Methods}
+
+Acausal modelica, library for acausal modeling of physiology - physiolibrary.
+Different domains similar principles.
+
+%   \begin{figure}[thpb]
+%      \centering
+%      \includegraphics[scale=0.5]{fig3.png}
+%      \caption{Proposed architecture utilizing architectural style REST}
+%      \label{figurelabel}
+%   \end{figure}
+
+\section{Results}
+
+example of models. Results with students.
+
+
+\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Discussion}
+
+Students models from literature, have tendency to copy-paste the block-oriented causal approach  which is possible.
+With having of physiological background and reverse engineering it can be build the acausal model which makes ...
+
+
+\section*{ACKNOWLEDGMENT}
+This work was supported by project MPO FR-TI3/869 and by project FR CESNET z.s.p.o. number 431.
+
+\bibliographystyle{unsrturl}
+\bibliography{../Dizertace/bibliography/Dizertace}
+\end{document}
