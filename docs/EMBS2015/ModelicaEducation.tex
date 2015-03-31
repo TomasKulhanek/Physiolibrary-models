@@ -32,6 +32,13 @@
 %\usepackage{times} % assumes new font selection scheme installed
 %\usepackage{amsmath} % assumes amsmath package installed
 %\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{listings,multicol} % for code listings, multicolumned
+\lstset{% escape sequence inside listing
+  escapeinside={(*}{*)},%
+}
+\usepackage{dtsyntax} % for listings modelica
+\usepackage{amsmath} % for mathematical equation
+\usepackage{amssymb} % for special symbols - blacktriangledown
 
 \title{\LARGE \bf
 Experiences in teaching of modeling and simulation with emphasize on equation based and acausal modeling techniques.
@@ -54,7 +61,7 @@ Experiences in teaching of modeling and simulation with emphasize on equation ba
 
 \author{\parbox{3 in}{
 Tomáš Kulhánek$^{*,1}$, 
-%Filip Ježek$^{1,2}$, 
+Filip Ježek$^{1,2}$, 
 %Marek Mateják$^{1}$,  
 %Jan Šilar$^{1}$, 
 %Pavol Privitzer$^{1}$, 
@@ -62,7 +69,7 @@ Tomáš Kulhánek$^{*,1}$,
 and Jiří Kofránek$^{1}$}% <-this % stops a space
 \thanks{$^{*}$corresponding author {\tt\small tomas.kulhanek@lf1.cuni.cz}}%        
 \thanks{$^{1}$Institute of Pathological Physiology, First Faculty of Medicine, Charles University in Prague, Czech Republic}%        
-%\thanks{$^{2}$Faculty of Electrical Engineering, Czech Technical University in Prague}%
+\thanks{$^{2}$Faculty of Electrical Engineering, Czech Technical University in Prague}%
 }
 \begin{document}
 
@@ -76,7 +83,8 @@ and Jiří Kofránek$^{1}$}% <-this % stops a space
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-This work introduces experiences of teaching modeling and simulation in the field of biomedical engineering with emphasize on acausal and equation/based modeling technique. Lot of 
+This work introduces experiences of teaching modeling and simulation in the field of biomedical engineering. We emphasize the acausal modeling technique and moved from teaching block-oriented tool MATLAB Simulink to acausal, object oriented Modelica language which can express the structure of the system rather than a process of computation. 
+Students, with their previous experience, tend to express the model in causal way to express the process of computation. With the introduced inovation, students tries to understand the modeled problems much deeper and causality is left on the tool.  
 
 \end{abstract}
 
@@ -118,20 +126,143 @@ This work sumarizes the main aspects of acausal modeling technique in connection
 
 \section{Methods}
 
-Acausal modelica, library for acausal modeling of physiology - physiolibrary.
-Different domains similar principles.
+%Acausal modelica, library for acausal modeling of physiology - physiolibrary.
+%Different domains similar principles.
 
-%   \begin{figure}[thpb]
-%      \centering
-%      \includegraphics[scale=0.5]{fig3.png}
-%      \caption{Proposed architecture utilizing architectural style REST}
-%      \label{figurelabel}
-%   \end{figure}
+Modelica language maintained by the Modelica association is object oriented, equation based and acausal modeling language \cite{Modelica}.
 
-\section{Results}
+\emph{Object orientation} means that the definition of model is class as in object oriented programming, instance of the model is object,  each instance can share type and differ in parameters and the place where it is used, inheritance and some sort of polymorphism is possible.
 
-example of models. Results with students.
+\emph{Equation based} means that the model can be expressed in equation instead of statements, thus the relation among variables can be expressed in any form and Modelica tool will decide which one is input and output upon compilation. %E.g. from the equation $q = \frac{dV}{dt}$ the process of computation can lead to $ q:= der(V)$ or $ V := \int{q}dt$ based on whether the $V$ or $q$ is known from the context.
 
+Additionally, \emph{acausal} means that additionaly to the equation based, the whole model consisted from components do not need explicitly declare what is input and output. Acausal connector is special purpose class to define variables of the model shared with other models or classes. Connecting two or more components via acausal connector will generate analogy of Kirchhoff's law: equality of all "non-flow" variables in connected connectors \begin{equation}p_1=p_2=\ldots =p_n\label{eq:kirchhoff1}\end{equation}
+and zero sum of all "flow" variables \begin{equation}\sum_{i=1}^n q_i=0\label{eq:kirchhoff2}\end{equation}
+
+Further reading about Modelica is in published works of Fritzson \cite{fritzson2010} and Tiller\cite{Tiller2014}.
+
+The methodology of acausal modeling is demonstrated e.g. in the hydraulic domain, which may express cardiovascular system (CVS). CVS can be decomposed into abstract component expressing hydraulic elasticity and hydraulic resistance. Connector \emph{HydraulicPort} with "flow" variable $q$ and non-flow variable pressure $p$ is presented in Modelica source code:
+\begin{lstlisting}[language=modelica]
+connector HydraulicPort
+  flow Real q;
+  Real p;
+end HydraulicPort;
+\end{lstlisting}
+Model of hydraulic resistor(conductor) with parameter $G$ denoting conductance and two hydraulic ports express the equations:
+\begin{equation}
+q_{in}.q = -q_{out}.q \label{eq:conductor1}
+\end{equation} 
+\begin{equation}
+ q_{in}.q = G \times (q_{in}.p-q_{out}.p) \label{eq:conductor2}
+\end{equation}
+Model of hydraulic elastance with parameters $V_0$ as unstressed volume $p_0$ external pressure and $C$ compliance(reciprocal value of elastance) with state variable $V$ volume express these equation:
+\begin{equation} \label{eq:elastic1}p-p_0 = \left\{   
+  \begin{array}{l l} 0 & \quad \text{if } V \text{\textless} V_0 \\ 
+    \frac{V-V_0}{C} & \quad \text{otherwise}
+  \end{array} \right.\end{equation} 
+\begin{equation}\label{eq:elastic2}\frac{{\rm d}V}{{\rm d}t} =  q\end{equation} 
+Both models can be written in Modelica as:
+\begin{lstlisting}[language=modelica]
+model HydraulicConductor
+  parameter Real G;
+  HydraulicPort qin;
+  HydraulicPort qout;
+equation 
+  qin.q= -qout.q; // eq.(3.3)
+  qin.q = G*(qin.p-qout.p); // eq.(3.4)
+end HydraulicConductor;
+
+model HydraulicElastance
+    Real V;
+    parameter Real V0;
+    parameter Real p0;
+    parameter Real C;
+    HydraulicPort qin;
+equation 
+   // eq.(3.5)
+  qin.p-p0 = if (V<V0) then 0 else (V-V0)/C;
+  der(V) = qin.q; // eq.(3.6)
+end HydraulicElastance;
+\end{lstlisting}
+
+This can be used to model two ideal baloons with liquid  interconnected via a tube characterized by some resistance. The acausal connectors \emph{qin} and \emph{qout} are connected via the \emph{connect()} statement in the following listing:
+\begin{lstlisting}[language=modelica]
+model twoballons
+  HydraulicConductor systemicResistance;
+  HydraulicElastance arteries;
+  HydraulicElastance veins;
+equation 
+  connect(arteries.qin, systemicResistance.qin);
+  connect(systemicResistance.qout, veins.qin);
+end twoballons;
+\end{lstlisting}
+
+The concrete instances may differ e.g. in a way what is known of the system, either by external measurement, or by some superior model. The \emph{ballsVolume} is initialized with initial volume of first balloon \emph{V(start) = 5000}.
+
+\begin{lstlisting}[language=modelica]
+model ballsVolume
+  extends twoballons(
+    arteries(
+      V(start=5000),
+      V0=529,
+      p0=0,
+      C=1.5),
+    systemicResistance(G=1),
+    veins(
+      V0=2845,
+      p0=0,
+      C=200));
+end ballsVolume;
+\end{lstlisting}
+
+Based on an concrete instance of the model with specific initial condition, the Modelica tool will decide what will be dependent and  what independent variables and computation flow based on the above rules and equation is generated as in following statements with assigning symbol (\emph{:=}).
+\begin{lstlisting}[language=modelica]
+// Translated M. model generated by Dymola  
+//  ballsVolume
+...
+// Dynamics Section
+  systemicResistance.qout.p := veins.p0+
+    (if veins.V < veins.V0 then 0 
+    else (veins.V-veins.V0)/veins.C);
+  systemicResistance.qin.p := arteries.p0+
+    (if arteries.V < arteries.V0 then 0
+    else (arteries.V-arteries.V0)/arteries.C);
+  der(arteries.V) := systemicResistance.G*
+    (systemicResistance.qout.p-
+      systemicResistance.qin.p);
+  der(veins.V) :=  -der(arteries.V);
+\end{lstlisting}
+
+When simulated the system goes to some equilibrium - steady state, which shows that the liquid has tendency from going from the compartment with higher pressure to compartment to lower pressure until the pressures are equal. In physiology, the blood has tendency to flow from arteries (has low compliance) to veins (having high compliance).
+
+It is possible to add additional components to model hydraulic valve, inertia, etc. Matejak et al. published the Modelica library containing the hydraulic domain and additional components for chemical domain, osmotic and thermal domain, which are useful for buidling complex models of human physiology not only in the textual form introduced above, but also graphical diagrams\cite{Matejak2014,Matejak2014mj}.  
+
+
+%
+%Empirically derived function of flow rate per time going out from the heart:
+%\begin{equation} \label{eq:heart} q = \left\{   
+%  \begin{array}{l l} 0 & \quad \text{otherwise} \\ 
+%    \sin \left( 
+%    \frac{t_c-T_{D1} }{ T_{D2} -T_{D1} } * \pi \right) * Q_{peak} 
+%    & \quad \text{if } t_c \in (T_{D1}..T_{D2})
+%  \end{array} \right.\end{equation} 
+%\begin{equation}\label{eq:flowrate2}\frac{{\rm d}V}{{\rm d}t} =  q\end{equation} 
+%
+%\begin{lstlisting}[language=modelica]
+%model HeartFlow
+%  HydraulicPort qout;
+%  discrete Real T0, HP=0.8;
+%  Boolean b(start = false);
+%  parameter Real TD1 = 0.07, TD2=0.39, QP = 0.000424;
+%  Real tc "relative time in cardiac cycle";
+%equation
+%  b = time - pre(T0) >= pre(HP) "true if new cardiac cycle begins";
+%  when {initial(), b} then
+%    T0 = time "set begining of cardiac cycle";
+%  end when;
+%  tc = time - T0 "relative time in carciac cycle";
+%  qout.q=if tc>TD1 and tc<TD2 then sin((tc-TD1)/(TD2-TD1)*Modelica.Constants.pi)*QP else 0;
+%end HeartFlow;
+%\end{lstlisting}
 
 \addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
                                   % on the last page of the document manually. It shortens
@@ -141,6 +272,12 @@ example of models. Results with students.
                                   % sure that you do not shorten the textheight too much.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Results}
+
+example of models. Results with students.
+
+
 
 
 
