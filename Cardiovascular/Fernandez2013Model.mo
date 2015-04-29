@@ -1166,8 +1166,8 @@ package Fernandez2013Model
   end Parts;
   annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})),
     uses(                                Modelica(version="3.2.1"),
-        Physiolibrary(version="2.2.0"),
-      Cardiovascular(version="1")),
-    version="1",
-    conversion(noneFromVersion=""));
+      Cardiovascular(version="2"),
+      Physiolibrary(version="2.3.0-beta")),
+    version="2",
+    conversion(noneFromVersion="", noneFromVersion="1"));
 end Fernandez2013Model;

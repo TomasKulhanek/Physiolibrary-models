@@ -1,0 +1,19 @@
+model Cardiovascular.Examples.DizertaceExample.HydraulicConductor
+parameter Real G;
+
+Real qin.q;
+Real qin.p;
+Real qout.q;
+Real qout.p;
+
+// Equations and algorithms
+
+  // Component 
+  // class Cardiovascular.Examples.DizertaceExample.HydraulicConductor
+  equation
+    qin.q =  -qout.q;
+    qin.q = G*(qin.p-qout.p);
+    qin.q = 0.0;
+    qout.q = 0.0;
+
+end Cardiovascular.Examples.DizertaceExample.HydraulicConductor;

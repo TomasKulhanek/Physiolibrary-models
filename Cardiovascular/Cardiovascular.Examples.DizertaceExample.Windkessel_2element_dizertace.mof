@@ -1,0 +1,1959 @@
+model Cardiovascular.Examples.DizertaceExample.Windkessel_2element_dizertace
+constant Boolean heart.useSolutionFlowInput = true "=true, if solution flow input is used instead of parameter SolutionFlow";
+parameter Physiolibrary.Types.VolumeFlowRate heart.SolutionFlow = 0 
+  "Volumetric flow of solution if useSolutionFlowInput=false";
+parameter Physiolibrary.Types.SimulationType arteries.Simulation = 
+  Physiolibrary.Types.SimulationType.NormalInit "Dynamic with Initialization or Steady State";
+parameter Boolean arteries.isDependent = false "=true, If zero flow is propagated in eqiulibrium through resistors, impedances, reactions, etc.";
+parameter Real arteries.state_start = arteries.volume_start "State start or init value";
+constant String arteries.dirName = "io" "Directory name to save and load values";
+parameter String arteries.storeUnit = "ml" "Unit in Utilities input/output function";
+parameter String arteries.stateName = "Windkessel_2element_dizertace.arteries" 
+  "Name in Utilities input/output function";
+parameter Boolean arteries.LOAD_STARTS = false "Load start value of state";
+parameter Boolean arteries.SAVE_RESULTS = false "Save final state values";
+parameter Boolean arteries.SAVE_COMPARISON = false "Compare final state values with original values";
+protected 
+parameter Real arteries.defaultValue(fixed = false) "Default value of state.";
+parameter Real arteries.initialValue(fixed = false) "Initial value of state.";
+public 
+parameter Physiolibrary.Types.Volume arteries.volume_start = 0.00097 
+  "Volume start value";
+constant Boolean arteries.useV0Input = false "=true, if zero-pressure-volume input is used";
+parameter Physiolibrary.Types.Volume arteries.ZeroPressureVolume(displayUnit = 
+  "m3") = 0.00085 "Maximal volume, that does not generate pressure if useV0Input=false";
+parameter Physiolibrary.Types.Volume arteries.CollapsingPressureVolume = 1E-12 
+  "Maximal volume, which generate negative collapsing pressure";
+constant Boolean arteries.useComplianceInput = false "=true, if compliance input is used";
+parameter Physiolibrary.Types.HydraulicCompliance arteries.Compliance(
+  displayUnit = "m3/Pa") = 1.0500862061839E-08 "Compliance if useComplianceInput=false";
+constant Boolean arteries.useExternalPressureInput = false "=true, if external pressure input is used";
+parameter Physiolibrary.Types.Pressure arteries.ExternalPressure = 0 
+  "External pressure. Set zero if internal pressure is relative to external. Valid only if useExternalPressureInput=false.";
+parameter Physiolibrary.Types.Pressure arteries.MinimalCollapsingPressure = -101325;
+protected 
+parameter Physiolibrary.Types.Pressure arteries.a = arteries.MinimalCollapsingPressure
+  /(-34.538776394910684);
+public 
+constant Boolean resistance.useConductanceInput = false "=true, if external conductance value is used";
+parameter Physiolibrary.Types.HydraulicConductance resistance.Conductance(
+  displayUnit = "m3/(Pa.s)") = 8.1006650191331E-09 "Hydraulic conductance if useConductanceInput=false";
+constant Boolean veins.usePressureInput = false "=true, if pressure input is used";
+parameter Physiolibrary.Types.Pressure veins.P = 0 "Hydraulic pressure if usePressureInput=false";
+parameter Boolean veins.isIsolatedInSteadyState = true "=true, if there is no flow at port in steady state";
+parameter Physiolibrary.Types.SimulationType veins.Simulation = Physiolibrary.Types.SimulationType.
+  NormalInit "If in equilibrium, then zero-flow equation is added.";
+parameter Physiolibrary.Types.Frequency pulses.HR = 1.2;
+parameter Physiolibrary.Types.Time pulses.TD1 = 0.07 "relative time of start of systole";
+parameter Physiolibrary.Types.VolumeFlowRate pulses.QP(displayUnit = "l/min") = 
+  0.000424 "peak volume flowrate";
+parameter Real arteries1.V0 = 0.00085;
+parameter Real arteries1.p0 = 0;
+parameter Real arteries1.C = 1.0500862061839E-08;
+parameter Real resistance1.G = 8.1006650191331E-09;
+parameter Real veins1.contrapressure = 0;
+
+Physiolibrary.Types.RealIO.VolumeFlowRateInput heart.solutionFlow(start = 
+  heart.SolutionFlow) = heart.q;
+Physiolibrary.Types.VolumeFlowRate heart.q "Current solution flow";
+Physiolibrary.Types.Pressure heart.q_out.pressure "Pressure";
+Physiolibrary.Types.VolumeFlowRate heart.q_out.q "Volume flow";
+Real arteries.state(start = (if arteries.LOAD_STARTS then arteries.readReal_Unique1
+  (
+  arteries.stateName, 
+  arteries.storeUnit, 
+  {arteries.UnitConversions.RealTypeRecord_Unique2("", "1", "", 1, 0, -1E+60, 
+    1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("", "1", "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("pH", "log10(mol/l)", 
+    "log10(mol/l)", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("Energy", "J", "kcal", 
+    4186.8, 0, -1E+60, 1E+60, 0, 4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Time", "s", "min", 60, 0, -1E+60, 1E+60, 0, 60, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("Frequency", "1/s", "Hz", 1,
+     0, -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Frequency", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 1E+60, 0, 
+    0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Mass", "kg", "g", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("Mass", "kg", "mg", 1E-06, 0,
+     0, 1E+60, 0, 1E-06, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("MassFlowRate", "kg/s", "mg/min", 1.6666666666666667E-08, 0, -1E+60, 1E+60,
+     0, 1.6666666666666667E-08, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("MassFlowRate", "kg/s", "g/min", 1.6666666666666667E-05, 0, -1E+60, 1E+60, 0,
+     1.6666666666666667E-05, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Density", "kg/m3", "kg/l", 1000.0, 0, 0, 1E+60, 0, 1000.0, StateSelect.
+    default), arteries.UnitConversions.RealTypeRecord_Unique2("Density", "kg/m3",
+     "g/l", 1, 0, 0, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("MassConcentration", "kg/m3", "mg/l", 0.001, 0, 0, 1E+60, 0, 0.001, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "MassConcentration", "kg/m3", "mg/dl", 0.009999999999999998, 0, 0, 1E+60, 0,
+     0.009999999999999998, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("MassConcentration", "kg/m3", "ng/l", 1E-09, 0, 0, 1E+60, 0, 1E-09, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "MassConcentration", "kg/m3", "ng/dl", 9.999999999999999E-09, 0, 0, 1E+60, 0,
+     9.999999999999999E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("MassConcentration", "kg/m3", "ng/ml", 1E-06, 0, 0, 1E+60, 0, 1E-06, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "Length", "m", "cm", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("Velocity", "m/s", "MPH", 
+    0.44704, 0, -1E+60, 1E+60, 0, 0.44704, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("Acceleration", "m/s2", 
+    "m/s2", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Pressure", "Pa", "mmHg", 133.32236842105263, 0, -1E+60, 1E+60, 0, 
+    133.32236842105263, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Volume", "m3", "ml", 1E-06, 0, -1E+60, 1E+60, 0, 1E-06, StateSelect.
+    default), arteries.UnitConversions.RealTypeRecord_Unique2("VolumeFlowRate", 
+    "m3/s", "ml/min", 1.6666666666666667E-08, 0, -1E+60, 1E+60, 0, 
+    1.6666666666666667E-08, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Concentration", "mol/m3", "mol/l", 1000.0, 0, -1E+60, 1E+60, 0, 1000.0, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "Concentration", "mol/m3", "mmol/l", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.
+    default), arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+    "mol/m3", "pmol/l", 1E-09, 0, -1E+60, 1E+60, 0, 1E-09, StateSelect.default),
+     arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", "mol/m3", 
+    "uU_Insulin/ml", 6.622E-09, 0, -1E+60, 1E+60, 0, 6.622E-09, StateSelect.
+    default), arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+    "mol/m3", "U_EPO/l", 4.5E-10, 0, -1E+60, 1E+60, 0, 4.5E-10, StateSelect.
+    default), arteries.UnitConversions.RealTypeRecord_Unique2("AmountOfSubstance",
+     "mol", "mmol", 0.001, 0, -1E+60, 1E+60, 0, 0.001, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("AmountOfSubstance", "mol", 
+    "osm", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("AmountOfSubstance", "mol", "mosm", 0.001, 0, -1E+60, 1E+60, 0, 0.001, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "MolarFlowRate", "mol/s", "mmol/min", 1.6666666666666667E-05, 0, -1E+60, 
+    1E+60, 0, 1.6666666666666667E-05, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("MolarFlowRate", "mol/s", "ml_STP/min", 7.338602876199938E-07, 0, -1E+60, 
+    1E+60, 0, 7.338602876199938E-07, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, StateSelect.
+    default), arteries.UnitConversions.RealTypeRecord_Unique2("ThermodynamicTemperature",
+     "K", "K", 1, 0, -1E+60, 1E+60, 310.15, 1, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("ThermodynamicTemperature", 
+    "K", "degC", 1, 273.15, -1E+60, 1E+60, 310.15, 1, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", "W", 1, 0, 
+    -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Power", "W", "kcal/min", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.
+    default), arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+    "cal/min", 0.06978, 0, -1E+60, 1E+60, 0, 0.06978, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("ThermalConductance", "W/K",
+     "kcal/(min.degC)", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.default),
+     arteries.UnitConversions.RealTypeRecord_Unique2("SpecificHeatCapacity", 
+    "J/(kg.K)", "kcal/(degC.kg)", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "SpecificEnergy", "J/kg", "kcal/kg", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "ElectricPotential", "V", "mV", 0.001, 0, -1E+60, 1E+60, 0, 0.001, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "ElectricCharge", "C", "meq", 96.48533990000001, 0, -1E+60, 1E+60, 0, 
+    96.48533990000001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("VolumeDensityOfCharge", "C/m3", "meq/l", 96485.3399, 0, -1E+60, 1E+60, 0, 
+    96485.3399, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("VolumeDensityOfCharge", "C/m3", "eq/l", 96485339.9, 0, -1E+60, 1E+60, 0, 
+    96485339.9, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("ElectricCurrent", "A", "meq/min", 1.6080889983333335, 0, -1E+60, 1E+60, 0,
+     1.6080889983333335, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Fraction", "1", "%", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default),
+     arteries.UnitConversions.RealTypeRecord_Unique2("OsmoticMembramePermeability",
+     "m6/(mol.s)", "ml/(mOsmol.min)", 1.6666666666666667E-05, 0, -1E+60, 1E+60, 0,
+     1.6666666666666667E-05, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("DiffusionMembranePermeability", "m3/s", "ml/min", 1.6666666666666667E-05, 0,
+     -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicConductance", 
+    "m3/(Pa.s)", "ml/(mmHg.min)", 1.2501028045069496E-10, 0, -1E+60, 1E+60, 0, 
+    1.2501028045069496E-10, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("HydraulicCompliance", "m3/Pa", "ml/mmHg", 7.500616827041698E-09, 0, -1E+60,
+     1E+60, 0, 7.500616827041698E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("HydraulicInertance", "Pa.s2/m3", "mmHg.min2/ml", 479960526315.7895, 0, 
+    -1E+60, 1E+60, 0, 479960526315.7895, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("GasSolubility", "mol/(m3.Pa)", "mmol/(l.mmHg)", 0.007500616827041697, 0, 
+    -1E+60, 1E+60, 0, 0.007500616827041697, StateSelect.default), 
+    arteries.UnitConversions.RealTypeRecord_Unique2("Osmolarity", "mol/m3", 
+    "mosm/l", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("Osmolarity", "mol/m3", "osm/l", 1000, 0, -1E+60, 1E+60, 0, 1000, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "MolarEnergy", "J/mol", "kcal/mol", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "Pharmacology Concentration", "1/m3", "iu/l", 1000, 0, -1E+60, 1E+60, 0, 1000,
+     StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "Pharmacology Concentration", "1/m3", "uiu/ml", 1, 0, -1E+60, 1E+60, 0, 1, 
+    StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+    "PopulationChange", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 1E+60, 0,
+     0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+    ("PopulationChange", "1/s", "1/d", 1.1574074074074073E-05, 0, -1E+60, 1E+60,
+     0, 1.1574074074074073E-05, StateSelect.default)}) else arteries.state_start),
+   stateSelect = StateSelect.prefer) "This state must be connected in inherited class definition";
+Real arteries.change "Dynamic change of state value per minute";
+Physiolibrary.Types.Pressure arteries.q_in.pressure "Pressure";
+Physiolibrary.Types.VolumeFlowRate arteries.q_in.q "Volume flow";
+Physiolibrary.Types.Volume arteries.excessVolume "Additional volume, that generate pressure";
+Physiolibrary.Types.RealIO.VolumeOutput arteries.volume;
+protected 
+Physiolibrary.Types.Volume arteries.zpv;
+Physiolibrary.Types.HydraulicCompliance arteries.c;
+Physiolibrary.Types.Pressure arteries.ep;
+public 
+Physiolibrary.Types.Pressure resistance.q_in.pressure "Pressure";
+Physiolibrary.Types.VolumeFlowRate resistance.q_in.q "Volume flow";
+Physiolibrary.Types.Pressure resistance.q_out.pressure "Pressure";
+Physiolibrary.Types.VolumeFlowRate resistance.q_out.q "Volume flow";
+Physiolibrary.Types.VolumeFlowRate resistance.volumeFlowRate "Volumetric flow";
+Physiolibrary.Types.Pressure resistance.dp "Pressure gradient";
+protected 
+Physiolibrary.Types.HydraulicConductance resistance.c;
+public 
+Physiolibrary.Types.Pressure veins.y.pressure "Pressure";
+Physiolibrary.Types.VolumeFlowRate veins.y.q "Volume flow";
+protected 
+Physiolibrary.Types.Pressure veins.p;
+public 
+Physiolibrary.Types.RealIO.VolumeFlowRateOutput pulses.volumeflowrate;
+discrete Physiolibrary.Types.Time pulses.T0 "begining of cardiac cycle";
+Boolean pulses.b(start = false);
+discrete Physiolibrary.Types.Time pulses.HP "duration of cardiac cycle";
+Physiolibrary.Types.Time pulses.tc "relative time in carciac cycle";
+discrete Physiolibrary.Types.Time pulses.TD2 "relative time of end of systole";
+Real heart1.qout.q;
+Real heart1.qout.p;
+Modelica.Blocks.Interfaces.RealInput heart1.desiredflow;
+Real arteries1.V(start = 0.00097);
+Real arteries1.qin.q;
+Real arteries1.qin.p;
+Real resistance1.qin.q;
+Real resistance1.qin.p;
+Real resistance1.qout.q;
+Real resistance1.qout.p;
+Real veins1.qin.q;
+Real veins1.qin.p;
+
+function Modelica.Math.asin
+  input Real u;
+  output Real y;
+
+external "C" y = asin(u);
+end Modelica.Math.asin;
+function Modelica.Utilities.Files.createDirectory
+  input String directoryName "Name of directory to be created (if present, ignore call)";
+protected 
+  String fullName;
+  Integer index;
+  Integer oldIndex;
+  Integer lastIndex;
+  Boolean found;
+  Boolean finished;
+  Integer nDirectories := 0 "Number of directories that need to be generated";
+  public 
+algorithm 
+  if ( not Modelica.Utilities.Files.createDirectory.existDirectory(directoryName))
+     then 
+    fullName := ModelicaInternal_fullPathName(directoryName);
+    index := ModelicaStrings_length(fullName);
+    if (ModelicaStrings_substring(fullName, index, index) == "/") then 
+      index := index-1;
+      Modelica.Utilities.Files.createDirectory.assertCorrectIndex(index, 
+        fullName);
+    end if;
+    lastIndex := index;
+    fullName := ModelicaStrings_substring(fullName, 1, index);
+    found := false;
+    while  not found loop
+      oldIndex := index;
+      index := Modelica.Utilities.Strings.findLast(fullName, "/", index, true);
+      if (index == 0) then 
+        index := oldIndex;
+        found := true;
+      else
+        index := index-1;
+        Modelica.Utilities.Files.createDirectory.assertCorrectIndex(index, 
+          fullName);
+        found := Modelica.Utilities.Files.createDirectory.existDirectory(
+          ModelicaStrings_substring(fullName, 1, index));
+      end if;
+    end while;
+    index := oldIndex;
+    finished := false;
+    while  not finished loop
+      ModelicaInternal_mkdir(ModelicaStrings_substring(fullName, 1, index));
+      if (index >= lastIndex) then 
+        finished := true;
+      elseif (index < lastIndex) then 
+        index := Modelica.Utilities.Strings.find(fullName, "/", index+2, true);
+        if (index == 0) then 
+          index := lastIndex;
+        end if;
+      end if;
+    end while;
+  end if;
+end Modelica.Utilities.Files.createDirectory;
+function Modelica.Utilities.Files.createDirectory.assertCorrectIndex
+  input Integer index "Index must be > 0";
+  input String directoryName "Directory name for error message";
+
+algorithm 
+  if (index < 1) then 
+    ModelicaError("It is not possible to create the directory
+\""+directoryName+
+      "\"\n"+"because this directory name is not valid");
+  end if;
+end Modelica.Utilities.Files.createDirectory.assertCorrectIndex;
+function Modelica.Utilities.Files.createDirectory.existDirectory
+  input String directoryName;
+  output Boolean exists "true if directory exists";
+protected 
+  Modelica.Utilities.Types.FileType fileType := ModelicaInternal_stat(
+    directoryName);
+  public 
+algorithm 
+  if (fileType == Modelica.Utilities.Types.FileType.RegularFile or fileType == 
+    Modelica.Utilities.Types.FileType.SpecialFile) then 
+    ModelicaError("Directory \""+directoryName+"\" cannot be created\n"+
+      "because this is an existing file.");
+  elseif (fileType == Modelica.Utilities.Types.FileType.Directory) then 
+    exists := true;
+  else
+    exists := false;
+  end if;
+end Modelica.Utilities.Files.createDirectory.existDirectory;
+function Modelica.Utilities.Files.exist
+  input String name "Name of file or directory";
+  output Boolean result "= true, if file or directory exists";
+
+algorithm 
+  result := ModelicaInternal_stat(name) > Modelica.Utilities.Types.FileType.
+    NoFile;
+end Modelica.Utilities.Files.exist;
+function Modelica.Utilities.Files.fullPathName
+  input String name "Absolute or relative file or directory name";
+  output String fullName "Full path of 'name'";
+
+external "C" fullName = ModelicaInternal_fullPathName(name);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Files.fullPathName;
+function Modelica.Utilities.Internal.FileSystem.mkdir
+  input String directoryName "Make a new directory";
+
+external "C" ModelicaInternal_mkdir(directoryName);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Internal.FileSystem.mkdir;
+function Modelica.Utilities.Internal.FileSystem.stat
+  input String name "Name of file, directory, pipe etc.";
+  output Modelica.Utilities.Types.FileType fileType "Type of file";
+
+external "C" fileType = ModelicaInternal_stat(name);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Internal.FileSystem.stat;
+function Modelica.Utilities.Streams.error
+  input String string "String to be printed to error message window";
+
+external "C" ModelicaError(string);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Streams.error;
+function Modelica.Utilities.Streams.print
+  input String string := "" "String to be printed";
+  input String fileName := "" "File where to print (empty string is the terminal)";
+
+external "C" ModelicaInternal_print(string, fileName);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Streams.print;
+function Modelica.Utilities.Streams.readLine
+  input String fileName "Name of the file that shall be read";
+  input Integer lineNumber "Number of line to read";
+  output String string "Line of text";
+  output Boolean endOfFile "If true, end-of-file was reached when trying to read line";
+
+external "C" string = ModelicaInternal_readLine(fileName, lineNumber, endOfFile);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Streams.readLine;
+function Modelica.Utilities.Strings.Advanced.scanReal
+  input String string;
+  input Integer startIndex := 1 "Index where scanning starts";
+  input Boolean unsigned := false "= true, if number shall not start with '+' or '-'";
+  output Integer nextIndex "Index after the found token (success=true) or index at which scanning failed (success=false)";
+  output Real number "Value of Real number";
+
+external "C" ModelicaStrings_scanReal(string, startIndex, unsigned, nextIndex, 
+  number);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Strings.Advanced.scanReal;
+function Modelica.Utilities.Strings.Advanced.skipWhiteSpace
+  input String string;
+  input Integer startIndex := 1;
+  output Integer nextIndex;
+
+external "C" nextIndex = ModelicaStrings_skipWhiteSpace(string, startIndex);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Strings.Advanced.skipWhiteSpace;
+function Modelica.Utilities.Strings.compare
+  input String string1;
+  input String string2;
+  input Boolean caseSensitive := true "= false, if case of letters is ignored";
+  output Modelica.Utilities.Types.Compare result "Result of comparison";
+
+external "C" result = ModelicaStrings_compare(string1, string2, caseSensitive);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Strings.compare;
+function Modelica.Utilities.Strings.find
+  input String string "String that is analyzed";
+  input String searchString "String that is searched for in string";
+  input Integer startIndex := 1 "Start search at index startIndex";
+  input Boolean caseSensitive := true "= false, if lower and upper case are ignored for the search";
+  output Integer index "Index of the beginning of the first occurrence of 'searchString' within 'string', or zero if not present";
+protected 
+  Integer lengthSearchString := ModelicaStrings_length(searchString);
+  Integer len := lengthSearchString-1;
+  Integer i := startIndex;
+  Integer i_max := 1+ModelicaStrings_length(string)-lengthSearchString;
+  public 
+algorithm 
+  index := 0;
+  while i <= i_max loop
+    if (Modelica.Utilities.Strings.isEqual(ModelicaStrings_substring(string, i, 
+      i+len), searchString, caseSensitive)) then 
+      index := i;
+      i := i_max+1;
+    else
+      i := i+1;
+    end if;
+  end while;
+end Modelica.Utilities.Strings.find;
+function Modelica.Utilities.Strings.findLast
+  input String string "String that is analyzed";
+  input String searchString "String that is searched for in string";
+  input Integer startIndex := 0 "Start search at index startIndex. If startIndex = 0, start at length(string)";
+  input Boolean caseSensitive := true "= false, if lower and upper case are ignored for the search";
+  output Integer index "Index of the beginning of the last occurrence of 'searchString' within 'string', or zero if not present";
+protected 
+  Integer lenString := ModelicaStrings_length(string);
+  Integer lenSearchString := ModelicaStrings_length(searchString);
+  Integer iMax := 1+lenString-lenSearchString;
+  Integer i;
+  public 
+algorithm 
+  i := (if startIndex == 0 or startIndex > iMax then iMax else startIndex);
+  index := 0;
+  while i >= 1 loop
+    if (Modelica.Utilities.Strings.isEqual(ModelicaStrings_substring(string, i, 
+      i+lenSearchString-1), searchString, caseSensitive)) then 
+      index := i;
+      i := 0;
+    else
+      i := i-1;
+    end if;
+  end while;
+end Modelica.Utilities.Strings.findLast;
+function Modelica.Utilities.Strings.isEqual
+  input String string1;
+  input String string2;
+  input Boolean caseSensitive := true "= false, if lower and upper case are ignored for the comparison";
+  output Boolean identical "True, if string1 is identical to string2";
+
+algorithm 
+  identical := ModelicaStrings_compare(string1, string2, caseSensitive) == 
+    Modelica.Utilities.Types.Compare.Equal;
+end Modelica.Utilities.Strings.isEqual;
+function Modelica.Utilities.Strings.length
+  input String string;
+  output Integer result "Number of characters of string";
+
+external "C" result = ModelicaStrings_length(string);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Strings.length;
+function Modelica.Utilities.Strings.repeat
+  input Integer n := 1 "Number of occurrences";
+  input String string := " " "String that is repeated";
+  output String repeatedString "String containing n concatenated strings";
+
+algorithm 
+  repeatedString := "";
+  for i in (1:n) loop
+    repeatedString := repeatedString+string;
+  end for;
+end Modelica.Utilities.Strings.repeat;
+function Modelica.Utilities.Strings.scanReal
+  input String string "String to be scanned";
+  input Integer startIndex := 1 "Start scanning of string at character startIndex";
+  input Boolean unsigned := false "= true, if Real token shall not start with a sign";
+  input String message := "" "Message used in error message if scan is not successful";
+  output Real number "Value of real number";
+  output Integer nextIndex "index of character after the found number";
+
+algorithm 
+  (nextIndex, number)  := ModelicaStrings_scanReal(string, startIndex, unsigned);
+  if (nextIndex == startIndex) then 
+    nextIndex := ModelicaStrings_skipWhiteSpace(string, startIndex);
+    if (unsigned) then 
+      Modelica.Utilities.Strings.syntaxError(string, nextIndex, "Expected a Real number without a sign "
+        +message);
+    else
+      Modelica.Utilities.Strings.syntaxError(string, nextIndex, "Expected a Real number "
+        +message);
+    end if;
+  end if;
+end Modelica.Utilities.Strings.scanReal;
+function Modelica.Utilities.Strings.substring
+  input String string "String from which a substring is inquired";
+  input Integer startIndex "Character position of substring begin (index=1 is first character in string)";
+  input Integer endIndex "Character position of substring end";
+  output String result "String containing substring string[startIndex:endIndex]";
+
+external "C" result = ModelicaStrings_substring(string, startIndex, endIndex);
+annotation(Library={"ModelicaExternalC"}, LibraryDirectory="/opt/dymola-2015-x86_64/Modelica/Library/Modelica 3.2.1/Resources/Library");
+end Modelica.Utilities.Strings.substring;
+function Modelica.Utilities.Strings.syntaxError
+  input String string "String that has an error at position index";
+  input Integer index "Index of string at which scanning detected an error";
+  input String message := "" "String printed at end of error message";
+protected 
+  Integer maxIndex := 40;
+  Integer maxLenString := 60;
+  Integer lenString := ModelicaStrings_length(string);
+  String errString;
+  Integer index2 := (if index < 1 then 1 else (if index > lenString then 
+    lenString else index));
+  public 
+algorithm 
+  if (index2 <= maxIndex) then 
+    errString := string;
+  else
+    errString := "... "+ModelicaStrings_substring(string, index2-maxIndex, 
+      lenString);
+    index2 := maxIndex+5;
+  end if;
+  if (ModelicaStrings_length(errString) > maxLenString) then 
+    errString := ModelicaStrings_substring(errString, 1, maxLenString)+" ...";
+  end if;
+  ModelicaError("Syntax error at character "+String(index)+" of\n"+errString+
+    "\n"+Modelica.Utilities.Strings.repeat(index2-1, " ")+"*"+"\n"+message);
+end Modelica.Utilities.Strings.syntaxError;
+function arteries.UnitConversions.RealTypeRecord_Unique2
+  input String Quantity := "" "Quantity";
+  input String Unit := "1" "SI unit";
+  input String DisplayUnit := "" "Display unit";
+  input Real Scale := 1 "Scale from display unit to SI unit such that x <d> = x*s+o <u>";
+  input Real Offset := 0 "Offset from display unit to SI unit such that x <d> = x*s+o <u>";
+  input Real Min := -1E+60 "minimal value";
+  input Real Max := 1E+60;
+  input Real Start;
+  input Real Nominal;
+  input StateSelect StateSelection := StateSelect.default;
+  output Physiolibrary.Types.Utilities.UnitConversions.RealTypeRecord _out := 
+    Physiolibrary.Types.Utilities.UnitConversions.RealTypeRecord(
+    Quantity = Quantity, 
+    Unit = Unit, 
+    DisplayUnit = DisplayUnit, 
+    Scale = Scale, 
+    Offset = Offset, 
+    Min = Min, 
+    Max = Max, 
+    Start = Start, 
+    Nominal = Nominal, 
+    StateSelection = StateSelection
+  );
+
+algorithm 
+end arteries.UnitConversions.RealTypeRecord_Unique2;
+function arteries.UnitConversions.findUnit_Unique3
+  input String unitToFind "display unit to find in unitConversions";
+protected 
+  constant Record _GlobalScope = record(
+    arteries = record(
+      UnitConversions = record(
+        RealTypeDef = {arteries.UnitConversions.RealTypeRecord_Unique2("", "1", 
+          "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("", "1", "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("pH", "log10(mol/l)", 
+          "log10(mol/l)", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Energy", "J", "kcal",
+           4186.8, 0, -1E+60, 1E+60, 0, 4186.8, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Time", "s", "min", 60,
+           0, -1E+60, 1E+60, 0, 60, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Frequency", "1/s", "Hz", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2("Frequency",
+           "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 1E+60, 0, 
+          0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Mass", "kg", "g", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("Mass", "kg", "mg", 
+          1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MassFlowRate", "kg/s", "mg/min", 1.6666666666666667E-08, 0, -1E+60, 
+          1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassFlowRate", "kg/s",
+           "g/min", 1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 
+          1.6666666666666667E-05, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Density", "kg/m3", "kg/l", 1000.0, 0, 0, 1E+60, 0, 1000.0, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Density", "kg/m3", "g/l", 1, 0, 0, 1E+60, 0, 1, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "mg/l", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "mg/dl", 0.009999999999999998, 0, 0, 1E+60, 0, 
+          0.009999999999999998, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MassConcentration", "kg/m3", "ng/l", 1E-09, 0, 0, 1E+60, 0, 1E-09, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "MassConcentration", "kg/m3", "ng/dl", 9.999999999999999E-09, 0, 0, 
+          1E+60, 0, 9.999999999999999E-09, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "ng/ml", 1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Length", "m", "cm", 
+          0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Velocity", "m/s", 
+          "MPH", 0.44704, 0, -1E+60, 1E+60, 0, 0.44704, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Acceleration", "m/s2",
+           "m/s2", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Pressure", "Pa", 
+          "mmHg", 133.32236842105263, 0, -1E+60, 1E+60, 0, 133.32236842105263, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Volume", "m3", "ml", 1E-06, 0, -1E+60, 1E+60, 0, 1E-06, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "VolumeFlowRate", "m3/s", "ml/min", 1.6666666666666667E-08, 0, -1E+60,
+           1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+          "mol/m3", "mol/l", 1000.0, 0, -1E+60, 1E+60, 0, 1000.0, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Concentration", "mol/m3", "mmol/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Concentration", "mol/m3", "pmol/l", 1E-09, 0, -1E+60, 1E+60, 0, 1E-09,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Concentration", "mol/m3", "uU_Insulin/ml", 6.622E-09, 0, -1E+60, 
+          1E+60, 0, 6.622E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Concentration", "mol/m3", "U_EPO/l", 4.5E-10, 0, -1E+60, 1E+60, 0, 
+          4.5E-10, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("AmountOfSubstance", "mol", "mmol", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("AmountOfSubstance", "mol", "osm", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "AmountOfSubstance", "mol", "mosm", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MolarFlowRate", "mol/s", "mmol/min", 1.6666666666666667E-05, 0, 
+          -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MolarFlowRate", 
+          "mol/s", "ml_STP/min", 7.338602876199938E-07, 0, -1E+60, 1E+60, 0, 
+          7.338602876199938E-07, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ThermodynamicTemperature", "K", "K", 1, 0, -1E+60, 1E+60, 310.15, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ThermodynamicTemperature", "K", "degC", 1, 273.15, -1E+60, 1E+60, 
+          310.15, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Power", "W", "W", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+          "kcal/min", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+          "cal/min", 0.06978, 0, -1E+60, 1E+60, 0, 0.06978, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("ThermalConductance",
+           "W/K", "kcal/(min.degC)", 69.78, 0, -1E+60, 1E+60, 0, 69.78, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "SpecificHeatCapacity", "J/(kg.K)", "kcal/(degC.kg)", 4186.8, 0, 
+          -1E+60, 1E+60, 0, 4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("SpecificEnergy", "J/kg", "kcal/kg", 4186.8, 0, -1E+60, 1E+60, 0, 
+          4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("ElectricPotential", "V", "mV", 0.001, 0, -1E+60, 1E+60, 0, 0.001, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ElectricCharge", "C", "meq", 96.48533990000001, 0, -1E+60, 1E+60, 0, 
+          96.48533990000001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("VolumeDensityOfCharge", "C/m3", "meq/l", 96485.3399, 0, -1E+60, 
+          1E+60, 0, 96485.3399, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("VolumeDensityOfCharge", "C/m3", "eq/l", 96485339.9, 0, -1E+60, 1E+60,
+           0, 96485339.9, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("ElectricCurrent", "A", "meq/min", 1.6080889983333335, 0, -1E+60, 
+          1E+60, 0, 1.6080889983333335, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Fraction", "1", "%", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "OsmoticMembramePermeability", "m6/(mol.s)", "ml/(mOsmol.min)", 
+          1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "DiffusionMembranePermeability", "m3/s", "ml/min", 1.6666666666666667E-05,
+           0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicConductance",
+           "m3/(Pa.s)", "ml/(mmHg.min)", 1.2501028045069496E-10, 0, -1E+60, 
+          1E+60, 0, 1.2501028045069496E-10, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicCompliance",
+           "m3/Pa", "ml/mmHg", 7.500616827041698E-09, 0, -1E+60, 1E+60, 0, 
+          7.500616827041698E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("HydraulicInertance", "Pa.s2/m3", "mmHg.min2/ml", 479960526315.7895, 0,
+           -1E+60, 1E+60, 0, 479960526315.7895, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("GasSolubility", 
+          "mol/(m3.Pa)", "mmol/(l.mmHg)", 0.007500616827041697, 0, -1E+60, 1E+60,
+           0, 0.007500616827041697, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Osmolarity", "mol/m3", "mosm/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Osmolarity", "mol/m3", "osm/l", 1000, 0, -1E+60, 1E+60, 0, 1000, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "MolarEnergy", "J/mol", "kcal/mol", 4186.8, 0, -1E+60, 1E+60, 0, 
+          4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Pharmacology Concentration", "1/m3", "iu/l", 1000, 0, -1E+60, 1E+60,
+           0, 1000, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Pharmacology Concentration", "1/m3", "uiu/ml", 1, 0, -1E+60, 1E+60, 0,
+           1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("PopulationChange", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 
+          1E+60, 0, 0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("PopulationChange", "1/s", "1/d", 1.1574074074074073E-05, 0, -1E+60, 
+          1E+60, 0, 1.1574074074074073E-05, StateSelect.default)}
+      )
+    )
+  );
+public 
+  input Physiolibrary.Types.Utilities.UnitConversions.RealTypeRecord 
+    unitConversions[62] = _GlobalScope.arteries.UnitConversions.RealTypeDef;
+  output Integer typeDef "index in unitConversions";
+
+algorithm 
+  typeDef := 0;
+  for i in (1:size(unitConversions, 1)) loop
+    if (unitConversions[i].DisplayUnit == unitToFind) then 
+      typeDef := i;
+      break;
+    end if;
+  end for;
+  if (typeDef == 0) then 
+    ModelicaInternal_print("Unit \""+unitToFind+"\" not defined. Do not hesitate to contact me. marek@matfyz.cz\n",
+       "");
+  end if;
+end arteries.UnitConversions.findUnit_Unique3;
+function arteries.readReal_Unique1
+  input String name "Name of parameter";
+  input String storeUnit "Prefered units to store variable value";
+protected 
+  constant Record _GlobalScope = record(
+    arteries = record(
+      UnitConversions = record(
+        RealTypeDef = {arteries.UnitConversions.RealTypeRecord_Unique2("", "1", 
+          "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("", "1", "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("pH", "log10(mol/l)", 
+          "log10(mol/l)", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Energy", "J", "kcal",
+           4186.8, 0, -1E+60, 1E+60, 0, 4186.8, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Time", "s", "min", 60,
+           0, -1E+60, 1E+60, 0, 60, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Frequency", "1/s", "Hz", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2("Frequency",
+           "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 1E+60, 0, 
+          0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Mass", "kg", "g", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("Mass", "kg", "mg", 
+          1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MassFlowRate", "kg/s", "mg/min", 1.6666666666666667E-08, 0, -1E+60, 
+          1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassFlowRate", "kg/s",
+           "g/min", 1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 
+          1.6666666666666667E-05, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Density", "kg/m3", "kg/l", 1000.0, 0, 0, 1E+60, 0, 1000.0, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Density", "kg/m3", "g/l", 1, 0, 0, 1E+60, 0, 1, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "mg/l", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "mg/dl", 0.009999999999999998, 0, 0, 1E+60, 0, 
+          0.009999999999999998, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MassConcentration", "kg/m3", "ng/l", 1E-09, 0, 0, 1E+60, 0, 1E-09, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "MassConcentration", "kg/m3", "ng/dl", 9.999999999999999E-09, 0, 0, 
+          1E+60, 0, 9.999999999999999E-09, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "ng/ml", 1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Length", "m", "cm", 
+          0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Velocity", "m/s", 
+          "MPH", 0.44704, 0, -1E+60, 1E+60, 0, 0.44704, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Acceleration", "m/s2",
+           "m/s2", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Pressure", "Pa", 
+          "mmHg", 133.32236842105263, 0, -1E+60, 1E+60, 0, 133.32236842105263, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Volume", "m3", "ml", 1E-06, 0, -1E+60, 1E+60, 0, 1E-06, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "VolumeFlowRate", "m3/s", "ml/min", 1.6666666666666667E-08, 0, -1E+60,
+           1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+          "mol/m3", "mol/l", 1000.0, 0, -1E+60, 1E+60, 0, 1000.0, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Concentration", "mol/m3", "mmol/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Concentration", "mol/m3", "pmol/l", 1E-09, 0, -1E+60, 1E+60, 0, 1E-09,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Concentration", "mol/m3", "uU_Insulin/ml", 6.622E-09, 0, -1E+60, 
+          1E+60, 0, 6.622E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Concentration", "mol/m3", "U_EPO/l", 4.5E-10, 0, -1E+60, 1E+60, 0, 
+          4.5E-10, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("AmountOfSubstance", "mol", "mmol", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("AmountOfSubstance", "mol", "osm", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "AmountOfSubstance", "mol", "mosm", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MolarFlowRate", "mol/s", "mmol/min", 1.6666666666666667E-05, 0, 
+          -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MolarFlowRate", 
+          "mol/s", "ml_STP/min", 7.338602876199938E-07, 0, -1E+60, 1E+60, 0, 
+          7.338602876199938E-07, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ThermodynamicTemperature", "K", "K", 1, 0, -1E+60, 1E+60, 310.15, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ThermodynamicTemperature", "K", "degC", 1, 273.15, -1E+60, 1E+60, 
+          310.15, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Power", "W", "W", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+          "kcal/min", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+          "cal/min", 0.06978, 0, -1E+60, 1E+60, 0, 0.06978, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("ThermalConductance",
+           "W/K", "kcal/(min.degC)", 69.78, 0, -1E+60, 1E+60, 0, 69.78, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "SpecificHeatCapacity", "J/(kg.K)", "kcal/(degC.kg)", 4186.8, 0, 
+          -1E+60, 1E+60, 0, 4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("SpecificEnergy", "J/kg", "kcal/kg", 4186.8, 0, -1E+60, 1E+60, 0, 
+          4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("ElectricPotential", "V", "mV", 0.001, 0, -1E+60, 1E+60, 0, 0.001, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ElectricCharge", "C", "meq", 96.48533990000001, 0, -1E+60, 1E+60, 0, 
+          96.48533990000001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("VolumeDensityOfCharge", "C/m3", "meq/l", 96485.3399, 0, -1E+60, 
+          1E+60, 0, 96485.3399, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("VolumeDensityOfCharge", "C/m3", "eq/l", 96485339.9, 0, -1E+60, 1E+60,
+           0, 96485339.9, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("ElectricCurrent", "A", "meq/min", 1.6080889983333335, 0, -1E+60, 
+          1E+60, 0, 1.6080889983333335, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Fraction", "1", "%", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "OsmoticMembramePermeability", "m6/(mol.s)", "ml/(mOsmol.min)", 
+          1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "DiffusionMembranePermeability", "m3/s", "ml/min", 1.6666666666666667E-05,
+           0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicConductance",
+           "m3/(Pa.s)", "ml/(mmHg.min)", 1.2501028045069496E-10, 0, -1E+60, 
+          1E+60, 0, 1.2501028045069496E-10, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicCompliance",
+           "m3/Pa", "ml/mmHg", 7.500616827041698E-09, 0, -1E+60, 1E+60, 0, 
+          7.500616827041698E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("HydraulicInertance", "Pa.s2/m3", "mmHg.min2/ml", 479960526315.7895, 0,
+           -1E+60, 1E+60, 0, 479960526315.7895, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("GasSolubility", 
+          "mol/(m3.Pa)", "mmol/(l.mmHg)", 0.007500616827041697, 0, -1E+60, 1E+60,
+           0, 0.007500616827041697, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Osmolarity", "mol/m3", "mosm/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Osmolarity", "mol/m3", "osm/l", 1000, 0, -1E+60, 1E+60, 0, 1000, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "MolarEnergy", "J/mol", "kcal/mol", 4186.8, 0, -1E+60, 1E+60, 0, 
+          4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Pharmacology Concentration", "1/m3", "iu/l", 1000, 0, -1E+60, 1E+60,
+           0, 1000, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Pharmacology Concentration", "1/m3", "uiu/ml", 1, 0, -1E+60, 1E+60, 0,
+           1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("PopulationChange", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 
+          1E+60, 0, 0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("PopulationChange", "1/s", "1/d", 1.1574074074074073E-05, 0, -1E+60, 
+          1E+60, 0, 1.1574074074074073E-05, StateSelect.default)}
+      )
+    )
+  );
+public 
+  input Physiolibrary.Types.Utilities.UnitConversions.RealTypeRecord 
+    unitConversions[62] = _GlobalScope.arteries.UnitConversions.RealTypeDef;
+  output Real value := 0 "Actual value of parameter in SI units";
+protected 
+  String fn;
+  String line;
+  Integer nextIndex;
+  Integer lineLen;
+  Integer iline := 1;
+  Boolean found := false;
+  Boolean endOfFile := false;
+  String str;
+  Real inputValue;
+  Integer typeDef;
+  public 
+algorithm 
+  fn := "io/input.txt";
+  if ( not Modelica.Utilities.Files.exist(fn)) then 
+    ModelicaError("readRealParameter(\""+name+"\", \""+fn+"\")  Error: the file does not exist.\n");
+  else
+    typeDef := arteries.UnitConversions.findUnit_Unique3(
+      storeUnit, 
+      unitConversions);
+    (line, endOfFile)  := ModelicaInternal_readLine(fn, iline);
+    while  not found and  not endOfFile loop
+      if (line == name) then 
+        (line, endOfFile)  := ModelicaInternal_readLine(fn, iline+1);
+        lineLen := ModelicaStrings_length(line);
+        nextIndex := 1;
+        (inputValue, nextIndex)  := Modelica.Utilities.Strings.scanReal(line, 
+          nextIndex, false, "");
+        nextIndex := ModelicaStrings_skipWhiteSpace(line, nextIndex);
+        if (nextIndex > lineLen) then 
+          if (ModelicaStrings_length(unitConversions[typeDef].DisplayUnit) > 0)
+             then 
+            ModelicaError("No units detected for variable '"+name+"' in file '"+
+              fn+"'. Expected unis are '"+unitConversions[typeDef].DisplayUnit+
+              "'!\n");
+          end if;
+        else
+          str := ModelicaStrings_substring(line, ModelicaStrings_skipWhiteSpace(
+            line, nextIndex), ModelicaStrings_length(line));
+          if (str <> unitConversions[typeDef].DisplayUnit) then 
+            ModelicaError("Units '"+str+"' not expected for variable '"+name+
+              "' in file '"+fn+"'. Expected unis are '"+unitConversions[typeDef]
+              .DisplayUnit+"'!\n");
+          end if;
+        end if;
+        value := inputValue*unitConversions[typeDef].Scale+unitConversions[
+          typeDef].Offset;
+        found := true;
+      else
+        iline := iline+2;
+        (line, endOfFile)  := ModelicaInternal_readLine(fn, iline);
+      end if;
+    end while;
+    if ( not found) then 
+      ModelicaError("Parameter \""+name+"\" not found in file \""+fn+"\"\n");
+    end if;
+  end if;
+end arteries.readReal_Unique1;
+function arteries.writeComparison_Unique5
+  input String name "Variable name";
+  input Real defaultValue "Original value[in SIunits] to compare with final value";
+  input Real initialValue "Initial variable value[in SI units]";
+  input Real finalValue "Final variable value[in SI units]";
+  input String storeUnit "Prefered units to store variable value";
+protected 
+  constant Record _GlobalScope = record(
+    arteries = record(
+      UnitConversions = record(
+        RealTypeDef = {arteries.UnitConversions.RealTypeRecord_Unique2("", "1", 
+          "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("", "1", "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("pH", "log10(mol/l)", 
+          "log10(mol/l)", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Energy", "J", "kcal",
+           4186.8, 0, -1E+60, 1E+60, 0, 4186.8, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Time", "s", "min", 60,
+           0, -1E+60, 1E+60, 0, 60, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Frequency", "1/s", "Hz", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2("Frequency",
+           "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 1E+60, 0, 
+          0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Mass", "kg", "g", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("Mass", "kg", "mg", 
+          1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MassFlowRate", "kg/s", "mg/min", 1.6666666666666667E-08, 0, -1E+60, 
+          1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassFlowRate", "kg/s",
+           "g/min", 1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 
+          1.6666666666666667E-05, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Density", "kg/m3", "kg/l", 1000.0, 0, 0, 1E+60, 0, 1000.0, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Density", "kg/m3", "g/l", 1, 0, 0, 1E+60, 0, 1, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "mg/l", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "mg/dl", 0.009999999999999998, 0, 0, 1E+60, 0, 
+          0.009999999999999998, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MassConcentration", "kg/m3", "ng/l", 1E-09, 0, 0, 1E+60, 0, 1E-09, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "MassConcentration", "kg/m3", "ng/dl", 9.999999999999999E-09, 0, 0, 
+          1E+60, 0, 9.999999999999999E-09, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "ng/ml", 1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Length", "m", "cm", 
+          0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Velocity", "m/s", 
+          "MPH", 0.44704, 0, -1E+60, 1E+60, 0, 0.44704, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Acceleration", "m/s2",
+           "m/s2", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Pressure", "Pa", 
+          "mmHg", 133.32236842105263, 0, -1E+60, 1E+60, 0, 133.32236842105263, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Volume", "m3", "ml", 1E-06, 0, -1E+60, 1E+60, 0, 1E-06, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "VolumeFlowRate", "m3/s", "ml/min", 1.6666666666666667E-08, 0, -1E+60,
+           1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+          "mol/m3", "mol/l", 1000.0, 0, -1E+60, 1E+60, 0, 1000.0, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Concentration", "mol/m3", "mmol/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Concentration", "mol/m3", "pmol/l", 1E-09, 0, -1E+60, 1E+60, 0, 1E-09,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Concentration", "mol/m3", "uU_Insulin/ml", 6.622E-09, 0, -1E+60, 
+          1E+60, 0, 6.622E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Concentration", "mol/m3", "U_EPO/l", 4.5E-10, 0, -1E+60, 1E+60, 0, 
+          4.5E-10, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("AmountOfSubstance", "mol", "mmol", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("AmountOfSubstance", "mol", "osm", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "AmountOfSubstance", "mol", "mosm", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MolarFlowRate", "mol/s", "mmol/min", 1.6666666666666667E-05, 0, 
+          -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MolarFlowRate", 
+          "mol/s", "ml_STP/min", 7.338602876199938E-07, 0, -1E+60, 1E+60, 0, 
+          7.338602876199938E-07, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ThermodynamicTemperature", "K", "K", 1, 0, -1E+60, 1E+60, 310.15, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ThermodynamicTemperature", "K", "degC", 1, 273.15, -1E+60, 1E+60, 
+          310.15, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Power", "W", "W", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+          "kcal/min", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+          "cal/min", 0.06978, 0, -1E+60, 1E+60, 0, 0.06978, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("ThermalConductance",
+           "W/K", "kcal/(min.degC)", 69.78, 0, -1E+60, 1E+60, 0, 69.78, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "SpecificHeatCapacity", "J/(kg.K)", "kcal/(degC.kg)", 4186.8, 0, 
+          -1E+60, 1E+60, 0, 4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("SpecificEnergy", "J/kg", "kcal/kg", 4186.8, 0, -1E+60, 1E+60, 0, 
+          4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("ElectricPotential", "V", "mV", 0.001, 0, -1E+60, 1E+60, 0, 0.001, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ElectricCharge", "C", "meq", 96.48533990000001, 0, -1E+60, 1E+60, 0, 
+          96.48533990000001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("VolumeDensityOfCharge", "C/m3", "meq/l", 96485.3399, 0, -1E+60, 
+          1E+60, 0, 96485.3399, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("VolumeDensityOfCharge", "C/m3", "eq/l", 96485339.9, 0, -1E+60, 1E+60,
+           0, 96485339.9, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("ElectricCurrent", "A", "meq/min", 1.6080889983333335, 0, -1E+60, 
+          1E+60, 0, 1.6080889983333335, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Fraction", "1", "%", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "OsmoticMembramePermeability", "m6/(mol.s)", "ml/(mOsmol.min)", 
+          1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "DiffusionMembranePermeability", "m3/s", "ml/min", 1.6666666666666667E-05,
+           0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicConductance",
+           "m3/(Pa.s)", "ml/(mmHg.min)", 1.2501028045069496E-10, 0, -1E+60, 
+          1E+60, 0, 1.2501028045069496E-10, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicCompliance",
+           "m3/Pa", "ml/mmHg", 7.500616827041698E-09, 0, -1E+60, 1E+60, 0, 
+          7.500616827041698E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("HydraulicInertance", "Pa.s2/m3", "mmHg.min2/ml", 479960526315.7895, 0,
+           -1E+60, 1E+60, 0, 479960526315.7895, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("GasSolubility", 
+          "mol/(m3.Pa)", "mmol/(l.mmHg)", 0.007500616827041697, 0, -1E+60, 1E+60,
+           0, 0.007500616827041697, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Osmolarity", "mol/m3", "mosm/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Osmolarity", "mol/m3", "osm/l", 1000, 0, -1E+60, 1E+60, 0, 1000, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "MolarEnergy", "J/mol", "kcal/mol", 4186.8, 0, -1E+60, 1E+60, 0, 
+          4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Pharmacology Concentration", "1/m3", "iu/l", 1000, 0, -1E+60, 1E+60,
+           0, 1000, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Pharmacology Concentration", "1/m3", "uiu/ml", 1, 0, -1E+60, 1E+60, 0,
+           1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("PopulationChange", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 
+          1E+60, 0, 0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("PopulationChange", "1/s", "1/d", 1.1574074074074073E-05, 0, -1E+60, 
+          1E+60, 0, 1.1574074074074073E-05, StateSelect.default)}
+      )
+    )
+  );
+public 
+  input Physiolibrary.Types.Utilities.UnitConversions.RealTypeRecord 
+    unitConversions[62] = _GlobalScope.arteries.UnitConversions.RealTypeDef;
+protected 
+  String fn;
+  Real outputInitialValue;
+  Real outputFinalValue;
+  Real outputDefaultValue;
+  Integer typeDef "Variable output units";
+  public 
+algorithm 
+  fn := "io/comparison.txt";
+  if ( not Modelica.Utilities.Files.exist(fn)) then 
+    if ( not Modelica.Utilities.Files.exist("output")) then 
+      Modelica.Utilities.Files.createDirectory("output");
+    end if;
+  end if;
+  typeDef := arteries.UnitConversions.findUnit_Unique3(
+    storeUnit, 
+    unitConversions);
+  outputDefaultValue := (defaultValue-unitConversions[typeDef].Offset)/
+    unitConversions[typeDef].Scale;
+  outputInitialValue := (initialValue-unitConversions[typeDef].Offset)/
+    unitConversions[typeDef].Scale;
+  outputFinalValue := (finalValue-unitConversions[typeDef].Offset)/
+    unitConversions[typeDef].Scale;
+  ModelicaInternal_print((if abs(outputDefaultValue) > 1E-15 then String(abs((
+    outputFinalValue-outputDefaultValue)/outputDefaultValue)) else "Zero vs. "+
+    String(outputFinalValue))+" ; "+name+" : default="+String(outputDefaultValue)
+    +" "+unitConversions[typeDef].DisplayUnit+", initial="+String(
+    outputInitialValue)+" "+unitConversions[typeDef].DisplayUnit+", final="+
+    String(outputFinalValue)+" "+unitConversions[typeDef].DisplayUnit, fn);
+end arteries.writeComparison_Unique5;
+function arteries.writeReal_Unique4
+  input String name "Variable name";
+  input Real value "Variable value";
+  input String storeUnit "Prefered units to store variable value";
+protected 
+  constant Record _GlobalScope = record(
+    arteries = record(
+      UnitConversions = record(
+        RealTypeDef = {arteries.UnitConversions.RealTypeRecord_Unique2("", "1", 
+          "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("", "1", "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("pH", "log10(mol/l)", 
+          "log10(mol/l)", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Energy", "J", "kcal",
+           4186.8, 0, -1E+60, 1E+60, 0, 4186.8, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Time", "s", "min", 60,
+           0, -1E+60, 1E+60, 0, 60, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Frequency", "1/s", "Hz", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2("Frequency",
+           "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 1E+60, 0, 
+          0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Mass", "kg", "g", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("Mass", "kg", "mg", 
+          1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MassFlowRate", "kg/s", "mg/min", 1.6666666666666667E-08, 0, -1E+60, 
+          1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassFlowRate", "kg/s",
+           "g/min", 1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 
+          1.6666666666666667E-05, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Density", "kg/m3", "kg/l", 1000.0, 0, 0, 1E+60, 0, 1000.0, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Density", "kg/m3", "g/l", 1, 0, 0, 1E+60, 0, 1, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "mg/l", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "mg/dl", 0.009999999999999998, 0, 0, 1E+60, 0, 
+          0.009999999999999998, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MassConcentration", "kg/m3", "ng/l", 1E-09, 0, 0, 1E+60, 0, 1E-09, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "MassConcentration", "kg/m3", "ng/dl", 9.999999999999999E-09, 0, 0, 
+          1E+60, 0, 9.999999999999999E-09, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration", 
+          "kg/m3", "ng/ml", 1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Length", "m", "cm", 
+          0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Velocity", "m/s", 
+          "MPH", 0.44704, 0, -1E+60, 1E+60, 0, 0.44704, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Acceleration", "m/s2",
+           "m/s2", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Pressure", "Pa", 
+          "mmHg", 133.32236842105263, 0, -1E+60, 1E+60, 0, 133.32236842105263, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Volume", "m3", "ml", 1E-06, 0, -1E+60, 1E+60, 0, 1E-06, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "VolumeFlowRate", "m3/s", "ml/min", 1.6666666666666667E-08, 0, -1E+60,
+           1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+          "mol/m3", "mol/l", 1000.0, 0, -1E+60, 1E+60, 0, 1000.0, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Concentration", "mol/m3", "mmol/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Concentration", "mol/m3", "pmol/l", 1E-09, 0, -1E+60, 1E+60, 0, 1E-09,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Concentration", "mol/m3", "uU_Insulin/ml", 6.622E-09, 0, -1E+60, 
+          1E+60, 0, 6.622E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Concentration", "mol/m3", "U_EPO/l", 4.5E-10, 0, -1E+60, 1E+60, 0, 
+          4.5E-10, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("AmountOfSubstance", "mol", "mmol", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("AmountOfSubstance", "mol", "osm", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "AmountOfSubstance", "mol", "mosm", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+           StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("MolarFlowRate", "mol/s", "mmol/min", 1.6666666666666667E-05, 0, 
+          -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("MolarFlowRate", 
+          "mol/s", "ml_STP/min", 7.338602876199938E-07, 0, -1E+60, 1E+60, 0, 
+          7.338602876199938E-07, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ThermodynamicTemperature", "K", "K", 1, 0, -1E+60, 1E+60, 310.15, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ThermodynamicTemperature", "K", "degC", 1, 273.15, -1E+60, 1E+60, 
+          310.15, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Power", "W", "W", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+          "kcal/min", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+          "cal/min", 0.06978, 0, -1E+60, 1E+60, 0, 0.06978, StateSelect.default),
+           arteries.UnitConversions.RealTypeRecord_Unique2("ThermalConductance",
+           "W/K", "kcal/(min.degC)", 69.78, 0, -1E+60, 1E+60, 0, 69.78, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "SpecificHeatCapacity", "J/(kg.K)", "kcal/(degC.kg)", 4186.8, 0, 
+          -1E+60, 1E+60, 0, 4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("SpecificEnergy", "J/kg", "kcal/kg", 4186.8, 0, -1E+60, 1E+60, 0, 
+          4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("ElectricPotential", "V", "mV", 0.001, 0, -1E+60, 1E+60, 0, 0.001, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "ElectricCharge", "C", "meq", 96.48533990000001, 0, -1E+60, 1E+60, 0, 
+          96.48533990000001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("VolumeDensityOfCharge", "C/m3", "meq/l", 96485.3399, 0, -1E+60, 
+          1E+60, 0, 96485.3399, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("VolumeDensityOfCharge", "C/m3", "eq/l", 96485339.9, 0, -1E+60, 1E+60,
+           0, 96485339.9, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("ElectricCurrent", "A", "meq/min", 1.6080889983333335, 0, -1E+60, 
+          1E+60, 0, 1.6080889983333335, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Fraction", "1", "%", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.
+          default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "OsmoticMembramePermeability", "m6/(mol.s)", "ml/(mOsmol.min)", 
+          1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "DiffusionMembranePermeability", "m3/s", "ml/min", 1.6666666666666667E-05,
+           0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicConductance",
+           "m3/(Pa.s)", "ml/(mmHg.min)", 1.2501028045069496E-10, 0, -1E+60, 
+          1E+60, 0, 1.2501028045069496E-10, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicCompliance",
+           "m3/Pa", "ml/mmHg", 7.500616827041698E-09, 0, -1E+60, 1E+60, 0, 
+          7.500616827041698E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("HydraulicInertance", "Pa.s2/m3", "mmHg.min2/ml", 479960526315.7895, 0,
+           -1E+60, 1E+60, 0, 479960526315.7895, StateSelect.default), 
+          arteries.UnitConversions.RealTypeRecord_Unique2("GasSolubility", 
+          "mol/(m3.Pa)", "mmol/(l.mmHg)", 0.007500616827041697, 0, -1E+60, 1E+60,
+           0, 0.007500616827041697, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Osmolarity", "mol/m3", "mosm/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "Osmolarity", "mol/m3", "osm/l", 1000, 0, -1E+60, 1E+60, 0, 1000, 
+          StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2(
+          "MolarEnergy", "J/mol", "kcal/mol", 4186.8, 0, -1E+60, 1E+60, 0, 
+          4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Pharmacology Concentration", "1/m3", "iu/l", 1000, 0, -1E+60, 1E+60,
+           0, 1000, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("Pharmacology Concentration", "1/m3", "uiu/ml", 1, 0, -1E+60, 1E+60, 0,
+           1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("PopulationChange", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 
+          1E+60, 0, 0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+          ("PopulationChange", "1/s", "1/d", 1.1574074074074073E-05, 0, -1E+60, 
+          1E+60, 0, 1.1574074074074073E-05, StateSelect.default)}
+      )
+    )
+  );
+public 
+  input Physiolibrary.Types.Utilities.UnitConversions.RealTypeRecord 
+    unitConversions[62] = _GlobalScope.arteries.UnitConversions.RealTypeDef;
+protected 
+  String fn;
+  Integer typeDef "Variable type";
+  public 
+algorithm 
+  fn := "io/output.txt";
+  if ( not Modelica.Utilities.Files.exist(fn)) then 
+    if ( not Modelica.Utilities.Files.exist("io")) then 
+      Modelica.Utilities.Files.createDirectory("io");
+    end if;
+  end if;
+  typeDef := arteries.UnitConversions.findUnit_Unique3(
+    storeUnit, 
+    unitConversions);
+  ModelicaInternal_print(name+"\n"+String((value-unitConversions[typeDef].Offset)
+    /unitConversions[typeDef].Scale)+" "+unitConversions[typeDef].DisplayUnit, 
+    fn);
+end arteries.writeReal_Unique4;
+// Equations and algorithms
+
+  // Component heart
+  // class Physiolibrary.Hydraulic.Sources.UnlimitedPump
+    // extends Physiolibrary.Chemical.Interfaces.ConditionalSolutionFlow
+    equation
+      if ( not heart.useSolutionFlowInput) then 
+        heart.q = heart.SolutionFlow;
+      end if;
+    // end of extends 
+  equation
+    heart.q_out.q =  -heart.q;
+
+  // Component arteries
+  // class Physiolibrary.Hydraulic.Components.ElasticVessel
+    // extends Physiolibrary.SteadyStates.Interfaces.SteadyState
+    equation
+      when terminal() then
+        if (arteries.SAVE_RESULTS) then 
+          arteries.writeReal_Unique4(
+            arteries.stateName, 
+            arteries.state, 
+            arteries.storeUnit, 
+            {arteries.UnitConversions.RealTypeRecord_Unique2("", "1", "", 1, 0, 
+              -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("", "1", "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("pH", 
+              "log10(mol/l)", "log10(mol/l)", 1, 0, -1E+60, 1E+60, 0, 1, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Time", "s", "min", 60, 0, -1E+60, 1E+60, 0, 60, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "Frequency", "1/s", "Hz", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "Frequency", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 
+              1E+60, 0, 0.016666666666666666, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Mass", "kg", "g",
+               0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Mass", "kg", "mg",
+               1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MassFlowRate", 
+              "kg/s", "mg/min", 1.6666666666666667E-08, 0, -1E+60, 1E+60, 0, 
+              1.6666666666666667E-08, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("MassFlowRate", "kg/s", "g/min", 1.6666666666666667E-05, 0, 
+              -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Density", "kg/m3",
+               "kg/l", 1000.0, 0, 0, 1E+60, 0, 1000.0, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Density", "kg/m3",
+               "g/l", 1, 0, 0, 1E+60, 0, 1, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+               "kg/m3", "mg/l", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "MassConcentration", "kg/m3", "mg/dl", 0.009999999999999998, 0, 0,
+               1E+60, 0, 0.009999999999999998, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+               "kg/m3", "ng/l", 1E-09, 0, 0, 1E+60, 0, 1E-09, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "MassConcentration", "kg/m3", "ng/dl", 9.999999999999999E-09, 0, 0,
+               1E+60, 0, 9.999999999999999E-09, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+               "kg/m3", "ng/ml", 1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2("Length",
+               "m", "cm", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Velocity", "m/s",
+               "MPH", 0.44704, 0, -1E+60, 1E+60, 0, 0.44704, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Acceleration", 
+              "m/s2", "m/s2", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Pressure", "Pa", 
+              "mmHg", 133.32236842105263, 0, -1E+60, 1E+60, 0, 133.32236842105263,
+               StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Volume", "m3", "ml", 1E-06, 0, -1E+60, 1E+60, 0, 1E-06, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("VolumeFlowRate", "m3/s", "ml/min", 1.6666666666666667E-08, 0, 
+              -1E+60, 1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+              "mol/m3", "mol/l", 1000.0, 0, -1E+60, 1E+60, 0, 1000.0, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Concentration", "mol/m3", "mmol/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Concentration", "mol/m3", "pmol/l", 1E-09, 0, -1E+60, 1E+60, 0, 
+              1E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Concentration", "mol/m3", "uU_Insulin/ml", 6.622E-09, 0, -1E+60,
+               1E+60, 0, 6.622E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Concentration", "mol/m3", "U_EPO/l", 4.5E-10, 0, -1E+60, 1E+60, 0,
+               4.5E-10, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("AmountOfSubstance", "mol", "mmol", 0.001, 0, -1E+60, 1E+60, 0, 
+              0.001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("AmountOfSubstance", "mol", "osm", 1, 0, -1E+60, 1E+60, 0, 1, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("AmountOfSubstance", "mol", "mosm", 0.001, 0, -1E+60, 1E+60, 0, 
+              0.001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("MolarFlowRate", "mol/s", "mmol/min", 1.6666666666666667E-05, 0, 
+              -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MolarFlowRate", 
+              "mol/s", "ml_STP/min", 7.338602876199938E-07, 0, -1E+60, 1E+60, 0,
+               7.338602876199938E-07, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ThermodynamicTemperature", "K", "K", 1, 0, -1E+60, 1E+60, 310.15,
+               1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ThermodynamicTemperature", "K", "degC", 1, 273.15, -1E+60, 1E+60,
+               310.15, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Power", "W", "W", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+              "kcal/min", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+              "cal/min", 0.06978, 0, -1E+60, 1E+60, 0, 0.06978, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "ThermalConductance", "W/K", "kcal/(min.degC)", 69.78, 0, -1E+60, 
+              1E+60, 0, 69.78, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("SpecificHeatCapacity", "J/(kg.K)", "kcal/(degC.kg)", 4186.8, 0, 
+              -1E+60, 1E+60, 0, 4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("SpecificEnergy", "J/kg", "kcal/kg", 4186.8, 0, -1E+60, 1E+60, 0,
+               4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ElectricPotential", "V", "mV", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+               StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ElectricCharge", "C", "meq", 96.48533990000001, 0, -1E+60, 1E+60,
+               0, 96.48533990000001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("VolumeDensityOfCharge", "C/m3", "meq/l", 96485.3399, 0, -1E+60, 
+              1E+60, 0, 96485.3399, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("VolumeDensityOfCharge", "C/m3", "eq/l", 96485339.9, 0, -1E+60, 
+              1E+60, 0, 96485339.9, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ElectricCurrent", "A", "meq/min", 1.6080889983333335, 0, -1E+60,
+               1E+60, 0, 1.6080889983333335, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Fraction", "1", 
+              "%", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("OsmoticMembramePermeability",
+               "m6/(mol.s)", "ml/(mOsmol.min)", 1.6666666666666667E-05, 0, 
+              -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("DiffusionMembranePermeability",
+               "m3/s", "ml/min", 1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 
+              1.6666666666666667E-05, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("HydraulicConductance", "m3/(Pa.s)", "ml/(mmHg.min)", 
+              1.2501028045069496E-10, 0, -1E+60, 1E+60, 0, 1.2501028045069496E-10,
+               StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("HydraulicCompliance", "m3/Pa", "ml/mmHg", 7.500616827041698E-09,
+               0, -1E+60, 1E+60, 0, 7.500616827041698E-09, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicInertance",
+               "Pa.s2/m3", "mmHg.min2/ml", 479960526315.7895, 0, -1E+60, 1E+60, 0,
+               479960526315.7895, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("GasSolubility", "mol/(m3.Pa)", "mmol/(l.mmHg)", 0.007500616827041697,
+               0, -1E+60, 1E+60, 0, 0.007500616827041697, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Osmolarity", 
+              "mol/m3", "mosm/l", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Osmolarity", 
+              "mol/m3", "osm/l", 1000, 0, -1E+60, 1E+60, 0, 1000, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "MolarEnergy", "J/mol", "kcal/mol", 4186.8, 0, -1E+60, 1E+60, 0, 
+              4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Pharmacology Concentration", "1/m3", "iu/l", 1000, 0, -1E+60, 
+              1E+60, 0, 1000, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Pharmacology Concentration", "1/m3", "uiu/ml", 1, 0, -1E+60, 
+              1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("PopulationChange", "1/s", "1/min", 0.016666666666666666, 0, 
+              -1E+60, 1E+60, 0, 0.016666666666666666, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("PopulationChange",
+               "1/s", "1/d", 1.1574074074074073E-05, 0, -1E+60, 1E+60, 0, 
+              1.1574074074074073E-05, StateSelect.default)});
+        end if;
+        if (arteries.SAVE_COMPARISON) then 
+          arteries.writeComparison_Unique5(
+            arteries.stateName, 
+            arteries.defaultValue, 
+            arteries.initialValue, 
+            arteries.state, 
+            arteries.storeUnit, 
+            {arteries.UnitConversions.RealTypeRecord_Unique2("", "1", "", 1, 0, 
+              -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("", "1", "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("pH", 
+              "log10(mol/l)", "log10(mol/l)", 1, 0, -1E+60, 1E+60, 0, 1, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Time", "s", "min", 60, 0, -1E+60, 1E+60, 0, 60, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "Frequency", "1/s", "Hz", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "Frequency", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 
+              1E+60, 0, 0.016666666666666666, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Mass", "kg", "g",
+               0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Mass", "kg", "mg",
+               1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MassFlowRate", 
+              "kg/s", "mg/min", 1.6666666666666667E-08, 0, -1E+60, 1E+60, 0, 
+              1.6666666666666667E-08, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("MassFlowRate", "kg/s", "g/min", 1.6666666666666667E-05, 0, 
+              -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Density", "kg/m3",
+               "kg/l", 1000.0, 0, 0, 1E+60, 0, 1000.0, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Density", "kg/m3",
+               "g/l", 1, 0, 0, 1E+60, 0, 1, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+               "kg/m3", "mg/l", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "MassConcentration", "kg/m3", "mg/dl", 0.009999999999999998, 0, 0,
+               1E+60, 0, 0.009999999999999998, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+               "kg/m3", "ng/l", 1E-09, 0, 0, 1E+60, 0, 1E-09, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "MassConcentration", "kg/m3", "ng/dl", 9.999999999999999E-09, 0, 0,
+               1E+60, 0, 9.999999999999999E-09, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+               "kg/m3", "ng/ml", 1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2("Length",
+               "m", "cm", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Velocity", "m/s",
+               "MPH", 0.44704, 0, -1E+60, 1E+60, 0, 0.44704, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Acceleration", 
+              "m/s2", "m/s2", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Pressure", "Pa", 
+              "mmHg", 133.32236842105263, 0, -1E+60, 1E+60, 0, 133.32236842105263,
+               StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Volume", "m3", "ml", 1E-06, 0, -1E+60, 1E+60, 0, 1E-06, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("VolumeFlowRate", "m3/s", "ml/min", 1.6666666666666667E-08, 0, 
+              -1E+60, 1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+              "mol/m3", "mol/l", 1000.0, 0, -1E+60, 1E+60, 0, 1000.0, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Concentration", "mol/m3", "mmol/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Concentration", "mol/m3", "pmol/l", 1E-09, 0, -1E+60, 1E+60, 0, 
+              1E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Concentration", "mol/m3", "uU_Insulin/ml", 6.622E-09, 0, -1E+60,
+               1E+60, 0, 6.622E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Concentration", "mol/m3", "U_EPO/l", 4.5E-10, 0, -1E+60, 1E+60, 0,
+               4.5E-10, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("AmountOfSubstance", "mol", "mmol", 0.001, 0, -1E+60, 1E+60, 0, 
+              0.001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("AmountOfSubstance", "mol", "osm", 1, 0, -1E+60, 1E+60, 0, 1, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("AmountOfSubstance", "mol", "mosm", 0.001, 0, -1E+60, 1E+60, 0, 
+              0.001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("MolarFlowRate", "mol/s", "mmol/min", 1.6666666666666667E-05, 0, 
+              -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("MolarFlowRate", 
+              "mol/s", "ml_STP/min", 7.338602876199938E-07, 0, -1E+60, 1E+60, 0,
+               7.338602876199938E-07, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+              StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ThermodynamicTemperature", "K", "K", 1, 0, -1E+60, 1E+60, 310.15,
+               1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ThermodynamicTemperature", "K", "degC", 1, 273.15, -1E+60, 1E+60,
+               310.15, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Power", "W", "W", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+              "kcal/min", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+              "cal/min", 0.06978, 0, -1E+60, 1E+60, 0, 0.06978, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "ThermalConductance", "W/K", "kcal/(min.degC)", 69.78, 0, -1E+60, 
+              1E+60, 0, 69.78, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("SpecificHeatCapacity", "J/(kg.K)", "kcal/(degC.kg)", 4186.8, 0, 
+              -1E+60, 1E+60, 0, 4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("SpecificEnergy", "J/kg", "kcal/kg", 4186.8, 0, -1E+60, 1E+60, 0,
+               4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ElectricPotential", "V", "mV", 0.001, 0, -1E+60, 1E+60, 0, 0.001,
+               StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ElectricCharge", "C", "meq", 96.48533990000001, 0, -1E+60, 1E+60,
+               0, 96.48533990000001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("VolumeDensityOfCharge", "C/m3", "meq/l", 96485.3399, 0, -1E+60, 
+              1E+60, 0, 96485.3399, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("VolumeDensityOfCharge", "C/m3", "eq/l", 96485339.9, 0, -1E+60, 
+              1E+60, 0, 96485339.9, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("ElectricCurrent", "A", "meq/min", 1.6080889983333335, 0, -1E+60,
+               1E+60, 0, 1.6080889983333335, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Fraction", "1", 
+              "%", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("OsmoticMembramePermeability",
+               "m6/(mol.s)", "ml/(mOsmol.min)", 1.6666666666666667E-05, 0, 
+              -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("DiffusionMembranePermeability",
+               "m3/s", "ml/min", 1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 
+              1.6666666666666667E-05, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("HydraulicConductance", "m3/(Pa.s)", "ml/(mmHg.min)", 
+              1.2501028045069496E-10, 0, -1E+60, 1E+60, 0, 1.2501028045069496E-10,
+               StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("HydraulicCompliance", "m3/Pa", "ml/mmHg", 7.500616827041698E-09,
+               0, -1E+60, 1E+60, 0, 7.500616827041698E-09, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicInertance",
+               "Pa.s2/m3", "mmHg.min2/ml", 479960526315.7895, 0, -1E+60, 1E+60, 0,
+               479960526315.7895, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("GasSolubility", "mol/(m3.Pa)", "mmol/(l.mmHg)", 0.007500616827041697,
+               0, -1E+60, 1E+60, 0, 0.007500616827041697, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("Osmolarity", 
+              "mol/m3", "mosm/l", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default),
+               arteries.UnitConversions.RealTypeRecord_Unique2("Osmolarity", 
+              "mol/m3", "osm/l", 1000, 0, -1E+60, 1E+60, 0, 1000, StateSelect.
+              default), arteries.UnitConversions.RealTypeRecord_Unique2(
+              "MolarEnergy", "J/mol", "kcal/mol", 4186.8, 0, -1E+60, 1E+60, 0, 
+              4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Pharmacology Concentration", "1/m3", "iu/l", 1000, 0, -1E+60, 
+              1E+60, 0, 1000, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("Pharmacology Concentration", "1/m3", "uiu/ml", 1, 0, -1E+60, 
+              1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+              ("PopulationChange", "1/s", "1/min", 0.016666666666666666, 0, 
+              -1E+60, 1E+60, 0, 0.016666666666666666, StateSelect.default), 
+              arteries.UnitConversions.RealTypeRecord_Unique2("PopulationChange",
+               "1/s", "1/d", 1.1574074074074073E-05, 0, -1E+60, 1E+60, 0, 
+              1.1574074074074073E-05, StateSelect.default)});
+        end if;
+      end when;
+      if (arteries.Simulation <> Physiolibrary.Types.SimulationType.SteadyState)
+         then 
+        der(arteries.state) = arteries.change;
+      elseif ( not arteries.isDependent) then 
+        arteries.change = 0;
+      end if;
+    // end of extends 
+  equation
+    if ( not arteries.useV0Input) then 
+      arteries.zpv = arteries.ZeroPressureVolume;
+    end if;
+    if ( not arteries.useComplianceInput) then 
+      arteries.c = arteries.Compliance;
+    end if;
+    if ( not arteries.useExternalPressureInput) then 
+      arteries.ep = arteries.ExternalPressure;
+    end if;
+    arteries.excessVolume = max(0, arteries.volume-arteries.zpv);
+    arteries.q_in.pressure = smooth(0, (if noEvent(arteries.volume > 
+      arteries.CollapsingPressureVolume) then arteries.excessVolume/arteries.c+
+      arteries.ep else arteries.a*log(max(1E-15, arteries.volume/
+      arteries.CollapsingPressureVolume))));
+    arteries.state = arteries.volume;
+    arteries.change = arteries.q_in.q;
+
+  // Component resistance
+  // class Physiolibrary.Hydraulic.Components.Conductor
+    // extends Physiolibrary.Hydraulic.Interfaces.OnePort
+    equation
+      resistance.q_in.q+resistance.q_out.q = 0;
+      resistance.volumeFlowRate = resistance.q_in.q;
+      resistance.dp = resistance.q_in.pressure-resistance.q_out.pressure;
+    // end of extends 
+  equation
+    if ( not resistance.useConductanceInput) then 
+      resistance.c = resistance.Conductance;
+    end if;
+    resistance.q_in.q = resistance.c*(resistance.q_in.pressure-resistance.q_out.pressure);
+
+  // Component veins
+  // class Physiolibrary.Hydraulic.Sources.UnlimitedVolume
+  equation
+    if ( not veins.usePressureInput) then 
+      veins.p = veins.P;
+    end if;
+    veins.y.pressure = veins.p;
+    if (veins.isIsolatedInSteadyState and veins.Simulation == Physiolibrary.Types.SimulationType.
+      SteadyState) then 
+      veins.y.q = 0;
+    end if;
+
+  // Component pulses
+  // class Cardiovascular.Examples.Utilities.Pulses
+  equation
+    pulses.b = time-pre(pulses.T0) >= pre(pulses.HP);
+    when {initial(), pulses.b} then
+      pulses.T0 = time;
+      pulses.HP = 1/pulses.HR;
+      pulses.TD2 = pulses.TD1+0.4*pulses.HP;
+    end when;
+    pulses.tc = time-pulses.T0;
+    pulses.volumeflowrate = (if pulses.tc < pulses.TD1 then 0 else (if pulses.tc
+       < pulses.TD2 then sin((pulses.tc-pulses.TD1)/(pulses.TD2-pulses.TD1)*
+      3.141592653589793)*pulses.QP else 0));
+
+  // Component heart1
+  // class Cardiovascular.Examples.DizertaceExample.HydraulicFlowSource
+  equation
+    heart1.qout.q =  -heart1.desiredflow;
+
+  // Component arteries1
+  // class Cardiovascular.Examples.DizertaceExample.HydraulicElastance
+  equation
+    arteries1.qin.p-arteries1.p0 = (if arteries1.V < arteries1.V0 then 0 else (
+      arteries1.V-arteries1.V0)/arteries1.C);
+    der(arteries1.V) = arteries1.qin.q;
+
+  // Component resistance1
+  // class Cardiovascular.Examples.DizertaceExample.HydraulicConductor
+  equation
+    resistance1.qin.q =  -resistance1.qout.q;
+    resistance1.qin.q = resistance1.G*(resistance1.qin.p-resistance1.qout.p);
+
+  // Component veins1
+  // class Cardiovascular.Examples.DizertaceExample.HydraulicContraPressure
+  equation
+    veins1.qin.p = veins1.contrapressure;
+
+  // Component 
+  // class Cardiovascular.Examples.DizertaceExample.Windkessel_2element_dizertace
+  equation
+    heart.q_out.pressure = arteries.q_in.pressure;
+    resistance.q_in.pressure = arteries.q_in.pressure;
+    arteries.q_in.q+heart.q_out.q+resistance.q_in.q = 0.0;
+    heart1.qout.p = arteries1.qin.p;
+    resistance1.qin.p = arteries1.qin.p;
+    arteries1.qin.q+heart1.qout.q+resistance1.qin.q = 0.0;
+    heart1.desiredflow = heart.solutionFlow;
+    pulses.volumeflowrate = heart.solutionFlow;
+    veins.y.pressure = resistance.q_out.pressure;
+    resistance.q_out.q+veins.y.q = 0.0;
+    veins1.qin.p = resistance1.qout.p;
+    resistance1.qout.q+veins1.qin.q = 0.0;
+            
+// Initial equations and algorithms
+
+  // Component arteries
+  // class Physiolibrary.Hydraulic.Components.ElasticVessel
+    // extends Physiolibrary.SteadyStates.Interfaces.SteadyState
+    initial equation
+      if (arteries.Simulation == Physiolibrary.Types.SimulationType.NormalInit)
+         then 
+        arteries.state = arteries.state_start;
+      elseif (arteries.Simulation == Physiolibrary.Types.SimulationType.ReadInit)
+         then 
+        arteries.state = arteries.readReal_Unique1(
+          arteries.stateName, 
+          arteries.storeUnit, 
+          {arteries.UnitConversions.RealTypeRecord_Unique2("", "1", "", 1, 0, 
+            -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("", "1", "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("pH", "log10(mol/l)",
+             "log10(mol/l)", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Energy", "J", 
+            "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Time", "s", "min", 60,
+             0, -1E+60, 1E+60, 0, 60, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Frequency", "1/s", "Hz", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "Frequency", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 1E+60,
+             0, 0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Mass", "kg", "g", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2("Mass", 
+            "kg", "mg", 1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("MassFlowRate", 
+            "kg/s", "mg/min", 1.6666666666666667E-08, 0, -1E+60, 1E+60, 0, 
+            1.6666666666666667E-08, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MassFlowRate", "kg/s", "g/min", 1.6666666666666667E-05, 0, -1E+60,
+             1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Density", "kg/m3", 
+            "kg/l", 1000.0, 0, 0, 1E+60, 0, 1000.0, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Density", "kg/m3", 
+            "g/l", 1, 0, 0, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MassConcentration", "kg/m3", "mg/l", 0.001, 0, 0, 1E+60, 0, 0.001,
+             StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MassConcentration", "kg/m3", "mg/dl", 0.009999999999999998, 0, 0, 
+            1E+60, 0, 0.009999999999999998, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+             "kg/m3", "ng/l", 1E-09, 0, 0, 1E+60, 0, 1E-09, StateSelect.default),
+             arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+             "kg/m3", "ng/dl", 9.999999999999999E-09, 0, 0, 1E+60, 0, 
+            9.999999999999999E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MassConcentration", "kg/m3", "ng/ml", 1E-06, 0, 0, 1E+60, 0, 1E-06,
+             StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Length", "m", "cm", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2("Velocity",
+             "m/s", "MPH", 0.44704, 0, -1E+60, 1E+60, 0, 0.44704, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "Acceleration", "m/s2", "m/s2", 1, 0, -1E+60, 1E+60, 0, 1, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Pressure", "Pa", "mmHg", 133.32236842105263, 0, -1E+60, 1E+60, 0, 
+            133.32236842105263, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Volume", "m3", "ml", 1E-06, 0, -1E+60, 1E+60, 0, 1E-06, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("VolumeFlowRate", "m3/s", "ml/min", 1.6666666666666667E-08, 0, 
+            -1E+60, 1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+            "mol/m3", "mol/l", 1000.0, 0, -1E+60, 1E+60, 0, 1000.0, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "Concentration", "mol/m3", "mmol/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Concentration", "mol/m3", "pmol/l", 1E-09, 0, -1E+60, 1E+60, 0, 
+            1E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Concentration", "mol/m3", "uU_Insulin/ml", 6.622E-09, 0, -1E+60, 
+            1E+60, 0, 6.622E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Concentration", "mol/m3", "U_EPO/l", 4.5E-10, 0, -1E+60, 1E+60, 0,
+             4.5E-10, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("AmountOfSubstance", "mol", "mmol", 0.001, 0, -1E+60, 1E+60, 0, 
+            0.001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("AmountOfSubstance", "mol", "osm", 1, 0, -1E+60, 1E+60, 0, 1, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("AmountOfSubstance", "mol", "mosm", 0.001, 0, -1E+60, 1E+60, 0, 
+            0.001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MolarFlowRate", "mol/s", "mmol/min", 1.6666666666666667E-05, 0, 
+            -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("MolarFlowRate", 
+            "mol/s", "ml_STP/min", 7.338602876199938E-07, 0, -1E+60, 1E+60, 0, 
+            7.338602876199938E-07, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ThermodynamicTemperature", "K", "K", 1, 0, -1E+60, 1E+60, 310.15, 1,
+             StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ThermodynamicTemperature", "K", "degC", 1, 273.15, -1E+60, 1E+60, 
+            310.15, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Power", "W", "W", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default),
+             arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+            "kcal/min", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.default),
+             arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+            "cal/min", 0.06978, 0, -1E+60, 1E+60, 0, 0.06978, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "ThermalConductance", "W/K", "kcal/(min.degC)", 69.78, 0, -1E+60, 
+            1E+60, 0, 69.78, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("SpecificHeatCapacity", "J/(kg.K)", "kcal/(degC.kg)", 4186.8, 0, 
+            -1E+60, 1E+60, 0, 4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("SpecificEnergy", "J/kg", "kcal/kg", 4186.8, 0, -1E+60, 1E+60, 0, 
+            4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ElectricPotential", "V", "mV", 0.001, 0, -1E+60, 1E+60, 0, 0.001, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ElectricCharge", "C", "meq", 96.48533990000001, 0, -1E+60, 1E+60, 0,
+             96.48533990000001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("VolumeDensityOfCharge", "C/m3", "meq/l", 96485.3399, 0, -1E+60, 
+            1E+60, 0, 96485.3399, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("VolumeDensityOfCharge", "C/m3", "eq/l", 96485339.9, 0, -1E+60, 
+            1E+60, 0, 96485339.9, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ElectricCurrent", "A", "meq/min", 1.6080889983333335, 0, -1E+60, 
+            1E+60, 0, 1.6080889983333335, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Fraction", "1", "%", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "OsmoticMembramePermeability", "m6/(mol.s)", "ml/(mOsmol.min)", 
+            1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 1.6666666666666667E-05,
+             StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("DiffusionMembranePermeability", "m3/s", "ml/min", 1.6666666666666667E-05,
+             0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicConductance",
+             "m3/(Pa.s)", "ml/(mmHg.min)", 1.2501028045069496E-10, 0, -1E+60, 
+            1E+60, 0, 1.2501028045069496E-10, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicCompliance",
+             "m3/Pa", "ml/mmHg", 7.500616827041698E-09, 0, -1E+60, 1E+60, 0, 
+            7.500616827041698E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("HydraulicInertance", "Pa.s2/m3", "mmHg.min2/ml", 479960526315.7895,
+             0, -1E+60, 1E+60, 0, 479960526315.7895, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("GasSolubility", 
+            "mol/(m3.Pa)", "mmol/(l.mmHg)", 0.007500616827041697, 0, -1E+60, 
+            1E+60, 0, 0.007500616827041697, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Osmolarity", 
+            "mol/m3", "mosm/l", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default),
+             arteries.UnitConversions.RealTypeRecord_Unique2("Osmolarity", 
+            "mol/m3", "osm/l", 1000, 0, -1E+60, 1E+60, 0, 1000, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "MolarEnergy", "J/mol", "kcal/mol", 4186.8, 0, -1E+60, 1E+60, 0, 
+            4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Pharmacology Concentration", "1/m3", "iu/l", 1000, 0, -1E+60, 
+            1E+60, 0, 1000, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Pharmacology Concentration", "1/m3", "uiu/ml", 1, 0, -1E+60, 1E+60,
+             0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("PopulationChange", "1/s", "1/min", 0.016666666666666666, 0, -1E+60,
+             1E+60, 0, 0.016666666666666666, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("PopulationChange", 
+            "1/s", "1/d", 1.1574074074074073E-05, 0, -1E+60, 1E+60, 0, 
+            1.1574074074074073E-05, StateSelect.default)});
+      elseif (arteries.Simulation == Physiolibrary.Types.SimulationType.
+        InitSteadyState and  not arteries.isDependent) then 
+        der(arteries.state) = 0;
+      end if;
+      arteries.initialValue = arteries.state;
+      if (arteries.SAVE_COMPARISON) then 
+        arteries.defaultValue = arteries.readReal_Unique1(
+          arteries.stateName, 
+          arteries.storeUnit, 
+          {arteries.UnitConversions.RealTypeRecord_Unique2("", "1", "", 1, 0, 
+            -1E+60, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("", "1", "", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("pH", "log10(mol/l)",
+             "log10(mol/l)", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Energy", "J", 
+            "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Time", "s", "min", 60,
+             0, -1E+60, 1E+60, 0, 60, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Frequency", "1/s", "Hz", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "Frequency", "1/s", "1/min", 0.016666666666666666, 0, -1E+60, 1E+60,
+             0, 0.016666666666666666, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Mass", "kg", "g", 0.001, 0, 0, 1E+60, 0, 0.001, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2("Mass", 
+            "kg", "mg", 1E-06, 0, 0, 1E+60, 0, 1E-06, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("MassFlowRate", 
+            "kg/s", "mg/min", 1.6666666666666667E-08, 0, -1E+60, 1E+60, 0, 
+            1.6666666666666667E-08, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MassFlowRate", "kg/s", "g/min", 1.6666666666666667E-05, 0, -1E+60,
+             1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Density", "kg/m3", 
+            "kg/l", 1000.0, 0, 0, 1E+60, 0, 1000.0, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Density", "kg/m3", 
+            "g/l", 1, 0, 0, 1E+60, 0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MassConcentration", "kg/m3", "mg/l", 0.001, 0, 0, 1E+60, 0, 0.001,
+             StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MassConcentration", "kg/m3", "mg/dl", 0.009999999999999998, 0, 0, 
+            1E+60, 0, 0.009999999999999998, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+             "kg/m3", "ng/l", 1E-09, 0, 0, 1E+60, 0, 1E-09, StateSelect.default),
+             arteries.UnitConversions.RealTypeRecord_Unique2("MassConcentration",
+             "kg/m3", "ng/dl", 9.999999999999999E-09, 0, 0, 1E+60, 0, 
+            9.999999999999999E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MassConcentration", "kg/m3", "ng/ml", 1E-06, 0, 0, 1E+60, 0, 1E-06,
+             StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Length", "m", "cm", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2("Velocity",
+             "m/s", "MPH", 0.44704, 0, -1E+60, 1E+60, 0, 0.44704, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "Acceleration", "m/s2", "m/s2", 1, 0, -1E+60, 1E+60, 0, 1, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Pressure", "Pa", "mmHg", 133.32236842105263, 0, -1E+60, 1E+60, 0, 
+            133.32236842105263, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Volume", "m3", "ml", 1E-06, 0, -1E+60, 1E+60, 0, 1E-06, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("VolumeFlowRate", "m3/s", "ml/min", 1.6666666666666667E-08, 0, 
+            -1E+60, 1E+60, 0, 1.6666666666666667E-08, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Concentration", 
+            "mol/m3", "mol/l", 1000.0, 0, -1E+60, 1E+60, 0, 1000.0, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "Concentration", "mol/m3", "mmol/l", 1, 0, -1E+60, 1E+60, 0, 1, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Concentration", "mol/m3", "pmol/l", 1E-09, 0, -1E+60, 1E+60, 0, 
+            1E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Concentration", "mol/m3", "uU_Insulin/ml", 6.622E-09, 0, -1E+60, 
+            1E+60, 0, 6.622E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Concentration", "mol/m3", "U_EPO/l", 4.5E-10, 0, -1E+60, 1E+60, 0,
+             4.5E-10, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("AmountOfSubstance", "mol", "mmol", 0.001, 0, -1E+60, 1E+60, 0, 
+            0.001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("AmountOfSubstance", "mol", "osm", 1, 0, -1E+60, 1E+60, 0, 1, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("AmountOfSubstance", "mol", "mosm", 0.001, 0, -1E+60, 1E+60, 0, 
+            0.001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("MolarFlowRate", "mol/s", "mmol/min", 1.6666666666666667E-05, 0, 
+            -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("MolarFlowRate", 
+            "mol/s", "ml_STP/min", 7.338602876199938E-07, 0, -1E+60, 1E+60, 0, 
+            7.338602876199938E-07, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Energy", "J", "kcal", 4186.8, 0, -1E+60, 1E+60, 0, 4186.8, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ThermodynamicTemperature", "K", "K", 1, 0, -1E+60, 1E+60, 310.15, 1,
+             StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ThermodynamicTemperature", "K", "degC", 1, 273.15, -1E+60, 1E+60, 
+            310.15, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Power", "W", "W", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default),
+             arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+            "kcal/min", 69.78, 0, -1E+60, 1E+60, 0, 69.78, StateSelect.default),
+             arteries.UnitConversions.RealTypeRecord_Unique2("Power", "W", 
+            "cal/min", 0.06978, 0, -1E+60, 1E+60, 0, 0.06978, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "ThermalConductance", "W/K", "kcal/(min.degC)", 69.78, 0, -1E+60, 
+            1E+60, 0, 69.78, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("SpecificHeatCapacity", "J/(kg.K)", "kcal/(degC.kg)", 4186.8, 0, 
+            -1E+60, 1E+60, 0, 4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("SpecificEnergy", "J/kg", "kcal/kg", 4186.8, 0, -1E+60, 1E+60, 0, 
+            4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ElectricPotential", "V", "mV", 0.001, 0, -1E+60, 1E+60, 0, 0.001, 
+            StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ElectricCharge", "C", "meq", 96.48533990000001, 0, -1E+60, 1E+60, 0,
+             96.48533990000001, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("VolumeDensityOfCharge", "C/m3", "meq/l", 96485.3399, 0, -1E+60, 
+            1E+60, 0, 96485.3399, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("VolumeDensityOfCharge", "C/m3", "eq/l", 96485339.9, 0, -1E+60, 
+            1E+60, 0, 96485339.9, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("ElectricCurrent", "A", "meq/min", 1.6080889983333335, 0, -1E+60, 
+            1E+60, 0, 1.6080889983333335, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Fraction", "1", "%", 0.01, 0, -1E+60, 1E+60, 0, 0.01, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "OsmoticMembramePermeability", "m6/(mol.s)", "ml/(mOsmol.min)", 
+            1.6666666666666667E-05, 0, -1E+60, 1E+60, 0, 1.6666666666666667E-05,
+             StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("DiffusionMembranePermeability", "m3/s", "ml/min", 1.6666666666666667E-05,
+             0, -1E+60, 1E+60, 0, 1.6666666666666667E-05, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicConductance",
+             "m3/(Pa.s)", "ml/(mmHg.min)", 1.2501028045069496E-10, 0, -1E+60, 
+            1E+60, 0, 1.2501028045069496E-10, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("HydraulicCompliance",
+             "m3/Pa", "ml/mmHg", 7.500616827041698E-09, 0, -1E+60, 1E+60, 0, 
+            7.500616827041698E-09, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("HydraulicInertance", "Pa.s2/m3", "mmHg.min2/ml", 479960526315.7895,
+             0, -1E+60, 1E+60, 0, 479960526315.7895, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("GasSolubility", 
+            "mol/(m3.Pa)", "mmol/(l.mmHg)", 0.007500616827041697, 0, -1E+60, 
+            1E+60, 0, 0.007500616827041697, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("Osmolarity", 
+            "mol/m3", "mosm/l", 1, 0, -1E+60, 1E+60, 0, 1, StateSelect.default),
+             arteries.UnitConversions.RealTypeRecord_Unique2("Osmolarity", 
+            "mol/m3", "osm/l", 1000, 0, -1E+60, 1E+60, 0, 1000, StateSelect.
+            default), arteries.UnitConversions.RealTypeRecord_Unique2(
+            "MolarEnergy", "J/mol", "kcal/mol", 4186.8, 0, -1E+60, 1E+60, 0, 
+            4186.8, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Pharmacology Concentration", "1/m3", "iu/l", 1000, 0, -1E+60, 
+            1E+60, 0, 1000, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("Pharmacology Concentration", "1/m3", "uiu/ml", 1, 0, -1E+60, 1E+60,
+             0, 1, StateSelect.default), arteries.UnitConversions.RealTypeRecord_Unique2
+            ("PopulationChange", "1/s", "1/min", 0.016666666666666666, 0, -1E+60,
+             1E+60, 0, 0.016666666666666666, StateSelect.default), 
+            arteries.UnitConversions.RealTypeRecord_Unique2("PopulationChange", 
+            "1/s", "1/d", 1.1574074074074073E-05, 0, -1E+60, 1E+60, 0, 
+            1.1574074074074073E-05, StateSelect.default)});
+      else
+        arteries.defaultValue = 6.0221415E+23;
+      end if;
+    // end of extends 
+
+  // Component veins
+  // class Physiolibrary.Hydraulic.Sources.UnlimitedVolume
+  initial equation
+    if (veins.isIsolatedInSteadyState and veins.Simulation == Physiolibrary.Types.SimulationType.
+      InitSteadyState) then 
+      veins.y.q = 0;
+    end if;
+
+end Cardiovascular.Examples.DizertaceExample.Windkessel_2element_dizertace;

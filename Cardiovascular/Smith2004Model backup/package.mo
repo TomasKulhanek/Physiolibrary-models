@@ -2,115 +2,117 @@ within ;
 package Smith2004Model
   model Hemodynamics_flat
     Physiolibrary.Hydraulic.Components.ElasticVessel aorta
-      annotation (Placement(transformation(extent={{-92,-28},{-72,-8}})));
+      annotation (Placement(transformation(extent={{-74,-32},{-54,-12}})));
     Physiolibrary.Hydraulic.Components.ElasticVessel venaCava
-      annotation (Placement(transformation(extent={{-78,26},{-58,46}})));
+      annotation (Placement(transformation(extent={{-74,24},{-54,44}})));
     Physiolibrary.Hydraulic.Components.IdealValve aorticValve
-      annotation (Placement(transformation(extent={{-40,-30},{-60,-10}})));
+      annotation (Placement(transformation(extent={{-26,-32},{-46,-12}})));
     Physiolibrary.Hydraulic.Components.Conductor systemic annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=90,
-          origin={-84,6})));
+          origin={-70,4})));
     Physiolibrary.Hydraulic.Components.IdealValve tricupsidValve
-      annotation (Placement(transformation(extent={{-54,28},{-34,48}})));
+      annotation (Placement(transformation(extent={{-40,26},{-20,46}})));
     Physiolibrary.Hydraulic.Components.ElasticVessel rightVentricle
-      annotation (Placement(transformation(extent={{-16,28},{4,48}})));
+      annotation (Placement(transformation(extent={{-2,26},{18,46}})));
     Physiolibrary.Hydraulic.Components.ElasticVessel leftVentricle
-      annotation (Placement(transformation(extent={{-6,-30},{14,-10}})));
+      annotation (Placement(transformation(extent={{8,-32},{28,-12}})));
     Physiolibrary.Hydraulic.Components.Inertia inertiaAV annotation (Placement(
           transformation(
           extent={{-10,-10},{10,10}},
           rotation=180,
-          origin={-24,-20})));
+          origin={-10,-22})));
     Physiolibrary.Hydraulic.Components.Inertia inertiaPV
-      annotation (Placement(transformation(extent={{10,26},{30,46}})));
+      annotation (Placement(transformation(extent={{24,24},{44,44}})));
     Physiolibrary.Hydraulic.Components.IdealValve pulmonaryValve
-      annotation (Placement(transformation(extent={{36,26},{56,46}})));
+      annotation (Placement(transformation(extent={{50,24},{70,44}})));
     Physiolibrary.Hydraulic.Components.ElasticVessel pulmonaryArteries
-      annotation (Placement(transformation(extent={{66,28},{86,48}})));
+      annotation (Placement(transformation(extent={{80,26},{100,46}})));
     Physiolibrary.Hydraulic.Components.Conductor pulmonary annotation (
         Placement(transformation(
           extent={{-10,-10},{10,10}},
           rotation=270,
-          origin={80,4})));
+          origin={94,2})));
     Physiolibrary.Hydraulic.Components.ElasticVessel pulmonaryVeins
-      annotation (Placement(transformation(extent={{68,-32},{88,-12}})));
+      annotation (Placement(transformation(extent={{82,-34},{102,-14}})));
     Physiolibrary.Hydraulic.Components.IdealValve mitralValve
-      annotation (Placement(transformation(extent={{46,-30},{26,-10}})));
+      annotation (Placement(transformation(extent={{60,-32},{40,-12}})));
+    VentricularInteraction ventricularInteraction
+      annotation (Placement(transformation(extent={{8,-4},{28,16}})));
   equation
     connect(aorticValve.q_out, aorta.q_in) annotation (Line(
-        points={{-60,-20},{-72,-20},{-72,-18},{-82,-18}},
+        points={{-46,-22},{-64,-22}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(aorta.q_in, systemic.q_in) annotation (Line(
-        points={{-82,-18},{-82,-4},{-84,-4}},
+        points={{-64,-22},{-68,-22},{-68,-6},{-70,-6}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(systemic.q_out, venaCava.q_in) annotation (Line(
-        points={{-84,16},{-86,16},{-86,36},{-68,36}},
+        points={{-70,14},{-72,14},{-72,34},{-64,34}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(venaCava.q_in, tricupsidValve.q_in) annotation (Line(
-        points={{-68,36},{-66,36},{-66,38},{-54,38}},
+        points={{-64,34},{-52,34},{-52,36},{-40,36}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(tricupsidValve.q_out, rightVentricle.q_in) annotation (Line(
-        points={{-34,38},{-6,38}},
+        points={{-20,36},{8,36}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(rightVentricle.q_in, inertiaPV.q_in) annotation (Line(
-        points={{-6,38},{2,38},{2,36},{10,36}},
+        points={{8,36},{16,36},{16,34},{24,34}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(inertiaPV.q_out, pulmonaryValve.q_in) annotation (Line(
-        points={{30,36},{36,36}},
+        points={{44,34},{50,34}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(pulmonaryValve.q_out, pulmonaryArteries.q_in) annotation (Line(
-        points={{56,36},{66,36},{66,38},{76,38}},
+        points={{70,34},{80,34},{80,36},{90,36}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(pulmonaryArteries.q_in, pulmonary.q_in) annotation (Line(
-        points={{76,38},{80,38},{80,14}},
+        points={{90,36},{94,36},{94,12}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(pulmonary.q_out, pulmonaryVeins.q_in) annotation (Line(
-        points={{80,-6},{78,-6},{78,-22}},
+        points={{94,-8},{92,-8},{92,-24}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(pulmonaryVeins.q_in, mitralValve.q_in) annotation (Line(
-        points={{78,-22},{64,-22},{64,-20},{46,-20}},
+        points={{92,-24},{78,-24},{78,-22},{60,-22}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(mitralValve.q_out, leftVentricle.q_in) annotation (Line(
-        points={{26,-20},{4,-20}},
+        points={{40,-22},{18,-22}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(leftVentricle.q_in, inertiaAV.q_in) annotation (Line(
-        points={{4,-20},{-14,-20}},
+        points={{18,-22},{0,-22}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(inertiaAV.q_out, aorticValve.q_in) annotation (Line(
-        points={{-34,-20},{-40,-20}},
+        points={{-20,-22},{-26,-22}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
-    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-              -100},{100,100}}),      graphics));
+    annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+              -100,-100},{100,100}}), graphics));
   end Hemodynamics_flat;
 
   model VentricularInteraction
@@ -169,8 +171,5 @@ package Smith2004Model
             smooth=Smooth.None)}), Diagram(coordinateSystem(preserveAspectRatio=
              false, extent={{-100,-100},{100,100}}), graphics));
   end VentricularInteraction;
-  annotation (uses(Modelica(version="3.2.1"), Physiolibrary(version=
-            "2.3.0-beta")),
-    version="1",
-    conversion(noneFromVersion=""));
+  annotation (uses(Modelica(version="3.2.1"), Physiolibrary(version="2.1.1")));
 end Smith2004Model;

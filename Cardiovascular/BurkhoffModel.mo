@@ -3061,14 +3061,16 @@ systemic.volume")}),     Icon(coordinateSystem(preserveAspectRatio=false, extent
                 {40,40}}),     graphics));
     end HemodynamicsBurkhoff_with_catheter;
   end Experiment;
-  annotation(uses(                                                             MeursModel(version = "1"), HeamodynamicsDymola(version = "1"),
-      Cardiovascular(version="1"),
-      Physiolibrary(version="2.2.0"),
-      Modelica(version="3.2.1")), Documentation(revisions="<html>
+  annotation(uses(                                                                                        HeamodynamicsDymola(version = "1"),
+      Modelica(version="3.2.1"),
+      Cardiovascular(version="2"),
+      MeursModel(version="3.2"),
+      Physiolibrary(version="2.3.0-beta")),
+                                  Documentation(revisions="<html>
 <p>Licensed by Tomas Kulhanek under the Modelica License 2</p>
 <p>Copyright &copy; 2008-2014, Tomas Kulhanek, Charles University in Prague.</p>
 <p><br><i>This Modelica package is&nbsp;<u>free</u>&nbsp;software and the use is completely at&nbsp;<u>your own risk</u>; it can be redistributed and/or modified under the terms of the Modelica License 2. For license conditions (including the disclaimer of warranty) see&nbsp;<a href=\"modelica://Physiolibrary.UsersGuide.ModelicaLicense2\">Physiolibrary.UsersGuide.ModelicaLicense2</a>&nbsp;or visit&nbsp;<a href=\"http://www.modelica.org/licenses/ModelicaLicense2\">http://www.modelica.org/licenses/ModelicaLicense2</a>.</i></p>
 </html>"),
-    version="1.2",
-    conversion(noneFromVersion=""));
+    version="1.3",
+    conversion(noneFromVersion="", noneFromVersion="1.2"));
 end BurkhoffModel;

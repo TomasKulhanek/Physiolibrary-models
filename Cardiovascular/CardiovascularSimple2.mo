@@ -1,8 +1,8 @@
 within ;
-package CardiovascularSimple
+package CardiovascularSimple2
     extends Modelica.Icons.Package;
 
-  package Examples "example models of effects decomposed from CVS"
+  package Examples
     extends Modelica.Icons.ExamplesPackage;
     model Windkessel_2element "Two-element Windkessel model"
       extends Modelica.Icons.Example;
@@ -11,8 +11,8 @@ package CardiovascularSimple
         annotation (Placement(transformation(extent={{-50,38},{-30,58}})));
       Physiolibrary.Hydraulic.Components.ElasticVessel arteries(
         ZeroPressureVolume(displayUnit="l") = 0.00085,
-        Compliance(displayUnit="ml/mmHg") = 1.0500862061839e-08,
-        volume_start(displayUnit="l") = 0.00097)
+        volume_start(displayUnit="l") = 0.00095,
+        Compliance(displayUnit="ml/mmHg") = 1.0500862061839e-08)
         annotation (Placement(transformation(extent={{-14,38},{6,58}})));
       Physiolibrary.Hydraulic.Components.Conductor resistance(
           useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
@@ -25,7 +25,7 @@ package CardiovascularSimple
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-40,20})));
-      Utilities.Pulses pulses(QP(displayUnit="m3/s") = 0.000424, HR=1.2)
+      Parts.Pulses pulses1(QP(displayUnit="m3/s") = 0.000424, HR=1.2)
         annotation (Placement(transformation(extent={{-64,58},{-44,78}})));
     equation
       connect(heart.q_out, arteries.q_in) annotation (Line(
@@ -38,8 +38,8 @@ package CardiovascularSimple
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(pulses.volumeflowrate, heart.solutionFlow) annotation (Line(
-          points={{-45,68},{-40,68},{-40,55}},
+      connect(pulses1.volumeflowrate, heart.solutionFlow) annotation (Line(
+          points={{-45,68},{-40,68},{-40,52}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(resistance.q_in, arteries.q_in) annotation (Line(
@@ -70,7 +70,7 @@ package CardiovascularSimple
 <li><a href=\"http://en.wikipedia.org/wiki/Windkessel_effect\">http://en.wikipedia.org/wiki/Windkessel_effect</a></li>
 </ul>
 </html>"),
-        experiment(StopTime=5));
+        experiment(StopTime=10));
     end Windkessel_2element;
 
     model TwoBaloon
@@ -110,8 +110,7 @@ package CardiovascularSimple
 </ul>
 </html>", info="<html>
 <p>Experiment with liquid and two balloons connected with resistor. </p>
-</html>"),
-        experiment(StopTime=5));
+</html>"));
     end TwoBaloon;
 
     model Windkessel_3element "Three-element windkessel model"
@@ -135,7 +134,7 @@ package CardiovascularSimple
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-40,20})));
-      Utilities.Pulses pulses(
+      Parts.Pulses pulses1(
         QP(displayUnit="m3/s") = 0.000424,
         TD1(displayUnit="s"),
         HR(displayUnit="1/min") = 1.2)
@@ -152,8 +151,8 @@ package CardiovascularSimple
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(pulses.volumeflowrate, heart.solutionFlow) annotation (Line(
-          points={{-45,68},{-40,68},{-40,55}},
+      connect(pulses1.volumeflowrate, heart.solutionFlow) annotation (Line(
+          points={{-45,68},{-40,68},{-40,52}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(heart.q_out, impedance.q_in) annotation (Line(
@@ -189,7 +188,7 @@ package CardiovascularSimple
 <li>Westerhof, N., Lankhaar, J.-W., &AMP; Westerhof, B. E. (2009). The arterial Windkessel. <i>Medical &AMP; Biological Engineering &AMP; Computing</i>, <i>47</i>(2), 131&ndash;41. doi:10.1007/s11517-008-0359-2</li>
 </ul>
 </html>"),
-        experiment(StopTime=5));
+        experiment(StopTime=10));
     end Windkessel_3element;
 
     model Windkessel_4element "Four-element windkessel model"
@@ -213,7 +212,7 @@ package CardiovascularSimple
             extent={{-10,-10},{10,10}},
             rotation=0,
             origin={-40,20})));
-      Utilities.Pulses pulses(QP(displayUnit="m3/s") = 0.000424, HR=1.2)
+      Parts.Pulses pulses1(HR=1.2, QP(displayUnit="m3/s") = 0.000424)
         annotation (Placement(transformation(extent={{-64,58},{-44,78}})));
       Physiolibrary.Hydraulic.Components.Conductor impedance(
           useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
@@ -231,8 +230,8 @@ package CardiovascularSimple
           color={0,0,0},
           thickness=1,
           smooth=Smooth.None));
-      connect(pulses.volumeflowrate, heart.solutionFlow) annotation (Line(
-          points={{-45,68},{-40,68},{-40,55}},
+      connect(pulses1.volumeflowrate, heart.solutionFlow) annotation (Line(
+          points={{-45,68},{-40,68},{-40,52}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(heart.q_out, impedance.q_in) annotation (Line(
@@ -277,63 +276,14 @@ package CardiovascularSimple
 <li>Westerhof, N., Lankhaar, J.-W., &AMP; Westerhof, B. E. (2009). The arterial Windkessel. <i>Medical &AMP; Biological Engineering &AMP; Computing</i>, <i>47</i>(2), 131&ndash;41. doi:10.1007/s11517-008-0359-2</li>
 </ul>
 </html>"),
-        experiment(StopTime=5));
+        experiment(StopTime=10));
     end Windkessel_4element;
 
-    package Utilities "Utility components used by package Examples"
-    extends Modelica.Icons.UtilitiesPackage;
-
-      model Pulses "example pulse flow generator"
-        import Physiolibrary.Types.*;
-        Physiolibrary.Types.RealIO.VolumeFlowRateOutput volumeflowrate
-          annotation (Placement(transformation(extent={{80,-10},{100,10}}),
-              iconTransformation(extent={{80,-10},{100,10}})));
-        discrete Time T0 "begining of cardiac cycle";
-        Boolean b(start=false);
-        discrete Time HP "duration of cardiac cycle";
-        parameter Frequency HR=1.2;
-        Time tc "relative time in carciac cycle";
-        parameter Time TD1=0.07 "relative time of start of systole";
-        discrete Time TD2 "relative time of end of systole";
-        parameter VolumeFlowRate QP=0.000424 "peak volume flowrate";
-      equation
-        b = time - pre(T0) >= pre(HP) "true if new cardiac cycle begins";
-        when {initial(),b} then
-          T0 = time "set begining of cardiac cycle";
-          HP = 1/HR "update length of carciac cycle";
-          TD2 = TD1 + (2/5)*HP "compute end time of systole";
-        end when;
-        tc = time - T0 "relative time in carciac cycle";
-        volumeflowrate = if tc < TD1 then 0 else if tc < TD2 then sin((tc - TD1)/
-          (TD2 - TD1)*Modelica.Constants.pi)*QP else 0
-          "zero before and after systole, otherwise sin up to peak flow";
-        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics={Rectangle(
-                    extent={{-80,80},{80,-80}},
-                    lineColor={0,0,255},
-                    fillColor={255,255,170},
-                    fillPattern=FillPattern.Solid),Line(
-                    points={{-70,0},{-50,0},{-48,2},{-42,52},{-36,60},{-28,52},{-24,
-                  2},{-20,0},{14,0},{18,2},{24,48},{24,54},{32,58},{40,50},{44,2},
-                  {50,0},{74,0}},
-                    color={0,0,255},
-                    smooth=Smooth.Bezier),
-              Text(
-                extent={{-80,108},{80,88}},
-                lineColor={0,0,255},
-                textString="%name"),
-              Text(
-                extent={{-80,-92},{78,-112}},
-                lineColor={0,0,255},
-                textString="rate=%HR")}));
-      end Pulses;
-    end Utilities;
   end Examples;
 
-  package Models "models of CVS composing several components and effects"
+  package Models
     extends Modelica.Icons.ExamplesPackage;
     model NonPulsatileCirculation
-      "Non-pulsatile simple model of CVS with mean values by Kofranek et al."
       extends Physiolibrary.Icons.CardioVascular;
       Physiolibrary.Hydraulic.Components.ElasticVessel PulmonaryArteries(
         useV0Input=true,
@@ -387,11 +337,11 @@ package CardiovascularSimple
         annotation (Placement(transformation(extent={{30,-38},{44,-24}})));
       Physiolibrary.Types.Constants.VolumeConst V0AS(k=0.000529)
         annotation (Placement(transformation(extent={{14,-50},{28,-36}})));
-      replaceable CardiovascularSimple.Parts.HeartPump rightHeart(StarlingSlope(
-            displayUnit="ml/(mmHg.s)") = 1.2503526469347e-07)
+      replaceable CardiovascularSimple2.Parts.HeartPump rightHeart(
+          StarlingSlope(displayUnit="ml/(mmHg.s)") = 1.2503526469347e-07)
         annotation (Placement(transformation(extent={{-72,-10},{-48,16}})));
-      replaceable CardiovascularSimple.Parts.HeartPump leftHeart(StarlingSlope(
-            displayUnit="m3/(Pa.s)") = 7.5006157584566e-08)
+      replaceable CardiovascularSimple2.Parts.HeartPump leftHeart(
+          StarlingSlope(displayUnit="m3/(Pa.s)") = 7.5006157584566e-08)
         annotation (Placement(transformation(extent={{74,-10},{52,10}})));
     equation
       connect(CAP.y, PulmonaryArteries.compliance) annotation (Line(
@@ -489,16 +439,15 @@ package CardiovascularSimple
 <ul>
 <li><i>Sep 2014 </i>by Martin Tribula and Tomas Kulhanek: <br>Created in Physiolibrary </li>
 </ul>
-</html>"),
-        experiment(StopTime=10));
+</html>"));
     end NonPulsatileCirculation;
 
-    model PulsatileCirculation "Pulsatile modification of simple model of CVS"
-      extends CardiovascularSimple.Models.NonPulsatileCirculation(
-        redeclare CardiovascularSimple.Parts.PulsatileHeartPump rightHeart(pulses(
-              QP=0.000338)),
-        redeclare CardiovascularSimple.Parts.PulsatileHeartPump leftHeart(pulses(QP=
-               0.000338)),
+    model PulsatileCirculation
+      extends CardiovascularSimple2.Models.NonPulsatileCirculation(
+        redeclare CardiovascularSimple2.Parts.PulsatileHeartPump
+          rightHeart(pulses(QP=0.000338)),
+        redeclare CardiovascularSimple2.Parts.PulsatileHeartPump
+          leftHeart(pulses(QP=0.000338)),
         CAS(k=7.2755972857029e-09),
         SystemicArteries(volume_start=0.000603),
         SystemicVeins(volume_start=0.003991));
@@ -507,12 +456,10 @@ package CardiovascularSimple
 <ul>
 <li><i>Sep 2014</i> by Tomas Kulhanek: <br>Created. </li>
 </ul>
-</html>"),
-        experiment(StopTime=10));
+</html>"));
     end PulsatileCirculation;
 
     model Fernandez2013CVS_flat
-      "Model of CVS by Fernandez de Canete et al. 2013"
 
       Physiolibrary.Hydraulic.Components.Conductor RPulmonaryVeins(
           useConductanceInput=false, Conductance(displayUnit="m3/(Pa.s)")=
@@ -596,12 +543,12 @@ package CardiovascularSimple
             origin={105,-3},
             extent={{-15,-15},{15,15}},
             rotation=0)));
-      CardiovascularSimple.Parts.TimeVaryingElastance timeVaryingElastanceLeft(
+      CardiovascularSimple2.Parts.TimeVaryingElastance timeVaryingElastanceLeft(
         Ed(displayUnit="mmHg/ml") = 13332238.7415,
         Es(displayUnit="mmHg/ml") = 183318282.69563,
         Pi0(displayUnit="mmHg") = 6666.11937075)
         annotation (Placement(transformation(extent={{-222,16},{-202,36}})));
-      CardiovascularSimple.Parts.TimeVaryingElastance timeVaryingElastanceRight(
+      CardiovascularSimple2.Parts.TimeVaryingElastance timeVaryingElastanceRight(
         Ed(displayUnit="mmHg/ml") = 3999671.62245,
         Es(displayUnit="mmHg/ml") = 43729743.0721,
         Pi0(displayUnit="mmHg") = 3199.73729796)
@@ -766,12 +713,11 @@ package CardiovascularSimple
 <li><i>Jul 2014</i> by Tomas Kulhanek: <br>Created. </li>
 <li><i>Oct 2014</i> by Tomas Kulhanek:<br>Modified initial values and corrected values of parameters according to original article.</li>
 </ul>
-</html>"),
-        experiment(StopTime=10));
+</html>"));
     end Fernandez2013CVS_flat;
   end Models;
 
-  package Parts "helper classes of subsystems"
+  package Parts
     extends Modelica.Icons.BasesPackage;
     model HeartPump
 
@@ -809,7 +755,7 @@ package CardiovascularSimple
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b outflow
         annotation (Placement(transformation(extent={{42,2},{62,22}}),
             iconTransformation(extent={{42,2},{62,22}})));
-      Examples.Utilities.Pulses pulses
+      Pulses pulses
         annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
       Physiolibrary.Hydraulic.Components.Pump pump(useSolutionFlowInput=
             true)
@@ -822,7 +768,7 @@ package CardiovascularSimple
           thickness=1,
           smooth=Smooth.None));
       connect(pump.solutionFlow, pulses.volumeflowrate) annotation (Line(
-          points={{-4,19},{-4,40},{-21,40}},
+          points={{-4,16},{-4,40},{-21,40}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(inflow, pump.q_in) annotation (Line(
@@ -930,12 +876,45 @@ package CardiovascularSimple
               textString="%name")}));
     end TimeVaryingElastance;
 
+    model Pulses "example pulse flow generator"
+      import Physiolibrary.Types.*;
+      Physiolibrary.Types.RealIO.VolumeFlowRateOutput volumeflowrate
+        annotation (Placement(transformation(extent={{80,-10},{100,10}}),
+            iconTransformation(extent={{80,-10},{100,10}})));
+      discrete Time T0 "begining of cardiac cycle";
+      Boolean b(start=false);
+      discrete Time HP "duration of cardiac cycle";
+      parameter Frequency HR=1.2;
+      Time tc "relative time in carciac cycle";
+      parameter Time TD1=0.07 "relative time of start of systole";
+      discrete Time TD2 "relative time of end of systole";
+      parameter VolumeFlowRate QP=0.000424 "peak volume flowrate";
+    equation
+      b = time - pre(T0) >= pre(HP) "true if new cardiac cycle begins";
+      when {initial(),b} then
+        T0 = time "set begining of cardiac cycle";
+        HP = 1/HR "update length of carciac cycle";
+        TD2 = TD1 + (2/5)*HP "compute end time of systole";
+      end when;
+      tc = time - T0 "relative time in carciac cycle";
+      volumeflowrate = if tc < TD1 then 0 else if tc < TD2 then sin((tc - TD1)/
+        (TD2 - TD1)*Modelica.Constants.pi)*QP else 0
+        "zero before and after systole, otherwise sin up to peak flow";
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}), graphics={Rectangle(
+                  extent={{-80,80},{80,-80}},
+                  lineColor={0,0,255},
+                  fillColor={255,255,170},
+                  fillPattern=FillPattern.Solid),Line(
+                  points={{-70,0},{-50,0},{-48,2},{-42,52},{-36,60},{-28,52},{-24,
+                2},{-20,0},{14,0},{18,2},{24,48},{24,54},{32,58},{40,50},{44,2},
+                {50,0},{74,0}},
+                  color={0,0,255},
+                  smooth=Smooth.Bezier)}));
+    end Pulses;
   end Parts;
   annotation (uses(
       Modelica(version="3.2.1"), Physiolibrary(version="2.3.0-beta")),
-                                       Documentation(info="<html>
-<p>This package of examples of models requires Physiolibrary. If not already installed, download it from <a href=\"http://www.physiolibrary.org\">www.physiolibrary.org</a>, install and open it.</p>
-</html>"),
     version="1",
     conversion(noneFromVersion=""));
-end CardiovascularSimple;
+end CardiovascularSimple2;
