@@ -2511,9 +2511,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extent={{-5,-5},{5,5}},
               rotation=180,
               origin={19,55})));
-        Physiolibrary.Types.Constants.PressureConst Pth1(
-                                                        k=-533.28954966)
-          annotation (Placement(transformation(extent={{42,82},{54,94}})));
       equation
         /*Plv = Plvf+Pperi;
   Plvf=e*Peslvf+(1-e)*Pedlvf;
@@ -2660,11 +2657,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             points={{-11.8,32},{-10,32},{-10,26.95},{40.4,26.95}},
             color={0,0,127},
             smooth=Smooth.Bezier));
-        connect(Pth1.y, pericardium.Pth) annotation (Line(
-            points={{55.5,88},{68,88},{68,76},{36,76},{36,59.95},{40.4,59.95}},
-
+        connect(pericardium.Pth, Pth) annotation (Line(
+            points={{40.4,59.95},{40,59.95},{40,60},{40,80},{40,80},{12,80},{12,
+                80}},
             color={0,0,127},
-            smooth=Smooth.Bezier));
+            smooth=Smooth.None));
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}),
                                graphics={
