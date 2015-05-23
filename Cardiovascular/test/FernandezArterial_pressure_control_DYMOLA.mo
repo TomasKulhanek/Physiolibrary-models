@@ -1,7 +1,8 @@
 within ;
 package control "modelo y control a corto plazo"
 
-  partial model compartimentogeneral
+   model compartimentogeneral
+
     Modelica.Blocks.Interfaces.RealInput
                                       flujent
       annotation (Placement(transformation(extent={{-84,30},{-68,50}}, rotation=
@@ -40,7 +41,7 @@ package control "modelo y control a corto plazo"
                                        flujsal
       annotation (Placement(transformation(extent={{-8,-34},{8,-16}}, rotation=
               0)));
-  equation
+   equation
     connect(flujent,Add1.u1)
       annotation (Line(points={{-76,40},{-62,40}}, color={0,0,255}));
     connect(Add1.y,Integrator1.u)
@@ -92,9 +93,10 @@ package control "modelo y control a corto plazo"
             fillPattern=FillPattern.Forward,
             textString=
                  "general")}));
-  end compartimentogeneral;
+   end compartimentogeneral;
 
   model circulacion
+
     venderecho venderecho1 annotation (Placement(transformation(extent={{-110,
               -20},{-12,62}}, rotation=0)));
     venizquierdo venizquierdo1 annotation (Placement(transformation(extent={{
@@ -291,7 +293,8 @@ package control "modelo y control a corto plazo"
                         graphics));
   end circulacion;
 
-  partial model limite "accion de la valvula"
+   model limite "accion de la valvula"
+
     Modelica.Blocks.Interfaces.RealInput
                                       incpres
       "presion entrada - presion de salida"
@@ -308,7 +311,7 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Logical.GreaterEqualThreshold GreaterEqual1(threshold=0)
       annotation (Placement(transformation(extent={{-56,-14},{-36,6}}, rotation=
              0)));
-  equation
+   equation
     connect(incpres,Switch1.u1)
       annotation (Line(points={{-48,29},{-33,29},{-33,10},{-8,10}}, color={0,0,
             255}));
@@ -330,9 +333,10 @@ package control "modelo y control a corto plazo"
             fillColor={127,255,255},
             fillPattern=FillPattern.Solid), Text(extent={{-28,8},{-6,6}},
               textString =                                        "limite")}));
-  end limite;
+   end limite;
 
-  partial model compartimentoconvalvula
+  model compartimentoconvalvula
+
     Modelica.Blocks.Interfaces.RealInput
                                       flujent "flujo de entrada"
       annotation (Placement(transformation(extent={{-98,32},{-82,48}}, rotation=
@@ -419,7 +423,8 @@ package control "modelo y control a corto plazo"
                                               "válvula")}));
   end compartimentoconvalvula;
 
-  partial model pulsos
+model pulsos
+
     Modelica.Blocks.Interfaces.RealInput
                                       InPort1
       annotation (Placement(transformation(extent={{-106,-14},{-94,2}},rotation=
@@ -450,7 +455,7 @@ package control "modelo y control a corto plazo"
               0)));
     Modelica.Blocks.Math.RealToInteger RealToInteger1
       annotation (Placement(transformation(extent={{8,-16},{28,4}}, rotation=0)));
-  equation
+equation
     connect(Constant1.y,Division1.u1)
       annotation (Line(points={{-79.1,18},{-82,18},{-82,4}}, color={0,0,255}));
     connect(InPort1,Division1.u2)
@@ -492,9 +497,10 @@ package control "modelo y control a corto plazo"
             fillColor={127,255,255},
             fillPattern=FillPattern.Solid), Text(extent={{-48,2},{-20,-2}},
               textString =                                          "pulsos")}));
-  end pulsos;
+end pulsos;
 
-  partial model ventriculo
+   model ventriculo
+
     Modelica.Blocks.Interfaces.RealInput
                                       EV "Entrada al ventriculo"
       annotation (Placement(transformation(extent={{-80,4},{-64,20}}, rotation=
@@ -540,7 +546,7 @@ package control "modelo y control a corto plazo"
     Modelica.Blocks.Interfaces.RealOutput
                                        PSV "Presion de salida del ventriculo"
       annotation (Placement(transformation(extent={{76,4},{90,20}},rotation=0)));
-  equation
+   equation
     connect(Maxelas,Product1.u2)       annotation (Line(points={{-72,-15},{-90,
             -15},{-90,-20.8},{-63.8,-20.8}}, color={0,0,255}));
     connect(Constant1.y,Division1.u1)             annotation (Line(points={{
@@ -579,9 +585,10 @@ package control "modelo y control a corto plazo"
             fillPattern=FillPattern.Forward,
             textString=
                  "ventriculo")}));
-  end ventriculo;
+   end ventriculo;
 
   model venderecho "Ventriculo derecho"
+
     ventriculo ventriculo1(compartimentoconvalvula1(admitancia(k=78),
           Integrator1(y_start=150)),
                                   Einicial(k=0.87))
@@ -657,6 +664,7 @@ package control "modelo y control a corto plazo"
   end venderecho;
 
   model venizquierdo "ventriculo izquierdo"
+
     ventriculo ventriculo1(compartimentoconvalvula1(admitancia(k=17),
           Integrator1(y_start=150)),
                                   Einicial(k=0.8))
@@ -732,6 +740,7 @@ package control "modelo y control a corto plazo"
   end venizquierdo;
 
   model circulacionsistemica
+
     Modelica.Blocks.Interfaces.RealInput
                                       FSV
       "Flujo circulación sistémica-vena cava"
@@ -828,7 +837,8 @@ package control "modelo y control a corto plazo"
                                               "sistemica")}));
   end circulacionsistemica;
 
-  partial model modulocontrol "modulo de control"
+   model modulocontrol "modulo de control"
+
     Modelica.Blocks.Interfaces.RealInput
                                       PAO "Presion aortica"
       annotation (Placement(transformation(extent={{-66,28},{-50,44}}, rotation=
@@ -907,7 +917,7 @@ package control "modelo y control a corto plazo"
       startTime=20,
       height=250)   annotation (Placement(transformation(extent={{-42,-56},{-22,
               -36}}, rotation=0)));
-  equation
+   equation
     connect(PAO, media1.PAO) annotation (Line(points={{-58,36},{-77.46,36},{
             -77.46,72.34},{-68.92,72.34}}, color={0,0,255}));
     connect(media1.media,Switch1.u1)       annotation (Line(points={{-47.32,
@@ -975,9 +985,9 @@ package control "modelo y control a corto plazo"
                                              "de"),
           Text(extent={{-34,-12},{46,-38}}, textString=
                                                 "Control")}));
-  end modulocontrol;
+   end modulocontrol;
 
-  partial model acumulador
+   model acumulador
 
     Modelica.Blocks.Interfaces.RealInput
                                       PAO "Presion aortica"
@@ -1001,7 +1011,7 @@ package control "modelo y control a corto plazo"
             extent={{32,-12},{52,8}}, rotation=0)));
     Modelica.Blocks.Routing.Multiplex2              Multiplex2_1
       annotation (Placement(transformation(extent={{-8,-12},{12,8}}, rotation=0)));
-  equation
+   equation
     connect(PAO,Switch1.u1)
       annotation (Line(points={{-91,42},{-66,42},{-66,8},{-48,8}}, color={0,0,
             255}));
@@ -1027,9 +1037,10 @@ package control "modelo y control a corto plazo"
             fillPattern=FillPattern.Solid), Text(extent={{-36,20},{-2,-16}},
               textString=
               "acumulador")}));
-  end acumulador;
+   end acumulador;
 
-  partial model contador
+   model contador
+
     Modelica.Blocks.Sources.Constant Constant1(k=1)
       annotation (Placement(transformation(extent={{-84,28},{-70,44}}, rotation=
              0)));
@@ -1042,7 +1053,7 @@ package control "modelo y control a corto plazo"
 
     acumulador acumulador1 annotation (Placement(transformation(extent={{-44,
               -22},{20,26}}, rotation=0)));
-  equation
+   equation
     connect(Constant1.y,       acumulador1.PAO) annotation (Line(points={{-69.3,
             36},{-56,36},{-56,12.08},{-41.12,12.08}}, color={0,0,255}));
     connect(subida, acumulador1.subida) annotation (Line(points={{-77,-2},{-58,
@@ -1058,9 +1069,10 @@ package control "modelo y control a corto plazo"
             fillPattern=FillPattern.Backward), Text(extent={{-8,28},{18,-8}},
               textString=
                    "contador")}));
-  end contador;
+   end contador;
 
-  partial model media "calcula la presion media aortica"
+   model media "calcula la presion media aortica"
+
     Modelica.Blocks.Interfaces.RealInput
                                       PAO "Presion aortica"
       annotation (Placement(transformation(extent={{-100,0},{-82,18}}, rotation=
@@ -1102,7 +1114,7 @@ package control "modelo y control a corto plazo"
     contador contador1(acumulador1(cero(k=1e-15)))
                        annotation (Placement(transformation(extent={{-28,-32},{
               -2,24}}, rotation=0)));
-  equation
+   equation
     connect(PAO,UnitDelay1.u)       annotation (Line(points={{-91,9},{-83.5,9},
             {-83.5,-2},{-77.6,-2}}, color={0,0,255}));
     connect(UnitDelay1.y,Compare1.u2)             annotation (Line(points={{
@@ -1159,9 +1171,10 @@ package control "modelo y control a corto plazo"
             fillColor={159,159,223},
             fillPattern=FillPattern.Solid), Text(extent={{-94,18},{82,-2}},
               textString =                      "media")}),Diagram(graphics));
-  end media;
+   end media;
 
   model arteriaaorta
+
     compartimentoconvalvula compartimentoconvalvula1(admitancia(k=80),
         Integrator1(y_start=100))
                                annotation (Placement(transformation(extent={{
@@ -1224,6 +1237,7 @@ package control "modelo y control a corto plazo"
   end arteriaaorta;
 
   model sistemapulmonarterial
+
     compartimentoconvalvula compartimentoconvalvula1(admitancia(k=90),
         Integrator1(y_start=120))
                                annotation (Placement(transformation(extent={{
@@ -1294,6 +1308,7 @@ package control "modelo y control a corto plazo"
   end sistemapulmonarterial;
 
   model sistemapulmonarvenoso
+
     compartimentogeneral compartimentogeneral1(admitancia(k=7),   Integrator1(y_start=
             240))    annotation (Placement(transformation(extent={{-36,-36},{76,
               66}}, rotation=0)));
@@ -1362,6 +1377,7 @@ package control "modelo y control a corto plazo"
   end sistemapulmonarvenoso;
 
   model venacava
+
     compartimentogeneral compartimentogeneral1(admitancia(k=1.65),
         Integrator1(y_start=500))
                                annotation (Placement(transformation(extent={{
@@ -1445,7 +1461,8 @@ package control "modelo y control a corto plazo"
               -100},{100,100}}), graphics));
   end testcontrol;
 
-  partial model modulocontroltest "modulo de control"
+   model modulocontroltest "modulo de control"
+
     Modelica.Blocks.Interfaces.RealInput
                                       PAO "Presion aortica"
       annotation (Placement(transformation(extent={{-66,28},{-50,44}}, rotation=
@@ -1522,7 +1539,7 @@ package control "modelo y control a corto plazo"
       offset=250,
       startTime=20) annotation (Placement(transformation(extent={{-42,-56},{-22,
               -36}}, rotation=0)));
-  equation
+   equation
     connect(activado,Switch1.u2)       annotation (Line(points={{-60,-51},{-56,
             -51},{-58,10},{-73.4,10}}, color={255,0,255}));
     connect(PAOmedia.y,Switch1.u3)             annotation (Line(points={{-77.2,
@@ -1590,7 +1607,7 @@ package control "modelo y control a corto plazo"
                                              "de"),
           Text(extent={{-34,-12},{46,-38}}, textString=
                                                 "Control")}));
-  end modulocontroltest;
+   end modulocontroltest;
   annotation(uses(Modelica(version="3.2.1")),
     version="1",
     conversion(noneFromVersion=""));

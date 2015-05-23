@@ -1,7 +1,0 @@
-model Cardiovascular.Examples.DizertaceExample.HydraulicFlowSource
-
-Real qout.q;
-Real qout.p;
-
-
-end Cardiovascular.Examples.DizertaceExample.HydraulicFlowSource;

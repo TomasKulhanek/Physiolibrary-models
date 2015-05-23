@@ -1,1 +1,0 @@
-cc -O0 -Wl,--no-as-needed --verbose -o dymosim -DDYMOSIM -DUNIX -DSkip_f2c_Undefs -m32 -fno-inline -g -Wl,--no-undefined -Wl,--allow-multiple-definition -I. -I/opt/dymola-2015-x86_64/source dsmodel.c -L/opt/dymola-2015-x86_64/bin/lib -lds -lstdc++ -lm -ldl
