@@ -13,7 +13,18 @@ Download the model and open in th following order:
   * Cardiovascular/MeursModel.mo
   * Cardiovascular/BurkhoffModel.mo
   * Cardiovascular/FernandezModel.mo
+  * 
 
+Source code
+===========
+<pre>
+git clone https://github.com/TomasKulhanek/Physiolibrary.models.git
+cd Physiolibrary.models
+git submodule init
+git submodule update
+cd Physiomodel
+git checkout pulsatile-cardiovascular
+</pre>
 Publication
 ===========
 Being prepared for scientific journal ... 
