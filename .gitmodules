@@ -4,3 +4,6 @@
 [submodule "Physiolibrary.extension"]
 	path = Physiolibrary.extension
 	url = https://github.com/TomasKulhanek/Physiolibrary.extension
+[submodule "Physiomodel"]
+	path = Physiomodel
+	url = https://github.com/physiology/Physiomodel.git
