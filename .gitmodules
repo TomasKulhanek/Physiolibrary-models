@@ -7,3 +7,4 @@
 [submodule "Physiomodel"]
 	path = Physiomodel
 	url = https://github.com/physiology/Physiomodel.git
+	branch = pulsatile-cardiovascular
