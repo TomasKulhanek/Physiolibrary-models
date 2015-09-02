@@ -3180,10 +3180,7 @@ From 240s relax ...
                {{-100,-100},{100,100}}), graphics));
     end Exercise_scenario;
   end Experiment;
-  annotation (uses(                                Modelica(version="3.2.1"),
-        Physiolibrary(version="2.2.0")),
-    version="1",
-    conversion(from(version="", script="ConvertFromSkeletalVO2Kinetics_.mos")));
+
   package ModelWithStreamConnector
     connector GasesInPlasmaFlow
       extends Physiolibrary.Hydraulic.Interfaces.HydraulicPort;
@@ -3215,6 +3212,14 @@ From 240s relax ...
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={80,80})));
+    equation
+      g_in.q = flowrate; //prescribed flowrate, determined e.g. by heart rate
+      g_out.q = -g_in.q;  //kirchhoff law
+      g_in.pressure = pvenous;
+      g_out.pressure = paorta;
+      g_out.o2 = o2c; //prescribed o2 concentration outgoing from pulmonary circ.
+      g_out.co2 = co2c; //prescribed co2 concentration outgoing from pulmonary circ.
+
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
@@ -3236,14 +3241,6 @@ From 240s relax ...
               fillColor={0,0,255},
               fillPattern=FillPattern.Solid,
               textString="CO2")}));
-    equation
-      g_in.q = flowrate; //prescribed flowrate, determined e.g. by heart rate
-      g_out.q = -g_in.q;  //kirchhoff law
-      g_in.pressure = pvenous;
-      g_out.pressure = paorta;
-      g_out.o2 = o2c; //prescribed o2 concentration outgoing from pulmonary circ.
-      g_out.co2 = co2c; //prescribed co2 concentration outgoing from pulmonary circ.
-
     end HeartAndLungs;
 
     connector GPInflow
@@ -3632,4 +3629,9 @@ From 240s relax ...
 </html>"));
     end Conductor;
   end ModelWithStreamConnector;
+  annotation (uses(                                Modelica(version="3.2.1"),
+        Physiolibrary(version="2.3.0")),
+    version="2",
+    conversion(from(version="", script="ConvertFromSkeletalVO2Kinetics_.mos"),
+        noneFromVersion="1"));
 end SkeletalVO2Kinetics;
