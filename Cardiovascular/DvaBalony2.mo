@@ -1,3 +1,4 @@
+within ;
 package DvaBalony2
   model ElastickaKomponenta
     Real p;
@@ -56,7 +57,8 @@ package DvaBalony2
     connector HydraulicConnector
       Real p;
       flow Real q;
-      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics = {Ellipse(origin = {2.85, 1.36}, fillColor = {0, 170, 255}, fillPattern = FillPattern.Sphere, extent = {{-53.59, 49.63}, {53.59, -49.63}}, endAngle = 360)}));
+      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics={  Ellipse(origin = {2.85, 1.36}, fillColor = {0, 170, 255},
+                fillPattern =                                                                                                    FillPattern.Sphere, extent = {{-53.59, 49.63}, {53.59, -49.63}}, endAngle = 360)}));
     end HydraulicConnector;
 
     model Spojene3Balony
@@ -78,7 +80,7 @@ package DvaBalony2
     equation
       q.p = V * E;
       q.q = der(V);
-      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics = {Ellipse(origin = {-0.99, -3.71}, extent = {{-71.78, 49.5}, {71.78, -49.5}}, endAngle = 360), Line(origin = {-4.18765, 30.4069}, points = {{-38.1391, -3.67427}, {-14.6242, 4.98909}, {-14.3767, 4.74157}, {15.8213, 5.23662}, {38.0985, -4.9119}, {38.0985, -4.9119}}), Line(origin = {-3.26809, -35.4527}, points = {{-33.6131, 0.304202}, {-19.2567, -8.60669}, {16.3869, -12.072}, {40.1493, -3.65619}})}));
+      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics={  Ellipse(origin = {-0.99, -3.71}, extent = {{-71.78, 49.5}, {71.78, -49.5}}, endAngle = 360), Line(origin = {-4.18765, 30.4069}, points = {{-38.1391, -3.67427}, {-14.6242, 4.98909}, {-14.3767, 4.74157}, {15.8213, 5.23662}, {38.0985, -4.9119}, {38.0985, -4.9119}}), Line(origin = {-3.26809, -35.4527}, points = {{-33.6131, 0.304202}, {-19.2567, -8.60669}, {16.3869, -12.072}, {40.1493, -3.65619}})}));
     end ElastickaKomponenta;
 
     model Odpor
@@ -90,7 +92,8 @@ package DvaBalony2
     equation
       q_in.q + q_out.q = 0;
       q_in.q = (q_in.p - q_out.p) / R;
-      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics = {Rectangle(origin = {-19.3046, 0.123663}, fillColor = {255, 170, 0}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-74.5, 31.81}, {114.599, -33.5427}})}));
+      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics={  Rectangle(origin = {-19.3046, 0.123663}, fillColor = {255, 170, 0},
+                fillPattern =                                                                                                    FillPattern.HorizontalCylinder, extent = {{-74.5, 31.81}, {114.599, -33.5427}})}));
     end Odpor;
 
     model SpojeneBalony
@@ -107,8 +110,10 @@ package DvaBalony2
       DvaBalony2.BalonySKonektory.Odpor odpor1 annotation(Placement(visible = true, transformation(origin = {-20, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       DvaBalony2.BalonySKonektory.ElastickaKomponenta B2(V(start = 300)) annotation(Placement(visible = true, transformation(origin = {40, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
-      connect(odpor1.q_out, B2.q) annotation(Line(points = {{-10, 0}, {40.099, 0}, {40.099, -0.247525}, {40.099, -0.247525}}));
-      connect(odpor1.q_in, B1.q) annotation(Line(points = {{-30, 0}, {-59.4059, 0}, {-59.4059, -0.247525}, {-60.6436, -0.247525}, {-60.6436, -0.247525}}));
+      connect(odpor1.q_out, B2.q) annotation(Line(points={{-10,0},{40.099,0},{
+              40.099,0},{40,0}}));
+      connect(odpor1.q_in, B1.q) annotation(Line(points={{-30,0},{-59.4059,0},{
+              -59.4059,-0.247525},{-60,-0.247525},{-60,0}}));
       annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})));
     end SpojeneBalony2;
 
@@ -131,7 +136,8 @@ package DvaBalony2
       Modelica.Blocks.Interfaces.RealInput desiredflow annotation(Placement(visible = true, transformation(origin = {-20, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-55, 95}, extent = {{-15, -15}, {15, 15}}, rotation = -90)));
     equation
       q_out.q = -desiredflow;
-      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics = {Polygon(origin = {10.2278, 10.6197}, fillColor = {0, 85, 255}, fillPattern = FillPattern.Solid, points = {{-68.892, 52.5}, {69.4743, -11.1138}, {-68.892, -52.4505}, {-68.892, 52.5}, {-68.892, 52.5}})}));
+      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics={  Polygon(origin = {10.2278, 10.6197}, fillColor = {0, 85, 255},
+                fillPattern =                                                                                                    FillPattern.Solid, points = {{-68.892, 52.5}, {69.4743, -11.1138}, {-68.892, -52.4505}, {-68.892, 52.5}, {-68.892, 52.5}})}));
     end pump;
 
     model unlimitedVolume
@@ -139,8 +145,22 @@ package DvaBalony2
       parameter Real pressure = 0;
     equation
       q_in.p = pressure;
-      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics = {Polygon(origin = {-8.17, -18.69}, fillColor = {0, 85, 255}, fillPattern = FillPattern.Solid, points = {{-60.8911, 69.6786}, {-59.901, -57.3016}, {-56.6832, -65.47}, {-51.2376, -69.9254}, {51.2376, -69.9254}, {57.9208, -66.2125}, {60.8911, -58.7868}, {60.6436, 69.9261}, {53.9604, 69.6786}, {54.703, -58.2917}, {48.2673, -61.5096}, {-45.5446, -61.5096}, {-52.9703, -56.064}, {-52.7228, 69.6786}, {-60.8911, 69.6786}, {-53.7129, 69.431}, {-60.8911, 69.6786}})}));
+      annotation(Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics={  Polygon(origin = {-8.17, -18.69}, fillColor = {0, 85, 255},
+                fillPattern =                                                                                                    FillPattern.Solid, points = {{-60.8911, 69.6786}, {-59.901, -57.3016}, {-56.6832, -65.47}, {-51.2376, -69.9254}, {51.2376, -69.9254}, {57.9208, -66.2125}, {60.8911, -58.7868}, {60.6436, 69.9261}, {53.9604, 69.6786}, {54.703, -58.2917}, {48.2673, -61.5096}, {-45.5446, -61.5096}, {-52.9703, -56.064}, {-52.7228, 69.6786}, {-60.8911, 69.6786}, {-53.7129, 69.431}, {-60.8911, 69.6786}})}));
     end unlimitedVolume;
+
+    model SpojeneBalony3
+      ElastickaKomponenta B1(V(start = 180), E = 0.5), B2(V(start = 50));
+      Odpor O;
+    equation
+    /*  B1.q.q = - O.q_in.q;
+  B1.q.p = O.q_in.p;
+  O.q_out.q = - B2.q.q;
+  O.q_out.p = B2.q.p;*/
+    //  connect(B1.q, O.q_in);
+    //  connect(O.q_out, B2.q);
+      annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})));
+    end SpojeneBalony3;
     annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})));
   end BalonySKonektory;
 
@@ -164,5 +184,6 @@ package DvaBalony2
     q1 = (p2 - p1) / R;
     annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})));
   end DvaBalonyFlat;
-  annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})));
+  annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})),
+    uses(Modelica(version="3.2.1")));
 end DvaBalony2;
