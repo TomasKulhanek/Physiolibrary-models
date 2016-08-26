@@ -20,6 +20,7 @@ package FernandezModel
     end pulsos;
 
     model VariableElasticityGenerator
+
       pulsos pulsos1(HP(displayUnit = "s", start = 1)) annotation(Placement(transformation(extent = {{-62, 42}, {-42, 62}})));
       Modelica.Blocks.Math.Product product1 annotation(Placement(transformation(extent = {{-5, -5}, {5, 5}}, rotation = 270, origin = {11, 23})));
       Modelica.Blocks.Sources.Constant const(k = 0.87) annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin={30,56})));
@@ -294,6 +295,44 @@ package FernandezModel
       connect(heartRate.y, bloodFlowMeasurement.HR) annotation(Line(points = {{30.25, 41}, {30.25, 23.5}, {34, 23.5}, {34, 4.6}}, color = {0, 0, 127}, smooth = Smooth.None));
       annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-120, -60}, {120, 60}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-120, -60}, {120, 60}}), graphics));
     end SystemicCirculation_test;
+
+  model Curve
+      "2D natural cubic interpolation spline defined with (x,y,slope) points"
+    //workaround for openmodelica error: Cyclically dependent constants or parameters found in scope Physiolibrary.Blocks.Interpolation.Curve: {data,x}, {data,y}, {data,slope}.
+    //Error: Error occurred while flattening model Physiolibrary.Blocks.Interpolation.Curve
+    parameter Real x[:] "x coordinations of interpolating points";
+    parameter Real y[:] "y coordinations of interpolating points";
+    parameter Real slope[:] "slopes at interpolating points";
+    Modelica.Blocks.Interfaces.RealInput u annotation(Placement(transformation(extent = {{-120, -20}, {-80, 20}})));
+    Modelica.Blocks.Interfaces.RealOutput val annotation(Placement(transformation(extent = {{80, -20}, {120, 20}})));
+    protected
+    parameter Real a[:, :] = Physiolibrary.Blocks.Interpolation.SplineCoefficients(x, y, slope)
+        "cubic polynom coefficients of curve segments between interpolating points";
+  equation
+    val = Physiolibrary.Blocks.Interpolation.Spline(x, a, u);
+    annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Rectangle(extent = {{-100, 100}, {100, -100}}, lineColor = {0, 0, 127}, fillColor = {255, 255, 255},
+              fillPattern =                                                                                                   FillPattern.Solid), Line(points = {{-70, -76}, {-20, -48}, {0, 12}, {34, 62}, {76, 72}}, color = {0, 0, 127}, smooth = Smooth.Bezier), Line(points = {{-48, -82}, {-48, 90}, {-48, 90}}, color = {0, 0, 127}, smooth = Smooth.Bezier, arrow = {Arrow.None, Arrow.Filled}), Line(points = {{-72, -74}, {68, -74}, {68, -74}}, color = {0, 0, 127}, smooth = Smooth.Bezier, arrow = {Arrow.None, Arrow.Filled})}));
+  end Curve;
+
+    block HydraulicElastanceToCompliance
+      "Reciprocal value of hydraulic compliance"
+
+      Physiolibrary.Types.RealIO.HydraulicComplianceOutput y
+        "HydraulicCompliance output"                                                      annotation(Placement(transformation(extent = {{40, -10}, {60, 10}}), iconTransformation(extent = {{40, -10}, {60, 10}})));
+      Types.RealIO.HydraulicElastanceInput hydraulicelastance
+        "HydraulicElastance input"                                                       annotation(Placement(transformation(extent = {{-68, -28}, {-28, 12}}), iconTransformation(extent = {{-54, -14}, {-28, 12}})));
+    equation
+      y = 1 / hydraulicelastance;
+      annotation(defaultComponentName = "hydrauliccompliance", Diagram(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics), Icon(coordinateSystem(extent = {{-40, -40}, {40, 40}}, preserveAspectRatio = false), graphics={  Rectangle(extent = {{-40, 40}, {40, -40}}, lineColor = {0, 0, 0}, radius = 10, fillColor = {236, 236, 236},
+                fillPattern =                                                                                                   FillPattern.Solid), Rectangle(extent = {{-28, 3}, {20, -4}},
+                lineThickness =                                                                                                   1, fillColor = {0, 0, 255},
+                fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Polygon(points = {{24, 10}, {24, -10}, {36, 0}, {36, 0}, {24, 10}},
+                lineThickness =                                                                                                   1, smooth = Smooth.None, fillColor = {0, 0, 255},
+                fillPattern =                                                                                                   FillPattern.Solid, pattern = LinePattern.None), Text(extent = {{-16, 30}, {12, 2}}, lineColor = {0, 0, 255}, fillColor = {255, 240, 234},
+                fillPattern =                                                                                                   FillPattern.Solid, textString = "1"), Text(extent = {{-22, -10}, {16, -32}}, lineColor = {0, 0, 255}, fillColor = {255, 240, 234},
+                fillPattern =                                                                                                   FillPattern.Solid, textString = "E")}));
+    end HydraulicElastanceToCompliance;
+
   end Parts;
 
   package Models
@@ -303,9 +342,9 @@ package FernandezModel
       replaceable Parts.PulmonaryCirculation pulmonaryCirculation annotation(Placement(transformation(extent = {{-24, 30}, {14, 66}})));
     equation
       connect(heart.leftHeartOutflow, systemicCirculation.inflow) annotation(Line(points={{2.95,
-              -11.2},{24,-11.2},{24,-48.0571},{15.45,-48.0571}},                                                                                      color = {190, 0, 0}, thickness = 1, smooth = Smooth.None));
+              -11.2},{24,-11.2},{24,-45.4},{15.45,-45.4}},                                                                                            color = {190, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(systemicCirculation.outflow, heart.rightHeartInflow) annotation(Line(points={{-18.85,
-              -48.5714},{-32,-48.5714},{-32,-10.6857},{-11.4,-10.6857}},                                                                                     color = {190, 0, 0}, thickness = 1, smooth = Smooth.None));
+              -46},{-32,-46},{-32,-10.6857},{-11.4,-10.6857}},                                                                                               color = {190, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(heart.rightHeartOutflow, pulmonaryCirculation.inflow) annotation(Line(points={{-10,
               4.22857},{-32,4.22857},{-32,47.1},{-23.62,47.1}},                                                                                             color = {190, 0, 0}, thickness = 1, smooth = Smooth.None));
       connect(pulmonaryCirculation.outflow, heart.leftHeartInflow) annotation(Line(points={{14,48},
@@ -531,5 +570,12 @@ package FernandezModel
                 fillPattern =                                                                                                    FillPattern.Solid, textString = "%name")}), Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics));
     end Stenosis;
   end Experiments;
-  annotation(uses(Physiolibrary(version = "2.1"), Modelica(version = "3.2.1"), MeursModel(version = "2")));
+  annotation(uses(                                Modelica(version = "3.2.1"), MeursModel(version = "2"),
+      Physiolibrary(version="2.3.1"),
+      Cardiovascular(version="1")),
+    version="2",
+    conversion(from(
+        version="1",
+        script="ConvertFromFernandezModel_1.mos",
+        version="")));
 end FernandezModel;
