@@ -6331,7 +6331,13 @@ above 0 mmHg.")}));
             "Selected set of basic constants"
             annotation (choicesAllMatching=true);
 
-          annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+          annotation (
+                  defaultComponentName="settings",
+            defaultComponentPrefixes="inner",
+            missingInnerMessage="No \"Settings\" component is defined. A default settings
+    component is required for proper function. Its enough to drop it to the top-level scene!
+    You can find it in Cardiovascular.Model.Complex.Settings.",
+                  Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                     {100,100}}), graphics={Bitmap(
                   extent={{-108,106},{108,-110}},
                   imageSource="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"
@@ -7855,20 +7861,12 @@ above 0 mmHg.")}));
                   "Adaptable reference passive myofiber stress";
                 discrete input Volume VW(start = VW_init, fixed = true)
                   "Adaptable wall volume";
+
                 input Real tauA "Activation time coefficient";
                 input Time tDelay
                   "Delay in contraction with respect to start of cardiac cycle";
 
-                parameter Cardiovascular.Types.Area Am0_init
-                  "Starting value of mid-wall area of dead space";
-                parameter Cardiovascular.Types.Area AmRef_init
-                  "Starting value of mid-wall surface area";
-                parameter Fraction contractilityScale = 1
-                  "Scaling coefficient of contractility";
-                parameter Real CRest = settings. constants. CRest
-                  "Contractility at fiber rest";
-                parameter Cardiovascular.Types.Length dLsP
-                  "Passive stress coefficient";
+                // constant parameters
                 parameter Cardiovascular.Types.Length LsP0=settings.constants.LsP0
                   "Sarcomere length with zero passive stress";
                 parameter Cardiovascular.Types.Length Lsc0=settings.constants.Lsc0
@@ -7877,64 +7875,74 @@ above 0 mmHg.")}));
                   "Reference length of isometrically stressed elastic sarcomere element";
                 parameter Cardiovascular.Types.Length LsRef=settings.constants.LsRef
                   "Reference sarcomere length";
-                parameter Pressure sigmaARef "Reference active myofiber stress";
+
+                // top-level parameters
+                parameter Cardiovascular.Types.Area Am0_init
+                  "Starting value of mid-wall area of dead space";
+                parameter Cardiovascular.Types.Area AmRef_init
+                  "Starting value of mid-wall surface area";
+                parameter Fraction contractilityScale = 1
+                  "Scaling coefficient of contractility";
+                parameter Real CRest = settings. constants. CRest
+                  "Contractility at fiber rest";
+
                 parameter Pressure sigmaPRef_init
                   "Starting value of reference passive myofiber stress";
+                parameter Volume VW_init "Starting value of wall volume";
+
+                // parameters to distinguish Atria and Ventricles during inheritance
+                parameter Cardiovascular.Types.Length dLsP
+                  "Passive stress coefficient";
+                parameter Pressure sigmaARef "Reference active myofiber stress";
                 parameter Real tauS "Time scaling coefficient";
                 parameter Velocity vMax
                   "Reference maximal sarcomere contraction velocity";
-                parameter Volume VW_init "Starting value of wall volume";
 
-                Cardiovascular.Types.Area Am(start=AmRef_init, fixed=true)
-                  "Current mid-wall area";
-                Real C(start = 0, fixed = true) "Current contractility";
-                Real Cm(unit = "m-1") "Mid-wall curvature";
-                Real epsilon "Natural myofiber strain";
-                Cardiovascular.Types.Length Ls "Sarcomere length";
-                Cardiovascular.Types.Length Lsc
-                  "Length of contractile sarcomere element";
-                Cardiovascular.Types.Length LscNorm
+                Real epsilon = 0.5 * log(max(1e-9, Am - Am0) / AmRef) - 1 / 12 * z ^ 2 - 0.019 * z ^ 4
+                  "Natural myofiber strain";
+                Cardiovascular.Types.Length Ls = LsRef * exp(epsilon)
+                  "Sarcomere length";
+                Cardiovascular.Types.Length LscNorm = max(0.0001, (Lsc - Lsc0) * 1e6)
                   "Normalized length of contractile sarcomere element";
-                Cardiovascular.Types.Length Lse
+                Cardiovascular.Types.Length Lse = Ls - Lsc
                   "Length of elastic sarcomere element";
-                Real LseNorm "Normalized length of elastic sarcomere element";
-                Pressure pT "Transmural pressure";
-                Pressure sigma "Total myofiber stress";
-                Pressure sigmaA "Active myofiber stress";
-                Pressure sigmaP "Passive myofiber stress";
-                Time t(start = 0, fixed = true)
-                  "Time from start of cardiac cycle";
+                Real LseNorm = max(-0.02, Lse / LseIso)
+                  "Normalized length of elastic sarcomere element";
+                Pressure pT = 2 * Tm * Cm "Transmural pressure";
+                Pressure sigma = max(0.2 * sigmaP, sigmaP) + sigmaA
+                  "Total myofiber stress";
+                Pressure sigmaA = sigmaARef * LscNorm * ((C + CRest) * LseNorm - CRest)
+                  "Active myofiber stress";
+                Pressure sigmaP = sigmaPRef * (0.12 * (cosh(5 * smooth(1, noEvent(if Ls > LsP0 then LsP0 / dLsP * log(Ls / LsP0) else 0.0))) - 1) + (log(Ls / LsRef) + 0.1))
+                  "Passive myofiber stress";
                 Real tauD = tauS * 0.33 * tauA
                   "Time coefficient for contractility decay";
                 Real tauR = tauS * 0.55 * tauA
                   "Time coefficient for contractility rise";
-                Real Tm(unit = "kg/s2") "Total wall tension";
-                Volume Vm "Current Mid-wall volume";
-                Real xD
+                Real Tm(unit = "kg/s2") = VW * sigma / 2 / Am * (1 + 0.27 * z ^ 2)
+                  "Total wall tension";
+                Real xD = (t - tDelay - tauA * (0.65 + 0.7 * LscNorm)) / tauD
                   "Auxiliary coefficient for modeling contractility decay";
-                Real xR "Auxiliary coefficient for modeling contractility rise";
-                Real z
+                Real xR = min(8, max(0, (t - tDelay) / tauR))
+                  "Auxiliary coefficient for modeling contractility rise";
+                Real z = 3 * Cm * VW / 2 / (Am - Am0)
                   "Auxiliary coefficient for computing natural myofiber strain";
 
-              equation
-                pT = 2 * Tm * Cm;
-                Tm = VW * sigma / 2 / Am * (1 + 0.27 * z ^ 2);
-                epsilon = 0.5 * log(max(1e-9, Am - Am0) / AmRef) - 1 / 12 * z ^ 2 - 0.019 * z ^ 4;
-                z = 3 * Cm * VW / 2 / (Am - Am0);
+                // differentiated variables
+                Cardiovascular.Types.Length Lsc
+                  "Length of contractile sarcomere element";
+                Real C(start = 0, fixed = true) "Current contractility";
+                Time t(start = 0, fixed = true)
+                  "Time from start of cardiac cycle";
 
-                Ls = LsRef * exp(epsilon);
-                Lse = Ls - Lsc;
-                LseNorm = max(-0.02, Lse / LseIso);
-                LscNorm = max(0.0001, (Lsc - Lsc0) * 1e6);
+                // abstract variables
+                Cardiovascular.Types.Area Am(start=AmRef_init, fixed=true)
+                  "Current mid-wall area";
+                Volume Vm "Current Mid-wall volume";
+                Real Cm(unit = "m-1") "Mid-wall curvature";
+              equation
                 der(Lsc) = max(LseNorm - 1, tanh(10 * C + max(0, 1e-4 * sigmaP ^ 2)) * (LseNorm - 1)) * vMax;
                 der(C) = contractilityScale * (if t - tDelay < 0 then 0 else 1 / tauR * tanh(4 * LscNorm ^ 2) * 0.02 * xR ^ 3 * (8 - xR) ^ 2 * exp(-xR) - 1 / tauD * C * (0.5 + 0.5 * sin((if xD >= 0 then 1 else -1) * min(pi / 2, abs(xD)))));
-
-                xD = (t - tDelay - tauA * (0.65 + 0.7 * LscNorm)) / tauD;
-                xR = min(8, max(0, (t - tDelay) / tauR));
-                sigmaA = sigmaARef * LscNorm * ((C + CRest) * LseNorm - CRest);
-                sigmaP = sigmaPRef * (0.12 * (cosh(5 * smooth(1, noEvent(if Ls > LsP0 then LsP0 / dLsP * log(Ls / LsP0) else 0.0))) - 1) + (log(Ls / LsRef) + 0.1));
-                sigma = max(0.2 * sigmaP, sigmaP) + sigmaA;
-
                 der(t) = 1;
                 when t - tDelay >= settings. condition. cycleDuration then
                   reinit(t, t - settings. condition. cycleDuration);
@@ -7942,6 +7950,7 @@ above 0 mmHg.")}));
 
               end HeartWall;
             end Abstraction;
+
 
             model Heart "Heart model including coronaries"
               import
@@ -8282,19 +8291,18 @@ above 0 mmHg.")}));
 
               input Pressure pP "Pericardial pressure";
 
-              Pressure p "Current atria pressure";
+              Pressure p = pT + pP "Current atria pressure";
               Volume V "Current atria volume";
 
             equation
-              Vm = V + 0.5 * VW;
-              Cm = (4 * pi / (3 * Vm)) ^ (1 / 3);
-              Am = 4 * pi / Cm ^ 2;
-
-              p = pT + pP;
-
+              // connector connection
               c. q = der(V) - (if V < 10e-6 then 700 * (10e-6 - V) else 0);  // Protection against near-zero volumes
               c. pressure = p;
 
+              // implementation of inherited variables
+              Vm = V + 0.5 * VW;
+              Cm = (4 * pi / (3 * Vm)) ^ (1 / 3);
+              Am = 4 * pi / Cm ^ 2;
               annotation (Documentation(info="<html>
 <p>from triseg nodel</p>
 </html>"),     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={Bitmap(
@@ -8323,20 +8331,20 @@ above 0 mmHg.")}));
               parameter Real EAmRef_init = 0
                 "Starting value of the correctional coefficient";
 
-              Cardiovascular.Types.Length xm "Wall extension along the x-axis";
-              Cardiovascular.Types.Length ym(start=0.033)
+              input Cardiovascular.Types.Length xm
+                "Wall extension along the x-axis";
+              input Cardiovascular.Types.Length ym(start=0.033)
                 "Wall extension along the y-axis";
-              Real sinAlpha "Sinus of angle of spherical surface";
-              Real cosAlpha "Cosinus of angle of spherical surface";
-              Real Tx(unit = "kg/s2") "Axial wall tension";
-              Real Ty(unit = "kg/s2") "Radial wall tension";
+
+              Real sinAlpha = 2 * xm * ym / (xm ^ 2 + ym ^ 2)
+                "Sinus of angle of spherical surface";
+              Real cosAlpha = (ym ^ 2 - xm ^ 2) / (xm ^ 2 + ym ^ 2)
+                "Cosinus of angle of spherical surface";
+              Real Tx(unit = "kg/s2") = Tm * sinAlpha "Axial wall tension";
+              Real Ty(unit = "kg/s2") = Tm * cosAlpha "Radial wall tension";
 
             equation
-              sinAlpha = 2 * xm * ym / (xm ^ 2 + ym ^ 2);
-              cosAlpha = (ym ^ 2 - xm ^ 2) / (xm ^ 2 + ym ^ 2);
-              Tx = Tm * sinAlpha;
-              Ty = Tm * cosAlpha;
-
+              // implementation of inherited variables
               Vm = Modelica. Constants. pi / 6 * xm * (xm ^ 2 + 3 * ym ^ 2);
               Am = Modelica. Constants. pi * (xm ^ 2 + ym ^ 2);
               Cm = 2 * xm / (xm ^ 2 + ym ^ 2);
@@ -8356,17 +8364,22 @@ above 0 mmHg.")}));
 
               Volume VLV "Volume of left ventricle";
               Volume VRV "Volume of right ventricle";
-              Pressure pLV "Pressure in left ventricle";
-              Pressure pRV "Pressure in right ventricle";
-              Pressure pM "Intramyocardial pressure for left ventricle";
+              Pressure pLV = LW. pT + pP "Pressure in left ventricle";
+              Pressure pRV = RW. pT + pP "Pressure in right ventricle";
+              Pressure pM = sigmaRM + pLV * (rO - rM) / (rO - rI)
+                "Intramyocardial pressure for left ventricle";
 
             protected
-              Cardiovascular.Types.Length rO "Radial position at outer surface";
-              Cardiovascular.Types.Length rI "Radial position at inner surface";
-              Cardiovascular.Types.Length rM
+              Cardiovascular.Types.Length rO = (3 * (VLV + (LW. VW + SW. VW) * 1) / 4 / Modelica.Constants.pi) ^ (1 / 3)
+                "Radial position at outer surface";
+              Cardiovascular.Types.Length rI = (3 * (VLV + (LW. VW + SW. VW) * 0) / 4 / Modelica.Constants.pi) ^ (1 / 3)
+                "Radial position at inner surface";
+              Cardiovascular.Types.Length rM = (3 * (VLV + (LW. VW + SW. VW) / 3) / 4 / Modelica.Constants.pi) ^ (1 / 3)
                 "Radial possition at representative position (1 / 3) inside the wall";
-              Real lambdaR "Radial fiber stretch ratio";
-              Pressure sigmaRM "Radial passive wall stress";
+              Real lambdaR = (((VLV + (LW. VW + SW. VW) / 3) / (60e-6 + (LW. VW + SW. VW) / 3)) ^ (1 / 3)) ^ (-2)
+                "Radial fiber stretch ratio";
+              Pressure sigmaRM = if lambdaR < 1   then 0 else 0.2e3 * (exp(9 * (lambdaR - 1)) - 1)
+                "Radial passive wall stress";
               Real e
                 "Error in sum of radial wall tensions for their adjustment";
 
@@ -8410,28 +8423,28 @@ above 0 mmHg.")}));
                 annotation (Placement(transforMation(extent={{10,-20},{30,0}})));
 
             equation
-              LW. Vm = +VLV + 0.5 * LW. VW + 0.5 * SW. VW - SW. Vm;
-              RW. Vm = +VRV + 0.5 * RW. VW + 0.5 * SW. VW + SW. Vm;
+              // missing definitions for following inputs :
+              // Am0 (ihnerited from HeartWall)
+              // AmRef (ihnerited from HeartWall)
+              // EAmRef (ihnerited from HeartWall)
+              // VW (ihnerited from HeartWall)
+              // sigmaPRef (from VentricularWall)
+
               LW. Tx = RW. Tx + SW. Tx;
               LW. Ty + RW. Ty + SW. Ty = e;  // This workaround needed because direct enforcement of equality of radial tensions led to numerical crashes in some cases
-              der(LW. ym) = -e * 1e6;
+              der(LW. ym) = -e * 1e6; // part of the workaround
               SW. ym = RW. ym;
               SW. ym = LW. ym;
 
-              pLV = LW. pT + pP;
-              pRV = RW. pT + pP;
+              // ventricles volume
+              LW. Vm = +VLV + 0.5 * LW. VW + 0.5 * SW. VW - SW. Vm;
+              RW. Vm = +VRV + 0.5 * RW. VW + 0.5 * SW. VW + SW. Vm;
+
+              // connectors connection
               cLV. pressure = pLV;
               cRV. pressure = pRV;
               cLV. q = der(VLV);
               cRV. q = der(VRV);
-
-              pM = sigmaRM + pLV * (rO - rM) / (rO - rI);
-
-              rO = (3 * (VLV + (LW. VW + SW. VW) * 1) / 4 / Modelica.Constants.pi) ^ (1 / 3);
-              rI = (3 * (VLV + (LW. VW + SW. VW) * 0) / 4 / Modelica.Constants.pi) ^ (1 / 3);
-              rM = (3 * (VLV + (LW. VW + SW. VW) / 3) / 4 / Modelica.Constants.pi) ^ (1 / 3);
-              sigmaRM = if lambdaR < 1   then 0 else 0.2e3 * (exp(9 * (lambdaR - 1)) - 1);
-              lambdaR = (((VLV + (LW. VW + SW. VW) / 3) / (60e-6 + (LW. VW + SW. VW) / 3)) ^ (1 / 3)) ^ (-2);
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                         -100},{100,100}}), graphics), Icon(coordinateSystem(
@@ -8656,7 +8669,7 @@ above 0 mmHg.")}));
                 annotation (Placement(transformation(extent={{-26,-10},{-6,10}})));
               R Ra(R = 700000000)
                 annotation (Placement(transformation(extent={{-58,-10},{-38,10}})));
-              C Ca(V_init = 6e-6, C = 3e-11)
+              C Ca(V_init=6e-06, C(displayUnit="m3/Pa") = 3e-11)
                 annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
               C Cv(V_init = 10e-6, C = 7e-10)
                 annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
@@ -12171,6 +12184,592 @@ My Arteries"),Line(
 </ul>
 </html>"));
       end Cardio;
+
+      model Cardio_test "The complete model"
+        import Cardiovascular.Model.Complex;
+        import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
+        import Cardiovascular.Model.Complex.Components.Main.*;
+        import Cardiovascular.Constants.*;
+        import Cardiovascular.Model.Complex.Settings.*;
+        import Cardiovascular.Types.*;
+        import Physiolibrary.Hydraulic.Sources.*;
+        import Physiolibrary.Types.*;
+
+        Frequency HR = 1 / settings. condition. cycleDuration "Heart rate";
+        Pressure MAP = avg_cVSA_p. average "Mean aortic pressure";
+        Volume SVol = CO / HR "Stroke volume";  // Name "SV" would interfere with systemic veins
+        VolumeFlowRate CO = avg_cVSA_q. average "Cardiac output";
+        Energy SWest = MAP * SVol "Non-invasive estimate of stroke work";
+        Energy SW = avg_LV_pEjection. average * SVol "Stroke work";
+        Power CPOest = MAP * CO "Non-invasive estimate of cardiac power output";
+        Power CPO = avg_LV_pEjection. average * CO "Cardiac power output";
+        Volume V = SV. V + PV. V + PA. V + SA. V + heart. V
+          "Total (stressed) blood volume";
+        Time t(start = 0, fixed = true)
+          "Time with respect to start of cardiac cycle";
+
+      protected
+        inner Boolean stepCycle(start=true, fixed = true)
+          "Steps denote start of new cardiac cycle";
+
+        discrete Real[:] feedback(start = {0, 0, 0})
+          "Monitored values for stability convergence";
+        discrete Real feedbackError
+          "Total square error of monitored values - used as a convergence criterion";
+        discrete Real newMode
+          "New mode to switch to - used during adaptation protocol";
+        Integer counter
+          "Counts sequential mode transitions realized without a need for further adaptation - used as a convergence criterion";
+
+      public
+        inner Settings settings(
+          redeclare
+            Cardiovascular.Model.Complex.Settings.Initialization.PhysiologicalAdapted
+                                                                                              initialization,
+          redeclare
+            Cardiovascular.Model.Complex.Settings.ModelConstants.Standard         constants,
+          redeclare Cardiovascular.Model.Complex.Settings.Supports.No supports,
+          redeclare
+            Cardiovascular.Model.Complex.Settings.Conditions.Rest_MinimalAdapt         condition)
+          annotation (Placement(transformation(extent={{108,2},{162,56}})));
+
+        replaceable
+          Cardiovascular.Model.Complex.Components.Main.SystemicArteries.ComplexTree_Derived
+                                                                                SA(
+            enableIABP=true)
+          constrainedby
+          Cardiovascular.Model.Complex.Components.Main.SystemicArteries.Abstraction.SystemicArteries
+          "Replaceable model of systemic arteries"
+          annotation (choicesAllMatching=true, Placement(transformation(
+              extent={{-46.0078,-47.414},{46.0078,47.414}},
+              rotation=-70,
+              origin={13.7098,-38.9833})));
+        Heart.Heart heart(
+          VPRef_init = settings. initialization. peri_VRef,
+          pPRef = settings. initialization. peri_pRef,
+          kP = settings. initialization. peri_k)
+          annotation (Placement(transformation(extent={{-34,-2},{28,60}})));
+        Vessels.AdaptableVeins SV(
+          pRef_init = settings. initialization. SV_pRef,
+          ARef_init = settings. initialization. SV_ARef,
+          AW_init = settings. initialization. SV_AW,
+          l = settings. initialization. SV_l,
+          k = settings. initialization. SV_k) annotation (Placement(transformation(
+              extent={{-51,-50},{51,50}},
+              rotation=80,
+              origin={-82,-41})));
+        Vessels.AdaptableArteries PA(
+          pRef_init = settings. initialization. PA_pRef,
+          ARef_init = settings. initialization. PA_ARef,
+          AW_init = settings. initialization. PA_AW,
+          l = settings. initialization. PA_l,
+          k = settings. initialization. PA_k) annotation (Placement(transformation(
+              extent={{-17.2253,-19.9627},{17.2253,19.9627}},
+              rotation=110,
+              origin={-3.3498,66.6412})));
+        Vessels.AdaptableVeins PV(
+          pRef_init = settings. initialization. PV_pRef,
+          ARef_init = settings. initialization. PV_ARef,
+          AW_init = settings. initialization. PV_AW,
+          l = settings. initialization. PV_l,
+          k = settings. initialization. PV_k) annotation (Placement(transformation(
+              extent={{19.5906,23.336},{-19.5906,-23.336}},
+              rotation=70,
+              origin={19.2282,59.6095})));
+
+        Vessels.ConsumingCapillaries SC(
+          R(start = settings. initialization. SC_R))
+          annotation (Placement(transformation(extent={{28,-44},{-32,-110}})));
+        Vessels.OxygenatingCapillaries PC(
+          R(start = settings. initialization. PC_R),
+          nonlinearity = settings. condition. pulmonaryPressureDropRef / PC. dp)
+          annotation (Placement(transformation(extent={{-8,68},{26,98}})));
+        ECMO.ECMO ecmo(
+          cycleDuration = settings. supports. ECMO_cycleDuration,
+          pulseDuration = settings. supports. ECMO_pulseDuration,
+          pulseShapeRef = settings. supports. ECMO_pulseShapeRef,
+          qMeanRef = settings. supports. ECMO_qMeanRef,
+          isEnabled=true)
+          annotation (Placement(transformation(extent={{-140,-8},{-62,70}})));
+
+        // Average and maximal values analyzers - used during adaptation
+      protected
+        Averager avg_LV_pEjection(
+          redeclare type T = Pressure,
+          signal = heart. ventricles. pLV,
+          condition = -heart. vSA. cOut. q > 0,
+          control = stepCycle);
+        Averager avg_PC_dp(
+          redeclare type T = Pressure,
+          signal = PC. dp,
+          control = stepCycle);
+        Averager avg_PC_q(
+          redeclare type T = VolumeFlowRate,
+          signal = PC. cIn. q,
+          control = stepCycle);
+        Averager avg_cVSA_p(
+          redeclare type T = Pressure,
+          signal = heart. cVSA. pressure,
+          control = stepCycle);
+        Averager avg_cVSA_q(
+          redeclare type T = VolumeFlowRate,
+          signal = -heart. cVSA. q,
+          control = stepCycle);
+        Averager avg_SV_pInner(
+          redeclare type T = Pressure,
+          signal = SV. pInner,
+          control = stepCycle);
+        Averager avg_SA_q(
+          redeclare type T = VolumeFlowRate,
+          signal = SA. cIn. q,
+          control = stepCycle);
+        Averager avg_SA_A(
+          redeclare type T = Area,
+          signal = SA. core. A,
+          control = stepCycle);
+        Maxer max_SA_wallStress(
+          redeclare type T = Pressure,
+          signal = (SA. core. p + SA. core. RWave * SA. core. A * settings. constants. vImpact) * (1 + 3 * SA. core. A / pre(SA. core. AW)),
+          control = stepCycle);
+        Averager avg_SA_pSquared(
+          redeclare type T = Real (unit = "kg2/(m2.s4)"),
+          signal = SA. core. p ^ 2,
+          control = stepCycle);
+        Averager avg_SV_q(
+          redeclare type T = VolumeFlowRate,
+          signal = SV. cIn. q,
+          control = stepCycle);
+        Averager avg_SV_A(
+          redeclare type T = Area,
+          signal = SV. core. A,
+          control = stepCycle);
+        Maxer max_SV_wallStress(
+          redeclare type T = Pressure,
+          signal = (SV. core. p + SV. core. RWave * SV. core. A * settings. constants. vImpact) * (1 + 3 * SV. core. A / pre(SV. core. AW)),
+          control = stepCycle);
+        Averager avg_SV_pSquared(
+          redeclare type T = Real (unit = "kg2/(m2.s4)"),
+          signal = SV. core. p ^ 2,
+          control = stepCycle);
+        Averager avg_PA_q(
+          redeclare type T = VolumeFlowRate,
+          signal = PA. cIn. q,
+          control = stepCycle);
+        Averager avg_PA_A(
+          redeclare type T = Area,
+          signal = PA. core. A,
+          control = stepCycle);
+        Maxer max_PA_wallStress(
+          redeclare type T = Pressure,
+          signal = (PA. core. p + PA. core. RWave * PA. core. A * settings. constants. vImpact) * (1 + 3 * PA. core. A / pre(PA. core. AW)),
+          control = stepCycle);
+        Averager avg_PA_pSquared(
+          redeclare type T = Real (unit = "kg2/(m2.s4)"),
+          signal = PA. core. p ^ 2,
+          control = stepCycle);
+        Averager avg_PV_q(
+          redeclare type T = VolumeFlowRate,
+          signal = PV. cIn. q,
+          control = stepCycle);
+        Averager avg_PV_A(
+          redeclare type T = Area,
+          signal = PV. core.A,
+          control = stepCycle);
+        Maxer max_PV_wallStress(
+          redeclare type T = Pressure,
+          signal = (PV. core. p + PV. core. RWave * PV. core. A * settings. constants. vImpact) * (1 + 3 * PV. core. A / pre(PV. core. AW)),
+          control = stepCycle);
+        Averager avg_PV_pSquared(
+          redeclare type T = Real (unit = "kg2/(m2.s4)"),
+          signal = PV. core. p ^ 2,
+          control = stepCycle);
+        Maxer max_pP(
+          redeclare type T = Pressure,
+          signal = heart. pP,
+          control = stepCycle);
+        Averager avg_LW_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. LW. sigmaA),
+          control = stepCycle);
+        Averager avg_LW_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. ventricles. LW. sigmaA) * 1e6 * heart. ventricles. LW.Lsc,
+          control = stepCycle);
+        Maxer max_LW_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. LW. sigmaP),
+          control = stepCycle);
+        Averager avg_LW_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. ventricles. LW. sigmaA) * (1e6 * heart. ventricles. LW. Lsc - avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+        Averager avg_SW_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. SW. sigmaA),
+          control = stepCycle);
+        Averager avg_SW_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. ventricles. SW. sigmaA) * 1e6 * heart. ventricles. SW. Lsc,
+          control = stepCycle);
+        Maxer max_SW_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. SW. sigmaP),
+          control = stepCycle);
+        Averager avg_SW_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          signal = max(0, heart. ventricles. SW. sigmaA) * (1e6 * heart. ventricles. SW. Lsc - avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+        Averager avg_RW_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. RW. sigmaA),
+          control = stepCycle);
+        Averager avg_RW_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. ventricles. RW. sigmaA) * 1e6 * heart. ventricles. RW. Lsc,
+          control = stepCycle);
+        Maxer max_RW_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. RW. sigmaP),
+          control = stepCycle);
+        Averager avg_RW_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          signal = max(0, heart. ventricles. RW. sigmaA) * (1e6 * heart. ventricles. RW. Lsc - avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+        Averager avg_LA_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. LA. sigmaA),
+          control = stepCycle);
+        Averager avg_LA_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. LA. sigmaA) * 1e6 * heart. LA. Lsc,
+          control = stepCycle);
+        Maxer max_LA_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. LA. sigmaP),
+          control = stepCycle);
+        Averager avg_LA_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          signal = max(0, heart. LA. sigmaA) * (1e6 * heart. LA. Lsc - avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+        Averager avg_RA_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. RA. sigmaA),
+          control = stepCycle);
+        Averager avg_RA_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. RA. sigmaA) * 1e6 * heart. RA. Lsc,
+          control = stepCycle);
+        Maxer max_RA_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. RA. sigmaP),
+          control = stepCycle);
+        Averager avg_RA_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          signal = max(0, heart. RA. sigmaA) * (1e6 * heart. RA. Lsc - avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+        Averager avg_V(
+          redeclare type T = Volume,
+          signal = V,
+          control = stepCycle);
+
+        UnlimitedPump volumeControl(useSolutionFlowInput = true);
+
+      equation
+        // Watching cardiac cycle time
+        der(t) = 1;
+        when t >= settings. condition. cycleDuration then
+          reinit(t, t - settings. condition. cycleDuration);
+          stepCycle = not pre(stepCycle);
+        end when;
+
+        // Setting blood volume to currently desired value
+        volumeControl. solutionFlow = (settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - V) / settings. constants. bloodVolumeAdaptationRate;
+
+        // Controling adaptation convergence
+        when change(stepCycle) then
+          feedback[:] = {avg_PC_dp. average  * 760 / 101325, avg_cVSA_q. average * 1e6, avg_cVSA_p. average * 760 / 101325};
+          feedbackError = sum((feedback[i] - pre(feedback[i])) ^ 2 for i in 1 : size(feedback, 1));
+          newMode = settings.condition.processFeedback(feedbackError, pre(counter) >= 14);
+          counter = if pre(counter) < 14 and settings. condition. adaptationPhase and pre(settings. condition. adaptationPhase) then (if newMode <> pre(settings. condition. mode) then pre(counter) + 1 else max(0, pre(counter) - 1)) else pre(counter);
+          reinit(settings. condition. mode, newMode);
+        end when;
+
+        //  Adaptatioin of capillary resistance
+        when change(stepCycle) and settings. condition. adaptCapillaryResistance then
+          reinit(PC. R, settings. condition. pulmonaryPressureDropRef / avg_PC_q.average);
+          reinit(SC. R, (settings. condition. aortalPressureRef - avg_SV_pInner. average) / settings. condition. aortalFlowRef * settings. condition. systemicResistanceScale);
+        end when;
+
+        // Adaptation of reference pressure and reference volume of vessels
+        when change(stepCycle) and settings. condition. adaptVesselDiameter then
+          SA. core. ARef = if SA. isAdaptable then pre(SA. core. ARef) * (0.17 / (abs(avg_SA_q. average) / avg_SA_A. average)) ^ (-0.5) * (pre(SA. core. pRef) / sqrt(avg_SA_pSquared. average)) ^ (-0.5 / (SA. core. k / 3 - 1)) else pre(SA. core. ARef);
+          SV. core. ARef = pre(SV. core. ARef) * (0.17 / (abs(avg_SV_q. average) / avg_SV_A. average)) ^ (-0.5) * (pre(SV. core. pRef) / sqrt(avg_SV_pSquared. average)) ^ (-0.5 / (SV. core. k / 3 - 1));
+          PA. core. ARef = pre(PA. core. ARef) * (0.17 / (abs(avg_PA_q. average) / avg_PA_A. average)) ^ (-0.5) * (pre(PA. core. pRef) / sqrt(avg_PA_pSquared. average)) ^ (-0.5 / (PA. core. k / 3 - 1));
+          PV. core. ARef = pre(PV. core. ARef) * (0.17 / (abs(avg_PV_q. average) / avg_PV_A. average)) ^ (-0.5) * (pre(PV. core. pRef) / sqrt(avg_PV_pSquared. average)) ^ (-0.5 / (PV. core. k / 3 - 1));
+          SA. core. pRef = if SA. isAdaptable then (pre(SA. core. pRef) / sqrt(avg_SA_pSquared. average)) ^ 0.5 * sqrt(avg_SA_pSquared. average) else pre(SA. core. pRef);
+          SV. core. pRef = (pre(SV. core. pRef) / sqrt(avg_SV_pSquared. average)) ^ 0.5 * sqrt(avg_SV_pSquared. average);
+          PA. core. pRef = (pre(PA. core. pRef) / sqrt(avg_PA_pSquared. average)) ^ 0.5 * sqrt(avg_PA_pSquared. average);
+          PV. core. pRef = (pre(PV. core. pRef) / sqrt(avg_PV_pSquared. average)) ^ 0.5 * sqrt(avg_PV_pSquared. average);
+        end when;
+
+        // Adaptation of valve diameters and dead mid-wall area of heart walls
+        when change(stepCycle) and settings. condition. adaptValveDiameter then
+          heart. vSA. ARef = if SA. isAdaptable then avg_SA_A. average else pre(heart. vSA. ARef);
+          heart. vSV. ARef = avg_SV_A. average;
+          heart. vPA. ARef = avg_PA_A. average;
+          heart. vPV. ARef = avg_PV_A. average;
+          heart. vLAV. ARef = 1.5 * heart. vSA. ARef;
+          heart. vRAV. ARef = 1.5 * avg_PA_A. average;
+          heart. ventricles. LW. Am0 = 1.5 * heart. vSA. ARef + heart. vSA. ARef;
+          heart. ventricles. SW. Am0 = 0;
+          heart. ventricles. RW. Am0 = 1.5 * avg_PA_A. average + avg_PA_A. average;
+          heart. LA. Am0 = 1.5 * heart. vSA. ARef + avg_SV_A. average;
+          heart. RA. Am0 = 1.5 * avg_PA_A. average + avg_PV_A. average;
+        end when;
+
+        // Adaptation of wall volumes of vessels
+        when change(stepCycle) and settings. condition. adaptVesselWVolume then
+          SA. core. AW = if SA. isAdaptable then pre(SA. core. AW) * (0.5e6 / pre(max_SA_wallStress. maximum)) ^ (-0.5) else pre(SA. core. AW);
+          SV. core. AW = pre(SV. core. AW) * (0.5e6 / pre(max_SV_wallStress. maximum)) ^ (-0.5);
+          PA. core. AW = pre(PA. core. AW) * (0.5e6 / pre(max_PA_wallStress. maximum)) ^ (-0.5);
+          PV. core. AW = pre(PV. core. AW) * (0.5e6 / pre(max_PV_wallStress. maximum)) ^ (-0.5);
+        end when;
+
+        // Adaptation of correctional term for more appropriate wall geometry
+        when change(stepCycle) and settings. condition. adaptTriSegJunction then
+          heart. ventricles. LW. EAmRef = 0;
+          heart. ventricles. SW. EAmRef = 5 * log(pre(heart. ventricles. LW. AmRef) * pre(heart. ventricles. RW. AmRef) / (pre(heart. ventricles. SW. AmRef) * (pre(heart. ventricles. LW. AmRef) + pre(heart. ventricles. RW. AmRef))));
+          heart. ventricles. RW. EAmRef = 0;
+        end when;
+
+        // Adaptation of wall volumes of heart walls
+        when change(stepCycle) and settings. condition. adaptChamberWVolume then
+          heart. ventricles. LW. VW = pre(heart. ventricles. LW. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LW_sigmaAPositiveNorm. average / avg_LW_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. LW. EAmRef) / pre(max_LW_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. ventricles. SW. VW = pre(heart. ventricles. SW. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_SW_sigmaAPositiveNorm. average / avg_SW_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. SW. EAmRef) / pre(max_SW_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. ventricles. RW. VW = pre(heart. ventricles. RW. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RW_sigmaAPositiveNorm. average / avg_RW_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. RW. EAmRef) / pre(max_RW_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. LA. VW = pre(heart. LA. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LA_sigmaAPositiveNorm. average / avg_LA_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_LA_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. RA. VW = pre(heart. RA. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RA_sigmaAPositiveNorm. average / avg_RA_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_RA_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+        end when;
+
+        // Adaptation of reference cross-sectional area of heart walls
+        when change(stepCycle) and settings. condition. adaptChamberWArea then
+          heart. ventricles. LW. AmRef = pre(heart. ventricles. LW. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LW_sigmaAPositiveNorm. average / avg_LW_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. LW. EAmRef) / pre(max_LW_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. ventricles. SW. AmRef = pre(heart. ventricles. SW. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_SW_sigmaAPositiveNorm. average / avg_SW_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. SW. EAmRef) / pre(max_SW_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. ventricles. RW. AmRef = pre(heart. ventricles. RW. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RW_sigmaAPositiveNorm. average / avg_RW_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. RW. EAmRef) / pre(max_RW_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. LA. AmRef = pre(heart. LA. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LA_sigmaAPositiveNorm. average / avg_LA_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_LA_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. RA. AmRef = pre(heart. RA. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RA_sigmaAPositiveNorm. average / avg_RA_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_RA_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+        end when;
+
+        // Adaptation of reference passive myofiber stress of heart walls
+        when change(stepCycle) and settings. condition. adaptChamberEcmStress then
+          heart. ventricles. LW. sigmaPRef = pre(heart. ventricles. LW. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LW_sigmaAPositiveNorm. average / avg_LW_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. LW. EAmRef) / pre(max_LW_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. ventricles. SW. sigmaPRef = pre(heart. ventricles. SW. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_SW_sigmaAPositiveNorm. average / avg_SW_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. SW. EAmRef) / pre(max_SW_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. ventricles. RW. sigmaPRef = pre(heart. ventricles. RW. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RW_sigmaAPositiveNorm. average / avg_RW_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. RW. EAmRef) / pre(max_RW_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. LA. sigmaPRef = pre(heart. LA. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LA_sigmaAPositiveNorm. average / avg_LA_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_LA_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          heart. RA. sigmaPRef = pre(heart. RA. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RA_sigmaAPositiveNorm. average / avg_RA_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_RA_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+        end when;
+
+        // Adaptation of reference volume of pericardium
+        when change(stepCycle) and settings. condition. adaptPericardium then
+          heart. VPRef = pre(heart. VPRef) / ((heart. pPRef / pre(max_pP. maximum)) ^ (0.3 / heart. kP));
+        end when;
+
+        connect(SV. cOut, heart.cVSV)   annotation (Line(
+            points={{-74.9152,-0.819844},{-16,-0.819844},{-16,14},{-16,32},{-20,
+                32},{-20,46},{-18,46},{-18,36.44},{-16.02,36.44}},
+            color={127,8,43},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(heart.cVPV, PV. cOut)   annotation (Line(
+            points={{6.92,40.16},{6.92,44},{4,44},{4,46},{10,46},{13.8679,46},{
+                13.8679,44.8822}},
+            color={255,0,0},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(SC. cOut, SV. cIn)    annotation (Line(
+            points={{-26,-77},{-89.0848,-77},{-89.0848,-81.1802}},
+            color={163,16,55},
+            smooth=Smooth.None,
+            thickness=1));
+        connect(SC. pOut, SV. pInner)    annotation (Line(
+            points={{-13.7,-58.19},{-12,-58.19},{-12,-58},{-12,-41.8682},{
+                -77.076,-41.8682}},
+            color={0,0,127},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(PA. cOut, PC. cIn)     annotation (Line(
+            points={{-8.06292,79.5904},{-8.06292,83},{-4.6,83}},
+            color={102,6,44},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(PC. cOut, PV. cIn)     annotation (Line(
+            points={{22.6,83},{24.5885,83},{24.5885,74.3368}},
+            color={255,0,0},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(PA. pInner, PC. pIn)     annotation (Line(
+            points={{-1.47392,67.324},{-1.47392,66},{-1.47392,68},{2,68},{2,74},
+                {2.37,74},{2.37,74.45}},
+            color={0,0,127},
+            smooth=Smooth.Bezier,
+            thickness=0.5));
+        connect(PC. pOut, PV. pInner)     annotation (Line(
+            points={{15.63,74.45},{15.63,74},{16,74},{16,64},{16,60},{16,
+                60.4076},{17.0353,60.4076}},
+            color={0,0,127},
+            smooth=Smooth.Bezier,
+            thickness=0.5));
+        connect(SC. cIn, SA. cOut)    annotation (Line(
+            points={{22,-77},{22,-78},{26.2983,-78},{26.2983,-73.5699}},
+            color={255,0,0},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(SA. cIn, heart. cVSA)   annotation (Line(
+            points={{1.12132,-4.39675},{2,-4.39675},{2,-2},{2,0},{0,0},{0,12},{
+                -2,12},{-2,36},{-6,36},{-6,54},{-14,54},{-14,44},{-10.44,44},{
+                -10.44,41.4}},
+            color={255,0,0},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(SA. pInner, SC. pIn)    annotation (Line(
+            points={{9.25434,-40.605},{4,-40.605},{4,-54},{9.7,-54},{9.7,-58.19}},
+            color={0,0,127},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(SV. cOut, ecmo. cIn) annotation (Line(
+            points={{-74.9152,-0.819844},{-74.9152,2},{-18,2},{-18,12},{-34,12},
+                {-100,12},{-146,12},{-146,20},{-146,31},{-132.2,31}},
+            color={127,0,38},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(ecmo. cOut, SA. cCannula) annotation (Line(
+            points={{-69.8,31},{-24,31},{-24,-14.9894},{-1.07811,-14.9894}},
+            color={255,0,0},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(heart. cVPA, PA. cIn)   annotation (Line(
+            points={{-1.76,42.64},{-1.76,48},{-8,48},{-8,50},{2,50},{2,53.692},
+                {1.36332,53.692}},
+            color={127,0,0},
+            smooth=Smooth.Bezier,
+            thickness=1));
+        connect(volumeControl. q_out, heart. cVSA); // Homely component -> disabling vizualization, even for connection
+
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics={
+              Text(
+                extent={{108,2},{162,-22}},
+                lineColor={229,196,6},
+                lineThickness=1,
+                fillColor={255,0,0},
+                fillPattern=FillPattern.Solid,
+                textStyle={TextStyle.Bold,TextStyle.Italic},
+                textString="Tune Me Up"),
+              Line(
+                points={{160,16},{180,4},{170,-8}},
+                color={122,53,18},
+                thickness=1,
+                smooth=Smooth.Bezier,
+                arrow={Arrow.Open,Arrow.None}),
+              Text(
+                extent={{108,-46},{164,-58}},
+                lineColor={229,196,6},
+                lineThickness=1,
+                fillColor={255,0,0},
+                fillPattern=FillPattern.Solid,
+                textStyle={TextStyle.Bold,TextStyle.Italic},
+                textString="Play with
+My Arteries"),Line(
+                points={{62,-54},{94,-76},{122,-76},{136,-68}},
+                color={122,53,18},
+                thickness=1,
+                smooth=Smooth.Bezier,
+                arrow={Arrow.Open,Arrow.None}),
+              Text(
+                extent={{-6,90},{24,100}},
+                lineColor={0,0,0},
+                lineThickness=1,
+                fillColor={255,0,0},
+                fillPattern=FillPattern.Solid,
+                textString="Pulmonary Circuit",
+                textStyle={TextStyle.Bold}),
+              Text(
+                extent={{-16,-102},{14,-92}},
+                lineColor={0,0,0},
+                lineThickness=1,
+                fillColor={255,0,0},
+                fillPattern=FillPattern.Solid,
+                textStyle={TextStyle.Bold},
+                textString="Systemic Circuit"),
+              Text(
+                extent={{-112,18},{-88,24}},
+                lineColor={0,0,0},
+                lineThickness=1,
+                fillColor={255,0,0},
+                fillPattern=FillPattern.Solid,
+                textStyle={TextStyle.Bold},
+                textString="ECMO")}),           experiment(
+            StartTime=400,
+            StopTime=415,
+            __Dymola_NumberOfIntervals=1000,
+            Tolerance=1e-006,
+            __Dymola_Algorithm="sdirk34hw"),
+          __Dymola_experimentSetupOutput,
+          Commands,
+          Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+              graphics={
+              Bitmap(
+                extent={{-64,76},{64,-60}},
+                imageSource="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",
+                fileName="modelica://Cardio/../../../../../../package_favorite.png"),
+              Bitmap(
+                extent={{-24,28},{24,-24}},
+                imageSource="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",
+                fileName="modelica://Cardio/../../../../../../Cross.png"),
+              Text(
+                extent={{-60,-66},{58,-82}},
+                lineColor={0,86,7},
+                lineThickness=1,
+                fillColor={255,0,0},
+                fillPattern=FillPattern.Solid,
+                textString="Cardio © 2015 Karel Kalecký",
+                textStyle={TextStyle.Bold}),
+              Text(
+                extent={{-60,-78},{58,-94}},
+                lineColor={0,86,7},
+                lineThickness=1,
+                fillColor={255,0,0},
+                fillPattern=FillPattern.Solid,
+                textStyle={TextStyle.Bold,TextStyle.Italic},
+                textString="Free usage for educational and research purposes")}),
+          Documentation(info="<html>
+<h4>Cardio &copy; 2015 Karel Kaleck&yacute;</h4>
+<p><i>To be used free for educational and research purposes</i></p>
+<p><br>The icons have been borrowed from free public sources. Thx to:</p>
+<ul>
+<li>Physiolibrary Icons (http://physiolibrary.org)</li>
+<li>Crystal Project Icons (http://commons.wikimedia.org/wiki/Crystal_Clear)</li>
+<li>user ArtFavor (http://www.freestockphotos.biz/stockphoto/14157)</li>
+<li>user Hazmat2 (http://en.wikipedia.org/wiki/Anterior_cerebral_artery#/media/File:Circle_of_Willis_en.svg)</li>
+</ul>
+</html>"));
+      end Cardio_test;
     end Complex;
   end Model;
 
