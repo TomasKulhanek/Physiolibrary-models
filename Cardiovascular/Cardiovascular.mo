@@ -8580,11 +8580,12 @@ above 0 mmHg.")}));
               outer parameter Pressure pRef_init
                 "Starting value of reference pressure";
 
-                Cardiovascular.Types.Area AW= AW_init
+              discrete input Cardiovascular.Types.Area AW(start=AW_init, fixed=true)
                 "Adaptable wall cross-sectional area";
-                Cardiovascular.Types.Area ARef = ARef_init
+              discrete input Cardiovascular.Types.Area ARef(start=ARef_init, fixed=true)
                 "Adaptable reference inner cross-sectional area";
-                Pressure pRef = pRef_init "Adaptable reference pressure";
+              discrete input Pressure pRef(start = pRef_init, fixed = true)
+                "Adaptable reference pressure";
 
               Cardiovascular.Types.Area A "Inner cross-sectional area";
               Volume VW "Wall volume";
@@ -8607,8 +8608,8 @@ above 0 mmHg.")}));
               RWave = (rho * (k - 3) * max(1.0, p) / 3) ^ 0.5 / (A + AW / 3);
 
               // For an unknown reason, this won't compile for the Abdolrazaghi tree:
-                 p = pRef * ((VW + 3 * V) / (VW + 3 * VRef)) ^ ((k - 3) / 3);
-             // p = pre(pRef) * ((pre(AW) * l + 3 * V) / (pre(AW) * l + 3 * pre(ARef) * l)) ^ ((k - 3) / 3);
+              //   p = pRef * ((VW + 3 * V) / (VW + 3 * VRef)) ^ ((k - 3) / 3);
+              p = pre(pRef) * ((pre(AW) * l + 3 * V) / (pre(AW) * l + 3 * pre(ARef) * l)) ^ ((k - 3) / 3);
 
               c. pressure = p;
               c. q = der(V);
@@ -12218,17 +12219,17 @@ My Arteries"),Line(
       public
         inner Settings settings(
           redeclare
+            Cardiovascular.Model.Complex.Settings.Initialization.PhysiologicalAdapted
+                                                                                              initialization,
+          redeclare
             Cardiovascular.Model.Complex.Settings.ModelConstants.Standard         constants,
           redeclare Cardiovascular.Model.Complex.Settings.Supports.No supports,
           redeclare
-            Cardiovascular.Model.Complex.Settings.Conditions.Rest_MinimalAdapt         condition,
-          redeclare
-            Cardiovascular.Model.Complex.Settings.Initialization.PhysiologicalAdapted
-            initialization)
+            Cardiovascular.Model.Complex.Settings.Conditions.Rest_MinimalAdapt         condition)
           annotation (Placement(transformation(extent={{108,2},{162,56}})));
 
-        replaceable
-          Complex.Components.Main.SystemicArteries.ComplexTree_Derived          SA
+        replaceable Complex.Components.Main.SystemicArteries.Original_CircAdapt
+                                                                                SA
           constrainedby
           Cardiovascular.Model.Complex.Components.Main.SystemicArteries.Abstraction.SystemicArteries
           "Replaceable model of systemic arteries"
@@ -12279,14 +12280,14 @@ My Arteries"),Line(
         ECMO.ECMO ecmo(
           cycleDuration = settings. supports. ECMO_cycleDuration,
           pulseDuration = settings. supports. ECMO_pulseDuration,
+          pulseShapeRef = settings. supports. ECMO_pulseShapeRef,
           qMeanRef = settings. supports. ECMO_qMeanRef,
-          isEnabled=false,
-          pulseShapeRef=Cardiovascular.Types.PulseShape.pulseless)
+          isEnabled=true)
           annotation (Placement(transformation(extent={{-140,-8},{-62,70}})));
 
         // Average and maximal values analyzers - used during adaptation
         // HEART
-
+      protected
         Averager avg_LV_pEjection(
           redeclare type T = Pressure,
           signal = heart. ventricles. pLV,
@@ -12300,200 +12301,199 @@ My Arteries"),Line(
           redeclare type T = VolumeFlowRate,
           signal = -heart. cVSA. q,
           control = stepCycle);
-      //   Maxer max_pP(
-      //     redeclare type T = Pressure,
-      //     signal = heart. pP,
-      //     control = stepCycle);
-      //   Averager avg_LW_sigmaAPositive(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. LW. sigmaA),
-      //     control = stepCycle);
-      //   Averager avg_LW_sigmaAPositiveLsc(
-      //     redeclare type T = Real,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. LW. sigmaA) * 1e6 * heart. ventricles. LW.Lsc,
-      //     control = stepCycle);
-      //   Maxer max_LW_sigmaP(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. LW. sigmaP),
-      //     control = stepCycle);
-      //   Averager avg_LW_sigmaAPositiveNorm(
-      //     redeclare type T = Real,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. LW. sigmaA) * (1e6 * heart. ventricles. LW. Lsc - avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average) ^ 2,
-      //     control = stepCycle);
-      //   Averager avg_SW_sigmaAPositive(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. SW. sigmaA),
-      //     control = stepCycle);
-      //   Averager avg_SW_sigmaAPositiveLsc(
-      //     redeclare type T = Real,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. SW. sigmaA) * 1e6 * heart. ventricles. SW. Lsc,
-      //     control = stepCycle);
-      //   Maxer max_SW_sigmaP(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. SW. sigmaP),
-      //     control = stepCycle);
-      //   Averager avg_SW_sigmaAPositiveNorm(
-      //     redeclare type T = Real,
-      //     signal = max(0, heart. ventricles. SW. sigmaA) * (1e6 * heart. ventricles. SW. Lsc - avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average) ^ 2,
-      //     control = stepCycle);
-      //   Averager avg_RW_sigmaAPositive(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. RW. sigmaA),
-      //     control = stepCycle);
-      //   Averager avg_RW_sigmaAPositiveLsc(
-      //     redeclare type T = Real,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. RW. sigmaA) * 1e6 * heart. ventricles. RW. Lsc,
-      //     control = stepCycle);
-      //   Maxer max_RW_sigmaP(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. ventricles. RW. sigmaP),
-      //     control = stepCycle);
-      //   Averager avg_RW_sigmaAPositiveNorm(
-      //     redeclare type T = Real,
-      //     signal = max(0, heart. ventricles. RW. sigmaA) * (1e6 * heart. ventricles. RW. Lsc - avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average) ^ 2,
-      //     control = stepCycle);
-      //   Averager avg_LA_sigmaAPositive(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. LA. sigmaA),
-      //     control = stepCycle);
-      //   Averager avg_LA_sigmaAPositiveLsc(
-      //     redeclare type T = Real,
-      //     init = 1,
-      //     signal = max(0, heart. LA. sigmaA) * 1e6 * heart. LA. Lsc,
-      //     control = stepCycle);
-      //   Maxer max_LA_sigmaP(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. LA. sigmaP),
-      //     control = stepCycle);
-      //   Averager avg_LA_sigmaAPositiveNorm(
-      //     redeclare type T = Real,
-      //     signal = max(0, heart. LA. sigmaA) * (1e6 * heart. LA. Lsc - avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average) ^ 2,
-      //     control = stepCycle);
-      //   Averager avg_RA_sigmaAPositive(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. RA. sigmaA),
-      //     control = stepCycle);
-      //   Averager avg_RA_sigmaAPositiveLsc(
-      //     redeclare type T = Real,
-      //     init = 1,
-      //     signal = max(0, heart. RA. sigmaA) * 1e6 * heart. RA. Lsc,
-      //     control = stepCycle);
-      //   Maxer max_RA_sigmaP(
-      //     redeclare type T = Pressure,
-      //     init = 1,
-      //     signal = max(0, heart. RA. sigmaP),
-      //     control = stepCycle);
-      //   Averager avg_RA_sigmaAPositiveNorm(
-      //     redeclare type T = Real,
-      //     signal = max(0, heart. RA. sigmaA) * (1e6 * heart. RA. Lsc - avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average) ^ 2,
-      //     control = stepCycle);
-      //
-      //   // SYSTEMIC CIRCULATION
-      //   //arteries
-      //   Maxer max_SA_wallStress(
-      //     redeclare type T = Pressure,
-      //     signal = (SA. core. p + SA. core. RWave * SA. core. A * settings. constants. vImpact) * (1 + 3 * SA. core. A / pre(SA. core. AW)),
-      //     control = stepCycle);
-      //   Averager avg_SA_pSquared(
-      //     redeclare type T = Real (unit = "kg2/(m2.s4)"),
-      //     signal = SA. core. p ^ 2,
-      //     control = stepCycle);
-      //   Averager avg_SA_q(
-      //     redeclare type T = VolumeFlowRate,
-      //     signal = SA. cIn. q,
-      //     control = stepCycle);
-      //   Averager avg_SA_A(
-      //     redeclare type T = Area,
-      //     signal = SA. core. A,
-      //     control = stepCycle);
-      //   //veins
-      //   Averager avg_SV_pInner(
-      //     redeclare type T = Pressure,
-      //     signal = SV. pInner,
-      //     control = stepCycle);
-      //   Averager avg_SV_q(
-      //     redeclare type T = VolumeFlowRate,
-      //     signal = SV. cIn. q,
-      //     control = stepCycle);
-      //   Averager avg_SV_A(
-      //     redeclare type T = Area,
-      //     signal = SV. core. A,
-      //     control = stepCycle);
-      //   Maxer max_SV_wallStress(
-      //     redeclare type T = Pressure,
-      //     signal = (SV. core. p + SV. core. RWave * SV. core. A * settings. constants. vImpact) * (1 + 3 * SV. core. A / pre(SV. core. AW)),
-      //     control = stepCycle);
-      //   Averager avg_SV_pSquared(
-      //     redeclare type T = Real (unit = "kg2/(m2.s4)"),
-      //     signal = SV. core. p ^ 2,
-      //     control = stepCycle);
-      //   //peripheries
-         Averager avg_PC_dp(
-           redeclare type T = Pressure,
-           signal = PC. dp,
-           control = stepCycle);
-      //   Averager avg_PC_q(
-      //     redeclare type T = VolumeFlowRate,
-      //     signal = PC. cIn. q,
-      //     control = stepCycle);
-      //
-      //   // PULMONARY CIRCULATION
-      //   //arteries
-      //   Averager avg_PA_q(
-      //     redeclare type T = VolumeFlowRate,
-      //     signal = PA. cIn. q,
-      //     control = stepCycle);
-      //   Averager avg_PA_A(
-      //     redeclare type T = Area,
-      //     signal = PA. core. A,
-      //     control = stepCycle);
-      //   Maxer max_PA_wallStress(
-      //     redeclare type T = Pressure,
-      //     signal = (PA. core. p + PA. core. RWave * PA. core. A * settings. constants. vImpact) * (1 + 3 * PA. core. A / pre(PA. core. AW)),
-      //     control = stepCycle);
-      //   Averager avg_PA_pSquared(
-      //     redeclare type T = Real (unit = "kg2/(m2.s4)"),
-      //     signal = PA. core. p ^ 2,
-      //     control = stepCycle);
-      //   //veins
-      //   Averager avg_PV_q(
-      //     redeclare type T = VolumeFlowRate,
-      //     signal = PV. cIn. q,
-      //     control = stepCycle);
-      //   Averager avg_PV_A(
-      //     redeclare type T = Area,
-      //     signal = PV. core.A,
-      //     control = stepCycle);
-      //   Maxer max_PV_wallStress(
-      //     redeclare type T = Pressure,
-      //     signal = (PV. core. p + PV. core. RWave * PV. core. A * settings. constants. vImpact) * (1 + 3 * PV. core. A / pre(PV. core. AW)),
-      //     control = stepCycle);
-      //   Averager avg_PV_pSquared(
-      //     redeclare type T = Real (unit = "kg2/(m2.s4)"),
-      //     signal = PV. core. p ^ 2,
-      //     control = stepCycle);
+        Maxer max_pP(
+          redeclare type T = Pressure,
+          signal = heart. pP,
+          control = stepCycle);
+        Averager avg_LW_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. LW. sigmaA),
+          control = stepCycle);
+        Averager avg_LW_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. ventricles. LW. sigmaA) * 1e6 * heart. ventricles. LW.Lsc,
+          control = stepCycle);
+        Maxer max_LW_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. LW. sigmaP),
+          control = stepCycle);
+        Averager avg_LW_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. ventricles. LW. sigmaA) * (1e6 * heart. ventricles. LW. Lsc - avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+        Averager avg_SW_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. SW. sigmaA),
+          control = stepCycle);
+        Averager avg_SW_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. ventricles. SW. sigmaA) * 1e6 * heart. ventricles. SW. Lsc,
+          control = stepCycle);
+        Maxer max_SW_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. SW. sigmaP),
+          control = stepCycle);
+        Averager avg_SW_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          signal = max(0, heart. ventricles. SW. sigmaA) * (1e6 * heart. ventricles. SW. Lsc - avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+        Averager avg_RW_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. RW. sigmaA),
+          control = stepCycle);
+        Averager avg_RW_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. ventricles. RW. sigmaA) * 1e6 * heart. ventricles. RW. Lsc,
+          control = stepCycle);
+        Maxer max_RW_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. ventricles. RW. sigmaP),
+          control = stepCycle);
+        Averager avg_RW_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          signal = max(0, heart. ventricles. RW. sigmaA) * (1e6 * heart. ventricles. RW. Lsc - avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+        Averager avg_LA_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. LA. sigmaA),
+          control = stepCycle);
+        Averager avg_LA_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. LA. sigmaA) * 1e6 * heart. LA. Lsc,
+          control = stepCycle);
+        Maxer max_LA_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. LA. sigmaP),
+          control = stepCycle);
+        Averager avg_LA_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          signal = max(0, heart. LA. sigmaA) * (1e6 * heart. LA. Lsc - avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+        Averager avg_RA_sigmaAPositive(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. RA. sigmaA),
+          control = stepCycle);
+        Averager avg_RA_sigmaAPositiveLsc(
+          redeclare type T = Real,
+          init = 1,
+          signal = max(0, heart. RA. sigmaA) * 1e6 * heart. RA. Lsc,
+          control = stepCycle);
+        Maxer max_RA_sigmaP(
+          redeclare type T = Pressure,
+          init = 1,
+          signal = max(0, heart. RA. sigmaP),
+          control = stepCycle);
+        Averager avg_RA_sigmaAPositiveNorm(
+          redeclare type T = Real,
+          signal = max(0, heart. RA. sigmaA) * (1e6 * heart. RA. Lsc - avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average) ^ 2,
+          control = stepCycle);
+
+        // SYSTEMIC CIRCULATION
+        //arteries
+        Maxer max_SA_wallStress(
+          redeclare type T = Pressure,
+          signal = (SA. core. p + SA. core. RWave * SA. core. A * settings. constants. vImpact) * (1 + 3 * SA. core. A / pre(SA. core. AW)),
+          control = stepCycle);
+        Averager avg_SA_pSquared(
+          redeclare type T = Real (unit = "kg2/(m2.s4)"),
+          signal = SA. core. p ^ 2,
+          control = stepCycle);
+        Averager avg_SA_q(
+          redeclare type T = VolumeFlowRate,
+          signal = SA. cIn. q,
+          control = stepCycle);
+        Averager avg_SA_A(
+          redeclare type T = Area,
+          signal = SA. core. A,
+          control = stepCycle);
+        //veins
+        Averager avg_SV_pInner(
+          redeclare type T = Pressure,
+          signal = SV. pInner,
+          control = stepCycle);
+        Averager avg_SV_q(
+          redeclare type T = VolumeFlowRate,
+          signal = SV. cIn. q,
+          control = stepCycle);
+        Averager avg_SV_A(
+          redeclare type T = Area,
+          signal = SV. core. A,
+          control = stepCycle);
+        Maxer max_SV_wallStress(
+          redeclare type T = Pressure,
+          signal = (SV. core. p + SV. core. RWave * SV. core. A * settings. constants. vImpact) * (1 + 3 * SV. core. A / pre(SV. core. AW)),
+          control = stepCycle);
+        Averager avg_SV_pSquared(
+          redeclare type T = Real (unit = "kg2/(m2.s4)"),
+          signal = SV. core. p ^ 2,
+          control = stepCycle);
+        //peripheries
+        Averager avg_PC_dp(
+          redeclare type T = Pressure,
+          signal = PC. dp,
+          control = stepCycle);
+        Averager avg_PC_q(
+          redeclare type T = VolumeFlowRate,
+          signal = PC. cIn. q,
+          control = stepCycle);
+
+        // PULMONARY CIRCULATION
+        //arteries
+        Averager avg_PA_q(
+          redeclare type T = VolumeFlowRate,
+          signal = PA. cIn. q,
+          control = stepCycle);
+        Averager avg_PA_A(
+          redeclare type T = Area,
+          signal = PA. core. A,
+          control = stepCycle);
+        Maxer max_PA_wallStress(
+          redeclare type T = Pressure,
+          signal = (PA. core. p + PA. core. RWave * PA. core. A * settings. constants. vImpact) * (1 + 3 * PA. core. A / pre(PA. core. AW)),
+          control = stepCycle);
+        Averager avg_PA_pSquared(
+          redeclare type T = Real (unit = "kg2/(m2.s4)"),
+          signal = PA. core. p ^ 2,
+          control = stepCycle);
+        //veins
+        Averager avg_PV_q(
+          redeclare type T = VolumeFlowRate,
+          signal = PV. cIn. q,
+          control = stepCycle);
+        Averager avg_PV_A(
+          redeclare type T = Area,
+          signal = PV. core.A,
+          control = stepCycle);
+        Maxer max_PV_wallStress(
+          redeclare type T = Pressure,
+          signal = (PV. core. p + PV. core. RWave * PV. core. A * settings. constants. vImpact) * (1 + 3 * PV. core. A / pre(PV. core. AW)),
+          control = stepCycle);
+        Averager avg_PV_pSquared(
+          redeclare type T = Real (unit = "kg2/(m2.s4)"),
+          signal = PV. core. p ^ 2,
+          control = stepCycle);
 
         // VOLUME
-      protected
         Averager avg_V(
           redeclare type T = Volume,
           signal = V,
           control = stepCycle);
 
-      //   UnlimitedPump volumeControl(useSolutionFlowInput = true);
+        UnlimitedPump volumeControl(useSolutionFlowInput = true);
 
       equation
         // Watching cardiac cycle time
@@ -12505,7 +12505,7 @@ My Arteries"),Line(
 
         // PROB1
         // Setting blood volume to currently desired value
-        // volumeControl. solutionFlow = (settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - V - 0.001*0.1) / settings. constants. bloodVolumeAdaptationRate;
+        volumeControl. solutionFlow = (settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - V) / settings. constants. bloodVolumeAdaptationRate;
 
         // PROB2
         // Controling adaptation convergence
@@ -12517,24 +12517,24 @@ My Arteries"),Line(
           reinit(settings. condition. mode, newMode);
         end when;
 
-      //   // PROB3
-      //   //  Adaptatioin of capillary resistance
-      //   when change(stepCycle) and settings. condition. adaptCapillaryResistance then
-      //     reinit(PC. R, settings. condition. pulmonaryPressureDropRef / avg_PC_q.average);
-      //     reinit(SC. R, (settings. condition. aortalPressureRef - avg_SV_pInner. average) / settings. condition. aortalFlowRef * settings. condition. systemicResistanceScale);
-      //   end when;
+        // PROB3
+        //  Adaptatioin of capillary resistance
+        when change(stepCycle) and settings. condition. adaptCapillaryResistance then
+          reinit(PC. R, settings. condition. pulmonaryPressureDropRef / avg_PC_q.average);
+          reinit(SC. R, (settings. condition. aortalPressureRef - avg_SV_pInner. average) / settings. condition. aortalFlowRef * settings. condition. systemicResistanceScale);
+        end when;
 
-      //   // Adaptation of reference pressure and reference volume of vessels
-      //   when change(stepCycle) and settings. condition. adaptVesselDiameter then
-      //     SA. core. ARef = if SA. isAdaptable then pre(SA. core. ARef) * (0.17 / (abs(avg_SA_q. average) / avg_SA_A. average)) ^ (-0.5) * (pre(SA. core. pRef) / sqrt(avg_SA_pSquared. average)) ^ (-0.5 / (SA. core. k / 3 - 1)) else pre(SA. core. ARef);
-      //     SV. core. ARef = pre(SV. core. ARef) * (0.17 / (abs(avg_SV_q. average) / avg_SV_A. average)) ^ (-0.5) * (pre(SV. core. pRef) / sqrt(avg_SV_pSquared. average)) ^ (-0.5 / (SV. core. k / 3 - 1));
-      //     PA. core. ARef = pre(PA. core. ARef) * (0.17 / (abs(avg_PA_q. average) / avg_PA_A. average)) ^ (-0.5) * (pre(PA. core. pRef) / sqrt(avg_PA_pSquared. average)) ^ (-0.5 / (PA. core. k / 3 - 1));
-      //     PV. core. ARef = pre(PV. core. ARef) * (0.17 / (abs(avg_PV_q. average) / avg_PV_A. average)) ^ (-0.5) * (pre(PV. core. pRef) / sqrt(avg_PV_pSquared. average)) ^ (-0.5 / (PV. core. k / 3 - 1));
-      //     SA. core. pRef = if SA. isAdaptable then (pre(SA. core. pRef) / sqrt(avg_SA_pSquared. average)) ^ 0.5 * sqrt(avg_SA_pSquared. average) else pre(SA. core. pRef);
-      //     SV. core. pRef = (pre(SV. core. pRef) / sqrt(avg_SV_pSquared. average)) ^ 0.5 * sqrt(avg_SV_pSquared. average);
-      //     PA. core. pRef = (pre(PA. core. pRef) / sqrt(avg_PA_pSquared. average)) ^ 0.5 * sqrt(avg_PA_pSquared. average);
-      //     PV. core. pRef = (pre(PV. core. pRef) / sqrt(avg_PV_pSquared. average)) ^ 0.5 * sqrt(avg_PV_pSquared. average);
-      //   end when;
+        // Adaptation of reference pressure and reference volume of vessels
+        when change(stepCycle) and settings. condition. adaptVesselDiameter then
+          SA. core. ARef = if SA. isAdaptable then pre(SA. core. ARef) * (0.17 / (abs(avg_SA_q. average) / avg_SA_A. average)) ^ (-0.5) * (pre(SA. core. pRef) / sqrt(avg_SA_pSquared. average)) ^ (-0.5 / (SA. core. k / 3 - 1)) else pre(SA. core. ARef);
+          SV. core. ARef = pre(SV. core. ARef) * (0.17 / (abs(avg_SV_q. average) / avg_SV_A. average)) ^ (-0.5) * (pre(SV. core. pRef) / sqrt(avg_SV_pSquared. average)) ^ (-0.5 / (SV. core. k / 3 - 1));
+          PA. core. ARef = pre(PA. core. ARef) * (0.17 / (abs(avg_PA_q. average) / avg_PA_A. average)) ^ (-0.5) * (pre(PA. core. pRef) / sqrt(avg_PA_pSquared. average)) ^ (-0.5 / (PA. core. k / 3 - 1));
+          PV. core. ARef = pre(PV. core. ARef) * (0.17 / (abs(avg_PV_q. average) / avg_PV_A. average)) ^ (-0.5) * (pre(PV. core. pRef) / sqrt(avg_PV_pSquared. average)) ^ (-0.5 / (PV. core. k / 3 - 1));
+          SA. core. pRef = if SA. isAdaptable then (pre(SA. core. pRef) / sqrt(avg_SA_pSquared. average)) ^ 0.5 * sqrt(avg_SA_pSquared. average) else pre(SA. core. pRef);
+          SV. core. pRef = (pre(SV. core. pRef) / sqrt(avg_SV_pSquared. average)) ^ 0.5 * sqrt(avg_SV_pSquared. average);
+          PA. core. pRef = (pre(PA. core. pRef) / sqrt(avg_PA_pSquared. average)) ^ 0.5 * sqrt(avg_PA_pSquared. average);
+          PV. core. pRef = (pre(PV. core. pRef) / sqrt(avg_PV_pSquared. average)) ^ 0.5 * sqrt(avg_PV_pSquared. average);
+        end when;
 
       //   // Adaptation of valve diameters and dead mid-wall area of heart walls
       //   when change(stepCycle) and settings. condition. adaptValveDiameter then
@@ -12551,13 +12551,13 @@ My Arteries"),Line(
       //     heart. RA. Am0 = 1.5 * avg_PA_A. average + avg_PV_A. average;
       //   end when;
 
-      //   // Adaptation of wall volumes of vessels
-      //   when change(stepCycle) and settings. condition. adaptVesselWVolume then
-      //     SA. core. AW = if SA. isAdaptable then pre(SA. core. AW) * (0.5e6 / pre(max_SA_wallStress. maximum)) ^ (-0.5) else pre(SA. core. AW);
-      //     SV. core. AW = pre(SV. core. AW) * (0.5e6 / pre(max_SV_wallStress. maximum)) ^ (-0.5);
-      //     PA. core. AW = pre(PA. core. AW) * (0.5e6 / pre(max_PA_wallStress. maximum)) ^ (-0.5);
-      //     PV. core. AW = pre(PV. core. AW) * (0.5e6 / pre(max_PV_wallStress. maximum)) ^ (-0.5);
-      //   end when;
+        // Adaptation of wall volumes of vessels
+        when change(stepCycle) and settings. condition. adaptVesselWVolume then
+          SA. core. AW = if SA. isAdaptable then pre(SA. core. AW) * (0.5e6 / pre(max_SA_wallStress. maximum)) ^ (-0.5) else pre(SA. core. AW);
+          SV. core. AW = pre(SV. core. AW) * (0.5e6 / pre(max_SV_wallStress. maximum)) ^ (-0.5);
+          PA. core. AW = pre(PA. core. AW) * (0.5e6 / pre(max_PA_wallStress. maximum)) ^ (-0.5);
+          PV. core. AW = pre(PV. core. AW) * (0.5e6 / pre(max_PV_wallStress. maximum)) ^ (-0.5);
+        end when;
 
       //   // Adaptation of correctional term for more appropriate wall geometry
       //   when change(stepCycle) and settings. condition. adaptTriSegJunction then
@@ -12677,7 +12677,7 @@ My Arteries"),Line(
             color={127,0,0},
             smooth=Smooth.Bezier,
             thickness=1));
-      //   connect(volumeControl. q_out, heart. cVSA); // Homely component -> disabling vizualization, even for connection
+        connect(volumeControl. q_out, heart. cVSA); // Homely component -> disabling vizualization, even for connection
 
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics={
