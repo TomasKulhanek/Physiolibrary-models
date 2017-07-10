@@ -8,6 +8,13 @@ package Cardiovascular
       annotation (Placement(transformation(extent={{-10,-36},{10,-16}})));
     replaceable Interfaces.Pulmonary pulmonaryCirculation
       annotation (Placement(transformation(extent={{-10,12},{10,32}})));
+
+    inner Physiolibrary.Types.Volume V=
+        heart. V +
+        systemicCirculation. V +
+        pulmonaryCirculation. V "Total (stressed) blood volume";
+
+
   equation
     connect(systemicCirculation.q_out, heart.rightHeartInflow) annotation(Line(points={{-10,-26},
             {-14,-26},{-14,-1.6},{-9.84,-1.6}},                                                                                                   color = {0, 0, 0}, thickness = 1, smooth = Smooth.None));
@@ -251,6 +258,8 @@ package Cardiovascular
     extends Modelica.Icons.InterfacesPackage;
     partial model Heart "Abstract heart circulation submodel"
 
+      Physiolibrary.Types.Volume V "Volume";
+
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rightHeartInflow annotation(Placement(transformation(extent={{-110,30},
                 {-90,50}}),                                                                                                    iconTransformation(extent={{-108,
                 -30},{-88,-10}})));
@@ -276,6 +285,9 @@ package Cardiovascular
     partial model Systemic "Abstract systemic circulation submodel"
       extends Physiolibrary.Icons.SystemicCirculation;
       //  extends Physiolibrary.Hydraulic.Interfaces.OnePort;
+
+      Physiolibrary.Types.Volume V "Total stressed blood volume of the systemic circulation";
+
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a q_in annotation(Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{90, -10}, {110, 10}})));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b q_out annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}}), iconTransformation(extent = {{-110, -10}, {-90, 10}})));
       annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
@@ -288,6 +300,8 @@ package Cardiovascular
     partial model Pulmonary "Abstract pulmonary circulation submodel"
       extends Physiolibrary.Icons.PulmonaryCirculation;
       //  extends Physiolibrary.Hydraulic.Interfaces.OnePort;
+      Physiolibrary.Types.Volume V "Total stressed blood volume of the pulmonary circulation";
+
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a q_in annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}}), iconTransformation(extent = {{-108, -12}, {-88, 8}})));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b q_out annotation(Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{88, -16}, {108, 4}})));
       annotation(Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Text(extent = {{-156, -38}, {156, -64}}, lineColor = {0, 0, 255},
@@ -6475,11 +6489,11 @@ above 0 mmHg.")}));
     package Complex
       "Complex model unifying state-of-the-art circAdapt model with coronary arteries and complex arterial tree"
          extends Modelica.Icons.ExamplesPackage;
-      package Settings "Central model settings"
+      package Environment "Central model settings and environment"
 
         import Physiolibrary.Types.*;
 
-        model Settings "Class encompassing all settings"
+        model ComplexEnvironment "Class encompassing all settings"
           extends Cardiovascular.Icons.Settings;
           import Cardiovascular.Model.Complex.Components.Main.SystemicArteries.*;
 
@@ -6503,6 +6517,40 @@ above 0 mmHg.")}));
             "Selected set of basic constants"
             annotation (choicesAllMatching=true);
 
+          Time t(start = 0, fixed = true)
+            "Time with respect to start of cardiac cycle";
+          inner Boolean stepCycle(start=true, fixed = true)
+            "Steps denote start of new cardiac cycle";
+
+        //   discrete Real[:] feedback(start = {0, 0, 0})
+        //     "Monitored values for stability convergence";
+        //   discrete Real feedbackError
+        //     "Total square error of monitored values - used as a convergence criterion";
+        //   discrete Real newMode
+        //     "New mode to switch to - used during adaptation protocol";
+        //   Integer counter
+        //     "Counts sequential mode transitions realized without a need for further adaptation - used as a convergence criterion";
+        equation
+
+
+
+          // Watching cardiac cycle time
+          der(t) = 1;
+          when t >= condition. cycleDuration then
+            reinit(t, t - condition. cycleDuration);
+            stepCycle = not pre(stepCycle);
+          end when;
+
+
+        //   // Controling adaptation convergence
+        //   when change(stepCycle) then
+        //     feedback[:] = {avg_PC_dp. average  * 760 / 101325, avg_cVSA_q. average * 1e6, avg_cVSA_p. average * 760 / 101325};
+        //     feedbackError = sum((feedback[i] - pre(feedback[i])) ^ 2 for i in 1 : size(feedback, 1));
+        //     newMode = settings.condition.processFeedback(feedbackError, pre(counter) >= 14);
+        //     counter = if pre(counter) < 14 and settings. condition. adaptationPhase and pre(settings. condition. adaptationPhase) then (if newMode <> pre(settings. condition. mode) then pre(counter) + 1 else max(0, pre(counter) - 1)) else pre(counter);
+        //     reinit(settings. condition. mode, newMode);
+        //   end when;
+
           annotation (
                   defaultComponentName="settings",
             defaultComponentPrefixes="inner",
@@ -6512,7 +6560,7 @@ above 0 mmHg.")}));
                   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                     {100,100}})));
 
-        end Settings;
+        end ComplexEnvironment;
 
         package Conditions "Setting global condition including adaptation"
           package Abstraction "Common ancestors"
@@ -7233,7 +7281,7 @@ above 0 mmHg.")}));
 
           end Standard;
         end ModelConstants;
-      end Settings;
+      end Environment;
 
       package Components "Model components"
 
@@ -8009,12 +8057,13 @@ above 0 mmHg.")}));
             package Abstraction "Common ancestors"
               partial model HeartWall
                 "Heart wall with sarcomere mechanics based on source code for CircAdapt by Arts et al. (2012)"
-                import Cardiovascular.Model.Complex.Settings.*;
+                import Cardiovascular.Model.Complex.Environment.*;
                 import Cardiovascular.Types.*;
                 import Modelica.Constants.*;
                 import Physiolibrary.Types.*;
 
-                outer Settings settings "Everything is out there...";
+                outer Environment.ComplexEnvironment settings
+                  "Everything is out there...";
 
               //   discrete input Cardiovascular.Types.Area Am0(start=Am0_init,
               //       fixed=true) "Adaptable mid-wall area of dead space";
@@ -8123,17 +8172,13 @@ above 0 mmHg.")}));
 
             model Heart "Heart model including coronaries"
               extends Cardiovascular.Icons.Heart_detailed;
-              import
-                Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
-              import
-                Cardiovascular.Model.Complex.Components.Auxiliary.Connectors.*;
+              import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
+              import Cardiovascular.Model.Complex.Components.Auxiliary.Connectors.*;
               import Cardiovascular.Model.Complex.Components.Main.Vessels.*;
-              import Cardiovascular.Model.Complex.Settings.*;
+              import Cardiovascular.Model.Complex.Environment.*;
               import Physiolibrary.Types.*;
 
-              outer Settings settings "Everything is out there...";
-              outer Boolean stepCycle "Changes when a new cardiac cycle begins";
-
+              outer Environment.ComplexEnvironment settings "Everything is out there...";
               inner Pressure pP = pPRef * (VP / VPRef) ^ kP
                 "Pericardial pressure";
 
@@ -8175,7 +8220,7 @@ above 0 mmHg.")}));
                 pP = pP,
                 contractilityScale = settings. condition. RA_contractilityScale)
                 annotation (Placement(transformation(extent={{-68,-58},{-22,-12}})));
-              CoronaryVessels Coro
+              CoronaryVessels Coro(pM = ventricles. pM)
                 annotation (Placement(transformation(extent={{28,-42},{-34,20}})));
               Valve vLAV(
                 Ko = settings. initialization. vLAV_Ko,
@@ -8290,7 +8335,6 @@ above 0 mmHg.")}));
                     origin={4,44})));
 
             equation
-              Coro. pM = ventricles. pM;
 
               connect(cVSV, vSV. cIn)   annotation (Line(
                   points={{-42,24},{-44,24},{-44,7.99878},{-43.8604,7.99878}},
@@ -8508,11 +8552,12 @@ above 0 mmHg.")}));
               extends Cardiovascular.Icons.Ventricle;
               import
                 Cardiovascular.Model.Complex.Components.Auxiliary.Connectors.*;
-              import Cardiovascular.Model.Complex.Settings.*;
+              import Cardiovascular.Model.Complex.Environment.*;
               import Cardiovascular.Types.*;
               import Physiolibrary.Types.*;
 
-              outer Settings settings "Everything is out there...";
+              outer Environment.ComplexEnvironment settings
+                "Everything is out there...";
 
               input Pressure pP "Pericardial pressure";
 
@@ -8689,7 +8734,7 @@ above 0 mmHg.")}));
 
               model Capillaries "Port for capillaries"
                 extends Auxiliary.RLC.Elements.R(
-                  dp = pIn - pOut);
+                  dp = pIn - pOut, R = R_R);
                 import Physiolibrary.Types.RealIO.*;
 
                 PressureInput pIn
@@ -8702,9 +8747,9 @@ above 0 mmHg.")}));
                       iconTransformation(extent={{-15,-15},{15,15}},
                       rotation=90,
                       origin={39,-57})));
-
+                Real R_R;
               equation
-                der(R) = 0;  // R is adaptable via reinit()
+                der(R_R) = 0;  // R is adaptable via reinit()
 
                 annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                                        graphics={Rectangle(
@@ -8857,8 +8902,8 @@ above 0 mmHg.")}));
 
             model OxygenatingCapillaries
               "Capillaries visualized as blood oxygenating"
-              extends Abstraction.Capillaries;
               extends Physiolibrary.Icons.PerfusionDO;
+              extends Abstraction.Capillaries;
 
             end OxygenatingCapillaries;
           end Vessels;
@@ -8919,9 +8964,10 @@ above 0 mmHg.")}));
                 AW_init = settings. initialization. SA_AW,
                 l = settings. initialization. SA_l,
                 k = settings. initialization. SA_k);
-              import Cardiovascular.Model.Complex.Settings.*;
+              import Cardiovascular.Model.Complex.Environment.*;
 
-              outer Settings settings "Everything is out there";
+              outer Environment.ComplexEnvironment settings
+                "Everything is out there";
 
             equation
               connect(cCannula, cIn) annotation (Line(
@@ -8982,8 +9028,8 @@ above 0 mmHg.")}));
               import Cardiovascular.Types.*;
               import Physiolibrary.Types.Volume;
 
-              outer Cardiovascular.Model.Complex.Settings.Settings settings
-                "Everything is out there...";
+              outer Cardiovascular.Model.Complex.Environment.ComplexEnvironment
+                settings "Everything is out there...";
 
               Volume V = ascendingAorta. V + aorticArch1. V + aorticArch2. V + thoracicAorta1. V + thoracicAorta2. V + thoracicAorta3. V + abdominalAorta1. V + abdominalAorta2. V
                 + arms. V + leftBrain. V + rightBrain. V + hepaticCirculation. V + rightKidney. V + leftKidneyAndUpperMesenteric. V + legsAndLowerMesenteric. V
@@ -9206,8 +9252,8 @@ above 0 mmHg.")}));
               import Cardiovascular.Types.*;
               import Physiolibrary.Types.Volume;
 
-              outer Cardiovascular.Model.Complex.Settings.Settings settings
-                "Everything is out there...";
+              outer Cardiovascular.Model.Complex.Environment.ComplexEnvironment
+                settings "Everything is out there...";
 
               Volume V = ascendingAorta. V + aorticArch1. V + aorticArch2. V + thoracicAorta1. V + thoracicAorta2. V + abdominalAorta1. V + abdominalAorta2And3. V + abdominalAorta4. V + abdominalAorta5. V
                 + hepatic. V + gastric. V + splenetic. V + leftRenal. V + rightRenal. V
@@ -9596,7 +9642,7 @@ above 0 mmHg.")}));
               import Cardiovascular.Types.*;
               import Physiolibrary.Types.*;
 
-              outer Cardiovascular.Model.Complex.Settings.Settings settings
+              outer Cardiovascular.Model.Complex.Environment.ComplexEnvironment settings
                 "Everything is out there...";
 
               inner parameter Fraction arterialStiffnessScale = settings. condition. _DT_arterialStiffnessScale
@@ -10469,7 +10515,8 @@ above 0 mmHg.")}));
                 r = 0.1e-2,
                 h = 0.02e-2,
                 E = 16e5) annotation (Placement(transformation(extent={{-76,-2},{-72,2}})));
-
+            // initial equation
+            //   thoracicAorta3.V = 180e-3;
             equation
               pInner = aorticArch2. cIn. pressure;
 
@@ -11254,12 +11301,13 @@ above 0 mmHg.")}));
               extends Auxiliary.BlockKinds.Port;
               import
                 Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Tubes.*;
-              import Cardiovascular.Model.Complex.Settings.*;
+              import Cardiovascular.Model.Complex.Environment.*;
               import Cardiovascular.Types.*;
               import Physiolibrary.Hydraulic.Components.IdealValve;
               import Physiolibrary.Types.*;
 
-              outer Settings settings "Everything is out there";
+              outer Environment.ComplexEnvironment settings
+                "Everything is out there";
 
               parameter Boolean isEnabled = true "Whether ECMO is enabled";
               parameter Cardiovascular.Types.PulseShape pulseShapeRef=
@@ -11433,10 +11481,11 @@ above 0 mmHg.")}));
               "ECMO pump with pressure control according to flow feedback and reference flow"
               extends Cardiovascular.Icons.Screw;
               extends Auxiliary.BlockKinds.Port;
-              import Cardiovascular.Model.Complex.Settings.*;
+              import Cardiovascular.Model.Complex.Environment.*;
               import Physiolibrary.Types.*;
 
-              outer Settings settings "Everything is out there";
+              outer Environment.ComplexEnvironment settings
+                "Everything is out there";
 
               input VolumeFlowRate qRef "Reference flow wave";
 
@@ -11491,16 +11540,31 @@ above 0 mmHg.")}));
           extends Interfaces.Heart;
           import Physiolibrary.Types.*;
           Main.Heart.Heart heart(
-            kP=kP,
-            pPRef=pPRef,
-            VPRef_init=VPRef_init)
+            VPRef_init = settings. initialization. peri_VRef,
+            pPRef = settings. initialization. peri_pRef,
+            kP = settings. initialization. peri_k)
             annotation (Placement(transformation(extent={{-48,-38},{44,74}})));
 
-          parameter Real kP "Pericardial stiffness non-linearity coefficient";
-          parameter Pressure pPRef "Pericardiial reference pressure";
-          parameter Volume VPRef_init
-            "Starting value of pericardial reference volume";
+          outer Environment.ComplexEnvironment settings "Everything is out there...";
 
+        //   Averager avg_LV_pEjection(
+        //     redeclare type T = Pressure,
+        //     signal = heart. ventricles. pLV,
+        //     condition = -heart. vSA. cOut. q > 0,
+        //     control = stepCycle);
+        //   Averager avg_cVSA_p(
+        //     redeclare type T = Pressure,
+        //     signal = heart. cVSA. pressure,
+        //     control = stepCycle);
+        //   Averager avg_cVSA_q(
+        //     redeclare type T = VolumeFlowRate,
+        //     signal = -heart. cVSA. q,
+        //     control = stepCycle);
+        //
+        //   Maxer max_pP(
+        //     redeclare type T = Pressure,
+        //     signal = heart. pP,
+        //     control = stepCycle);
 
           // Averager avg_LW_sigmaAPositive(
           //   redeclare type T = Pressure,
@@ -11600,7 +11664,7 @@ above 0 mmHg.")}));
           //   control = stepCycle);
 
         equation
-
+          V = heart. V;
           // MOVED FROM CARDIO:
 
           // DISABLING THE ADAPTATION
@@ -11681,18 +11745,30 @@ above 0 mmHg.")}));
               color={0,0,0},
               thickness=1));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                    -100},{100,100}})));
+                    -100},{100,100}})), Icon(graphics={                                 Text(
+                  extent={{-100,20},{100,100}},
+                  lineColor={0,0,0},
+                  fontName="Bauhaus 93",
+                  textStyle={TextStyle.Bold},
+                  textString="COMPLEX")}));
         end Heart;
 
         model Systemic
           extends Interfaces.Systemic;
-          replaceable Main.SystemicArteries.ComplexTree_Derived SA(enableIABP=
-                true) constrainedby Main.SystemicArteries.ComplexTree_Derived
+            import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
+          import Physiolibrary.Types.*;
+          import Cardiovascular.Model.Complex.Environment.*;
+
+          outer Environment.ComplexEnvironment settings "Everything is out there...";
+
+          replaceable Main.SystemicArteries.Original_CircAdapt  SA
+                      constrainedby
+            Cardiovascular.Model.Complex.Components.Main.SystemicArteries.Abstraction.SystemicArteries
             "Replaceable model of systemic arteries" annotation (
               choicesAllMatching=true, Placement(transformation(
-                extent={{-46.0078,-47.414},{46.0078,47.414}},
-                rotation=-70,
-                origin={47.7098,-54.9833})));
+                extent={{-25.149,25.1987},{25.149,-25.1987}},
+                origin={60.851,14.8013},
+                rotation=180)));
           Main.Vessels.AdaptableVeins
                                  SV(
             pRef_init = settings. initialization. SV_pRef,
@@ -11700,72 +11776,121 @@ above 0 mmHg.")}));
             AW_init = settings. initialization. SV_AW,
             l = settings. initialization. SV_l,
             k = settings. initialization. SV_k) annotation (Placement(transformation(
-                extent={{-51,-50},{51,50}},
-                rotation=80,
-                origin={-10,-59})));
+                extent={{-25.5,-25.5},{25.5,25.5}},
+                origin={-67.5,10.5},
+                rotation=180)));
           Main.Vessels.ConsumingCapillaries
                                        SC(
             R(start = settings. initialization. SC_R))
-            annotation (Placement(transformation(extent={{62,-60},{2,-126}})));
+            annotation (Placement(transformation(extent={{-30,33},{30,-33}},
+                rotation=180,
+                origin={-8,19})));
           Main.ECMO.ECMO
                     ecmo(
             cycleDuration = settings. supports. ECMO_cycleDuration,
             pulseDuration = settings. supports. ECMO_pulseDuration,
             pulseShapeRef = settings. supports. ECMO_pulseShapeRef,
             qMeanRef = settings. supports. ECMO_qMeanRef,
-            isEnabled=true)
-            annotation (Placement(transformation(extent={{-126,-94},{-48,-16}})));
+            isEnabled=settings.supports.ECMO_isEnabled)
+            annotation (Placement(transformation(extent={{-14,-106},{64,-28}})));
+
+          Averager avg_SV_pInner(
+            redeclare type T = Pressure,
+            signal = SV. pInner,
+            control = settings. stepCycle);
+          Averager avg_SA_q(
+            redeclare type T = VolumeFlowRate,
+            signal = SA. cIn. q,
+            control = settings. stepCycle);
+
+            input Volume totalVolume;
+
+        public
+          Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl(useSolutionFlowInput = true);
+
         equation
+
+          // Setting blood volume to currently desired value
+          // It is impractible to set the contents of all small arteries in the tree in other waz
+          volumeControl. solutionFlow = (settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - totalVolume) / settings. constants. bloodVolumeAdaptationRate;
+          connect(volumeControl. q_out, q_in); // Homely component -> disabling vizualization, even for connection
+
+          V = SV. V + SA. V;
+
+            //  Adaptatioin of capillary resistance
+          when change(settings. stepCycle) and settings. condition. adaptCapillaryResistance then
+            reinit(SC. R, (settings. condition. aortalPressureRef - avg_SV_pInner. average) / settings. condition. aortalFlowRef * settings. condition. systemicResistanceScale);
+          end when;
+
           connect(SC. cOut,SV.  cIn)    annotation (Line(
-              points={{8,-93},{-17.0848,-93},{-17.0848,-99.1802}},
+              points={{-32,19},{-32,19},{-46.1,19},{-46.1,10.5},{-47.1,10.5}},
               color={180,56,148},
-              thickness=1));
+              thickness=1,
+              smooth=Smooth.Bezier));
           connect(SC. pOut,SV.  pInner)    annotation (Line(
-              points={{20.3,-74.19},{22,-74.19},{22,-74},{22,-59.8682},{
-                  -5.07596,-59.8682}},
+              points={{-19.7,0.19},{-47.5,0.19},{-47.5,13.05},{-67.5,13.05}},
               color={0,0,127},
               smooth=Smooth.Bezier,
               thickness=1));
           connect(SC. cIn,SA.  cOut)    annotation (Line(
-              points={{56,-93},{56,-94},{60.2983,-94},{60.2983,-89.5699}},
+              points={{16,19},{16,22},{40.7318,22},{40.7318,14.8013}},
               color={255,0,0},
               smooth=Smooth.Bezier,
               thickness=1));
           connect(SA. pInner,SC.  pIn)    annotation (Line(
-              points={{43.2543,-56.605},{38,-56.605},{38,-70},{43.7,-70},{43.7,
-                  -74.19}},
+              points={{60.851,12.2814},{60.851,12.2814},{60.851,14},{3.7,14},{
+                  3.7,0.19}},
               color={0,0,127},
               smooth=Smooth.Bezier,
               thickness=1));
           connect(ecmo. cOut,SA.  cCannula) annotation (Line(
-              points={{-55.8,-55},{10,-55},{10,-30.9894},{32.9219,-30.9894}},
+              points={{56.2,-67},{76,-67},{76,11.7775},{75.9404,11.7775}},
               color={255,0,0},
               smooth=Smooth.Bezier,
               thickness=1));
           connect(q_in, SA.cIn) annotation (Line(
-              points={{100,0},{68,0},{68,-20.3967},{35.1213,-20.3967}},
+              points={{100,0},{100,0},{100,2},{100,14.8013},{80.9702,14.8013}},
               color={0,0,0},
               thickness=1,
               smooth=Smooth.Bezier));
           connect(q_out, SV.cOut) annotation (Line(
-              points={{-100,0},{-52,0},{-52,-18.8198},{-2.91515,-18.8198}},
+              points={{-100,0},{-96,0},{-96,10},{-90,10},{-90,10.5},{-87.9,10.5}},
+              color={0,0,0},
+              thickness=1,
+              smooth=Smooth.Bezier));
+          connect(q_out, ecmo.cIn) annotation (Line(
+              points={{-100,0},{-88,0},{-88,-67},{-6.2,-67}},
               color={0,0,0},
               thickness=1,
               smooth=Smooth.Bezier));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics={
                 Text(
-                  extent={{18,-118},{48,-108}},
+                  extent={{-24,42},{6,52}},
                   lineColor={0,0,0},
                   lineThickness=1,
                   fillColor={255,0,0},
                   fillPattern=FillPattern.Solid,
                   textStyle={TextStyle.Bold},
-                  textString="Systemic Circuit")}));
+                  textString="Systemic Circuit")}), Icon(graphics={                     Text(
+                  extent={{-100,20},{100,100}},
+                  lineColor={0,0,0},
+                  fontName="Bauhaus 93",
+                  textStyle={TextStyle.Bold},
+                  textString="COMPLEX")}));
         end Systemic;
 
         model Pulmonary
           extends Interfaces.Pulmonary;
+          import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
+          import Physiolibrary.Types.*;
+          import Cardiovascular.Model.Complex.Environment.*;
+
+          outer Environment.ComplexEnvironment settings "Everything is out there...";
+
+
+
+
           Main.Vessels.AdaptableArteries
                                     PA(
             pRef_init = settings. initialization. PA_pRef,
@@ -11774,8 +11899,7 @@ above 0 mmHg.")}));
             l = settings. initialization. PA_l,
             k = settings. initialization. PA_k) annotation (Placement(transformation(
                 extent={{-17.2253,-19.9627},{17.2253,19.9627}},
-                rotation=110,
-                origin={-35.3498,14.6412})));
+                origin={-67.3498,0.6412})));
           Main.Vessels.AdaptableVeins
                                  PV(
             pRef_init = settings. initialization. PV_pRef,
@@ -11784,57 +11908,89 @@ above 0 mmHg.")}));
             l = settings. initialization. PV_l,
             k = settings. initialization. PV_k) annotation (Placement(transformation(
                 extent={{19.5906,23.336},{-19.5906,-23.336}},
-                rotation=70,
-                origin={-10.7718,7.6095})));
+                origin={61.2282,1.6095},
+                rotation=180)));
           Main.Vessels.OxygenatingCapillaries
                                          PC(
             R(start = settings. initialization. PC_R),
             nonlinearity = settings. condition. pulmonaryPressureDropRef / PC. dp)
-            annotation (Placement(transformation(extent={{-38,16},{-4,46}})));
+            annotation (Placement(transformation(extent={{-28,-16},{6,14}})));
+
+
+        protected
+            Averager avg_PC_q(
+            redeclare type T = VolumeFlowRate,
+            signal = PC. cIn. q,
+            control = settings. stepCycle);
+
+            Averager avg_PC_dp(
+            redeclare type T = Pressure,
+            signal = PC. dp,
+            control = settings. stepCycle);
+
+          Averager avg_PA_q(
+            redeclare type T = VolumeFlowRate,
+            signal = PA. cIn. q,
+            control = settings. stepCycle);
+          Averager avg_PV_q(
+            redeclare type T = VolumeFlowRate,
+            signal = PV. cIn. q,
+            control = settings. stepCycle);
         equation
+
+          V = PV. V + PA. V;
+
+            //  Adaptatioin of capillary resistance
+          when change(settings. stepCycle) and settings. condition. adaptCapillaryResistance then
+            reinit(PC. R, settings. condition. pulmonaryPressureDropRef / avg_PC_q.average);
+          end when;
+
+
           connect(PA. cOut,PC.  cIn)     annotation (Line(
-              points={{-40.0629,27.5904},{-40.0629,31},{-34.6,31}},
+              points={{-53.5696,0.6412},{-53.5696,-1},{-24.6,-1}},
               color={102,6,44},
               smooth=Smooth.Bezier,
               thickness=1));
           connect(PC. cOut,PV.  cIn)     annotation (Line(
-              points={{-7.4,31},{-5.4115,31},{-5.4115,22.3368}},
+              points={{2.6,-1},{45.5557,-1},{45.5557,1.6095}},
               color={255,0,0},
               smooth=Smooth.Bezier,
               thickness=1));
           connect(PA. pInner,PC.  pIn)     annotation (Line(
-              points={{-33.4739,15.324},{-33.4739,14},{-33.4739,16},{-28,16},{
-                  -28,22},{-27.63,22},{-27.63,22.45}},
+              points={{-67.3498,-1.35507},{-67.3498,-17.3551},{-42,-17.3551},{-42,-9.55},
+                  {-17.63,-9.55}},
               color={0,0,127},
               smooth=Smooth.Bezier,
               thickness=0.5));
           connect(PC. pOut,PV.  pInner)     annotation (Line(
-              points={{-14.37,22.45},{-14.37,22},{-14,22},{-14,12},{-14,8},{-14,
-                  8.40764},{-12.9647,8.40764}},
+              points={{-4.37,-9.55},{-4.37,-8},{-4,-8},{28,-8},{28,-18},{46,-18},{46,-0.7241},
+                  {61.2282,-0.7241}},
               color={0,0,127},
               smooth=Smooth.Bezier,
               thickness=0.5));
           connect(q_in, PA.cIn) annotation (Line(
-              points={{-100,0},{-70,0},{-70,-4},{-30.6367,-4},{-30.6367,1.69201}},
+              points={{-100,0},{-90,0},{-90,0.6412},{-81.13,0.6412}},
               color={0,0,0},
-              thickness=1,
-              smooth=Smooth.Bezier));
-
+              thickness=1));
           connect(q_out, PV.cOut) annotation (Line(
-              points={{100,0},{42,0},{42,-7.11781},{-16.1321,-7.11781}},
+              points={{100,0},{90,0},{90,1.6095},{76.9007,1.6095}},
               color={0,0,0},
-              thickness=1,
-              smooth=Smooth.Bezier));
+              thickness=1));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics={
                 Text(
-                  extent={{-36,38},{-6,48}},
+                  extent={{-26,8},{4,18}},
                   lineColor={0,0,0},
                   lineThickness=1,
                   fillColor={255,0,0},
                   fillPattern=FillPattern.Solid,
                   textString="Pulmonary Circuit",
-                  textStyle={TextStyle.Bold})}));
+                  textStyle={TextStyle.Bold})}), Icon(graphics={                        Text(
+                  extent={{-100,20},{100,100}},
+                  lineColor={0,0,0},
+                  fontName="Bauhaus 93",
+                  textStyle={TextStyle.Bold},
+                  textString="COMPLEX")}));
         end Pulmonary;
       end Components;
 
@@ -11844,7 +12000,7 @@ above 0 mmHg.")}));
         import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
         import Cardiovascular.Model.Complex.Components.Main.*;
         import Cardiovascular.Constants.*;
-        import Cardiovascular.Model.Complex.Settings.*;
+        import Cardiovascular.Model.Complex.Environment.*;
         import Cardiovascular.Types.*;
         import Physiolibrary.Hydraulic.Sources.*;
         import Physiolibrary.Types.*;
@@ -11859,31 +12015,18 @@ above 0 mmHg.")}));
         Power CPO = avg_LV_pEjection. average * CO "Cardiac power output";
         Volume V = SV. V + PV. V + PA. V + SA. V + heart. V
           "Total (stressed) blood volume";
-        Time t(start = 0, fixed = true)
-          "Time with respect to start of cardiac cycle";
-
-      protected
-        inner Boolean stepCycle(start=true, fixed = true)
-          "Steps denote start of new cardiac cycle";
-
-        discrete Real[:] feedback(start = {0, 0, 0})
-          "Monitored values for stability convergence";
-        discrete Real feedbackError
-          "Total square error of monitored values - used as a convergence criterion";
-        discrete Real newMode
-          "New mode to switch to - used during adaptation protocol";
-        Integer counter
-          "Counts sequential mode transitions realized without a need for further adaptation - used as a convergence criterion";
 
       public
-        inner Settings settings(
+        inner Complex.Environment.ComplexEnvironment settings(
           redeclare
-            Cardiovascular.Model.Complex.Settings.Initialization.PhysiologicalAdapted         initialization,
+            Cardiovascular.Model.Complex.Environment.Initialization.PhysiologicalAdapted
+            initialization,
+          redeclare Cardiovascular.Model.Complex.Environment.ModelConstants.Standard
+            constants,
+          redeclare Cardiovascular.Model.Complex.Environment.Supports.No supports,
           redeclare
-            Cardiovascular.Model.Complex.Settings.ModelConstants.Standard         constants,
-          redeclare Cardiovascular.Model.Complex.Settings.Supports.No supports,
-          redeclare
-            Cardiovascular.Model.Complex.Settings.Conditions.Rest_MinimalAdapt         condition)
+            Cardiovascular.Model.Complex.Environment.Conditions.Rest_MinimalAdapt
+            condition)
           annotation (Placement(transformation(extent={{108,2},{162,56}})));
 
         replaceable
@@ -11911,71 +12054,22 @@ above 0 mmHg.")}));
               extent={{-51,-50},{51,50}},
               rotation=80,
               origin={-82,-41})));
-        Vessels.AdaptableArteries PA(
-          pRef_init = settings. initialization. PA_pRef,
-          ARef_init = settings. initialization. PA_ARef,
-          AW_init = settings. initialization. PA_AW,
-          l = settings. initialization. PA_l,
-          k = settings. initialization. PA_k) annotation (Placement(transformation(
-              extent={{-17.2253,-19.9627},{17.2253,19.9627}},
-              rotation=110,
-              origin={-3.3498,66.6412})));
-        Vessels.AdaptableVeins PV(
-          pRef_init = settings. initialization. PV_pRef,
-          ARef_init = settings. initialization. PV_ARef,
-          AW_init = settings. initialization. PV_AW,
-          l = settings. initialization. PV_l,
-          k = settings. initialization. PV_k) annotation (Placement(transformation(
-              extent={{19.5906,23.336},{-19.5906,-23.336}},
-              rotation=70,
-              origin={19.2282,59.6095})));
 
         Vessels.ConsumingCapillaries SC(
           R(start = settings. initialization. SC_R))
           annotation (Placement(transformation(extent={{28,-44},{-32,-110}})));
-        Vessels.OxygenatingCapillaries PC(
-          R(start = settings. initialization. PC_R),
-          nonlinearity = settings. condition. pulmonaryPressureDropRef / PC. dp)
-          annotation (Placement(transformation(extent={{-8,68},{26,98}})));
         ECMO.ECMO ecmo(
           cycleDuration = settings. supports. ECMO_cycleDuration,
           pulseDuration = settings. supports. ECMO_pulseDuration,
           pulseShapeRef = settings. supports. ECMO_pulseShapeRef,
           qMeanRef = settings. supports. ECMO_qMeanRef,
-          isEnabled=true)
+          isEnabled=false)
           annotation (Placement(transformation(extent={{-140,-8},{-62,70}})));
 
         // Average and maximal values analyzers - used during adaptation
-      protected
-        Averager avg_LV_pEjection(
-          redeclare type T = Pressure,
-          signal = heart. ventricles. pLV,
-          condition = -heart. vSA. cOut. q > 0,
-          control = stepCycle);
-        Averager avg_PC_dp(
-          redeclare type T = Pressure,
-          signal = PC. dp,
-          control = stepCycle);
-        Averager avg_PC_q(
-          redeclare type T = VolumeFlowRate,
-          signal = PC. cIn. q,
-          control = stepCycle);
-        Averager avg_cVSA_p(
-          redeclare type T = Pressure,
-          signal = heart. cVSA. pressure,
-          control = stepCycle);
-        Averager avg_cVSA_q(
-          redeclare type T = VolumeFlowRate,
-          signal = -heart. cVSA. q,
-          control = stepCycle);
-        Averager avg_SV_pInner(
-          redeclare type T = Pressure,
-          signal = SV. pInner,
-          control = stepCycle);
-        Averager avg_SA_q(
-          redeclare type T = VolumeFlowRate,
-          signal = SA. cIn. q,
-          control = stepCycle);
+
+
+
 
 
         // DISABLING THE ADAPTATION
@@ -12009,11 +12103,7 @@ above 0 mmHg.")}));
       //     signal = SV. core. p ^ 2,
       //     control = stepCycle);
 
-        Averager avg_PA_q(
-          redeclare type T = VolumeFlowRate,
-          signal = PA. cIn. q,
-          control = stepCycle);
-      //   Averager avg_PA_A(
+          //   Averager avg_PA_A(
       //     redeclare type T = Area,
       //     signal = PA. core. A,
       //     control = stepCycle);
@@ -12025,10 +12115,6 @@ above 0 mmHg.")}));
       //     redeclare type T = Real (unit = "kg2/(m2.s4)"),
       //     signal = PA. core. p ^ 2,
       //     control = stepCycle);
-        Averager avg_PV_q(
-          redeclare type T = VolumeFlowRate,
-          signal = PV. cIn. q,
-          control = stepCycle);
       //   Averager avg_PV_A(
       //     redeclare type T = Area,
       //     signal = PV. core.A,
@@ -12041,42 +12127,28 @@ above 0 mmHg.")}));
       //     redeclare type T = Real (unit = "kg2/(m2.s4)"),
       //     signal = PV. core. p ^ 2,
       //     control = stepCycle);
-        Maxer max_pP(
-          redeclare type T = Pressure,
-          signal = heart. pP,
-          control = stepCycle);
+
+      protected
         Averager avg_V(
           redeclare type T = Volume,
           signal = V,
           control = stepCycle);
 
+      public
         UnlimitedPump volumeControl(useSolutionFlowInput = true);
+        // Volume V = SV. V + PV. V + PA. V + SA. V + heart. V
+        //   "Total (stressed) blood volume";
 
       equation
-        // Watching cardiac cycle time
-        der(t) = 1;
-        when t >= settings. condition. cycleDuration then
-          reinit(t, t - settings. condition. cycleDuration);
-          stepCycle = not pre(stepCycle);
-        end when;
 
         // Setting blood volume to currently desired value
         volumeControl. solutionFlow = (settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - V) / settings. constants. bloodVolumeAdaptationRate;
 
-        // Controling adaptation convergence
-        when change(stepCycle) then
-          feedback[:] = {avg_PC_dp. average  * 760 / 101325, avg_cVSA_q. average * 1e6, avg_cVSA_p. average * 760 / 101325};
-          feedbackError = sum((feedback[i] - pre(feedback[i])) ^ 2 for i in 1 : size(feedback, 1));
-          newMode = settings.condition.processFeedback(feedbackError, pre(counter) >= 14);
-          counter = if pre(counter) < 14 and settings. condition. adaptationPhase and pre(settings. condition. adaptationPhase) then (if newMode <> pre(settings. condition. mode) then pre(counter) + 1 else max(0, pre(counter) - 1)) else pre(counter);
-          reinit(settings. condition. mode, newMode);
-        end when;
 
-        //  Adaptatioin of capillary resistance
-        when change(stepCycle) and settings. condition. adaptCapillaryResistance then
-          reinit(PC. R, settings. condition. pulmonaryPressureDropRef / avg_PC_q.average);
-          reinit(SC. R, (settings. condition. aortalPressureRef - avg_SV_pInner. average) / settings. condition. aortalFlowRef * settings. condition. systemicResistanceScale);
-        end when;
+        // connect(volumeControl. q_out, heart. cVSA); // Homely component -> disabling vizualization, even for connection
+
+
+
 
       //    // Adaptation of reference pressure and reference volume of vessels
       //    when change(stepCycle) and settings. condition. adaptVesselDiameter then
@@ -12105,12 +12177,6 @@ above 0 mmHg.")}));
             color={127,8,43},
             smooth=Smooth.Bezier,
             thickness=1));
-        connect(heart.cVPV, PV. cOut)   annotation (Line(
-            points={{6.92,40.16},{6.92,44},{4,44},{4,46},{10,46},{13.8679,46},{
-                13.8679,44.8822}},
-            color={255,0,0},
-            smooth=Smooth.Bezier,
-            thickness=1));
         connect(SC. cOut, SV. cIn)    annotation (Line(
             points={{-26,-77},{-89.0848,-77},{-89.0848,-81.1802}},
             color={163,16,55},
@@ -12122,28 +12188,6 @@ above 0 mmHg.")}));
             color={0,0,127},
             smooth=Smooth.Bezier,
             thickness=1));
-        connect(PA. cOut, PC. cIn)     annotation (Line(
-            points={{-8.06292,79.5904},{-8.06292,83},{-4.6,83}},
-            color={102,6,44},
-            smooth=Smooth.Bezier,
-            thickness=1));
-        connect(PC. cOut, PV. cIn)     annotation (Line(
-            points={{22.6,83},{24.5885,83},{24.5885,74.3368}},
-            color={255,0,0},
-            smooth=Smooth.Bezier,
-            thickness=1));
-        connect(PA. pInner, PC. pIn)     annotation (Line(
-            points={{-1.47392,67.324},{-1.47392,67.324},{-1.47392,68},{2,68},{2,
-                74},{2.37,74},{2.37,74.45}},
-            color={0,0,127},
-            smooth=Smooth.Bezier,
-            thickness=0.5));
-        connect(PC. pOut, PV. pInner)     annotation (Line(
-            points={{15.63,74.45},{15.63,74},{16,74},{16,64},{16,60},{16,
-                60.4076},{17.0353,60.4076}},
-            color={0,0,127},
-            smooth=Smooth.Bezier,
-            thickness=0.5));
         connect(SC. cIn, SA. cOut)    annotation (Line(
             points={{22,-77},{22,-78},{26.2983,-78},{26.2983,-73.5699}},
             color={255,0,0},
@@ -12170,12 +12214,6 @@ above 0 mmHg.")}));
         connect(ecmo. cOut, SA. cCannula) annotation (Line(
             points={{-69.8,31},{-24,31},{-24,-14.9894},{-1.07811,-14.9894}},
             color={255,0,0},
-            smooth=Smooth.Bezier,
-            thickness=1));
-        connect(heart. cVPA, PA. cIn)   annotation (Line(
-            points={{-1.76,42.64},{-1.76,48},{-8,48},{-8,50},{2,50},{2,53.692},
-                {1.36332,53.692}},
-            color={127,0,0},
             smooth=Smooth.Bezier,
             thickness=1));
         connect(volumeControl. q_out, heart. cVSA); // Homely component -> disabling vizualization, even for connection
@@ -12210,14 +12248,6 @@ My Arteries"),Line(
                 thickness=1,
                 smooth=Smooth.Bezier,
                 arrow={Arrow.Open,Arrow.None}),
-              Text(
-                extent={{-6,90},{24,100}},
-                lineColor={0,0,0},
-                lineThickness=1,
-                fillColor={255,0,0},
-                fillPattern=FillPattern.Solid,
-                textString="Pulmonary Circuit",
-                textStyle={TextStyle.Bold}),
               Text(
                 extent={{-16,-102},{14,-92}},
                 lineColor={0,0,0},
@@ -12272,6 +12302,38 @@ My Arteries"),Line(
 </html>"));
       end Cardio;
 
+      model CardioReinvented
+        extends Cardiovascular.System(
+          redeclare Components.Pulmonary pulmonaryCirculation,
+          redeclare Components.Heart heart,
+          redeclare Components.Systemic systemicCirculation(redeclare
+              Components.Main.SystemicArteries.ComplexTree_Derived SA, totalVolume = V));
+        import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
+        import Cardiovascular.Constants.*;
+        import Cardiovascular.Types.*;
+        import Physiolibrary.Hydraulic.Sources.*;
+        import Physiolibrary.Types.*;
+
+
+        inner Environment.ComplexEnvironment settings
+          annotation (Placement(transformation(extent={{-22,26},{-6,40}})));
+
+
+      // protected
+      //   Averager avg_V(
+      //     redeclare type T = Volume,
+      //     signal = V,
+      //     control = settings. stepCycle);
+
+
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+              coordinateSystem(preserveAspectRatio=false)),
+          experiment(
+            StartTime=400,
+            StopTime=415,
+            Tolerance=1e-006,
+            __Dymola_Algorithm="Sdirk34hw"));
+      end CardioReinvented;
     end Complex;
   end Model;
 
@@ -12526,8 +12588,8 @@ My Arteries"),Line(
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(fileName="modelica://Cardiovascular/Resources/Icons/Vessels.png",
               extent={{-130.465,-88.1195},{130.465,88.1195}},
-                origin={2.99971,8.99942},
-                rotation=68)}),
+                origin={-3.00029,12.9994},
+                rotation=290)}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
 
       end Vessels;
