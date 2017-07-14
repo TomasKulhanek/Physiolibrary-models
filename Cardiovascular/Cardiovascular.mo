@@ -1,4 +1,4 @@
-within ;
+ï»¿within ;
 package Cardiovascular
   model System
 
@@ -9,10 +9,7 @@ package Cardiovascular
     replaceable Interfaces.Pulmonary pulmonaryCirculation
       annotation (Placement(transformation(extent={{-10,12},{10,32}})));
 
-    inner Physiolibrary.Types.Volume V=
-        heart. V +
-        systemicCirculation. V +
-        pulmonaryCirculation. V "Total (stressed) blood volume";
+
 
 
   equation
@@ -258,7 +255,7 @@ package Cardiovascular
     extends Modelica.Icons.InterfacesPackage;
     partial model Heart "Abstract heart circulation submodel"
 
-      Physiolibrary.Types.Volume V "Volume";
+    //   Physiolibrary.Types.Volume V "Volume";
 
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rightHeartInflow annotation(Placement(transformation(extent={{-110,30},
                 {-90,50}}),                                                                                                    iconTransformation(extent={{-108,
@@ -286,7 +283,7 @@ package Cardiovascular
       extends Physiolibrary.Icons.SystemicCirculation;
       //  extends Physiolibrary.Hydraulic.Interfaces.OnePort;
 
-      Physiolibrary.Types.Volume V "Total stressed blood volume of the systemic circulation";
+    //   Physiolibrary.Types.Volume V "Total stressed blood volume of the systemic circulation";
 
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a q_in annotation(Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{90, -10}, {110, 10}})));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b q_out annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}}), iconTransformation(extent = {{-110, -10}, {-90, 10}})));
@@ -300,7 +297,7 @@ package Cardiovascular
     partial model Pulmonary "Abstract pulmonary circulation submodel"
       extends Physiolibrary.Icons.PulmonaryCirculation;
       //  extends Physiolibrary.Hydraulic.Interfaces.OnePort;
-      Physiolibrary.Types.Volume V "Total stressed blood volume of the pulmonary circulation";
+    //   Physiolibrary.Types.Volume V "Total stressed blood volume of the pulmonary circulation";
 
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a q_in annotation(Placement(transformation(extent = {{-110, -10}, {-90, 10}}), iconTransformation(extent = {{-108, -12}, {-88, 8}})));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b q_out annotation(Placement(transformation(extent = {{90, -10}, {110, 10}}), iconTransformation(extent = {{88, -16}, {108, 4}})));
@@ -2911,8 +2908,17 @@ package Cardiovascular
       model HemodynamicsSmith
         extends Cardiovascular.System(
           redeclare Parts.Pulmonary pulmonaryCirculation,
-          redeclare Parts.Heart heart,
+          redeclare Complex.Components.Heart
+                                heart,
           redeclare Parts.Systemic systemicCirculation);
+        inner Complex.Environment.ComplexEnvironment settings(
+          redeclare Complex.Environment.Conditions.Rest_MinimalAdapt condition,
+
+          redeclare Complex.Environment.Supports.No supports,
+          redeclare Complex.Environment.Initialization.PhysiologicalAdapted
+            initialization,
+          redeclare Complex.Environment.ModelConstants.Standard constants)
+          annotation (Placement(transformation(extent={{-30,20},{-10,40}})));
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000));
       end HemodynamicsSmith;
 
@@ -6559,7 +6565,6 @@ above 0 mmHg.")}));
     You can find it in Cardiovascular.Model.Complex.Settings.",
                   Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                     {100,100}})));
-
         end ComplexEnvironment;
 
         package Conditions "Setting global condition including adaptation"
@@ -8458,7 +8463,7 @@ above 0 mmHg.")}));
             equation
               cIn. q = -cOut. q;
 
-              if A > 0 then
+              if noEvent(A > 0) then
                 dp = R * cIn. q * abs(cIn. q) + L * der(cIn. q);
                 R = rho / 2 / A ^ 2;
                 L = rho * l / A;
@@ -11664,7 +11669,7 @@ above 0 mmHg.")}));
           //   control = stepCycle);
 
         equation
-          V = heart. V;
+        //   V = heart. V;
           // MOVED FROM CARDIO:
 
           // DISABLING THE ADAPTATION
@@ -11803,19 +11808,41 @@ above 0 mmHg.")}));
             signal = SA. cIn. q,
             control = settings. stepCycle);
 
-            input Volume totalVolume;
+        //     input Volume totalVolume;
+
+            Volume V_filling( start = 0);
+
+            Real q_filling;
+
+            parameter Fraction speed_factor = 5;
+
+            parameter Volume V_init = 270e-6;
 
         public
           Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl(useSolutionFlowInput = true);
 
+          Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
+
+
         equation
+          der(V_filling) = q_filling;
+          q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
+
+        //   if V_filling < V_init then
+            volumeControl_.solutionFlow = q_filling;
+        //   else
+        //     volumeControl_.solutionFlow = 0;
+        //   end if;
 
           // Setting blood volume to currently desired value
           // It is impractible to set the contents of all small arteries in the tree in other waz
-          volumeControl. solutionFlow = (settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - totalVolume) / settings. constants. bloodVolumeAdaptationRate;
+          volumeControl. solutionFlow = 0;
+          //(settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - totalVolume) / settings. constants. bloodVolumeAdaptationRate;
           connect(volumeControl. q_out, q_in); // Homely component -> disabling vizualization, even for connection
 
-          V = SV. V + SA. V;
+            connect(volumeControl_. q_out, q_in); // Homely component -> disabling vizualization, even for connection
+
+        //   V = SV. V + SA. V;
 
             //  Adaptatioin of capillary resistance
           when change(settings. stepCycle) and settings. condition. adaptCapillaryResistance then
@@ -11938,7 +11965,7 @@ above 0 mmHg.")}));
             control = settings. stepCycle);
         equation
 
-          V = PV. V + PA. V;
+        //   V = PV. V + PA. V;
 
             //  Adaptatioin of capillary resistance
           when change(settings. stepCycle) and settings. condition. adaptCapillaryResistance then
@@ -12279,7 +12306,7 @@ My Arteries"),Line(
                 lineThickness=1,
                 fillColor={255,0,0},
                 fillPattern=FillPattern.Solid,
-                textString="Cardio © 2015 Karel Kalecký",
+                textString="Cardio Â© 2015 Karel KaleckÃ½",
                 textStyle={TextStyle.Bold}),
               Text(
                 extent={{-60,-78},{58,-94}},
@@ -12304,10 +12331,13 @@ My Arteries"),Line(
 
       model CardioReinvented
         extends Cardiovascular.System(
-          redeclare Components.Pulmonary pulmonaryCirculation,
-          redeclare Components.Heart heart,
+          redeclare Smith2004.Parts.Pulmonary
+                                          pulmonaryCirculation,
+          redeclare Smith2004.Parts.Heart
+                                     heart,
           redeclare Components.Systemic systemicCirculation(redeclare
-              Components.Main.SystemicArteries.ComplexTree_Derived SA, totalVolume = V));
+              Components.Main.SystemicArteries.ComplexTree_Derived SA,
+              speed_factor=0.1));
         import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
         import Cardiovascular.Constants.*;
         import Cardiovascular.Types.*;
@@ -12595,6 +12625,6 @@ My Arteries"),Line(
       end Vessels;
 
   end Icons;
-  annotation (uses(
-      Modelica(version="3.2.1"), Physiolibrary(version="2.3.1")));
+  annotation (uses(              Physiolibrary(version="2.3.1"), Modelica(
+          version="3.2.2")));
 end Cardiovascular;
