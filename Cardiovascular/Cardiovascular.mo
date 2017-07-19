@@ -2908,8 +2908,7 @@ package Cardiovascular
       model HemodynamicsSmith
         extends Cardiovascular.System(
           redeclare Parts.Pulmonary pulmonaryCirculation,
-          redeclare Complex.Components.Heart
-                                heart,
+          redeclare Parts.Heart heart,
           redeclare Parts.Systemic systemicCirculation);
         inner Complex.Environment.ComplexEnvironment settings(
           redeclare Complex.Environment.Conditions.Rest_MinimalAdapt condition,
@@ -7450,11 +7449,28 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 l = settings. initialization. SA_l,
                 k = settings. initialization. SA_k);
               import Cardiovascular.Model.Complex.Environment.*;
+              import Physiolibrary.Types.*;
 
               outer Environment.ComplexEnvironment settings
                 "Everything is out there";
 
+                Volume V_filling( start = 0);
+
+                Real q_filling;
+
+                parameter Fraction speed_factor = 10;
+
+                parameter Volume V_init = 300e-6;
+
+              Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
+
+
             equation
+              der(V_filling) = q_filling;
+              q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
+                volumeControl_.solutionFlow = q_filling;
+                connect(volumeControl_. q_out, cIn); // Homely component -> disabling vizualization, even for connection
+
               connect(cCannula, cIn) annotation (Line(
                   points={{-60,-12},{-40,-12},{-40,0},{-80,0}},
                   color={0,0,255},
@@ -7477,13 +7493,30 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             model Windkessel_Physiolibrary
               "Windkessel model of systemic arteries from Physiolibrary v2.3.1-alpha by Marek Matejak (2015)"
               extends Abstraction.SystemicArteries_Adapter;
+
               extends Auxiliary.RLC.Compounds.LpRCR(
                 C = 1.0500862061839e-08,
                 L(displayUnit = "mmHg.s2/ml") = 666611.937075,
                 R(displayUnit = "(mmHg.s)/ml") = 123456530.74629,
                 Rp(displayUnit = "(mmHg.s)/ml") = 666611.937075);
+              import Physiolibrary.Types.*;
+               Volume V_filling( start = 0);
+
+                Real q_filling;
+
+                parameter Fraction speed_factor = 10;
+
+                parameter Volume V_init = 300e-6;
+
+              Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
+
 
             equation
+              der(V_filling) = q_filling;
+              q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
+                volumeControl_.solutionFlow = q_filling;
+                connect(volumeControl_. q_out, cIn); // Homely component -> disabling vizualization, even for connection
+
               pInner = capacitor. c. pressure;
 
               connect(cIn, cCannula) annotation (Line(
@@ -8198,6 +8231,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                  + leftPopliteal1. V + rightPopliteal1. V + leftPopliteal2. V + rightPopliteal2. V + leftAnteriorTibial1. V + leftPosteriorTibial1. V + rightPosteriorTibial1. V + rightAnteriorTibial1. V + leftAnteriorTibial2. V + leftPeroneal1. V
                  + leftPosteriorTibial2. V + rightPosteriorTibial2. V + rightPeroneal1. V + rightAnteriorTibial2. V + leftAnteriorTibial3. V + leftPeroneal2. V + rightPeroneal2. V + rightAnteriorTibial3. V
                 "Current volume";
+
+                 Volume V_filling( start = 0);
+
+                Real q_filling;
+
+                parameter Fraction speed_factor = 5;
+
+                parameter Volume V_init = 270e-6;
+
+              Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
 
               TubeRLC_Derived ascendingAorta(
                 isCannulated = enableECMO and cannulaPlacement == CannulaPlacement. ascendingAorta,
@@ -9031,7 +9074,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 E = 16e5) annotation (Placement(transformation(extent={{-76,-2},{-72,2}})));
             // initial equation
             //   thoracicAorta3.V = 180e-3;
+
+
+
+
             equation
+              der(V_filling) = q_filling;
+              q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
+                volumeControl_.solutionFlow = q_filling;
+                connect(volumeControl_. q_out, cIn); // Homely component -> disabling vizualization, even for connection
+
               pInner = aorticArch2. cIn. pressure;
 
               if settings. supports. ECMO_isEnabled then
@@ -10319,37 +10371,37 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
         //     input Volume totalVolume;
 
-            Volume V_filling( start = 0);
+        //     Volume V_filling( start = 0);
+        //
+        //     Real q_filling;
+        //
+        //     parameter Fraction speed_factor = 5;
+        //
+        //     parameter Volume V_init = 270e-6;
 
-            Real q_filling;
+        //   Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl(useSolutionFlowInput = true);
 
-            parameter Fraction speed_factor = 5;
-
-            parameter Volume V_init = 270e-6;
-
-        public
-          Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl(useSolutionFlowInput = true);
-
-          Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
-
-
+        //   Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
+        //
+        //
         equation
-          der(V_filling) = q_filling;
-          q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
+        //   der(V_filling) = q_filling;
+        //   q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
+        //     volumeControl_.solutionFlow = q_filling;
+        //     connect(volumeControl_. q_out, q_in); // Homely component -> disabling vizualization, even for connection
 
         //   if V_filling < V_init then
-            volumeControl_.solutionFlow = q_filling;
         //   else
         //     volumeControl_.solutionFlow = 0;
         //   end if;
 
           // Setting blood volume to currently desired value
           // It is impractible to set the contents of all small arteries in the tree in other waz
-          volumeControl. solutionFlow = 0;
-          //(settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - totalVolume) / settings. constants. bloodVolumeAdaptationRate;
-          connect(volumeControl. q_out, q_in); // Homely component -> disabling vizualization, even for connection
+          //   volumeControl. solutionFlow = 0;
 
-            connect(volumeControl_. q_out, q_in); // Homely component -> disabling vizualization, even for connection
+          //(settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - totalVolume) / settings. constants. bloodVolumeAdaptationRate;
+        //   connect(volumeControl. q_out, q_in); // Homely component -> disabling vizualization, even for connection
+
 
         //   V = SV. V + SA. V;
 
@@ -10532,18 +10584,19 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
       model Cardio
         extends Cardiovascular.System(
-          redeclare Components.Pulmonary  pulmonaryCirculation,
+          redeclare Smith2004.Parts.Pulmonary
+                                          pulmonaryCirculation,
           redeclare Components.Heart heart,
           redeclare Components.Systemic systemicCirculation(redeclare
-              Components.Main.SystemicArteries.ComplexTree_Derived SA,
-              speed_factor=0.1));
+              Components.Main.SystemicArteries.Original_CircAdapt SA));
         import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
         import Cardiovascular.Constants.*;
         import Cardiovascular.Types.*;
         import Physiolibrary.Hydraulic.Sources.*;
         import Physiolibrary.Types.*;
 
-        inner Environment.ComplexEnvironment settings
+        inner Environment.ComplexEnvironment settings(redeclare
+            Environment.Supports.ECMO_Nonpulsatile supports)
           annotation (Placement(transformation(extent={{-22,26},{-6,40}})));
 
       // protected
