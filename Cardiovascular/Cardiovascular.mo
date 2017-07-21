@@ -2910,13 +2910,6 @@ package Cardiovascular
           redeclare Parts.Pulmonary pulmonaryCirculation,
           redeclare Parts.Heart heart,
           redeclare Parts.Systemic systemicCirculation);
-        inner Complex.Environment.ComplexEnvironment settings(
-          redeclare Complex.Environment.Conditions.Rest_MinimalAdapt condition,
-          redeclare Complex.Environment.Supports.No supports,
-          redeclare Complex.Environment.Initialization.PhysiologicalAdapted
-            initialization,
-          redeclare Complex.Environment.ModelConstants.Standard constants)
-          annotation (Placement(transformation(extent={{-30,20},{-10,40}})));
 
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000));
       end HemodynamicsSmith;
@@ -10584,8 +10577,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
       model Cardio
         extends Cardiovascular.System(
-          redeclare Smith2004.Parts.Pulmonary
-                                          pulmonaryCirculation,
+          redeclare Components.Pulmonary  pulmonaryCirculation,
           redeclare Components.Heart heart,
           redeclare Components.Systemic systemicCirculation(redeclare
               Components.Main.SystemicArteries.Original_CircAdapt SA));
@@ -10596,7 +10588,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         import Physiolibrary.Types.*;
 
         inner Environment.ComplexEnvironment settings(redeclare
-            Environment.Supports.ECMO_Nonpulsatile supports)
+            Environment.Supports.No supports)
           annotation (Placement(transformation(extent={{-22,26},{-6,40}})));
 
       // protected
