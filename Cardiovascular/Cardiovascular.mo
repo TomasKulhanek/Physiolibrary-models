@@ -66,7 +66,6 @@ package Cardiovascular
   end Overview;
 
     class ModelicaLicense2 "Modelica License 2"
-
       annotation (Documentation(info="<html>
 <p>All files in this directory (Cardiovascular) and in all subdirectories, especially all files that build package &QUOT;Cardiovascular&QUOT; are licensed by <u><b>Tomas Kulhanek</b></u> under the <u><b>Modelica License 2 </b></u>(with exception of files &QUOT;Resources/*&QUOT;). </p>
 <h4>Licensor:</h4>
@@ -5139,7 +5138,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                        +
                       "0HZQZUEVZVIxnsewM/n6j+UwhecR3G7CNzuwE0tlN8iFEJuuDDxAqr+TFD6bwG6yJN+pscuPxASBpDTErijdjLPghKEzpNLKBLAX0u8c57A7r4+/NQHWeKMwTkWLcsfYWXmB7AIPEyG2i1jE0Z6NrirKrJDjYm7S284jeHgKr0df/7HkFfxiKn3AP+zLNkjqC6FNCxPPqWBWwqSEs0w+fpW0pmZHeJzJ+20PGgW4FhpNUVYUjlnjyCqZ/k5y2Qt+PK5/H2oCrPHGVYA7Y3h71WjsKukLrjfhYAovBstd26iQzYpL588Ung3gL58Kkf4mMC3h+wOp/u40hAwrLUfd3UQqwvLvKdPiUmzurzfE7Tkw4mltCDZQRgeopTKc5nAYw4fHcFivdNQEWOPNw+5EAknu9mUSXBpD05tdyQR5fC5T3jUjMtYIGR5N4a9eiATmN4lUwZO5HIc9W/py5RVh9j+EvbnIWlqekB1mNS52hRAdy/QQS+kZ/q9j+JvDr+691agJsMYbgnkOnxxJVXSzK4amWLI58faq5H3sT2Q67JipaT+UY/LPT/7xiENpCXf/dY7SD0eiJYxNP3Ajl1W3wFke4S9S+Ok5/NW+vF+jJsAabyguYiHBfkNS35qeHHttWyzxVxsieHZs6Rd2AvjPX8gQ5LcRSQmfX8DBHN5dkbzh1cCkzGlZfftiJC4xae1bVRNgjRqjVPqB39qE2yvi9uk7y/Rv15Z/Kw2PzsTo4Ld5dUxpyQ++SOHhULZCbEuGH7NcqsAaNQHWqAFIr+3RuQQh+Y7EXm74y0Dx0ljK7E1k8PHk4nfjeSktk95J/V9coybAGn8fZhl8tCdDg3kOt7qyIeLaIhQ+nML3d5b3qVHjdxT11mONX47AkWPwnZ746FnI0OP5UIYhdcZjjZoAa7wRvyXWFYuqGjVqAqxRo0aN323Y9UtQo0aNmgBr1KhRoybAGjVq1KgJsEaNGjVqAqxRo0aNmgBr1KhRoybAGjVq1KgJsEaNGjVqAqxRo0aNmgBr1KhRoybAGjVq1Pjtxv8BS93cFi44VmQAAABKelRYdHNvZnR3YXJlAAB42vPMTUxP9U1Mz0zOVjDTM9YzVzCw1Dcw0TewUAi0UMgoKSmw0tcvLy/Xy8xNTE/NTUzPTM7Wyy9KBwDYmhGYfnuzVgAAACF6VFh0VGh1bWI6OkRvY3VtZW50OjpQYWdlcwAAeNozBAAAMgAyDBLihAAAACF6VFh0VGh1bWI6OkltYWdlOjpoZWlnaHQAAHjaMzezAAABTACmAmIHcgAAACF6VFh0VGh1bWI6OkltYWdlOjpXaWR0aAAAeNozNDAyAQAB8ADI6yd/qAAAACJ6VFh0VGh1bWI6Ok1pbWV0eXBlAAB42svMTUxP1S/ISwcAEXsDeF85R+IAAAAgelRYdFRodW1iOjpNVGltZQAAeNozNDQ3M7QwMzKyBAALKAIMn+/EFwAAAB56VFh0VGh1bWI6OlNpemUAAHjaMzEy0rOwNMxOAgAJpgI2toGxfgAAAE96VFh0VGh1bWI6OlVSSQAAeNoFwTkOgDAMBMAfsaKgoechVmJgRXwoBCF+z8zOpisAmA882ULqgpcXUysFJczCbwhkxta/cfbIoA76lH78td4WuK/dBm4AAAAASUVORK5CYII=",
                   fileName=
-                      "modelica://Cardiovascular/Resources/Icons/Erythropoietin.png")}),                                                            Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+                      "modelica://Cardiovascular/Resources/Icons/320px-Erythropoietin.png")}),                                                            Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
                     -100},{160,100}}),                                                                                                    graphics));
         end Erythropoetin;
 
@@ -11641,14 +11640,15 @@ above 0 mmHg.")}));
                                                                                               initialization,
           redeclare
             Cardiovascular.Model.Complex.Settings.ModelConstants.Standard         constants,
+          redeclare Cardiovascular.Model.Complex.Settings.Supports.No supports,
           redeclare
-            Cardiovascular.Model.Complex.Settings.Conditions.Rest_MinimalAdapt         condition,
-          redeclare Cardiovascular.Model.Complex.Settings.Supports.IABP
-            supports)
+            Cardiovascular.Model.Complex.Settings.Conditions.Rest_MinimalAdapt         condition)
           annotation (Placement(transformation(extent={{108,2},{162,56}})));
 
         replaceable
-          Complex.Components.Main.SystemicArteries.ComplexTree_Derived          SA
+          Cardiovascular.Model.Complex.Components.Main.SystemicArteries.ComplexTree_Derived
+                                                                                SA(
+            enableIABP=true)
           constrainedby
           Cardiovascular.Model.Complex.Components.Main.SystemicArteries.Abstraction.SystemicArteries
           "Replaceable model of systemic arteries"
@@ -12009,8 +12009,8 @@ above 0 mmHg.")}));
             smooth=Smooth.Bezier,
             thickness=1));
         connect(heart.cVPV, PV. cOut)   annotation (Line(
-            points={{6.92,40.16},{6.92,44},{4,44},{4,46},{10,46},{13.8679,46},{13.8679,
-                44.8822}},
+            points={{6.92,40.16},{6.92,44},{4,44},{4,46},{10,46},{13.8679,46},{
+                13.8679,44.8822}},
             color={255,0,0},
             smooth=Smooth.Bezier,
             thickness=1));
@@ -12020,8 +12020,8 @@ above 0 mmHg.")}));
             smooth=Smooth.None,
             thickness=1));
         connect(SC. pOut, SV. pInner)    annotation (Line(
-            points={{-13.7,-58.19},{-12,-58.19},{-12,-58},{-12,-41.8682},{-77.076,
-                -41.8682}},
+            points={{-13.7,-58.19},{-12,-58.19},{-12,-58},{-12,-41.8682},{
+                -77.076,-41.8682}},
             color={0,0,127},
             smooth=Smooth.Bezier,
             thickness=1));
@@ -12042,8 +12042,8 @@ above 0 mmHg.")}));
             smooth=Smooth.Bezier,
             thickness=0.5));
         connect(PC. pOut, PV. pInner)     annotation (Line(
-            points={{15.63,74.45},{15.63,74},{16,74},{16,64},{16,60},{16,60.4076},
-                {17.0353,60.4076}},
+            points={{15.63,74.45},{15.63,74},{16,74},{16,64},{16,60},{16,
+                60.4076},{17.0353,60.4076}},
             color={0,0,127},
             smooth=Smooth.Bezier,
             thickness=0.5));
@@ -12053,9 +12053,9 @@ above 0 mmHg.")}));
             smooth=Smooth.Bezier,
             thickness=1));
         connect(SA. cIn, heart. cVSA)   annotation (Line(
-            points={{1.12132,-4.39675},{2,-4.39675},{2,-2},{2,0},{0,0},{0,12},{-2,
-                12},{-2,36},{-6,36},{-6,54},{-14,54},{-14,44},{-10.44,44},{-10.44,
-                41.4}},
+            points={{1.12132,-4.39675},{2,-4.39675},{2,-2},{2,0},{0,0},{0,12},{
+                -2,12},{-2,36},{-6,36},{-6,54},{-14,54},{-14,44},{-10.44,44},{
+                -10.44,41.4}},
             color={255,0,0},
             smooth=Smooth.Bezier,
             thickness=1));
@@ -12076,8 +12076,8 @@ above 0 mmHg.")}));
             smooth=Smooth.Bezier,
             thickness=1));
         connect(heart. cVPA, PA. cIn)   annotation (Line(
-            points={{-1.76,42.64},{-1.76,48},{-8,48},{-8,50},{2,50},{2,53.692},{
-                1.36332,53.692}},
+            points={{-1.76,42.64},{-1.76,48},{-8,48},{-8,50},{2,50},{2,53.692},
+                {1.36332,53.692}},
             color={127,0,0},
             smooth=Smooth.Bezier,
             thickness=1));
@@ -12610,8 +12610,8 @@ My Arteries"),Line(
             smooth=Smooth.Bezier,
             thickness=1));
         connect(heart.cVPV, PV. cOut)   annotation (Line(
-            points={{6.92,40.16},{6.92,44},{4,44},{4,46},{10,46},{13.8679,46},{13.8679,
-                44.8822}},
+            points={{6.92,40.16},{6.92,44},{4,44},{4,46},{10,46},{13.8679,46},{
+                13.8679,44.8822}},
             color={255,0,0},
             smooth=Smooth.Bezier,
             thickness=1));
@@ -12621,8 +12621,8 @@ My Arteries"),Line(
             smooth=Smooth.None,
             thickness=1));
         connect(SC. pOut, SV. pInner)    annotation (Line(
-            points={{-13.7,-58.19},{-12,-58.19},{-12,-58},{-12,-41.8682},{-77.076,
-                -41.8682}},
+            points={{-13.7,-58.19},{-12,-58.19},{-12,-58},{-12,-41.8682},{
+                -77.076,-41.8682}},
             color={0,0,127},
             smooth=Smooth.Bezier,
             thickness=1));
@@ -12643,8 +12643,8 @@ My Arteries"),Line(
             smooth=Smooth.Bezier,
             thickness=0.5));
         connect(PC. pOut, PV. pInner)     annotation (Line(
-            points={{15.63,74.45},{15.63,74},{16,74},{16,64},{16,60},{16,60.4076},
-                {17.0353,60.4076}},
+            points={{15.63,74.45},{15.63,74},{16,74},{16,64},{16,60},{16,
+                60.4076},{17.0353,60.4076}},
             color={0,0,127},
             smooth=Smooth.Bezier,
             thickness=0.5));
@@ -12654,9 +12654,9 @@ My Arteries"),Line(
             smooth=Smooth.Bezier,
             thickness=1));
         connect(SA. cIn, heart. cVSA)   annotation (Line(
-            points={{1.12132,-4.39675},{2,-4.39675},{2,-2},{2,0},{0,0},{0,12},{-2,
-                12},{-2,36},{-6,36},{-6,54},{-14,54},{-14,44},{-10.44,44},{-10.44,
-                41.4}},
+            points={{1.12132,-4.39675},{2,-4.39675},{2,-2},{2,0},{0,0},{0,12},{
+                -2,12},{-2,36},{-6,36},{-6,54},{-14,54},{-14,44},{-10.44,44},{
+                -10.44,41.4}},
             color={255,0,0},
             smooth=Smooth.Bezier,
             thickness=1));
@@ -12677,8 +12677,8 @@ My Arteries"),Line(
             smooth=Smooth.Bezier,
             thickness=1));
         connect(heart. cVPA, PA. cIn)   annotation (Line(
-            points={{-1.76,42.64},{-1.76,48},{-8,48},{-8,50},{2,50},{2,53.692},{
-                1.36332,53.692}},
+            points={{-1.76,42.64},{-1.76,48},{-8,48},{-8,50},{2,50},{2,53.692},
+                {1.36332,53.692}},
             color={127,0,0},
             smooth=Smooth.Bezier,
             thickness=1));
@@ -12788,7 +12788,6 @@ My Arteries"),Line(
 
   package Test
     model AllModels
-
       Model.Meurs.HemodynamicsMeurs_shallow hemodynamicsMeurs_shallow
         annotation (Placement(transformation(extent={{-96,62},{-40,94}})));
       Model.Meurs.HemodynamicsMeurs hemodynamicsMeurs
@@ -12834,7 +12833,6 @@ My Arteries"),Line(
   package Types
     package Constants
       block FrequencyControl "External signal of type Frequency"
-
         Physiolibrary.Types.RealIO.FrequencyOutput y
           "HydraulicCompliance constant"                                            annotation(Placement(transformation(extent = {{40, -10}, {60, 10}}), iconTransformation(extent = {{40, -10}, {60, 10}})));
         Physiolibrary.Types.RealIO.FrequencyInput c annotation(Placement(transformation(extent = {{-40, -20}, {0, 20}}), iconTransformation(extent = {{-40, -20}, {0, 20}})));
