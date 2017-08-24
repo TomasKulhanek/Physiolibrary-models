@@ -490,6 +490,7 @@ package Cardiovascular
     package Meurs
         extends Modelica.Icons.ExamplesPackage;
       model HemodynamicsMeurs_shallow
+        extends Cardiovascular.Icons.Runnable_Shallow;
 
         Physiolibrary.Hydraulic.Components.ElasticVessel PulmonaryArteries(useV0Input = false,                                   useComplianceInput = false,
           volume_start=0.000106,
@@ -680,6 +681,8 @@ package Cardiovascular
           redeclare Parts.Pulmonary pulmonaryCirculation,
           redeclare Parts.Heart heart,
           redeclare Parts.Systemic systemicCirculation);
+          extends Cardiovascular.Icons.Runnable_System;
+
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000),
             Documentation(info="<html>
 <p>Cardiovascular model implemented per description of Meurs et al.</p>
@@ -1216,7 +1219,7 @@ package Cardiovascular
       stenosisControl(aorticstenosis(InitialResistance(displayUnit="(mmHg.s)/ml")=
              1066579.09932, FinalResistance(displayUnit="(mmHg.s)/ml") = 1066579.09932),
         AVBackFlowConductance(k=1.2501026264094e-15)),*/
-
+          extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000),
             Documentation(info="<html>
 <p>Cardiovascular model implemented per description of Meurs et al.</p>
@@ -1447,6 +1450,7 @@ package Cardiovascular
               aorticstenosis(FinalResistance(displayUnit="(mmHg.s)/ml")=
                 10665790.9932)), redeclare
             ControlledParts.AorticValveHeartControl heart);
+          extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(StopTime=120, __Dymola_NumberOfIntervals=5000));
       end StenosisAorticValve;
 
@@ -1474,7 +1478,8 @@ package Cardiovascular
       model HemodynamicsBurkhoff_shallow
         //Cardiovascular.Hydraulic.Components.Resistor
         //Cardiovascular.Hydraulic.Components.IdealValveNorm
-        import Physiolibrary.Hydraulic.Components.*;
+            extends Cardiovascular.Icons.Runnable_Shallow;
+      import Physiolibrary.Hydraulic.Components.*;
         ElasticVessel Cvs(
           volume_start=0.002701,
           ZeroPressureVolume=0.00223,
@@ -1874,6 +1879,7 @@ package Cardiovascular
           redeclare Parts.Pulmonary pulmonaryCirculation,
           redeclare replaceable Parts.Heart heart,
           redeclare Parts.Systemic systemicCirculation);
+          extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(
             StopTime=5,
             __Dymola_NumberOfIntervals=5000,
@@ -2484,6 +2490,7 @@ package Cardiovascular
           InitialResistance(displayUnit="(mmHg.s)/ml") = 266644.77483,
           FinalResistance(displayUnit="(mmHg.s)/ml") = 266644.77483),
       mitralvalvestenosis(InitialResistance=333305.9685375, FinalResistance=333305.9685375)));*/
+          extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(
             StopTime=5,
             __Dymola_NumberOfIntervals=5000,
@@ -2724,6 +2731,7 @@ package Cardiovascular
     package Smith2004
         extends Modelica.Icons.ExamplesPackage;
       model HemodynamicsSmith_shallow
+            extends Cardiovascular.Icons.Runnable_Shallow;
         import Physiolibrary.Hydraulic.Components.*;
       ElasticVesselElastance aorta(
           ZeroPressureVolume=0,
@@ -2919,7 +2927,8 @@ package Cardiovascular
 <p>Cardiovascular model implemented per description of Smith et al.</p>
 <p>[12] B. W. Smith, J. G. Chase, R. I. Nokes, G. M. Shaw, G. Wake, Minimal Haemodynamic System Model Including Ventricular Interaction and Valve Dynamics., Medical Engineering &AMP; Physics 26 (2) (2004) 131&ndash;139. doi:10.1016/j.medengphy.2003.10.001.</p>
 <p>[13] CellML implementation at URL:  http://models.cellml.org/exposure/9d046663ba5cac5c8a61ac146183614b/smith_chase_nokes_shaw_wake_2004.cellml/view</p>
-</html>"));
+</html>"),
+          experiment(StopTime=5));
       end HemodynamicsSmith_shallow;
 
       model HemodynamicsSmith
@@ -2928,6 +2937,7 @@ package Cardiovascular
           redeclare Parts.Heart heart,
           redeclare Parts.Systemic systemicCirculation);
 
+          extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000));
       end HemodynamicsSmith;
 
@@ -3993,6 +4003,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
       AVBackFlowConductance(k(displayUnit="ml/(mmHg.s)") = 7.5006157584566e-14),
       aorticstenosis(InitialResistance=2399802.97347, FinalResistance=2399802.97347)),*/
 
+          extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(
             StopTime=5,
             __Dymola_NumberOfIntervals=5000,
@@ -4281,19 +4292,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
     package Fernandez
       extends Modelica.Icons.ExamplesPackage;
       model Hemodynamics_shallow
+            extends Cardiovascular.Icons.Runnable_Shallow;
 
-        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rightHeartInflow annotation(Placement(transformation(extent={{-114,42},
-                  {-94,62}}),                                                                                                    iconTransformation(extent={{-108,
-                  -30},{-88,-10}})));
-        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b rightHeartOutflow annotation(Placement(transformation(extent={{86,42},
-                  {106,62}}),                                                                                                    iconTransformation(extent={{-110,10},
-                  {-90,30}})));
-        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a leftHeartInflow annotation(Placement(transformation(extent={{86,-38},
-                  {106,-18}}),                                                                                                    iconTransformation(extent={{90,10},
-                  {110,30}})));
-        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b leftHeartOutflow annotation(Placement(transformation(extent={{-114,
-                  -38},{-94,-18}}),                                                                                                    iconTransformation(extent={{90,-28},
-                  {110,-8}})));
         Physiolibrary.Hydraulic.Components.Inertia Ltc(
             I(displayUnit="mmHg.s2/ml") = 10678.18997523, volumeFlow_start(
               displayUnit="m3/s") = 0.0001372)
@@ -4339,14 +4339,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           annotation (Placement(transformation(extent={{-28,-14},{32,40}})));
         Physiolibrary.Types.Constants.PressureConst Pth(k=-533.28954966)
           annotation (Placement(transformation(extent={{38,32},{48,42}})));
-        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a q_in annotation(Placement(transformation(extent={{-10,-10},
-                  {10,10}},
-              rotation=0,
-              origin={-140,-28}),                                                                                                    iconTransformation(extent = {{-108, -12}, {-88, 8}})));
-        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b q_out annotation(Placement(transformation(extent={{-10,-10},
-                  {10,10}},
-              rotation=0,
-              origin={-132,50}),                                                                                                    iconTransformation(extent = {{88, -16}, {108, 4}})));
       Physiolibrary.Hydraulic.Components.ElasticVesselElastance pulmonaryArteries(
           ZeroPressureVolume=0,
           useExternalPressureInput=true,
@@ -4388,18 +4380,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           volume_start=0.0002952,
           Elastance=786602.0857485)
           annotation (Placement(transformation(extent={{186,-44},{218,-12}})));
-        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a q_in1
-                                                                annotation(Placement(transformation(extent={{100,42},
-                  {120,62}}),                                                                                                    iconTransformation(extent = {{90, -10}, {110, 10}})));
-        Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b q_out1
-                                                                 annotation(Placement(transformation(extent={{104,-38},
-                  {124,-18}}),                                                                                                    iconTransformation(extent = {{-110, -10}, {-90, 10}})));
       equation
-        connect(rightHeartInflow,Ltc. q_in) annotation (Line(
-            points={{-104,52},{-94,52}},
-            color={0,0,0},
-            thickness=1,
-            smooth=Smooth.None));
         connect(Ltc.q_out,tricuspidValve. q_in) annotation (Line(
             points={{-74,52},{-52,52}},
             color={0,0,0},
@@ -4421,11 +4402,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             color={0,0,0},
             thickness=1,
             smooth=Smooth.None));
-        connect(pulmonaryValve.q_out,rightHeartOutflow)  annotation (Line(
-            points={{82,52},{96,52}},
-            color={0,0,0},
-            thickness=1,
-            smooth=Smooth.None));
         connect(Pth.y,ventricularInteraction. Pth) annotation (Line(
             points={{49.25,37},{52,37},{52,15.16},{26,15.16}},
             color={0,0,127},
@@ -4433,11 +4409,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         connect(ventricularInteraction.frequency,HR. y) annotation (Line(
             points={{-22,15.16},{-30,15.16},{-30,27},{-38,27}},
             color={0,0,127},
-            smooth=Smooth.None));
-        connect(Lmt.q_in,leftHeartInflow)  annotation (Line(
-            points={{84,-22},{90,-22},{90,-28},{96,-28}},
-            color={0,0,0},
-            thickness=1,
             smooth=Smooth.None));
         connect(Lmt.q_out,mitralValve. q_in) annotation (Line(
             points={{64,-22},{56,-22}},
@@ -4460,16 +4431,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             color={0,0,0},
             thickness=1,
             smooth=Smooth.None));
-        connect(aorticValve.q_out,leftHeartOutflow)  annotation (Line(
-            points={{-82,-22},{-88,-22},{-88,-28},{-104,-28}},
-            color={0,0,0},
-            thickness=1,
-            smooth=Smooth.None));
-        connect(q_in,pulmonaryArteries. q_in) annotation (Line(
-            points={{-140,-28},{-140,-30},{-175,-30}},
-            color={0,0,0},
-            thickness=1,
-            smooth=Smooth.None));
         connect(pulmonaryArteries.q_in,Rpul. q_in) annotation (Line(
             points={{-175,-30},{-176,-30},{-176,-5},{-177,-5}},
             color={0,0,0},
@@ -4477,11 +4438,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             smooth=Smooth.None));
         connect(Rpul.q_out,pulmonaryVeins. q_in) annotation (Line(
             points={{-177,25},{-176,25},{-176,50},{-178,50}},
-            color={0,0,0},
-            thickness=1,
-            smooth=Smooth.None));
-        connect(pulmonaryVeins.q_in,q_out)  annotation (Line(
-            points={{-178,50},{-132,50}},
             color={0,0,0},
             thickness=1,
             smooth=Smooth.None));
@@ -4494,19 +4450,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             points={{-159.8,-15.6},{-198,-15.6},{-198,64.4},{-163.6,64.4}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(q_in, leftHeartOutflow) annotation (Line(
-            points={{-140,-28},{-104,-28},{-104,-28}},
-            color={0,0,0},
-            thickness=1));
-        connect(q_out, rightHeartInflow) annotation (Line(
-            points={{-132,50},{-118,50},{-118,52},{-104,52}},
-            color={0,0,0},
-            thickness=1));
-        connect(aorta.q_in, q_in1) annotation (Line(
-            points={{202,50},{202,52},{110,52}},
-            color={0,0,0},
-            thickness=1,
-            smooth=Smooth.None));
         connect(aorta.q_in,Rsys. q_in) annotation (Line(
             points={{202,50},{202,22}},
             color={0,0,0},
@@ -4517,27 +4460,26 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             color={0,0,0},
             thickness=1,
             smooth=Smooth.None));
-        connect(venaCava.q_in, q_out1) annotation (Line(
-            points={{202,-28},{114,-28}},
-            color={0,0,0},
-            thickness=1,
-            smooth=Smooth.None));
-        connect(q_out1, q_out1) annotation (Line(
-            points={{114,-28},{114,-28}},
+        connect(pulmonaryVeins.q_in, Ltc.q_in) annotation (Line(
+            points={{-178,50},{-136,50},{-136,52},{-94,52}},
             color={0,0,0},
             thickness=1));
-        connect(leftHeartInflow, q_out1) annotation (Line(
-            points={{96,-28},{106,-28},{114,-28}},
+        connect(pulmonaryArteries.q_in, aorticValve.q_out) annotation (Line(
+            points={{-175,-30},{-128,-30},{-128,-22},{-82,-22}},
             color={0,0,0},
             thickness=1));
-        connect(rightHeartOutflow, q_in1) annotation (Line(
-            points={{96,52},{104,52},{110,52}},
+        connect(Lmt.q_in, venaCava.q_in) annotation (Line(
+            points={{84,-22},{144,-22},{144,-28},{202,-28}},
+            color={0,0,0},
+            thickness=1));
+        connect(aorta.q_in, pulmonaryValve.q_out) annotation (Line(
+            points={{202,50},{142,50},{142,52},{82,52}},
             color={0,0,0},
             thickness=1));
         annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-340,
                   -80},{360,80}})),                                                                                   Icon(coordinateSystem(extent={{-340,
-                  -80},{360,80}},                                                                                                    preserveAspectRatio = false), graphics={Bitmap(extent={{-38,-78},{38,72}},
-                  fileName = "modelica://FernandezModel/Resources/Icons/cvsconcept.png")}), experiment(StartTime = 0, StopTime = 100, Tolerance = 1e-006, Interval = 0.2));
+                  -80},{360,80}},                                                                                                    preserveAspectRatio = false)),
+                                                                                            experiment(StartTime = 0, StopTime = 100, Tolerance = 1e-006, Interval = 0.2));
       end Hemodynamics_shallow;
 
       model HemodynamicsFernandez
@@ -4546,6 +4488,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           redeclare Parts.Heart heart,
           redeclare Parts.SystemicCirculation
                                    systemicCirculation);
+          extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000), Diagram(
               coordinateSystem(preserveAspectRatio=false, extent={{-20,-40},{20,
                   40}})));
@@ -10605,6 +10548,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           redeclare Components.Heart heart,
           redeclare Components.Systemic systemicCirculation(redeclare
               Components.Main.SystemicArteries.Original_CircAdapt SA));
+          extends Cardiovascular.Icons.Runnable_System;
         import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
         import Cardiovascular.Constants.*;
         import Cardiovascular.Types.*;
@@ -11760,8 +11704,8 @@ above 0 mmHg.")}));
   Pd := q_in.pressure;
   Pmean:=q_in.pressure;*/
       equation
-        Pmax = max(Pmax, q_in.pressure);
-        Pmin = min(Pmin, q_in.pressure);
+        Pmax = if not (initial() or edge(b)) then max(Pmax, q_in.pressure) else q_in.pressure;
+        Pmin = if not (initial() or edge(b)) then min(Pmin, q_in.pressure) else q_in.pressure;
         PmeanA =  (2/3)*Pmin+(1/3)*Pmax;
         b = der(q_in.pressure) > 0;
         der(SumPressure) = q_in.pressure;
@@ -11778,8 +11722,11 @@ above 0 mmHg.")}));
                    //if ((SumPressure / pre(HP))<Pd) then PmeanA else
           reinit(SumPressure,  0) "reinitialisation of sum pressure";
                    //if (Pmean2>Pd) then Pmean1 else Pmean2;
-          reinit(Pmax,  q_in.pressure) "reinitialisation of maximal pressure";
-          reinit(Pmin,  q_in.pressure) "reinitialisation minimal pressure";
+      //     Pmax = pre(q_in.pressure) "reinitialisation of maximal pressure";
+      //    Pmin = pre(q_in.pressure) "reinitialisation minimal pressure";
+
+                   //     reinit(Pmax,  q_in.pressure) "reinitialisation of maximal pressure";
+      //     reinit(Pmin,  q_in.pressure) "reinitialisation minimal pressure";
        end when;
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}),
@@ -12349,6 +12296,43 @@ above 0 mmHg.")}));
 
       end Vessels;
 
+    model Runnable_System
+
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-20, -40}, {20, 40}}), graphics), Icon(coordinateSystem(extent={{-20,-40},
+                {20,40}},                                                                                                    preserveAspectRatio=false),   graphics={                                                                                                            Text(
+              extent={{-40,-42},{40,-50}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Ellipse(lineColor={75,138,73},
+                    extent={{-20,-20},{20,20}}),
+            Polygon(lineColor = {0,0,255},
+                    fillColor = {75,138,73},
+                    pattern = LinePattern.None,
+                    fillPattern = FillPattern.Solid,
+                    points={{-8,12},{12,0},{-8,-12},{-8,12}})}),                                                                        Documentation(info="<html>
+<p>Architectural model of cardiovascular subsystems. The partial subsystems are meant to be redeclared by the implemented submodels.</p>
+</html>"));
+    end Runnable_System;
+
+    model Runnable_Shallow
+     annotation(Diagram(coordinateSystem(extent={{-280,-140},{280,180}},      preserveAspectRatio=false),   graphics), Icon(coordinateSystem(extent = {{-280, -140}, {280, 180}}, preserveAspectRatio = false), graphics={
+            Ellipse(lineColor = {75,138,73},
+                    fillColor={255,255,255},
+                    fillPattern = FillPattern.Solid,
+                    extent={{-156,-140},{164,180}}),
+            Polygon(lineColor = {0,0,255},
+                    fillColor = {75,138,73},
+                    pattern = LinePattern.None,
+                    fillPattern = FillPattern.Solid,
+                    points={{-68,118},{104,16},{-68,-82},{-68,118}})}),
+        experiment(StopTime=5, __Dymola_NumberOfIntervals=5000),
+        Documentation(info="<html>
+<p>Cardiovascular model implemented per description of Meurs et al.</p>
+<p>[9] J. A. Goodwin, W. L. van Meurs, C. D. S a Couto, J. E. W. Beneken, S. A. Graves, A Model for Educational Simulation of Infant Cardiovascular Physiology, Anesthesia &AMP; Analgesia 99 (6) (2004) 1655&ndash;1664. doi:10.1213/01.ANE.0000134797.52793.AF.</p>
+<p>[10] C. D. S a Couto, W. L. van Meurs, J. A. Goodwin, P. Andriessen, A Model for Educational Simulation of Neonatal Cardiovascular Pathophysiology, Simulation in Healthcare 1 (Inaugural) (2006) 4&ndash;12.</p>
+<p>[11] W. van Meurs, Modeling and Simulation in Biomedical Engineering: Applications in Cardiorespiratory Physiology, McGraw-Hill Professional, 2011.</p>
+</html>"));
+    end Runnable_Shallow;
   end Icons;
   annotation (uses(              Physiolibrary(version="2.3.1"), Modelica(
           version="3.2.2")), Documentation(info="<html>
