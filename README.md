@@ -19,3 +19,7 @@ Run any model with a green Play triangle, e.g. Cardiovascular.Model.Meurs.Hemody
 You can watch an instructional video at [https://youtu.be/wcipWB1Ngnw]
 
 
+Citable DOI https://doi.org/10.5281/zenodo.1098407
+
+Cite as 
+Tomas Kulhanek, & Filip Ježek. (2017, December 9). filip-jezek/Physiolibrary.models: Published version (Version 1.0). Zenodo. http://doi.org/10.5281/zenodo.1098407
