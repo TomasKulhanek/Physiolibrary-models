@@ -320,10 +320,10 @@ package Cardiovascular
       "Interface for cardiovascular system controlled by short-term(baroreflex), long-term(blood volume) and pathologies(stenosis)"
       extends Cardiovascular.System(
         redeclare replaceable Pulmonary pulmonaryCirculation constrainedby
-          Controlled.Pulmonary,
+            Controlled.Pulmonary,
         redeclare replaceable Heart heart constrainedby Controlled.Heart,
         redeclare replaceable Systemic systemicCirculation constrainedby
-          Controlled.Systemic);
+            Controlled.Systemic);
 
       replaceable ShortTermControl shortTermControl
         annotation (Placement(transformation(extent={{-52,16},{-36,32}})));
@@ -10799,7 +10799,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             annotation (Placement(transformation(extent={{-14,-10},{6,10}})));
           Physiolibrary.Types.Constants.OneConst one
             annotation (Placement(transformation(extent={{-26,8},{-18,16}})));
-      equation
+        equation
           connect(hematocrit, spline.u) annotation (Line(
               points={{-80,0},{-12,0}},
               color={0,0,127},
@@ -11924,7 +11924,7 @@ above 0 mmHg.")}));
 
       model BleedingTransfusionScenario
         extends Cardiovascular.Interfaces.Controlled.ScenarioControl;
-    import Physiolibrary.Types.*;
+        import Physiolibrary.Types.*;
         //after 1 minute, 5minutes bleeding
         parameter Time Tbs=60,Tbd=5*60;
         parameter Volume BloodLoss=0.001;
@@ -12049,7 +12049,7 @@ above 0 mmHg.")}));
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={30,-50})));
-    equation
+      equation
        RBCbleed=bleedrate*hematocrit*12e12/2.4e-3;
        plasmableed=bleedrate*(1-hematocrit);
        RBCtransfusion=transrate*0.4*12e12/2.4e-3;
@@ -12940,36 +12940,67 @@ above 0 mmHg.")}));
     end CardioLVUnloading;
 
     model CatheterDataFitting
-      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR LongerDrain(l=0.31, r(
-            displayUnit="mm") = 0.022)
+      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR LongerDrain(r=0.0018,
+          l=0.31)
         annotation (Placement(transformation(extent={{42,2},{22,22}})));
       Physiolibrary.Hydraulic.Sources.UnlimitedPump unlimitedPump(
           useSolutionFlowInput=true)
-        annotation (Placement(transformation(extent={{-32,-20},{-12,0}})));
+        annotation (Placement(transformation(extent={{-30,22},{-10,2}})));
       Physiolibrary.Hydraulic.Sources.UnlimitedVolume unlimitedVolume
         annotation (Placement(transformation(extent={{100,-20},{80,0}})));
       Modelica.Blocks.Sources.Ramp ramp(height=0.1e-3, duration=1)
-        annotation (Placement(transformation(extent={{-94,6},{-74,26}})));
-      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR ShorterOutflow(r(
-            displayUnit="mm") = 0.005, l=1)
+        annotation (Placement(transformation(extent={{-88,-12},{-68,8}})));
+      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR ShorterOutflow(l=0.22, r
+          =0.0014)
         annotation (Placement(transformation(extent={{44,-26},{24,-6}})));
+      Physiolibrary.Hydraulic.Sources.UnlimitedPump unlimitedPump1(
+          useSolutionFlowInput=true)
+        annotation (Placement(transformation(extent={{-30,-26},{-10,-6}})));
+      Physiolibrary.Hydraulic.Sources.UnlimitedPump unlimitedPump2(
+          useSolutionFlowInput=true)
+        annotation (Placement(transformation(extent={{-28,72},{-8,52}})));
+      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR LongerDrain1(l=3.5, r=
+            0.0018)
+        annotation (Placement(transformation(extent={{42,52},{22,72}})));
     equation
-      connect(ramp.y, unlimitedPump.solutionFlow) annotation (Line(points={{-73,
-              16},{-22,16},{-22,-3}}, color={0,0,127}));
+      connect(ramp.y, unlimitedPump.solutionFlow) annotation (Line(points={{-67,-2},
+              {-20,-2},{-20,5}},      color={0,0,127}));
       connect(unlimitedPump.q_out, LongerDrain.cOut) annotation (Line(
-          points={{-12,-10},{6,-10},{6,12},{24,12}},
+          points={{-10,12},{24,12}},
           color={0,0,0},
           thickness=1));
       connect(LongerDrain.cIn, unlimitedVolume.y) annotation (Line(points={{40,
               12},{60,12},{60,-10},{80,-10}}, color={127,0,0}));
-      connect(unlimitedPump.q_out, ShorterOutflow.cOut) annotation (Line(
-          points={{-12,-10},{6,-10},{6,-16},{26,-16}},
-          color={0,0,0},
-          thickness=1));
       connect(ShorterOutflow.cIn, unlimitedVolume.y) annotation (Line(points={{
               42,-16},{62,-16},{62,-10},{80,-10}}, color={127,0,0}));
+      connect(unlimitedPump1.q_out, ShorterOutflow.cOut) annotation (Line(
+          points={{-10,-16},{26,-16}},
+          color={0,0,0},
+          thickness=1));
+      connect(unlimitedPump1.solutionFlow, unlimitedPump.solutionFlow)
+        annotation (Line(points={{-20,-9},{-32,-9},{-32,-2},{-20,-2},{-20,5}},
+            color={0,0,127}));
+      connect(ramp.y, unlimitedPump2.solutionFlow) annotation (Line(points={{
+              -67,-2},{-42,-2},{-42,55},{-18,55}}, color={0,0,127}));
+      connect(unlimitedPump2.q_out, LongerDrain1.cOut) annotation (Line(
+          points={{-8,62},{24,62}},
+          color={0,0,0},
+          thickness=1));
+      connect(LongerDrain1.cIn, unlimitedVolume.y) annotation (Line(points={{40,
+              62},{56,62},{56,60},{80,60},{80,-10}}, color={127,0,0}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
-            coordinateSystem(preserveAspectRatio=false)));
+            coordinateSystem(preserveAspectRatio=false), graphics={Polygon(
+              points={{-50,40},{-50,-40},{70,-40},{70,40},{-50,40}},
+              lineColor={28,108,200},
+              lineThickness=1,
+              fillPattern=FillPattern.Sphere,
+              fillColor={255,255,255}), Text(
+              extent={{-44,28},{58,38}},
+              lineColor={28,108,200},
+              lineThickness=1,
+              fillPattern=FillPattern.Sphere,
+              fillColor={255,255,255},
+              textString="Maquet catheter")}));
     end CatheterDataFitting;
   end Experiments;
   annotation (uses(              Physiolibrary(version="2.3.2-beta"), Modelica(
