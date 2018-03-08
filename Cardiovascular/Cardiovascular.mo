@@ -4974,6 +4974,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         //     "New mode to switch to - used during adaptation protocol";
         //   Integer counter
         //     "Counts sequential mode transitions realized without a need for further adaptation - used as a convergence criterion";
+        Real HeartRate = 60/condition. cycleDuration "Heart rate BPM";
         equation
 
 
@@ -5016,25 +5017,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 "Reference pressure in aorta";
               parameter Pressure pulmonaryPressureDropRef = 1500
                 "Reference pressure drop over pulmonary capillaries";
-
-              parameter Fraction _DT_aorticArchStenosisRatio = 0
-                "Severity of stenosis in aortic arch (derived tree only)";
-              parameter Fraction _DT_arterialStiffnessScale = 1
-                "Scaling coefficient for arterial stiffness (derived tree only)";
-              parameter Fraction bloodVolumeRefScale = 1
-                "Scaling coefficient for blood volume";
-              parameter Fraction systemicResistanceScale = 1
-                "Scaling coefficient for systemic resistance";
-              parameter Fraction LW_contractilityScale = 1
-                "Scaling coefficient for contractility of left ventricle wall";
-              parameter Fraction SW_contractilityScale = 1
-                "Scaling coefficient for contractility of sepal wall";
-              parameter Fraction RW_contractilityScale = 1
-                "Scaling coefficient for contractility of right ventricle wall";
-              parameter Fraction LA_contractilityScale = 1
-                "Scaling coefficient for contractility of left atrium";
-              parameter Fraction RA_contractilityScale = 1
-                "Scaling coefficient for contractility of right atrium";
 
               Time cycleDuration = 1 / heartBeat "Duration of cardiac cycle";
               VolumeFlowRate aortalFlowRef = 85e-6
@@ -5696,6 +5678,25 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               parameter Velocity vImpact
                 "Reference velocity of blood due to movement impacts";
 
+              parameter Fraction _DT_aorticArchStenosisRatio = 0
+                "Severity of stenosis in aortic arch (derived tree only)";
+              parameter Fraction _DT_arterialStiffnessScale = 1
+                "Scaling coefficient for arterial stiffness (derived tree only)";
+              parameter Fraction bloodVolumeRefScale = 1
+                "Scaling coefficient for blood volume";
+              parameter Fraction systemicResistanceScale = 1
+                "Scaling coefficient for systemic resistance";
+              parameter Fraction LW_contractilityScale = 1
+                "Scaling coefficient for contractility of left ventricle wall";
+              parameter Fraction SW_contractilityScale = 1
+                "Scaling coefficient for contractility of sepal wall";
+              parameter Fraction RW_contractilityScale = 1
+                "Scaling coefficient for contractility of right ventricle wall";
+              parameter Fraction LA_contractilityScale = 1
+                "Scaling coefficient for contractility of left atrium";
+              parameter Fraction RA_contractilityScale = 1
+                "Scaling coefficient for contractility of right atrium";
+
             end ModelConstants;
           end Abstraction;
 
@@ -5723,6 +5724,10 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               ecmoPumpPressureAdaptationRate = 4e9);
 
           end Standard;
+
+          record LVFailure
+            extends Standard(LW_contractilityScale=0.25);
+          end LVFailure;
         end ModelConstants;
       end Environment;
 
@@ -6651,7 +6656,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 tDelay = settings. initialization. LA_tDelay_Base + settings. initialization. LA_tDelay_CycleFraction * settings. condition. cycleDuration,
                 VW_init = settings. initialization. LA_VW,
                 pP = 0.5 * pP,
-                contractilityScale = settings. condition. LA_contractilityScale) annotation (Placement(transformation(extent={{58,-40},
+                contractilityScale = settings. constants. LA_contractilityScale) annotation (Placement(transformation(extent={{58,-40},
                         {16,-2}})));
               AtrialWall RA(
                 AmRef_init = settings. initialization. RA_AmRef,
@@ -6661,7 +6666,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 tDelay = settings. initialization. RA_tDelay_Base + settings. initialization. RA_tDelay_CycleFraction * settings. condition. cycleDuration,
                 VW_init = settings. initialization. RA_VW,
                 pP = pP,
-                contractilityScale = settings. condition. RA_contractilityScale)
+                contractilityScale = settings. constants. RA_contractilityScale)
                 annotation (Placement(transformation(extent={{-68,-58},{-22,-12}})));
               CoronaryVessels Coro(pM = ventricles. pM)
                 annotation (Placement(transformation(extent={{28,-42},{-34,20}})));
@@ -7041,7 +7046,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 tDelay = settings. initialization. LW_tDelay_Base + settings. initialization. LW_tDelay_CycleFraction * settings. condition. cycleDuration,
                 EAmRef_init = settings. initialization. LW_EAmRef,
                 VW_init = settings. initialization. LW_VW,
-                contractilityScale = settings. condition. LW_contractilityScale)
+                contractilityScale = settings. constants. LW_contractilityScale)
                 annotation (Placement(transforMation(extent={{-48,26},{-28,46}})));
               VentricularWall SW(
                 AmRef_init = settings. initialization. SW_AmRef,
@@ -7051,7 +7056,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 tDelay = settings. initialization. SW_tDelay_Base + settings. initialization. SW_tDelay_CycleFraction * settings. condition. cycleDuration,
                 EAmRef_init = settings. initialization. SW_EAmRef,
                 VW_init = settings. initialization. SW_VW,
-                contractilityScale = settings. condition. SW_contractilityScale)
+                contractilityScale = settings. constants. SW_contractilityScale)
                 annotation (Placement(transforMation(extent={{-18,4},{2,24}})));
               VentricularWall RW(
                 AmRef_init = settings. initialization. RW_AmRef,
@@ -7061,7 +7066,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 tDelay = settings. initialization. RW_tDelay_Base + settings. initialization. RW_tDelay_CycleFraction * settings. condition. cycleDuration,
                 EAmRef_init = settings. initialization. RW_EAmRef,
                 VW_init = settings. initialization. RW_VW,
-                contractilityScale = settings. condition. RW_contractilityScale)
+                contractilityScale = settings. constants. RW_contractilityScale)
                 annotation (Placement(transforMation(extent={{10,-20},{30,0}})));
 
             equation
@@ -10359,9 +10364,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         //   Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
         //
         //
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a AortaCannulla
-            annotation (Placement(transformation(extent={{60,-100},{80,-80}}),
-                iconTransformation(extent={{60,-100},{80,-80}})));
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a AortaCannulla annotation (
+              Placement(transformation(extent={{60,-100},{80,-80}}), iconTransformation(
+                  extent={{60,-100},{80,-80}})));
         equation
         //   der(V_filling) = q_filling;
         //   q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
@@ -10385,7 +10390,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
             //  Adaptatioin of capillary resistance
           when change(settings. stepCycle) and settings. condition. adaptCapillaryResistance then
-            reinit(SC. R, (settings. condition. aortalPressureRef - avg_SV_pInner. average) / settings. condition. aortalFlowRef * settings. condition. systemicResistanceScale);
+            reinit(SC. R, (settings. condition. aortalPressureRef - avg_SV_pInner. average) / settings. condition. aortalFlowRef * settings. constants. systemicResistanceScale);
           end when;
 
           connect(SC. cOut,SV.  cIn)    annotation (Line(
@@ -12484,7 +12489,7 @@ above 0 mmHg.")}));
       import Physiolibrary.Types.*;
 
       inner Model.Complex.Environment.ComplexEnvironment settings(redeclare
-          Model.Complex.Environment.Supports.No supports)
+          Model.Complex.Environment.Conditions.Rest_MinimalAdapt condition)
         annotation (Placement(transformation(extent={{-22,26},{-6,40}})));
 
     // protected
@@ -12558,6 +12563,29 @@ above 0 mmHg.")}));
           Tolerance=1e-006,
           __Dymola_Algorithm="Sdirk34hw"));
     end LVUnloading;
+
+    package LVUnload_states
+      model Healthy_noEcmo
+        extends LVUnloading(LVDrain(l(displayUnit="m") = 100, r=1e-05));
+        annotation (experiment(
+            StopTime=15,
+            Tolerance=1e-006,
+            __Dymola_Algorithm="Sdirk34hw"));
+      end Healthy_noEcmo;
+
+      model LVFailure_noEcmo
+        extends LVUnloading(settings(redeclare
+              Model.Complex.Environment.ModelConstants.LVFailure constants),
+            LVDrain(l(displayUnit="m") = 100, r=1e-05));
+      end LVFailure_noEcmo;
+
+      model LVFailure_Ecmo
+        extends LVUnloading(settings(redeclare
+              Model.Complex.Environment.ModelConstants.LVFailure constants,
+              redeclare Model.Complex.Environment.Supports.ECMO_Pulsatile
+              supports));
+      end LVFailure_Ecmo;
+    end LVUnload_states;
   end Experiments;
   annotation (uses(              Physiolibrary(version="2.3.2-beta"), Modelica(
           version="3.2.2")));
