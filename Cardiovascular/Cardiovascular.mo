@@ -379,6 +379,7 @@ package Cardiovascular
             color={0,0,255},
             thickness=0.5,
             smooth=Smooth.None));
+
         connect(systemicCirculation.busConnector, heart.busConnector)
           annotation (Line(
             points={{-7.6,-29},{-18,-29},{-18,-5.6},{-8.4,-5.6}},
@@ -858,6 +859,7 @@ package Cardiovascular
 
             color={0,0,127},
             smooth=Smooth.None));
+
         connect(LeftAtrium.compliance, atrialElastance.Ct) annotation (Line(
             points={{88,75.2},{88,86},{122,86},{122,96},{121.61,96},{121.61,
                 109.84}},
@@ -1015,9 +1017,9 @@ package Cardiovascular
                   extent={{-100,-100},{100,100}}), graphics), Icon(
                 coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Meurs")}));
+                          extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Meurs")}));
         end Pulmonary;
 
         model Systemic
@@ -1179,10 +1181,9 @@ package Cardiovascular
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
-                  Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Meurs")}));
+                  Text(   extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Meurs")}));
         end Systemic;
 
         model Heart
@@ -1363,10 +1364,9 @@ package Cardiovascular
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
-                  Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Meurs")}));
+                  Text(   extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Meurs")}));
         end Heart;
 
         model AtrialElastance
@@ -1605,6 +1605,7 @@ package Cardiovascular
 
               color={0,0,127},
               smooth=Smooth.None));
+
           connect(PulmonaryVeins.volume, add.u2) annotation (Line(
               points={{27.2,-12},{28,-12},{28,-24},{34,-24},{34,32},{-14,32}},
               color={0,0,127},
@@ -1740,6 +1741,7 @@ package Cardiovascular
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
+
           connect(ventricularElastance.Es_ext, busConnector.lvcompliance)
             annotation (Line(
               points={{-62.4,-17.2},{-62.4,-14},{-62,-14},{-62,-10},{-98,-10},{
@@ -2072,6 +2074,7 @@ package Cardiovascular
 
             color={0,0,127},
             smooth=Smooth.None));
+
         connect(LAElastance.HR, heartRate.y) annotation (Line(
             points={{158.99,38.64},{128,38.64},{128,38},{-77,38}},
             color={0,0,127},
@@ -2085,6 +2088,7 @@ package Cardiovascular
 
             color={0,0,127},
             smooth=Smooth.None));
+
         connect(LV.StressedVolume, LVElastance.Vs) annotation (Line(
             points={{97.6,6.2},{97.6,16},{89.68,16},{89.68,17.2}},
             color={0,0,127},
@@ -2212,6 +2216,7 @@ package Cardiovascular
 
             color={0,190,190},
             smooth=Smooth.None));
+
         connect(LV.externalPressure, add3.y) annotation (Line(
             points={{110,4},{110,7.7},{109,7.7}},
             color={0,190,190},
@@ -2375,10 +2380,9 @@ package Cardiovascular
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
-                  Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Burkhoff")}));
+                  Text(   extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Burkhoff")}));
         end Pulmonary;
 
         model Systemic
@@ -2451,10 +2455,9 @@ package Cardiovascular
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
-                  Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Burkhoff")}));
+                  Text(   extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Burkhoff")}));
         end Systemic;
 
         model Heart "heart with modified elastance"
@@ -2729,10 +2732,9 @@ package Cardiovascular
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
-                  Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Burkhoff")}));
+                  Text(   extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Burkhoff")}));
         end Heart;
 
         model ElasticVesselWithSVandP
@@ -4222,10 +4224,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
-                  Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Smith")}));
+                  Text(   extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Smith")}));
         end Heart;
 
         model Pulmonary
@@ -4286,10 +4287,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
-                  Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Smith")}));
+                  Text(   extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Smith")}));
         end Pulmonary;
 
         model Systemic
@@ -4334,10 +4334,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
-                  Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Smith")}));
+                  Text(   extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Smith")}));
         end Systemic;
 
         model ElasticWall
@@ -5257,6 +5256,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               color={0,0,127},
               smooth=Smooth.Bezier));
+
           connect(ERMAX.y, variableElasticityGenerator.maxelastance)
             annotation (Line(
               points={{-36.25,45},{-46.96,45},{-46.96,40.96}},
@@ -5338,9 +5338,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   extent={{-120,-60},{120,80}})), Icon(coordinateSystem(
                   preserveAspectRatio=false, extent={{-120,-60},{120,80}}),
                 graphics={Text(
-                  extent={{-98,48},{102,88}},
-                  lineColor={0,0,0},
-                  textString="Fernandez")}));
+                          extent={{-98,48},{102,88}},
+                          lineColor={0,0,0},
+                          textString="Fernandez")}));
         end Heart;
 
         model SystemicCirculation
@@ -5457,9 +5457,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   extent={{-120,-60},{120,60}})), Icon(coordinateSystem(
                   preserveAspectRatio=false, extent={{-120,-60},{120,60}}),
                 graphics={Text(
-                  extent={{-106,34},{94,74}},
-                  lineColor={0,0,0},
-                  textString="Fernandez")}));
+                          extent={{-106,34},{94,74}},
+                          lineColor={0,0,0},
+                          textString="Fernandez")}));
         end SystemicCirculation;
 
         model PulmonaryCirculation
@@ -5537,9 +5537,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   extent={{-100,-40},{100,40}})), Icon(coordinateSystem(
                   preserveAspectRatio=false, extent={{-100,-40},{100,40}}),
                 graphics={Text(
-                  extent={{-98,10},{102,50}},
-                  lineColor={0,0,0},
-                  textString="Fernandez")}));
+                          extent={{-98,10},{102,50}},
+                          lineColor={0,0,0},
+                          textString="Fernandez")}));
         end PulmonaryCirculation;
 
         model Curve
@@ -7060,18 +7060,17 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text(
-                        extent={{-34,26},{30,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
-                        textString="LpRCR"), Text(
-                        extent={{-66,86},{76,30}},
-                        lineColor={0,0,0},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="%name")}));
+                      graphics={Text( extent={{-34,26},{30,-24}},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
+                                      textString="LpRCR"),Text(
+                                      extent={{-66,86},{76,30}},
+                                      lineColor={0,0,0},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="%name")}));
               end LpRCR;
 
               model RRcC "Constant R(R-C) segment"
@@ -7638,6 +7637,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   color={127,5,58},
                   smooth=Smooth.Bezier,
                   thickness=1));
+
               connect(RA.c, vRAV.cIn) annotation (Line(
                   points={{-45,-23.5},{-44,-23.5},{-44,-48},{-42,-48},{-42,-49.4468},
                       {-36.5886,-49.4468}},
@@ -7655,12 +7655,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
+
               connect(vLAV.cIn, LA.c) annotation (Line(
                   points={{34.3184,-47.0748},{36,-47.0748},{36,-11.5},{37,-11.5}},
 
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
+
               connect(vLAV.cOut, ventricles.cLV) annotation (Line(
                   points={{24.449,-58.8368},{30,-58.8368},{24,-58.8368},{24,-68},
                       {12,-68},{12,-67.4},{8.8,-67.4}},
@@ -7673,6 +7675,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
+
               connect(vSA.cOut, cVSA) annotation (Line(
                   points={{10.1396,-32.0012},{8,-32.0012},{8,-20},{-20,-20},{-20,
                       38},{-24,38},{-24,40}},
@@ -8390,14 +8393,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                       extent={{-100,-100},{100,100}}), graphics), Icon(graphics
-                    ={Text(
-                      extent={{-70,64},{52,4}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Windkessel (Physiolibrary)")}));
+                    ={Text(       extent={{-70,64},{52,4}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Windkessel (Physiolibrary)")}));
             end Windkessel_Physiolibrary;
 
             model Windkessel_Stergiopulos
@@ -8420,14 +8422,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                       extent={{-100,-100},{100,100}}), graphics), Icon(graphics
-                    ={Text(
-                      extent={{-68,64},{46,8}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Windkessel (Stergiopulos)")}));
+                    ={Text(       extent={{-68,64},{46,8}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Windkessel (Stergiopulos)")}));
             end Windkessel_Stergiopulos;
 
             model Aorta_Ferrari "Model of aorta by Ferrari et al. (2005)"
@@ -8682,14 +8683,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                       extent={{-100,-100},{100,100}}), graphics), Icon(graphics
-                    ={Text(
-                      extent={{-56,56},{28,10}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Aorta (Ferrari)")}));
+                    ={Text(       extent={{-56,56},{28,10}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Aorta (Ferrari)")}));
             end Aorta_Ferrari;
 
             model Tree_Abdolrazaghi
@@ -9131,14 +9131,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                       extent={{-100,-100},{100,100}}), graphics), Icon(graphics
-                    ={Text(
-                      extent={{-60,50},{36,12}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Tree (Abdolrazaghi)")}));
+                    ={Text(       extent={{-60,50},{36,12}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Tree (Abdolrazaghi)")}));
             end Tree_Abdolrazaghi;
 
             model ComplexTree_Derived "Derived arterial tree"
@@ -11073,14 +11072,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                       extent={{-100,-100},{100,100}}), graphics), Icon(graphics
-                    ={Text(
-                      extent={{-62,44},{46,24}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Derived Tree")}));
+                    ={Text(       extent={{-62,44},{46,24}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Derived Tree")}));
             end ComplexTree_Derived;
           end SystemicArteries;
 
@@ -11204,8 +11202,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.Bezier,
                   thickness=1));
               connect(inflowTube.cOut, ecmoPump.cIn) annotation (Line(
-                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{
-                      -40.4,0}},
+                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{-40.4,
+                      0}},
                   color={127,5,60},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -11402,8 +11400,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               end when;
 
               connect(inflowTube.cOut, ecmoPump.cIn) annotation (Line(
-                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{
-                      -40.4,0}},
+                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{-40.4,
+                      0}},
                   color={127,5,60},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -11647,6 +11645,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               color={0,0,0},
               thickness=1));
+
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}})), Icon(graphics={Text(
                   extent={{-100,20},{100,100}},
@@ -11771,12 +11770,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.Bezier));
+
           connect(q_out, SV.cOut) annotation (Line(
               points={{-100,0},{-96,0},{-96,10},{-90,10},{-90,10.5},{-87.9,10.5}},
 
               color={0,0,0},
               thickness=1,
               smooth=Smooth.Bezier));
+
           connect(AortaCannulla, SA.cCannula) annotation (Line(
               points={{70,-90},{74,-90},{74,11.7775},{75.9404,11.7775}},
               color={0,0,0},
@@ -11898,13 +11899,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics={Text(
-                  extent={{-26,8},{4,18}},
-                  lineColor={0,0,0},
-                  lineThickness=1,
-                  fillColor={255,0,0},
-                  fillPattern=FillPattern.Solid,
-                  textString="Pulmonary Circuit",
-                  textStyle={TextStyle.Bold})}), Icon(graphics={Text(
+                          extent={{-26,8},{4,18}},
+                          lineColor={0,0,0},
+                          lineThickness=1,
+                          fillColor={255,0,0},
+                          fillPattern=FillPattern.Solid,
+                          textString="Pulmonary Circuit",
+                          textStyle={TextStyle.Bold})}), Icon(graphics={Text(
                   extent={{-100,20},{100,100}},
                   lineColor={0,0,0},
                   fontName="Bauhaus 93",
@@ -12758,6 +12759,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={127,127,0},
               thickness=1,
               smooth=Smooth.None));
+
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
                     {-100,-100},{100,100}}), graphics={Bitmap(extent={{-72,-72},
                   {80,78}}, fileName=
@@ -13993,6 +13995,7 @@ above 0 mmHg.")}));
               origin={4.25124,18.8661},
               rotation=75)}), Diagram(coordinateSystem(preserveAspectRatio=
                 false)));
+
     end Arteries;
 
     class Atrium
@@ -14025,7 +14028,7 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-                  "modelica://Cardiovascular/Resources/Icons/Heart_detailed.png")}),
+              "modelica://Cardiovascular/Resources/Icons/Heart_detailed.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
     end Heart_detailed;
 
@@ -14033,18 +14036,19 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-                  "modelica://Cardiovascular/Resources/Icons/O2.png")}),
-          Diagram(coordinateSystem(preserveAspectRatio=false)));
+              "modelica://Cardiovascular/Resources/Icons/O2.png")}), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
     end O2;
 
     class Screw
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(
-              extent={{-100,-100},{100,100}},
-              fileName="modelica://Cardiovascular/Resources/Icons/Screw.png",
-              origin={2,-4},
-              rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=
+                  extent={{-100,-100},{100,100}},
+                  fileName=
+                "modelica://Cardiovascular/Resources/Icons/Screw.png",
+                  origin={2,-4},
+                  rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=
                 false)));
     end Screw;
 
@@ -14226,10 +14230,9 @@ above 0 mmHg.")}));
       import Cardiovascular.Types.*;
       import Physiolibrary.Hydraulic.Sources.*;
       import Physiolibrary.Types.*;
-
       inner Model.Complex.Environment.ComplexEnvironment settings(redeclare
           Model.Complex.Environment.Conditions.Rest_MinimalAdapt condition)
-        annotation (Placement(transformation(extent={{-22,26},{-6,40}})));
+        annotation (Placement(transformation(extent={{-20,32},{-12,40}})));
 
       // protected
       //   Averager avg_V(
@@ -14237,45 +14240,11 @@ above 0 mmHg.")}));
       //     signal = V,
       //     control = settings. stepCycle);
 
-      Model.Complex.Components.Main.ECMO.ECMO_bare ecmo(
-        cycleDuration=settings.supports.ECMO_cycleDuration,
-        pulseDuration=settings.supports.ECMO_pulseDuration,
-        pulseShapeRef=settings.supports.ECMO_pulseShapeRef,
-        qMeanRef=settings.supports.ECMO_qMeanRef,
-        isEnabled=settings.supports.ECMO_isEnabled)
-        annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain(l=0.22, r=
-            0.0021) annotation (Placement(transformation(
-            extent={{3,-3},{-3,3}},
-            rotation=90,
-            origin={-13,-37})));
-      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22, r
-          =0.0021) annotation (Placement(transformation(
-            extent={{-3,-3},{3,3}},
-            rotation=90,
-            origin={13,-49})));
     equation
       connect(systemicCirculation.q_out, heart.rightHeartInflow) annotation (
           Line(
           points={{-10,-26},{-14,-26},{-14,-1.6},{-9.84,-1.6}},
           color={0,0,0},
-          thickness=1));
-      connect(systemicCirculation.q_out, VenousDrain.cIn) annotation (Line(
-          points={{-10,-26},{-13,-26},{-13,-34.6}},
-          color={28,108,200},
-          thickness=1));
-      connect(VenousDrain.cOut, ecmo.cIn) annotation (Line(
-          points={{-13,-39.4},{-13,-60},{-9.6,-60}},
-          color={28,108,200},
-          thickness=1));
-      connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
-          points={{9.6,-60},{12,-60},{12,-51.4},{13,-51.4}},
-          color={217,67,180},
-          thickness=1));
-      connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut) annotation
-        (Line(
-          points={{7,-35},{12,-35},{12,-46.6},{13,-46.6}},
-          color={217,67,180},
           thickness=1));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-20,-80},{20,
@@ -14307,6 +14276,41 @@ above 0 mmHg.")}));
               Model.Complex.Environment.ModelConstants.LVFailure constants,
               redeclare Model.Complex.Environment.Supports.ECMO_Nonpulsatile
               supports));
+        Model.Complex.Components.Main.ECMO.ECMO_bare ecmo(
+          cycleDuration=settings.supports.ECMO_cycleDuration,
+          pulseDuration=settings.supports.ECMO_pulseDuration,
+          pulseShapeRef=settings.supports.ECMO_pulseShapeRef,
+          qMeanRef=settings.supports.ECMO_qMeanRef,
+          isEnabled=settings.supports.ECMO_isEnabled)
+          annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
+            r=0.0021) annotation (Placement(transformation(
+              extent={{-3,-3},{3,3}},
+              rotation=90,
+              origin={13,-49})));
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain(l=0.22,
+            r=0.0021) annotation (Placement(transformation(
+              extent={{3,-3},{-3,3}},
+              rotation=90,
+              origin={-15,-37})));
+      equation
+        connect(VenousDrain.cOut, ecmo.cIn) annotation (Line(
+            points={{-15,-39.4},{-15,-60},{-9.6,-60}},
+            color={28,108,200},
+            thickness=1));
+        connect(systemicCirculation.q_out, VenousDrain.cIn) annotation (Line(
+            points={{-10,-26},{-15,-26},{-15,-34.6}},
+            color={28,108,200},
+            thickness=1));
+        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+          annotation (Line(
+            points={{7,-35},{13,-35},{13,-46.6}},
+            color={217,67,180},
+            thickness=1));
+        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
+            points={{9.6,-60},{13,-60},{13,-51.4}},
+            color={217,67,180},
+            thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
       end LVFailure_Ecmo;
 
@@ -14320,15 +14324,50 @@ above 0 mmHg.")}));
               extent={{3,-3},{-3,3}},
               rotation=90,
               origin={-19,-37})));
+        Model.Complex.Components.Main.ECMO.ECMO_bare ecmo(
+          cycleDuration=settings.supports.ECMO_cycleDuration,
+          pulseDuration=settings.supports.ECMO_pulseDuration,
+          pulseShapeRef=settings.supports.ECMO_pulseShapeRef,
+          qMeanRef=settings.supports.ECMO_qMeanRef,
+          isEnabled=settings.supports.ECMO_isEnabled)
+          annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
+            r=0.0021) annotation (Placement(transformation(
+              extent={{-3,-3},{3,3}},
+              rotation=90,
+              origin={13,-49})));
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain(l=0.22,
+            r=0.0021) annotation (Placement(transformation(
+              extent={{3,-3},{-3,3}},
+              rotation=90,
+              origin={-15,-37})));
       equation
         connect(heart.LVCannula, LVDrain.cIn) annotation (Line(
             points={{0.88,-3.52},{0.88,-8},{2,-8},{2,-14},{-19,-14},{-19,-34.6}},
 
             color={28,108,200},
             thickness=1));
+
         connect(LVDrain.cOut, ecmo.cIn) annotation (Line(
             points={{-19,-39.4},{-19,-60},{-9.6,-60}},
             color={28,108,200},
+            thickness=1));
+        connect(VenousDrain.cOut, ecmo.cIn) annotation (Line(
+            points={{-15,-39.4},{-15,-60},{-9.6,-60}},
+            color={28,108,200},
+            thickness=1));
+        connect(systemicCirculation.q_out, VenousDrain.cIn) annotation (Line(
+            points={{-10,-26},{-15,-26},{-15,-34.6}},
+            color={28,108,200},
+            thickness=1));
+        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+          annotation (Line(
+            points={{7,-35},{13,-35},{13,-46.6}},
+            color={217,67,180},
+            thickness=1));
+        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
+            points={{9.6,-60},{13,-60},{13,-51.4}},
+            color={217,67,180},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
       end LVFailure_Ecmo_LVDrain;
