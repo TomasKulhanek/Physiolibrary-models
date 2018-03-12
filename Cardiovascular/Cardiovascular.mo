@@ -6380,7 +6380,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 "IABP deflation timing with respect to cardiac cycle (derived tree only)";
 
               parameter Boolean ECMO_isEnabled "Whether ECMO is connected";
-              parameter VolumeFlowRate ECMO_qMeanRef=5e-3/60
+              parameter VolumeFlowRate ECMO_qMeanRef=1.6666666666667e-06
                 "Reference mean flow through ECMO";
               parameter Cardiovascular.Types.PulseShape ECMO_pulseShapeRef=
                   PulseShape.pulseless "Shape of ECMO pulse or constant flow";
@@ -6403,6 +6403,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               parameter Cardiovascular.Types.Length _DT_ECMO_cannulaDepth=0.007
                 "Insertion depth of ECMO cannulas (derived tree only)";
 
+              annotation (__Dymola_Commands);
             end Supports;
           end Abstraction;
 
@@ -6825,17 +6826,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-34,26},{30,-24}},
-                                      lineColor={0,0,0},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid,
-                                      textStyle={TextStyle.Bold},
-                                      textString="RLC"),Text(
-                                      extent={{-70,86},{72,30}},
-                                      lineColor={0,0,0},
-                                      fillColor={86,199,10},
-                                      fillPattern=FillPattern.Solid,
-                                      textString="%name")}));
+                      graphics={Text(
+                        extent={{-34,26},{30,-24}},
+                        lineColor={0,0,0},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid,
+                        textStyle={TextStyle.Bold},
+                        textString="RLC"), Text(
+                        extent={{-70,86},{72,30}},
+                        lineColor={0,0,0},
+                        fillColor={86,199,10},
+                        fillPattern=FillPattern.Solid,
+                        textString="%name")}));
               end RLC;
 
               model CLR "Constant CLR segment"
@@ -7321,11 +7323,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}}), graphics={Text(
-                                      extent={{-62,-34},{62,-76}},
-                                      lineColor={127,0,127},
-                                      fillColor={86,199,10},
-                                      fillPattern=FillPattern.Solid,
-                                      textString="+IABP")}));
+                        extent={{-62,-34},{62,-76}},
+                        lineColor={127,0,127},
+                        fillColor={86,199,10},
+                        fillPattern=FillPattern.Solid,
+                        textString="+IABP")}));
               end TubeRLC_Derived_IABP;
             end Tubes;
           end RLC;
@@ -7632,15 +7634,15 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.Bezier,
                   thickness=1));
               connect(vSV.cOut, RA.c) annotation (Line(
-                  points={{-44.1396,-7.99878},{-44,-7.99878},{-44,-23.5},{-45,-23.5}},
-
+                  points={{-44.1396,-7.99878},{-44,-7.99878},{-44,-23.5},{-45,
+                      -23.5}},
                   color={127,5,58},
                   smooth=Smooth.Bezier,
                   thickness=1));
 
               connect(RA.c, vRAV.cIn) annotation (Line(
-                  points={{-45,-23.5},{-44,-23.5},{-44,-48},{-42,-48},{-42,-49.4468},
-                      {-36.5886,-49.4468}},
+                  points={{-45,-23.5},{-44,-23.5},{-44,-48},{-42,-48},{-42,
+                      -49.4468},{-36.5886,-49.4468}},
                   color={127,5,58},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -7677,14 +7679,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   thickness=1));
 
               connect(vSA.cOut, cVSA) annotation (Line(
-                  points={{10.1396,-32.0012},{8,-32.0012},{8,-20},{-20,-20},{-20,
-                      38},{-24,38},{-24,40}},
+                  points={{10.1396,-32.0012},{8,-32.0012},{8,-20},{-20,-20},{
+                      -20,38},{-24,38},{-24,40}},
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
               connect(ventricles.cRV, vRAV.cOut) annotation (Line(
-                  points={{-11.6,-68},{-26,-68},{-26,-62},{-27.4114,-62},{-27.4114,
-                      -62.5532}},
+                  points={{-11.6,-68},{-26,-68},{-26,-62},{-27.4114,-62},{
+                      -27.4114,-62.5532}},
                   color={127,5,58},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -7979,11 +7981,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                       -67.4},{47.4,-67.4},{47.4,-68},{90,-68}}, color={197,52,
                       16}));
               annotation (Icon(graphics={Polygon(
-                                  points={{32,-8},{40,2},{98,2},{96,-2},{42,-2},
-                        {32,-8}}, lineColor={0,0,255},
-                                  lineThickness=1,
-                                  fillColor={0,0,255},
-                                  fillPattern=FillPattern.Solid)}), Diagram(
+                      points={{32,-8},{40,2},{98,2},{96,-2},{42,-2},{32,-8}},
+                      lineColor={0,0,255},
+                      lineThickness=1,
+                      fillColor={0,0,255},
+                      fillPattern=FillPattern.Solid)}), Diagram(
                     coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                         {100,100}})));
             end HeartLVCannulated;
@@ -8344,13 +8346,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                       extent={{-100,-100},{100,100}}), graphics), Icon(
                     coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                         {100,100}}), graphics={Text(
-                      extent={{-52,52},{28,16}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Original (Arts)")}));
+                                  extent={{-52,52},{28,16}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Original (Arts)")}));
             end Original_CircAdapt;
 
 
@@ -11400,8 +11402,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               end when;
 
               connect(inflowTube.cOut, ecmoPump.cIn) annotation (Line(
-                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{-40.4,
-                      0}},
+                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{
+                      -40.4,0}},
                   color={127,5,60},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -11784,13 +11786,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics={Text(
-                  extent={{-24,42},{6,52}},
-                  lineColor={0,0,0},
-                  lineThickness=1,
-                  fillColor={255,0,0},
-                  fillPattern=FillPattern.Solid,
-                  textStyle={TextStyle.Bold},
-                  textString="Systemic Circuit")}), Icon(graphics={Text(
+                          extent={{-24,42},{6,52}},
+                          lineColor={0,0,0},
+                          lineThickness=1,
+                          fillColor={255,0,0},
+                          fillPattern=FillPattern.Solid,
+                          textStyle={TextStyle.Bold},
+                          textString="Systemic Circuit")}), Icon(graphics={Text(
                   extent={{-100,20},{100,100}},
                   lineColor={0,0,0},
                   fontName="Bauhaus 93",
@@ -11899,13 +11901,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics={Text(
-                          extent={{-26,8},{4,18}},
-                          lineColor={0,0,0},
-                          lineThickness=1,
-                          fillColor={255,0,0},
-                          fillPattern=FillPattern.Solid,
-                          textString="Pulmonary Circuit",
-                          textStyle={TextStyle.Bold})}), Icon(graphics={Text(
+                  extent={{-26,8},{4,18}},
+                  lineColor={0,0,0},
+                  lineThickness=1,
+                  fillColor={255,0,0},
+                  fillPattern=FillPattern.Solid,
+                  textString="Pulmonary Circuit",
+                  textStyle={TextStyle.Bold})}), Icon(graphics={Text(
                   extent={{-100,20},{100,100}},
                   lineColor={0,0,0},
                   fontName="Bauhaus 93",
@@ -13960,21 +13962,21 @@ above 0 mmHg.")}));
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={1,1}), graphics={Polygon(
-              points={{-100,100},{100,0},{-100,-100},{-100,100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}),
+                    points={{-100,100},{100,0},{-100,-100},{-100,100}},
+                    lineColor={0,0,127},
+                    fillColor={255,255,255},
+                    fillPattern=FillPattern.Solid)}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={1,1}), graphics={Polygon(
-              points={{-100,50},{0,0},{-100,-50},{-100,50}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{30,110},{30,60}},
-              lineColor={0,0,127},
-              textString="%name")}),
+                    points={{-100,50},{0,0},{-100,-50},{-100,50}},
+                    lineColor={0,0,127},
+                    fillColor={255,255,255},
+                    fillPattern=FillPattern.Solid),Text(
+                    extent={{30,110},{30,60}},
+                    lineColor={0,0,127},
+                    textString="%name")}),
         Documentation(info="<html>
   <p>
   Connector with one output signal of type HydraulicResistance.
@@ -14002,7 +14004,7 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-              "modelica://Cardiovascular/Resources/Icons/Atrium.png")}),
+                  "modelica://Cardiovascular/Resources/Icons/Atrium.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
     end Atrium;
 
@@ -14028,7 +14030,7 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-              "modelica://Cardiovascular/Resources/Icons/Heart_detailed.png")}),
+                  "modelica://Cardiovascular/Resources/Icons/Heart_detailed.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
     end Heart_detailed;
 
@@ -14036,19 +14038,18 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-              "modelica://Cardiovascular/Resources/Icons/O2.png")}), Diagram(
-            coordinateSystem(preserveAspectRatio=false)));
+                  "modelica://Cardiovascular/Resources/Icons/O2.png")}),
+          Diagram(coordinateSystem(preserveAspectRatio=false)));
     end O2;
 
     class Screw
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(
-                  extent={{-100,-100},{100,100}},
-                  fileName=
-                "modelica://Cardiovascular/Resources/Icons/Screw.png",
-                  origin={2,-4},
-                  rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=
+              extent={{-100,-100},{100,100}},
+              fileName="modelica://Cardiovascular/Resources/Icons/Screw.png",
+              origin={2,-4},
+              rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=
                 false)));
     end Screw;
 
@@ -14064,15 +14065,15 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-              "modelica://Cardiovascular/Resources/Icons/Valve.png")}), Diagram(
-            coordinateSystem(preserveAspectRatio=false)));
+                  "modelica://Cardiovascular/Resources/Icons/Valve.png")}),
+          Diagram(coordinateSystem(preserveAspectRatio=false)));
     end Valve;
 
     class Ventricle
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-              "modelica://Cardiovascular/Resources/Icons/Ventricle.png")}),
+                  "modelica://Cardiovascular/Resources/Icons/Ventricle.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
     end Ventricle;
 
@@ -14203,17 +14204,17 @@ above 0 mmHg.")}));
         annotation (Line(points={{-18,81},{-18,55}}, color={0,0,127}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
             coordinateSystem(preserveAspectRatio=false), graphics={Polygon(
-                  points={{-44,44},{-44,-36},{76,-36},{76,44},{-44,44}},
-                  lineColor={28,108,200},
-                  lineThickness=1,
-                  fillPattern=FillPattern.Sphere,
-                  fillColor={255,255,255}),Text(
-                  extent={{-44,28},{58,38}},
-                  lineColor={28,108,200},
-                  lineThickness=1,
-                  fillPattern=FillPattern.Sphere,
-                  fillColor={255,255,255},
-                  textString="Maquet catheter")}));
+              points={{-44,44},{-44,-36},{76,-36},{76,44},{-44,44}},
+              lineColor={28,108,200},
+              lineThickness=1,
+              fillPattern=FillPattern.Sphere,
+              fillColor={255,255,255}), Text(
+              extent={{-44,28},{58,38}},
+              lineColor={28,108,200},
+              lineThickness=1,
+              fillPattern=FillPattern.Sphere,
+              fillColor={255,255,255},
+              textString="Maquet catheter")}));
     end CatheterDataFitting;
 
     model LVUnloading
@@ -14269,6 +14270,7 @@ above 0 mmHg.")}));
       model LVFailure_noEcmo
         extends LVUnloading(settings(redeclare
               Model.Complex.Environment.ModelConstants.LVFailure constants));
+        annotation (experiment(StopTime=15, __Dymola_Algorithm="Sdirk34hw"));
       end LVFailure_noEcmo;
 
       model LVFailure_Ecmo
