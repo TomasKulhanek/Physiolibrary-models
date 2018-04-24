@@ -375,6 +375,7 @@ package Cardiovascular
         connect(pulmonaryCirculation.busConnector, heart.busConnector)
           annotation (Line(
             points={{-8,25.2},{-14,25.2},{-14,26},{-18,26},{-18,-5.6},{-8.4,-5.6}},
+
             color={0,0,255},
             thickness=0.5,
             smooth=Smooth.None));
@@ -553,8 +554,8 @@ package Cardiovascular
           ExternalPressure=-533.28954966)
           annotation (Placement(transformation(extent={{-10,86},{14,110}})));
         Physiolibrary.Hydraulic.Components.Conductor PulmonaryVeinResistance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               2.4999552322936e-06)
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 2.4999552322936e-06)
           annotation (Placement(transformation(extent={{26,86},{56,110}})));
         Physiolibrary.Hydraulic.Components.ElasticVessel LeftAtrium(
           useComplianceInput=true,
@@ -616,8 +617,8 @@ package Cardiovascular
               rotation=180,
               origin={134,18})));
         Physiolibrary.Hydraulic.Components.Conductor ArteryResistance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               1.2526028316622e-07)
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 1.2526028316622e-07)
           annotation (Placement(transformation(extent={{94,8},{114,28}})));
         Physiolibrary.Hydraulic.Components.Conductor
           SystemicArterioralConductance(useConductanceInput=false, Conductance(
@@ -627,8 +628,8 @@ package Cardiovascular
               rotation=0,
               origin={23,17})));
         Physiolibrary.Hydraulic.Components.Conductor SmallVenuleConductance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               3.7503078792283e-08) annotation (Placement(transformation(
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 3.7503078792283e-08) annotation (Placement(transformation(
               extent={{14,-9},{-14,9}},
               rotation=0,
               origin={-60,17})));
@@ -641,12 +642,12 @@ package Cardiovascular
           Compliance=2.8652352197304e-08)
           annotation (Placement(transformation(extent={{-26,10},{-6,30}})));
         Physiolibrary.Hydraulic.Components.Conductor VeinsResistance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               8.3256834918868e-08)
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 8.3256834918868e-08)
           annotation (Placement(transformation(extent={{-120,6},{-148,28}})));
         Physiolibrary.Hydraulic.Components.Conductor CentralVenousResistance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               2.4999552322936e-06)
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 2.4999552322936e-06)
           annotation (Placement(transformation(extent={{-208,8},{-232,28}})));
         Physiolibrary.Hydraulic.Components.ElasticVessel IntraThoracicVeins(
           useV0Input=false,
@@ -855,6 +856,7 @@ package Cardiovascular
         connect(rightVentricle.compliance, ventricularElastance1.Ct)
           annotation (Line(
             points={{-153,69},{-153,80},{-126,80},{-126,108.91},{-147.15,108.91}},
+
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -979,8 +981,8 @@ package Cardiovascular
             Elastance=6066168.6273825)
             annotation (Placement(transformation(extent={{8,-12},{32,12}})));
           Physiolibrary.Hydraulic.Components.Resistor PulmonaryVeinResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 399967.162245)
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 399967.162245)
             annotation (Placement(transformation(extent={{46,-12},{70,12}})));
         equation
           connect(q_in, PulmonaryArteries.q_in) annotation (Line(
@@ -1040,8 +1042,8 @@ package Cardiovascular
                 rotation=180,
                 origin={70,1})));
           Physiolibrary.Hydraulic.Components.Resistor ArteryResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 7999343.2449) annotation (Placement(transformation(
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 7999343.2449) annotation (Placement(transformation(
                 extent={{7,-7},{-7,7}},
                 rotation=0,
                 origin={55,1})));
@@ -1071,8 +1073,8 @@ package Cardiovascular
             Elastance=34930465.50273)
             annotation (Placement(transformation(extent={{2,-36},{16,-22}})));
           Physiolibrary.Hydraulic.Components.Resistor SmallVenuleResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 26664477.483) annotation (Placement(transformation(
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 26664477.483) annotation (Placement(transformation(
                 extent={{7,-7},{-7,7}},
                 rotation=0,
                 origin={-7,-29})));
@@ -1086,8 +1088,8 @@ package Cardiovascular
             Elastance=2253148.3473135)
             annotation (Placement(transformation(extent={{-32,-22},{-14,-6}})));
           Physiolibrary.Hydraulic.Components.Resistor VeinsResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 11999014.86735)
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 11999014.86735)
             annotation (Placement(transformation(extent={{-32,-22},{-48,-6}})));
           Physiolibrary.Hydraulic.Components.ElasticVesselElastance
             IntraThoracicVeins(
@@ -1100,8 +1102,8 @@ package Cardiovascular
             Elastance=2426467.450953)
             annotation (Placement(transformation(extent={{-66,-8},{-48,8}})));
           Physiolibrary.Hydraulic.Components.Resistor CentralVenousResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 399967.162245)
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 399967.162245)
             annotation (Placement(transformation(extent={{-74,-8},{-90,8}})));
         equation
           connect(VeinsResistance.q_in, ExtrathoracicVeins.q_in) annotation (
@@ -1376,7 +1378,8 @@ package Cardiovascular
           parameter Physiolibrary.Types.HydraulicElastance EMIN
             "Diastolic elastance";
           parameter Boolean useEs_extInput=false
-            "=true, if external elastance/compliance value is used" annotation (
+            "=true, if external elastance/compliance value is used" annotation
+            (
             Evaluate=true,
             HideResult=true,
             choices(__Dymola_checkBox=true),
@@ -1458,7 +1461,8 @@ package Cardiovascular
           //Equation to calculate normalized elastance ET0 was:
           //Et0=EMIN+(EMAX-EMIN)*((time-T0)-(Tas+Tav))/Tvs)*sin(Modelica.Constants.pi*(((time-T0)-(Tas+Tav))/Tvs));
           parameter Boolean useEs_extInput=false
-            "=true, if external elastance/compliance value is used" annotation (
+            "=true, if external elastance/compliance value is used" annotation
+            (
             Evaluate=true,
             HideResult=true,
             choices(__Dymola_checkBox=true),
@@ -1480,7 +1484,8 @@ package Cardiovascular
           end if;
           HeartInterval = time - T0;
           Et = EMIN + (es_int - EMIN)*Et0;
-          if HeartInterval >= Tas + Tav and HeartInterval < Tas + Tav + Tvs then
+          if HeartInterval >= Tas + Tav and HeartInterval < Tas + Tav + Tvs
+               then
             Et0 = (HeartInterval - (Tas + Tav))/Tvs*sin(Modelica.Constants.pi*(
               HeartInterval - (Tas + Tav))/Tvs)/Kn;
           else
@@ -1539,8 +1544,8 @@ package Cardiovascular
             "atrioventricular delay";
           discrete Modelica.SIunits.Time HP(start=0) "heart period";
           Boolean b(start=false);
-          Physiolibrary.Types.RealIO.FrequencyInput HR "heart rate" annotation (
-             Placement(transformation(extent={{-12,68},{28,108}}),
+          Physiolibrary.Types.RealIO.FrequencyInput HR "heart rate" annotation
+            (Placement(transformation(extent={{-12,68},{28,108}}),
                 iconTransformation(
                 extent={{-20,-20},{20,20}},
                 rotation=270,
@@ -1597,6 +1602,7 @@ package Cardiovascular
         equation
           connect(PulmonaryArteries.volume, add.u1) annotation (Line(
               points={{-62.8,-12},{-62,-12},{-62,-26},{-6,-26},{-6,20},{-14,20}},
+
               color={0,0,127},
               smooth=Smooth.None));
 
@@ -1729,6 +1735,7 @@ package Cardiovascular
           connect(ventricularElastance1.Es_ext, busConnector.rvcompliance)
             annotation (Line(
               points={{-17,84.6},{-68,84.6},{-68,88},{-98,88},{-98,86},{-98,86}},
+
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%second",
@@ -1770,8 +1777,8 @@ package Cardiovascular
           extends Model.Scenario.StenosisControl(
             venacavastenosis(InitialElastance=2426467.450953, FinalElastance=
                   2426467.450953),
-            aorticstenosis(InitialResistance(displayUnit="(mmHg.s)/ml")=
-                1066579.09932, FinalResistance(displayUnit="(mmHg.s)/ml")=
+            aorticstenosis(InitialResistance(displayUnit="(mmHg.s)/ml") =
+                1066579.09932, FinalResistance(displayUnit="(mmHg.s)/ml") =
                 1066579.09932),
             mitralvalvestenosis(InitialResistance=399967.162245,
                 FinalResistance=399967.162245));
@@ -1807,7 +1814,7 @@ package Cardiovascular
       model StenosisAorticValve
         extends HemodynamicsMeursBVControl(redeclare
             ControlledParts.AorticValveStenosisScenario scenarioControl(
-              aorticstenosis(FinalResistance(displayUnit="(mmHg.s)/ml")=
+              aorticstenosis(FinalResistance(displayUnit="(mmHg.s)/ml") =
                 10665790.9932)), redeclare
             ControlledParts.AorticValveHeartControl heart);
         extends Cardiovascular.Icons.Runnable_System;
@@ -1894,7 +1901,7 @@ package Cardiovascular
           volume_start=7.3e-05,
           ZeroPressureVolume=5e-06)
           annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
-        IdealValveResistance TV(_Ron(displayUnit="(mmHg.s)/ml")=
+        IdealValveResistance TV(_Ron(displayUnit="(mmHg.s)/ml") =
             333305.9685375) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -2064,6 +2071,7 @@ package Cardiovascular
             smooth=Smooth.None));
         connect(RVElastance.HR, RAElastance.HR) annotation (Line(
             points={{15.21,4.3},{-2,4.3},{-2,6},{-58,6},{-58,0.3},{-54.68,0.3}},
+
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -2077,6 +2085,7 @@ package Cardiovascular
             smooth=Smooth.None));
         connect(RA.StressedVolume, RAElastance.Vs) annotation (Line(
             points={{-54.4,-29.8},{-54.4,-19.9},{-54.32,-19.9},{-54.32,-16.8}},
+
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -2204,6 +2213,7 @@ package Cardiovascular
             smooth=Smooth.None));
         connect(RAElastance.Pt, add.u3) annotation (Line(
             points={{-34.16,-16.6},{-34.16,-26},{-20,-26},{-20,-28.8},{-25.2,-28.8}},
+
             color={0,190,190},
             smooth=Smooth.None));
 
@@ -2764,7 +2774,8 @@ package Cardiovascular
           parameter Pressure Beta
             "coefficient of end diastolic pressure-volume curve";
           parameter Boolean useEs_extInput=false
-            "=true, if external elastance/compliance value is used" annotation (
+            "=true, if external elastance/compliance value is used" annotation
+            (
             Evaluate=true,
             HideResult=true,
             choices(__Dymola_checkBox=true),
@@ -3198,8 +3209,8 @@ package Cardiovascular
         ElasticVesselElastance aorta(
           ZeroPressureVolume=0,
           volume_start=0.0001241,
-          Elastance=92165766.41999) annotation (Placement(transformation(extent=
-                 {{-130,-30},{-110,-10}})));
+          Elastance=92165766.41999) annotation (Placement(transformation(extent
+                ={{-130,-30},{-110,-10}})));
         ElasticVesselElastance venaCava(
           ZeroPressureVolume=0,
           volume_start=0.0002952,
@@ -3386,7 +3397,8 @@ package Cardiovascular
 <p>Cardiovascular model implemented per description of Smith et al.</p>
 <p>[12] B. W. Smith, J. G. Chase, R. I. Nokes, G. M. Shaw, G. Wake, Minimal Haemodynamic System Model Including Ventricular Interaction and Valve Dynamics., Medical Engineering &AMP; Physics 26 (2) (2004) 131&ndash;139. doi:10.1016/j.medengphy.2003.10.001.</p>
 <p>[13] CellML implementation at URL:  http://models.cellml.org/exposure/9d046663ba5cac5c8a61ac146183614b/smith_chase_nokes_shaw_wake_2004.cellml/view</p>
-</html>"),experiment(StopTime=5));
+</html>"),
+          experiment(StopTime=5));
       end HemodynamicsSmith_shallow;
 
       model HemodynamicsSmith
@@ -3421,11 +3433,11 @@ package Cardiovascular
           parameter HydraulicLambda lambdarv;
           parameter HydraulicLambda lambdalv;
           parameter HydraulicLambda lambdaperi;
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation (
-             Placement(transformation(extent={{-48,20},{-28,40}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation
+            (Placement(transformation(extent={{-48,20},{-28,40}}),
                 iconTransformation(extent={{-12,90},{8,110}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation (
-             Placement(transformation(extent={{-46,-22},{-26,-2}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation
+            (Placement(transformation(extent={{-46,-22},{-26,-2}}),
                 iconTransformation(extent={{-10,-110},{10,-90}})));
           RealIO.FrequencyInput HR annotation (Placement(transformation(extent=
                     {{-78,-40},{-38,0}}), iconTransformation(extent={{-100,-20},
@@ -3507,11 +3519,11 @@ package Cardiovascular
                 rotation=180,
                 extent={{-10,-10},{10,10}},
                 origin={-84,-10}), iconTransformation(extent={{80,-10},{100,10}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation (
-             Placement(transformation(rotation=0, extent={{-4,-28},{16,-8}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation
+            (Placement(transformation(rotation=0, extent={{-4,-28},{16,-8}}),
                 iconTransformation(extent={{-10,-40},{10,-20}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation (
-             Placement(transformation(rotation=0, extent={{-4,32},{16,52}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation
+            (Placement(transformation(rotation=0, extent={{-4,32},{16,52}}),
                 iconTransformation(extent={{-10,6},{10,26}})));
           Physiolibrary.Types.RealIO.FrequencyInput HR annotation (Placement(
                 transformation(rotation=0, extent={{-94,10},{-74,30}}),
@@ -3709,11 +3721,11 @@ package Cardiovascular
 
         model VentricularInteraction
           //  Physiolibrary.Types.Pressure Plv,Plvf,Pperi,Prv,Prvf,Ppcd,Pth,Pspt;
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation (
-             Placement(transformation(extent={{-48,20},{-28,40}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation
+            (Placement(transformation(extent={{-48,20},{-28,40}}),
                 iconTransformation(extent={{-10,90},{10,110}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation (
-             Placement(transformation(extent={{-46,-22},{-26,-2}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation
+            (Placement(transformation(extent={{-46,-22},{-26,-2}}),
                 iconTransformation(extent={{-10,-110},{10,-90}})));
           Physiolibrary.Types.RealIO.FrequencyInput frequency annotation (
               Placement(transformation(extent={{-78,-40},{-38,0}}),
@@ -3743,8 +3755,8 @@ package Cardiovascular
                 rotation=180,
                 extent={{10,-10},{-10,10}},
                 origin={-10,-16})));
-          Septum septum annotation (Placement(transformation(rotation=0, extent=
-                   {{-54,-6},{-14,26}})));
+          Septum septum annotation (Placement(transformation(rotation=0, extent
+                  ={{-54,-6},{-14,26}})));
           Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(
                 transformation(
                 extent={{-6,-6},{6,6}},
@@ -3776,8 +3788,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               points={{-52,10},{-58,10},{-58,-20}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(rightVentricle.stressedVolume, pericardium.Vrvfw) annotation (
-             Line(
+          connect(rightVentricle.stressedVolume, pericardium.Vrvfw) annotation
+            (Line(
               points={{-5,36},{-5,19.54},{20.06,19.54}},
               color={0,0,127},
               smooth=Smooth.Bezier));
@@ -3876,7 +3888,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         model TimeVaryingElastance
           //parameter Physiolibrary.Types.HydraulicElastance Ed "elastance of diastole";
           parameter Boolean useEs_extInput=false
-            "=true, if external elastance/compliance value is used" annotation (
+            "=true, if external elastance/compliance value is used" annotation
+            (
             Evaluate=true,
             HideResult=true,
             choices(__Dymola_checkBox=true),
@@ -3907,8 +3920,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 extent={{-14,-14},{14,14}},
                 rotation=0,
                 origin={66,66})));
-          Physiolibrary.Types.RealIO.FrequencyInput HR "heart rate" annotation (
-             Placement(transformation(extent={{76,58},{116,98}}),
+          Physiolibrary.Types.RealIO.FrequencyInput HR "heart rate" annotation
+            (Placement(transformation(extent={{76,58},{116,98}}),
                 iconTransformation(
                 extent={{-20,-20},{20,20}},
                 rotation=0,
@@ -3918,8 +3931,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 extent={{-20,-20},{20,20}},
                 rotation=180,
                 origin={60,-40})));
-          Physiolibrary.Types.RealIO.HydraulicComplianceInput Es_ext(start=1/Es)=
-               1/es_int if useEs_extInput annotation (Placement(transformation(
+          Physiolibrary.Types.RealIO.HydraulicComplianceInput Es_ext(start=1/Es)
+             = 1/es_int if useEs_extInput annotation (Placement(transformation(
                   extent={{60,60},{100,100}}), iconTransformation(
                 extent={{-20,-20},{20,20}},
                 rotation=0,
@@ -4103,20 +4116,20 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   "m3/s") = 0.0001372)
             annotation (Placement(transformation(extent={{-90,30},{-70,50}})));
           Physiolibrary.Hydraulic.Components.IdealValveResistance
-            tricuspidValve(Pknee=0, _Ron(displayUnit="(mmHg.s)/ml")=
+            tricuspidValve(Pknee=0, _Ron(displayUnit="(mmHg.s)/ml") =
               3159740.5817355)
             annotation (Placement(transformation(extent={{-48,30},{-28,50}})));
           Physiolibrary.Hydraulic.Components.Inertia Lpv(I(displayUnit=
-                  "mmHg.s2/ml") = 19822.372560862, volumeFlow_start(displayUnit=
-                 "m3/s") = -1.9e-9)
+                  "mmHg.s2/ml") = 19822.372560862, volumeFlow_start(displayUnit
+                ="m3/s") = -1.9e-9)
             annotation (Placement(transformation(extent={{42,30},{62,50}})));
           Physiolibrary.Hydraulic.Components.IdealValveResistance
-            pulmonaryValve(Pknee=0, _Ron(displayUnit="(mmHg.s)/ml")=
+            pulmonaryValve(Pknee=0, _Ron(displayUnit="(mmHg.s)/ml") =
               733273.1307825)
             annotation (Placement(transformation(extent={{66,30},{86,50}})));
           Physiolibrary.Hydraulic.Components.Inertia Lmt(I(displayUnit=
-                  "mmHg.s2/ml") = 10261.557514558, volumeFlow_start(displayUnit=
-                 "m3/s") = 0.0001141) annotation (Placement(transformation(
+                  "mmHg.s2/ml") = 10261.557514558, volumeFlow_start(displayUnit
+                ="m3/s") = 0.0001141) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=180,
                 origin={78,-14})));
@@ -4124,8 +4137,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               Pknee=0, _Ron(displayUnit="(mmHg.s)/ml") = 2106493.721157)
             annotation (Placement(transformation(extent={{60,-24},{40,-4}})));
           Physiolibrary.Hydraulic.Components.Inertia Lav(I(displayUnit=
-                  "mmHg.s2/ml") = 16250.665802014, volumeFlow_start(displayUnit=
-                 "m3/s") = -1.4e-8) annotation (Placement(transformation(
+                  "mmHg.s2/ml") = 16250.665802014, volumeFlow_start(displayUnit
+                ="m3/s") = -1.4e-8) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=180,
                 origin={-40,-14})));
@@ -4188,8 +4201,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
-          connect(mitralValve.q_out, ventricularInteraction.lvflow) annotation (
-             Line(
+          connect(mitralValve.q_out, ventricularInteraction.lvflow) annotation
+            (Line(
               points={{40,-14},{6,-14}},
               color={0,0,0},
               thickness=1,
@@ -4773,8 +4786,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extent={{-19,-18},{19,18}},
               rotation=0,
               origin={-175,-30})));
-        Physiolibrary.Hydraulic.Components.Resistor Rpul(Resistance(displayUnit=
-               "(mmHg.s)/ml") = 20691634.526808) annotation (Placement(
+        Physiolibrary.Hydraulic.Components.Resistor Rpul(Resistance(displayUnit
+              ="(mmHg.s)/ml") = 20691634.526808) annotation (Placement(
               transformation(
               extent={{-15,-16},{15,16}},
               rotation=90,
@@ -4798,8 +4811,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           volume_start=0.0001241,
           Elastance=92165766.41999)
           annotation (Placement(transformation(extent={{186,34},{218,66}})));
-        Physiolibrary.Hydraulic.Components.Resistor Rsys(Resistance(displayUnit=
-               "(mmHg.s)/ml") = 145054757.50752) annotation (Placement(
+        Physiolibrary.Hydraulic.Components.Resistor Rsys(Resistance(displayUnit
+              ="(mmHg.s)/ml") = 145054757.50752) annotation (Placement(
               transformation(
               extent={{-16,-16},{16,16}},
               rotation=270,
@@ -5224,8 +5237,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               curve(y={0.0033,0.41,0.63,0.73,0.8,0.76,0.25,0.0033,0.0033},
                 slope={0,5.0136,2.56,1.36,0.24,-4.4,-6.0536,0,0}))
             annotation (Placement(transformation(extent={{48,2},{96,44}})));
-          Physiolibrary.Hydraulic.Components.IdealValve aorticValve annotation (
-             Placement(transformation(
+          Physiolibrary.Hydraulic.Components.IdealValve aorticValve annotation
+            (Placement(transformation(
                 extent={{10,-11},{-10,11}},
                 rotation=180,
                 origin={98,1})));
@@ -5240,6 +5253,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           connect(heartRate.y, variableElasticityGenerator.heartRate)
             annotation (Line(
               points={{-65.75,55},{-55.875,55},{-55.875,41.17},{-54.88,41.17}},
+
               color={0,0,127},
               smooth=Smooth.Bezier));
 
@@ -5306,6 +5320,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           connect(leftHeartInflow, mitralValve.q_in) annotation (Line(
               points={{100,-20},{100,-20},{100,-46},{36,-46},{36,-28},{40,-28}},
+
               color={0,0,0},
               thickness=1));
 
@@ -5490,8 +5505,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
-          connect(pulmonaryArteries.q_in, pulmonaryResistance.q_in) annotation (
-             Line(
+          connect(pulmonaryArteries.q_in, pulmonaryResistance.q_in) annotation
+            (Line(
               points={{-10,0},{18,0}},
               color={0,0,0},
               thickness=1,
@@ -5628,8 +5643,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-80,-30})));
-          PressureOutput Pd "Diastolic pressure during heart cycle" annotation (
-             Placement(transformation(extent={{-50,-40},{-30,-20}}),
+          PressureOutput Pd "Diastolic pressure during heart cycle" annotation
+            (Placement(transformation(extent={{-50,-40},{-30,-20}}),
                 iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
@@ -5728,7 +5743,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
         model ComplexEnvironment "Class encompassing all settings"
           extends Cardiovascular.Icons.Settings;
-          import Cardiovascular.Model.Complex.Components.Main.SystemicArteries.*;
+          import Cardiovascular.Model.Complex.Components.Main.SystemicArteries
+            .*;
 
           inner replaceable Conditions.Rest_NoAdapt condition constrainedby
             Conditions.Abstraction.Condition
@@ -6550,10 +6566,10 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extends Physiolibrary.Hydraulic.Interfaces.HydraulicPort;
 
               annotation (Icon(graphics={Ellipse(
-                      extent={{-80,80},{80,-80}},
-                      lineColor={197,52,16},
-                      fillColor={255,170,0},
-                      fillPattern=FillPattern.Sphere)}));
+                                  extent={{-80,80},{80,-80}},
+                                  lineColor={197,52,16},
+                                  fillColor={255,170,0},
+                                  fillPattern=FillPattern.Sphere)}));
             end Through;
 
             connector Out "Outflow connector"
@@ -6733,8 +6749,25 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 parameter Real Base "Base for mmHg";
                 parameter Real Exp;
 
+                Real qs=cIn.q^2;
+                Real dps=dp^2;
               equation
-                Base*cIn.q^Exp = dp;
+                //   if noEvent(dp >= 0) and noEvent(cIn.q >= 0) then
+                //     Base*cIn.q^Exp = dp;
+                //     //log(dp/Base) = Exp*log(cIn.q);
+                //
+                //   else
+                //     // just a numeric workaround for negative flows
+                //     Base*(-cIn.q)^Exp = -dp;
+                //     //    log(-dp/Base) = Exp*log(-cIn.q);
+                //   end if;
+
+                //   dp = if noEvent(dp >= 0) and noEvent(cIn.q >= 0) then Base*cIn.q^Exp else -
+                //     Base*(-cIn.q)^Exp;
+                cIn.q = if noEvent(dp >= 0) then (dp/Base)^(1/Exp) else -(-dp/
+                  Base)^(1/Exp);
+
+
                 0 = cIn.q + cOut.q;
 
                 annotation (Icon(graphics={Line(
@@ -6832,18 +6865,17 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text(
-                        extent={{-34,26},{30,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
-                        textString="RLC"), Text(
-                        extent={{-70,86},{72,30}},
-                        lineColor={0,0,0},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="%name")}));
+                      graphics={Text( extent={{-34,26},{30,-24}},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
+                                      textString="RLC"),Text(
+                                      extent={{-70,86},{72,30}},
+                                      lineColor={0,0,0},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="%name")}));
               end RLC;
 
               model CLR "Constant CLR segment"
@@ -7329,11 +7361,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}}), graphics={Text(
-                        extent={{-62,-34},{62,-76}},
-                        lineColor={127,0,127},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="+IABP")}));
+                                      extent={{-62,-34},{62,-76}},
+                                      lineColor={127,0,127},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="+IABP")}));
               end TubeRLC_Derived_IABP;
             end Tubes;
           end RLC;
@@ -7640,15 +7672,15 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.Bezier,
                   thickness=1));
               connect(vSV.cOut, RA.c) annotation (Line(
-                  points={{-44.1396,-7.99878},{-44,-7.99878},{-44,-23.5},{-45,
-                      -23.5}},
+                  points={{-44.1396,-7.99878},{-44,-7.99878},{-44,-23.5},{-45,-23.5}},
+
                   color={127,5,58},
                   smooth=Smooth.Bezier,
                   thickness=1));
 
               connect(RA.c, vRAV.cIn) annotation (Line(
-                  points={{-45,-23.5},{-44,-23.5},{-44,-48},{-42,-48},{-42,
-                      -49.4468},{-36.5886,-49.4468}},
+                  points={{-45,-23.5},{-44,-23.5},{-44,-48},{-42,-48},{-42,-49.4468},
+                      {-36.5886,-49.4468}},
                   color={127,5,58},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -7659,12 +7691,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   thickness=1));
               connect(vPV.cOut, LA.c) annotation (Line(
                   points={{33.8604,2.00122},{36,2.00122},{36,-11.5},{37,-11.5}},
+
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
 
               connect(vLAV.cIn, LA.c) annotation (Line(
                   points={{34.3184,-47.0748},{36,-47.0748},{36,-11.5},{37,-11.5}},
+
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -7677,19 +7711,20 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   thickness=1));
               connect(ventricles.cLV, vSA.cIn) annotation (Line(
                   points={{8.8,-67.4},{8,-67.4},{8,-47.9988},{9.86038,-47.9988}},
+
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
 
               connect(vSA.cOut, cVSA) annotation (Line(
-                  points={{10.1396,-32.0012},{8,-32.0012},{8,-20},{-20,-20},{
-                      -20,38},{-24,38},{-24,40}},
+                  points={{10.1396,-32.0012},{8,-32.0012},{8,-20},{-20,-20},{-20,
+                      38},{-24,38},{-24,40}},
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
               connect(ventricles.cRV, vRAV.cOut) annotation (Line(
-                  points={{-11.6,-68},{-26,-68},{-26,-62},{-27.4114,-62},{
-                      -27.4114,-62.5532}},
+                  points={{-11.6,-68},{-26,-68},{-26,-62},{-27.4114,-62},{-27.4114,
+                      -62.5532}},
                   color={127,5,58},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -7984,11 +8019,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                       -67.4},{47.4,-67.4},{47.4,-68},{90,-68}}, color={197,52,
                       16}));
               annotation (Icon(graphics={Polygon(
-                      points={{32,-8},{40,2},{98,2},{96,-2},{42,-2},{32,-8}},
-                      lineColor={0,0,255},
-                      lineThickness=1,
-                      fillColor={0,0,255},
-                      fillPattern=FillPattern.Solid)}), Diagram(
+                                  points={{32,-8},{40,2},{98,2},{96,-2},{42,-2},
+                        {32,-8}}, lineColor={0,0,255},
+                                  lineThickness=1,
+                                  fillColor={0,0,255},
+                                  fillPattern=FillPattern.Solid)}), Diagram(
                     coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                         {100,100}})));
             end HeartLVCannulated;
@@ -8064,6 +8099,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                     smooth=Smooth.None));
                 connect(pressureMeasure.pressure, pInner) annotation (Line(
                     points={{12,-28},{22,-28},{22,-66},{0,-66},{0,-80},{0,-80}},
+
                     color={0,0,127},
                     smooth=Smooth.None));
 
@@ -8071,11 +8107,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}}), graphics={Text(
-                        extent={{-40,20},{40,80}},
-                        lineColor={0,0,0},
-                        textString="A",
-                        fontName="Bauhaus 93",
-                        textStyle={TextStyle.Bold})}));
+                                      extent={{-40,20},{40,80}},
+                                      lineColor={0,0,0},
+                                      textString="A",
+                                      fontName="Bauhaus 93",
+                                      textStyle={TextStyle.Bold})}));
               end AdaptableVessels;
 
               model Capillaries "Port for capillaries"
@@ -8100,10 +8136,10 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Icon(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics={Rectangle(
-                        extent={{-70,30},{70,-30}},
-                        lineColor={255,255,255},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid)}), Diagram(
+                                      extent={{-70,30},{70,-30}},
+                                      lineColor={255,255,255},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid)}), Diagram(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}})));
               end Capillaries;
@@ -8195,7 +8231,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extends Cardiovascular.Icons.Vessels;
               extends Auxiliary.BlockKinds.Port;
               import
-                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Elements.*;
+                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Elements
+                .*;
               import Physiolibrary.Types.Volume;
 
               input Real pM "Intramyocardial pressure";
@@ -8263,7 +8300,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 "Common ancestor for all types of systemic arteries"
                 extends Vessels.Abstraction.Vessels;
                 import
-                  Cardiovascular.Model.Complex.Components.Auxiliary.Connectors.*;
+                  Cardiovascular.Model.Complex.Components.Auxiliary.Connectors
+                  .*;
 
                 parameter Boolean isAdaptable
                   "Whether the model supports adaptation";
@@ -8394,8 +8432,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-70,64},{52,4}},
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-70,64},{52,4}},
                                   lineColor={0,128,0},
                                   lineThickness=1,
                                   fillColor={255,0,0},
@@ -8423,8 +8461,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-68,64},{46,8}},
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-68,64},{46,8}},
                                   lineColor={0,128,0},
                                   lineThickness=1,
                                   fillColor={255,0,0},
@@ -8436,9 +8474,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             model Aorta_Ferrari "Model of aorta by Ferrari et al. (2005)"
               extends SystemicArteries.Abstraction.SystemicArteries_Adapter;
               import
-                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Compounds.*;
+                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Compounds
+                .*;
               import
-                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Elements.*;
+                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Elements
+                .*;
               import
                 Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Tubes.*;
               import Cardiovascular.Types.*;
@@ -8533,7 +8573,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               pInner = aorticArch2.cIn.pressure;
 
               if settings.supports.ECMO_isEnabled then
-                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta then
+                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta
+                     then
                   connect(cCannula, ascendingAorta.cIn);
                 elseif settings.supports.ECMO_cannulaPlacement ==
                     CannulaPlacement.aorticArch1 then
@@ -8681,8 +8722,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-56,56},{28,10}},
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-56,56},{28,10}},
                                   lineColor={0,128,0},
                                   lineThickness=1,
                                   fillColor={255,0,0},
@@ -8695,7 +8736,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               "Model of systemic arterial tree by Abdolrazaghi et al. (2010)"
               extends Abstraction.SystemicArteries_Adapter;
               import
-                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Compounds.*;
+                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Compounds
+                .*;
               import Cardiovascular.Types.*;
               import Physiolibrary.Types.Volume;
 
@@ -8898,7 +8940,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               pInner = aorticArch2.cIn.pressure;
 
               if settings.supports.ECMO_isEnabled then
-                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta then
+                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta
+                     then
                   connect(cCannula, ascendingAorta.cIn);
                 elseif settings.supports.ECMO_cannulaPlacement ==
                     CannulaPlacement.aorticArch1 then
@@ -8981,8 +9024,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{96,90},{94,90},{94,6},{90,6}},
                   color={0,0,255},
                   smooth=Smooth.None));
-              connect(abdominalAorta4.cOut, inferiorMesenteric.cIn) annotation (
-                 Line(
+              connect(abdominalAorta4.cOut, inferiorMesenteric.cIn) annotation
+                (Line(
                   points={{90,-58},{66,-58},{66,-54},{42,-54}},
                   color={0,0,255},
                   smooth=Smooth.None));
@@ -9127,8 +9170,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-60,50},{36,12}},
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-60,50},{36,12}},
                                   lineColor={0,128,0},
                                   lineThickness=1,
                                   fillColor={255,0,0},
@@ -10211,7 +10254,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               pInner = aorticArch2.cIn.pressure;
 
               if settings.supports.ECMO_isEnabled then
-                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta then
+                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta
+                     then
                   connect(cCannula, ascendingAorta.cIn);
                 elseif settings.supports.ECMO_cannulaPlacement ==
                     CannulaPlacement.aorticArch1 then
@@ -10295,8 +10339,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-52,11.6},{-54,11.6},{-54,8},{-57.6,8}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(leftPopliteal2.cOut, leftAnteriorTibial1.cIn) annotation (
-                 Line(
+              connect(leftPopliteal2.cOut, leftAnteriorTibial1.cIn) annotation
+                (Line(
                   points={{-52,11.6},{-50,11.6},{-50,4},{-51.6,4}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10329,8 +10373,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-88.4,32},{-90,32},{-90,30},{-91.6,30}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightExternalIlliac2.cOut, rightFemoral1.cIn) annotation (
-                 Line(
+              connect(rightExternalIlliac2.cOut, rightFemoral1.cIn) annotation
+                (Line(
                   points={{-60.4,22},{-62,22},{-62,18},{-63.6,18}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10437,8 +10481,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-63.6,28},{-60,28},{-60,33.6},{-58,33.6}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(inferiorMesenteric.cIn, abdominalAorta3.cOut) annotation (
-                 Line(
+              connect(inferiorMesenteric.cIn, abdominalAorta3.cOut) annotation
+                (Line(
                   points={{-59.6,28},{-58,28},{-58,33.6}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10502,8 +10546,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-67.6,86},{-66,86},{-66,84},{-64.4,84}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightBrachial1.cOut, rightProfundaBrachi.cIn) annotation (
-                 Line(
+              connect(rightBrachial1.cOut, rightProfundaBrachi.cIn) annotation
+                (Line(
                   points={{-90.4,52},{-95.6,52},{-95.6,50}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10516,8 +10560,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-58,41.6},{-58,34.4}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(abdominalAorta1.cOut, superiorMesenteric.cIn) annotation (
-                 Line(
+              connect(abdominalAorta1.cOut, superiorMesenteric.cIn) annotation
+                (Line(
                   points={{-58,41.6},{-63.6,41.6},{-63.6,38}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10565,8 +10609,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-64.4,78},{-69.6,78},{-69.6,80}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightInternalCarotid1.cOut, rightLingual.cIn) annotation (
-                 Line(
+              connect(rightInternalCarotid1.cOut, rightLingual.cIn) annotation
+                (Line(
                   points={{-64.4,78},{-69.6,78},{-69.6,82}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10575,8 +10619,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-64.4,78},{-66,78},{-66,84},{-67.6,84}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightCerebral.cIn, rightExternalCarotid.cOut) annotation (
-                 Line(
+              connect(rightCerebral.cIn, rightExternalCarotid.cOut) annotation
+                (Line(
                   points={{-75.6,76},{-66.4,76}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10711,18 +10755,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-78.4,58},{-87.6,58}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightSubclavian.cOut, rightCostocervical.cIn) annotation (
-                 Line(
+              connect(rightSubclavian.cOut, rightCostocervical.cIn) annotation
+                (Line(
                   points={{-78.4,58},{-85.6,58},{-85.6,60}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightSubclavian.cOut, rightThyrocervical.cIn) annotation (
-                 Line(
+              connect(rightSubclavian.cOut, rightThyrocervical.cIn) annotation
+                (Line(
                   points={{-78.4,58},{-85.6,58},{-85.6,62}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightSubclavian.cOut, rightSuprascapular.cIn) annotation (
-                 Line(
+              connect(rightSubclavian.cOut, rightSuprascapular.cIn) annotation
+                (Line(
                   points={{-78.4,58},{-85.6,58},{-85.6,64}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -11067,8 +11111,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-62,44},{46,24}},
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-62,44},{46,24}},
                                   lineColor={0,128,0},
                                   lineThickness=1,
                                   fillColor={255,0,0},
@@ -11261,13 +11305,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 "Everything is out there";
 
               input VolumeFlowRate qRef "Reference flow wave";
-
+              Real B=qRef;
               Pressure p "Pressure exerted by the pump";
-
+              parameter VolumeFlowRate qRef2;
             equation
               cIn.q = -cOut.q;
               dp = -p;
-              der(p) = (qRef - cIn.q)*settings.constants.ecmoPumpPressureAdaptationRate;
+              der(p) = (qRef2 - cIn.q)*settings.constants.ecmoPumpPressureAdaptationRate;
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                       extent={{-100,-100},{100,100}}), graphics), Icon(
@@ -11419,8 +11463,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   thickness=1));
 
               connect(inflowTube.cIn, cIn) annotation (Line(points={{-55.8405,
-                      36.7048},{-55.8405,18.3524},{-80,18.3524},{-80,0}}, color=
-                     {127,0,0}));
+                      36.7048},{-55.8405,18.3524},{-80,18.3524},{-80,0}}, color
+                    ={127,0,0}));
               connect(outflowTube.cOut, cOut) annotation (Line(points={{61.234,
                       37.6013},{61.234,19.8007},{80,19.8007},{80,0}}, color={
                       229,133,64}));
@@ -11638,6 +11682,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           connect(rightHeartOutflow, heart.cVPA) annotation (Line(
               points={{100,40},{100,40},{100,60},{0,60},{0,42.64},{-0.16,42.64}},
+
               color={0,0,0},
               thickness=1));
 
@@ -11732,7 +11777,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           //   V = SV. V + SA. V;
 
           //  Adaptatioin of capillary resistance
-          when change(settings.stepCycle) and settings.condition.adaptCapillaryResistance then
+          when change(settings.stepCycle) and settings.condition.adaptCapillaryResistance
+               then
             reinit(SC.R, (settings.condition.aortalPressureRef - avg_SV_pInner.average)
               /settings.condition.aortalFlowRef*settings.constants.systemicResistanceScale);
           end when;
@@ -11760,12 +11806,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           connect(q_in, SA.cIn) annotation (Line(
               points={{100,0},{100,0},{100,2},{100,14.8013},{80.9702,14.8013}},
+
               color={0,0,0},
               thickness=1,
               smooth=Smooth.Bezier));
 
           connect(q_out, SV.cOut) annotation (Line(
               points={{-100,0},{-96,0},{-96,10},{-90,10},{-90,10.5},{-87.9,10.5}},
+
               color={0,0,0},
               thickness=1,
               smooth=Smooth.Bezier));
@@ -11853,7 +11901,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           //   V = PV. V + PA. V;
 
           //  Adaptatioin of capillary resistance
-          when change(settings.stepCycle) and settings.condition.adaptCapillaryResistance then
+          when change(settings.stepCycle) and settings.condition.adaptCapillaryResistance
+               then
             reinit(PC.R_R, settings.condition.pulmonaryPressureDropRef/avg_PC_q.average);
           end when;
 
@@ -11890,13 +11939,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics={Text(
-                  extent={{-26,8},{4,18}},
-                  lineColor={0,0,0},
-                  lineThickness=1,
-                  fillColor={255,0,0},
-                  fillPattern=FillPattern.Solid,
-                  textString="Pulmonary Circuit",
-                  textStyle={TextStyle.Bold})}), Icon(graphics={Text(
+                          extent={{-26,8},{4,18}},
+                          lineColor={0,0,0},
+                          lineThickness=1,
+                          fillColor={255,0,0},
+                          fillPattern=FillPattern.Solid,
+                          textString="Pulmonary Circuit",
+                          textStyle={TextStyle.Bold})}), Icon(graphics={Text(
                   extent={{-100,20},{100,100}},
                   lineColor={0,0,0},
                   fontName="Bauhaus 93",
@@ -12079,8 +12128,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="External inputs/outputs"));
-        Physiolibrary.Types.RealIO.FrequencyInput cond(start=HR0Param) = HR0 if
-             useHRInput annotation (Placement(transformation(extent={{-62,36},{
+        Physiolibrary.Types.RealIO.FrequencyInput cond(start=HR0Param) = HR0
+          if useHRInput annotation (Placement(transformation(extent={{-62,36},{
                   -22,76}}), iconTransformation(
               extent={{-20,-20},{20,20}},
               rotation=180,
@@ -12103,8 +12152,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extent={{-14,-14},{14,14}},
               rotation=180,
               origin={-76,10})));
-        Physiolibrary.Types.RealIO.HydraulicComplianceOutput evleft annotation (
-           Placement(transformation(extent={{78,-18},{98,2}}),
+        Physiolibrary.Types.RealIO.HydraulicComplianceOutput evleft annotation
+          (Placement(transformation(extent={{78,-18},{98,2}}),
               iconTransformation(
               extent={{-16,-16},{16,16}},
               rotation=180,
@@ -12291,8 +12340,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={58,46})));
-          Physiolibrary.Blocks.Factors.Normalization FunctionEffect annotation (
-             Placement(transformation(
+          Physiolibrary.Blocks.Factors.Normalization FunctionEffect annotation
+            (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={78,46})));
@@ -12352,8 +12401,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               points={{82,46},{96,46}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(Kidney_Nefron_Count_TotalxNormal.y, CounEffect.u) annotation (
-             Line(
+          connect(Kidney_Nefron_Count_TotalxNormal.y, CounEffect.u) annotation
+            (Line(
               points={{44,21},{58,21},{58,38}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -12464,8 +12513,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 origin={-77,-4})));
           Physiolibrary.Population.Components.Population RBC
             annotation (Placement(transformation(extent={{-18,-26},{2,-6}})));
-          Physiolibrary.Population.Sources.Growth erythropoiesis(useChangeInput=
-               true) annotation (Placement(transformation(extent={{-46,-30},{-26,
+          Physiolibrary.Population.Sources.Growth erythropoiesis(useChangeInput
+              =true) annotation (Placement(transformation(extent={{-46,-30},{-26,
                     -10}})));
           Physiolibrary.Population.Sources.Growth transfusion
             annotation (Placement(transformation(extent={{-38,14},{-18,34}})));
@@ -12540,8 +12589,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               string="%second",
               index=1,
               extent={{-9,-3},{-9,-3}}));
-          connect(erythropoetin.ecf_volume, busConnector.ecfvolume) annotation (
-             Line(
+          connect(erythropoetin.ecf_volume, busConnector.ecfvolume) annotation
+            (Line(
               points={{-79.5385,-12},{-79.5385,-24},{-98,-24},{-98,30}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -12592,19 +12641,19 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               useSolutionFlowInput=false) annotation (Placement(transformation(
                   extent={{-44,-48},{-24,-28}})));
           Physiolibrary.Osmotic.Sources.SolventInflux FoodAndDrink(
-              useSolutionFlowInput=false, SolutionFlow(displayUnit="l/day")=
+              useSolutionFlowInput=false, SolutionFlow(displayUnit="l/day") =
               2.4305555555556e-08) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-34,-10})));
           Physiolibrary.Osmotic.Sources.SolventInflux Metabolism(
-              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day")=
+              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day") =
               3.4722222222222e-09) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={26,-28})));
           Physiolibrary.Osmotic.Sources.SolventOutflux SkinAndLungsLoss(
-              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day")=
+              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day") =
               1.0416666666667e-08) annotation (Placement(transformation(
                 extent={{-11,-11},{11,11}},
                 rotation=0,
@@ -12616,7 +12665,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 rotation=0,
                 origin={0,-28})));
           Physiolibrary.Osmotic.Sources.SolventOutflux Feces(
-              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day")=
+              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day") =
               1.1574074074074e-09) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
@@ -12746,6 +12795,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               smooth=Smooth.None));
           connect(SkinAndLungsLoss.q_in, lymphatic.q_in) annotation (Line(
               points={{46.4,-27},{36,-27},{36,-38},{34,-38},{34,-39},{18,-39}},
+
               color={127,127,0},
               thickness=1,
               smooth=Smooth.None));
@@ -12766,8 +12816,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
           DesiredFlowrate desiredFlowrate(flowtime(displayUnit="s") = 1)
             annotation (Placement(transformation(extent={{-4,6},{16,26}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b port_b annotation (
-             Placement(transformation(extent={{56,-26},{76,-6}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b port_b annotation
+            (Placement(transformation(extent={{56,-26},{76,-6}}),
                 iconTransformation(extent={{82,-100},{102,-80}})));
           Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeRefill(
               useSolutionFlowInput=true)
@@ -12825,8 +12875,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
-          connect(desiredFlowrate.volume, busConnector.bloodVolume) annotation (
-             Line(
+          connect(desiredFlowrate.volume, busConnector.bloodVolume) annotation
+            (Line(
               points={{7.4,23.2},{7.4,38},{-12,38}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -12926,8 +12976,8 @@ above 0 mmHg.")}));
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          connect(DesiredBloodVolume.u1, busConnector.plasmaVolume) annotation (
-             Line(
+          connect(DesiredBloodVolume.u1, busConnector.plasmaVolume) annotation
+            (Line(
               points={{6,-16},{0,-16},{0,12}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -12977,8 +13027,8 @@ above 0 mmHg.")}));
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          connect(BloodVolume.u2, busConnector.systemicBloodVolume) annotation (
-             Line(
+          connect(BloodVolume.u2, busConnector.systemicBloodVolume) annotation
+            (Line(
               points={{10.6,41},{0,41},{0,12}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -13882,8 +13932,8 @@ above 0 mmHg.")}));
         annotation (
           defaultComponentName="hydraulicCompliance",
           Diagram(coordinateSystem(extent={{-40,-40},{40,40}})),
-          Icon(coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=
-                 false), graphics={Rectangle(
+          Icon(coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio
+                =false), graphics={Rectangle(
                       extent={{-40,40},{40,-40}},
                       lineColor={0,0,0},
                       radius=10,
@@ -13979,10 +14029,11 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(
-              extent={{-87.243,-87.3037},{87.243,87.3037}},
-              fileName="modelica://Cardiovascular/Resources/Icons/Arteries.png",
-              origin={4.25124,18.8661},
-              rotation=75)}), Diagram(coordinateSystem(preserveAspectRatio=
+                  extent={{-87.243,-87.3037},{87.243,87.3037}},
+                  fileName=
+                "modelica://Cardiovascular/Resources/Icons/Arteries.png",
+                  origin={4.25124,18.8661},
+                  rotation=75)}), Diagram(coordinateSystem(preserveAspectRatio=
                 false)));
 
     end Arteries;
@@ -13991,7 +14042,7 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-                  "modelica://Cardiovascular/Resources/Icons/Atrium.png")}),
+              "modelica://Cardiovascular/Resources/Icons/Atrium.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
     end Atrium;
 
@@ -14017,7 +14068,7 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-                  "modelica://Cardiovascular/Resources/Icons/Heart_detailed.png")}),
+              "modelica://Cardiovascular/Resources/Icons/Heart_detailed.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
     end Heart_detailed;
 
@@ -14052,15 +14103,15 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-                  "modelica://Cardiovascular/Resources/Icons/Valve.png")}),
-          Diagram(coordinateSystem(preserveAspectRatio=false)));
+              "modelica://Cardiovascular/Resources/Icons/Valve.png")}), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
     end Valve;
 
     class Ventricle
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-                  "modelica://Cardiovascular/Resources/Icons/Ventricle.png")}),
+              "modelica://Cardiovascular/Resources/Icons/Ventricle.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
     end Ventricle;
 
@@ -14068,10 +14119,11 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(
-              extent={{-130.465,-88.1195},{130.465,88.1195}},
-              origin={0.99971,8.9994},
-              rotation=-68,
-              fileName="modelica://Cardiovascular/Resources/Icons/Vessels.png")}),
+                  extent={{-130.465,-88.1195},{130.465,88.1195}},
+                  origin={0.99971,8.9994},
+                  rotation=-68,
+                  fileName=
+                "modelica://Cardiovascular/Resources/Icons/Vessels.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
 
     end Vessels;
@@ -14155,35 +14207,35 @@ above 0 mmHg.")}));
       Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain(l=0.33, r=
             0.0021)
         annotation (Placement(transformation(extent={{42,78},{22,98}})));
-      Physiolibrary.Hydraulic.Sources.UnlimitedPump ECMO(useSolutionFlowInput=
-            true)
+      Physiolibrary.Hydraulic.Sources.UnlimitedPump ECMOExp(
+          useSolutionFlowInput=true)
         annotation (Placement(transformation(extent={{-30,-170},{-10,-150}})));
       Physiolibrary.Hydraulic.Sources.UnlimitedPump unlimitedPump4(
           useSolutionFlowInput=true)
         annotation (Placement(transformation(extent={{-22,-76},{-2,-96}})));
-      Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance LVDrainExp(Base=
-            5.53E+11, Exp=1.771662)
+      Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+        LVDrainExp(Base=5.53E+11, Exp=1.771662)
         annotation (Placement(transformation(extent={{28,-96},{48,-76}})));
       Physiolibrary.Hydraulic.Sources.UnlimitedPump unlimitedPump5(
           useSolutionFlowInput=true)
         annotation (Placement(transformation(extent={{-22,-50},{-2,-70}})));
-      Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance VenousDrainExp(Base=
-            6.2e11, Exp=1.855311)
+      Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+        VenousDrainExp(Base=6.2e11, Exp=1.855311)
         annotation (Placement(transformation(extent={{28,-70},{48,-50}})));
-      Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance VenousDrainECMOExp(Base=
-            6.2e11, Exp=1.855311)
+      Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+        VenousDrainECMOExp(Base=6.2e11, Exp=1.855311)
         annotation (Placement(transformation(extent={{20,-168},{40,-148}})));
-      Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance LVDrainECMOExp(Exp=
-            1.771662, Base=4*5.53E+11)
-        annotation (Placement(transformation(extent={{20,-192},{40,-172}})));
-      Physiolibrary.Hydraulic.Sources.UnlimitedPump ECMO1(useSolutionFlowInput=
-            true)
+      Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+        LVDrainECMOExp(Exp=1.771662, Base=4*5.53E+11)
+        annotation (Placement(transformation(extent={{40,-192},{20,-172}})));
+      Physiolibrary.Hydraulic.Sources.UnlimitedPump ECMOLin(
+          useSolutionFlowInput=true)
         annotation (Placement(transformation(extent={{-32,-216},{-12,-196}})));
-      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR LVDrainECMOLin(l=1.2, r=
-            0.0018)
+      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR LVDrainECMOLin(l=1.2,
+          r=0.0018)
         annotation (Placement(transformation(extent={{40,-240},{20,-220}})));
-      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrainECMOLin(l=0.33, r
-          =0.0021)
+      Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrainECMOLin(l=
+            0.33, r=0.0021)
         annotation (Placement(transformation(extent={{40,-214},{20,-194}})));
     equation
       connect(ramp.y, unlimitedPump.solutionFlow)
@@ -14209,8 +14261,8 @@ above 0 mmHg.")}));
           points={{-8,62},{26,62}},
           color={0,0,0},
           thickness=1));
-      connect(LVDrainExtension.cIn, unlimitedVolume.y) annotation (Line(points={{42,62},
-              {56,62},{56,60},{80,60},{80,-10}},          color={127,0,0}));
+      connect(LVDrainExtension.cIn, unlimitedVolume.y) annotation (Line(points=
+              {{42,62},{56,62},{56,60},{80,60},{80,-10}}, color={127,0,0}));
       connect(unlimitedPump3.q_out, VenousDrain.cOut) annotation (Line(
           points={{-8,88},{24,88}},
           color={0,0,0},
@@ -14219,12 +14271,13 @@ above 0 mmHg.")}));
               88},{56,88},{56,86},{80,86},{80,-10}}, color={127,0,0}));
       connect(unlimitedPump3.solutionFlow, unlimitedPump2.solutionFlow)
         annotation (Line(points={{-18,81},{-18,55}}, color={0,0,127}));
-      connect(ramp.y,unlimitedPump4. solutionFlow) annotation (Line(points={{-67,-2},
-              {-46,-2},{-46,-93},{-12,-93}},   color={0,0,127}));
-      connect(unlimitedPump5.solutionFlow,unlimitedPump4. solutionFlow)
+      connect(ramp.y, unlimitedPump4.solutionFlow) annotation (Line(points={{-67,
+              -2},{-46,-2},{-46,-93},{-12,-93}}, color={0,0,127}));
+      connect(unlimitedPump5.solutionFlow, unlimitedPump4.solutionFlow)
         annotation (Line(points={{-12,-67},{-12,-70},{-2,-70},{-2,-74},{-12,-74},
-              {-12,-93}},                            color={0,0,127}));
-      connect(ECMO.solutionFlow, unlimitedPump4.solutionFlow) annotation (Line(
+              {-12,-93}}, color={0,0,127}));
+      connect(ECMOExp.solutionFlow, unlimitedPump4.solutionFlow) annotation (
+          Line(
           points={{-20,-153},{-14,-153},{-14,-93},{-12,-93}},
           color={0,0,127},
           smooth=Smooth.Bezier));
@@ -14238,19 +14291,10 @@ above 0 mmHg.")}));
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
-      connect(ECMO.q_out, VenousDrainECMOExp.cIn) annotation (Line(
+      connect(ECMOExp.q_out, VenousDrainECMOExp.cIn) annotation (Line(
           points={{-10,-160},{8,-160},{8,-158},{22,-158}},
           color={0,0,0},
           thickness=1,
-          smooth=Smooth.Bezier));
-      connect(ECMO.q_out, LVDrainECMOExp.cIn) annotation (Line(
-          points={{-10,-160},{6,-160},{6,-182},{22,-182},{22,-182}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.Bezier));
-      connect(LVDrainECMOExp.cOut, VenousDrainECMOExp.cOut) annotation (Line(
-          points={{38,-182},{38,-170},{38,-158}},
-          color={229,133,64},
           smooth=Smooth.Bezier));
       connect(VenousDrainECMOExp.cOut, LVDrainExp.cOut) annotation (Line(
           points={{38,-158},{46,-158},{46,-86}},
@@ -14264,7 +14308,7 @@ above 0 mmHg.")}));
           points={{46,-60},{66,-60},{66,-10},{80,-10}},
           color={229,133,64},
           smooth=Smooth.Bezier));
-      connect(ECMO1.solutionFlow, ECMO.solutionFlow) annotation (Line(
+      connect(ECMOLin.solutionFlow, ECMOExp.solutionFlow) annotation (Line(
           points={{-22,-199},{-22,-153},{-20,-153}},
           color={0,0,127},
           smooth=Smooth.Bezier));
@@ -14272,66 +14316,71 @@ above 0 mmHg.")}));
               38,-230},{80,-230},{80,-10}}, color={127,0,0}));
       connect(VenousDrainECMOLin.cIn, unlimitedVolume.y) annotation (Line(
             points={{38,-204},{80,-204},{80,-10}}, color={127,0,0}));
-      connect(ECMO1.q_out, VenousDrainECMOLin.cOut) annotation (Line(
+      connect(ECMOLin.q_out, VenousDrainECMOLin.cOut) annotation (Line(
           points={{-12,-206},{22,-206},{22,-204}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
-      connect(ECMO1.q_out, LVDrainECMOLin.cOut) annotation (Line(
+      connect(ECMOLin.q_out, LVDrainECMOLin.cOut) annotation (Line(
           points={{-12,-206},{4,-206},{4,-230},{22,-230}},
           color={0,0,0},
           thickness=1,
           smooth=Smooth.Bezier));
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-240},{100,100}})),                             Diagram(
-            coordinateSystem(preserveAspectRatio=false, extent={{-100,-240},{
-                100,100}}),                              graphics={Polygon(
-              points={{-44,44},{-44,-36},{76,-36},{76,44},{-44,44}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255}), Text(
-              extent={{-44,28},{58,38}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255},
-              textString="Maquet catheter"),                       Polygon(
-              points={{-50,-40},{-50,-120},{70,-120},{70,-40},{-50,-40}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255}), Text(
-              extent={{-42,-114},{60,-104}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255},
-              textString="Non-linear venous drain and LV drain catheters"),
-                                                                   Polygon(
-              points={{-52,-124},{-52,-192},{68,-192},{68,-124},{-52,-124}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255}),                            Polygon(
-              points={{-52,-198},{-52,-266},{68,-266},{68,-198},{-52,-198}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255}), Text(
-              extent={{-46,-138},{56,-128}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255},
-              textString="Non-linear venous drain divider"),
-                                        Text(
-              extent={{-44,-264},{58,-254}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255},
-              textString="Linear venous drain divider")}));
+      connect(ECMOExp.q_out, LVDrainECMOExp.cOut) annotation (Line(
+          points={{-10,-160},{6,-160},{6,-182},{22,-182}},
+          color={0,0,0},
+          thickness=1));
+      connect(LVDrainECMOExp.cIn, VenousDrainECMOExp.cOut)
+        annotation (Line(points={{38,-182},{38,-158}}, color={127,0,0}));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -240},{100,100}})), Diagram(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-240},{100,100}}),
+            graphics={Polygon(
+                  points={{-44,44},{-44,-36},{76,-36},{76,44},{-44,44}},
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={255,255,255}),Text(
+                  extent={{-44,28},{58,38}},
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={255,255,255},
+                  textString="Maquet catheter"),Polygon(
+                  points={{-50,-40},{-50,-120},{70,-120},{70,-40},{-50,-40}},
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={255,255,255}),Text(
+                  extent={{-42,-114},{60,-104}},
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={255,255,255},
+                  textString="Non-linear venous drain and LV drain catheters"),
+              Polygon(
+                  points={{-48,-122},{-48,-190},{72,-190},{72,-122},{-48,-122}},
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={255,255,255}),Polygon(
+                  points={{-52,-198},{-52,-266},{68,-266},{68,-198},{-52,-198}},
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={255,255,255}),Text(
+                  extent={{-46,-138},{56,-128}},
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={255,255,255},
+                  textString="Non-linear venous drain divider"),Text(
+                  extent={{-44,-264},{58,-254}},
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={255,255,255},
+                  textString="Linear venous drain divider")}));
     end CatheterDataFitting;
 
     model LVUnloading
@@ -14438,46 +14487,30 @@ above 0 mmHg.")}));
               Model.Complex.Environment.ModelConstants.LVFailure constants,
               redeclare Model.Complex.Environment.Supports.ECMO_Nonpulsatile
               supports));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR LVDrain(l=1.2, r=
-              0.0018) annotation (Placement(transformation(
-              extent={{3,-3},{-3,3}},
-              rotation=90,
-              origin={-19,-37})));
         Model.Complex.Components.Main.ECMO.ECMO_bare ecmo(
           cycleDuration=settings.supports.ECMO_cycleDuration,
           pulseDuration=settings.supports.ECMO_pulseDuration,
           pulseShapeRef=settings.supports.ECMO_pulseShapeRef,
-          qMeanRef=settings.supports.ECMO_qMeanRef,
-          isEnabled=settings.supports.ECMO_isEnabled)
+          isEnabled=settings.supports.ECMO_isEnabled,
+          qMeanRef(displayUnit="l/min") = 8.3333333333333e-05)
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
         Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
             r=0.0021) annotation (Placement(transformation(
               extent={{-3,-3},{3,3}},
               rotation=90,
               origin={13,-49})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
-              extent={{3,-3},{-3,3}},
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrainECMOLin(l
+            =0.33, r=0.0021) annotation (Placement(transformation(
+              extent={{4,-4},{-4,4}},
               rotation=90,
-              origin={-15,-37})));
+              origin={-12,-46})));
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR LVDrainECMOLin(l=1.2,
+            r=0.0018) annotation (Placement(transformation(
+              extent={{4,-4},{-4,4}},
+              rotation=90,
+              origin={-18,-46})));
       equation
-        connect(heart.LVCannula, LVDrain.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-8},{2,-8},{2,-14},{-19,-14},{-19,-34.6}},
-            color={28,108,200},
-            thickness=1));
 
-        connect(LVDrain.cOut, ecmo.cIn) annotation (Line(
-            points={{-19,-39.4},{-19,-60},{-9.6,-60}},
-            color={28,108,200},
-            thickness=1));
-        connect(VenousDrain.cOut, ecmo.cIn) annotation (Line(
-            points={{-15,-39.4},{-15,-60},{-9.6,-60}},
-            color={28,108,200},
-            thickness=1));
-        connect(systemicCirculation.q_out, VenousDrain.cIn) annotation (Line(
-            points={{-10,-26},{-15,-26},{-15,-34.6}},
-            color={28,108,200},
-            thickness=1));
         connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
           annotation (Line(
             points={{7,-35},{13,-35},{13,-46.6}},
@@ -14487,8 +14520,88 @@ above 0 mmHg.")}));
             points={{9.6,-60},{13,-60},{13,-51.4}},
             color={217,67,180},
             thickness=1));
+        connect(VenousDrainECMOLin.cIn, systemicCirculation.q_out) annotation (
+            Line(
+            points={{-12,-42.8},{-12,-26},{-10,-26}},
+            color={28,108,200},
+            thickness=1));
+        connect(VenousDrainECMOLin.cOut, ecmo.cIn) annotation (Line(
+            points={{-12,-49.2},{-12,-60},{-9.6,-60}},
+            color={28,108,200},
+            thickness=1));
+        connect(heart.LVCannula, LVDrainECMOLin.cIn) annotation (Line(
+            points={{0.88,-3.52},{0.88,-12},{-18,-12},{-18,-42.8}},
+            color={28,108,200},
+            thickness=1));
+        connect(LVDrainECMOLin.cOut, ecmo.cIn) annotation (Line(
+            points={{-18,-49.2},{-18,-60},{-9.6,-60}},
+            color={28,108,200},
+            thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
       end LVFailure_Ecmo_LVDrain;
+
+      model LVFailure_Ecmo_LVDrainNonLin
+        extends LVUnloading(settings(redeclare
+              Model.Complex.Environment.ModelConstants.LVFailure constants,
+              redeclare Model.Complex.Environment.Supports.ECMO_Nonpulsatile
+              supports));
+        Model.Complex.Components.Main.ECMO.ECMO_bare ecmo(
+          cycleDuration=settings.supports.ECMO_cycleDuration,
+          pulseDuration=settings.supports.ECMO_pulseDuration,
+          pulseShapeRef=settings.supports.ECMO_pulseShapeRef,
+          isEnabled=settings.supports.ECMO_isEnabled,
+          qMeanRef(displayUnit="l/min") = 1.6666666666667e-06,
+          ecmoPump(qRef2=1.6666666666667e-06))
+          annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
+            r=0.0021) annotation (Placement(transformation(
+              extent={{-3,-3},{3,3}},
+              rotation=90,
+              origin={13,-49})));
+        Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+          VenousDrainECMOExp(Base=6.2e11, Exp=1.855311) annotation (Placement(
+              transformation(
+              extent={{4,4},{-4,-4}},
+              rotation=90,
+              origin={-12,-46})));
+        Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+          LVDrainECMOExp(Exp=1.771662, Base=4*5.53E+11) annotation (Placement(
+              transformation(
+              extent={{4,4},{-4,-4}},
+              rotation=90,
+              origin={-18,-46})));
+
+
+      equation
+
+        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+          annotation (Line(
+            points={{7,-35},{13,-35},{13,-46.6}},
+            color={217,67,180},
+            thickness=1));
+        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
+            points={{9.6,-60},{13,-60},{13,-51.4}},
+            color={217,67,180},
+            thickness=1));
+        connect(VenousDrainECMOExp.cIn, systemicCirculation.q_out) annotation (
+            Line(
+            points={{-12,-42.8},{-12,-26},{-10,-26}},
+            color={28,108,200},
+            thickness=1));
+        connect(VenousDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
+            points={{-12,-49.2},{-12,-60},{-9.6,-60}},
+            color={28,108,200},
+            thickness=1));
+        connect(heart.LVCannula, LVDrainECMOExp.cIn) annotation (Line(
+            points={{0.88,-3.52},{0.88,-12},{-18,-12},{-18,-42.8}},
+            color={28,108,200},
+            thickness=1));
+        connect(LVDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
+            points={{-18,-49.2},{-18,-60},{-9.6,-60}},
+            color={28,108,200},
+            thickness=1));
+        annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
+      end LVFailure_Ecmo_LVDrainNonLin;
     end LVUnload_states;
   end Experiments;
   annotation (uses(Physiolibrary(version="2.3.2-beta"), Modelica(version=
