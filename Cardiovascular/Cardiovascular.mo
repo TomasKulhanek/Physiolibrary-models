@@ -51,9 +51,9 @@ package Cardiovascular
 
   package UsersGuide "User's Guide"
     extends Modelica.Icons.Information;
-  class Overview "Overview of Physiolibrary"
-    extends Modelica.Icons.Information;
-   annotation (Documentation(info="<html>
+    class Overview "Overview of Physiolibrary"
+      extends Modelica.Icons.Information;
+      annotation (Documentation(info="<html>
 <p>The Cardiovascular library consists of the following main sub-libraries: </p>
 <table cellspacing=\"0\" cellpadding=\"2\" border=\"1\"><tr>
 <td><p align=\"center\"><h4>Library Components</h4></p></td>
@@ -85,7 +85,7 @@ package Cardiovascular
 </tr>
 </table>
 </html>"));
-  end Overview;
+    end Overview;
 
     class ModelicaLicense2 "Modelica License 2"
       annotation (Documentation(info="<html>
@@ -207,37 +207,37 @@ package Cardiovascular
 </html>"));
     end ModelicaLicense2;
 
-  package ReleaseNotes "Release notes"
-    extends Modelica.Icons.ReleaseNotes;
-  class Version_1_0 "Version 1.0.0 (Jul 01, 2015)"
-    extends Modelica.Icons.ReleaseNotes;
-  annotation (Documentation(info="<html>
+    package ReleaseNotes "Release notes"
+      extends Modelica.Icons.ReleaseNotes;
+      class Version_1_0 "Version 1.0.0 (Jul 01, 2015)"
+        extends Modelica.Icons.ReleaseNotes;
+        annotation (Documentation(info="<html>
 <p><ul>
 <li>migration to GITHub https://github.com/TomasKulhanek/Physiolibrary.models/Cardiovascular</li>
 <li><font style=\"color: #333333; \">The library uses the Modelica Standard Library (MSL) version 3.2. and Physiolibrary version 3.2</font></li>
 <li><font style=\"color: #333333; \">Contains nice cardiovascular icons.</font></li>
 </ul></p>
 </html>"));
-  end Version_1_0;
+      end Version_1_0;
 
-  class Version_2_0 "Version 2.0.0 (Aug 01, 2017)"
-    extends Modelica.Icons.ReleaseNotes;
-   annotation (Documentation(info="<html>
+      class Version_2_0 "Version 2.0.0 (Aug 01, 2017)"
+        extends Modelica.Icons.ReleaseNotes;
+        annotation (Documentation(info="<html>
 <ul>
 <li>added the Complex model</li>
 <li>Complex model is compatible with other simple models</li>
 <li>Change and unification of icons</li>
 </ul>
 </html>"));
-  end Version_2_0;
-   annotation (Documentation(info="<html>
+      end Version_2_0;
+      annotation (Documentation(info="<html>
 <p>This section summarizes the changes that have been performed on the Cardiovascular. </p>
 </html>"));
-  end ReleaseNotes;
+    end ReleaseNotes;
 
-  class NewRealease "Publishing new release"
-    extends Modelica.Icons.Information;
-   annotation (Documentation(info="<html>
+    class NewRealease "Publishing new release"
+      extends Modelica.Icons.Information;
+      annotation (Documentation(info="<html>
 <p><br>New release must be numbered by Semantic Versioning 2.0, see <a href=\"http://semver.org/\">semver.org</a>. </p>
 <p><br>If minor version, then the conversion script must be written and connected with package Physiolibrary using &QUOT;annotation(conversion(from(version=..)))&QUOT;! </p>
 <p><br>To clean the code from dummy annotations try to use script <a href=\"https://github.com/dietmarw/trimtrailingwhitespaces\">ttws</a>. </p>
@@ -263,16 +263,16 @@ package Cardiovascular
 <li>Draft a new release from &QUOT;release&QUOT; branch with number &QUOT;vX.Y.Z&QUOT; and with release notes. </li>
 </ul>
 </html>"));
-  end NewRealease;
+    end NewRealease;
 
-  class Contact "Contact"
-    extends Modelica.Icons.Contact;
-   annotation (Documentation(info="<html>
+    class Contact "Contact"
+      extends Modelica.Icons.Contact;
+      annotation (Documentation(info="<html>
 <p>Tomas Kulhanek</p>
 <p>email: tomas.kulhanek@matfyz.cz</p>
 </html>"));
-  end Contact;
-  annotation (__Dymola_DocumentationClass=true, Documentation(info="<html>
+    end Contact;
+    annotation (__Dymola_DocumentationClass=true, Documentation(info="<html>
 <p>Package Cardiovascular is a modelica package for <b>Human Physiology</b> that provides constants, types, connectors, partial models and model components fitted for physiological models of cardiovascular system and some control mechanism. </p>
 <p>It contains complementar models to the cardiovascular system in complex parametric model of human physiology Physiomodel.</p>
 <p>Up-to-date version could be found at https://github.com/filip-jezek/Physiolibrary.models</p>
@@ -283,7 +283,7 @@ package Cardiovascular
     extends Modelica.Icons.InterfacesPackage;
     partial model Heart "Abstract heart circulation submodel"
 
-    //   Physiolibrary.Types.Volume V "Volume";
+      //   Physiolibrary.Types.Volume V "Volume";
 
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rightHeartInflow
         annotation (Placement(transformation(extent={{-110,30},{-90,50}}),
@@ -298,8 +298,8 @@ package Cardiovascular
         annotation (Placement(transformation(extent={{-110,-30},{-90,-10}}),
             iconTransformation(extent={{90,-28},{110,-8}})));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),                                                                        graphics={Bitmap(extent={{-86,-106},{82,104}},
-              fileName=
+                -100},{100,100}}), graphics={Bitmap(extent={{-86,-106},{82,104}},
+                fileName=
                   "modelica://Cardiovascular/Resources/Icons/heartPict.png"),
               Text(
               extent={{-98,-78},{102,-112}},
@@ -315,7 +315,7 @@ package Cardiovascular
       extends Physiolibrary.Icons.SystemicCirculation;
       //  extends Physiolibrary.Hydraulic.Interfaces.OnePort;
 
-    //   Physiolibrary.Types.Volume V "Total stressed blood volume of the systemic circulation";
+      //   Physiolibrary.Types.Volume V "Total stressed blood volume of the systemic circulation";
 
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a q_in annotation (
           Placement(transformation(extent={{90,-10},{110,10}}),
@@ -336,7 +336,7 @@ package Cardiovascular
     partial model Pulmonary "Abstract pulmonary circulation submodel"
       extends Physiolibrary.Icons.PulmonaryCirculation;
       //  extends Physiolibrary.Hydraulic.Interfaces.OnePort;
-    //   Physiolibrary.Types.Volume V "Total stressed blood volume of the pulmonary circulation";
+      //   Physiolibrary.Types.Volume V "Total stressed blood volume of the pulmonary circulation";
 
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a q_in annotation (
           Placement(transformation(extent={{-110,-10},{-90,10}}),
@@ -354,179 +354,180 @@ package Cardiovascular
             graphics));
     end Pulmonary;
 
-  package Controlled
-    extends Modelica.Icons.InterfacesPackage;
-    partial model System
-      "Interface for cardiovascular system controlled by short-term(baroreflex), long-term(blood volume) and pathologies(stenosis)"
-      extends Cardiovascular.System(
-        redeclare replaceable Pulmonary pulmonaryCirculation constrainedby
+    package Controlled
+      extends Modelica.Icons.InterfacesPackage;
+      partial model System
+        "Interface for cardiovascular system controlled by short-term(baroreflex), long-term(blood volume) and pathologies(stenosis)"
+        extends Cardiovascular.System(
+          redeclare replaceable Pulmonary pulmonaryCirculation constrainedby
             Controlled.Pulmonary,
-        redeclare replaceable Heart heart constrainedby Controlled.Heart,
-        redeclare replaceable Systemic systemicCirculation constrainedby
+          redeclare replaceable Heart heart constrainedby Controlled.Heart,
+          redeclare replaceable Systemic systemicCirculation constrainedby
             Controlled.Systemic);
 
-      replaceable ShortTermControl shortTermControl
-        annotation (Placement(transformation(extent={{-52,16},{-36,32}})));
-      replaceable LongTermControl longTermControl
-        annotation (Placement(transformation(extent={{-50,-12},{-30,8}})));
-      replaceable ScenarioControl scenarioControl
-        annotation (Placement(transformation(extent={{-50,-36},{-30,-16}})));
-    equation
+        replaceable ShortTermControl shortTermControl
+          annotation (Placement(transformation(extent={{-52,16},{-36,32}})));
+        replaceable LongTermControl longTermControl
+          annotation (Placement(transformation(extent={{-50,-12},{-30,8}})));
+        replaceable ScenarioControl scenarioControl
+          annotation (Placement(transformation(extent={{-50,-36},{-30,-16}})));
+      equation
         connect(pulmonaryCirculation.busConnector, heart.busConnector)
           annotation (Line(
-          points={{-8,25.2},{-14,25.2},{-14,26},{-18,26},{-18,-5.6},{-8.4,-5.6}},
-          color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None));
+            points={{-8,25.2},{-14,25.2},{-14,26},{-18,26},{-18,-5.6},{-8.4,-5.6}},
+
+            color={0,0,255},
+            thickness=0.5,
+            smooth=Smooth.None));
 
         connect(systemicCirculation.busConnector, heart.busConnector)
           annotation (Line(
-          points={{-7.6,-29},{-18,-29},{-18,-5.6},{-8.4,-5.6}},
-          color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None));
+            points={{-7.6,-29},{-18,-29},{-18,-5.6},{-8.4,-5.6}},
+            color={0,0,255},
+            thickness=0.5,
+            smooth=Smooth.None));
         connect(shortTermControl.busConnector, heart.busConnector) annotation (
             Line(
-          points={{-37.6,31.2},{-18,31.2},{-18,-5.6},{-8.4,-5.6}},
-          color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None));
+            points={{-37.6,31.2},{-18,31.2},{-18,-5.6},{-8.4,-5.6}},
+            color={0,0,255},
+            thickness=0.5,
+            smooth=Smooth.None));
         connect(longTermControl.busConnector, heart.busConnector) annotation (
             Line(
-          points={{-41.8,0.4},{-18,0.4},{-18,-5.6},{-8.4,-5.6}},
-          color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None));
+            points={{-41.8,0.4},{-18,0.4},{-18,-5.6},{-8.4,-5.6}},
+            color={0,0,255},
+            thickness=0.5,
+            smooth=Smooth.None));
         connect(longTermControl.port_a, heart.rightHeartInflow) annotation (
             Line(
-          points={{-30.6,-8},{-14,-8},{-14,-1.6},{-9.84,-1.6}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
+            points={{-30.6,-8},{-14,-8},{-14,-1.6},{-9.84,-1.6}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
         connect(scenarioControl.busConnector, heart.busConnector) annotation (
             Line(
-          points={{-32,-17},{-18,-17},{-18,-5.6},{-8.4,-5.6}},
-          color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None));
+            points={{-32,-17},{-18,-17},{-18,-5.6},{-8.4,-5.6}},
+            color={0,0,255},
+            thickness=0.5,
+            smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                   {{-60,-40},{20,40}}), graphics));
-    end System;
+      end System;
 
-    model Pulmonary "Abstract controlled pulmonary circulation submodel"
-      extends Cardiovascular.Interfaces.Pulmonary;
-      Physiolibrary.Types.BusConnector busConnector annotation (Placement(
-            transformation(extent={{-100,14},{-60,54}}), iconTransformation(
-              extent={{-100,12},{-60,52}})));
-    end Pulmonary;
+      model Pulmonary "Abstract controlled pulmonary circulation submodel"
+        extends Cardiovascular.Interfaces.Pulmonary;
+        Physiolibrary.Types.BusConnector busConnector annotation (Placement(
+              transformation(extent={{-100,14},{-60,54}}), iconTransformation(
+                extent={{-100,12},{-60,52}})));
+      end Pulmonary;
 
-    partial model Heart "Abstract controlled heart circulation submodel"
-      extends Cardiovascular.Interfaces.Heart;
-      Physiolibrary.Types.BusConnector busConnector annotation (Placement(
-            transformation(extent={{-118,66},{-78,106}}), iconTransformation(
-              extent={{-100,-90},{-60,-50}})));
+      partial model Heart "Abstract controlled heart circulation submodel"
+        extends Cardiovascular.Interfaces.Heart;
+        Physiolibrary.Types.BusConnector busConnector annotation (Placement(
+              transformation(extent={{-118,66},{-78,106}}), iconTransformation(
+                extent={{-100,-90},{-60,-50}})));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                   {{-100,-100},{100,100}}), graphics));
-    end Heart;
+      end Heart;
 
-    model Systemic "Abstract controlled systemic circulation submodel"
-      extends Cardiovascular.Interfaces.Systemic;
-      Physiolibrary.Types.BusConnector busConnector annotation (Placement(
-            transformation(extent={{-100,14},{-60,54}}), iconTransformation(
-              extent={{-96,-50},{-56,-10}})));
+      model Systemic "Abstract controlled systemic circulation submodel"
+        extends Cardiovascular.Interfaces.Systemic;
+        Physiolibrary.Types.BusConnector busConnector annotation (Placement(
+              transformation(extent={{-100,14},{-60,54}}), iconTransformation(
+                extent={{-96,-50},{-56,-10}})));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                   {{-100,-100},{100,100}}), graphics));
-    end Systemic;
+      end Systemic;
 
-    partial model LongTermControl
-      "Abstract submodel of long-term volume control"
+      partial model LongTermControl
+        "Abstract submodel of long-term volume control"
 
-      Physiolibrary.Types.BusConnector busConnector annotation (Placement(
+        Physiolibrary.Types.BusConnector busConnector annotation (Placement(
               transformation(extent={{0,-8},{40,32}}), iconTransformation(
                 extent={{-38,4},{2,44}})));
         Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a port_a annotation (
             Placement(transformation(extent={{84,-70},{104,-50}}),
-            iconTransformation(extent={{84,-70},{104,-50}})));
-      Model.Control.BloodVolume.VolumeRefill2 volumeRefill
-        annotation (Placement(transformation(extent={{46,-38},{86,6}})));
-    equation
-      connect(volumeRefill.busConnector, busConnector) annotation (Line(
-          points={{63.6,-7.64},{20,-7.64},{20,12}},
-          color={0,0,255},
-          thickness=0.5,
-          smooth=Smooth.None), Text(
-          string="%second",
-          index=1,
-          extent={{6,3},{6,3}}));
-      connect(volumeRefill.port_b, port_a) annotation (Line(
-          points={{84.4,-35.8},{94,-35.8},{94,-60}},
-          color={0,0,0},
-          thickness=1,
-          smooth=Smooth.None));
+              iconTransformation(extent={{84,-70},{104,-50}})));
+        Model.Control.BloodVolume.VolumeRefill2 volumeRefill
+          annotation (Placement(transformation(extent={{46,-38},{86,6}})));
+      equation
+        connect(volumeRefill.busConnector, busConnector) annotation (Line(
+            points={{63.6,-7.64},{20,-7.64},{20,12}},
+            color={0,0,255},
+            thickness=0.5,
+            smooth=Smooth.None), Text(
+            string="%second",
+            index=1,
+            extent={{6,3},{6,3}}));
+        connect(volumeRefill.port_b, port_a) annotation (Line(
+            points={{84.4,-35.8},{94,-35.8},{94,-60}},
+            color={0,0,0},
+            thickness=1,
+            smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={Bitmap(extent={{-80,-80},{82,80}}, fileName=
-                  "modelica://Physiolibrary/Resources/Icons/bloodProperties.png"),
+                "modelica://Physiolibrary/Resources/Icons/bloodProperties.png"),
                 Text( extent={{-100,-62},{100,-100}},
-              lineColor={0,0,255},
-              textString="%name")}));
-    end LongTermControl;
+                      lineColor={0,0,255},
+                      textString="%name")}));
+      end LongTermControl;
 
-    partial model ShortTermControl
-      "Abstract submodel of short-term CVS parameters values"
+      partial model ShortTermControl
+        "Abstract submodel of short-term CVS parameters values"
 
-      Physiolibrary.Types.BusConnector busConnector annotation (Placement(
-            transformation(extent={{-28,14},{12,54}}), iconTransformation(
-              extent={{60,70},{100,110}})));
+        Physiolibrary.Types.BusConnector busConnector annotation (Placement(
+              transformation(extent={{-28,14},{12,54}}), iconTransformation(
+                extent={{60,70},{100,110}})));
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics={Bitmap(extent={{-80,-80},{80,80}},
                 fileName=
                 "modelica://Physiolibrary/Resources/Icons/baroreflex.png"),Text(
-              extent={{-100,-80},{100,-118}},
-              lineColor={0,0,255},
-              textString="%name")}), Diagram(coordinateSystem(
-              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-            graphics));
+                      extent={{-100,-80},{100,-118}},
+                      lineColor={0,0,255},
+                      textString="%name")}), Diagram(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+              graphics));
 
-    end ShortTermControl;
+      end ShortTermControl;
 
-    model ScenarioControl "Abstract submodel of possible scenarios"
+      model ScenarioControl "Abstract submodel of possible scenarios"
 
-      Physiolibrary.Types.BusConnector busConnector annotation (Placement(
-            transformation(extent={{60,70},{100,110}}), iconTransformation(
-              extent={{60,70},{100,110}})));
-      annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+        Physiolibrary.Types.BusConnector busConnector annotation (Placement(
+              transformation(extent={{60,70},{100,110}}), iconTransformation(
+                extent={{60,70},{100,110}})));
+        annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics={Rectangle(
-              extent={{-96,80},{98,-60}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
+                      extent={{-96,80},{98,-60}},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
                       pattern=LinePattern.None),Text(
-              extent={{-100,-60},{100,-98}},
-              lineColor={0,0,255},
+                      extent={{-100,-60},{100,-98}},
+                      lineColor={0,0,255},
                       textString="%name"),Line(
-              points={{-96,96},{-96,-60}},
-              color={0,0,255},
+                      points={{-96,96},{-96,-60}},
+                      color={0,0,255},
                       smooth=Smooth.None),Line(
-              points={{-96,-60},{98,-60}},
-              color={0,0,255},
-              smooth=Smooth.None,
+                      points={{-96,-60},{98,-60}},
+                      color={0,0,255},
+                      smooth=Smooth.None,
                       arrow={Arrow.None,Arrow.Filled}),Text(
-              extent={{-42,-62},{40,-68}},
-              lineColor={0,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
+                      extent={{-42,-62},{40,-68}},
+                      lineColor={0,0,255},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
                       textString="time")}), Diagram(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics));
-    end ScenarioControl;
-  end Controlled;
+      end ScenarioControl;
+    end Controlled;
   end Interfaces;
 
   package Model
     extends Modelica.Icons.ExamplesPackage;
     package Meurs
-        extends Modelica.Icons.ExamplesPackage;
+      extends Modelica.Icons.ExamplesPackage;
       model HemodynamicsMeurs_shallow
         extends Cardiovascular.Icons.Runnable_Shallow;
 
@@ -553,8 +554,8 @@ package Cardiovascular
           ExternalPressure=-533.28954966)
           annotation (Placement(transformation(extent={{-10,86},{14,110}})));
         Physiolibrary.Hydraulic.Components.Conductor PulmonaryVeinResistance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               2.4999552322936e-06)
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 2.4999552322936e-06)
           annotation (Placement(transformation(extent={{26,86},{56,110}})));
         Physiolibrary.Hydraulic.Components.ElasticVessel LeftAtrium(
           useComplianceInput=true,
@@ -616,8 +617,8 @@ package Cardiovascular
               rotation=180,
               origin={134,18})));
         Physiolibrary.Hydraulic.Components.Conductor ArteryResistance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               1.2526028316622e-07)
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 1.2526028316622e-07)
           annotation (Placement(transformation(extent={{94,8},{114,28}})));
         Physiolibrary.Hydraulic.Components.Conductor
           SystemicArterioralConductance(useConductanceInput=false, Conductance(
@@ -627,8 +628,8 @@ package Cardiovascular
               rotation=0,
               origin={23,17})));
         Physiolibrary.Hydraulic.Components.Conductor SmallVenuleConductance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               3.7503078792283e-08) annotation (Placement(transformation(
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 3.7503078792283e-08) annotation (Placement(transformation(
               extent={{14,-9},{-14,9}},
               rotation=0,
               origin={-60,17})));
@@ -641,12 +642,12 @@ package Cardiovascular
           Compliance=2.8652352197304e-08)
           annotation (Placement(transformation(extent={{-26,10},{-6,30}})));
         Physiolibrary.Hydraulic.Components.Conductor VeinsResistance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               8.3256834918868e-08)
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 8.3256834918868e-08)
           annotation (Placement(transformation(extent={{-120,6},{-148,28}})));
         Physiolibrary.Hydraulic.Components.Conductor CentralVenousResistance(
-            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")=
-               2.4999552322936e-06)
+            useConductanceInput=false, Conductance(displayUnit="ml/(mmHg.s)")
+             = 2.4999552322936e-06)
           annotation (Placement(transformation(extent={{-208,8},{-232,28}})));
         Physiolibrary.Hydraulic.Components.ElasticVessel IntraThoracicVeins(
           useV0Input=false,
@@ -855,6 +856,7 @@ package Cardiovascular
         connect(rightVentricle.compliance, ventricularElastance1.Ct)
           annotation (Line(
             points={{-153,69},{-153,80},{-126,80},{-126,108.91},{-147.15,108.91}},
+
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -939,7 +941,7 @@ package Cardiovascular
           redeclare Parts.Pulmonary pulmonaryCirculation,
           redeclare Parts.Heart heart,
           redeclare Parts.Systemic systemicCirculation);
-          extends Cardiovascular.Icons.Runnable_System;
+        extends Cardiovascular.Icons.Runnable_System;
 
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000),
             Documentation(info="<html>
@@ -979,8 +981,8 @@ package Cardiovascular
             Elastance=6066168.6273825)
             annotation (Placement(transformation(extent={{8,-12},{32,12}})));
           Physiolibrary.Hydraulic.Components.Resistor PulmonaryVeinResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 399967.162245)
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 399967.162245)
             annotation (Placement(transformation(extent={{46,-12},{70,12}})));
         equation
           connect(q_in, PulmonaryArteries.q_in) annotation (Line(
@@ -1015,9 +1017,9 @@ package Cardiovascular
                   extent={{-100,-100},{100,100}}), graphics), Icon(
                 coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                     {100,100}}), graphics={Text(
-                  extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Meurs")}));
+                          extent={{-100,60},{100,100}},
+                          lineColor={0,0,0},
+                          textString="Meurs")}));
         end Pulmonary;
 
         model Systemic
@@ -1039,9 +1041,9 @@ package Cardiovascular
                 extent={{-6,-5},{6,5}},
                 rotation=180,
                 origin={70,1})));
-          Physiolibrary.Hydraulic.Components.Resistor  ArteryResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 7999343.2449) annotation (Placement(transformation(
+          Physiolibrary.Hydraulic.Components.Resistor ArteryResistance(
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 7999343.2449) annotation (Placement(transformation(
                 extent={{7,-7},{-7,7}},
                 rotation=0,
                 origin={55,1})));
@@ -1070,9 +1072,9 @@ package Cardiovascular
             ZeroPressureVolume=0.000185,
             Elastance=34930465.50273)
             annotation (Placement(transformation(extent={{2,-36},{16,-22}})));
-          Physiolibrary.Hydraulic.Components.Resistor  SmallVenuleResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 26664477.483) annotation (Placement(transformation(
+          Physiolibrary.Hydraulic.Components.Resistor SmallVenuleResistance(
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 26664477.483) annotation (Placement(transformation(
                 extent={{7,-7},{-7,7}},
                 rotation=0,
                 origin={-7,-29})));
@@ -1085,9 +1087,9 @@ package Cardiovascular
             ZeroPressureVolume=0.001,
             Elastance=2253148.3473135)
             annotation (Placement(transformation(extent={{-32,-22},{-14,-6}})));
-          Physiolibrary.Hydraulic.Components.Resistor  VeinsResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 11999014.86735)
+          Physiolibrary.Hydraulic.Components.Resistor VeinsResistance(
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 11999014.86735)
             annotation (Placement(transformation(extent={{-32,-22},{-48,-6}})));
           Physiolibrary.Hydraulic.Components.ElasticVesselElastance
             IntraThoracicVeins(
@@ -1099,9 +1101,9 @@ package Cardiovascular
             ExternalPressure=-533.28954966,
             Elastance=2426467.450953)
             annotation (Placement(transformation(extent={{-66,-8},{-48,8}})));
-          Physiolibrary.Hydraulic.Components.Resistor  CentralVenousResistance(
-              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")=
-                 399967.162245)
+          Physiolibrary.Hydraulic.Components.Resistor CentralVenousResistance(
+              useConductanceInput=false, Resistance(displayUnit="(mmHg.s)/ml")
+               = 399967.162245)
             annotation (Placement(transformation(extent={{-74,-8},{-90,8}})));
         equation
           connect(VeinsResistance.q_in, ExtrathoracicVeins.q_in) annotation (
@@ -1180,8 +1182,8 @@ package Cardiovascular
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Meurs")}));
+                          lineColor={0,0,0},
+                          textString="Meurs")}));
         end Systemic;
 
         model Heart
@@ -1363,8 +1365,8 @@ package Cardiovascular
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Meurs")}));
+                          lineColor={0,0,0},
+                          textString="Meurs")}));
         end Heart;
 
         model AtrialElastance
@@ -1376,7 +1378,8 @@ package Cardiovascular
           parameter Physiolibrary.Types.HydraulicElastance EMIN
             "Diastolic elastance";
           parameter Boolean useEs_extInput=false
-            "=true, if external elastance/compliance value is used" annotation (
+            "=true, if external elastance/compliance value is used" annotation
+            (
             Evaluate=true,
             HideResult=true,
             choices(__Dymola_checkBox=true),
@@ -1458,7 +1461,8 @@ package Cardiovascular
           //Equation to calculate normalized elastance ET0 was:
           //Et0=EMIN+(EMAX-EMIN)*((time-T0)-(Tas+Tav))/Tvs)*sin(Modelica.Constants.pi*(((time-T0)-(Tas+Tav))/Tvs));
           parameter Boolean useEs_extInput=false
-            "=true, if external elastance/compliance value is used" annotation (
+            "=true, if external elastance/compliance value is used" annotation
+            (
             Evaluate=true,
             HideResult=true,
             choices(__Dymola_checkBox=true),
@@ -1480,7 +1484,8 @@ package Cardiovascular
           end if;
           HeartInterval = time - T0;
           Et = EMIN + (es_int - EMIN)*Et0;
-          if HeartInterval >= Tas + Tav and HeartInterval < Tas + Tav + Tvs then
+          if HeartInterval >= Tas + Tav and HeartInterval < Tas + Tav + Tvs
+               then
             Et0 = (HeartInterval - (Tas + Tav))/Tvs*sin(Modelica.Constants.pi*(
               HeartInterval - (Tas + Tav))/Tvs)/Kn;
           else
@@ -1539,8 +1544,8 @@ package Cardiovascular
             "atrioventricular delay";
           discrete Modelica.SIunits.Time HP(start=0) "heart period";
           Boolean b(start=false);
-          Physiolibrary.Types.RealIO.FrequencyInput HR "heart rate" annotation (
-             Placement(transformation(extent={{-12,68},{28,108}}),
+          Physiolibrary.Types.RealIO.FrequencyInput HR "heart rate" annotation
+            (Placement(transformation(extent={{-12,68},{28,108}}),
                 iconTransformation(
                 extent={{-20,-20},{20,20}},
                 rotation=270,
@@ -1571,11 +1576,11 @@ package Cardiovascular
           redeclare replaceable ControlledParts.Baroreflex shortTermControl,
           redeclare replaceable Cardiovascular.Model.Control.BloodVolumeControl
             longTermControl);
-      /*    redeclare CardiovascularDevel.Model.Meurs.Variants.Parts.Stenosis
+        /*    redeclare CardiovascularDevel.Model.Meurs.Variants.Parts.Stenosis
       stenosisControl(aorticstenosis(InitialResistance(displayUnit="(mmHg.s)/ml")=
              1066579.09932, FinalResistance(displayUnit="(mmHg.s)/ml") = 1066579.09932),
         AVBackFlowConductance(k=1.2501026264094e-15)),*/
-          extends Cardiovascular.Icons.Runnable_System;
+        extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000),
             Documentation(info="<html>
 <p>Cardiovascular model implemented per description of Meurs et al.</p>
@@ -1597,6 +1602,7 @@ package Cardiovascular
         equation
           connect(PulmonaryArteries.volume, add.u1) annotation (Line(
               points={{-62.8,-12},{-62,-12},{-62,-26},{-6,-26},{-6,20},{-14,20}},
+
               color={0,0,127},
               smooth=Smooth.None));
 
@@ -1729,6 +1735,7 @@ package Cardiovascular
           connect(ventricularElastance1.Es_ext, busConnector.rvcompliance)
             annotation (Line(
               points={{-17,84.6},{-68,84.6},{-68,88},{-98,88},{-98,86},{-98,86}},
+
               color={0,0,127},
               smooth=Smooth.None), Text(
               string="%second",
@@ -1770,8 +1777,8 @@ package Cardiovascular
           extends Model.Scenario.StenosisControl(
             venacavastenosis(InitialElastance=2426467.450953, FinalElastance=
                   2426467.450953),
-            aorticstenosis(InitialResistance(displayUnit="(mmHg.s)/ml")=
-                1066579.09932, FinalResistance(displayUnit="(mmHg.s)/ml")=
+            aorticstenosis(InitialResistance(displayUnit="(mmHg.s)/ml") =
+                1066579.09932, FinalResistance(displayUnit="(mmHg.s)/ml") =
                 1066579.09932),
             mitralvalvestenosis(InitialResistance=399967.162245,
                 FinalResistance=399967.162245));
@@ -1807,10 +1814,10 @@ package Cardiovascular
       model StenosisAorticValve
         extends HemodynamicsMeursBVControl(redeclare
             ControlledParts.AorticValveStenosisScenario scenarioControl(
-              aorticstenosis(FinalResistance(displayUnit="(mmHg.s)/ml")=
+              aorticstenosis(FinalResistance(displayUnit="(mmHg.s)/ml") =
                 10665790.9932)), redeclare
             ControlledParts.AorticValveHeartControl heart);
-          extends Cardiovascular.Icons.Runnable_System;
+        extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(StopTime=120, __Dymola_NumberOfIntervals=5000));
       end StenosisAorticValve;
 
@@ -1834,11 +1841,11 @@ package Cardiovascular
     end Meurs;
 
     package Burkhoff
-        extends Modelica.Icons.ExamplesPackage;
+      extends Modelica.Icons.ExamplesPackage;
       model HemodynamicsBurkhoff_shallow
         //Cardiovascular.Hydraulic.Components.Resistor
         //Cardiovascular.Hydraulic.Components.IdealValveNorm
-            extends Cardiovascular.Icons.Runnable_Shallow;
+        extends Cardiovascular.Icons.Runnable_Shallow;
         import Physiolibrary.Hydraulic.Components.*;
         ElasticVessel Cvs(
           volume_start=0.002701,
@@ -1894,7 +1901,7 @@ package Cardiovascular
           volume_start=7.3e-05,
           ZeroPressureVolume=5e-06)
           annotation (Placement(transformation(extent={{-60,-50},{-40,-30}})));
-        IdealValveResistance TV(_Ron(displayUnit="(mmHg.s)/ml")=
+        IdealValveResistance TV(_Ron(displayUnit="(mmHg.s)/ml") =
             333305.9685375) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
@@ -2064,6 +2071,7 @@ package Cardiovascular
             smooth=Smooth.None));
         connect(RVElastance.HR, RAElastance.HR) annotation (Line(
             points={{15.21,4.3},{-2,4.3},{-2,6},{-58,6},{-58,0.3},{-54.68,0.3}},
+
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -2077,6 +2085,7 @@ package Cardiovascular
             smooth=Smooth.None));
         connect(RA.StressedVolume, RAElastance.Vs) annotation (Line(
             points={{-54.4,-29.8},{-54.4,-19.9},{-54.32,-19.9},{-54.32,-16.8}},
+
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -2204,6 +2213,7 @@ package Cardiovascular
             smooth=Smooth.None));
         connect(RAElastance.Pt, add.u3) annotation (Line(
             points={{-34.16,-16.6},{-34.16,-26},{-20,-26},{-20,-28.8},{-25.2,-28.8}},
+
             color={0,190,190},
             smooth=Smooth.None));
 
@@ -2286,7 +2296,7 @@ package Cardiovascular
           redeclare Parts.Pulmonary pulmonaryCirculation,
           redeclare replaceable Parts.Heart heart,
           redeclare Parts.Systemic systemicCirculation);
-          extends Cardiovascular.Icons.Runnable_System;
+        extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(
             StopTime=5,
             __Dymola_NumberOfIntervals=5000,
@@ -2306,21 +2316,21 @@ package Cardiovascular
           import Physiolibrary.Hydraulic.Components.*;
           Resistor Rcsp(Resistance(displayUnit="(mmHg.s)/ml") = 2666447.7483)
             annotation (Placement(transformation(extent={{-84,-10},{-64,10}})));
-        ElasticVessel      Capprox(
+          ElasticVessel Capprox(
             volume_start=3e-05,
             ZeroPressureVolume=2e-05,
             Compliance=7.5006157584566e-09)
             annotation (Placement(transformation(extent={{-56,-10},{-36,10}})));
           Resistor Rcp(Resistance(displayUnit="(mmHg.s)/ml") = 2666447.7483)
             annotation (Placement(transformation(extent={{-32,-10},{-12,10}})));
-        ElasticVessel      Cap(
+          ElasticVessel Cap(
             volume_start=0.000802,
             ZeroPressureVolume=0.0006,
             Compliance=1.5001231516913e-07)
             annotation (Placement(transformation(extent={{-8,-10},{12,10}})));
           Resistor Rap(Resistance(displayUnit="(mmHg.s)/ml") = 2666447.7483)
             annotation (Placement(transformation(extent={{12,-10},{32,10}})));
-        ElasticVessel      Cvp(
+          ElasticVessel Cvp(
             volume_start=0.000154,
             ZeroPressureVolume=0.0001,
             Compliance=5.2504310309196e-08)
@@ -2371,16 +2381,16 @@ package Cardiovascular
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Burkhoff")}));
+                          lineColor={0,0,0},
+                          textString="Burkhoff")}));
         end Pulmonary;
 
         model Systemic
           extends Cardiovascular.Interfaces.Systemic;
-            import Physiolibrary.Hydraulic.Components.*;
+          import Physiolibrary.Hydraulic.Components.*;
           Resistor Rcprox(Resistance(displayUnit="(mmHg.s)/ml") = 2666447.7483)
             annotation (Placement(transformation(extent={{86,-10},{66,10}})));
-        ElasticVessel Caprox(
+          ElasticVessel Caprox(
             volume_start=3.8e-05,
             ZeroPressureVolume=3e-05,
             Compliance=7.5006157584566e-10)
@@ -2394,7 +2404,7 @@ package Cardiovascular
             annotation (Placement(transformation(extent={{0,-10},{20,10}})));
           Resistor Ras(Resistance(displayUnit="(mmHg.s)/ml") = 99991790.56125)
             annotation (Placement(transformation(extent={{-2,-10},{-22,10}})));
-        ElasticVessel Cvs(
+          ElasticVessel Cvs(
             volume_start=0.002701,
             ZeroPressureVolume=0.00223,
             useComplianceInput=false,
@@ -2446,19 +2456,19 @@ package Cardiovascular
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Burkhoff")}));
+                          lineColor={0,0,0},
+                          textString="Burkhoff")}));
         end Systemic;
 
         model Heart "heart with modified elastance"
           extends Cardiovascular.Interfaces.Heart;
-        Parts.ElasticVesselWithSVandP LA(
+          Parts.ElasticVesselWithSVandP LA(
             useComplianceInput=true,
             useExternalPressureInput=true,
             volume_start=8.1e-05,
             ZeroPressureVolume=5e-06)
             annotation (Placement(transformation(extent={{30,-50},{50,-30}})));
-        Parts.AtrialElastance atrialElastance1(
+          Parts.AtrialElastance atrialElastance1(
             Tmax(displayUnit="ms") = 0.125,
             Tau(displayUnit="ms") = 0.02,
             Alpha=40000,
@@ -2473,14 +2483,14 @@ package Cardiovascular
                 extent={{-10,-10},{10,10}},
                 rotation=180,
                 origin={-6,-40})));
-        Parts.VentricularElastance ventricularElastance1(
+          Parts.VentricularElastance ventricularElastance1(
             Tmax(displayUnit="ms") = 0.2,
             Tau(displayUnit="ms") = 0.03,
             Alpha=24000,
             Beta(displayUnit="mmHg") = 45.3296117211,
             Ees=205316476.6191)
             annotation (Placement(transformation(extent={{-52,-20},{-18,6}})));
-        Parts.ElasticVesselWithSVandP LV(
+          Parts.ElasticVesselWithSVandP LV(
             useComplianceInput=true,
             volume_start=0.000125,
             ZeroPressureVolume=5e-06,
@@ -2498,14 +2508,14 @@ package Cardiovascular
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={50,42})));
-        Parts.ElasticVesselWithSVandP RV(
+          Parts.ElasticVesselWithSVandP RV(
             useComplianceInput=true,
             ExternalPressure=0,
             useExternalPressureInput=true,
             volume_start=0.000112,
             ZeroPressureVolume=5e-06)
             annotation (Placement(transformation(extent={{16,32},{36,52}})));
-        Parts.VentricularElastance ventricularElastance(
+          Parts.VentricularElastance ventricularElastance(
             Tmax(displayUnit="ms") = 0.2,
             Tau(displayUnit="ms") = 0.03,
             Alpha=24000,
@@ -2518,14 +2528,14 @@ package Cardiovascular
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={4,42})));
-        Parts.AtrialElastance atrialElastance(
+          Parts.AtrialElastance atrialElastance(
             Tmax(displayUnit="ms") = 0.125,
             Tau(displayUnit="ms") = 0.02,
             Alpha=40000,
             Beta(displayUnit="mmHg") = 39.9967162245,
             Ees=26664477.483)
             annotation (Placement(transformation(extent={{-80,62},{-48,92}})));
-        Parts.ElasticVesselWithSVandP RA(
+          Parts.ElasticVesselWithSVandP RA(
             useComplianceInput=true,
             useExternalPressureInput=true,
             volume_start=7.3e-05,
@@ -2723,8 +2733,8 @@ package Cardiovascular
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Burkhoff")}));
+                          lineColor={0,0,0},
+                          textString="Burkhoff")}));
         end Heart;
 
         model ElasticVesselWithSVandP
@@ -2764,14 +2774,15 @@ package Cardiovascular
           parameter Pressure Beta
             "coefficient of end diastolic pressure-volume curve";
           parameter Boolean useEs_extInput=false
-            "=true, if external elastance/compliance value is used" annotation (
+            "=true, if external elastance/compliance value is used" annotation
+            (
             Evaluate=true,
             HideResult=true,
             choices(__Dymola_checkBox=true),
             Dialog(group="External inputs/outputs"));
           parameter HydraulicElastance Ees
             "coefficient of end-systolic elastance"
-                annotation (Dialog(enable=not useEs_extInput));
+            annotation (Dialog(enable=not useEs_extInput));
           HydraulicElastance Et "Elastance";
           Time Tsyst;
           //need to define in extended model
@@ -2782,7 +2793,7 @@ package Cardiovascular
           RealIO.PressureOutput Pt "peak isovolumic pressure" annotation (
               Placement(transformation(extent={{64,-78},{84,-58}}),
                 iconTransformation(
-                  extent={{-10,-10},{10,10}},
+                extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={82,-86})));
           RealIO.HydraulicComplianceOutput Ct annotation (Placement(
@@ -2797,7 +2808,7 @@ package Cardiovascular
                 rotation=180,
                 origin={87,67})));
         protected
-         HydraulicElastance mes;
+          HydraulicElastance mes;
         equation
           if not useEs_extInput then
             mes = Ees;
@@ -2843,13 +2854,13 @@ package Cardiovascular
                           lineColor={255,0,0},
                           smooth=Smooth.None,
                           fillColor={255,0,0},
-                    fillPattern=FillPattern.Solid,
+                          fillPattern=FillPattern.Solid,
                           origin={84,69},
                           rotation=180),Text(
                           extent={{-110,-52},{-64,-76}},
                           lineColor={0,0,255},
                           fillColor={255,0,0},
-                    fillPattern=FillPattern.Solid,
+                          fillPattern=FillPattern.Solid,
                           textString="Vs"),Text(
                           extent={{6,-50},{52,-76}},
                           lineColor={0,0,255},
@@ -2865,7 +2876,7 @@ package Cardiovascular
                           lineColor={0,0,255},
                           fillColor={255,0,0},
                           fillPattern=FillPattern.Solid,
-                  textString="Ped")}));
+                          textString="Ped")}));
         end HeartElastance;
 
         model VentricularElastance
@@ -2948,13 +2959,13 @@ package Cardiovascular
               activationDelay=10)),
           redeclare replaceable Model.Control.BloodVolumeControl
             longTermControl);
-      /*    redeclare Control.StenosisControl simulationControl(venacavastenosis(
+        /*    redeclare Control.StenosisControl simulationControl(venacavastenosis(
           InitialElastance=1906510.1400345, FinalElastance=
             1906510.1400345),                                aorticstenosis(
           InitialResistance(displayUnit="(mmHg.s)/ml") = 266644.77483,
           FinalResistance(displayUnit="(mmHg.s)/ml") = 266644.77483),
       mitralvalvestenosis(InitialResistance=333305.9685375, FinalResistance=333305.9685375)));*/
-          extends Cardiovascular.Icons.Runnable_System;
+        extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(
             StopTime=5,
             __Dymola_NumberOfIntervals=5000,
@@ -3191,16 +3202,16 @@ package Cardiovascular
     end Burkhoff;
 
     package Smith2004
-        extends Modelica.Icons.ExamplesPackage;
+      extends Modelica.Icons.ExamplesPackage;
       model HemodynamicsSmith_shallow
-            extends Cardiovascular.Icons.Runnable_Shallow;
+        extends Cardiovascular.Icons.Runnable_Shallow;
         import Physiolibrary.Hydraulic.Components.*;
-      ElasticVesselElastance aorta(
+        ElasticVesselElastance aorta(
           ZeroPressureVolume=0,
           volume_start=0.0001241,
-          Elastance=92165766.41999) annotation (Placement(transformation(extent=
-                 {{-130,-30},{-110,-10}})));
-      ElasticVesselElastance venaCava(
+          Elastance=92165766.41999) annotation (Placement(transformation(extent
+                ={{-130,-30},{-110,-10}})));
+        ElasticVesselElastance venaCava(
           ZeroPressureVolume=0,
           volume_start=0.0002952,
           Elastance(displayUnit="Pa/m3") = 786602.0857485)
@@ -3228,7 +3239,7 @@ package Cardiovascular
         IdealValveResistance pulmonaryValve(Pknee=0, _Ron(displayUnit=
                 "(mmHg.s)/ml") = 733273.1307825)
           annotation (Placement(transformation(extent={{62,24},{82,44}})));
-          ElasticVesselElastance pulmonaryArteries(
+        ElasticVesselElastance pulmonaryArteries(
           ZeroPressureVolume=0,
           useExternalPressureInput=true,
           volume_start=3.904e-05,
@@ -3239,7 +3250,7 @@ package Cardiovascular
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={114,4})));
-      ElasticVesselElastance pulmonaryVeins(
+        ElasticVesselElastance pulmonaryVeins(
           ZeroPressureVolume=0,
           useExternalPressureInput=true,
           volume_start=0.0008269,
@@ -3261,7 +3272,7 @@ package Cardiovascular
           annotation (Placement(transformation(extent={{-44,0},{-28,14}})));
         Physiolibrary.Types.Constants.PressureConst IntraThoracicPressure(k=-533.28954966)
           annotation (Placement(transformation(extent={{38,12},{50,20}})));
-      Parts.VentricularInteraction_flat ventricularInteraction_flat(
+        Parts.VentricularInteraction_flat ventricularInteraction_flat(
           lambdalv=33000,
           lambdaperi=30000,
           lambdas(displayUnit="1/m3") = 435000,
@@ -3386,7 +3397,8 @@ package Cardiovascular
 <p>Cardiovascular model implemented per description of Smith et al.</p>
 <p>[12] B. W. Smith, J. G. Chase, R. I. Nokes, G. M. Shaw, G. Wake, Minimal Haemodynamic System Model Including Ventricular Interaction and Valve Dynamics., Medical Engineering &AMP; Physics 26 (2) (2004) 131&ndash;139. doi:10.1016/j.medengphy.2003.10.001.</p>
 <p>[13] CellML implementation at URL:  http://models.cellml.org/exposure/9d046663ba5cac5c8a61ac146183614b/smith_chase_nokes_shaw_wake_2004.cellml/view</p>
-</html>"),experiment(StopTime=5));
+</html>"),
+          experiment(StopTime=5));
       end HemodynamicsSmith_shallow;
 
       model HemodynamicsSmith
@@ -3395,7 +3407,7 @@ package Cardiovascular
           redeclare Parts.Heart heart,
           redeclare Parts.Systemic systemicCirculation);
 
-          extends Cardiovascular.Icons.Runnable_System;
+        extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000));
       end HemodynamicsSmith;
 
@@ -3403,7 +3415,7 @@ package Cardiovascular
         extends Modelica.Icons.UtilitiesPackage;
 
         model VentricularInteraction_flat
-            import Physiolibrary.Types.*;
+          import Physiolibrary.Types.*;
           Volume Vsept(start=0.000002), Vrv(start=0.0001042), Vlv(start=
                 0.0001042), Vperi;
           parameter Volume V0sept=0.000002, V0peri;
@@ -3413,19 +3425,19 @@ package Cardiovascular
           parameter HydraulicElastance Essept, Esrv, Eslv
             "elastance of systole";
           parameter Real A=1, B=80, CC=0.375;
-            Time tm;
-            discrete Time HP "heart period";
-            discrete Time t0 "time of beginning of the cardiac cycle";
-            discrete Time ts "duration of systole";
-            parameter HydraulicLambda lambdas;
-            parameter HydraulicLambda lambdarv;
-            parameter HydraulicLambda lambdalv;
-            parameter HydraulicLambda lambdaperi;
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation (
-             Placement(transformation(extent={{-48,20},{-28,40}}),
+          Time tm;
+          discrete Time HP "heart period";
+          discrete Time t0 "time of beginning of the cardiac cycle";
+          discrete Time ts "duration of systole";
+          parameter HydraulicLambda lambdas;
+          parameter HydraulicLambda lambdarv;
+          parameter HydraulicLambda lambdalv;
+          parameter HydraulicLambda lambdaperi;
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation
+            (Placement(transformation(extent={{-48,20},{-28,40}}),
                 iconTransformation(extent={{-12,90},{8,110}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation (
-             Placement(transformation(extent={{-46,-22},{-26,-2}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation
+            (Placement(transformation(extent={{-46,-22},{-26,-2}}),
                 iconTransformation(extent={{-10,-110},{10,-90}})));
           RealIO.FrequencyInput HR annotation (Placement(transformation(extent=
                     {{-78,-40},{-38,0}}), iconTransformation(extent={{-100,-20},
@@ -3460,21 +3472,21 @@ package Cardiovascular
           Pperi = Pth + Pi0peri*(exp(lambdaperi*(Vperi - V0peri)) - 1);
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
                     {-100,-100},{100,100}}), graphics={Text(
-                  extent={{102,-32},{76,-20}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{102,-32},{76,-20}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="Pth"),Text(
-                  extent={{-100,-22},{-74,-34}},
-                  lineColor={0,0,255},
+                          extent={{-100,-22},{-74,-34}},
+                          lineColor={0,0,255},
                           textString="HR"),Rectangle(
                           extent={{-20,80},{20,-60}},
                           lineColor={0,0,255},
-                  fillPattern=FillPattern.Solid,
+                          fillPattern=FillPattern.Solid,
                           fillColor={0,0,255}),Text(
-                  extent={{-100,-60},{100,-80}},
-                  lineColor={0,0,255},
-                  textString="%name")}));
+                          extent={{-100,-60},{100,-80}},
+                          lineColor={0,0,255},
+                          textString="%name")}));
         end VentricularInteraction_flat;
 
         model Septum
@@ -3488,7 +3500,7 @@ package Cardiovascular
                 extent={{-5,-5},{5,5}},
                 rotation=0,
                 origin={-23,23})));
-        TimeVaryingElastance septumdrv(
+          TimeVaryingElastance septumdrv(
             lambda=435000,
             Es=6499999676.0309,
             Pi0=148.00118226939) annotation (Placement(transformation(
@@ -3507,11 +3519,11 @@ package Cardiovascular
                 rotation=180,
                 extent={{-10,-10},{10,10}},
                 origin={-84,-10}), iconTransformation(extent={{80,-10},{100,10}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation (
-             Placement(transformation(rotation=0, extent={{-4,-28},{16,-8}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation
+            (Placement(transformation(rotation=0, extent={{-4,-28},{16,-8}}),
                 iconTransformation(extent={{-10,-40},{10,-20}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation (
-             Placement(transformation(rotation=0, extent={{-4,32},{16,52}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation
+            (Placement(transformation(rotation=0, extent={{-4,32},{16,52}}),
                 iconTransformation(extent={{-10,6},{10,26}})));
           Physiolibrary.Types.RealIO.FrequencyInput HR annotation (Placement(
                 transformation(rotation=0, extent={{-94,10},{-74,30}}),
@@ -3561,22 +3573,22 @@ package Cardiovascular
                     {100,100}}), graphics={Polygon(
                           points={{-100,-20},{-40,0},{-6,6},{8,6},{40,0},{100,-20},
                     {98,-20},{-100,-20}},
-                  lineColor={167,167,255},
-                  smooth=Smooth.None,
-                  fillPattern=FillPattern.Forward,
+                          lineColor={167,167,255},
+                          smooth=Smooth.None,
+                          fillPattern=FillPattern.Forward,
                           fillColor={255,170,170}),Text(
-                  extent={{-100,-20},{-78,-40}},
-                  lineColor={0,0,127},
-                  fillPattern=FillPattern.Forward,
+                          extent={{-100,-20},{-78,-40}},
+                          lineColor={0,0,127},
+                          fillPattern=FillPattern.Forward,
                           textString="HR"),Text(
-                  extent={{80,-20},{100,-40}},
-                  lineColor={0,0,127},
-                  fillPattern=FillPattern.Forward,
+                          extent={{80,-20},{100,-40}},
+                          lineColor={0,0,127},
+                          fillPattern=FillPattern.Forward,
                           textString="V"),Text(
-                  extent={{-80,-20},{76,0}},
-                  lineColor={0,0,127},
-                  fillPattern=FillPattern.Forward,
-                  textString="%name")}));
+                          extent={{-80,-20},{76,0}},
+                          lineColor={0,0,127},
+                          fillPattern=FillPattern.Forward,
+                          textString="%name")}));
         end Septum;
 
         model Ventricle
@@ -3587,7 +3599,7 @@ package Cardiovascular
             Es=77993596.637775,
             Pi0=28.757638965416)
             annotation (Placement(transformation(extent={{-32,-4},{-12,22}})));
-        ElasticVesselWithSVandP ventricle(
+          ElasticVesselWithSVandP ventricle(
             useComplianceInput=true,
             useExternalPressureInput=true,
             useV0Input=true,
@@ -3681,44 +3693,44 @@ package Cardiovascular
                   extent={{-60,-60},{60,40}}), graphics), Icon(coordinateSystem(
                   preserveAspectRatio=false, extent={{-60,-60},{60,40}}),
                 graphics={Bitmap(extent={{-34,-44},{28,24}}, fileName=
-                      "modelica://Physiolibrary/Resources/Icons/heartVentricle.png"),
+                  "modelica://Physiolibrary/Resources/Icons/heartVentricle.png"),
                   Text(   extent={{-40,18},{-20,0}},
-                  lineColor={0,0,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          lineColor={0,0,127},
+                          pattern=LinePattern.Dash,
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="HR"),Text(
-                  extent={{20,20},{42,0}},
-                  lineColor={0,0,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{20,20},{42,0}},
+                          lineColor={0,0,127},
+                          pattern=LinePattern.Dash,
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="Pext"),Text(
-                  extent={{-16,0},{6,-20}},
-                  lineColor={0,0,127},
-                  pattern=LinePattern.Dash,
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{-16,0},{6,-20}},
+                          lineColor={0,0,127},
+                          pattern=LinePattern.Dash,
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="V0"),Rectangle(extent={{-40,40},{40,-20}},
                   lineColor={0,0,127}),Text(
-                  extent={{-60,60},{60,42}},
-                  lineColor={0,0,127},
-                  fillPattern=FillPattern.Forward,
-                  textString="%name")}));
+                          extent={{-60,60},{60,42}},
+                          lineColor={0,0,127},
+                          fillPattern=FillPattern.Forward,
+                          textString="%name")}));
         end Ventricle;
 
         model VentricularInteraction
-        //  Physiolibrary.Types.Pressure Plv,Plvf,Pperi,Prv,Prvf,Ppcd,Pth,Pspt;
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation (
-             Placement(transformation(extent={{-48,20},{-28,40}}),
+          //  Physiolibrary.Types.Pressure Plv,Plvf,Pperi,Prv,Prvf,Ppcd,Pth,Pspt;
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rvflow annotation
+            (Placement(transformation(extent={{-48,20},{-28,40}}),
                 iconTransformation(extent={{-10,90},{10,110}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation (
-             Placement(transformation(extent={{-46,-22},{-26,-2}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a lvflow annotation
+            (Placement(transformation(extent={{-46,-22},{-26,-2}}),
                 iconTransformation(extent={{-10,-110},{10,-90}})));
           Physiolibrary.Types.RealIO.FrequencyInput frequency annotation (
               Placement(transformation(extent={{-78,-40},{-38,0}}),
                 iconTransformation(extent={{-100,-12},{-60,28}})));
-        Pericardium pericardium(
+          Pericardium pericardium(
             lambda(displayUnit="1/m3") = 30000,
             V0=0.0002,
             P0=66.701190423724) annotation (Placement(transformation(
@@ -3743,8 +3755,8 @@ package Cardiovascular
                 rotation=180,
                 extent={{10,-10},{-10,10}},
                 origin={-10,-16})));
-          Septum septum annotation (Placement(transformation(rotation=0, extent=
-                   {{-54,-6},{-14,26}})));
+          Septum septum annotation (Placement(transformation(rotation=0, extent
+                  ={{-54,-6},{-14,26}})));
           Modelica.Blocks.Math.Gain gain(k=-1) annotation (Placement(
                 transformation(
                 extent={{-6,-6},{6,6}},
@@ -3772,12 +3784,12 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               points={{-15,44},{-58,44},{-58,-20}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(septum.HR,    frequency) annotation (Line(
+          connect(septum.HR, frequency) annotation (Line(
               points={{-52,10},{-58,10},{-58,-20}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(rightVentricle.stressedVolume, pericardium.Vrvfw) annotation (
-             Line(
+          connect(rightVentricle.stressedVolume, pericardium.Vrvfw) annotation
+            (Line(
               points={{-5,36},{-5,19.54},{20.06,19.54}},
               color={0,0,127},
               smooth=Smooth.Bezier));
@@ -3836,38 +3848,38 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               smooth=Smooth.None));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
                     {-100,-100},{100,100}}), graphics={Text(
-                  extent={{-102,-20},{-76,-32}},
-                  lineColor={0,0,255},
+                          extent={{-102,-20},{-76,-32}},
+                          lineColor={0,0,255},
                           textString="HR"),Text(
-                  extent={{100,-32},{74,-20}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{100,-32},{74,-20}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="Pth"),Bitmap(extent={{-92,84},{-4,-74}},
                   fileName=
-                      "modelica://Physiolibrary/Resources/Icons/srdceprava.png"),
-                Bitmap(extent={{-18,-102},{94,72}}, fileName=
-                      "modelica://Physiolibrary/Resources/Icons/srdceLeva.png"),
+                  "modelica://Physiolibrary/Resources/Icons/srdceprava.png"),
+                  Bitmap(extent={{-18,-102},{94,72}}, fileName=
+                  "modelica://Physiolibrary/Resources/Icons/srdceLeva.png"),
                   Polygon(points={{-18,48},{4,48},{6,30},{14,2},{16,-28},{16,-62},
                     {18,-64},{10,-72},{-6,-70},{-8,-52},{-10,-4},{-14,28},{-18,
                     44},{-18,46},{-18,48}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.Bezier,
-                  fillPattern=FillPattern.Forward,
+                          lineColor={0,0,0},
+                          smooth=Smooth.Bezier,
+                          fillPattern=FillPattern.Forward,
                           fillColor={255,205,205}),Polygon(
                           points={{-58,0},{-64,0},{-66,0},{-62,-12},{-56,-38},{
                     -38,-60},{-6,-76},{24,-72},{44,-50},{62,-18},{68,2},{60,4},
                     {56,-10},{46,-32},{34,-52},{20,-66},{4,-68},{-12,-64},{-44,
                     -42},{-42,-42},{-58,0}},
-                  lineColor={0,0,0},
-                  smooth=Smooth.Bezier,
-                  fillColor={255,205,205},
+                          lineColor={0,0,0},
+                          smooth=Smooth.Bezier,
+                          fillColor={255,205,205},
                           fillPattern=FillPattern.Forward),Text(
-                  extent={{-98,-68},{98,-92}},
-                  lineColor={0,0,0},
-                  lineThickness=1,
-                  fillColor={255,205,205},
-                  fillPattern=FillPattern.Forward,
+                          extent={{-98,-68},{98,-92}},
+                          lineColor={0,0,0},
+                          lineThickness=1,
+                          fillColor={255,205,205},
+                          fillPattern=FillPattern.Forward,
                           textString="%name")}), Diagram(coordinateSystem(
                   preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics));
@@ -3876,7 +3888,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         model TimeVaryingElastance
           //parameter Physiolibrary.Types.HydraulicElastance Ed "elastance of diastole";
           parameter Boolean useEs_extInput=false
-            "=true, if external elastance/compliance value is used" annotation (
+            "=true, if external elastance/compliance value is used" annotation
+            (
             Evaluate=true,
             HideResult=true,
             choices(__Dymola_checkBox=true),
@@ -3907,8 +3920,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 extent={{-14,-14},{14,14}},
                 rotation=0,
                 origin={66,66})));
-          Physiolibrary.Types.RealIO.FrequencyInput HR "heart rate" annotation (
-             Placement(transformation(extent={{76,58},{116,98}}),
+          Physiolibrary.Types.RealIO.FrequencyInput HR "heart rate" annotation
+            (Placement(transformation(extent={{76,58},{116,98}}),
                 iconTransformation(
                 extent={{-20,-20},{20,20}},
                 rotation=0,
@@ -3918,8 +3931,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 extent={{-20,-20},{20,20}},
                 rotation=180,
                 origin={60,-40})));
-          Physiolibrary.Types.RealIO.HydraulicComplianceInput Es_ext(start=1/Es)=
-               1/es_int if useEs_extInput annotation (Placement(transformation(
+          Physiolibrary.Types.RealIO.HydraulicComplianceInput Es_ext(start=1/Es)
+             = 1/es_int if useEs_extInput annotation (Placement(transformation(
                   extent={{60,60},{100,100}}), iconTransformation(
                 extent={{-20,-20},{20,20}},
                 rotation=0,
@@ -3931,7 +3944,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             es_int = Es;
           end if;
           tm = time - pre(t0);
-        /*  if tm < pre(ts) then
+          /*  if tm < pre(ts) then
     a = (1 - cos(2 * Modelica.Constants.pi * tm / pre(ts))) / 2;
   else
     a = 0;
@@ -3970,16 +3983,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                           extent={{-288,134},{260,78}},
                           lineColor={0,0,255},
                           textString="%name"),Text(
-                  extent={{44,-52},{76,-80}},
-                  lineColor={0,0,255},
-                  lineThickness=0.5,
-                  fillColor={255,255,170},
-                  fillPattern=FillPattern.Solid,
+                          extent={{44,-52},{76,-80}},
+                          lineColor={0,0,255},
+                          lineThickness=0.5,
+                          fillColor={255,255,170},
+                          fillPattern=FillPattern.Solid,
                           textString="V"),Line(
                           points={{-40,0},{-32,0},{-32,4},{-30,26},{-26,40},{-22,
                     42},{-20,38},{-18,22},{-16,0},{6,0},{8,24},{12,40},{16,42},
                     {18,38},{22,0},{44,0}},
-                  color={0,0,255},
+                          color={0,0,255},
                           smooth=Smooth.None)}), Diagram(coordinateSystem(
                   extent={{-100,-100},{60,100}})));
         end TimeVaryingElastance;
@@ -4032,66 +4045,66 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           Vlv = Vlvfw - Vsept;
           Pperi = P0*(exp(lambda*(Vperi - V0)) - 1);
           //orig equation in mmHg and ml
-           pressure = Pth + Pperi;
+          pressure = Pth + Pperi;
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
                     {-40,-100},{60,100}}), graphics={Polygon(
                           points={{-18,90},{-18,-90},{-6,-80},{24,-44},{32,-16},
                     {30,10},{24,32},{0,68},{-18,92},{-18,90}},
-                  smooth=Smooth.None,
-                  lineColor={167,167,255},
-                  fillPattern=FillPattern.Forward,
+                          smooth=Smooth.None,
+                          lineColor={167,167,255},
+                          fillPattern=FillPattern.Forward,
                           fillColor={227,227,255}),Polygon(
                           points={{30,4},{22,6},{-6,8},{-18,6},{-18,4},{-18,0},
                     {-18,-4},{-16,-4},{-8,-6},{24,-4},{30,-4},{30,4}},
-                  lineColor={167,167,255},
-                  smooth=Smooth.Bezier,
-                  fillColor={255,170,170},
+                          lineColor={167,167,255},
+                          smooth=Smooth.Bezier,
+                          fillColor={255,170,170},
                           fillPattern=FillPattern.Forward),Polygon(
                           points={{-18,102},{20,50},{36,14},{36,-30},{16,-62},{
                     -18,-98},{-20,-88},{12,-54},{28,-30},{28,14},{12,48},{-18,
                     90},{-18,102}},
-                  lineColor={0,0,255},
-                  smooth=Smooth.Bezier,
-                  fillColor={255,170,170},
+                          lineColor={0,0,255},
+                          smooth=Smooth.Bezier,
+                          fillColor={255,170,170},
                           fillPattern=FillPattern.Forward),Text(
-                  extent={{22,98},{40,80}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{22,98},{40,80}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="p"),Text(
-                  extent={{-16,14},{12,-10}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{-16,14},{12,-10}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="Vsept"),Text(
-                  extent={{-16,40},{10,14}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{-16,40},{10,14}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="Vrvfw"),Text(
-                  extent={{-18,-18},{8,-44}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{-18,-18},{8,-44}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="Vlvfw"),Text(
-                  extent={{22,40},{38,22}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{22,40},{38,22}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="Vrv"),Text(
-                  extent={{20,-22},{40,-36}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
+                          extent={{20,-22},{40,-36}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
                           textString="Vlv"),Text(
-                  extent={{-10,98},{12,76}},
-                  lineColor={0,0,255},
-                  fillColor={170,255,255},
-                  fillPattern=FillPattern.Forward,
+                          extent={{-10,98},{12,76}},
+                          lineColor={0,0,255},
+                          fillColor={170,255,255},
+                          fillPattern=FillPattern.Forward,
                           textString="Pth"),Text(
-                  extent={{-40,120},{64,100}},
-                  lineColor={0,0,127},
-                  fillPattern=FillPattern.Forward,
+                          extent={{-40,120},{64,100}},
+                          lineColor={0,0,127},
+                          fillPattern=FillPattern.Forward,
                           textString="%name")}), Diagram(coordinateSystem(
                   extent={{-40,-100},{60,100}}), graphics));
         end Pericardium;
@@ -4103,20 +4116,20 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   "m3/s") = 0.0001372)
             annotation (Placement(transformation(extent={{-90,30},{-70,50}})));
           Physiolibrary.Hydraulic.Components.IdealValveResistance
-            tricuspidValve(Pknee=0, _Ron(displayUnit="(mmHg.s)/ml")=
+            tricuspidValve(Pknee=0, _Ron(displayUnit="(mmHg.s)/ml") =
               3159740.5817355)
             annotation (Placement(transformation(extent={{-48,30},{-28,50}})));
           Physiolibrary.Hydraulic.Components.Inertia Lpv(I(displayUnit=
-                  "mmHg.s2/ml") = 19822.372560862, volumeFlow_start(displayUnit=
-                 "m3/s") = -1.9e-9)
+                  "mmHg.s2/ml") = 19822.372560862, volumeFlow_start(displayUnit
+                ="m3/s") = -1.9e-9)
             annotation (Placement(transformation(extent={{42,30},{62,50}})));
           Physiolibrary.Hydraulic.Components.IdealValveResistance
-            pulmonaryValve(Pknee=0, _Ron(displayUnit="(mmHg.s)/ml")=
+            pulmonaryValve(Pknee=0, _Ron(displayUnit="(mmHg.s)/ml") =
               733273.1307825)
             annotation (Placement(transformation(extent={{66,30},{86,50}})));
           Physiolibrary.Hydraulic.Components.Inertia Lmt(I(displayUnit=
-                  "mmHg.s2/ml") = 10261.557514558, volumeFlow_start(displayUnit=
-                 "m3/s") = 0.0001141) annotation (Placement(transformation(
+                  "mmHg.s2/ml") = 10261.557514558, volumeFlow_start(displayUnit
+                ="m3/s") = 0.0001141) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=180,
                 origin={78,-14})));
@@ -4124,12 +4137,12 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               Pknee=0, _Ron(displayUnit="(mmHg.s)/ml") = 2106493.721157)
             annotation (Placement(transformation(extent={{60,-24},{40,-4}})));
           Physiolibrary.Hydraulic.Components.Inertia Lav(I(displayUnit=
-                  "mmHg.s2/ml") = 16250.665802014, volumeFlow_start(displayUnit=
-                 "m3/s") = -1.4e-8) annotation (Placement(transformation(
+                  "mmHg.s2/ml") = 16250.665802014, volumeFlow_start(displayUnit
+                ="m3/s") = -1.4e-8) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=180,
                 origin={-40,-14})));
-            Physiolibrary.Hydraulic.Components.IdealValveResistance  aorticValve(
+          Physiolibrary.Hydraulic.Components.IdealValveResistance aorticValve(
               Pknee=0, _Ron(displayUnit="(mmHg.s)/ml") = 2399802.97347)
             annotation (Placement(transformation(extent={{-58,-24},{-78,-4}})));
           replaceable Physiolibrary.Types.Constants.FrequencyConst HR(k=1.2)
@@ -4188,8 +4201,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
-          connect(mitralValve.q_out, ventricularInteraction.lvflow) annotation (
-             Line(
+          connect(mitralValve.q_out, ventricularInteraction.lvflow) annotation
+            (Line(
               points={{40,-14},{6,-14}},
               color={0,0,0},
               thickness=1,
@@ -4212,8 +4225,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Smith")}));
+                          lineColor={0,0,0},
+                          textString="Smith")}));
         end Heart;
 
         model Pulmonary
@@ -4275,8 +4288,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Smith")}));
+                          lineColor={0,0,0},
+                          textString="Smith")}));
         end Pulmonary;
 
         model Systemic
@@ -4322,8 +4335,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
-                  lineColor={0,0,0},
-                  textString="Smith")}));
+                          lineColor={0,0,0},
+                          textString="Smith")}));
         end Systemic;
 
         model ElasticWall
@@ -4362,37 +4375,37 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           pressure = (volume - V0)/compliance;
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
                     {-100,-100},{100,100}}), graphics={Text(
-                  extent={{-30,26},{22,-4}},
-                  lineColor={0,0,255},
-                  lineThickness=0.5,
+                          extent={{-30,26},{22,-4}},
+                          lineColor={0,0,255},
+                          lineThickness=0.5,
                           textString="prv"),Text(
-                  extent={{-42,-38},{10,-68}},
-                  lineColor={0,0,255},
-                  lineThickness=0.5,
+                          extent={{-42,-38},{10,-68}},
+                          lineColor={0,0,255},
+                          lineThickness=0.5,
                           textString="plv"),Text(
-                  extent={{26,-32},{102,-56}},
-                  lineColor={0,0,255},
-                  lineThickness=0.5,
+                          extent={{26,-32},{102,-56}},
+                          lineColor={0,0,255},
+                          lineThickness=0.5,
                           textString="pressure"),Text(
-                  extent={{-150,-26},{-70,-46}},
-                  lineColor={0,0,255},
-                  lineThickness=0.5,
+                          extent={{-150,-26},{-70,-46}},
+                          lineColor={0,0,255},
+                          lineThickness=0.5,
                           textString="Volume"),Polygon(
                           points={{-100,-14},{-40,-34},{-6,-40},{8,-40},{40,-34},
                     {100,-14},{98,-14},{-100,-14}},
-                  lineColor={0,0,255},
-                  smooth=Smooth.None,
-                  fillPattern=FillPattern.Forward,
+                          lineColor={0,0,255},
+                          smooth=Smooth.None,
+                          fillPattern=FillPattern.Forward,
                           fillColor={255,170,170}),Text(
-                  extent={{-128,-10},{-60,-44}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Forward,
-                  textString="compliance
+                          extent={{-128,-10},{-60,-44}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Forward,
+                          textString="compliance
 "),Text(                  extent={{20,40},{166,-18}},
-                  lineColor={0,0,255},
-                  horizontalAlignment=TextAlignment.Left,
-                  textString="  pressure = plv -prv;
+                          lineColor={0,0,255},
+                          horizontalAlignment=TextAlignment.Left,
+                          textString="  pressure = plv -prv;
   pressure = (volume-V0) /compliance;")}), Diagram(coordinateSystem(
                   preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics));
@@ -4428,12 +4441,12 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           redeclare replaceable Model.Control.BloodVolumeControl
             longTermControl,
           redeclare ControlledParts.Baroreflex shortTermControl);
-      /*    redeclare CardiovascularDevel.Model.Control.StenosisControl stenosisControl(
+        /*    redeclare CardiovascularDevel.Model.Control.StenosisControl stenosisControl(
       venacavastenosis(InitialElastance=786602.0857485, FinalElastance=786602.0857485),
       AVBackFlowConductance(k(displayUnit="ml/(mmHg.s)") = 7.5006157584566e-14),
       aorticstenosis(InitialResistance=2399802.97347, FinalResistance=2399802.97347)),*/
 
-          extends Cardiovascular.Icons.Runnable_System;
+        extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(
             StopTime=5,
             __Dymola_NumberOfIntervals=5000,
@@ -4535,7 +4548,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                     useEs_extInput=true))),
             aorticValve(useLimitationInputs=false));
         equation
-        //  connect(volume, busConnector.heartvolume);
+          //  connect(volume, busConnector.heartvolume);
           connect(HR.c, busConnector.heartrate) annotation (Line(
               points={{-48,15},{-54,15},{-54,18},{-66,18},{-66,86},{-98,86}},
               color={0,0,127},
@@ -4609,17 +4622,17 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extent={{6,3},{6,3}}));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
                     {-100,-100},{100,100}}), graphics={Text(
-                  extent={{46,60},{98,42}},
-                  lineColor={0,0,255},
+                          extent={{46,60},{98,42}},
+                          lineColor={0,0,255},
                           textString="volume")}), Diagram(coordinateSystem(
                   preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics={Text(
-                  extent={{-40,56},{24,52}},
-                  lineColor={0,0,255},
+                          extent={{-40,56},{24,52}},
+                          lineColor={0,0,255},
                           textString=
                     "rvcompliance ->rightVentricle.drive.Es_ext"),Text(
-                  extent={{-62,-42},{2,-46}},
-                  lineColor={0,0,255},
+                          extent={{-62,-42},{2,-46}},
+                          lineColor={0,0,255},
                           textString=
                     "lvcompliance ->leftVentricle.drive.Es_ext")}));
         end VIVolume;
@@ -4723,7 +4736,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
     package Fernandez
       extends Modelica.Icons.ExamplesPackage;
       model Hemodynamics_shallow
-            extends Cardiovascular.Icons.Runnable_Shallow;
+        extends Cardiovascular.Icons.Runnable_Shallow;
 
         Physiolibrary.Hydraulic.Components.Inertia Ltc(I(displayUnit=
                 "mmHg.s2/ml") = 10678.18997523, volumeFlow_start(displayUnit=
@@ -4754,13 +4767,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extent={{-10,-10},{10,10}},
               rotation=180,
               origin={-44,-22})));
-          Physiolibrary.Hydraulic.Components.IdealValveResistance  aorticValve(
+        Physiolibrary.Hydraulic.Components.IdealValveResistance aorticValve(
             Pknee=0, _Ron(displayUnit="(mmHg.s)/ml") = 2399802.97347)
           annotation (Placement(transformation(extent={{-62,-32},{-82,-12}})));
         replaceable Physiolibrary.Types.Constants.FrequencyConst HR(k=1.2)
           annotation (Placement(transformation(extent={{-56,20},{-40,34}})));
         replaceable Smith2004.Parts.VentricularInteraction
-                                 ventricularInteraction
+          ventricularInteraction
           annotation (Placement(transformation(extent={{-28,-14},{32,40}})));
         Physiolibrary.Types.Constants.PressureConst Pth(k=-533.28954966)
           annotation (Placement(transformation(extent={{38,32},{48,42}})));
@@ -4773,8 +4786,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extent={{-19,-18},{19,18}},
               rotation=0,
               origin={-175,-30})));
-        Physiolibrary.Hydraulic.Components.Resistor Rpul(Resistance(displayUnit=
-               "(mmHg.s)/ml") = 20691634.526808) annotation (Placement(
+        Physiolibrary.Hydraulic.Components.Resistor Rpul(Resistance(displayUnit
+              ="(mmHg.s)/ml") = 20691634.526808) annotation (Placement(
               transformation(
               extent={{-15,-16},{15,16}},
               rotation=90,
@@ -4798,8 +4811,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           volume_start=0.0001241,
           Elastance=92165766.41999)
           annotation (Placement(transformation(extent={{186,34},{218,66}})));
-        Physiolibrary.Hydraulic.Components.Resistor Rsys(Resistance(displayUnit=
-               "(mmHg.s)/ml") = 145054757.50752) annotation (Placement(
+        Physiolibrary.Hydraulic.Components.Resistor Rsys(Resistance(displayUnit
+              ="(mmHg.s)/ml") = 145054757.50752) annotation (Placement(
               transformation(
               extent={{-16,-16},{16,16}},
               rotation=270,
@@ -4845,7 +4858,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             thickness=1,
             smooth=Smooth.None));
         connect(mitralValve.q_out, ventricularInteraction.lvflow) annotation (
-           Line(
+            Line(
             points={{36,-22},{2,-22},{2,-14}},
             color={0,0,0},
             thickness=1,
@@ -4922,7 +4935,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           redeclare Parts.PulmonaryCirculation pulmonaryCirculation,
           redeclare Parts.Heart heart,
           redeclare Parts.SystemicCirculation systemicCirculation);
-          extends Cardiovascular.Icons.Runnable_System;
+        extends Cardiovascular.Icons.Runnable_System;
         annotation (experiment(StopTime=5, __Dymola_NumberOfIntervals=5000),
             Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-20,-40},
                   {20,40}})));
@@ -4930,7 +4943,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
       package Parts
         extends Modelica.Icons.UtilitiesPackage;
-          connector HydraulicElastanceInput = input
+        connector HydraulicElastanceInput = input
             Physiolibrary.Types.HydraulicElastance
           "input HydraulicElastance as connector" annotation (
           defaultComponentName="hydraulicelastance",
@@ -5224,8 +5237,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               curve(y={0.0033,0.41,0.63,0.73,0.8,0.76,0.25,0.0033,0.0033},
                 slope={0,5.0136,2.56,1.36,0.24,-4.4,-6.0536,0,0}))
             annotation (Placement(transformation(extent={{48,2},{96,44}})));
-          Physiolibrary.Hydraulic.Components.IdealValve aorticValve annotation (
-             Placement(transformation(
+          Physiolibrary.Hydraulic.Components.IdealValve aorticValve annotation
+            (Placement(transformation(
                 extent={{10,-11},{-10,11}},
                 rotation=180,
                 origin={98,1})));
@@ -5240,6 +5253,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           connect(heartRate.y, variableElasticityGenerator.heartRate)
             annotation (Line(
               points={{-65.75,55},{-55.875,55},{-55.875,41.17},{-54.88,41.17}},
+
               color={0,0,127},
               smooth=Smooth.Bezier));
 
@@ -5306,6 +5320,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           connect(leftHeartInflow, mitralValve.q_in) annotation (Line(
               points={{100,-20},{100,-20},{100,-46},{36,-46},{36,-28},{40,-28}},
+
               color={0,0,0},
               thickness=1));
 
@@ -5323,9 +5338,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   extent={{-120,-60},{120,80}})), Icon(coordinateSystem(
                   preserveAspectRatio=false, extent={{-120,-60},{120,80}}),
                 graphics={Text(
-                  extent={{-98,48},{102,88}},
-                  lineColor={0,0,0},
-                  textString="Fernandez")}));
+                          extent={{-98,48},{102,88}},
+                          lineColor={0,0,0},
+                          textString="Fernandez")}));
         end Heart;
 
         model SystemicCirculation
@@ -5442,9 +5457,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   extent={{-120,-60},{120,60}})), Icon(coordinateSystem(
                   preserveAspectRatio=false, extent={{-120,-60},{120,60}}),
                 graphics={Text(
-                  extent={{-106,34},{94,74}},
-                  lineColor={0,0,0},
-                  textString="Fernandez")}));
+                          extent={{-106,34},{94,74}},
+                          lineColor={0,0,0},
+                          textString="Fernandez")}));
         end SystemicCirculation;
 
         model PulmonaryCirculation
@@ -5490,8 +5505,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
-          connect(pulmonaryArteries.q_in, pulmonaryResistance.q_in) annotation (
-             Line(
+          connect(pulmonaryArteries.q_in, pulmonaryResistance.q_in) annotation
+            (Line(
               points={{-10,0},{18,0}},
               color={0,0,0},
               thickness=1,
@@ -5522,18 +5537,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   extent={{-100,-40},{100,40}})), Icon(coordinateSystem(
                   preserveAspectRatio=false, extent={{-100,-40},{100,40}}),
                 graphics={Text(
-                  extent={{-98,10},{102,50}},
-                  lineColor={0,0,0},
-                  textString="Fernandez")}));
+                          extent={{-98,10},{102,50}},
+                          lineColor={0,0,0},
+                          textString="Fernandez")}));
         end PulmonaryCirculation;
 
-      model Curve
+        model Curve
           "2D natural cubic interpolation spline defined with (x,y,slope) points"
-        //workaround for openmodelica error: Cyclically dependent constants or parameters found in scope Physiolibrary.Blocks.Interpolation.Curve: {data,x}, {data,y}, {data,slope}.
-        //Error: Error occurred while flattening model Physiolibrary.Blocks.Interpolation.Curve
-        parameter Real x[:] "x coordinations of interpolating points";
-        parameter Real y[:] "y coordinations of interpolating points";
-        parameter Real slope[:] "slopes at interpolating points";
+          //workaround for openmodelica error: Cyclically dependent constants or parameters found in scope Physiolibrary.Blocks.Interpolation.Curve: {data,x}, {data,y}, {data,slope}.
+          //Error: Error occurred while flattening model Physiolibrary.Blocks.Interpolation.Curve
+          parameter Real x[:] "x coordinations of interpolating points";
+          parameter Real y[:] "y coordinations of interpolating points";
+          parameter Real slope[:] "slopes at interpolating points";
           Modelica.Blocks.Interfaces.RealInput u annotation (Placement(
                 transformation(extent={{-120,-20},{-80,20}})));
           Modelica.Blocks.Interfaces.RealOutput val
@@ -5545,7 +5560,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                       y,
                       slope)
             "cubic polynom coefficients of curve segments between interpolating points";
-      equation
+        equation
           val = Physiolibrary.Blocks.Interpolation.Spline(
                     x,
                     a,
@@ -5569,7 +5584,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                           color={0,0,127},
                           smooth=Smooth.Bezier,
                           arrow={Arrow.None,Arrow.Filled})}));
-      end Curve;
+        end Curve;
 
         block HydraulicElastanceToCompliance
           "Reciprocal value of hydraulic compliance"
@@ -5628,8 +5643,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-80,-30})));
-          PressureOutput Pd "Diastolic pressure during heart cycle" annotation (
-             Placement(transformation(extent={{-50,-40},{-30,-20}}),
+          PressureOutput Pd "Diastolic pressure during heart cycle" annotation
+            (Placement(transformation(extent={{-50,-40},{-30,-20}}),
                 iconTransformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
@@ -5721,14 +5736,15 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
     package Complex
       "Complex model unifying state-of-the-art circAdapt model with coronary arteries and complex arterial tree"
-         extends Modelica.Icons.ExamplesPackage;
+      extends Modelica.Icons.ExamplesPackage;
       package Environment "Central model settings and environment"
 
         import Physiolibrary.Types.*;
 
         model ComplexEnvironment "Class encompassing all settings"
           extends Cardiovascular.Icons.Settings;
-          import Cardiovascular.Model.Complex.Components.Main.SystemicArteries.*;
+          import Cardiovascular.Model.Complex.Components.Main.SystemicArteries
+            .*;
 
           inner replaceable Conditions.Rest_NoAdapt condition constrainedby
             Conditions.Abstraction.Condition
@@ -5754,14 +5770,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           inner Boolean stepCycle(start=true, fixed=true)
             "Steps denote start of new cardiac cycle";
 
-        //   discrete Real[:] feedback(start = {0, 0, 0})
-        //     "Monitored values for stability convergence";
-        //   discrete Real feedbackError
-        //     "Total square error of monitored values - used as a convergence criterion";
-        //   discrete Real newMode
-        //     "New mode to switch to - used during adaptation protocol";
-        //   Integer counter
-        //     "Counts sequential mode transitions realized without a need for further adaptation - used as a convergence criterion";
+          //   discrete Real[:] feedback(start = {0, 0, 0})
+          //     "Monitored values for stability convergence";
+          //   discrete Real feedbackError
+          //     "Total square error of monitored values - used as a convergence criterion";
+          //   discrete Real newMode
+          //     "New mode to switch to - used during adaptation protocol";
+          //   Integer counter
+          //     "Counts sequential mode transitions realized without a need for further adaptation - used as a convergence criterion";
           Real HeartRate=60/condition.cycleDuration "Heart rate BPM";
         equation
 
@@ -5775,22 +5791,22 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           end when;
 
 
-        //   // Controling adaptation convergence
-        //   when change(stepCycle) then
-        //     feedback[:] = {avg_PC_dp. average  * 760 / 101325, avg_cVSA_q. average * 1e6, avg_cVSA_p. average * 760 / 101325};
-        //     feedbackError = sum((feedback[i] - pre(feedback[i])) ^ 2 for i in 1 : size(feedback, 1));
-        //     newMode = settings.condition.processFeedback(feedbackError, pre(counter) >= 14);
-        //     counter = if pre(counter) < 14 and settings. condition. adaptationPhase and pre(settings. condition. adaptationPhase) then (if newMode <> pre(settings. condition. mode) then pre(counter) + 1 else max(0, pre(counter) - 1)) else pre(counter);
-        //     reinit(settings. condition. mode, newMode);
-        //   end when;
+          //   // Controling adaptation convergence
+          //   when change(stepCycle) then
+          //     feedback[:] = {avg_PC_dp. average  * 760 / 101325, avg_cVSA_q. average * 1e6, avg_cVSA_p. average * 760 / 101325};
+          //     feedbackError = sum((feedback[i] - pre(feedback[i])) ^ 2 for i in 1 : size(feedback, 1));
+          //     newMode = settings.condition.processFeedback(feedbackError, pre(counter) >= 14);
+          //     counter = if pre(counter) < 14 and settings. condition. adaptationPhase and pre(settings. condition. adaptationPhase) then (if newMode <> pre(settings. condition. mode) then pre(counter) + 1 else max(0, pre(counter) - 1)) else pre(counter);
+          //     reinit(settings. condition. mode, newMode);
+          //   end when;
 
           annotation (
-                  defaultComponentName="settings",
+            defaultComponentName="settings",
             defaultComponentPrefixes="inner",
             missingInnerMessage="No \"Settings\" component is defined. A default settings
     component is required for proper function. Its enough to drop it to the top-level scene!
     You can find it in Cardiovascular.Model.Complex.Settings.",
-                  Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+            Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                     {100,100}})));
         end ComplexEnvironment;
 
@@ -5868,7 +5884,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
           model Rest_Adapt "Adaptation phase in resting condition"
             extends Conditions.Rest_MinimalAdapt(adaptVesselDiameter=true,
-              adaptValveDiameter=true);
+                adaptValveDiameter=true);
 
           end Rest_Adapt;
 
@@ -6511,8 +6527,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           end Standard;
 
           record LVFailure
-            extends Standard(LW_contractilityScale=0.2, RW_contractilityScale=x, SW_contractilityScale=x);
-            constant Real x = 1;
+            extends Standard(
+              LW_contractilityScale=0.2,
+              RW_contractilityScale=x,
+              SW_contractilityScale=x);
+            constant Real x=1;
           end LVFailure;
         end ModelConstants;
       end Environment;
@@ -6551,10 +6570,10 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extends Physiolibrary.Hydraulic.Interfaces.HydraulicPort;
 
               annotation (Icon(graphics={Ellipse(
-                      extent={{-80,80},{80,-80}},
-                      lineColor={197,52,16},
-                      fillColor={255,170,0},
-                      fillPattern=FillPattern.Sphere)}));
+                                  extent={{-80,80},{80,-80}},
+                                  lineColor={197,52,16},
+                                  fillColor={255,170,0},
+                                  fillPattern=FillPattern.Sphere)}));
             end Through;
 
             connector Out "Outflow connector"
@@ -6799,16 +6818,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       graphics={Text( extent={{-32,26},{32,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
                                       textString="RC"),Text(
-                        extent={{-70,86},{72,30}},
-                        lineColor={0,0,0},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="%name")}));
+                                      extent={{-70,86},{72,30}},
+                                      lineColor={0,0,0},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="%name")}));
               end RC;
 
               model RLC "Constant RLC segment"
@@ -6851,16 +6870,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       graphics={Text( extent={{-34,26},{30,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
                                       textString="RLC"),Text(
-                        extent={{-70,86},{72,30}},
-                        lineColor={0,0,0},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="%name")}));
+                                      extent={{-70,86},{72,30}},
+                                      lineColor={0,0,0},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="%name")}));
               end RLC;
 
               model CLR "Constant CLR segment"
@@ -6903,16 +6922,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       graphics={Text( extent={{-34,26},{30,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
                                       textString="CLR"),Text(
-                        extent={{-66,86},{76,30}},
-                        lineColor={0,0,0},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="%name")}));
+                                      extent={{-66,86},{76,30}},
+                                      lineColor={0,0,0},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="%name")}));
               end CLR;
 
               model CRL "Constant CRL segment"
@@ -6955,16 +6974,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       graphics={Text( extent={{-34,26},{30,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
                                       textString="CRL"),Text(
-                        extent={{-66,86},{76,30}},
-                        lineColor={0,0,0},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="%name")}));
+                                      extent={{-66,86},{76,30}},
+                                      lineColor={0,0,0},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="%name")}));
               end CRL;
 
               model CLpRR "Constant C(L|R)R segment"
@@ -6989,16 +7008,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       graphics={Rectangle(
-                        extent={{-48,18},{52,-18}},
-                        lineColor={255,255,255},
-                        fillColor={255,255,255},
+                                      extent={{-48,18},{52,-18}},
+                                      lineColor={255,255,255},
+                                      fillColor={255,255,255},
                                       fillPattern=FillPattern.Solid),Text(
-                        extent={{-34,26},{30,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
-                        textString="CLpRR")}));
+                                      extent={{-34,26},{30,-24}},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
+                                      textString="CLpRR")}));
               end CLpRR;
 
               model CRLpR "Constant CR(L|R) segment"
@@ -7023,16 +7042,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       graphics={Rectangle(
-                        extent={{-50,18},{50,-18}},
-                        lineColor={255,255,255},
-                        fillColor={255,255,255},
+                                      extent={{-50,18},{50,-18}},
+                                      lineColor={255,255,255},
+                                      fillColor={255,255,255},
                                       fillPattern=FillPattern.Solid),Text(
-                        extent={{-34,26},{30,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
-                        textString="CRLpR")}));
+                                      extent={{-34,26},{30,-24}},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
+                                      textString="CRLpR")}));
               end CRLpR;
 
               partial model LpRCR "Constant (L|R)CR segment"
@@ -7086,16 +7105,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       graphics={Text( extent={{-34,26},{30,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
                                       textString="LpRCR"),Text(
-                        extent={{-66,86},{76,30}},
-                        lineColor={0,0,0},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="%name")}));
+                                      extent={{-66,86},{76,30}},
+                                      lineColor={0,0,0},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="%name")}));
               end LpRCR;
 
               model RRcC "Constant R(R-C) segment"
@@ -7142,17 +7161,17 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}}), graphics={Text(
-                        extent={{-32,26},{32,-24}},
-                        lineColor={0,0,0},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid,
-                        textStyle={TextStyle.Bold},
+                                      extent={{-32,26},{32,-24}},
+                                      lineColor={0,0,0},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid,
+                                      textStyle={TextStyle.Bold},
                                       textString="RRcC"),Text(
-                        extent={{-66,84},{76,28}},
-                        lineColor={0,0,0},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="%name")}));
+                                      extent={{-66,84},{76,28}},
+                                      lineColor={0,0,0},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="%name")}));
               end RRcC;
 
             end Compounds;
@@ -7346,11 +7365,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}}), graphics={Text(
-                        extent={{-62,-34},{62,-76}},
-                        lineColor={127,0,127},
-                        fillColor={86,199,10},
-                        fillPattern=FillPattern.Solid,
-                        textString="+IABP")}));
+                                      extent={{-62,-34},{62,-76}},
+                                      lineColor={127,0,127},
+                                      fillColor={86,199,10},
+                                      fillPattern=FillPattern.Solid,
+                                      textString="+IABP")}));
               end TubeRLC_Derived_IABP;
             end Tubes;
           end RLC;
@@ -7369,15 +7388,15 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 outer Environment.ComplexEnvironment settings
                   "Everything is out there...";
 
-              //   discrete input Cardiovascular.Types.Area Am0(start=Am0_init,
-              //       fixed=true) "Adaptable mid-wall area of dead space";
-              //   discrete input Cardiovascular.Types.Area AmRef(start=AmRef_init,
-              //       fixed=true) "Adaptable mid-wall area of cavity";
-              //   discrete input Pressure sigmaPRef(start = sigmaPRef_init, fixed = true)
-              //     "Adaptable reference passive myofiber stress";
-              //   discrete input Volume VW(start = VW_init, fixed = true)
-              //     "Adaptable wall volume";
-              // DISABLING THE ADAPTATION
+                //   discrete input Cardiovascular.Types.Area Am0(start=Am0_init,
+                //       fixed=true) "Adaptable mid-wall area of dead space";
+                //   discrete input Cardiovascular.Types.Area AmRef(start=AmRef_init,
+                //       fixed=true) "Adaptable mid-wall area of cavity";
+                //   discrete input Pressure sigmaPRef(start = sigmaPRef_init, fixed = true)
+                //     "Adaptable reference passive myofiber stress";
+                //   discrete input Volume VW(start = VW_init, fixed = true)
+                //     "Adaptable wall volume";
+                // DISABLING THE ADAPTATION
                 Cardiovascular.Types.Area Am0=Am0_init;
                 Cardiovascular.Types.Area AmRef=AmRef_init;
                 Pressure sigmaPRef=sigmaPRef_init;
@@ -7492,9 +7511,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 "Everything is out there...";
               inner Pressure pP=pPRef*(VP/VPRef)^kP "Pericardial pressure";
 
-            //   discrete input Volume VPRef(start = VPRef_init, fixed = true)
-            //     "Adaptable reference pericardial volume";
-            // DISABLING THE ADAPTATION
+              //   discrete input Volume VPRef(start = VPRef_init, fixed = true)
+              //     "Adaptable reference pericardial volume";
+              // DISABLING THE ADAPTATION
               Volume VPRef=VPRef_init;
 
               parameter Real kP
@@ -7658,6 +7677,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   thickness=1));
               connect(vSV.cOut, RA.c) annotation (Line(
                   points={{-44.1396,-7.99878},{-44,-7.99878},{-44,-23.5},{-45,-23.5}},
+
                   color={127,5,58},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -7675,12 +7695,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   thickness=1));
               connect(vPV.cOut, LA.c) annotation (Line(
                   points={{33.8604,2.00122},{36,2.00122},{36,-11.5},{37,-11.5}},
+
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
 
               connect(vLAV.cIn, LA.c) annotation (Line(
                   points={{34.3184,-47.0748},{36,-47.0748},{36,-11.5},{37,-11.5}},
+
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -7693,6 +7715,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   thickness=1));
               connect(ventricles.cLV, vSA.cIn) annotation (Line(
                   points={{8.8,-67.4},{8,-67.4},{8,-47.9988},{9.86038,-47.9988}},
+
                   color={255,0,0},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -7750,7 +7773,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               // discrete input Cardiovascular.Types.Area ARef(start=ARef_init,
               //       fixed=true) "Adaptable cross-sectional area";
-            // DISABLING THE ADAPTATION
+              // DISABLING THE ADAPTATION
               Cardiovascular.Types.Area ARef=ARef_init;
 
               parameter Cardiovascular.Types.Area ARef_init
@@ -7842,9 +7865,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extends Physiolibrary.Icons.HeartVentricle;
               import Cardiovascular.Types.*;
 
-            //   discrete input Real EAmRef(start = EAmRef_init, fixed = true)
-            //     "Adaptable correctional coefficient for sepal wall geometry";
-            // DISABLING THE ADAPTATION
+              //   discrete input Real EAmRef(start = EAmRef_init, fixed = true)
+              //     "Adaptable correctional coefficient for sepal wall geometry";
+              // DISABLING THE ADAPTATION
               Real EAmRef=EAmRef_init;
 
               parameter Real EAmRef_init=0
@@ -8002,9 +8025,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               annotation (Icon(graphics={Polygon(
                                   points={{32,-8},{40,2},{98,2},{96,-2},{42,-2},
                         {32,-8}}, lineColor={0,0,255},
-                      lineThickness=1,
-                      fillColor={0,0,255},
-                      fillPattern=FillPattern.Solid)}), Diagram(
+                                  lineThickness=1,
+                                  fillColor={0,0,255},
+                                  fillPattern=FillPattern.Solid)}), Diagram(
                     coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                         {100,100}})));
             end HeartLVCannulated;
@@ -8074,12 +8097,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                     points={{-10,0},{-80,0}},
                     color={0,0,255},
                     smooth=Smooth.None));
-                connect(core.c, pressureMeasure.q_in)   annotation (Line(
+                connect(core.c, pressureMeasure.q_in) annotation (Line(
                     points={{-10,-31},{2,-31},{2,-30}},
                     color={0,0,255},
                     smooth=Smooth.None));
                 connect(pressureMeasure.pressure, pInner) annotation (Line(
                     points={{12,-28},{22,-28},{22,-66},{0,-66},{0,-80},{0,-80}},
+
                     color={0,0,127},
                     smooth=Smooth.None));
 
@@ -8087,11 +8111,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}}), graphics={Text(
-                        extent={{-40,20},{40,80}},
-                        lineColor={0,0,0},
-                        textString="A",
-                        fontName="Bauhaus 93",
-                        textStyle={TextStyle.Bold})}));
+                                      extent={{-40,20},{40,80}},
+                                      lineColor={0,0,0},
+                                      textString="A",
+                                      fontName="Bauhaus 93",
+                                      textStyle={TextStyle.Bold})}));
               end AdaptableVessels;
 
               model Capillaries "Port for capillaries"
@@ -8116,10 +8140,10 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Icon(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics={Rectangle(
-                        extent={{-70,30},{70,-30}},
-                        lineColor={255,255,255},
-                        fillColor={255,255,255},
-                        fillPattern=FillPattern.Solid)}), Diagram(
+                                      extent={{-70,30},{70,-30}},
+                                      lineColor={255,255,255},
+                                      fillColor={255,255,255},
+                                      fillPattern=FillPattern.Solid)}), Diagram(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}})));
               end Capillaries;
@@ -8179,7 +8203,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               // For an unknown reason, this won't compile for the Abdolrazaghi tree:
               //   p = pRef * ((VW + 3 * V) / (VW + 3 * VRef)) ^ ((k - 3) / 3);
-            //   p = pre(pRef) * ((pre(AW) * l + 3 * V) / (pre(AW) * l + 3 * pre(ARef) * l)) ^ ((k - 3) / 3);
+              //   p = pre(pRef) * ((pre(AW) * l + 3 * V) / (pre(AW) * l + 3 * pre(ARef) * l)) ^ ((k - 3) / 3);
 
               // DISABLING THE ADAPTATION
               p = pRef*((VW + 3*V)/(VW + 3*VRef))^((k - 3)/3);
@@ -8211,7 +8235,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extends Cardiovascular.Icons.Vessels;
               extends Auxiliary.BlockKinds.Port;
               import
-                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Elements.*;
+                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Elements
+                .*;
               import Physiolibrary.Types.Volume;
 
               input Real pM "Intramyocardial pressure";
@@ -8279,7 +8304,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 "Common ancestor for all types of systemic arteries"
                 extends Vessels.Abstraction.Vessels;
                 import
-                  Cardiovascular.Model.Complex.Components.Auxiliary.Connectors.*;
+                  Cardiovascular.Model.Complex.Components.Auxiliary.Connectors
+                  .*;
 
                 parameter Boolean isAdaptable
                   "Whether the model supports adaptation";
@@ -8302,18 +8328,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 import Physiolibrary.Types.*;
 
                 // DISABLING THE ADAPTATION
-              //   inner parameter Real k = 10
-              //     "Fake stifnesss non-linearity parameter";
-              //   inner parameter Cardiovascular.Types.Length l=1
-              //     "Fake total arterial length";
-              //   inner parameter Cardiovascular.Types.Area AW_init=1
-              //     "Fake starting value of wall cross-sectional area";
-              //   inner parameter Cardiovascular.Types.Area ARef_init=1
-              //     "Fake starting value of reference inner cross-sectional area";
-              //   inner parameter Pressure pRef_init = 1
-              //     "Fake starting value of reference pressure";
-              //
-              //   Vessels.AdaptableVesselsCore core "Fake compliance core";
+                //   inner parameter Real k = 10
+                //     "Fake stifnesss non-linearity parameter";
+                //   inner parameter Cardiovascular.Types.Length l=1
+                //     "Fake total arterial length";
+                //   inner parameter Cardiovascular.Types.Area AW_init=1
+                //     "Fake starting value of wall cross-sectional area";
+                //   inner parameter Cardiovascular.Types.Area ARef_init=1
+                //     "Fake starting value of reference inner cross-sectional area";
+                //   inner parameter Pressure pRef_init = 1
+                //     "Fake starting value of reference pressure";
+                //
+                //   Vessels.AdaptableVesselsCore core "Fake compliance core";
 
               end SystemicArteries_Adapter;
             end Abstraction;
@@ -8335,7 +8361,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               Volume V_filling(start=0);
 
-                Real q_filling;
+              Real q_filling;
 
               parameter Fraction speed_factor=10;
 
@@ -8349,7 +8375,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               der(V_filling) = q_filling;
               q_filling/speed_factor = V_init - V_filling;
               // - der(V_filling);
-                volumeControl_.solutionFlow = q_filling;
+              volumeControl_.solutionFlow = q_filling;
               connect(volumeControl_.q_out, cIn);
               // Homely component -> disabling vizualization, even for connection
 
@@ -8362,13 +8388,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                       extent={{-100,-100},{100,100}}), graphics), Icon(
                     coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                         {100,100}}), graphics={Text(
-                      extent={{-52,52},{28,16}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Original (Arts)")}));
+                                  extent={{-52,52},{28,16}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Original (Arts)")}));
             end Original_CircAdapt;
 
 
@@ -8384,7 +8410,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               import Physiolibrary.Types.*;
               Volume V_filling(start=0);
 
-                Real q_filling;
+              Real q_filling;
 
               parameter Fraction speed_factor=10;
 
@@ -8398,7 +8424,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               der(V_filling) = q_filling;
               q_filling/speed_factor = V_init - V_filling;
               // - der(V_filling);
-                volumeControl_.solutionFlow = q_filling;
+              volumeControl_.solutionFlow = q_filling;
               connect(volumeControl_.q_out, cIn);
               // Homely component -> disabling vizualization, even for connection
 
@@ -8410,14 +8436,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-70,64},{52,4}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Windkessel (Physiolibrary)")}));
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-70,64},{52,4}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Windkessel (Physiolibrary)")}));
             end Windkessel_Physiolibrary;
 
             model Windkessel_Stergiopulos
@@ -8439,22 +8465,24 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-68,64},{46,8}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Windkessel (Stergiopulos)")}));
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-68,64},{46,8}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Windkessel (Stergiopulos)")}));
             end Windkessel_Stergiopulos;
 
             model Aorta_Ferrari "Model of aorta by Ferrari et al. (2005)"
               extends SystemicArteries.Abstraction.SystemicArteries_Adapter;
               import
-                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Compounds.*;
+                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Compounds
+                .*;
               import
-                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Elements.*;
+                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Elements
+                .*;
               import
                 Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Tubes.*;
               import Cardiovascular.Types.*;
@@ -8549,7 +8577,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               pInner = aorticArch2.cIn.pressure;
 
               if settings.supports.ECMO_isEnabled then
-                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta then
+                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta
+                     then
                   connect(cCannula, ascendingAorta.cIn);
                 elseif settings.supports.ECMO_cannulaPlacement ==
                     CannulaPlacement.aorticArch1 then
@@ -8697,21 +8726,22 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-56,56},{28,10}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Aorta (Ferrari)")}));
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-56,56},{28,10}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Aorta (Ferrari)")}));
             end Aorta_Ferrari;
 
             model Tree_Abdolrazaghi
               "Model of systemic arterial tree by Abdolrazaghi et al. (2010)"
               extends Abstraction.SystemicArteries_Adapter;
               import
-                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Compounds.*;
+                Cardiovascular.Model.Complex.Components.Auxiliary.RLC.Compounds
+                .*;
               import Cardiovascular.Types.*;
               import Physiolibrary.Types.Volume;
 
@@ -8914,7 +8944,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               pInner = aorticArch2.cIn.pressure;
 
               if settings.supports.ECMO_isEnabled then
-                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta then
+                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta
+                     then
                   connect(cCannula, ascendingAorta.cIn);
                 elseif settings.supports.ECMO_cannulaPlacement ==
                     CannulaPlacement.aorticArch1 then
@@ -8997,8 +9028,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{96,90},{94,90},{94,6},{90,6}},
                   color={0,0,255},
                   smooth=Smooth.None));
-              connect(abdominalAorta4.cOut, inferiorMesenteric.cIn) annotation (
-                 Line(
+              connect(abdominalAorta4.cOut, inferiorMesenteric.cIn) annotation
+                (Line(
                   points={{90,-58},{66,-58},{66,-54},{42,-54}},
                   color={0,0,255},
                   smooth=Smooth.None));
@@ -9143,14 +9174,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-60,50},{36,12}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Tree (Abdolrazaghi)")}));
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-60,50},{36,12}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Tree (Abdolrazaghi)")}));
             end Tree_Abdolrazaghi;
 
             model ComplexTree_Derived "Derived arterial tree"
@@ -9245,7 +9276,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
               Volume V_filling(start=0);
 
-                Real q_filling;
+              Real q_filling;
 
               parameter Fraction speed_factor=5;
 
@@ -10210,8 +10241,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 h=0.02e-2,
                 E=16e5) annotation (Placement(transformation(extent={{-76,-2},{
                         -72,2}})));
-            // initial equation
-            //   thoracicAorta3.V = 180e-3;
+              // initial equation
+              //   thoracicAorta3.V = 180e-3;
 
 
 
@@ -10220,14 +10251,15 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               der(V_filling) = q_filling;
               q_filling/speed_factor = V_init - V_filling;
               // - der(V_filling);
-                volumeControl_.solutionFlow = q_filling;
+              volumeControl_.solutionFlow = q_filling;
               connect(volumeControl_.q_out, cIn);
               // Homely component -> disabling vizualization, even for connection
 
               pInner = aorticArch2.cIn.pressure;
 
               if settings.supports.ECMO_isEnabled then
-                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta then
+                if settings.supports.ECMO_cannulaPlacement == CannulaPlacement.ascendingAorta
+                     then
                   connect(cCannula, ascendingAorta.cIn);
                 elseif settings.supports.ECMO_cannulaPlacement ==
                     CannulaPlacement.aorticArch1 then
@@ -10311,8 +10343,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-52,11.6},{-54,11.6},{-54,8},{-57.6,8}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(leftPopliteal2.cOut, leftAnteriorTibial1.cIn) annotation (
-                 Line(
+              connect(leftPopliteal2.cOut, leftAnteriorTibial1.cIn) annotation
+                (Line(
                   points={{-52,11.6},{-50,11.6},{-50,4},{-51.6,4}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10345,8 +10377,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-88.4,32},{-90,32},{-90,30},{-91.6,30}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightExternalIlliac2.cOut, rightFemoral1.cIn) annotation (
-                 Line(
+              connect(rightExternalIlliac2.cOut, rightFemoral1.cIn) annotation
+                (Line(
                   points={{-60.4,22},{-62,22},{-62,18},{-63.6,18}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10453,8 +10485,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-63.6,28},{-60,28},{-60,33.6},{-58,33.6}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(inferiorMesenteric.cIn, abdominalAorta3.cOut) annotation (
-                 Line(
+              connect(inferiorMesenteric.cIn, abdominalAorta3.cOut) annotation
+                (Line(
                   points={{-59.6,28},{-58,28},{-58,33.6}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10518,8 +10550,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-67.6,86},{-66,86},{-66,84},{-64.4,84}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightBrachial1.cOut, rightProfundaBrachi.cIn) annotation (
-                 Line(
+              connect(rightBrachial1.cOut, rightProfundaBrachi.cIn) annotation
+                (Line(
                   points={{-90.4,52},{-95.6,52},{-95.6,50}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10532,8 +10564,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-58,41.6},{-58,34.4}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(abdominalAorta1.cOut, superiorMesenteric.cIn) annotation (
-                 Line(
+              connect(abdominalAorta1.cOut, superiorMesenteric.cIn) annotation
+                (Line(
                   points={{-58,41.6},{-63.6,41.6},{-63.6,38}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10581,8 +10613,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-64.4,78},{-69.6,78},{-69.6,80}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightInternalCarotid1.cOut, rightLingual.cIn) annotation (
-                 Line(
+              connect(rightInternalCarotid1.cOut, rightLingual.cIn) annotation
+                (Line(
                   points={{-64.4,78},{-69.6,78},{-69.6,82}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10591,8 +10623,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-64.4,78},{-66,78},{-66,84},{-67.6,84}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightCerebral.cIn, rightExternalCarotid.cOut) annotation (
-                 Line(
+              connect(rightCerebral.cIn, rightExternalCarotid.cOut) annotation
+                (Line(
                   points={{-75.6,76},{-66.4,76}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -10727,18 +10759,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   points={{-78.4,58},{-87.6,58}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightSubclavian.cOut, rightCostocervical.cIn) annotation (
-                 Line(
+              connect(rightSubclavian.cOut, rightCostocervical.cIn) annotation
+                (Line(
                   points={{-78.4,58},{-85.6,58},{-85.6,60}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightSubclavian.cOut, rightThyrocervical.cIn) annotation (
-                 Line(
+              connect(rightSubclavian.cOut, rightThyrocervical.cIn) annotation
+                (Line(
                   points={{-78.4,58},{-85.6,58},{-85.6,62}},
                   color={0,0,0},
                   smooth=Smooth.None));
-              connect(rightSubclavian.cOut, rightSuprascapular.cIn) annotation (
-                 Line(
+              connect(rightSubclavian.cOut, rightSuprascapular.cIn) annotation
+                (Line(
                   points={{-78.4,58},{-85.6,58},{-85.6,64}},
                   color={0,0,0},
                   smooth=Smooth.None));
@@ -11083,14 +11115,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   smooth=Smooth.None));
 
               annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics=
-                     {Text(       extent={{-62,44},{46,24}},
-                      lineColor={0,128,0},
-                      lineThickness=1,
-                      fillColor={255,0,0},
-                      fillPattern=FillPattern.Solid,
-                      textStyle={TextStyle.Bold},
-                      textString="Derived Tree")}));
+                      extent={{-100,-100},{100,100}}), graphics), Icon(graphics
+                    ={Text(       extent={{-62,44},{46,24}},
+                                  lineColor={0,128,0},
+                                  lineThickness=1,
+                                  fillColor={255,0,0},
+                                  fillPattern=FillPattern.Solid,
+                                  textStyle={TextStyle.Bold},
+                                  textString="Derived Tree")}));
             end ComplexTree_Derived;
           end SystemicArteries;
 
@@ -11435,8 +11467,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   thickness=1));
 
               connect(inflowTube.cIn, cIn) annotation (Line(points={{-55.8405,
-                      36.7048},{-55.8405,18.3524},{-80,18.3524},{-80,0}}, color=
-                     {127,0,0}));
+                      36.7048},{-55.8405,18.3524},{-80,18.3524},{-80,0}}, color
+                    ={127,0,0}));
               connect(outflowTube.cOut, cOut) annotation (Line(points={{61.234,
                       37.6013},{61.234,19.8007},{80,19.8007},{80,0}}, color={
                       229,133,64}));
@@ -11459,24 +11491,24 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           outer Environment.ComplexEnvironment settings
             "Everything is out there...";
 
-        //   Averager avg_LV_pEjection(
-        //     redeclare type T = Pressure,
-        //     signal = heart. ventricles. pLV,
-        //     condition = -heart. vSA. cOut. q > 0,
-        //     control = stepCycle);
-        //   Averager avg_cVSA_p(
-        //     redeclare type T = Pressure,
-        //     signal = heart. cVSA. pressure,
-        //     control = stepCycle);
-        //   Averager avg_cVSA_q(
-        //     redeclare type T = VolumeFlowRate,
-        //     signal = -heart. cVSA. q,
-        //     control = stepCycle);
-        //
-        //   Maxer max_pP(
-        //     redeclare type T = Pressure,
-        //     signal = heart. pP,
-        //     control = stepCycle);
+          //   Averager avg_LV_pEjection(
+          //     redeclare type T = Pressure,
+          //     signal = heart. ventricles. pLV,
+          //     condition = -heart. vSA. cOut. q > 0,
+          //     control = stepCycle);
+          //   Averager avg_cVSA_p(
+          //     redeclare type T = Pressure,
+          //     signal = heart. cVSA. pressure,
+          //     control = stepCycle);
+          //   Averager avg_cVSA_q(
+          //     redeclare type T = VolumeFlowRate,
+          //     signal = -heart. cVSA. q,
+          //     control = stepCycle);
+          //
+          //   Maxer max_pP(
+          //     redeclare type T = Pressure,
+          //     signal = heart. pP,
+          //     control = stepCycle);
 
           // Averager avg_LW_sigmaAPositive(
           //   redeclare type T = Pressure,
@@ -11576,68 +11608,68 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           //   control = stepCycle);
 
         equation
-        //   V = heart. V;
+          //   V = heart. V;
           // MOVED FROM CARDIO:
 
           // DISABLING THE ADAPTATION
-        //
-        //   // Adaptation of valve diameters and dead mid-wall area of heart walls
-        //   when change(stepCycle) and settings. condition. adaptValveDiameter then
-        //     heart. vSA. ARef = if SA. isAdaptable then avg_SA_A. average else pre(heart. vSA. ARef);
-        //     heart. vSV. ARef = avg_SV_A. average;
-        //     heart. vPA. ARef = avg_PA_A. average;
-        //     heart. vPV. ARef = avg_PV_A. average;
-        //     heart. vLAV. ARef = 1.5 * heart. vSA. ARef;
-        //     heart. vRAV. ARef = 1.5 * avg_PA_A. average;
-        //     heart. ventricles. LW. Am0 = 1.5 * heart. vSA. ARef + heart. vSA. ARef;
-        //     heart. ventricles. SW. Am0 = 0;
-        //     heart. ventricles. RW. Am0 = 1.5 * avg_PA_A. average + avg_PA_A. average;
-        //     heart. LA. Am0 = 1.5 * heart. vSA. ARef + avg_SV_A. average;
-        //     heart. RA. Am0 = 1.5 * avg_PA_A. average + avg_PV_A. average;
-        //   end when;
+          //
+          //   // Adaptation of valve diameters and dead mid-wall area of heart walls
+          //   when change(stepCycle) and settings. condition. adaptValveDiameter then
+          //     heart. vSA. ARef = if SA. isAdaptable then avg_SA_A. average else pre(heart. vSA. ARef);
+          //     heart. vSV. ARef = avg_SV_A. average;
+          //     heart. vPA. ARef = avg_PA_A. average;
+          //     heart. vPV. ARef = avg_PV_A. average;
+          //     heart. vLAV. ARef = 1.5 * heart. vSA. ARef;
+          //     heart. vRAV. ARef = 1.5 * avg_PA_A. average;
+          //     heart. ventricles. LW. Am0 = 1.5 * heart. vSA. ARef + heart. vSA. ARef;
+          //     heart. ventricles. SW. Am0 = 0;
+          //     heart. ventricles. RW. Am0 = 1.5 * avg_PA_A. average + avg_PA_A. average;
+          //     heart. LA. Am0 = 1.5 * heart. vSA. ARef + avg_SV_A. average;
+          //     heart. RA. Am0 = 1.5 * avg_PA_A. average + avg_PV_A. average;
+          //   end when;
 
 
           // DISABLING THE ADAPTATION
-        //   // Adaptation of correctional term for more appropriate wall geometry
-        //   when change(stepCycle) and settings. condition. adaptTriSegJunction then
-        //     heart. ventricles. LW. EAmRef = 0;
-        //     heart. ventricles. SW. EAmRef = 5 * log(pre(heart. ventricles. LW. AmRef) * pre(heart. ventricles. RW. AmRef) / (pre(heart. ventricles. SW. AmRef) * (pre(heart. ventricles. LW. AmRef) + pre(heart. ventricles. RW. AmRef))));
-        //     heart. ventricles. RW. EAmRef = 0;
-        //   end when;
+          //   // Adaptation of correctional term for more appropriate wall geometry
+          //   when change(stepCycle) and settings. condition. adaptTriSegJunction then
+          //     heart. ventricles. LW. EAmRef = 0;
+          //     heart. ventricles. SW. EAmRef = 5 * log(pre(heart. ventricles. LW. AmRef) * pre(heart. ventricles. RW. AmRef) / (pre(heart. ventricles. SW. AmRef) * (pre(heart. ventricles. LW. AmRef) + pre(heart. ventricles. RW. AmRef))));
+          //     heart. ventricles. RW. EAmRef = 0;
+          //   end when;
 
-            // DISABLING THE ADAPTATION
+          // DISABLING THE ADAPTATION
 
-        //   // Adaptation of wall volumes of heart walls
-        //   when change(stepCycle) and settings. condition. adaptChamberWVolume then
-        //     heart. ventricles. LW. VW = pre(heart. ventricles. LW. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LW_sigmaAPositiveNorm. average / avg_LW_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. LW. EAmRef) / pre(max_LW_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. ventricles. SW. VW = pre(heart. ventricles. SW. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_SW_sigmaAPositiveNorm. average / avg_SW_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. SW. EAmRef) / pre(max_SW_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. ventricles. RW. VW = pre(heart. ventricles. RW. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RW_sigmaAPositiveNorm. average / avg_RW_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. RW. EAmRef) / pre(max_RW_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. LA. VW = pre(heart. LA. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LA_sigmaAPositiveNorm. average / avg_LA_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_LA_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. RA. VW = pre(heart. RA. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RA_sigmaAPositiveNorm. average / avg_RA_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_RA_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //   end when;
-        //
-        //   // Adaptation of reference cross-sectional area of heart walls
-        //   when change(stepCycle) and settings. condition. adaptChamberWArea then
-        //     heart. ventricles. LW. AmRef = pre(heart. ventricles. LW. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LW_sigmaAPositiveNorm. average / avg_LW_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. LW. EAmRef) / pre(max_LW_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. ventricles. SW. AmRef = pre(heart. ventricles. SW. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_SW_sigmaAPositiveNorm. average / avg_SW_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. SW. EAmRef) / pre(max_SW_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. ventricles. RW. AmRef = pre(heart. ventricles. RW. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RW_sigmaAPositiveNorm. average / avg_RW_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. RW. EAmRef) / pre(max_RW_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. LA. AmRef = pre(heart. LA. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LA_sigmaAPositiveNorm. average / avg_LA_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_LA_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. RA. AmRef = pre(heart. RA. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RA_sigmaAPositiveNorm. average / avg_RA_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_RA_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //   end when;
-        //
-        //   // Adaptation of reference passive myofiber stress of heart walls
-        //   when change(stepCycle) and settings. condition. adaptChamberEcmStress then
-        //     heart. ventricles. LW. sigmaPRef = pre(heart. ventricles. LW. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LW_sigmaAPositiveNorm. average / avg_LW_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. LW. EAmRef) / pre(max_LW_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. ventricles. SW. sigmaPRef = pre(heart. ventricles. SW. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_SW_sigmaAPositiveNorm. average / avg_SW_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. SW. EAmRef) / pre(max_SW_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. ventricles. RW. sigmaPRef = pre(heart. ventricles. RW. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RW_sigmaAPositiveNorm. average / avg_RW_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. RW. EAmRef) / pre(max_RW_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. LA. sigmaPRef = pre(heart. LA. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LA_sigmaAPositiveNorm. average / avg_LA_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_LA_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //     heart. RA. sigmaPRef = pre(heart. RA. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RA_sigmaAPositiveNorm. average / avg_RA_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_RA_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
-        //   end when;
-        //
-        //   // Adaptation of reference volume of pericardium
-        //   when change(stepCycle) and settings. condition. adaptPericardium then
-        //     heart. VPRef = pre(heart. VPRef) / ((heart. pPRef / pre(max_pP. maximum)) ^ (0.3 / heart. kP));
-        //   end when;
+          //   // Adaptation of wall volumes of heart walls
+          //   when change(stepCycle) and settings. condition. adaptChamberWVolume then
+          //     heart. ventricles. LW. VW = pre(heart. ventricles. LW. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LW_sigmaAPositiveNorm. average / avg_LW_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. LW. EAmRef) / pre(max_LW_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. ventricles. SW. VW = pre(heart. ventricles. SW. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_SW_sigmaAPositiveNorm. average / avg_SW_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. SW. EAmRef) / pre(max_SW_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. ventricles. RW. VW = pre(heart. ventricles. RW. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RW_sigmaAPositiveNorm. average / avg_RW_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. RW. EAmRef) / pre(max_RW_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. LA. VW = pre(heart. LA. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LA_sigmaAPositiveNorm. average / avg_LA_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_LA_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. RA. VW = pre(heart. RA. VW) * exp(0.3957 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RA_sigmaAPositiveNorm. average / avg_RA_sigmaAPositive. average))) / 0.5))) - 0.3066 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_RA_sigmaP. maximum)) / 0.5))) - 0.235 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //   end when;
+          //
+          //   // Adaptation of reference cross-sectional area of heart walls
+          //   when change(stepCycle) and settings. condition. adaptChamberWArea then
+          //     heart. ventricles. LW. AmRef = pre(heart. ventricles. LW. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LW_sigmaAPositiveNorm. average / avg_LW_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. LW. EAmRef) / pre(max_LW_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. ventricles. SW. AmRef = pre(heart. ventricles. SW. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_SW_sigmaAPositiveNorm. average / avg_SW_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. SW. EAmRef) / pre(max_SW_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. ventricles. RW. AmRef = pre(heart. ventricles. RW. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RW_sigmaAPositiveNorm. average / avg_RW_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. RW. EAmRef) / pre(max_RW_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. LA. AmRef = pre(heart. LA. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LA_sigmaAPositiveNorm. average / avg_LA_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_LA_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. RA. AmRef = pre(heart. RA. AmRef) * exp(-0.4571 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RA_sigmaAPositiveNorm. average / avg_RA_sigmaAPositive. average))) / 0.5))) - 0.0433 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_RA_sigmaP. maximum)) / 0.5))) + 1.3028 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //   end when;
+          //
+          //   // Adaptation of reference passive myofiber stress of heart walls
+          //   when change(stepCycle) and settings. condition. adaptChamberEcmStress then
+          //     heart. ventricles. LW. sigmaPRef = pre(heart. ventricles. LW. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LW_sigmaAPositiveNorm. average / avg_LW_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. LW. EAmRef) / pre(max_LW_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LW_sigmaAPositiveLsc. average / avg_LW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. ventricles. SW. sigmaPRef = pre(heart. ventricles. SW. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_SW_sigmaAPositiveNorm. average / avg_SW_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. SW. EAmRef) / pre(max_SW_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_SW_sigmaAPositiveLsc. average / avg_SW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. ventricles. RW. sigmaPRef = pre(heart. ventricles. RW. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RW_sigmaAPositiveNorm. average / avg_RW_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. ventricleSigmaPAdapt * exp(-heart. ventricles. RW. EAmRef) / pre(max_RW_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RW_sigmaAPositiveLsc. average / avg_RW_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. LA. sigmaPRef = pre(heart. LA. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_LA_sigmaAPositiveNorm. average / avg_LA_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_LA_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_LA_sigmaAPositiveLsc. average / avg_LA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //     heart. RA. sigmaPRef = pre(heart. RA. sigmaPRef) * exp(-0.3338 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt) / (3 * sqrt(avg_RA_sigmaAPositiveNorm. average / avg_RA_sigmaAPositive. average))) / 0.5))) + 0.2091 * log(exp(0.5 * tanh(log(settings. constants. atriumSigmaPAdapt / pre(max_RA_sigmaP. maximum)) / 0.5))) - 1.3101 * log(exp(0.5 * tanh(log(1e6 * (settings. constants. LsMinAdapt + 0.6 * (settings. constants. LsMaxAdapt - settings. constants. LsMinAdapt)) / (avg_RA_sigmaAPositiveLsc. average / avg_RA_sigmaAPositive. average)) / 0.5)))) ^ 0.5;
+          //   end when;
+          //
+          //   // Adaptation of reference volume of pericardium
+          //   when change(stepCycle) and settings. condition. adaptPericardium then
+          //     heart. VPRef = pre(heart. VPRef) / ((heart. pPRef / pre(max_pP. maximum)) ^ (0.3 / heart. kP));
+          //   end when;
 
 
           connect(rightHeartInflow, heart.cVSV) annotation (Line(
@@ -11654,6 +11686,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           connect(rightHeartOutflow, heart.cVPA) annotation (Line(
               points={{100,40},{100,40},{100,60},{0,60},{0,42.64},{-0.16,42.64}},
+
               color={0,0,0},
               thickness=1));
 
@@ -11668,15 +11701,15 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
         model Systemic
           extends Interfaces.Systemic;
-            import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
+          import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
           import Physiolibrary.Types.*;
           import Cardiovascular.Model.Complex.Environment.*;
 
           outer Environment.ComplexEnvironment settings
             "Everything is out there...";
 
-          replaceable Main.SystemicArteries.Original_CircAdapt  SA
-                      constrainedby
+          replaceable Main.SystemicArteries.Original_CircAdapt SA
+            constrainedby
             Cardiovascular.Model.Complex.Components.Main.SystemicArteries.Abstraction.SystemicArteries
             "Replaceable model of systemic arteries" annotation (
               choicesAllMatching=true, Placement(transformation(
@@ -11708,47 +11741,48 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             signal=SA.cIn.q,
             control=settings.stepCycle);
 
-        //     input Volume totalVolume;
+          //     input Volume totalVolume;
 
-        //     Volume V_filling( start = 0);
-        //
-        //     Real q_filling;
-        //
-        //     parameter Fraction speed_factor = 5;
-        //
-        //     parameter Volume V_init = 270e-6;
+          //     Volume V_filling( start = 0);
+          //
+          //     Real q_filling;
+          //
+          //     parameter Fraction speed_factor = 5;
+          //
+          //     parameter Volume V_init = 270e-6;
 
-        //   Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl(useSolutionFlowInput = true);
+          //   Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl(useSolutionFlowInput = true);
 
-        //   Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
-        //
-        //
+          //   Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
+          //
+          //
           Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a AortaCannulla
             annotation (Placement(transformation(extent={{60,-100},{80,-80}}),
                 iconTransformation(extent={{60,-100},{80,-80}})));
         equation
-        //   der(V_filling) = q_filling;
-        //   q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
-        //     volumeControl_.solutionFlow = q_filling;
-        //     connect(volumeControl_. q_out, q_in); // Homely component -> disabling vizualization, even for connection
+          //   der(V_filling) = q_filling;
+          //   q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
+          //     volumeControl_.solutionFlow = q_filling;
+          //     connect(volumeControl_. q_out, q_in); // Homely component -> disabling vizualization, even for connection
 
-        //   if V_filling < V_init then
-        //   else
-        //     volumeControl_.solutionFlow = 0;
-        //   end if;
+          //   if V_filling < V_init then
+          //   else
+          //     volumeControl_.solutionFlow = 0;
+          //   end if;
 
           // Setting blood volume to currently desired value
           // It is impractible to set the contents of all small arteries in the tree in other waz
           //   volumeControl. solutionFlow = 0;
 
           //(settings. condition. bloodVolumeRef * settings. condition. bloodVolumeRefScale - totalVolume) / settings. constants. bloodVolumeAdaptationRate;
-        //   connect(volumeControl. q_out, q_in); // Homely component -> disabling vizualization, even for connection
+          //   connect(volumeControl. q_out, q_in); // Homely component -> disabling vizualization, even for connection
 
 
-        //   V = SV. V + SA. V;
+          //   V = SV. V + SA. V;
 
-            //  Adaptatioin of capillary resistance
-          when change(settings.stepCycle) and settings.condition.adaptCapillaryResistance then
+          //  Adaptatioin of capillary resistance
+          when change(settings.stepCycle) and settings.condition.adaptCapillaryResistance
+               then
             reinit(SC.R, (settings.condition.aortalPressureRef - avg_SV_pInner.average)
               /settings.condition.aortalFlowRef*settings.constants.systemicResistanceScale);
           end when;
@@ -11776,12 +11810,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           connect(q_in, SA.cIn) annotation (Line(
               points={{100,0},{100,0},{100,2},{100,14.8013},{80.9702,14.8013}},
+
               color={0,0,0},
               thickness=1,
               smooth=Smooth.Bezier));
 
           connect(q_out, SV.cOut) annotation (Line(
               points={{-100,0},{-96,0},{-96,10},{-90,10},{-90,10.5},{-87.9,10.5}},
+
               color={0,0,0},
               thickness=1,
               smooth=Smooth.Bezier));
@@ -11792,12 +11828,12 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics={Text(
-                  extent={{-24,42},{6,52}},
-                  lineColor={0,0,0},
-                  lineThickness=1,
-                  fillColor={255,0,0},
-                  fillPattern=FillPattern.Solid,
-                  textStyle={TextStyle.Bold},
+                          extent={{-24,42},{6,52}},
+                          lineColor={0,0,0},
+                          lineThickness=1,
+                          fillColor={255,0,0},
+                          fillPattern=FillPattern.Solid,
+                          textStyle={TextStyle.Bold},
                           textString="Systemic Circuit")}), Icon(graphics={Text(
                   extent={{-100,20},{100,100}},
                   lineColor={0,0,0},
@@ -11829,7 +11865,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             l=settings.initialization.PA_l,
             k=settings.initialization.PA_k) annotation (Placement(
                 transformation(extent={{-17.2253,-19.9627},{17.2253,19.9627}},
-                origin={-67.3498,0.6412})));
+                  origin={-67.3498,0.6412})));
           Main.Vessels.AdaptableVeins PV(
             pRef_init=settings.initialization.PV_pRef,
             ARef_init=settings.initialization.PV_ARef,
@@ -11846,12 +11882,12 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
 
         protected
-            Averager avg_PC_q(
+          Averager avg_PC_q(
             redeclare type T = VolumeFlowRate,
             signal=PC.cIn.q,
             control=settings.stepCycle);
 
-            Averager avg_PC_dp(
+          Averager avg_PC_dp(
             redeclare type T = Pressure,
             signal=PC.dp,
             control=settings.stepCycle);
@@ -11866,10 +11902,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             control=settings.stepCycle);
         equation
 
-        //   V = PV. V + PA. V;
+          //   V = PV. V + PA. V;
 
-            //  Adaptatioin of capillary resistance
-          when change(settings.stepCycle) and settings.condition.adaptCapillaryResistance then
+          //  Adaptatioin of capillary resistance
+          when change(settings.stepCycle) and settings.condition.adaptCapillaryResistance
+               then
             reinit(PC.R_R, settings.condition.pulmonaryPressureDropRef/avg_PC_q.average);
           end when;
 
@@ -11906,12 +11943,12 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics={Text(
-                  extent={{-26,8},{4,18}},
-                  lineColor={0,0,0},
-                  lineThickness=1,
-                  fillColor={255,0,0},
-                  fillPattern=FillPattern.Solid,
-                  textString="Pulmonary Circuit",
+                          extent={{-26,8},{4,18}},
+                          lineColor={0,0,0},
+                          lineThickness=1,
+                          fillColor={255,0,0},
+                          fillPattern=FillPattern.Solid,
+                          textString="Pulmonary Circuit",
                           textStyle={TextStyle.Bold})}), Icon(graphics={Text(
                   extent={{-100,20},{100,100}},
                   lineColor={0,0,0},
@@ -11935,11 +11972,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
       model Cardio
         extends Cardiovascular.System(
-          redeclare Components.Pulmonary  pulmonaryCirculation,
+          redeclare Components.Pulmonary pulmonaryCirculation,
           redeclare Components.Heart heart,
           redeclare Components.Systemic systemicCirculation(redeclare
               Components.Main.SystemicArteries.Original_CircAdapt SA));
-          extends Cardiovascular.Icons.Runnable_System;
+        extends Cardiovascular.Icons.Runnable_System;
         import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
         import Cardiovascular.Constants.*;
         import Cardiovascular.Types.*;
@@ -11954,11 +11991,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           redeclare Environment.ModelConstants.Standard constants)
           annotation (Placement(transformation(extent={{-22,26},{-6,40}})));
 
-      // protected
-      //   Averager avg_V(
-      //     redeclare type T = Volume,
-      //     signal = V,
-      //     control = settings. stepCycle);
+        // protected
+        //   Averager avg_V(
+        //     redeclare type T = Volume,
+        //     signal = V,
+        //     control = settings. stepCycle);
 
         Components.Main.ECMO.ECMO ecmo(
           cycleDuration=settings.supports.ECMO_cycleDuration,
@@ -12020,7 +12057,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
       model Baroreflex
         extends Cardiovascular.Interfaces.Controlled.ShortTermControl;
-      /*  Physiolibrary.Types.BusConnector busConnector annotation (Placement(
+        /*  Physiolibrary.Types.BusConnector busConnector annotation (Placement(
         transformation(extent={{-28,14},{12,54}}), iconTransformation(
           extent={{60,70},{100,110}})));*/
         Baroreceptor baroreceptor(activationDelay(displayUnit="s"))
@@ -12043,7 +12080,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             index=1,
             extent={{6,3},{6,3}}));
         connect(baroreceptor.evleft, busConnector.lvcompliance) annotation (
-           Line(
+            Line(
             points={{24.2,-2.88},{-8,-2.88},{-8,34}},
             color={0,0,127},
             smooth=Smooth.None), Text(
@@ -12095,8 +12132,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           HideResult=true,
           choices(__Dymola_checkBox=true),
           Dialog(group="External inputs/outputs"));
-        Physiolibrary.Types.RealIO.FrequencyInput cond(start=HR0Param) = HR0 if
-             useHRInput annotation (Placement(transformation(extent={{-62,36},{
+        Physiolibrary.Types.RealIO.FrequencyInput cond(start=HR0Param) = HR0
+          if useHRInput annotation (Placement(transformation(extent={{-62,36},{
                   -22,76}}), iconTransformation(
               extent={{-20,-20},{20,20}},
               rotation=180,
@@ -12119,8 +12156,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extent={{-14,-14},{14,14}},
               rotation=180,
               origin={-76,10})));
-        Physiolibrary.Types.RealIO.HydraulicComplianceOutput evleft annotation (
-           Placement(transformation(extent={{78,-18},{98,2}}),
+        Physiolibrary.Types.RealIO.HydraulicComplianceOutput evleft annotation
+          (Placement(transformation(extent={{78,-18},{98,2}}),
               iconTransformation(
               extent={{-16,-16},{16,16}},
               rotation=180,
@@ -12150,7 +12187,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         //  parameter Physiolibrary.Types.HydraulicConductance Conductance=0
       protected
         Physiolibrary.Types.Frequency HR0;
-      //  parameter Physiolibrary.Types.HydraulicCompliance ECV0;
+        //  parameter Physiolibrary.Types.HydraulicCompliance ECV0;
       equation
         if not useHRInput then
           HR0 = HR0Param;
@@ -12253,13 +12290,13 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   extent={{-100,-100},{100,100}}), graphics), Icon(
                 coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                     {100,100}}), graphics={Rectangle(
-                  extent={{-80,80},{82,-60}},
-                  lineColor={0,0,255},
-                  fillPattern=FillPattern.Solid,
+                          extent={{-80,80},{82,-60}},
+                          lineColor={0,0,255},
+                          fillPattern=FillPattern.Solid,
                           fillColor={255,255,167}),Text(
-                  extent={{-184,-58},{214,-94}},
-                  lineColor={0,0,255},
-                  textString="%name")}));
+                          extent={{-184,-58},{214,-94}},
+                          lineColor={0,0,255},
+                          textString="%name")}));
         end KidneyPO2Estimate;
 
         model Erythropoetin
@@ -12307,8 +12344,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={58,46})));
-          Physiolibrary.Blocks.Factors.Normalization FunctionEffect annotation (
-             Placement(transformation(
+          Physiolibrary.Blocks.Factors.Normalization FunctionEffect annotation
+            (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={78,46})));
@@ -12341,7 +12378,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 displayUnit="mol/min") = 0.011166666666667)
             annotation (Placement(transformation(extent={{30,40},{44,50}})));
           EPO_Physiolibrary.Chemical.Sources.UnlimitedSolutePumpOut clearance(
-              useSoluteFlowInput=true)   annotation (Placement(transformation(
+              useSoluteFlowInput=true) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={2,-30})));
@@ -12368,8 +12405,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               points={{82,46},{96,46}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(Kidney_Nefron_Count_TotalxNormal.y, CounEffect.u) annotation (
-             Line(
+          connect(Kidney_Nefron_Count_TotalxNormal.y, CounEffect.u) annotation
+            (Line(
               points={{44,21},{58,21},{58,38}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -12437,7 +12474,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   fileName=
                   "modelica://Cardiovascular/Resources/Icons/320px-Erythropoietin.png")}),
               Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                    -100},{160,100}}),                                                                                                    graphics));
+                    -100},{160,100}}), graphics));
         end Erythropoetin;
 
         model KidneyFluidBalance
@@ -12459,8 +12496,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           discrete Physiolibrary.Types.Volume Vpn;
         equation
           when {initial()} then
-              Vpn = plasmaticVolume;
-        end when;
+            Vpn = plasmaticVolume;
+          end when;
           if plasmaticVolume < Vpn then
             urineoutflowrate = Kud*((plasmaticVolume - Vpn)/Vpn) + Jun;
           else
@@ -12469,7 +12506,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
                     {-100,-100},{100,100}}), graphics={Bitmap(extent={{-82,-82},
                   {80,80}}, fileName=
-                      "modelica://Cardiovascular/Resources/Icons/kidney.png")}));
+                  "modelica://Cardiovascular/Resources/Icons/kidney.png")}));
         end KidneyFluidBalance;
 
         model RedBloodCells2
@@ -12480,8 +12517,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 origin={-77,-4})));
           Physiolibrary.Population.Components.Population RBC
             annotation (Placement(transformation(extent={{-18,-26},{2,-6}})));
-          Physiolibrary.Population.Sources.Growth erythropoiesis(useChangeInput=
-               true) annotation (Placement(transformation(extent={{-46,-30},{-26,
+          Physiolibrary.Population.Sources.Growth erythropoiesis(useChangeInput
+              =true) annotation (Placement(transformation(extent={{-46,-30},{-26,
                     -10}})));
           Physiolibrary.Population.Sources.Growth transfusion
             annotation (Placement(transformation(extent={{-38,14},{-18,34}})));
@@ -12493,20 +12530,20 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           Physiolibrary.Types.Constants.PopulationChangeConst
             RBCBaseSecretionRate(k=1.16e6) "13.7 ml/day (12e12 cells == 2.4 L)"
             annotation (Placement(transformation(extent={{-54,4},{-38,16}})));
-          Physiolibrary.Blocks.Factors.SplineLag      EPOEffect(
+          Physiolibrary.Blocks.Factors.SplineLag EPOEffect(
             HalfTime=3*86400*Modelica.Math.log(2),
             data={{0.0,0.0,0},{1.3,1.0,1.0},{4.0,4.0,0}},
             stateName="[EPO]Delay.Effect",
-          UsePositiveLog10=true,
-          Xscale=1e3) "20 miu/ml = 20e3 iu/m3"
+            UsePositiveLog10=true,
+            Xscale=1e3) "20 miu/ml = 20e3 iu/m3"
             annotation (Placement(transformation(extent={{-46,-14},{-26,6}})));
           Physiolibrary.Types.BusConnector busConnector
             annotation (Placement(transformation(extent={{-118,10},{-78,50}})));
           Modelica.Blocks.Math.Gain RBCVol(k(unit="m3") = 2.4e-3/12e12)
             "12e12 cells == 2.4 L" annotation (Placement(transformation(
-              extent={{5,-5},{-5,5}},
-              rotation=0,
-              origin={-35,-41})));
+                extent={{5,-5},{-5,5}},
+                rotation=0,
+                origin={-35,-41})));
           Modelica.Blocks.Math.Gain InitialPopulation(k=12e12/2.4e-3)
             "12e12 cells == 2.4 L" annotation (Placement(transformation(
                 extent={{5,-5},{-5,5}},
@@ -12556,8 +12593,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               string="%second",
               index=1,
               extent={{-9,-3},{-9,-3}}));
-          connect(erythropoetin.ecf_volume, busConnector.ecfvolume) annotation (
-             Line(
+          connect(erythropoetin.ecf_volume, busConnector.ecfvolume) annotation
+            (Line(
               points={{-79.5385,-12},{-79.5385,-24},{-98,-24},{-98,30}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -12608,19 +12645,19 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               useSolutionFlowInput=false) annotation (Placement(transformation(
                   extent={{-44,-48},{-24,-28}})));
           Physiolibrary.Osmotic.Sources.SolventInflux FoodAndDrink(
-              useSolutionFlowInput=false, SolutionFlow(displayUnit="l/day")=
+              useSolutionFlowInput=false, SolutionFlow(displayUnit="l/day") =
               2.4305555555556e-08) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-34,-10})));
           Physiolibrary.Osmotic.Sources.SolventInflux Metabolism(
-              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day")=
+              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day") =
               3.4722222222222e-09) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={26,-28})));
           Physiolibrary.Osmotic.Sources.SolventOutflux SkinAndLungsLoss(
-              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day")=
+              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day") =
               1.0416666666667e-08) annotation (Placement(transformation(
                 extent={{-11,-11},{11,11}},
                 rotation=0,
@@ -12632,7 +12669,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 rotation=0,
                 origin={0,-28})));
           Physiolibrary.Osmotic.Sources.SolventOutflux Feces(
-              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day")=
+              useSolutionFlowInput=false, SolutionFlow(displayUnit="ml/day") =
               1.1574074074074e-09) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
@@ -12762,6 +12799,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               smooth=Smooth.None));
           connect(SkinAndLungsLoss.q_in, lymphatic.q_in) annotation (Line(
               points={{46.4,-27},{36,-27},{36,-38},{34,-38},{34,-39},{18,-39}},
+
               color={127,127,0},
               thickness=1,
               smooth=Smooth.None));
@@ -12782,8 +12820,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
           DesiredFlowrate desiredFlowrate(flowtime(displayUnit="s") = 1)
             annotation (Placement(transformation(extent={{-4,6},{16,26}})));
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b port_b annotation (
-             Placement(transformation(extent={{56,-26},{76,-6}}),
+          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b port_b annotation
+            (Placement(transformation(extent={{56,-26},{76,-6}}),
                 iconTransformation(extent={{82,-100},{102,-80}})));
           Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeRefill(
               useSolutionFlowInput=true)
@@ -12805,27 +12843,27 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           Physiolibrary.Types.BusConnector busConnector
             annotation (Placement(transformation(extent={{-32,18},{8,58}})));
         equation
-        /*  if desiredFlowrate.volumeflowrate < 0 then
+          /*  if desiredFlowrate.volumeflowrate < 0 then
     volumeRefill.solutionFlow = -max(0, min(-desiredFlowrate.volumeflowrate, -maxflowrate));
   else
     volumeRefill.solutionFlow = desiredFlowrate.volumeflowrate;
   end if;*/
           connect(switch1.y, volumeRefill.solutionFlow) annotation (Line(
               points={{-0.7,3},{-4,3},{-4,-9}},
-            color={0,0,127},
+              color={0,0,127},
               smooth=Smooth.None));
           connect(desiredFlowrate.volumeflowrate, switch1.u1) annotation (Line(
               points={{15.9,18.5},{15.4,18.5},{15.4,8.6}},
-            color={0,0,127},
+              color={0,0,127},
               smooth=Smooth.None));
           connect(zeroRefill.y, switch1.u3) annotation (Line(
               points={{28,-4},{28,-2.6},{15.4,-2.6}},
-            color={0,0,127},
+              color={0,0,127},
               smooth=Smooth.None));
           connect(pressureMeasure.pressure, greaterThreshold.u) annotation (
               Line(
               points={{54,16},{47.6,16}},
-            color={0,0,127},
+              color={0,0,127},
               smooth=Smooth.None));
           connect(greaterThreshold.y, switch1.u2) annotation (Line(
               points={{29.2,16},{26,16},{26,3},{15.4,3}},
@@ -12841,8 +12879,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
-          connect(desiredFlowrate.volume, busConnector.bloodVolume) annotation (
-             Line(
+          connect(desiredFlowrate.volume, busConnector.bloodVolume) annotation
+            (Line(
               points={{7.4,23.2},{7.4,38},{-12,38}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -12860,24 +12898,24 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           connect(pressureMeasure.q_in, conductor.q_out) annotation (Line(
               points={{64,14},{64,0},{48,0},{48,-16}},
               color={0,0,0},
-                thickness=1,
+              thickness=1,
               smooth=Smooth.None));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
                     {-100,-100},{100,100}}), graphics={Rectangle(
                           extent={{-28,36},{34,-30}},
                           lineColor={0,0,0},
-                lineThickness=1,
+                          lineThickness=1,
                           fillPattern=FillPattern.Sphere,
                           fillColor={190,0,0},
                           radius=4),Rectangle(
                           extent={{-24,-28},{-20,-62}},
                           lineColor={0,0,0},
-                lineThickness=1,
+                          lineThickness=1,
                           fillPattern=FillPattern.Sphere,
                           fillColor={190,0,0}),Rectangle(
                           extent={{30,-26},{34,-62}},
                           lineColor={0,0,0},
-                lineThickness=1,
+                          lineThickness=1,
                           fillPattern=FillPattern.Sphere,
                           fillColor={190,0,0}),Polygon(
                           points={{6,-30},{6,-38},{8,-40},{12,-46},{10,-48},{12,
@@ -12902,14 +12940,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                           fillPattern=FillPattern.Sphere,
                           radius=2,
                           lineThickness=1),Text(
-                  extent={{-100,100},{100,62}},
-                  lineColor={0,0,255},
+                          extent={{-100,100},{100,62}},
+                          lineColor={0,0,255},
                           textString="%name")}), Diagram(coordinateSystem(
                   preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics={Text(
-                  extent={{10,38},{64,28}},
-                  lineColor={0,0,255},
-                  textString="Allow change only
+                          extent={{10,38},{64,28}},
+                          lineColor={0,0,255},
+                          textString="Allow change only
 if the pressure is
 above 0 mmHg.")}));
         end VolumeRefill2;
@@ -12942,8 +12980,8 @@ above 0 mmHg.")}));
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          connect(DesiredBloodVolume.u1, busConnector.plasmaVolume) annotation (
-             Line(
+          connect(DesiredBloodVolume.u1, busConnector.plasmaVolume) annotation
+            (Line(
               points={{6,-16},{0,-16},{0,12}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -12993,8 +13031,8 @@ above 0 mmHg.")}));
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          connect(BloodVolume.u2, busConnector.systemicBloodVolume) annotation (
-             Line(
+          connect(BloodVolume.u2, busConnector.systemicBloodVolume) annotation
+            (Line(
               points={{10.6,41},{0,41},{0,12}},
               color={0,0,127},
               smooth=Smooth.None), Text(
@@ -13052,15 +13090,15 @@ above 0 mmHg.")}));
                   extent={{-100,-100},{100,100}}), graphics), Icon(
                 coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                     {100,100}}), graphics={Rectangle(
-                  extent={{-40,40},{40,-20}},
-                  lineColor={0,0,255},
-                fillPattern=FillPattern.Solid,
+                          extent={{-40,40},{40,-20}},
+                          lineColor={0,0,255},
+                          fillPattern=FillPattern.Solid,
                           fillColor={255,127,127}),Text(
-                  extent={{-100,-20},{100,-60}},
-                  lineColor={0,0,255},
-                  fillColor={255,170,170},
-                  fillPattern=FillPattern.Solid,
-                  textString="%name")}));
+                          extent={{-100,-20},{100,-60}},
+                          lineColor={0,0,255},
+                          fillColor={255,170,170},
+                          fillPattern=FillPattern.Solid,
+                          textString="%name")}));
         end BloodProperties;
 
         model DesiredFlowrate "control total blood volume"
@@ -13167,13 +13205,13 @@ above 0 mmHg.")}));
 
       model BloodVolumeControl
         extends Cardiovascular.Interfaces.Controlled.LongTermControl;
-      /*  Physiolibrary.Types.BusConnector busConnector annotation (Placement(
+        /*  Physiolibrary.Types.BusConnector busConnector annotation (Placement(
         transformation(extent={{-40,2},{0,42}}), iconTransformation(
           extent={{-38,4},{2,44}})));*/
         replaceable BloodVolume.Plasma2 plasma(plasma(Simulation=Physiolibrary.Types.SimulationType.NoInit))
           constrainedby BloodVolume.Plasma2
           annotation (Placement(transformation(extent={{-28,26},{4,58}})));
-                                   //(plasma(volume_start=bloodProperties.BloodVolume.y))
+        //(plasma(volume_start=bloodProperties.BloodVolume.y))
         replaceable BloodVolume.RedBloodCells2 redBloodCells(RBC(
               population_start=2, Simulation=Physiolibrary.Types.SimulationType.NoInit))
           constrainedby BloodVolume.RedBloodCells2
@@ -13211,11 +13249,11 @@ above 0 mmHg.")}));
             extent={{6,3},{6,3}}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                   {{-100,-100},{100,100}}), graphics={Text(
-                extent={{-24,-36},{80,-58}},
-                lineColor={0,0,255},
-                horizontalAlignment=TextAlignment.Left,
-                fontSize=10,
-                textString="initial algorithm
+                      extent={{-24,-36},{80,-58}},
+                      lineColor={0,0,255},
+                      horizontalAlignment=TextAlignment.Left,
+                      fontSize=10,
+                      textString="initial algorithm
   plasma.plasma.state:=bloodProperties.InitialPlasmaVolume.y;
   redBloodCells.RBC.state:=redBloodCells.InitialPopulation.y;")}), Icon(
               coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
@@ -13236,17 +13274,17 @@ above 0 mmHg.")}));
         discrete Boolean b(start=false) "beat signal";
         Time T0(start=0) "start of cardiac cycle ";
         discrete Time HP(start=0.75) "length of cardiac cycle";
-      //protected
+        //protected
       equation
         b = der(q_in.pressure) > 0;
         der(SumPressure) = q_in.pressure;
-       when {edge(b)} then
-          T0 =   time "initial time of current cardiac cycle";
-          HP =   if pre(T0) > 0 then time - pre(T0) else 0.75;
+        when {edge(b)} then
+          T0 = time "initial time of current cardiac cycle";
+          HP = if pre(T0) > 0 then time - pre(T0) else 0.75;
           Pmean = SumPressure/HP "mean pressure";
-          reinit(SumPressure,  0) "reinitialisation of sum pressure";
-                   //if (Pmean2>Pd) then Pmean1 else Pmean2;
-       end when;
+          reinit(SumPressure, 0) "reinitialisation of sum pressure";
+          //if (Pmean2>Pd) then Pmean1 else Pmean2;
+        end when;
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-55,12},{55,-12}},
@@ -13407,10 +13445,10 @@ above 0 mmHg.")}));
         discrete Boolean b(start=false) "beat signal";
         Time T0(start=0) "start of cardiac cycle ";
         discrete Time HP(start=1) "length of cardiac cycle";
-      //protected
+        //protected
         Pressure PmeanA "approximation of mean pressure";
         Pressure Pmean2 "approximation of mean pressure";
-      /*initial algorithm
+        /*initial algorithm
 
   Ps := q_in.pressure;
   Pd := q_in.pressure;
@@ -13423,25 +13461,25 @@ above 0 mmHg.")}));
         PmeanA = (2/3)*Pmin + (1/3)*Pmax;
         b = der(q_in.pressure) > 0;
         der(SumPressure) = q_in.pressure;
-       when {initial(),edge(b)} then
-          T0 =   time "initial time of current cardiac cycle";
-          HP =   if pre(T0) > 0 then time - pre(T0) else 1;
-          Ps =   pre(Pmax)
+        when {initial(),edge(b)} then
+          T0 = time "initial time of current cardiac cycle";
+          HP = if pre(T0) > 0 then time - pre(T0) else 1;
+          Ps = pre(Pmax)
             "systolic pressure = maximum pressure during cardiac cycle";
-          Pd =   pre(Pmin)
+          Pd = pre(Pmin)
             "diastolic pressure=minimal pressure during cardiac cycle";
           Pmean2 = pre(SumPressure)/pre(HP) "mean pressure";
           Pmean = if (Pmean2 < Pd) then max(Pd, PmeanA) else Pmean2;
-      //    Pmean =  max(Pd,(SumPressure / pre(HP))) "mean pressure";
-                   //if ((SumPressure / pre(HP))<Pd) then PmeanA else
-          reinit(SumPressure,  0) "reinitialisation of sum pressure";
-                   //if (Pmean2>Pd) then Pmean1 else Pmean2;
-      //     Pmax = pre(q_in.pressure) "reinitialisation of maximal pressure";
-      //    Pmin = pre(q_in.pressure) "reinitialisation minimal pressure";
+          //    Pmean =  max(Pd,(SumPressure / pre(HP))) "mean pressure";
+          //if ((SumPressure / pre(HP))<Pd) then PmeanA else
+          reinit(SumPressure, 0) "reinitialisation of sum pressure";
+          //if (Pmean2>Pd) then Pmean1 else Pmean2;
+          //     Pmax = pre(q_in.pressure) "reinitialisation of maximal pressure";
+          //    Pmin = pre(q_in.pressure) "reinitialisation minimal pressure";
 
-                   //     reinit(Pmax,  q_in.pressure) "reinitialisation of maximal pressure";
-      //     reinit(Pmin,  q_in.pressure) "reinitialisation minimal pressure";
-       end when;
+          //     reinit(Pmax,  q_in.pressure) "reinitialisation of maximal pressure";
+          //     reinit(Pmin,  q_in.pressure) "reinitialisation minimal pressure";
+        end when;
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics={Text(
                       extent={{-55,12},{55,-12}},
@@ -13469,11 +13507,11 @@ above 0 mmHg.")}));
     end Control;
 
     package Scenario "models of various scenarios"
-        extends Modelica.Icons.VariantsPackage;
+      extends Modelica.Icons.VariantsPackage;
 
       partial model StenosisControl
         extends Interfaces.Controlled.ScenarioControl;
-      /*  Physiolibrary.Types.BusConnector busConnector annotation (Placement(
+        /*  Physiolibrary.Types.BusConnector busConnector annotation (Placement(
         transformation(extent={{-28,14},{12,54}}), iconTransformation(
           extent={{-28,14},{12,54}})));*/
         Stenosis.StenosisElastance venacavastenosis
@@ -13542,28 +13580,28 @@ above 0 mmHg.")}));
                       fillColor={255,255,255},
                       fillPattern=FillPattern.Solid,
                       pattern=LinePattern.None),Text(
-                extent={{-72,76},{82,54}},
-                pattern=LinePattern.None,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                textString="stenosis",
+                      extent={{-72,76},{82,54}},
+                      pattern=LinePattern.None,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      textString="stenosis",
                       lineColor={0,0,0}),Line(
-                points={{-86,-2},{-32,-2},{-2,32},{74,32},{78,32}},
-                pattern=LinePattern.None,
-                smooth=Smooth.None,
+                      points={{-86,-2},{-32,-2},{-2,32},{74,32},{78,32}},
+                      pattern=LinePattern.None,
+                      smooth=Smooth.None,
                       arrow={Arrow.None,Arrow.Filled}),Text(
-                extent={{-72,40},{62,32}},
-                pattern=LinePattern.None,
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid,
-                textString="Resistance",
+                      extent={{-72,40},{62,32}},
+                      pattern=LinePattern.None,
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid,
+                      textString="Resistance",
                       lineColor={0,0,0})}), Diagram(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics));
       end StenosisControl;
 
       package Stenosis
-          extends Modelica.Icons.UtilitiesPackage;
+        extends Modelica.Icons.UtilitiesPackage;
         model StenosisElastance
           parameter Physiolibrary.Types.HydraulicElastance InitialElastance;
           parameter Physiolibrary.Types.HydraulicElastance FinalElastance;
@@ -13750,7 +13788,7 @@ above 0 mmHg.")}));
                   -100},{100,100}}), graphics={Line(
                       points={{-76,58},{-46,58},{-28,50},{-28,26},{-8,12},{4,14},
                   {28,14},{50,8},{54,20},{62,60},{80,60}},
-                color={0,0,255},
+                      color={0,0,255},
                       smooth=Smooth.Bezier)}), Diagram(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics));
@@ -13805,7 +13843,7 @@ above 0 mmHg.")}));
         plasmableed = bleedrate*(1 - hematocrit);
         RBCtransfusion = transrate*0.4*12e12/2.4e-3;
         plasmatransfusion = transrate*(1 - 0.4);
-      /* connect(busConnector.hematocrit,hematocrit);
+        /* connect(busConnector.hematocrit,hematocrit);
  connect(busConnector.RBCbleed,RBCbleed);
  connect(busConnector.plasmableed,plasmableed);
  connect(busConnector.RBCtransfusion,RBCtransfusion);
@@ -13815,10 +13853,10 @@ above 0 mmHg.")}));
                 preserveAspectRatio=false), graphics), Icon(coordinateSystem(
                 extent={{-40,-100},{40,100}}, preserveAspectRatio=false),
               graphics={Rectangle(
-                extent={{-20,100},{20,-100}},
-                lineColor={0,0,255},
-                fillPattern=FillPattern.Solid,
-                fillColor={0,0,255})}));
+                      extent={{-20,100},{20,-100}},
+                      lineColor={0,0,255},
+                      fillPattern=FillPattern.Solid,
+                      fillColor={0,0,255})}));
       end BleedingTransfusionBurkhoffInterface;
 
       model BleedingTransfusionRate
@@ -13849,25 +13887,25 @@ above 0 mmHg.")}));
         end if;
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics={Line(
-                points={{-80,80},{-80,-80}},
-          color={0,0,255},
+                      points={{-80,80},{-80,-80}},
+                      color={0,0,255},
                       smooth=Smooth.None),Line(
-                points={{80,-80},{-80,-80}},
-                color={0,0,255},
+                      points={{80,-80},{-80,-80}},
+                      color={0,0,255},
                       smooth=Smooth.None),Line(
                       points={{-76,58},{-46,58},{-28,50},{-28,26},{-8,12},{4,14},
                   {28,14},{50,8},{54,20},{62,60},{80,60}},
-                color={0,0,255},
+                      color={0,0,255},
                       smooth=Smooth.Bezier),Text(
-                extent={{-100,-80},{100,-100}},
-                lineColor={0,0,255},
+                      extent={{-100,-80},{100,-100}},
+                      lineColor={0,0,255},
                       textString="%name"),Line(
-                points={{-28,38},{80,90}},
-                color={0,0,255},
+                      points={{-28,38},{80,90}},
+                      color={0,0,255},
                       smooth=Smooth.None),Line(
-                points={{56,32},{82,32},{80,32}},
-                color={0,0,255},
-                smooth=Smooth.None)}));
+                      points={{56,32},{82,32},{80,32}},
+                      color={0,0,255},
+                      smooth=Smooth.None)}));
       end BleedingTransfusionRate;
     end Scenario;
   end Model;
@@ -13898,8 +13936,8 @@ above 0 mmHg.")}));
         annotation (
           defaultComponentName="hydraulicCompliance",
           Diagram(coordinateSystem(extent={{-40,-40},{40,40}})),
-          Icon(coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio=
-                 false), graphics={Rectangle(
+          Icon(coordinateSystem(extent={{-40,-40},{40,40}}, preserveAspectRatio
+                =false), graphics={Rectangle(
                       extent={{-40,40},{40,-40}},
                       lineColor={0,0,0},
                       radius=10,
@@ -13934,9 +13972,9 @@ above 0 mmHg.")}));
         "Input HydraulicResistance as connector" annotation (
         defaultComponentName="resistance",
         Icon(graphics={Polygon(
-                points={{-100,100},{100,0},{-100,-100},{-100,100}},
-                lineColor={0,0,127},
-                fillColor={0,0,127},
+                    points={{-100,100},{100,0},{-100,-100},{-100,100}},
+                    lineColor={0,0,127},
+                    fillColor={0,0,127},
                     fillPattern=FillPattern.Solid)}, coordinateSystem(
             extent={{-100,-100},{100,100}},
             preserveAspectRatio=true,
@@ -13944,16 +13982,16 @@ above 0 mmHg.")}));
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             initialScale=0.2,
-              extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics={Polygon(
-                points={{0,50},{100,0},{0,-50},{0,50}},
-                lineColor={0,0,127},
-                fillColor={0,0,127},
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={Polygon(
+                    points={{0,50},{100,0},{0,-50},{0,50}},
+                    lineColor={0,0,127},
+                    fillColor={0,0,127},
                     fillPattern=FillPattern.Solid),Text(
-                extent={{-10,85},{-10,60}},
-                lineColor={0,0,127},
-                textString="%name")}),
-          Documentation(info="<html>
+                    extent={{-10,85},{-10,60}},
+                    lineColor={0,0,127},
+                    textString="%name")}),
+        Documentation(info="<html>
     <p>
     Connector with one input signal of type HydraulicResistance.
     </p>
@@ -13963,25 +14001,25 @@ above 0 mmHg.")}));
         "Output HydraulicResistance as connector" annotation (
         defaultComponentName="resistance",
         Icon(coordinateSystem(
-              preserveAspectRatio=true,
-              extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics={Polygon(
-                points={{-100,100},{100,0},{-100,-100},{-100,100}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid)}),
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={Polygon(
+                    points={{-100,100},{100,0},{-100,-100},{-100,100}},
+                    lineColor={0,0,127},
+                    fillColor={255,255,255},
+                    fillPattern=FillPattern.Solid)}),
         Diagram(coordinateSystem(
-              preserveAspectRatio=true,
-              extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics={Polygon(
-                points={{-100,50},{0,0},{-100,-50},{-100,50}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={Polygon(
+                    points={{-100,50},{0,0},{-100,-50},{-100,50}},
+                    lineColor={0,0,127},
+                    fillColor={255,255,255},
                     fillPattern=FillPattern.Solid),Text(
-                extent={{30,110},{30,60}},
-                lineColor={0,0,127},
-                textString="%name")}),
-          Documentation(info="<html>
+                    extent={{30,110},{30,60}},
+                    lineColor={0,0,127},
+                    textString="%name")}),
+        Documentation(info="<html>
   <p>
   Connector with one output signal of type HydraulicResistance.
   </p>
@@ -13998,7 +14036,7 @@ above 0 mmHg.")}));
                   extent={{-87.243,-87.3037},{87.243,87.3037}},
                   fileName=
                 "modelica://Cardiovascular/Resources/Icons/Arteries.png",
-              origin={4.25124,18.8661},
+                  origin={4.25124,18.8661},
                   rotation=75)}), Diagram(coordinateSystem(preserveAspectRatio=
                 false)));
 
@@ -14065,34 +14103,34 @@ above 0 mmHg.")}));
           Diagram(coordinateSystem(preserveAspectRatio=false)));
     end Settings;
 
-      class Valve
+    class Valve
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
               "modelica://Cardiovascular/Resources/Icons/Valve.png")}), Diagram(
             coordinateSystem(preserveAspectRatio=false)));
-      end Valve;
+    end Valve;
 
-      class Ventricle
+    class Ventricle
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
               "modelica://Cardiovascular/Resources/Icons/Ventricle.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
-      end Ventricle;
+    end Ventricle;
 
-      class Vessels
+    class Vessels
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(
-              extent={{-130.465,-88.1195},{130.465,88.1195}},
-              origin={0.99971,8.9994},
-              rotation=-68,
+                  extent={{-130.465,-88.1195},{130.465,88.1195}},
+                  origin={0.99971,8.9994},
+                  rotation=-68,
                   fileName=
                 "modelica://Cardiovascular/Resources/Icons/Vessels.png")}),
           Diagram(coordinateSystem(preserveAspectRatio=false)));
 
-      end Vessels;
+    end Vessels;
 
     model Runnable_System
 
@@ -14124,14 +14162,14 @@ above 0 mmHg.")}));
         Icon(coordinateSystem(extent={{-280,-140},{280,180}},
               preserveAspectRatio=false), graphics={Ellipse(
                   lineColor={75,138,73},
-                    fillColor={255,255,255},
+                  fillColor={255,255,255},
                   fillPattern=FillPattern.Solid,
                   extent={{-156,-140},{164,180}}),Polygon(
                   lineColor={0,0,255},
                   fillColor={75,138,73},
                   pattern=LinePattern.None,
                   fillPattern=FillPattern.Solid,
-                    points={{-68,118},{104,16},{-68,-82},{-68,118}})}),
+                  points={{-68,118},{104,16},{-68,-82},{-68,118}})}),
         experiment(StopTime=5, __Dymola_NumberOfIntervals=5000),
         Documentation(info="<html>
 <p>Cardiovascular model implemented per description of Meurs et al.</p>
@@ -14303,15 +14341,15 @@ above 0 mmHg.")}));
               preserveAspectRatio=false, extent={{-100,-240},{100,100}}),
             graphics={Polygon(
                   points={{-44,44},{-44,-36},{76,-36},{76,44},{-44,44}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
                   fillColor={255,255,255}),Text(
-              extent={{-44,28},{58,38}},
-              lineColor={28,108,200},
-              lineThickness=1,
-              fillPattern=FillPattern.Sphere,
-              fillColor={255,255,255},
+                  extent={{-44,28},{58,38}},
+                  lineColor={28,108,200},
+                  lineThickness=1,
+                  fillPattern=FillPattern.Sphere,
+                  fillColor={255,255,255},
                   textString="Maquet catheter"),Polygon(
                   points={{-50,-40},{-50,-120},{70,-120},{70,-40},{-50,-40}},
                   lineColor={28,108,200},
@@ -14365,7 +14403,7 @@ above 0 mmHg.")}));
       import Physiolibrary.Types.*;
       inner Model.Complex.Environment.ComplexEnvironment settings(redeclare
           Model.Complex.Environment.Conditions.Rest_MinimalAdapt condition)
-        annotation (Placement(transformation(extent={{-20,32},{-12,40}})));
+        annotation (Placement(transformation(extent={{-20,34},{-14,40}})));
 
       // protected
       //   Averager avg_V(
@@ -14420,30 +14458,30 @@ above 0 mmHg.")}));
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
         Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
             r=0.0021) annotation (Placement(transformation(
-              extent={{-3,-3},{3,3}},
+              extent={{-4,-4},{4,4}},
               rotation=90,
-              origin={13,-49})));
+              origin={18,-46})));
         Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain(l=0.22,
             r=0.0021) annotation (Placement(transformation(
-              extent={{3,-3},{-3,3}},
+              extent={{4,-4},{-4,4}},
               rotation=90,
-              origin={-15,-37})));
+              origin={-12,-46})));
       equation
         connect(VenousDrain.cOut, ecmo.cIn) annotation (Line(
-            points={{-15,-39.4},{-15,-60},{-9.6,-60}},
+            points={{-12,-49.2},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
         connect(systemicCirculation.q_out, VenousDrain.cIn) annotation (Line(
-            points={{-10,-26},{-15,-26},{-15,-34.6}},
+            points={{-10,-26},{-12,-26},{-12,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
           annotation (Line(
-            points={{7,-35},{13,-35},{13,-46.6}},
+            points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
         connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
-            points={{9.6,-60},{13,-60},{13,-51.4}},
+            points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
@@ -14463,11 +14501,11 @@ above 0 mmHg.")}));
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
         Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
             r=0.0021) annotation (Placement(transformation(
-              extent={{-3,-3},{3,3}},
+              extent={{-4,-4},{4,4}},
               rotation=90,
-              origin={13,-49})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrainECMOLin(l=
-             0.33, r=0.0021) annotation (Placement(transformation(
+              origin={18,-46})));
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrainECMOLin(l
+            =0.33, r=0.0021) annotation (Placement(transformation(
               extent={{4,-4},{-4,4}},
               rotation=90,
               origin={-12,-46})));
@@ -14475,16 +14513,16 @@ above 0 mmHg.")}));
             r=0.0018) annotation (Placement(transformation(
               extent={{4,-4},{-4,4}},
               rotation=90,
-              origin={-18,-46})));
+              origin={14,-46})));
       equation
 
         connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
           annotation (Line(
-            points={{7,-35},{13,-35},{13,-46.6}},
+            points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
         connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
-            points={{9.6,-60},{13,-60},{13,-51.4}},
+            points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
         connect(VenousDrainECMOLin.cIn, systemicCirculation.q_out) annotation (
@@ -14497,11 +14535,11 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         connect(heart.LVCannula, LVDrainECMOLin.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-12},{-18,-12},{-18,-42.8}},
+            points={{0.88,-3.52},{0.88,-4},{14,-4},{14,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(LVDrainECMOLin.cOut, ecmo.cIn) annotation (Line(
-            points={{-18,-49.2},{-18,-60},{-9.6,-60}},
+            points={{14,-49.2},{14,-52},{-12,-52},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
@@ -14522,9 +14560,9 @@ above 0 mmHg.")}));
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
         Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
             r=0.0021) annotation (Placement(transformation(
-              extent={{-3,-3},{3,3}},
+              extent={{-4,-4},{4,4}},
               rotation=90,
-              origin={13,-49})));
+              origin={18,-46})));
         Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
           VenousDrainECMOExp(Base=6.2e11, Exp=1.855311) annotation (Placement(
               transformation(
@@ -14536,18 +14574,18 @@ above 0 mmHg.")}));
               transformation(
               extent={{4,4},{-4,-4}},
               rotation=90,
-              origin={-18,-46})));
+              origin={14,-46})));
 
 
       equation
 
         connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
           annotation (Line(
-            points={{7,-35},{13,-35},{13,-46.6}},
+            points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
         connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
-            points={{9.6,-60},{13,-60},{13,-51.4}},
+            points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
         connect(VenousDrainECMOExp.cIn, systemicCirculation.q_out) annotation (
@@ -14560,11 +14598,11 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         connect(heart.LVCannula, LVDrainECMOExp.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-12},{-18,-12},{-18,-42.8}},
+            points={{0.88,-3.52},{0.88,-4},{14,-4},{14,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(LVDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
-            points={{-18,-49.2},{-18,-60},{-9.6,-60}},
+            points={{14,-49.2},{14,-52},{-12,-52},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
@@ -14585,9 +14623,9 @@ above 0 mmHg.")}));
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
         Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
             r=0.0021) annotation (Placement(transformation(
-              extent={{-3,-3},{3,3}},
+              extent={{-4,-4},{4,4}},
               rotation=90,
-              origin={13,-49})));
+              origin={18,-46})));
         Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
           VenousDrainECMOExp(Base=6.2e11, Exp=1.855311) annotation (Placement(
               transformation(
@@ -14595,21 +14633,21 @@ above 0 mmHg.")}));
               rotation=90,
               origin={-12,-46})));
         Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
-          LVDrainECMOExp(Base=1.22E+14, Exp=1.919743)   annotation (Placement(
+          LVDrainECMOExp(Base=1.22E+14, Exp=1.919743) annotation (Placement(
               transformation(
               extent={{4,4},{-4,-4}},
               rotation=90,
-              origin={-18,-46})));
+              origin={14,-46})));
 
       equation
 
         connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
           annotation (Line(
-            points={{7,-35},{13,-35},{13,-46.6}},
+            points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
         connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
-            points={{9.6,-60},{13,-60},{13,-51.4}},
+            points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
         connect(VenousDrainECMOExp.cIn, systemicCirculation.q_out) annotation (
@@ -14622,11 +14660,11 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         connect(heart.LVCannula, LVDrainECMOExp.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-12},{-18,-12},{-18,-42.8}},
+            points={{0.88,-3.52},{0.88,-4},{14,-4},{14,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(LVDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
-            points={{-18,-49.2},{-18,-60},{-9.6,-60}},
+            points={{14,-49.2},{14,-52},{-12,-52},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
