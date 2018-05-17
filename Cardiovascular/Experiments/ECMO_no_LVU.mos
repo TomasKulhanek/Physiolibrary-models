@@ -1,0 +1,128 @@
+// 
+cd("D:/home/git/Physiolibrary.models/Cardiovascular/Experiments");
+
+translateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo");
+settings.constants.LW_contractilityScale = 0.1;
+ecmo.ecmoPump.qRef2 = 0.00000166666667; simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_00");
+ecmo.ecmoPump.qRef2 = 0.00001666666667 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_01");
+ecmo.ecmoPump.qRef2 = 0.00003333333333 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_02");
+ecmo.ecmoPump.qRef2 = 0.00005          ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_03");
+ecmo.ecmoPump.qRef2 = 0.00006666666667 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_04");
+ecmo.ecmoPump.qRef2 = 0.00008333333333 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_05");
+ecmo.ecmoPump.qRef2 = 0.0001           ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_06");
+ecmo.ecmoPump.qRef2 = 0.0001166666667  ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_07");
+
+// FIG 1 PVloops
+
+// Figure 2: The flows: LV flow: LVDrainECMOExp.cIn.q
+// Systemic flow
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="LVFailure_Ecmo_00.mat", colors={{28,108,200}}, displayUnits={"ml/min"});
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="LVFailure_Ecmo_01.mat", colors={{238,46,47}},  displayUnits={"ml/min"});
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="LVFailure_Ecmo_02.mat", colors={{0,140,72}},   displayUnits={"ml/min"});
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="LVFailure_Ecmo_03.mat", colors={{217,67,180}}, displayUnits={"ml/min"});
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="LVFailure_Ecmo_04.mat", colors={{0,0,0}},      displayUnits={"ml/min"});
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="LVFailure_Ecmo_05.mat", colors={{162,29,33}},  displayUnits={"ml/min"});
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="LVFailure_Ecmo_06.mat", colors={{244,125,35}}, displayUnits={"ml/min"});
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="LVFailure_Ecmo_07.mat", colors={{102,44,145}}, displayUnits={"ml/min"});
+// DISP the results
+"Systemic flow"
+plotSignalOperator("LVFailure_Ecmo_00[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+plotSignalOperator("LVFailure_Ecmo_01[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+plotSignalOperator("LVFailure_Ecmo_02[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+plotSignalOperator("LVFailure_Ecmo_03[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+plotSignalOperator("LVFailure_Ecmo_04[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+plotSignalOperator("LVFailure_Ecmo_05[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+plotSignalOperator("LVFailure_Ecmo_06[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+plotSignalOperator("LVFailure_Ecmo_07[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+ 
+// Figure 3: EDV heart.heart.ventricles.VLV
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="LVFailure_Ecmo_00.mat", colors={{28,108,200}}, displayUnits={"ml"});
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="LVFailure_Ecmo_01.mat", colors={{238,46,47}},  displayUnits={"ml"});
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="LVFailure_Ecmo_02.mat", colors={{0,140,72}},   displayUnits={"ml"});
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="LVFailure_Ecmo_03.mat", colors={{217,67,180}}, displayUnits={"ml"});
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="LVFailure_Ecmo_04.mat", colors={{0,0,0}},      displayUnits={"ml"});
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="LVFailure_Ecmo_05.mat", colors={{162,29,33}},  displayUnits={"ml"});
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="LVFailure_Ecmo_06.mat", colors={{244,125,35}}, displayUnits={"ml"});
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="LVFailure_Ecmo_07.mat", colors={{102,44,145}}, displayUnits={"ml"});
+// results: copy&paste into dymola command window
+"ESV"
+plotSignalOperator("LVFailure_Ecmo_00[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_01[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_02[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_03[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_04[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_05[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_06[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_07[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+// minEDV
+"MinESV"
+plotSignalOperator("LVFailure_Ecmo_00[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_01[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_02[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_03[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_04[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_05[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_06[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_07[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+// EDV - fitted to valve openind
+"EDV"
+plotSignalOperator("LVFailure_Ecmo_00[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.72, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_01[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.74, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_02[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.75, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_03[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.76, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_04[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.78, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_05[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.80, 15, 0, 3);
+plotSignalOperator("LVFailure_Ecmo_06[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.84, 15, 0, 3);
+"* The AV does not open for 7 l/min"
+
+
+// figure 4: MAP - systemicCirculation.q_in.pressure
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_00.mat", colors={{28,108,200}}, displayUnits={"ml"});
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_01.mat", colors={{238,46,47}},  displayUnits={"ml"});
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_02.mat", colors={{0,140,72}},   displayUnits={"ml"});
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_03.mat", colors={{217,67,180}}, displayUnits={"ml"});
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_04.mat", colors={{0,0,0}},      displayUnits={"ml"});
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_05.mat", colors={{162,29,33}},  displayUnits={"ml"});
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_06.mat", colors={{244,125,35}}, displayUnits={"ml"});
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_07.mat", colors={{102,44,145}}, displayUnits={"ml"}); 
+//MAP
+"MAP"
+plotSignalOperator("LVFailure_Ecmo_00[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+plotSignalOperator("LVFailure_Ecmo_01[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+plotSignalOperator("LVFailure_Ecmo_02[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+plotSignalOperator("LVFailure_Ecmo_03[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+plotSignalOperator("LVFailure_Ecmo_04[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+plotSignalOperator("LVFailure_Ecmo_05[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+plotSignalOperator("LVFailure_Ecmo_06[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+plotSignalOperator("LVFailure_Ecmo_07[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+
+//FIGURE 5: Pressure in left ventricles
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_00.mat", colors={{28,108,200}}, displayUnits={"ml"});
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_01.mat", colors={{238,46,47}},  displayUnits={"ml"});
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_02.mat", colors={{0,140,72}},   displayUnits={"ml"});
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_03.mat", colors={{217,67,180}}, displayUnits={"ml"});
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_04.mat", colors={{0,0,0}},      displayUnits={"ml"});
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_05.mat", colors={{162,29,33}},  displayUnits={"ml"});
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_06.mat", colors={{244,125,35}}, displayUnits={"ml"});
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_07.mat", colors={{102,44,145}}, displayUnits={"ml"}); 
+// SP
+"SP"
+plotSignalOperator("LVFailure_Ecmo_00[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_01[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_02[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_03[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_04[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_05[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_06[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_07[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+// DP
+"DP"
+plotSignalOperator("LVFailure_Ecmo_00[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_01[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_02[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_03[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_04[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_05[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_06[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+plotSignalOperator("LVFailure_Ecmo_07[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+ 

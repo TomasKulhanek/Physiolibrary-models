@@ -6528,7 +6528,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
           record LVFailure
             extends Standard(
-              LW_contractilityScale=0.2,
+              LW_contractilityScale=0.25,
               RW_contractilityScale=x,
               SW_contractilityScale=x);
             constant Real x=1;
@@ -6570,10 +6570,10 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               extends Physiolibrary.Hydraulic.Interfaces.HydraulicPort;
 
               annotation (Icon(graphics={Ellipse(
-                                  extent={{-80,80},{80,-80}},
-                                  lineColor={197,52,16},
-                                  fillColor={255,170,0},
-                                  fillPattern=FillPattern.Sphere)}));
+                      extent={{-80,80},{80,-80}},
+                      lineColor={197,52,16},
+                      fillColor={255,170,0},
+                      fillPattern=FillPattern.Sphere)}));
             end Through;
 
             connector Out "Outflow connector"
@@ -6817,17 +6817,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-32,26},{32,-24}},
-                                      lineColor={0,0,0},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid,
-                                      textStyle={TextStyle.Bold},
-                                      textString="RC"),Text(
-                                      extent={{-70,86},{72,30}},
-                                      lineColor={0,0,0},
-                                      fillColor={86,199,10},
-                                      fillPattern=FillPattern.Solid,
-                                      textString="%name")}));
+                      graphics={Text(
+                        extent={{-32,26},{32,-24}},
+                        lineColor={0,0,0},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid,
+                        textStyle={TextStyle.Bold},
+                        textString="RC"), Text(
+                        extent={{-70,86},{72,30}},
+                        lineColor={0,0,0},
+                        fillColor={86,199,10},
+                        fillPattern=FillPattern.Solid,
+                        textString="%name")}));
               end RC;
 
               model RLC "Constant RLC segment"
@@ -6869,17 +6870,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-34,26},{30,-24}},
-                                      lineColor={0,0,0},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid,
-                                      textStyle={TextStyle.Bold},
-                                      textString="RLC"),Text(
-                                      extent={{-70,86},{72,30}},
-                                      lineColor={0,0,0},
-                                      fillColor={86,199,10},
-                                      fillPattern=FillPattern.Solid,
-                                      textString="%name")}));
+                      graphics={Text(
+                        extent={{-34,26},{30,-24}},
+                        lineColor={0,0,0},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid,
+                        textStyle={TextStyle.Bold},
+                        textString="RLC"), Text(
+                        extent={{-70,86},{72,30}},
+                        lineColor={0,0,0},
+                        fillColor={86,199,10},
+                        fillPattern=FillPattern.Solid,
+                        textString="%name")}));
               end RLC;
 
               model CLR "Constant CLR segment"
@@ -6921,17 +6923,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-34,26},{30,-24}},
-                                      lineColor={0,0,0},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid,
-                                      textStyle={TextStyle.Bold},
-                                      textString="CLR"),Text(
-                                      extent={{-66,86},{76,30}},
-                                      lineColor={0,0,0},
-                                      fillColor={86,199,10},
-                                      fillPattern=FillPattern.Solid,
-                                      textString="%name")}));
+                      graphics={Text(
+                        extent={{-34,26},{30,-24}},
+                        lineColor={0,0,0},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid,
+                        textStyle={TextStyle.Bold},
+                        textString="CLR"), Text(
+                        extent={{-66,86},{76,30}},
+                        lineColor={0,0,0},
+                        fillColor={86,199,10},
+                        fillPattern=FillPattern.Solid,
+                        textString="%name")}));
               end CLR;
 
               model CRL "Constant CRL segment"
@@ -6973,17 +6976,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-34,26},{30,-24}},
-                                      lineColor={0,0,0},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid,
-                                      textStyle={TextStyle.Bold},
-                                      textString="CRL"),Text(
-                                      extent={{-66,86},{76,30}},
-                                      lineColor={0,0,0},
-                                      fillColor={86,199,10},
-                                      fillPattern=FillPattern.Solid,
-                                      textString="%name")}));
+                      graphics={Text(
+                        extent={{-34,26},{30,-24}},
+                        lineColor={0,0,0},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid,
+                        textStyle={TextStyle.Bold},
+                        textString="CRL"), Text(
+                        extent={{-66,86},{76,30}},
+                        lineColor={0,0,0},
+                        fillColor={86,199,10},
+                        fillPattern=FillPattern.Solid,
+                        textString="%name")}));
               end CRL;
 
               model CLpRR "Constant C(L|R)R segment"
@@ -7008,16 +7012,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       graphics={Rectangle(
-                                      extent={{-48,18},{52,-18}},
-                                      lineColor={255,255,255},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid),Text(
-                                      extent={{-34,26},{30,-24}},
-                                      lineColor={0,0,0},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid,
-                                      textStyle={TextStyle.Bold},
-                                      textString="CLpRR")}));
+                        extent={{-48,18},{52,-18}},
+                        lineColor={255,255,255},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid), Text(
+                        extent={{-34,26},{30,-24}},
+                        lineColor={0,0,0},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid,
+                        textStyle={TextStyle.Bold},
+                        textString="CLpRR")}));
               end CLpRR;
 
               model CRLpR "Constant CR(L|R) segment"
@@ -7042,16 +7046,16 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       graphics={Rectangle(
-                                      extent={{-50,18},{50,-18}},
-                                      lineColor={255,255,255},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid),Text(
-                                      extent={{-34,26},{30,-24}},
-                                      lineColor={0,0,0},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid,
-                                      textStyle={TextStyle.Bold},
-                                      textString="CRLpR")}));
+                        extent={{-50,18},{50,-18}},
+                        lineColor={255,255,255},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid), Text(
+                        extent={{-34,26},{30,-24}},
+                        lineColor={0,0,0},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid,
+                        textStyle={TextStyle.Bold},
+                        textString="CRLpR")}));
               end CRLpR;
 
               partial model LpRCR "Constant (L|R)CR segment"
@@ -7104,17 +7108,18 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-34,26},{30,-24}},
-                                      lineColor={0,0,0},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid,
-                                      textStyle={TextStyle.Bold},
-                                      textString="LpRCR"),Text(
-                                      extent={{-66,86},{76,30}},
-                                      lineColor={0,0,0},
-                                      fillColor={86,199,10},
-                                      fillPattern=FillPattern.Solid,
-                                      textString="%name")}));
+                      graphics={Text(
+                        extent={{-34,26},{30,-24}},
+                        lineColor={0,0,0},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid,
+                        textStyle={TextStyle.Bold},
+                        textString="LpRCR"), Text(
+                        extent={{-66,86},{76,30}},
+                        lineColor={0,0,0},
+                        fillColor={86,199,10},
+                        fillPattern=FillPattern.Solid,
+                        textString="%name")}));
               end LpRCR;
 
               model RRcC "Constant R(R-C) segment"
@@ -7161,17 +7166,17 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}}), graphics={Text(
-                                      extent={{-32,26},{32,-24}},
-                                      lineColor={0,0,0},
-                                      fillColor={255,255,255},
-                                      fillPattern=FillPattern.Solid,
-                                      textStyle={TextStyle.Bold},
-                                      textString="RRcC"),Text(
-                                      extent={{-66,84},{76,28}},
-                                      lineColor={0,0,0},
-                                      fillColor={86,199,10},
-                                      fillPattern=FillPattern.Solid,
-                                      textString="%name")}));
+                        extent={{-32,26},{32,-24}},
+                        lineColor={0,0,0},
+                        fillColor={255,255,255},
+                        fillPattern=FillPattern.Solid,
+                        textStyle={TextStyle.Bold},
+                        textString="RRcC"), Text(
+                        extent={{-66,84},{76,28}},
+                        lineColor={0,0,0},
+                        fillColor={86,199,10},
+                        fillPattern=FillPattern.Solid,
+                        textString="%name")}));
               end RRcC;
 
             end Compounds;
@@ -7365,11 +7370,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                         extent={{-100,-100},{100,100}}), graphics), Icon(
                       coordinateSystem(preserveAspectRatio=false, extent={{-100,
                           -100},{100,100}}), graphics={Text(
-                                      extent={{-62,-34},{62,-76}},
-                                      lineColor={127,0,127},
-                                      fillColor={86,199,10},
-                                      fillPattern=FillPattern.Solid,
-                                      textString="+IABP")}));
+                        extent={{-62,-34},{62,-76}},
+                        lineColor={127,0,127},
+                        fillColor={86,199,10},
+                        fillPattern=FillPattern.Solid,
+                        textString="+IABP")}));
               end TubeRLC_Derived_IABP;
             end Tubes;
           end RLC;
@@ -11444,8 +11449,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               end when;
 
               connect(inflowTube.cOut, ecmoPump.cIn) annotation (Line(
-                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{
-                      -40.4,0}},
+                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{-40.4,
+                      0}},
                   color={127,5,60},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -14080,18 +14085,19 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-                  "modelica://Cardiovascular/Resources/Icons/O2.png")}),
-          Diagram(coordinateSystem(preserveAspectRatio=false)));
+              "modelica://Cardiovascular/Resources/Icons/O2.png")}), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
     end O2;
 
     class Screw
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(
-              extent={{-100,-100},{100,100}},
-              fileName="modelica://Cardiovascular/Resources/Icons/Screw.png",
-              origin={2,-4},
-              rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=
+                  extent={{-100,-100},{100,100}},
+                  fileName=
+                "modelica://Cardiovascular/Resources/Icons/Screw.png",
+                  origin={2,-4},
+                  rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=
                 false)));
     end Screw;
 
@@ -14456,31 +14462,33 @@ above 0 mmHg.")}));
           isEnabled=settings.supports.ECMO_isEnabled,
           ecmoPump(qRef2=1.6666666666667e-06))
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
+              0.22, r=0.0021) annotation (Placement(transformation(
               extent={{-4,-4},{4,4}},
               rotation=90,
               origin={18,-46})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
-              extent={{4,-4},{-4,4}},
+        Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+          VenousDrainECMOExp(Base=6.2e11, Exp=1.855311) annotation (Placement(
+              transformation(
+              extent={{4,4},{-4,-4}},
               rotation=90,
               origin={-12,-46})));
       equation
-        connect(VenousDrain.cOut, ecmo.cIn) annotation (Line(
+        connect(VenousDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
             points={{-12,-49.2},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
-        connect(systemicCirculation.q_out, VenousDrain.cIn) annotation (Line(
+        connect(systemicCirculation.q_out, VenousDrainECMOExp.cIn) annotation (
+            Line(
             points={{-10,-26},{-12,-26},{-12,-42.8}},
             color={28,108,200},
             thickness=1));
-        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+        connect(systemicCirculation.AortaCannulla, arterialInfusion.cOut)
           annotation (Line(
             points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
-        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
+        connect(ecmo.cOut, arterialInfusion.cIn) annotation (Line(
             points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
@@ -14499,8 +14507,8 @@ above 0 mmHg.")}));
           isEnabled=settings.supports.ECMO_isEnabled,
           qMeanRef(displayUnit="l/min") = 8.3333333333333e-05)
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
+              0.22, r=0.0021) annotation (Placement(transformation(
               extent={{-4,-4},{4,4}},
               rotation=90,
               origin={18,-46})));
@@ -14516,12 +14524,12 @@ above 0 mmHg.")}));
               origin={14,-46})));
       equation
 
-        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+        connect(systemicCirculation.AortaCannulla, arterialInfusion.cOut)
           annotation (Line(
             points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
-        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
+        connect(ecmo.cOut, arterialInfusion.cIn) annotation (Line(
             points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
@@ -14558,8 +14566,8 @@ above 0 mmHg.")}));
           qMeanRef(displayUnit="l/min") = 1.6666666666667e-06,
           ecmoPump(qRef2=8.3333333333333e-05))
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
+              0.22, r=0.0021) annotation (Placement(transformation(
               extent={{-4,-4},{4,4}},
               rotation=90,
               origin={18,-46})));
@@ -14579,12 +14587,12 @@ above 0 mmHg.")}));
 
       equation
 
-        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+        connect(systemicCirculation.AortaCannulla, arterialInfusion.cOut)
           annotation (Line(
             points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
-        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
+        connect(ecmo.cOut, arterialInfusion.cIn) annotation (Line(
             points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
@@ -14621,8 +14629,8 @@ above 0 mmHg.")}));
           qMeanRef(displayUnit="l/min") = 1.6666666666667e-06,
           ecmoPump(qRef2=8.3333333333333e-05))
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
+              0.22, r=0.0021) annotation (Placement(transformation(
               extent={{-4,-4},{4,4}},
               rotation=90,
               origin={18,-46})));
@@ -14641,12 +14649,12 @@ above 0 mmHg.")}));
 
       equation
 
-        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+        connect(systemicCirculation.AortaCannulla, arterialInfusion.cOut)
           annotation (Line(
             points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
-        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
+        connect(ecmo.cOut, arterialInfusion.cIn) annotation (Line(
             points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
