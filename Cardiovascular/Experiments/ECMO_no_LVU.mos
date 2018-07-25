@@ -2,7 +2,6 @@
 cd("D:/home/git/Physiolibrary.models/Cardiovascular/Experiments");
 
 translateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo");
-settings.constants.LW_contractilityScale = 0.1;
 ecmo.ecmoPump.qRef2 = 0.00000166666667; simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_00");
 ecmo.ecmoPump.qRef2 = 0.00001666666667 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_01");
 ecmo.ecmoPump.qRef2 = 0.00003333333333 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo_02");
@@ -73,7 +72,7 @@ plotSignalOperator("LVFailure_Ecmo_03[end].heart.heart.ventricles.VLV", SignalOp
 plotSignalOperator("LVFailure_Ecmo_04[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.78, 15, 0, 3);
 plotSignalOperator("LVFailure_Ecmo_05[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.80, 15, 0, 3);
 plotSignalOperator("LVFailure_Ecmo_06[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.84, 15, 0, 3);
-"* The AV does not open for 7 l/min"
+plotSignalOperator("LVFailure_Ecmo_07[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.84, 15, 0, 3);"* The AV does not open for 7 l/min"
 
 
 // figure 4: MAP - systemicCirculation.q_in.pressure

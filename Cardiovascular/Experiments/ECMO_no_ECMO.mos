@@ -1,10 +1,9 @@
-cd("D:/home/git/Physiolibrary.models/Cardiovascular/Experiments");
+﻿cd("D:/home/git/Physiolibrary.models/Cardiovascular/Experiments");
 
 translateModel("Cardiovascular.Experiments.LVUnload_states.Healthy_noEcmo");
 simulateModel("Cardiovascular.Experiments.LVUnload_states.Healthy_noEcmo", stopTime=15, method="Cvode", resultFile="Healthy_noEcmo");
 
 translateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_noEcmo");
-settings.constants.LW_contractilityScale = 0.1;
 simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_noEcmo", stopTime=15, method="Cvode", resultFile="LV_Fail_noEcmo");
 
 // FIG 1 PVloops

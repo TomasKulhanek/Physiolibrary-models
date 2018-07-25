@@ -1,6 +1,4 @@
 cd("D:/home/git/Physiolibrary.models/Cardiovascular/Experiments");
-translateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo");
-settings.constants.LW_contractilityScale = 0.1;
 
 translateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo_LVDrainNonLin10Fr");
 ecmo.ecmoPump.qRef2 = 0.0000016666;		simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo_LVDrainNonLin10Fr", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo_LVDrainNonLin10Fr_00");
@@ -78,7 +76,7 @@ EDV03 = plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr_03[end].heart.heart
 EDV04 = plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr_04[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.78, 15, 0, 3);
 EDV05 = plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr_05[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.80, 15, 0, 3);
 EDV06 = plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr_06[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.84, 15, 0, 3);
-EDV07 = "* The AV does not open for 7 l/min"
+EDV07 = String(plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr_07[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.84, 15, 0, 3)) + "* The AV does not open for 7 l/min"
 
 // figure 4: MAP - systemicCirculation.q_in.pressure
 createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LVFailure_Ecmo_LVDrainNonLin10Fr_00.mat", colors={{28,108,200}}, displayUnits={"ml"});
@@ -128,16 +126,6 @@ DP06 = plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr_06[end].heart.heart.
 DP07 = plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr_07[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
 
 // couple of periods: 9.042, 14.142
-
-// get the systemic flow
-plotSignalOperator("LVFailure_Ecmo00_25[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 10);
-plotSignalOperator("LVFailure_Ecmo01_25[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 10);
-plotSignalOperator("LVFailure_Ecmo02_25[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 10);
-plotSignalOperator("LVFailure_Ecmo03_25[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 10);
-plotSignalOperator("LVFailure_Ecmo04_25[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 10);
-plotSignalOperator("LVFailure_Ecmo05_25[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 10);
-plotSignalOperator("LVFailure_Ecmo06_25[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 10);
-plotSignalOperator("LVFailure_Ecmo07_25[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 10);
 
 /*
 // OUTPUT 
