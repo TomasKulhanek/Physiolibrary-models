@@ -20,6 +20,3 @@ You can watch an instructional video at [https://youtu.be/wcipWB1Ngnw]
 The model is available to the public use. Although the model is implemented in the universal Modelica language, minor differences in interpretation persist among the various tools. The model has been developed and tested in the Dassault Systémes Dymola 2018 tool only. Other tools (Wolfram SystemModeler, OpenModelica etc) might be used as well, but we do not guarantee proper functionality.
 
 Citable DOI https://doi.org/10.5281/zenodo.1098407
-
-Cite as 
-Tomas Kulhanek, & Filip Ježek. (2017, December 9). filip-jezek/Physiolibrary.models: Published version (Version 1.0). Zenodo. http://doi.org/10.5281/zenodo.1098407
