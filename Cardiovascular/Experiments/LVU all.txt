@@ -1,13 +1,13 @@
 cd("D:/home/git/Physiolibrary.models/Cardiovascular/Experiments");
 translateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo");
-ecmo.ecmoPump.qRef2 = 0.00000166666667; simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo0_1");
-ecmo.ecmoPump.qRef2 = 0.00001666666667 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo01");
-ecmo.ecmoPump.qRef2 = 0.00003333333333 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo02");
-ecmo.ecmoPump.qRef2 = 0.00005          ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo03");
-ecmo.ecmoPump.qRef2 = 0.00006666666667 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo04");
-ecmo.ecmoPump.qRef2 = 0.00008333333333 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo05");
-ecmo.ecmoPump.qRef2 = 0.0001           ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo06");
-ecmo.ecmoPump.qRef2 = 0.0001166666667  ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Cvode", resultFile="LVFailure_Ecmo07");
+ecmo.ecmoPump.qRef2 = 0.00000166666667; simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo0_1");
+ecmo.ecmoPump.qRef2 = 0.00001666666667 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo01");
+ecmo.ecmoPump.qRef2 = 0.00003333333333 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo02");
+ecmo.ecmoPump.qRef2 = 0.00005          ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo03");
+ecmo.ecmoPump.qRef2 = 0.00006666666667 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo04");
+ecmo.ecmoPump.qRef2 = 0.00008333333333 ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo05");
+ecmo.ecmoPump.qRef2 = 0.0001           ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo06");
+ecmo.ecmoPump.qRef2 = 0.0001166666667  ;simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo07");
 
 translateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo_LVDrainNonLin10Fr");
 ecmo.ecmoPump.qRef2 = 0.0000016666;		simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_Ecmo_LVDrainNonLin10Fr", stopTime=15, method="Sdirk34hw", resultFile="LVFailure_Ecmo_LVDrainNonLin10Fr");;
@@ -21,7 +21,7 @@ ecmo.ecmoPump.qRef2 = 0.0001166666667  ;simulateModel("Cardiovascular.Experiment
 
 //LVFailure_Ecmo_LVDrainNonLin10Fr
 
-
+LVU FLOW
 plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr[1].LVDrainECMOExp.cIn.q", SignalOperator.ArithmeticMean, 12.45, 15, 0, 6);
 plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr[2].LVDrainECMOExp.cIn.q", SignalOperator.ArithmeticMean, 12.45, 15, 0, 6);
 plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr[3].LVDrainECMOExp.cIn.q", SignalOperator.ArithmeticMean, 12.45, 15, 0, 6);
@@ -41,6 +41,16 @@ plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr[8].LVDrainECMOExp.cIn.q", S
  
  
  EDV
+ 
+ plotSignalOperator("LVFailure_Ecmo0_1[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 14, 0, 9);
+ plotSignalOperator("LVFailure_Ecmo01[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 14, 0, 9);
+ plotSignalOperator("LVFailure_Ecmo02[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 14, 0, 9);
+ plotSignalOperator("LVFailure_Ecmo03[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 14, 0, 9);
+ plotSignalOperator("LVFailure_Ecmo04[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 14, 0, 9);
+ plotSignalOperator("LVFailure_Ecmo05[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 14, 0, 9);
+ plotSignalOperator("LVFailure_Ecmo06[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 14, 0, 9);
+ plotSignalOperator("LVFailure_Ecmo07[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 14, 0, 9);
+ 
  plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr[1].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 10);
  plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr[2].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 10);
  plotSignalOperator("LVFailure_Ecmo_LVDrainNonLin10Fr[3].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 10);

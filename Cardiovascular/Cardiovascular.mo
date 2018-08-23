@@ -3678,7 +3678,7 @@ package Cardiovascular
               color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                  extent={{-60,-60},{60,40}}), graphics), Icon(coordinateSystem(
+                  extent={{-60,-60},{60,40}})),           Icon(coordinateSystem(
                   preserveAspectRatio=false, extent={{-60,-60},{60,40}}),
                 graphics={Bitmap(extent={{-34,-44},{28,24}}, fileName=
                       "modelica://Physiolibrary/Resources/Icons/heartVentricle.png"),
@@ -3750,6 +3750,22 @@ package Cardiovascular
                 extent={{-6,-6},{6,6}},
                 rotation=90,
                 origin={-14,22})));
+          Physiolibrary.Types.RealIO.VolumeOutput rightVentricleVolume
+            annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=180,
+                origin={-10,90}), iconTransformation(
+                extent={{-10,-10},{10,10}},
+                rotation=90,
+                origin={-60,90})));
+          Physiolibrary.Types.RealIO.VolumeOutput leftVentricleVolume
+            annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=180,
+                origin={-10,-90}), iconTransformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={60,-90})));
         equation
           /*Plv = Plvf+Pperi;
   Plvf=e*Peslvf+(1-e)*Pedlvf;
@@ -3765,7 +3781,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 */
           //Pspt = leftVentricle.q_in.pressure - rightVentricle.q_in.pressure;
           connect(frequency, leftVentricle.HR) annotation (Line(
-              points={{-58,-20},{-15,-20}},
+              points={{-58,-20},{-36,-20},{-36,-24},{-15,-24}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(rightVentricle.HR, frequency) annotation (Line(
@@ -3778,33 +3794,33 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               smooth=Smooth.None));
           connect(rightVentricle.stressedVolume, pericardium.Vrvfw) annotation (
              Line(
-              points={{-5,36},{-5,19.54},{20.06,19.54}},
+              points={{-5,36},{-5,19.54},{14.86,19.54}},
               color={0,0,127},
               smooth=Smooth.Bezier));
           connect(lvflow, leftVentricle.q_in) annotation (Line(
-              points={{-36,-12},{-16.6667,-12}},
+              points={{-36,-12},{-26,-12},{-26,-16},{-16.6667,-16}},
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
           connect(pericardium.pressure, leftVentricle.Pext) annotation (Line(
-              points={{40.6,35.4},{44,35.4},{44,-20},{-5,-20}},
+              points={{35.4,35.4},{44,35.4},{44,-24},{-5,-24}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(Pth, pericardium.Pth) annotation (Line(
-              points={{4,34},{20.06,34},{20.06,35.14}},
+              points={{4,34},{14.86,34},{14.86,35.14}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(pericardium.pressure, rightVentricle.Pext) annotation (Line(
-              points={{40.6,35.4},{44,35.4},{44,44},{-5,44}},
+              points={{35.4,35.4},{44,35.4},{44,44},{-5,44}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(leftVentricle.stressedVolume, pericardium.Vlvfw) annotation (
               Line(
-              points={{-5,-12},{-4,-12},{-4,3.94},{20.06,3.94}},
+              points={{-5,-16},{-4,-16},{-4,3.94},{14.86,3.94}},
               color={0,0,127},
               smooth=Smooth.Bezier));
           connect(septum.volume, leftVentricle.V0) annotation (Line(
-              points={{-16,10},{-13.3333,10},{-13.3333,-12}},
+              points={{-16,10},{-13.3333,10},{-13.3333,-16}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(septum.volume, gain.u) annotation (Line(
@@ -3812,7 +3828,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,127},
               smooth=Smooth.None));
           connect(pericardium.Vsept, gain.u) annotation (Line(
-              points={{20.06,12.26},{-14,12.26},{-14,14.8}},
+              points={{14.86,12.26},{-14,12.26},{-14,14.8}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(gain.y, rightVentricle.V0) annotation (Line(
@@ -3830,10 +3846,14 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               thickness=1,
               smooth=Smooth.None));
           connect(septum.lvflow, leftVentricle.q_in) annotation (Line(
-              points={{-34,5.2},{-34,-12},{-16.6667,-12}},
+              points={{-34,5.2},{-34,-16},{-16.6667,-16}},
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
+          connect(leftVentricle.volume, leftVentricleVolume) annotation (Line(
+                points={{-9,-16},{-6,-16},{-6,-90},{-10,-90}}, color={0,0,127}));
+          connect(rightVentricle.volume, rightVentricleVolume) annotation (Line(
+                points={{-9,36},{-10,36},{-10,90}}, color={0,0,127}));
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={
                     {-100,-100},{100,100}}), graphics={Text(
                   extent={{-102,-20},{-76,-32}},
@@ -3869,8 +3889,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   fillColor={255,205,205},
                   fillPattern=FillPattern.Forward,
                           textString="%name")}), Diagram(coordinateSystem(
-                  preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-                graphics));
+                  preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
         end VentricularInteraction;
 
         model TimeVaryingElastance
@@ -4389,7 +4408,9 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   fillColor={255,170,170},
                   fillPattern=FillPattern.Forward,
                   textString="compliance
-"),Text(                  extent={{20,40},{166,-18}},
+"),
+                Text(
+                  extent={{20,40},{166,-18}},
                   lineColor={0,0,255},
                   horizontalAlignment=TextAlignment.Left,
                   textString="  pressure = plv -prv;
@@ -4552,7 +4573,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               string="%second",
               index=1,
               extent={{6,3},{6,3}}));
-          connect(ventricularInteraction.volume, busConnector.heartBloodVolume)
+          connect(ventricularInteraction.rightVentricleVolume, busConnector.heartBloodVolume)
             annotation (Line(
               points={{17.4,26.5},{17.4,86},{-98,86}},
               color={0,0,127},
@@ -4587,7 +4608,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               points={{-9,-12},{-9,-28.8},{0.6,-28.8}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(add.y, volume) annotation (Line(
+          connect(add.y, rightVentricleVolume) annotation (Line(
               points={{16.7,-33},{26.35,-33},{26.35,-34},{44,-34}},
               color={0,0,127},
               smooth=Smooth.None));
