@@ -6532,7 +6532,10 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
           end Standard;
 
           record LVFailure
-            extends Standard(LW_contractilityScale=0.2, RW_contractilityScale=x, SW_contractilityScale=x);
+            extends Standard(
+              LW_contractilityScale=0.1,
+              RW_contractilityScale=x,
+              SW_contractilityScale=x);
             constant Real x = 1;
           end LVFailure;
         end ModelConstants;
@@ -6819,7 +6822,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-32,26},{32,-24}},
+                      graphics={Text(
+                        extent={{-32,26},{32,-24}},
                         lineColor={0,0,0},
                         fillColor={255,255,255},
                         fillPattern=FillPattern.Solid,
@@ -6871,7 +6875,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-34,26},{30,-24}},
+                      graphics={Text(
+                        extent={{-34,26},{30,-24}},
                         lineColor={0,0,0},
                         fillColor={255,255,255},
                         fillPattern=FillPattern.Solid,
@@ -6923,7 +6928,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-34,26},{30,-24}},
+                      graphics={Text(
+                        extent={{-34,26},{30,-24}},
                         lineColor={0,0,0},
                         fillColor={255,255,255},
                         fillPattern=FillPattern.Solid,
@@ -6975,7 +6981,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-34,26},{30,-24}},
+                      graphics={Text(
+                        extent={{-34,26},{30,-24}},
                         lineColor={0,0,0},
                         fillColor={255,255,255},
                         fillPattern=FillPattern.Solid,
@@ -7106,7 +7113,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                         extent={{-100,-100},{100,100}}), graphics), Icon(
-                      graphics={Text( extent={{-34,26},{30,-24}},
+                      graphics={Text(
+                        extent={{-34,26},{30,-24}},
                         lineColor={0,0,0},
                         fillColor={255,255,255},
                         fillPattern=FillPattern.Solid,
@@ -11433,8 +11441,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               end when;
 
               connect(inflowTube.cOut, ecmoPump.cIn) annotation (Line(
-                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{
-                      -40.4,0}},
+                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{-40.4,
+                      0}},
                   color={127,5,60},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -14063,8 +14071,8 @@ above 0 mmHg.")}));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(extent={{-100,-100},{100,100}}, fileName=
-                  "modelica://Cardiovascular/Resources/Icons/O2.png")}),
-          Diagram(coordinateSystem(preserveAspectRatio=false)));
+              "modelica://Cardiovascular/Resources/Icons/O2.png")}), Diagram(
+            coordinateSystem(preserveAspectRatio=false)));
     end O2;
 
     class Screw
@@ -14072,7 +14080,8 @@ above 0 mmHg.")}));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false), graphics={
               Bitmap(
               extent={{-100,-100},{100,100}},
-              fileName="modelica://Cardiovascular/Resources/Icons/Screw.png",
+                  fileName=
+                "modelica://Cardiovascular/Resources/Icons/Screw.png",
               origin={2,-4},
               rotation=90)}), Diagram(coordinateSystem(preserveAspectRatio=
                 false)));
@@ -14386,7 +14395,7 @@ above 0 mmHg.")}));
       import Physiolibrary.Types.*;
       inner Model.Complex.Environment.ComplexEnvironment settings(redeclare
           Model.Complex.Environment.Conditions.Rest_MinimalAdapt condition)
-        annotation (Placement(transformation(extent={{-20,32},{-12,40}})));
+        annotation (Placement(transformation(extent={{-20,34},{-14,40}})));
 
       // protected
       //   Averager avg_V(
@@ -14439,32 +14448,34 @@ above 0 mmHg.")}));
           isEnabled=settings.supports.ECMO_isEnabled,
           ecmoPump(qRef2=1.6666666666667e-06))
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
-              extent={{-3,-3},{3,3}},
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
+              0.22, r=0.0021) annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
               rotation=90,
-              origin={13,-49})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
-              extent={{3,-3},{-3,3}},
+              origin={18,-46})));
+        Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+          VenousDrainECMOExp(Base=6.2e11, Exp=1.855311) annotation (Placement(
+              transformation(
+              extent={{4,4},{-4,-4}},
               rotation=90,
-              origin={-15,-37})));
+              origin={-12,-46})));
       equation
-        connect(VenousDrain.cOut, ecmo.cIn) annotation (Line(
-            points={{-15,-39.4},{-15,-60},{-9.6,-60}},
+        connect(VenousDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
+            points={{-12,-49.2},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
-        connect(systemicCirculation.q_out, VenousDrain.cIn) annotation (Line(
-            points={{-10,-26},{-15,-26},{-15,-34.6}},
+        connect(systemicCirculation.q_out, VenousDrainECMOExp.cIn) annotation (
+            Line(
+            points={{-10,-26},{-12,-26},{-12,-42.8}},
             color={28,108,200},
             thickness=1));
-        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+        connect(systemicCirculation.AortaCannulla, arterialInfusion.cOut)
           annotation (Line(
-            points={{7,-35},{13,-35},{13,-46.6}},
+            points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
-        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
-            points={{9.6,-60},{13,-60},{13,-51.4}},
+        connect(ecmo.cOut, arterialInfusion.cIn) annotation (Line(
+            points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
@@ -14482,11 +14493,11 @@ above 0 mmHg.")}));
           isEnabled=settings.supports.ECMO_isEnabled,
           qMeanRef(displayUnit="l/min") = 8.3333333333333e-05)
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
-              extent={{-3,-3},{3,3}},
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
+              0.22, r=0.0021) annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
               rotation=90,
-              origin={13,-49})));
+              origin={18,-46})));
         Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrainECMOLin(l=
              0.33, r=0.0021) annotation (Placement(transformation(
               extent={{4,-4},{-4,4}},
@@ -14496,16 +14507,16 @@ above 0 mmHg.")}));
             r=0.0018) annotation (Placement(transformation(
               extent={{4,-4},{-4,4}},
               rotation=90,
-              origin={-18,-46})));
+              origin={14,-46})));
       equation
 
-        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+        connect(systemicCirculation.AortaCannulla, arterialInfusion.cOut)
           annotation (Line(
-            points={{7,-35},{13,-35},{13,-46.6}},
+            points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
-        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
-            points={{9.6,-60},{13,-60},{13,-51.4}},
+        connect(ecmo.cOut, arterialInfusion.cIn) annotation (Line(
+            points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
         connect(VenousDrainECMOLin.cIn, systemicCirculation.q_out) annotation (
@@ -14518,11 +14529,11 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         connect(heart.LVCannula, LVDrainECMOLin.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-12},{-18,-12},{-18,-42.8}},
+            points={{0.88,-3.52},{0.88,-4},{14,-4},{14,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(LVDrainECMOLin.cOut, ecmo.cIn) annotation (Line(
-            points={{-18,-49.2},{-18,-60},{-9.6,-60}},
+            points={{14,-49.2},{14,-52},{-12,-52},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
@@ -14541,11 +14552,11 @@ above 0 mmHg.")}));
           qMeanRef(displayUnit="l/min") = 1.6666666666667e-06,
           ecmoPump(qRef2=8.3333333333333e-05))
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
-              extent={{-3,-3},{3,3}},
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
+              0.22, r=0.0021) annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
               rotation=90,
-              origin={13,-49})));
+              origin={18,-46})));
         Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
           VenousDrainECMOExp(Base=6.2e11, Exp=1.855311) annotation (Placement(
               transformation(
@@ -14557,18 +14568,18 @@ above 0 mmHg.")}));
               transformation(
               extent={{4,4},{-4,-4}},
               rotation=90,
-              origin={-18,-46})));
+              origin={14,-46})));
 
 
       equation
 
-        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+        connect(systemicCirculation.AortaCannulla, arterialInfusion.cOut)
           annotation (Line(
-            points={{7,-35},{13,-35},{13,-46.6}},
+            points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
-        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
-            points={{9.6,-60},{13,-60},{13,-51.4}},
+        connect(ecmo.cOut, arterialInfusion.cIn) annotation (Line(
+            points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
         connect(VenousDrainECMOExp.cIn, systemicCirculation.q_out) annotation (
@@ -14581,11 +14592,11 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         connect(heart.LVCannula, LVDrainECMOExp.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-12},{-18,-12},{-18,-42.8}},
+            points={{0.88,-3.52},{0.88,-4},{14,-4},{14,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(LVDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
-            points={{-18,-49.2},{-18,-60},{-9.6,-60}},
+            points={{14,-49.2},{14,-52},{-12,-52},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
@@ -14604,11 +14615,11 @@ above 0 mmHg.")}));
           qMeanRef(displayUnit="l/min") = 1.6666666666667e-06,
           ecmoPump(qRef2=8.3333333333333e-05))
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrain1(l=0.22,
-            r=0.0021) annotation (Placement(transformation(
-              extent={{-3,-3},{3,3}},
+        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
+              0.22, r=0.0021) annotation (Placement(transformation(
+              extent={{-4,-4},{4,4}},
               rotation=90,
-              origin={13,-49})));
+              origin={18,-46})));
         Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
           VenousDrainECMOExp(Base=6.2e11, Exp=1.855311) annotation (Placement(
               transformation(
@@ -14620,17 +14631,17 @@ above 0 mmHg.")}));
               transformation(
               extent={{4,4},{-4,-4}},
               rotation=90,
-              origin={-18,-46})));
+              origin={14,-46})));
 
       equation
 
-        connect(systemicCirculation.AortaCannulla, VenousDrain1.cOut)
+        connect(systemicCirculation.AortaCannulla, arterialInfusion.cOut)
           annotation (Line(
-            points={{7,-35},{13,-35},{13,-46.6}},
+            points={{7,-35},{18,-35},{18,-42.8}},
             color={217,67,180},
             thickness=1));
-        connect(ecmo.cOut, VenousDrain1.cIn) annotation (Line(
-            points={{9.6,-60},{13,-60},{13,-51.4}},
+        connect(ecmo.cOut, arterialInfusion.cIn) annotation (Line(
+            points={{9.6,-60},{18,-60},{18,-49.2}},
             color={217,67,180},
             thickness=1));
         connect(VenousDrainECMOExp.cIn, systemicCirculation.q_out) annotation (
@@ -14643,11 +14654,11 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         connect(heart.LVCannula, LVDrainECMOExp.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-12},{-18,-12},{-18,-42.8}},
+            points={{0.88,-3.52},{0.88,-4},{14,-4},{14,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(LVDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
-            points={{-18,-49.2},{-18,-60},{-9.6,-60}},
+            points={{14,-49.2},{14,-52},{-12,-52},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
