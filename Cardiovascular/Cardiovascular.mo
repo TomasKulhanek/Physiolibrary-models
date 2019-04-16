@@ -39,11 +39,7 @@ package Cardiovascular
               40}}), graphics),
       Icon(coordinateSystem(extent={{-20,-40},{20,40}}, preserveAspectRatio=
               false), graphics={Bitmap(extent={{-40,-40},{40,40}}, fileName=
-                "modelica://Cardiovascular/Resources/Icons/cvsconcept.png"),
-            Text(
-            extent={{-40,-40},{40,-48}},
-            lineColor={0,0,255},
-            textString="%name")}),
+                "modelica://Cardiovascular/Resources/Icons/cvsconcept.png")}),
       Documentation(info="<html>
 <p>Architectural model of cardiovascular subsystems. The partial subsystems are meant to be redeclared by the implemented submodels.</p>
 </html>"));
@@ -284,6 +280,7 @@ package Cardiovascular
     partial model Heart "Abstract heart circulation submodel"
 
     //   Physiolibrary.Types.Volume V "Volume";
+      parameter Boolean useLVCannula = false;
 
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a rightHeartInflow
         annotation (Placement(transformation(extent={{-110,30},{-90,50}}),
@@ -297,6 +294,9 @@ package Cardiovascular
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b leftHeartOutflow
         annotation (Placement(transformation(extent={{-110,-30},{-90,-10}}),
             iconTransformation(extent={{90,-28},{110,-8}})));
+      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a LVCannula if useLVCannula
+        annotation (Placement(transformation(extent={{40,-78},{60,-58}}),
+            iconTransformation(extent={{72,-70},{92,-50}})));
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),                                                                        graphics={Bitmap(extent={{-86,-106},{82,104}},
               fileName=
@@ -306,8 +306,7 @@ package Cardiovascular
               lineColor={190,0,0},
               lineThickness=1,
               textString="%name")}), Diagram(coordinateSystem(
-              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-            graphics));
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
 
     end Heart;
 
@@ -317,12 +316,15 @@ package Cardiovascular
 
     //   Physiolibrary.Types.Volume V "Total stressed blood volume of the systemic circulation";
 
+      parameter Boolean useAortalCanulla = false;
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a q_in annotation (
           Placement(transformation(extent={{90,-10},{110,10}}),
             iconTransformation(extent={{90,-10},{110,10}})));
       Physiolibrary.Hydraulic.Interfaces.HydraulicPort_b q_out annotation (
           Placement(transformation(extent={{-110,-10},{-90,10}}),
             iconTransformation(extent={{-110,-10},{-90,10}})));
+      Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a AortaCannulla if useAortalCanulla annotation (Placement(transformation(extent={{60,-100},{80,-80}}), iconTransformation(extent={{60,-100},{80,-80}})));
+
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
@@ -4153,10 +4155,22 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
             annotation (Placement(transformation(extent={{-58,-24},{-78,-4}})));
           replaceable Physiolibrary.Types.Constants.FrequencyConst HR(k=1.2)
             annotation (Placement(transformation(extent={{-52,8},{-36,22}})));
-          replaceable VentricularInteraction ventricularInteraction
-            annotation (Placement(transformation(extent={{-24,-14},{36,40}})));
           Physiolibrary.Types.Constants.PressureConst Pth(k=-533.28954966)
-            annotation (Placement(transformation(extent={{42,20},{52,30}})));
+            annotation (Placement(transformation(extent={{52,20},{42,30}})));
+        VentricularInteraction_flat       ventricularInteraction_flat(
+            lambdalv=33000,
+            lambdaperi=30000,
+            lambdas(displayUnit="1/m3") = 435000,
+            lambdarv(displayUnit="1/m3") = 23000,
+            Essept(displayUnit="mmHg/ml") = 6499999676.0309,
+            V0peri=0.0002,
+            Pi0sept=148.00118226939,
+            Pi0rv=28.757638965416,
+            Pi0lv=16.038683206025,
+            Pi0peri=66.701190423724,
+            Esrv=77993596.637775,
+            Eslv=383941811.27772)
+            annotation (Placement(transformation(extent={{-18,-8},{20,32}})));
         equation
           connect(rightHeartInflow, Ltc.q_in) annotation (Line(
               points={{-100,40},{-90,40}},
@@ -4165,17 +4179,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               smooth=Smooth.None));
           connect(Ltc.q_out, tricuspidValve.q_in) annotation (Line(
               points={{-70,40},{-48,40}},
-              color={0,0,0},
-              thickness=1,
-              smooth=Smooth.None));
-          connect(tricuspidValve.q_out, ventricularInteraction.rvflow)
-            annotation (Line(
-              points={{-28,40},{6,40}},
-              color={0,0,0},
-              thickness=1,
-              smooth=Smooth.None));
-          connect(ventricularInteraction.rvflow, Lpv.q_in) annotation (Line(
-              points={{6,40},{42,40}},
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
@@ -4189,14 +4192,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
-          connect(Pth.y, ventricularInteraction.Pth) annotation (Line(
-              points={{53.25,25},{56,25},{56,15.16},{30,15.16}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(ventricularInteraction.frequency, HR.y) annotation (Line(
-              points={{-18,15.16},{-26,15.16},{-26,15},{-34,15}},
-              color={0,0,127},
-              smooth=Smooth.None));
           connect(Lmt.q_in, leftHeartInflow) annotation (Line(
               points={{88,-14},{94,-14},{94,-20},{100,-20}},
               color={0,0,0},
@@ -4204,17 +4199,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               smooth=Smooth.None));
           connect(Lmt.q_out, mitralValve.q_in) annotation (Line(
               points={{68,-14},{60,-14}},
-              color={0,0,0},
-              thickness=1,
-              smooth=Smooth.None));
-          connect(mitralValve.q_out, ventricularInteraction.lvflow) annotation (
-             Line(
-              points={{40,-14},{6,-14}},
-              color={0,0,0},
-              thickness=1,
-              smooth=Smooth.None));
-          connect(Lav.q_in, ventricularInteraction.lvflow) annotation (Line(
-              points={{-30,-14},{6,-14}},
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
@@ -4228,8 +4212,38 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
+          connect(tricuspidValve.q_out, ventricularInteraction_flat.rvflow)
+            annotation (Line(
+              points={{-28,40},{0.62,40},{0.62,32}},
+              color={0,0,0},
+              thickness=1));
+          connect(ventricularInteraction_flat.rvflow, Lpv.q_in) annotation (
+              Line(
+              points={{0.62,32},{0.62,40},{42,40}},
+              color={0,0,0},
+              thickness=1));
+          connect(Lav.q_in, ventricularInteraction_flat.lvflow) annotation (
+              Line(
+              points={{-30,-14},{2,-14},{2,-8},{1,-8}},
+              color={0,0,0},
+              thickness=1));
+          connect(ventricularInteraction_flat.lvflow, mitralValve.q_out)
+            annotation (Line(
+              points={{1,-8},{2,-8},{2,-14},{40,-14}},
+              color={0,0,0},
+              thickness=1));
+          connect(ventricularInteraction_flat.lvflow, LVCannula) annotation (
+              Line(
+              points={{1,-8},{2,-8},{2,-68},{50,-68}},
+              color={0,0,0},
+              thickness=1));
+          connect(HR.y, ventricularInteraction_flat.HR) annotation (Line(points=
+                 {{-34,15},{-24,15},{-24,12},{-14.2,12}}, color={0,0,127}));
+          connect(ventricularInteraction_flat.Pth, Pth.y) annotation (Line(
+                points={{16.58,12},{35.29,12},{35.29,25},{40.75,25}}, color={0,
+                  0,127}));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                  extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
+                  extent={{-100,-100},{100,100}})),           Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
                   lineColor={0,0,0},
                   textString="Smith")}));
@@ -4338,8 +4352,12 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1,
               smooth=Smooth.None));
+          connect(AortaCannulla, aorta.q_in) annotation (Line(
+              points={{70,-90},{52,-90},{52,2}},
+              color={0,0,0},
+              thickness=1));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                  extent={{-100,-100},{100,100}}), graphics), Icon(graphics={
+                  extent={{-100,-100},{100,100}})),           Icon(graphics={
                   Text(   extent={{-100,60},{100,100}},
                   lineColor={0,0,0},
                   textString="Smith")}));
@@ -4408,8 +4426,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                   fillColor={255,170,170},
                   fillPattern=FillPattern.Forward,
                   textString="compliance
-"),
-                Text(
+"),             Text(
                   extent={{20,40},{166,-18}},
                   lineColor={0,0,255},
                   horizontalAlignment=TextAlignment.Left,
@@ -4550,11 +4567,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         model HeartControl
 
           extends Interfaces.Controlled.Heart;
-          extends Parts.Heart(
-            redeclare Types.Constants.FrequencyControl HR,
-            redeclare VIVolume ventricularInteraction(rightVentricle(drive(
-                    useEs_extInput=true))),
-            aorticValve(useLimitationInputs=false));
+          extends Parts.Heart(redeclare Types.Constants.FrequencyControl HR,
+              aorticValve(useLimitationInputs=false));
         equation
         //  connect(volume, busConnector.heartvolume);
           connect(HR.c, busConnector.heartrate) annotation (Line(
@@ -6757,6 +6771,7 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 parameter Real Base "Base for mmHg";
                 parameter Real Exp;
+                parameter Boolean closed = false;
 
                 Real qs=cIn.q^2;
                 Real dps=dp^2;
@@ -6773,8 +6788,12 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
                 //   dp = if noEvent(dp >= 0) and noEvent(cIn.q >= 0) then Base*cIn.q^Exp else -
                 //     Base*(-cIn.q)^Exp;
+                if closed then
+                  cIn.q = 0;
+                  else
                 cIn.q = if noEvent(dp >= 0) then (dp/Base)^(1/Exp) else -(-dp/
                   Base)^(1/Exp);
+                end if;
 
 
                 0 = cIn.q + cOut.q;
@@ -11441,8 +11460,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               end when;
 
               connect(inflowTube.cOut, ecmoPump.cIn) annotation (Line(
-                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{-40.4,
-                      0}},
+                  points={{-39.8195,8.95557},{-46,8.95557},{-46,20},{-46,0},{
+                      -40.4,0}},
                   color={127,5,60},
                   smooth=Smooth.Bezier,
                   thickness=1));
@@ -11752,9 +11771,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         //   Physiolibrary.Hydraulic.Sources.UnlimitedPump volumeControl_(useSolutionFlowInput = true);
         //
         //
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a AortaCannulla
-            annotation (Placement(transformation(extent={{60,-100},{80,-80}}),
-                iconTransformation(extent={{60,-100},{80,-80}})));
         equation
         //   der(V_filling) = q_filling;
         //   q_filling/speed_factor = V_init - V_filling;// - der(V_filling);
@@ -11951,14 +11967,6 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
 
         model HeartCannulated
           extends Heart(redeclare Main.Heart.HeartLVCannulated heart);
-          Physiolibrary.Hydraulic.Interfaces.HydraulicPort_a LVCannula
-            annotation (Placement(transformation(extent={{0,80},{20,100}}),
-                iconTransformation(extent={{26,-54},{46,-34}})));
-        equation
-          connect(LVCannula, heart.LVcannula) annotation (Line(
-              points={{10,90},{44,90},{44,19.12}},
-              color={0,0,0},
-              thickness=1));
         end HeartCannulated;
       end Components;
 
@@ -14381,12 +14389,11 @@ above 0 mmHg.")}));
 
     model LVUnloading
       extends Cardiovascular.System(
-        redeclare Model.Complex.Components.Pulmonary pulmonaryCirculation,
-        redeclare Model.Complex.Components.HeartCannulated heart,
-        redeclare Model.Complex.Components.Systemic systemicCirculation(
-            redeclare
-            Model.Complex.Components.Main.SystemicArteries.Original_CircAdapt
-            SA(V_init=6e-05)));
+        redeclare Model.Smith2004.Parts.Pulmonary    pulmonaryCirculation,
+        redeclare Model.Smith2004.Parts.Heart              heart(useLVCannula=
+              true),
+        redeclare Model.Smith2004.Parts.Systemic    systemicCirculation(
+            useAortalCanulla=true));
       extends Cardiovascular.Icons.Runnable_System;
       import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
       import Cardiovascular.Constants.*;
@@ -14529,7 +14536,7 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         connect(heart.LVCannula, LVDrainECMOLin.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-4},{14,-4},{14,-42.8}},
+            points={{4.56,-4.8},{4.56,-4},{14,-4},{14,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(LVDrainECMOLin.cOut, ecmo.cIn) annotation (Line(
@@ -14654,7 +14661,7 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         connect(heart.LVCannula, LVDrainECMOExp.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-4},{14,-4},{14,-42.8}},
+            points={{4.56,-4.8},{4.56,-4},{14,-4},{14,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(LVDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
@@ -14663,8 +14670,49 @@ above 0 mmHg.")}));
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
       end LVFailure_Ecmo_LVDrainNonLin10Fr;
+
+      model LVAD_smith
+        extends LVFailure_Ecmo_LVDrainNonLin10Fr(
+          ecmo(ecmoPump(qRef2=0)),
+          LVDrainECMOExp(closed=false),
+          heart(ventricularInteraction_flat(Eslv=38394200.0)),
+          pulmonaryCirculation(pulmonaryVeins(ZeroPressureVolume(displayUnit=
+                    "ml") = 0)));
+        annotation (experiment(
+            StopTime=30,
+            Tolerance=1e-07,
+            __Dymola_Algorithm="Cvode"));
+      end LVAD_smith;
     end LVUnload_states;
   end Experiments;
+
+  package Visualization
+    model MergedSmith
+      parameter Physiolibrary.Types.Frequency HR = 1.2;
+      parameter Physiolibrary.Types.HydraulicElastance Eslv = 383941811;
+      parameter Physiolibrary.Types.Volume VeinsZPV = 0;
+      parameter Physiolibrary.Types.VolumeFlowRate qRef = 0;
+      Experiments.LVUnload_states.LVAD_smith VA_ECMO(
+        heart(HR(k=HR), ventricularInteraction_flat(Eslv=Eslv)),
+        pulmonaryCirculation(pulmonaryVeins(ZeroPressureVolume=VeinsZPV)),
+        ecmo(ecmoPump(qRef2=qRef)),
+        LVDrainECMOExp(closed=true))
+        annotation (Placement(transformation(extent={{-70,-44},{-40,60}})));
+      Experiments.LVUnload_states.LVAD_smith VA_ECMO_DLAC_UNLOAD(
+        heart(HR(k=HR), ventricularInteraction_flat(Eslv=Eslv)),
+        pulmonaryCirculation(pulmonaryVeins(ZeroPressureVolume=VeinsZPV)),
+        ecmo(ecmoPump(qRef2=qRef)),
+        LVDrainECMOExp(closed=false))
+        annotation (Placement(transformation(extent={{2,-20},{40,68}})));
+      annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+            coordinateSystem(preserveAspectRatio=false)),
+        experiment(
+          StopTime=30,
+          __Dymola_NumberOfIntervals=1500,
+          Tolerance=1e-08,
+          __Dymola_Algorithm="Cvode"));
+    end MergedSmith;
+  end Visualization;
   annotation (uses(Physiolibrary(version="2.3.2-beta"), Modelica(version=
-            "3.2.2")));
+            "3.2.3")));
 end Cardiovascular;
