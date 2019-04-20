@@ -14683,6 +14683,10 @@ above 0 mmHg.")}));
             Tolerance=1e-07,
             __Dymola_Algorithm="Cvode"));
       end LVAD_smith;
+
+      model LVAD_smith_No_Unload
+        extends LVAD_smith(LVDrainECMOExp(closed=true));
+      end LVAD_smith_No_Unload;
     end LVUnload_states;
   end Experiments;
 
