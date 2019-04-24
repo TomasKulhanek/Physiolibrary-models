@@ -6769,12 +6769,17 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 extends Physiolibrary.Icons.Resistor;
                 import Physiolibrary.Types.*;
 
-                parameter Real Base "Base for mmHg";
-                parameter Real Exp;
+                parameter Real Base "dp = base * Q^Exp ";
+                parameter Real Exp "dp = base * Q^Exp ";
                 parameter Boolean closed = false;
-
-                Real qs=cIn.q^2;
-                Real dps=dp^2;
+                parameter Real FrenchGauge = 10 "Outer diameter for computation of shear stress";
+                parameter Modelica.SIunits.Thickness wallThickness = 0.8e-3 "For shear stress calculation only";
+                parameter Real relativeViscosity = 1 "Transformation from water to blood";
+                Modelica.SIunits.Diameter innerD = FrenchGauge / 3 * 1e-3 - 2*wallThickness;
+                parameter Modelica.SIunits.Length l = 1;
+                Modelica.SIunits.ShearStress shearStress = dp*innerD/l/4;
+              //   Real qs=cIn.q^2;
+              //   Real dps=dp^2;
               equation
                 //   if noEvent(dp >= 0) and noEvent(cIn.q >= 0) then
                 //     Base*cIn.q^Exp = dp;
@@ -6791,8 +6796,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
                 if closed then
                   cIn.q = 0;
                   else
-                cIn.q = if noEvent(dp >= 0) then (dp/Base)^(1/Exp) else -(-dp/
-                  Base)^(1/Exp);
+                cIn.q = if noEvent(dp >= 0) then (dp/Base/relativeViscosity)^(1/Exp) else -(-dp/
+                  Base/relativeViscosity)^(1/Exp);
                 end if;
 
 
@@ -14599,7 +14604,7 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         connect(heart.LVCannula, LVDrainECMOExp.cIn) annotation (Line(
-            points={{0.88,-3.52},{0.88,-4},{14,-4},{14,-42.8}},
+            points={{4.56,-4.8},{4.56,-4},{14,-4},{14,-42.8}},
             color={28,108,200},
             thickness=1));
         connect(LVDrainECMOExp.cOut, ecmo.cIn) annotation (Line(
@@ -14622,19 +14627,31 @@ above 0 mmHg.")}));
           qMeanRef(displayUnit="l/min") = 1.6666666666667e-06,
           ecmoPump(qRef2=8.3333333333333e-05))
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
-              0.22, r=0.0021) annotation (Placement(transformation(
+        Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+                                                           arterialInfusion(
+          Base=2883640000000,
+          Exp=1.822029,
+          FrenchGauge=12,
+          wallThickness(displayUnit="mm") = 0.0005,
+          relativeViscosity=1,
+          l=0.31)             annotation (Placement(transformation(
               extent={{-4,-4},{4,4}},
               rotation=90,
               origin={18,-46})));
         Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
-          VenousDrainECMOExp(Base=6.2e11, Exp=1.855311) annotation (Placement(
+          VenousDrainECMOExp(Base=6.2e11, Exp=1.855311,
+          FrenchGauge=19,
+          relativeViscosity=1.5,
+          l(displayUnit="cm") = 0.33)                   annotation (Placement(
               transformation(
               extent={{4,4},{-4,-4}},
               rotation=90,
               origin={-12,-46})));
         Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
-          LVDrainECMOExp(Base=1.22E+14, Exp=1.919743)   annotation (Placement(
+          LVDrainECMOExp(Base=1.22E+14, Exp=1.919743,
+          FrenchGauge=12,
+          relativeViscosity=1.5,
+          l(displayUnit="cm") = 0.33)                   annotation (Placement(
               transformation(
               extent={{4,4},{-4,-4}},
               rotation=90,
@@ -14674,18 +14691,25 @@ above 0 mmHg.")}));
       model LVAD_smith
         extends LVFailure_Ecmo_LVDrainNonLin10Fr(
           ecmo(ecmoPump(qRef2=0)),
-          LVDrainECMOExp(closed=false),
+          LVDrainECMOExp(closed=false, l(displayUnit="cm")),
           heart(ventricularInteraction_flat(Eslv=38394200.0)),
           pulmonaryCirculation(pulmonaryVeins(ZeroPressureVolume(displayUnit=
-                    "ml") = 0)));
+                    "ml") = 0)),
+          VenousDrainECMOExp(wallThickness(displayUnit="mm"), l(displayUnit=
+                  "cm")));
         annotation (experiment(
             StopTime=30,
-            Tolerance=1e-07,
+            Interval=0.01,
+            Tolerance=1e-09,
             __Dymola_Algorithm="Cvode"));
       end LVAD_smith;
 
       model LVAD_smith_No_Unload
         extends LVAD_smith(LVDrainECMOExp(closed=true));
+        annotation (experiment(
+            StopTime=60,
+            Tolerance=1e-06,
+            __Dymola_Algorithm="Cvode"));
       end LVAD_smith_No_Unload;
     end LVUnload_states;
   end Experiments;
