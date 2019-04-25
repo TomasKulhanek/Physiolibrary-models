@@ -11503,7 +11503,11 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
         model Heart
           extends Interfaces.Heart;
           import Physiolibrary.Types.*;
-          replaceable Main.Heart.Heart heart(
+          replaceable Main.Heart.HeartLVCannulated
+                                       heart(
+            VPRef_init=settings.initialization.peri_VRef,
+            pPRef=settings.initialization.peri_pRef,
+            kP=settings.initialization.peri_k) constrainedby Main.Heart.Heart(
             VPRef_init=settings.initialization.peri_VRef,
             pPRef=settings.initialization.peri_pRef,
             kP=settings.initialization.peri_k)
@@ -11710,6 +11714,8 @@ Pspt=e*Pesspt+(1-e)*Pedspt;
               color={0,0,0},
               thickness=1));
 
+          connect(heart.LVcannula, LVCannula) annotation (Line(points={{44,
+                  19.12},{48,19.12},{48,-68},{50,-68}}, color={229,133,64}));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}})), Icon(graphics={Text(
                   extent={{-100,20},{100,100}},
@@ -14392,7 +14398,50 @@ above 0 mmHg.")}));
                   textString="Linear venous drain divider")}));
     end CatheterDataFitting;
 
-    model LVUnloading
+    model LVUnloadingTriSeg
+      extends Cardiovascular.System(
+        redeclare Model.Complex.Components.Pulmonary pulmonaryCirculation,
+        redeclare Model.Complex.Components.Heart           heart(useLVCannula=
+              true),
+        redeclare Model.Complex.Components.Systemic systemicCirculation(
+            useAortalCanulla=true,
+                redeclare
+                Model.Complex.Components.Main.SystemicArteries.Original_CircAdapt
+                SA(V_init=6e-05)));
+      extends Cardiovascular.Icons.Runnable_System;
+      import Cardiovascular.Model.Complex.Components.Auxiliary.Analyzers.*;
+      import Cardiovascular.Constants.*;
+      import Cardiovascular.Types.*;
+      import Physiolibrary.Hydraulic.Sources.*;
+      import Physiolibrary.Types.*;
+      inner Model.Complex.Environment.ComplexEnvironment settings(redeclare
+          Model.Complex.Environment.Conditions.Rest_MinimalAdapt condition)
+        annotation (Placement(transformation(extent={{-20,34},{-14,40}})));
+
+      // protected
+      //   Averager avg_V(
+      //     redeclare type T = Volume,
+      //     signal = V,
+      //     control = settings. stepCycle);
+
+    equation
+      connect(systemicCirculation.q_out, heart.rightHeartInflow) annotation (
+          Line(
+          points={{-10,-26},{-14,-26},{-14,-1.6},{-9.84,-1.6}},
+          color={0,0,0},
+          thickness=1));
+      annotation (
+        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-20,-80},{20,
+                40}})),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-20,-80},{
+                20,40}})),
+        experiment(
+          StopTime=15,
+          Tolerance=1e-006,
+          __Dymola_Algorithm="Sdirk34hw"));
+    end LVUnloadingTriSeg;
+
+    model LVUnloadingSmith
       extends Cardiovascular.System(
         redeclare Model.Smith2004.Parts.Pulmonary    pulmonaryCirculation,
         redeclare Model.Smith2004.Parts.Heart              heart(useLVCannula=
@@ -14430,11 +14479,12 @@ above 0 mmHg.")}));
           StopTime=15,
           Tolerance=1e-006,
           __Dymola_Algorithm="Sdirk34hw"));
-    end LVUnloading;
+    end LVUnloadingSmith;
 
     package LVUnload_states
       model Healthy_noEcmo
-        extends LVUnloading;
+        extends LVUnloadingTriSeg(systemicCirculation(useAortalCanulla=false),
+            heart(useLVCannula=false));
         annotation (experiment(
             StopTime=15,
             Tolerance=1e-006,
@@ -14442,13 +14492,17 @@ above 0 mmHg.")}));
       end Healthy_noEcmo;
 
       model LVFailure_noEcmo
-        extends LVUnloading(settings(redeclare
-              Model.Complex.Environment.ModelConstants.LVFailure constants));
+        extends LVUnloadingTriSeg(
+                            settings(redeclare
+              Model.Complex.Environment.ModelConstants.LVFailure constants),
+          systemicCirculation(useAortalCanulla=false),
+          heart(useLVCannula=false));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Sdirk34hw"));
       end LVFailure_noEcmo;
 
       model LVFailure_Ecmo
-        extends LVUnloading(settings(redeclare
+        extends LVUnloadingTriSeg(
+                            settings(redeclare
               Model.Complex.Environment.ModelConstants.LVFailure constants,
               redeclare Model.Complex.Environment.Supports.ECMO_Nonpulsatile
               supports));
@@ -14493,66 +14547,9 @@ above 0 mmHg.")}));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
       end LVFailure_Ecmo;
 
-      model LVFailure_Ecmo_LVDrain
-        extends LVUnloading(settings(redeclare
-              Model.Complex.Environment.ModelConstants.LVFailure constants,
-              redeclare Model.Complex.Environment.Supports.ECMO_Nonpulsatile
-              supports));
-        Model.Complex.Components.Main.ECMO.ECMO_bare ecmo(
-          cycleDuration=settings.supports.ECMO_cycleDuration,
-          pulseDuration=settings.supports.ECMO_pulseDuration,
-          pulseShapeRef=settings.supports.ECMO_pulseShapeRef,
-          isEnabled=settings.supports.ECMO_isEnabled,
-          qMeanRef(displayUnit="l/min") = 8.3333333333333e-05)
-          annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
-              0.22, r=0.0021) annotation (Placement(transformation(
-              extent={{-4,-4},{4,4}},
-              rotation=90,
-              origin={18,-46})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR VenousDrainECMOLin(l=
-             0.33, r=0.0021) annotation (Placement(transformation(
-              extent={{4,-4},{-4,4}},
-              rotation=90,
-              origin={-12,-46})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR LVDrainECMOLin(l=1.2,
-            r=0.0018) annotation (Placement(transformation(
-              extent={{4,-4},{-4,4}},
-              rotation=90,
-              origin={14,-46})));
-      equation
-
-        connect(systemicCirculation.AortaCannulla, arterialInfusion.cOut)
-          annotation (Line(
-            points={{7,-35},{18,-35},{18,-42.8}},
-            color={217,67,180},
-            thickness=1));
-        connect(ecmo.cOut, arterialInfusion.cIn) annotation (Line(
-            points={{9.6,-60},{18,-60},{18,-49.2}},
-            color={217,67,180},
-            thickness=1));
-        connect(VenousDrainECMOLin.cIn, systemicCirculation.q_out) annotation (
-            Line(
-            points={{-12,-42.8},{-12,-26},{-10,-26}},
-            color={28,108,200},
-            thickness=1));
-        connect(VenousDrainECMOLin.cOut, ecmo.cIn) annotation (Line(
-            points={{-12,-49.2},{-12,-60},{-9.6,-60}},
-            color={28,108,200},
-            thickness=1));
-        connect(heart.LVCannula, LVDrainECMOLin.cIn) annotation (Line(
-            points={{4.56,-4.8},{4.56,-4},{14,-4},{14,-42.8}},
-            color={28,108,200},
-            thickness=1));
-        connect(LVDrainECMOLin.cOut, ecmo.cIn) annotation (Line(
-            points={{14,-49.2},{14,-52},{-12,-52},{-12,-60},{-9.6,-60}},
-            color={28,108,200},
-            thickness=1));
-        annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
-      end LVFailure_Ecmo_LVDrain;
-
-      model LVFailure_Ecmo_LVDrainNonLin
-        extends LVUnloading(settings(redeclare
+      model LVFailure_Ecmo_LVDrainNonLin10Fr
+        extends LVUnloadingTriSeg(
+                            settings(redeclare
               Model.Complex.Environment.ModelConstants.LVFailure constants,
               redeclare Model.Complex.Environment.Supports.ECMO_Nonpulsatile
               supports));
@@ -14564,24 +14561,35 @@ above 0 mmHg.")}));
           qMeanRef(displayUnit="l/min") = 1.6666666666667e-06,
           ecmoPump(qRef2=8.3333333333333e-05))
           annotation (Placement(transformation(extent={{-12,-72},{12,-48}})));
-        Model.Complex.Components.Auxiliary.RLC.Tubes.TubeR arterialInfusion(l=
-              0.22, r=0.0021) annotation (Placement(transformation(
+        Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
+                                                           arterialInfusion(
+          Base=2883640000000,
+          Exp=1.822029,
+          FrenchGauge=12,
+          wallThickness(displayUnit="mm") = 0.0005,
+          relativeViscosity=1,
+          l=0.31)             annotation (Placement(transformation(
               extent={{-4,-4},{4,4}},
               rotation=90,
               origin={18,-46})));
         Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
-          VenousDrainECMOExp(Base=6.2e11, Exp=1.855311) annotation (Placement(
+          VenousDrainECMOExp(Base=6.2e11, Exp=1.855311,
+          FrenchGauge=19,
+          relativeViscosity=1.5,
+          l(displayUnit="cm") = 0.33)                   annotation (Placement(
               transformation(
               extent={{4,4},{-4,-4}},
               rotation=90,
               origin={-12,-46})));
         Model.Complex.Components.Auxiliary.RLC.Elements.ExponentialResistance
-          LVDrainECMOExp(Exp=1.771662, Base=4*5.53E+11) annotation (Placement(
+          LVDrainECMOExp(Base=1.22E+14, Exp=1.919743,
+          FrenchGauge=12,
+          relativeViscosity=1.5,
+          l(displayUnit="cm") = 0.33)                   annotation (Placement(
               transformation(
               extent={{4,4},{-4,-4}},
               rotation=90,
               origin={14,-46})));
-
 
       equation
 
@@ -14611,11 +14619,16 @@ above 0 mmHg.")}));
             points={{14,-49.2},{14,-52},{-12,-52},{-12,-60},{-9.6,-60}},
             color={28,108,200},
             thickness=1));
-        annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
-      end LVFailure_Ecmo_LVDrainNonLin;
+        annotation (experiment(
+            StopTime=30,
+            Interval=0.01,
+            Tolerance=1e-07,
+            __Dymola_Algorithm="Cvode"));
+      end LVFailure_Ecmo_LVDrainNonLin10Fr;
 
-      model LVFailure_Ecmo_LVDrainNonLin10Fr
-        extends LVUnloading(settings(redeclare
+      model Smith_LVFailure_Ecmo_LVDrain
+        extends LVUnloadingSmith(
+                            settings(redeclare
               Model.Complex.Environment.ModelConstants.LVFailure constants,
               redeclare Model.Complex.Environment.Supports.ECMO_Nonpulsatile
               supports));
@@ -14686,10 +14699,10 @@ above 0 mmHg.")}));
             color={28,108,200},
             thickness=1));
         annotation (experiment(StopTime=15, __Dymola_Algorithm="Cvode"));
-      end LVFailure_Ecmo_LVDrainNonLin10Fr;
+      end Smith_LVFailure_Ecmo_LVDrain;
 
       model LVAD_smith
-        extends LVFailure_Ecmo_LVDrainNonLin10Fr(
+        extends Experiments.LVUnload_states.Smith_LVFailure_Ecmo_LVDrain(
           ecmo(ecmoPump(qRef2=0)),
           LVDrainECMOExp(closed=false, l(displayUnit="cm")),
           heart(ventricularInteraction_flat(Eslv=38394200.0)),
@@ -14705,7 +14718,8 @@ above 0 mmHg.")}));
       end LVAD_smith;
 
       model LVAD_smith_No_Unload
-        extends LVAD_smith(LVDrainECMOExp(closed=true));
+        extends Experiments.LVUnload_states.LVAD_smith(
+                           LVDrainECMOExp(closed=true));
         annotation (experiment(
             StopTime=60,
             Tolerance=1e-06,
