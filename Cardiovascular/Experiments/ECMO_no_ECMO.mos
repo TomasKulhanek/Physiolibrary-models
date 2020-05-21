@@ -1,0 +1,89 @@
+﻿cd("D:/home/git/Physiolibrary.models/Cardiovascular/Experiments");
+
+translateModel("Cardiovascular.Experiments.LVUnload_states.Healthy_noEcmo");
+simulateModel("Cardiovascular.Experiments.LVUnload_states.Healthy_noEcmo", stopTime=15, method="Cvode", resultFile="Healthy_noEcmo");
+
+translateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_noEcmo");
+simulateModel("Cardiovascular.Experiments.LVUnload_states.LVFailure_noEcmo", stopTime=15, method="Cvode", resultFile="LV_Fail_noEcmo");
+
+// FIG 1 PVloops
+
+// Figure 2: The flows: LV flow: LVDrainECMOExp.cIn.q
+// Systemic flow
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="Healthy_noEcmo.mat",   colors={{28,108,200}}, displayUnits={"ml/min"});
+createPlot(id=2, position={35, 30, 584, 420}, y={"systemicCirculation.SC.cIn.q"}, range={0.0, 16.0, -300.0, 8000.0}, erase=false, grid=true, filename="LV_Fail_noEcmo.mat", colors={{238,46,47}},  displayUnits={"ml/min"});
+// DISP the results
+"Systemic flow"
+healthyQ = plotSignalOperator("Healthy_noEcmo[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+LVFail_Q = plotSignalOperator("LV_Fail_noEcmo[end].systemicCirculation.SC.cIn.q", SignalOperator.ArithmeticMean, 9.042, 14.142, 0, 2);
+
+// Figure 3: EDV heart.heart.ventricles.VLV
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="Healthy_noEcmo.mat",   colors={{28,108,200}}, displayUnits={"ml"});
+createPlot(id=3, position={95, 90, 584, 420}, y={"heart.heart.ventricles.VLV"}, range={0.0, 16.0, 70.0, 160.0}, erase=false, grid=true, filename="LV_Fail_noEcmo.mat", colors={{238,46,47}},  displayUnits={"ml"});
+// results: copy&paste into dymola command window
+"ESV"
+healthyESV = plotSignalOperator("Healthy_noEcmo[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+LVFail_ESV = plotSignalOperator("LV_Fail_noEcmo[end].heart.heart.ventricles.VLV", SignalOperator.Min, 14.06, 14.16, 0, 3);
+// minEDV
+"MinESV"
+healthyMinESV = plotSignalOperator("Healthy_noEcmo[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+LVFail_MinESV = plotSignalOperator("LV_Fail_noEcmo[end].heart.heart.ventricles.VLV", SignalOperator.Min, 13.6, 15, 0, 3);
+// EDV - fitted to valve openind
+healthyEDV = plotSignalOperator("Healthy_noEcmo[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.72, 15, 0, 3);
+LVFail_EDV = plotSignalOperator("LV_Fail_noEcmo[end].heart.heart.ventricles.VLV", SignalOperator.Max, 14.74, 15, 0, 3);
+
+// figure 4: MAP - systemicCirculation.q_in.pressure
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="Healthy_noEcmo.mat", colors={{28,108,200}}, displayUnits={"ml"});
+createPlot(id=4, position={95, 90, 584, 420}, y={"systemicCirculation.q_in.pressure"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LV_Fail_noEcmo.mat", colors={{238,46,47}},  displayUnits={"ml"});
+"MAP"
+healthyMAP = plotSignalOperator("Healthy_noEcmo[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+LVFail_MAP = plotSignalOperator("LV_Fail_noEcmo[end].systemicCirculation.q_in.pressure", SignalOperator.ArithmeticMean, 13.07, 15, 0, 4);
+
+//FIGURE 5: Pressure in left ventricles
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="Healthy_noEcmo.mat", colors={{28,108,200}}, displayUnits={"ml"});
+createPlot(id=5, position={95, 90, 584, 420}, y={"heart.heart.ventricles.pLV"}, range={0.0, 16.0, 42.0, 128.0}, erase=false, grid=true, filename="LV_Fail_noEcmo.mat", colors={{238,46,47}},  displayUnits={"ml"});
+"SP"
+healthySP = plotSignalOperator("Healthy_noEcmo[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+LVFail_SP = plotSignalOperator("LV_Fail_noEcmo[end].heart.heart.ventricles.pLV", SignalOperator.Max, 13.8, 14.5, 0, 5);
+"DP"
+healthyDP = plotSignalOperator("Healthy_noEcmo[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+LVFail_DP = plotSignalOperator("LV_Fail_noEcmo[end].heart.heart.ventricles.pLV", SignalOperator.Min, 14.2, 14.8, 0, 5);
+
+// couple of periods: 9.042, 14.142
+
+/*
+
+"HEALTHY"
+"Systemic flow"
+healthyQ
+"ESV"
+healthyESV 
+"MinESV"
+healthyMinESV
+"EDV"
+healthyEDV 
+"MAP"
+healthyMAP 
+"SP"
+healthySP 
+"DP"
+healthyDP 
+"----"
+
+"LV FAILURE"
+"Systemic flow"
+LVFail_Q
+"ESV"
+LVFail_ESV 
+"MinESV"
+LVFail_MinESV 
+"EDV"
+LVFail_EDV 
+"MAP"
+LVFail_MAP 
+"SP"
+LVFail_SP 
+"DP"
+LVFail_DP 
+
+*/
