@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0" xmlns:isee="http://iseesystems.com/XMILE">
+	<header>
+		<smile version="1.0" namespace="std, isee"/>
+		<name>glucose-insulin model</name>
+		<uuid>36d89d99-d960-4191-aca2-d1334f79315e</uuid>
+		<vendor>isee systems, inc.</vendor>
+		<product version="1.9.3" isee:build_number="1954" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+	</header>
+	<sim_specs isee:sim_duration="1.5" isee:simulation_delay="0.125" isee:restore_on_start="false" method="Euler" time_units="Hours" isee:instantaneous_flows="false">
+		<start>1</start>
+		<stop>13</stop>
+		<dt reciprocal="true">4</dt>
+	</sim_specs>
+	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="true"/>
+	<isee:multiplayer_settings include_chat="true" allow_observers="false" advance_time_increment="1" observer_start_page="home_page" enabled="false"/>
+	<isee:time_formats default_format="Builtin">
+		<isee:time_format name="Builtin" type="adaptive"/>
+	</isee:time_formats>
+	<default_format/>
+	<model_units>
+		<unit name="Milliliters">
+			<eqn/>
+			<alias>ml</alias>
+			<alias>milliliter</alias>
+		</unit>
+		<unit name="Milligrams">
+			<eqn/>
+			<alias>mg</alias>
+			<alias>milligram</alias>
+		</unit>
+		<unit name="Hours">
+			<eqn/>
+			<alias>hr</alias>
+			<alias>hour</alias>
+		</unit>
+	</model_units>
+	<model>
+		<variables>
+			<stock name="Glucose Content">
+				<doc>1215</doc>
+				<eqn>12165</eqn>
+				<inflow>Glucose_Intput_Flow_Rate</inflow>
+				<outflow>Renal_Loss_Rate</outflow>
+				<outflow>Tissue_Utilisation_Rate_insulin_Independent</outflow>
+				<outflow>Tissue_Utilisation_Rate_insulin_Dependent</outflow>
+				<non_negative/>
+				<units>mg</units>
+			</stock>
+			<stock name="Insulin Content">
+				<eqn>851</eqn>
+				<inflow>&quot;Pancreatic:Insulin_Production:Rate&quot;</inflow>
+				<outflow>Insulin_Destruction_Rate</outflow>
+				<non_negative/>
+				<units>mU</units>
+			</stock>
+			<flow name="Renal Loss Rate">
+				<eqn>IF x&gt;Theta THEN (x-Theta)*Mu ELSE 0</eqn>
+				<non_negative/>
+				<units>mg/hour</units>
+			</flow>
+			<flow name="Tissue Utilisation\nRate insulin Independent">
+				<eqn>x*Lamda</eqn>
+				<non_negative/>
+				<units>mg/hour</units>
+			</flow>
+			<flow name="Tissue Utilisation Rate\ninsulin Dependent">
+				<eqn>x*y*Nu</eqn>
+				<non_negative/>
+				<units>mg/hour</units>
+			</flow>
+			<flow name="Glucose Intput Flow Rate">
+				<eqn>QL</eqn>
+				<non_negative/>
+				<units>mg/hour</units>
+			</flow>
+			<flow name="Pancreatic:Insulin Production:Rate">
+				<eqn>IF (x&gt;Fi) THEN B*(x-Fi) ELSE 0</eqn>
+				<non_negative/>
+				<units>mU/Hours</units>
+			</flow>
+			<flow name="Insulin Destruction Rate">
+				<eqn>Aplha*y</eqn>
+				<non_negative/>
+				<units>mU/Hours</units>
+			</flow>
+			<aux name="x">
+				<eqn>Glucose_Content/ECF_Volume</eqn>
+				<units>mg/ml</units>
+			</aux>
+			<aux name="y">
+				<eqn>Insulin_Content/ECF_Volume</eqn>
+				<units>mU/ml</units>
+			</aux>
+			<aux name="ECF Volume">
+				<eqn>15000</eqn>
+				<units>ml</units>
+			</aux>
+			<aux name="B">
+				<eqn>1430</eqn>
+				<units>ml*mU/mg/hour</units>
+			</aux>
+			<aux name="Fi">
+				<eqn>0.51</eqn>
+				<units>mg/ml</units>
+			</aux>
+			<aux name="Aplha">
+				<eqn>7600</eqn>
+				<units>ml/hour</units>
+			</aux>
+			<aux name="QL">
+				<eqn>8400</eqn>
+				<units>mg/hour</units>
+			</aux>
+			<aux name="Nu">
+				<doc>139000</doc>
+				<eqn>139000</eqn>
+				<units>ml*ml/mU/hour</units>
+			</aux>
+			<aux name="Theta">
+				<eqn>2.5</eqn>
+				<units>mg/ml</units>
+			</aux>
+			<aux name="Mu">
+				<eqn>7200</eqn>
+				<units>ml/hour</units>
+			</aux>
+			<aux name="Lamda">
+				<eqn>2470</eqn>
+				<units>ml/hour</units>
+			</aux>
+		</variables>
+		<views>
+			<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+				<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
+				<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+					<isee:series_styles>
+						<isee:series_style color="blue" thickness="1"/>
+						<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#FF7F00" thickness="1"/>
+						<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#FF007F" thickness="1"/>
+						<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+						<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+						<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+						<isee:series_style color="#C8C8C8" thickness="1"/>
+					</isee:series_styles>
+				</graph>
+				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="ending" report_flows="summed" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
+				<slider color="#66CC66" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
+				<isee:sim_speed_slider color="black" background="white"/>
+				<isee:time_slider color="#E95F74" background="silver"/>
+				<isee:pie_input color="black" background="white" font_size="12pt" legend_position="bottom" isee:transparent="false"/>
+				<knob color="#66CC66" background="#E0E0E0" font_size="12pt" label_side="bottom" wrap_title="true"/>
+				<numeric_input color="black" background="#E0E0E0" font_size="12pt" label_side="left" wrap_title="true" input_expands="false" input_width="100"/>
+				<switch color="black" background="#E0E0E0" font_size="12pt" label_side="top" wrap_title="true" isee:appearance="switch" isee:on_color="green"/>
+				<options color="black" background="white" appearance="radio-buttons" arrangement="vertical"/>
+				<graphical_input color="black" background="#E0E0E0" font_size="12pt" isee:show_hover_tip="true"/>
+				<group_input color="black" background="#E0E0E0" font_size="12pt"/>
+				<lamp color="black" background="white" font_size="9pt"/>
+				<gauge color="black" background="white" font_size="9pt" needle_color="#F09F72" bar_color="#EEEEEE" bar_progress_color="black" appearance="radial" num_major_ticks="11" num_minor_ticks="11" show_numeric_value="true"/>
+				<isee:spatial_map color="black" background="white" font_size="12pt"/>
+				<isee:animation_object color="black" background="white" font_size="12pt"/>
+				<isee:navigation_widget color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
+				<isee:shape color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid" opacity="1" transparent_background="true"/>
+				<isee:selector color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
+				<isee:financial_table color="black" background="#E0E0E0" text_align="right" font_size="12pt" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+			</style>
+			<view isee:show_pages="false" background="white" page_width="1091" page_height="762" isee:page_cols="2" isee:page_rows="2" isee:popup_graphs_are_comparative="true" type="stock_flow">
+				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
+					<stock color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="45" height="35"/>
+					</stock>
+					<flow color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom"/>
+					<isee:placeholder color="#228B22" background="white" font_color="#228B22" font_size="9pt" label_side="bottom"/>
+					<module color="blue" background="white" font_color="blue" font_size="9pt" label_side="top">
+						<shape type="rectangle" width="55" height="45"/>
+					</module>
+					<aux color="blue" background="white" font_color="blue" font_size="9pt" label_side="bottom">
+						<shape type="circle" radius="18"/>
+					</aux>
+					<group color="red" background="white" font_color="red" font_size="9pt"/>
+					<connector color="#FF007F" background="white" font_color="#FF007F" font_size="9pt" isee:thickness="1"/>
+					<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+					<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
+					<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
+						<isee:series_styles>
+							<isee:series_style color="blue" thickness="1"/>
+							<isee:series_style color="red" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="fuchsia" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="#008F44" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF7F00" thickness="1"/>
+							<isee:series_style color="#7F00FF" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#0CA0FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="lime" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#FF007F" thickness="1"/>
+							<isee:series_style color="aqua" thickness="1" pen_style="dot_dashed"/>
+							<isee:series_style color="#F586FF" thickness="1" pen_style="dotted"/>
+							<isee:series_style color="black" thickness="1" pen_style="dashed"/>
+							<isee:series_style color="#C8C8C8" thickness="1"/>
+						</isee:series_styles>
+					</graph>
+					<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="ending" report_flows="summed" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				</style>
+				<stock label_side="top" x="406" y="89.5" width="264" height="190" name="Glucose Content"/>
+				<stock x="398.5" y="466" width="279" height="196" name="Insulin Content"/>
+				<flow label_side="bottom" x="831" y="120" name="Renal Loss Rate">
+					<pts>
+						<pt x="670" y="120"/>
+						<pt x="1016" y="120"/>
+					</pts>
+				</flow>
+				<flow label_side="bottom" x="833.5" y="198" name="Tissue Utilisation\nRate insulin Independent">
+					<pts>
+						<pt x="670" y="198"/>
+						<pt x="1021" y="198"/>
+					</pts>
+				</flow>
+				<flow x="830.5" y="256" name="Tissue Utilisation Rate\ninsulin Dependent">
+					<pts>
+						<pt x="670" y="256"/>
+						<pt x="1015" y="256"/>
+					</pts>
+				</flow>
+				<flow x="309.5" y="173" name="Glucose Intput Flow Rate">
+					<pts>
+						<pt x="213" y="173"/>
+						<pt x="406" y="173"/>
+					</pts>
+				</flow>
+				<flow x="291.75" y="564" name="Pancreatic:Insulin Production:Rate">
+					<pts>
+						<pt x="185" y="564"/>
+						<pt x="398.5" y="564"/>
+					</pts>
+				</flow>
+				<flow x="826.25" y="582" name="Insulin Destruction Rate">
+					<pts>
+						<pt x="677.5" y="582"/>
+						<pt x="999" y="582"/>
+					</pts>
+				</flow>
+				<aux x="686.5" y="334" name="x"/>
+				<aux x="725" y="425" name="y"/>
+				<aux x="586" y="386" name="ECF Volume"/>
+				<aux label_side="bottom" x="220" y="667" name="B"/>
+				<aux x="214" y="748" name="Fi"/>
+				<aux label_side="bottom" x="936" y="441.5" name="Aplha"/>
+				<aux x="259" y="68" width="16" height="16" name="QL"/>
+				<aux x="908" y="348" name="Nu"/>
+				<aux x="715" y="63" name="Theta"/>
+				<aux x="894" y="59" name="Mu"/>
+				<connector uid="1" angle="32.1523">
+					<from>B</from>
+					<to>&quot;Pancreatic:Insulin_Production:Rate&quot;</to>
+				</connector>
+				<connector uid="2" angle="25.8664">
+					<from>Fi</from>
+					<to>&quot;Pancreatic:Insulin_Production:Rate&quot;</to>
+				</connector>
+				<connector uid="3" angle="183.468">
+					<from>x</from>
+					<to>&quot;Pancreatic:Insulin_Production:Rate&quot;</to>
+				</connector>
+				<connector uid="4" angle="339.444">
+					<from>y</from>
+					<to>Insulin_Destruction_Rate</to>
+				</connector>
+				<connector uid="5" angle="232.005">
+					<from>Aplha</from>
+					<to>Insulin_Destruction_Rate</to>
+				</connector>
+				<connector uid="6" angle="328.496">
+					<from>QL</from>
+					<to>Glucose_Intput_Flow_Rate</to>
+				</connector>
+				<connector uid="7" angle="149.036">
+					<from>Nu</from>
+					<to>Tissue_Utilisation_Rate_insulin_Dependent</to>
+				</connector>
+				<connector uid="8" angle="34.992">
+					<from>y</from>
+					<to>Tissue_Utilisation_Rate_insulin_Dependent</to>
+				</connector>
+				<connector uid="9" angle="359.397">
+					<from>x</from>
+					<to>Tissue_Utilisation_Rate_insulin_Dependent</to>
+				</connector>
+				<connector uid="10" angle="318.832">
+					<from>Glucose_Content</from>
+					<to>x</to>
+				</connector>
+				<connector uid="11" angle="27.3576">
+					<from>ECF_Volume</from>
+					<to>x</to>
+				</connector>
+				<connector uid="12" angle="48.7978">
+					<from>Insulin_Content</from>
+					<to>y</to>
+				</connector>
+				<connector uid="13" angle="4.76364">
+					<from>ECF_Volume</from>
+					<to>y</to>
+				</connector>
+				<aux x="908" y="155" name="Lamda"/>
+				<connector uid="14" angle="63.4349">
+					<from>x</from>
+					<to>Tissue_Utilisation_Rate_insulin_Independent</to>
+				</connector>
+				<connector uid="15" angle="209.993">
+					<from>Lamda</from>
+					<to>Tissue_Utilisation_Rate_insulin_Independent</to>
+				</connector>
+				<connector uid="16" angle="86.4237">
+					<from>x</from>
+					<to>Renal_Loss_Rate</to>
+				</connector>
+				<connector uid="17" angle="249.075">
+					<from>Mu</from>
+					<to>Renal_Loss_Rate</to>
+				</connector>
+				<connector uid="18" angle="356.532">
+					<from>Theta</from>
+					<to>Renal_Loss_Rate</to>
+				</connector>
+				<text_box uid="19" x="907" y="84" width="223" height="21">IF x&gt;Theta THEN (x-Theta)*Mu ELSE 0</text_box>
+				<text_box uid="20" x="899" y="203" width="54" height="21">x*Lamda</text_box>
+				<text_box uid="21" x="895" y="262" width="54" height="21">x*y*Nu</text_box>
+				<text_box uid="22" x="895" y="591" width="54" height="21">Aplha*y</text_box>
+				<text_box uid="23" x="109" y="519" width="186" height="21">IF (x&gt;Fi) THEN B*(x-Fi) ELSE 0</text_box>
+				<text_box uid="24" x="335" y="144.5" width="23" height="21">QL</text_box>
+				<text_box uid="25" x="756.5" y="411.5" width="164.5" height="21">Insulin_Content/ISF_Volume</text_box>
+				<text_box uid="26" x="481.75" y="311" width="180.5" height="21">Glucose_Content/ECF_Volume</text_box>
+				<text_box uid="27" x="559.75" y="414.5" width="61.5" height="21">15000 ml</text_box>
+				<text_box uid="28" x="959.75" y="440.5" width="81.5" height="21">7600 ml/hour</text_box>
+				<text_box uid="29" x="921" y="356" width="133.5" height="21">139000 ml*ml/mU/hour</text_box>
+				<text_box uid="30" x="926.75" y="144.5" width="133.5" height="21">2470 ml/hour</text_box>
+				<text_box uid="31" x="908.5" y="52.5" width="133.5" height="21">7200 ml/hour</text_box>
+				<text_box uid="32" x="284.5" y="63" width="88" height="21">8400 mg/hour</text_box>
+				<text_box uid="33" x="114" y="691" width="122" height="21">1430 ml*mU/mg/hour</text_box>
+				<text_box uid="34" x="232.5" y="757" width="88" height="21">0,51 mg/ml</text_box>
+				<text_box uid="35" x="494" y="666" width="88" height="21">initial 851 mU</text_box>
+				<text_box uid="36" x="462" y="283" width="88" height="21">initial 12165 mg</text_box>
+				<text_box uid="37" x="640" y="51" width="60.75" height="21">2,5 mg/ml</text_box>
+			</view>
+		</views>
+	</model>
+</xmile>
+

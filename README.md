@@ -14,9 +14,14 @@ This model set is a supplementary material to an article [*Lumped Models of the 
 
 ### Installation
 
-Download the library and open in the following order:
+
+Download the library model and open in the following order:
   * Physiolibrary/...   from www.physiolibrary.org
+then for Cardiovascular
   * Cardiovascular/package.mo
+for Metabolism
+  * Metabolism/package.mo
+
   
 ### Run an example
 Run any model with a green Play triangle, e.g. Cardiovascular.Model.Meurs.HemodynamicsMeurs or Cardiovascular.Model.Complex.Cardio. With decomposed models, you can redeclare the submodels wby any other compatible submodel of same subsystem (in Dymola use right context menu - change class - all matching choices - select you choice).
