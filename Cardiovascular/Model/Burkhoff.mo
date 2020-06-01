@@ -2,8 +2,7 @@ within Cardiovascular.Model;
 package Burkhoff
     extends Modelica.Icons.ExamplesPackage;
   model HemodynamicsBurkhoff_shallow
-    //Cardiovascular.Hydraulic.Components.Resistor
-    //Cardiovascular.Hydraulic.Components.IdealValveNorm
+
         extends Cardiovascular.Icons.Runnable_Shallow;
     import Physiolibrary.Hydraulic.Components.*;
     ElasticVessel Cvs(
