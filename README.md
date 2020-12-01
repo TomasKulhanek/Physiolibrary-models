@@ -10,7 +10,9 @@ Currently the circulation hemodynamic models are included based on description a
 - Avolio,
 - example of complex combined model by Kalecky.
 
-This model set is a supplementary material to an article [*Lumped Models of the Cardiovascular System of Various Complexity* by Filip Ježek, Tomáš Kulhánek, Karel Kalecký and Jiří Kofránek. DOI: 10.1016/j.bbe.2017.08.001](https://doi.org/10.1016/j.bbe.2017.08.001)
+This model set is a supplementary material to following articles:
+  * [*Lumped Models of the Cardiovascular System of Various Complexity* by Filip Ježek, Tomáš Kulhánek, Karel Kalecký and Jiří Kofránek. DOI: 10.1016/j.bbe.2017.08.001](https://doi.org/10.1016/j.bbe.2017.08.001)
+  * [T. Kulhánek and J. Kofránek, "Experience with Teaching Different Modeling Techniques on the example of Glucose Insulin Regulation Model," 2020 42nd Annual International Conference of the IEEE Engineering in Medicine & Biology Society (EMBC), Montreal, QC, Canada, 2020, pp. 6024-6027, doi: 10.1109/EMBC44109.2020.9176535](https://doi.org/10.1109/EMBC44109.2020.9176535)
 
 ### Installation
 
