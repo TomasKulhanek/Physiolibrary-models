@@ -158,7 +158,7 @@ package Burkhoff
       annotation (Placement(transformation(
           extent={{7,-5},{-7,5}},
           rotation=0,
-          origin={19,-53})));
+          origin={23,-53})));
     Modelica.Blocks.Math.Add add2 annotation (Placement(transformation(
           extent={{-3,-3},{3,3}},
           rotation=270,
@@ -233,7 +233,7 @@ package Burkhoff
         smooth=Smooth.None));
 
     connect(LAElastance.HR, heartRate.y) annotation (Line(
-        points={{158.99,38.64},{128,38.64},{128,38},{-77,38}},
+        points={{158.99,38.64},{128,38.64},{128,40},{26,40},{26,38},{-77,38}},
         color={0,0,127},
         smooth=Smooth.None));
     connect(LVElastance.HR, heartRate.y) annotation (Line(
@@ -343,12 +343,12 @@ package Burkhoff
         thickness=1,
         smooth=Smooth.None));
     connect(pressureMeasure1.q_in, RV.q_in) annotation (Line(
-        points={{21.8,-56},{24,-56},{24,-40},{26,-40}},
+        points={{25.8,-56},{26,-56},{26,-40}},
         color={0,0,0},
         thickness=1,
         smooth=Smooth.None));
     connect(pressureMeasure1.pressure, RAVGain.u) annotation (Line(
-        points={{14.8,-55},{-7,-55}},
+        points={{18.8,-55},{-7,-55}},
         color={0,0,127},
         smooth=Smooth.None));
     connect(add1.u3, add1.u3) annotation (Line(

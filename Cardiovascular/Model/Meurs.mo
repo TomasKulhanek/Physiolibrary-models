@@ -1011,7 +1011,7 @@ package Meurs
       discrete Physiolibrary.Types.Time Tvs;
       parameter Physiolibrary.Types.Time Tav(displayUnit="s") = 0.01
         "atrioventricular delay";
-      discrete Modelica.SIunits.Time HP(start=0) "heart period";
+      discrete Modelica.Units.SI.Time HP(start=0) "heart period";
       Boolean b(start=false);
       Physiolibrary.Types.RealIO.FrequencyInput HR "heart rate" annotation (
          Placement(transformation(extent={{-12,68},{28,108}}),

@@ -9,8 +9,8 @@ package Avolio1980
           parameter Physiolibrary.Types.Height h=0.0005 "wall thickness";
           parameter Physiolibrary.Types.Pressure E=1600000.0
             "Young modulus N/m^2";
-          parameter Modelica.SIunits.Density ro=1060;
-          parameter Modelica.SIunits.DynamicViscosity mi=0.004;
+      parameter Modelica.Units.SI.Density ro=1060;
+      parameter Modelica.Units.SI.DynamicViscosity mi=0.004;
           parameter Boolean terminal = false;
           parameter Physiolibrary.Types.HydraulicResistance Rbref=1e8; //per KK
           parameter Real kkCfactor = 3.53;
@@ -2584,7 +2584,7 @@ package Avolio1980
 
         model Windkessel_test2 "Two-element Windkessel model"
           extends Modelica.Icons.Example;
-          import Modelica.SIunits.*;
+          import Modelica.Units.SI.*;
             inner parameter Real arterialStiffnessScale = 1;
               inner parameter Length cannulaOuterDiameter = 0.007
             "Outer diameter of ECMO cannulas (derived tree only)";
@@ -2702,7 +2702,7 @@ package Avolio1980
 
         model Windkessel_test3 "Two-element Windkessel model"
           extends Modelica.Icons.Example;
-          import Modelica.SIunits.*;
+          import Modelica.Units.SI.*;
           Physiolibrary.Hydraulic.Sources.UnlimitedPump heart(useSolutionFlowInput = true) annotation(Placement(transformation(extent = {{-50, 38}, {-30, 58}})));
           Physiolibrary.Hydraulic.Sources.UnlimitedVolume veins(P=666.611937075)
                                                                 annotation(Placement(transformation(extent = {{-10, -10}, {10, 10}}, rotation = 0, origin = {-40, 20})));
@@ -2767,7 +2767,7 @@ package Avolio1980
 
         model Windkessel_test4 "Two-element Windkessel model"
           extends Modelica.Icons.Example;
-          import Modelica.SIunits.*;
+          import Modelica.Units.SI.*;
             inner parameter Real arterialStiffnessScale = 1;
               inner parameter Length cannulaOuterDiameter = 0.007
             "Outer diameter of ECMO cannulas (derived tree only)";

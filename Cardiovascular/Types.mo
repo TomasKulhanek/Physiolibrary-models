@@ -32,9 +32,9 @@ package Types
     end FrequencyControl;
   end Constants;
 
-  type Area = Modelica.SIunits.Area (displayUnit="cm2",nominal=1e-4)
+  type Area = Modelica.Units.SI.Area(displayUnit="cm2",nominal=1e-4)
     "Type for area";
-  type Length = Modelica.SIunits.Length (displayUnit="cm",nominal=1e-2)
+  type Length = Modelica.Units.SI.Length(displayUnit="cm",nominal=1e-2)
     "Type for length and radius";
   type PulseShape = enumeration(
       pulseless,
